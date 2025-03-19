@@ -1,3 +1,6 @@
+Cut;X, Control
+Copy;C, Control
+Paste;V, Control
 New Leaf;D1, Alt
 New Lvl;D2, Alt
 New Gate;D3, Alt

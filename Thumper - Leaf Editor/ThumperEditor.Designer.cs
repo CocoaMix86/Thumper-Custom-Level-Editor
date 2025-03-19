@@ -116,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -741,7 +741,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 126);
+            this.contextmenuEdit.Size = new Size(218, 148);
             // 
             // toolstripEditUndo
             // 
@@ -765,6 +765,7 @@
             // toolstripEditCut
             // 
             this.toolstripEditCut.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripEditCut.Enabled = false;
             this.toolstripEditCut.ForeColor = Color.White;
             this.toolstripEditCut.Image = Properties.Resources.icon_cut;
             this.toolstripEditCut.Name = "toolstripEditCut";
@@ -776,6 +777,7 @@
             // toolstripEditCopy
             // 
             this.toolstripEditCopy.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripEditCopy.Enabled = false;
             this.toolstripEditCopy.ForeColor = Color.White;
             this.toolstripEditCopy.Image = Properties.Resources.icon_copy2;
             this.toolstripEditCopy.Name = "toolstripEditCopy";
@@ -923,9 +925,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1047,6 +1048,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1067,14 +1076,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 

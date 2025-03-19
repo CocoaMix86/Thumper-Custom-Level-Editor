@@ -83,7 +83,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private FileInfo LoadedMaster;
-        private List<MasterLvlData> clipboardmaster = new();
         public ObservableCollection<MasterLvlData> MasterLvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
         public MasterProperties masterproperties
         {
@@ -361,8 +360,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 todelete.Add(MasterLvls[dgvr.Index]);
             }
             int _in = masterLvlList.CurrentRow.Index;
+
+            MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
             foreach (MasterLvlData mld in todelete)
                 MasterLvls.Remove(mld);
+            MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
+            masterlvls_CollectionChanged(null, null);
+
             TCLE.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Lvl");
             masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= MasterLvls.Count ? _in - 1 : _in));
@@ -460,21 +464,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnMasterLvlCopy_Click(object sender, EventArgs e)
         {
-            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
-            selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            clipboardmaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
-            clipboardmaster.Reverse();
-            TCLE.PlaySound("UIkcopy");
-            btnMasterLvlPaste.Enabled = true;
+            Copy();
         }
 
         private void btnMasterLvlPaste_Click(object sender, EventArgs e)
         {
-            int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
-            foreach (MasterLvlData mld in clipboardmaster)
-                MasterLvls.Insert(_in, mld.Clone());
-            SaveCheckAndWrite(false, "Paste Lvl");
-            TCLE.PlaySound("UIkpaste");
+            Paste();
         }
 
         private void btnRevertMaster_Click(object sender, EventArgs e)
@@ -772,6 +767,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterproperties.skybox = "";
             //set saved flag to true, because nothing is loaded
             SaveCheckAndWrite(true, "");
+        }
+
+        public void Cut()
+        {
+            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            selectedrows.Sort((row, row2) => row.CompareTo(row2));
+            TCLE.ClipboardMaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
+            TCLE.ClipboardMaster.Reverse();
+            TCLE.PlaySound("UIkcopy");
+            btnMasterLvlPaste.Enabled = true;
+
+            MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
+            foreach (MasterLvlData mld in TCLE.ClipboardMaster) {
+                MasterLvls.Remove(mld);
+            }
+            MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
+            masterlvls_CollectionChanged(null, null);
+        }
+
+        public void Copy()
+        {
+            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
+            selectedrows.Sort((row, row2) => row.CompareTo(row2));
+            TCLE.ClipboardMaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
+            TCLE.ClipboardMaster.Reverse();
+            TCLE.PlaySound("UIkcopy");
+            btnMasterLvlPaste.Enabled = true;
+        }
+
+        public void Paste()
+        {
+            int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
+
+            MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
+            foreach (MasterLvlData mld in TCLE.ClipboardMaster)
+                MasterLvls.Insert(_in, mld.Clone());
+            MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
+            masterlvls_CollectionChanged(null, null);
+
+            SaveCheckAndWrite(false, "Paste Lvl");
+            TCLE.PlaySound("UIkpaste");
         }
         #endregion
 

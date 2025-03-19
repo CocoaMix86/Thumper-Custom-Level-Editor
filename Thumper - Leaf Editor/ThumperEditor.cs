@@ -36,8 +36,10 @@ namespace Thumper_Custom_Level_Editor
         }
         public static ProjectProperties ProjectProperties;
         public static SettingsUITheme settingsUITheme = new();
-        public static List<Sequencer_Object> ClipboardSequencer = new();
         public static bool Fullscreen;
+        //Public accessible clipboards
+        public static List<Sequencer_Object> ClipboardSequencer = new();
+        public static List<MasterLvlData> ClipboardMaster = new();
         #endregion
 
         #region Form Construction
@@ -303,8 +305,20 @@ namespace Thumper_Custom_Level_Editor
         #region Form Key Press
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
+            if (dockMain.ActiveContent == (IDockContent)Explorer)
+                return;
+
+            if (e.KeyData == Keybinds["Cut"]) {
+                toolstripEditCut_Click(null, null);
+            }
+            else if (e.KeyData == Keybinds["Copy"]) {
+                toolstripEditCopy_Click(null, null);
+            }
+            else if (e.KeyData == Keybinds["Paste"]) {
+                toolstripEditPaste_Click(null, null);
+            }
             //tab switch next
-            if (e.KeyData == Keybinds["Next Tab"]) {
+            else if (e.KeyData == Keybinds["Next Tab"]) {
                 if (!ActiveWorkspace.dockMain.Documents.Any())
                     return;
                 List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
