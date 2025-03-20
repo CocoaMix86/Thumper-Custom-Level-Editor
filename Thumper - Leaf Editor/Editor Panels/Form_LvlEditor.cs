@@ -30,7 +30,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
-            propertyGridLvl.Focus();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -101,8 +100,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
             lvlProperties.sublevel = LvlLeafs[e.RowIndex];
-            propertyGridLvl.ExpandAllGridItems();
-            propertyGridLvl.Refresh();
             LvlUpdatePaths(e.RowIndex);
         }
 
@@ -794,7 +791,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
-            propertyGridLvl.SelectedObject = lvlProperties;
 
             //Clear DGVs so new data can load
             lvlLoopTracks.Rows.Clear();
@@ -824,7 +820,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlleaf_CollectionChanged(null, null);
 
             btnLvlLeafRandom.Enabled = true;
-            propertyGridLvl.SelectedObject = lvlProperties;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
@@ -869,7 +864,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 id = TCLE.rng.Next()
             });
             SaveCheckAndWrite(false, "Add New Leaf");
-            propertyGridLvl.Refresh();
         }
 
         public void LvlUpdatePaths(int index)
@@ -920,7 +914,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             LoadLvl(UndoList[undolistindex].savestate, LoadedLvl);
             UndoList.RemoveRange(0, undolistindex);
-            propertyGridLvl.Refresh();
         }
 
         ///SAVE
@@ -1182,12 +1175,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
         {
             //Bass.BASS_SetVolume(volumeSlider1.Volume);
-        }
-
-        private void labelCollapsePanel_Click(object sender, EventArgs e)
-        {
-            splitContainer2.Panel2Collapsed = !splitContainer2.Panel2Collapsed;
-            labelCollapsePanel.Text = splitContainer2.Panel2Collapsed ? "<" : ">";
         }
     }
 }

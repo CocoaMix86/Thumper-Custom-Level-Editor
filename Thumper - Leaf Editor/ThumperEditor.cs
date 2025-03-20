@@ -374,6 +374,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripLevelName_Click(object sender, EventArgs e)
         {
             dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
+            dockProjectProperties.Text = $"Project Properties";
         }
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)
@@ -994,6 +995,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 _GAD = value;
                 dockProjectProperties.propertyGridProject.SelectedObject = _GAD.GetType().GetMethod("GetProperties").Invoke(_GAD, null);
+                dockProjectProperties.Text = $"{_GAD.DockHandler.TabText} Properties";
             }
         }
         private static IDockContent _GAD;
