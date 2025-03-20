@@ -109,6 +109,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
+
+            if (e.ColumnIndex is 4) {
+                MasterLvls[e.RowIndex].checkpoint = !MasterLvls[e.RowIndex].checkpoint;
+            }
+            else if (e.ColumnIndex is 5) {
+                MasterLvls[e.RowIndex].playplus = !MasterLvls[e.RowIndex].playplus;
+            }
+            else if (e.ColumnIndex is 6) {
+                MasterLvls[e.RowIndex].isolate = !MasterLvls[e.RowIndex].isolate;
+            }
+
             masterproperties.sublevel = MasterLvls[e.RowIndex];
             propertyGridMaster.ExpandAllGridItems();
             propertyGridMaster.Refresh();
@@ -209,14 +220,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush LvlColorNotExist = new SolidBrush(Color.Maroon);
         private static Color SelectColor = Color.FromArgb(199, 69, 255);
         private static SolidBrush LvlColorSelected = new SolidBrush(SelectColor);
+        private static Pen PenBlack = new Pen(Color.Black, 1);
         private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
-            if (e.RowIndex == -1)
+            if (e.RowIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-            else
-            {
+            }
+            else {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+                CellPaintIcons(e);
+                if (e.ColumnIndex is > 3)
+                    e.Graphics.DrawLine(PenBlack, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+            }
+        }
+
+        int w = 16;
+        int h = 16;
+        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
+        {
+            //get dimensions
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+            //paint the image
+            //Checkpoint
+            if (e.ColumnIndex == 4) {
+                if (e.RowIndex is not -1) {
+                    if (MasterLvls[e.RowIndex].checkpoint)
+                    e.Graphics.DrawImage(Properties.Resources.icon_check_blue, new Rectangle(x, y, w, h));
+                }
+            }
+            //Play+
+            if (e.ColumnIndex == 5) {
+                if (e.RowIndex is not -1) {
+                    if (MasterLvls[e.RowIndex].playplus)
+                        e.Graphics.DrawImage(Properties.Resources.icon_check_blue, new Rectangle(x, y, w, h));
+                }
+            }
+            //Isolate
+            if (e.ColumnIndex == 6) {
+                if (e.RowIndex is not -1) {
+                    if (MasterLvls[e.RowIndex].isolate)
+                        e.Graphics.DrawImage(Properties.Resources.icon_check_blue, new Rectangle(x, y, w, h));
+                }
             }
         }
 
@@ -229,10 +275,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Width -= 4;
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
-            if ((sender as DataGridView).Rows[e.RowIndex].Selected)
-                e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
-            else
-                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+
+            if (MasterLvls.Any(x => x.isolate)) {
+                if ((sender as DataGridView).Rows[e.RowIndex].Selected)
+                    e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
+                else if (MasterLvls[e.RowIndex].isolate)
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+                else
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(Color.Gray), bounds, 8);
+            }
+            else {
+                if ((sender as DataGridView).Rows[e.RowIndex].Selected)
+                    e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
+                else
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            }
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 

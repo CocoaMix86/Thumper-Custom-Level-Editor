@@ -231,7 +231,10 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Leaf;D1, Alt
+        ///   Looks up a localized string similar to Cut;X, Control
+        ///Copy;C, Control
+        ///Paste;V, Control
+        ///New Leaf;D1, Alt
         ///New Lvl;D2, Alt
         ///New Gate;D3, Alt
         ///New Master;D4, Alt
@@ -249,11 +252,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///Split Leaf;F8
         ///Randomize Row Values;F9
         ///Toggle Auto-Place;F10
+        ///Leaf Playback;F2
         ///Quick Value 0;D0, Control
-        ///Quick Value 1;D1, Control
-        ///Quick Value 2;D2, Control
-        ///Quick Value 3;D3, Control
-        ///Qui [rest of string was truncated]&quot;;.
+        ///Quick Value 1;D [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DefaultKeybinds {
             get {
@@ -686,6 +687,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static System.Drawing.Bitmap icon_check_32 {
             get {
                 object obj = ResourceManager.GetObject("icon_check_32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_check_blue {
+            get {
+                object obj = ResourceManager.GetObject("icon_check_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -39,6 +39,9 @@
             this.masterfiletype = new DataGridViewImageColumn();
             this.masterLvl = new DataGridViewTextBoxColumn();
             this.Runtime = new DataGridViewTextBoxColumn();
+            this.masterCheckpoint = new DataGridViewTextBoxColumn();
+            this.masterPlayPlus = new DataGridViewTextBoxColumn();
+            this.masterIsolate = new DataGridViewTextBoxColumn();
             this.masterToolStrip = new ToolStrip();
             this.btnMasterLvlAdd = new ToolStripButton();
             this.btnMasterLvlDelete = new ToolStripButton();
@@ -79,7 +82,7 @@
             this.masterLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.SublevelNum, this.masterfiletype, this.masterLvl, this.Runtime });
+            this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.SublevelNum, this.masterfiletype, this.masterLvl, this.Runtime, this.masterCheckpoint, this.masterPlayPlus, this.masterIsolate });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.Green;
             dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -116,7 +119,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(292, 506);
+            this.masterLvlList.Size = new Size(286, 506);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -158,7 +161,7 @@
             // Runtime
             // 
             this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
             this.Runtime.FillWeight = 50F;
@@ -166,6 +169,42 @@
             this.Runtime.Name = "Runtime";
             this.Runtime.ReadOnly = true;
             this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // masterCheckpoint
+            // 
+            this.masterCheckpoint.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.masterCheckpoint.HeaderText = "Ch.";
+            this.masterCheckpoint.MinimumWidth = 16;
+            this.masterCheckpoint.Name = "masterCheckpoint";
+            this.masterCheckpoint.ReadOnly = true;
+            this.masterCheckpoint.Resizable = DataGridViewTriState.True;
+            this.masterCheckpoint.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.masterCheckpoint.ToolTipText = "Spawn checkpoint after lvl";
+            this.masterCheckpoint.Width = 30;
+            // 
+            // masterPlayPlus
+            // 
+            this.masterPlayPlus.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.masterPlayPlus.HeaderText = "P+";
+            this.masterPlayPlus.MinimumWidth = 16;
+            this.masterPlayPlus.Name = "masterPlayPlus";
+            this.masterPlayPlus.ReadOnly = true;
+            this.masterPlayPlus.Resizable = DataGridViewTriState.True;
+            this.masterPlayPlus.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.masterPlayPlus.ToolTipText = "Play/Hide lvl in Play+ (useful for tutorials)";
+            this.masterPlayPlus.Width = 25;
+            // 
+            // masterIsolate
+            // 
+            this.masterIsolate.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.masterIsolate.HeaderText = "Iso.";
+            this.masterIsolate.MinimumWidth = 16;
+            this.masterIsolate.Name = "masterIsolate";
+            this.masterIsolate.ReadOnly = true;
+            this.masterIsolate.Resizable = DataGridViewTriState.True;
+            this.masterIsolate.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.masterIsolate.ToolTipText = "Isolate lvl. If enabled, only isolated lvls will play when testing in game";
+            this.masterIsolate.Width = 32;
             // 
             // masterToolStrip
             // 
@@ -280,7 +319,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(300, -2);
+            this.labelCollapsePanel.Location = new Point(294, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -310,7 +349,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(332, 519);
+            this.propertyGridMaster.Size = new Size(338, 519);
             this.propertyGridMaster.TabIndex = 0;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -338,7 +377,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 316;
+            this.splitContainer1.SplitterDistance = 310;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 
@@ -382,10 +421,13 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         public PropertyGrid propertyGridMaster;
+        private Label labelCollapsePanel;
         private DataGridViewTextBoxColumn SublevelNum;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
         private DataGridViewTextBoxColumn Runtime;
-        private Label labelCollapsePanel;
+        private DataGridViewTextBoxColumn masterCheckpoint;
+        private DataGridViewTextBoxColumn masterPlayPlus;
+        private DataGridViewTextBoxColumn masterIsolate;
     }
 }
