@@ -2233,7 +2233,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (filepath.Extension == ".lvl") {
                 this.Text = $"{LoadedLeaf.Name} [Sequencer]";
                 //
-                leafProperties = new(this, filepath, Lvl.lvlleafs.Select(x => x.beats).Sum()) {
+                leafProperties = new(this, filepath, Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats) {
                     SequencerType = filepath.Extension,
                     timesignature = "4/4"
                 };
@@ -2632,6 +2632,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void TrackLeafDividerHighlighting(LvlProperties Lvl)
         {
             int index = FrozenColumnOffset;
+
+            trackEditor.Columns[index].DefaultCellStyle.BackColor = Color.LightGray;
+            trackEditor.Columns[index].HeaderCell.Style.BackColor = Color.LightGray;
+            trackEditor.Columns[index].HeaderCell.Style.ForeColor = Color.Black;
+            trackEditor.Columns[index].HeaderText = "Approach";
+            index += Lvl.approachbeats;
+
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 trackEditor.Columns[index].DefaultCellStyle.BackColor = Color.LightGray;
                 trackEditor.Columns[index].HeaderCell.Style.BackColor = Color.LightGray;
