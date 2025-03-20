@@ -723,8 +723,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
+            //this finds a pane in the active workspace that has matching extensions already open on it
+            var Panes = TCLE.ActiveWorkspace.dockMain.Panes;
+            DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(".leaf")).Any());
+
             Form_LeafEditor leaf = new(LvlProperties) { DockAreas = DockAreas.Document | DockAreas.Float };
-            leaf.Show(TCLE.ActiveWorkspace.dockMain, DockState.Document);
+            if (OpenHere != null)
+                leaf.Show(OpenHere, null);
+            else
+                leaf.Show(TCLE.ActiveWorkspace.dockMain, DockState.Document);
         }
         #endregion
 
