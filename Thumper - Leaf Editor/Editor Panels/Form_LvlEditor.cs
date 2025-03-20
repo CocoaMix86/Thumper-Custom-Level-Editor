@@ -328,6 +328,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
         private static Color SelectColor = Color.FromArgb(199, 69, 255);
         private static SolidBrush LvlLeafColorSelected = new SolidBrush(SelectColor);
+        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
+        private static Pen PenBlack = new Pen(Color.Black, 1);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -337,10 +339,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Width -= 4;
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
-            if ((sender as DataGridView).Rows[e.RowIndex].Selected)
-                e.Graphics.FillRoundedRectangle(LvlLeafColorSelected, bounds, 8);
-            else
-                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+            DataGridView dgv = sender as DataGridView;
+
+            if (dgv.Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             //e.Graphics.FillRoundedRectangle(LvlLeafs[e.RowIndex].NotFound ? LvlLeafColorNotExist : LvlLeafColor, bounds, 6);
             if (sender == lvlLeafList)
                 e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);

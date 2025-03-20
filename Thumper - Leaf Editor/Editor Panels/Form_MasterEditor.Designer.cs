@@ -119,7 +119,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(285, 506);
+            this.masterLvlList.Size = new Size(281, 506);
             this.masterLvlList.TabIndex = 79;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -319,7 +319,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(293, -2);
+            this.labelCollapsePanel.Location = new Point(289, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -349,7 +349,7 @@
             this.propertyGridMaster.RightToLeft = RightToLeft.No;
             this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(339, 519);
+            this.propertyGridMaster.Size = new Size(343, 519);
             this.propertyGridMaster.TabIndex = 0;
             this.propertyGridMaster.ToolbarVisible = false;
             this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -377,7 +377,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
             this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 309;
+            this.splitContainer1.SplitterDistance = 305;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 49;
             // 

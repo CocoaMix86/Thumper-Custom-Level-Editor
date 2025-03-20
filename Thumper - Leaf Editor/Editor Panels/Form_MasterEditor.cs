@@ -276,17 +276,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Width -= 4;
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            DataGridView dgv = sender as DataGridView;
 
-            if ((sender as DataGridView).Rows[e.RowIndex].Selected)
+            if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             if (MasterLvls.Any(x => x.isolate)) {
                 if (MasterLvls[e.RowIndex].isolate)
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
                 else
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(Color.Gray), bounds, 8);
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
             else {
-                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+                e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);

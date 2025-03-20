@@ -37,10 +37,6 @@
             this.splitContainer1 = new SplitContainer();
             this.labelCollapsePanel = new Label();
             this.gateLvlList = new DataGridView();
-            this.gatePhaseNum = new DataGridViewTextBoxColumn();
-            this.dataGridViewImageColumn1 = new DataGridViewImageColumn();
-            this.dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            this.GateLvlRuntime = new DataGridViewTextBoxColumn();
             this.gateToolStrip = new ToolStrip();
             this.btnGateLvlAdd = new ToolStripButton();
             this.btnGateLvlDelete = new ToolStripButton();
@@ -50,6 +46,10 @@
             this.lblMasterlvllistHelp = new Label();
             this.propertyGridGate = new PropertyGrid();
             this.toolTip1 = new ToolTip(this.components);
+            this.gatePhaseNum = new DataGridViewTextBoxColumn();
+            this.dataGridViewImageColumn1 = new DataGridViewImageColumn();
+            this.dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            this.GateLvlRuntime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -79,7 +79,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
             this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 225;
+            this.splitContainer1.SplitterDistance = 224;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 118;
             // 
@@ -92,7 +92,7 @@
             this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(209, -2);
+            this.labelCollapsePanel.Location = new Point(208, -2);
             this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel.MinimumSize = new Size(16, 16);
@@ -160,7 +160,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(201, 351);
+            this.gateLvlList.Size = new Size(200, 351);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -172,45 +172,6 @@
             this.gateLvlList.DragOver += this.gateLvlList_DragOver;
             this.gateLvlList.MouseDown += this.gateLvlList_MouseDown;
             this.gateLvlList.MouseMove += this.gateLvlList_MouseMove;
-            // 
-            // gatePhaseNum
-            // 
-            this.gatePhaseNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            this.gatePhaseNum.HeaderText = "";
-            this.gatePhaseNum.Name = "gatePhaseNum";
-            this.gatePhaseNum.ReadOnly = true;
-            this.gatePhaseNum.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.gatePhaseNum.Width = 5;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewImageColumn1.FillWeight = 1F;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Width = 5;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Lvl";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // GateLvlRuntime
-            // 
-            this.GateLvlRuntime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.GateLvlRuntime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.GateLvlRuntime.FillWeight = 50F;
-            this.GateLvlRuntime.HeaderText = "Runtime";
-            this.GateLvlRuntime.Name = "GateLvlRuntime";
-            this.GateLvlRuntime.ReadOnly = true;
-            this.GateLvlRuntime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // gateToolStrip
             // 
@@ -301,7 +262,7 @@
             this.lblMasterlvllistHelp.Cursor = Cursors.Help;
             this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(547, -3);
+            this.lblMasterlvllistHelp.Location = new Point(546, -3);
             this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
             this.lblMasterlvllistHelp.Size = new Size(15, 16);
@@ -327,13 +288,52 @@
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(395, 364);
+            this.propertyGridGate.Size = new Size(396, 364);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridGate.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridGate.ViewForeColor = Color.White;
             this.propertyGridGate.PropertyValueChanged += this.propertyGridGate_PropertyValueChanged;
+            // 
+            // gatePhaseNum
+            // 
+            this.gatePhaseNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.gatePhaseNum.HeaderText = "";
+            this.gatePhaseNum.Name = "gatePhaseNum";
+            this.gatePhaseNum.ReadOnly = true;
+            this.gatePhaseNum.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gatePhaseNum.Width = 5;
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.dataGridViewImageColumn1.FillWeight = 1F;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 5;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Lvl";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // GateLvlRuntime
+            // 
+            this.GateLvlRuntime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.GateLvlRuntime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.GateLvlRuntime.FillWeight = 50F;
+            this.GateLvlRuntime.HeaderText = "Runtime";
+            this.GateLvlRuntime.Name = "GateLvlRuntime";
+            this.GateLvlRuntime.ReadOnly = true;
+            this.GateLvlRuntime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Form_GateEditor
             // 
@@ -371,11 +371,11 @@
         private ToolStripButton btnGateLvlDown;
         private DataGridView gateLvlList;
         private Label label1;
+        private Label labelCollapsePanel;
+        private ToolTip toolTip1;
         private DataGridViewTextBoxColumn gatePhaseNum;
         private DataGridViewImageColumn dataGridViewImageColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn GateLvlRuntime;
-        private Label labelCollapsePanel;
-        private ToolTip toolTip1;
     }
 }
