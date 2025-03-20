@@ -116,6 +116,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush SampColorNotExist = new SolidBrush(Color.Maroon);
         private static Color SelectColor = Color.FromArgb(199, 69, 255);
         private static SolidBrush SampColorSelected = new SolidBrush(SelectColor);
+        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
+        private static Pen PenBlack = new Pen(Color.Black, 1);
         private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -152,10 +154,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Width -= 4;
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+
             if (sampleList.Rows[e.RowIndex].Selected)
-                e.Graphics.FillRoundedRectangle(SampColorSelected, bounds, 8);
-            else
-                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+                e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (sampleList.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
