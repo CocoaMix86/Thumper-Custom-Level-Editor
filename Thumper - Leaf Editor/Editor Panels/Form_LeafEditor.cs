@@ -2188,6 +2188,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //meh
         }
 
+        public object GetProperties()
+        {
+            return LeafProperties;
+        }
+
         ///Update DGV from _tracks
         public void LoadLeaf(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
         {

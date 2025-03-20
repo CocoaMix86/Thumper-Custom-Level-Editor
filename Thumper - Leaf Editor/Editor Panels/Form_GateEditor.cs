@@ -423,6 +423,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
         }
 
+        public object GetProperties()
+        {
+            return GateProperties;
+        }
+
         public void LoadGate(dynamic _load, FileInfo filepath)
         {
             if (_load == null)

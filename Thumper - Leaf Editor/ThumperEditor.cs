@@ -358,6 +358,29 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
 
+        #region Toolstrip Main (no submenu)
+        private void toolstripAddScene_Click(object sender, EventArgs e)
+        {
+            Form_DrawScene draw = new();
+            draw.Show(dockMain, DockState.Document);
+        }
+
+        private void btnVolumeMixer_Click(object sender, EventArgs e)
+        {
+            VolumeMaster volma = new VolumeMaster();
+            volma.Show();
+        }
+
+        private void toolstripLevelName_Click(object sender, EventArgs e)
+        {
+            dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
+        }
+
+        private void toolstripStopAudio_Click(object sender, EventArgs e)
+        {
+            StopAudio();
+        }
+        #endregion
         #region Toolstrip File
         private void contextmenuFile_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -965,7 +988,15 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Dock Tab Rightclick
-        public static IDockContent GlobalActiveDocument;
+        public static IDockContent GlobalActiveDocument
+        {
+            get => _GAD;
+            set {
+                _GAD = value;
+                dockProjectProperties.propertyGridProject.SelectedObject = _GAD.GetType().GetMethod("GetProperties").Invoke(_GAD, null);
+            }
+        }
+        private static IDockContent _GAD;
         private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
@@ -997,27 +1028,6 @@ namespace Thumper_Custom_Level_Editor
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
         }
         #endregion
-
-        private void toolstripAddScene_Click(object sender, EventArgs e)
-        {
-            Form_DrawScene draw = new();
-            draw.Show(dockMain, DockState.Document);
-        }
-
-        [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
-        private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
-        public static void alzheimer()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-        }
-
-        private void toolstripStopAudio_Click(object sender, EventArgs e)
-        {
-            StopAudio();
-        }
-
         #region Undo System
         private void toolstripMainUndo_ButtonClick(object sender, EventArgs e)
         {
@@ -1038,10 +1048,14 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
 
-        private void btnVolumeMixer_Click(object sender, EventArgs e)
+        //Forcefully garbage collect everything. Highly important to keep this app's memory usage low, especially while streaming audio
+        [DllImport("kernel32.dll", EntryPoint = "SetProcessWorkingSetSize", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        private static extern int SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
+        public static void alzheimer()
         {
-            VolumeMaster volma = new VolumeMaster();
-            volma.Show();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
     }
 }

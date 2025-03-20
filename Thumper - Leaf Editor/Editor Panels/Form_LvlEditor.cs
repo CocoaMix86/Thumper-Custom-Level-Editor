@@ -766,6 +766,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///
         }
 
+        public object GetProperties()
+        {
+            return LvlProperties;
+        }
+
         public void LoadLvl(dynamic _load, FileInfo filepath)
         {
             if (_load == null)

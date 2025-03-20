@@ -76,6 +76,7 @@
         }
 
         #endregion
-        private PropertyGrid propertyGridProject;
+
+        public PropertyGrid propertyGridProject;
     }
 }

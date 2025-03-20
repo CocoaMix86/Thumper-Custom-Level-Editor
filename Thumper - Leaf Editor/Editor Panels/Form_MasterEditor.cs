@@ -548,6 +548,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //_masterlvls.CollectionChanged += masterlvls_CollectionChanged;
         }
 
+        public object GetProperties()
+        {
+            return MasterProperties;
+        }
+
         public void LoadMaster(dynamic _load, FileInfo filepath)
         {
             if (_load == null)

@@ -455,6 +455,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.Columns[1].ValueType = typeof(string);
         }
 
+        public object GetProperties()
+        {
+            return SampleProperties;
+        }
+
         public void LoadSample(dynamic _load, FileInfo filepath)
         {
             if (_load == null)
