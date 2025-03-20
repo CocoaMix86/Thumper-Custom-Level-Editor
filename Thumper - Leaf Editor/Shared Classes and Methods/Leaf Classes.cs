@@ -106,7 +106,7 @@ namespace Thumper_Custom_Level_Editor
             int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
             data_points = new SeqDataPoint[maxbeats].ToList();
             for (int x = 0; x < maxbeats; x++) {
-                data_points[x] = new() { Owner = this, beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
+                data_points[x] = new() { Owner = this, Beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
             }
         }
 
@@ -144,35 +144,26 @@ namespace Thumper_Custom_Level_Editor
 
     public class SeqDataPoint
     {
+        [Browsable(false)]
         public Sequencer_Object Owner { get; set; }
-        public int beat { get; set; }
-        public object value
+        [CategoryAttribute("Selected Data Point(s)")]
+        [DisplayName("Beat #")]
+        public int beat { get => Beat; }
+        [Browsable(false)]
+        public int Beat;
+
+        [CategoryAttribute("Selected Data Point(s)")]
+        [DisplayName("Value")]
+        public decimal? value
         {
-            get => Value;
+            get => (decimal?)Value;
             set {
                 if (value != null) {
-                    /*
-                    //standardize values based on the type
-                    if (Owner.trait_type == "kTraitBool") {
-                        if ((decimal)value is not 1 or 0)
-                            value = 1;
-                    }
-                    else if (Owner.trait_type == "kTraitColor") {
-                        value = TCLE.TruncateDecimal((decimal)value, 0);
-                    }
-                    else if (Owner.trait_type == "kTraitAction") {
-                        if ((decimal)value is not 1)
-                            value = 1;
-                    }
-                    else if (Owner.trait_type == "kTraitInt") {
-                        value = TCLE.TruncateDecimal((decimal)value, 0);
-                    }
-                    */
                 }
                 Value = value;
 
                 if (Owner != null && Owner.editor_row != null) {
-                    if (Owner.editor_row.Cells[beat + 3].Value != Value) {
+                    if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
                         Owner.editor_row.Cells[beat + 3].Value = Value;
                         Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
                     }
@@ -182,7 +173,15 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private object Value;
+
+        [CategoryAttribute("Selected Data Point(s)")]
+        [DisplayName("Interp")]
+        [TypeConverter(typeof(LeafInterpolations))]
         public string interpolation { get; set; }
+
+        [CategoryAttribute("Selected Data Point(s)")]
+        [DisplayName("Easing")]
+        [TypeConverter(typeof(LeafEasings))]
         public string ease { get; set; }
     }
 
@@ -197,8 +196,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Sequencer_Object selectedobj { get; set; }
         [Browsable(false)]
-        public SeqDataPoint selecteddatapoint { get; set; }
-        [Browsable(false)]
         public string SequencerType { get; set; }
 
         public LeafProperties(Form_LeafEditor Parent, FileInfo path, int _beats)
@@ -207,7 +204,6 @@ namespace Thumper_Custom_Level_Editor
             FilePath = path;
             Beats = _beats;
             selectedobj = new(this);
-            selecteddatapoint = new();
             seq_objs = new();
             //seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
         }
@@ -309,28 +305,6 @@ namespace Thumper_Custom_Level_Editor
                 Form_LeafEditor.TrackUpdateHighlighting(selectedobj);
             }
         }
-
-        [CategoryAttribute("Sequencer Data Point")]
-        [DisplayName("Beat #")]
-        [Description("")]
-        public int datapointbeat => selecteddatapoint.beat;
-
-        [CategoryAttribute("Sequencer Data Point")]
-        [DisplayName("Value")]
-        [Description("")]
-        public decimal? datapointvalue { get => (decimal?)selecteddatapoint.value; set => selecteddatapoint.value = value; }
-
-        [CategoryAttribute("Sequencer Data Point")]
-        [DisplayName("Interpolation")]
-        [Description("")]
-        [TypeConverter(typeof(LeafInterpolations))]
-        public string datapointinterp { get => selecteddatapoint.interpolation; set => selecteddatapoint.interpolation = value; }
-
-        [CategoryAttribute("Sequencer Data Point")]
-        [DisplayName("Easing")]
-        [Description("")]
-        [TypeConverter(typeof(LeafEasings))]
-        public string datapointease { get => selecteddatapoint.ease; set => selecteddatapoint.ease = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 0")]

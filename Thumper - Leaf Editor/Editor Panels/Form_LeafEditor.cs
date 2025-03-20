@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using Un4seen.Bass;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
@@ -152,6 +153,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
+        private List<SeqDataPoint> SelectedDPs = new();
         #endregion
 
         #region EventHandlers
@@ -736,8 +738,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ResetRowAfterEdit = false;
                 trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex, LastRowEdit];
             }
-            leafProperties.selecteddatapoint = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex].data_points[trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset];
-            propertyGridLeaf.Refresh();
+
+            //certain actions only available with cells selected
             bool enable = trackEditor.SelectedCells.Count > 0;
             btnTrackUp.Enabled = enable;
             btnTrackDown.Enabled = enable;
@@ -749,6 +751,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
             trackEditor.InvalidateColumn(0);
+            //get all selected cells and display them grouped together in the propertygrid
+            //this allows for mass editing
+            SelectedDPs.Clear();
+            foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
+                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset]);
+            }
+            propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
+            propertyGridLeaf.Refresh();
         }
 
         private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -824,7 +834,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //if cell does not have the value, set it
                         if (_cell.Value != _tempval) {
                             _cell.Value = _tempval;
-                            SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = _tempval;
+                            SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = (decimal?)_tempval;
                             changes = true;
                         }
                     }
@@ -974,8 +984,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (e.ColumnIndex >= FrozenColumnOffset) {
-                leafProperties.selecteddatapoint = SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset];
-                propertyGridLeaf.Refresh();
+                //leafProperties.selecteddatapoint = SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset];
+                //propertyGridLeaf.Refresh();
             }
         }
 
@@ -2013,7 +2023,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //only copy datapoints after the split index
                 for (int x = splitindex; x < LeafProperties.beats; x++) {
                     clone.data_points[x - splitindex] = new SeqDataPoint() {
-                        beat = seq.data_points[x].beat - splitindex,
+                        Beat = seq.data_points[x].beat - splitindex,
                         value = seq.data_points[x].value,
                         ease = seq.data_points[x].ease,
                         interpolation = seq.data_points[x].interpolation,
@@ -2249,7 +2259,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EnableLeafButtons();
             trackZoom_Scroll(null, null);
 
-            propertyGridLeaf.SelectedObject = LeafProperties;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
@@ -2307,7 +2316,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (dp is JObject data_point) {
                         SeqDataPoint data = new() {
                             Owner = _s,
-                            beat = (int)data_point["beat"],
+                            Beat = (int)data_point["beat"],
                             value = (decimal)data_point["value"],
                             interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
                             ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
@@ -2317,7 +2326,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else {
                         SeqDataPoint data = new() {
                             Owner = _s,
-                            beat = int.Parse(((JProperty)dp).Name),
+                            Beat = int.Parse(((JProperty)dp).Name),
                             value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3),
                             interpolation = "Linear",
                             ease = TCLE.Easings["kEaseInOut"]
@@ -2538,7 +2547,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             {
                 for (int x = LeafProperties.beats; x < 255; x++)
                 {
-                    seq.data_points[x] = new() { beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    seq.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                 }
             }
             //set cell zoom
@@ -3004,7 +3013,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 dgvc.Value = _out;
-                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { Owner = seq, beat = dgvc.ColumnIndex - FrozenColumnOffset, value = _out, ease = "Ease In Out", interpolation = "Linear" };
+                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { Owner = seq, Beat = dgvc.ColumnIndex - FrozenColumnOffset, value = (decimal?)_out, ease = "Ease In Out", interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
         }
