@@ -1,19 +1,27 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
     public class GateLvlData
     {
-        public string lvlname { get; set; }
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Sublevel Name")]
+        public string lvlname { get => _Lvlname; }
+        [Browsable(false)]
+        public string _Lvlname;
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Sentry")]
+        [Description("Does this sublevel use a sentry. The multilane option is wider than the single lane")]
+        [TypeConverter(typeof(GateSentryList))]
         public string sentrytype { get; set; }
+
+        [CategoryAttribute("Sublevel Options")]
+        [DisplayName("Bucket #")]
+        [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
+        [TypeConverter(typeof(GateBucket))]
         public int bucket { get; set; }
     }
 
@@ -30,14 +38,11 @@ namespace Thumper_Custom_Level_Editor
         public Form_GateEditor parent;
         [Browsable(false)]
         public ObservableCollection<GateLvlData> gatelvls;
-        [Browsable(false)]
-        public GateLvlData sublevel { get; set; }
 
         public GateProperties(Form_GateEditor Parent, FileInfo path)
         {
             parent = Parent;
             FilePath = path;
-            sublevel = new();
             gatelvls = new();
             gatelvls.CollectionChanged += parent.gatelvls_CollectionChanged;
         }
@@ -114,22 +119,6 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
         public string runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Sublevel Name")]
-        public string sublevelname => sublevel.lvlname;
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Sentry")]
-        [TypeConverter(typeof(GateSentryList))]
-        [Description("Does this sublevel use a sentry. The multilane option is wider than the single lane")]
-        public string sentrytype { get => sublevel.sentrytype; set => sublevel.sentrytype = value; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Bucket")]
-        [TypeConverter(typeof(GateBucket))]
-        [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
-        public int bucket { get => sublevel.bucket + 1; set => sublevel.bucket = value - 1; }
     }
 
     public class GateBossList : StringConverter

@@ -21,7 +21,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     savestate = load
                 });
             }
-            propertyGridGate.SelectedObject = GateProperties;
         }
         private void Form_GateEditor_Shown(object sender, EventArgs e)
         {
@@ -127,7 +126,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            gateproperties.sublevel = GateLvls[e.RowIndex];
+
+            propertyGridGate.SelectedObjects = gateLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => GateLvls[x.Index]).ToArray();
             propertyGridGate.ExpandAllGridItems();
             propertyGridGate.Refresh();
         }
@@ -138,6 +138,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
             TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")).Value?.File);
+        }
+
+        private void gateLvlList_SelectionChanged(object sender, EventArgs e)
+        {
+            propertyGridGate.SelectedObjects = gateLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => GateLvls[x.Index]).ToArray();
+            propertyGridGate.ExpandAllGridItems();
+            propertyGridGate.Refresh();
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -351,6 +358,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.Title = "Load a Thumper Lvl file";
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
+                AddFileToGate(ofd.FileName);
+                /*
                 //parse leaf to JSON
                 dynamic _load = TCLE.LoadFileLock(ofd.FileName);
                 //check if file being loaded is actually a leaf. Can do so by checking the JSON key
@@ -360,12 +369,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //add leaf data to the list
                 GateProperties.gatelvls.Add(new GateLvlData() {
-                    lvlname = (string)_load["obj_name"],
+                    _Lvlname = (string)_load["obj_name"],
                     sentrytype = "None",
                     bucket = 0
                 });
                 TCLE.PlaySound("UIobjectadd");
                 SaveCheckAndWrite(false, "Add New Phase");
+                */
             }
         }
 
@@ -451,20 +461,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
                 random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
-            propertyGridGate.SelectedObject = gateproperties;
 
             ///Clear form elements so new data can load
             GateLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["boss_patterns"]) {
                 GateProperties.gatelvls.Add(new GateLvlData() {
-                    lvlname = _lvl["lvl_name"],
+                    _Lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
                     bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
             }
 
-            propertyGridGate.SelectedObject = gateproperties;
             EditorLoading = false;
             EditorIsSaved = true;
             RecalculateRuntime();
@@ -588,7 +596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             GateLvls.Add(new GateLvlData() {
-                lvlname = (string)_load["obj_name"],
+                _Lvlname = (string)_load["obj_name"],
                 sentrytype = "None",
                 bucket = 0
             });

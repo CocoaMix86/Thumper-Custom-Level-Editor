@@ -342,8 +342,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             //e.Graphics.FillRoundedRectangle(LvlLeafs[e.RowIndex].NotFound ? LvlLeafColorNotExist : LvlLeafColor, bounds, 6);
-            if (sender == lvlLeafList)
-                e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
+            ///if (sender == lvlLeafList)
+            ///    e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
 
             if (sender == lvlLeafPaths)
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
@@ -405,6 +405,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafList.Rows.Clear();
             foreach (LvlLeafData leaf in LvlLeafs) {
                 lvlLeafList.Rows.Add(new object[] {
+                    Properties.Resources.editor_leaf,
                     leaf.leafname,
                     0 });
             }
@@ -470,14 +471,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (!btnLvlPathView.Checked)
                 return;
-            pictureTunnelViewer.Visible = true;
+            //calculate position to show the tunnel image
             Point mouse = this.PointToClient(System.Windows.Forms.Cursor.Position);
-            pictureTunnelViewer.Location = new Point(mouse.X + 50, (mouse.Y + 150 > this.Height) ? this.Height - 300 : mouse.Y - 150);
-            pictureTunnelViewer.BringToFront();
-
+            int height = (mouse.Y + 150 > this.Height) ? this.Height - 300 : mouse.Y - 150;
+            if (height < 0) height = 0;
+            //get image of tunnel
             string pathname = (string)(sender as DataGridView).Rows[e.RowIndex].Cells[0].GetEditedFormattedValue(e.RowIndex, DataGridViewDataErrorContexts.Commit);
             pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
-            //pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{LvlProperties.sublevel.paths[e.RowIndex].Replace(".path", "")}");
+            //show the image
+            pictureTunnelViewer.Visible = true;
+            pictureTunnelViewer.Location = new Point(mouse.X + 50, height);
+            pictureTunnelViewer.BringToFront();
         }
 
         private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
@@ -1026,7 +1030,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
                 if (beats == -1) {
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle.BackColor = Color.Maroon;
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[1].Value = $"file not found";
+                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"file not found";
                     _leaf.beats = 1;
                     _leaf.NotFound = true;
                 }
@@ -1037,7 +1041,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _leaf.NotFound = false;
                     string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                     lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[1].Value = $"{beats} beats -- {time}";
+                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
                 }
             }
             lvlLeafList.Refresh();

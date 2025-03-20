@@ -51,6 +51,7 @@
             this.lblLvlTunnels = new Label();
             this.splitContainer1 = new SplitContainer();
             this.lvlLeafList = new DataGridView();
+            this.lvlLeafIcon = new DataGridViewImageColumn();
             this.Leaf = new DataGridViewTextBoxColumn();
             this.Beats = new DataGridViewTextBoxColumn();
             this.btnLvlSequencer = new Button();
@@ -162,7 +163,7 @@
             this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.lvlLeafList.ColumnHeadersHeight = 20;
             this.lvlLeafList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.lvlLeafList.Columns.AddRange(new DataGridViewColumn[] { this.Leaf, this.Beats });
+            this.lvlLeafList.Columns.AddRange(new DataGridViewColumn[] { this.lvlLeafIcon, this.Leaf, this.Beats });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle4.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -212,6 +213,16 @@
             this.lvlLeafList.DragOver += this.lvlLeafList_DragOver;
             this.lvlLeafList.MouseDown += this.lvlLeafList_MouseDown;
             this.lvlLeafList.MouseMove += this.lvlLeafList_MouseMove;
+            // 
+            // lvlLeafIcon
+            // 
+            this.lvlLeafIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.lvlLeafIcon.HeaderText = "";
+            this.lvlLeafIcon.Image = Properties.Resources.editor_leaf;
+            this.lvlLeafIcon.MinimumWidth = 16;
+            this.lvlLeafIcon.Name = "lvlLeafIcon";
+            this.lvlLeafIcon.ReadOnly = true;
+            this.lvlLeafIcon.Width = 16;
             // 
             // Leaf
             // 
@@ -927,8 +938,6 @@
         private DataGridView dgvPathsList;
         private DataGridViewTextBoxColumn columnLvlLeafPaths;
         private DataGridView lvlLeafList;
-        private DataGridViewTextBoxColumn Leaf;
-        private DataGridViewTextBoxColumn Beats;
         private Label label29;
         public Button btnLvlSequencer;
         private ToolStrip lvlToolStrip;
@@ -939,5 +948,8 @@
         private ToolStripButton btnLvlLeafCopy;
         private ToolStripButton btnLvlLeafPaste;
         private ToolStripButton btnLvlLeafRandom;
+        private DataGridViewImageColumn lvlLeafIcon;
+        private DataGridViewTextBoxColumn Leaf;
+        private DataGridViewTextBoxColumn Beats;
     }
 }
