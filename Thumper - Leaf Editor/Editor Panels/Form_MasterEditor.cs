@@ -220,6 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush LvlColorNotExist = new SolidBrush(Color.Maroon);
         private static Color SelectColor = Color.FromArgb(199, 69, 255);
         private static SolidBrush LvlColorSelected = new SolidBrush(SelectColor);
+        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
         private static Pen PenBlack = new Pen(Color.Black, 1);
         private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -276,20 +277,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
 
+            if ((sender as DataGridView).Rows[e.RowIndex].Selected)
+                e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             if (MasterLvls.Any(x => x.isolate)) {
-                if ((sender as DataGridView).Rows[e.RowIndex].Selected)
-                    e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
-                else if (MasterLvls[e.RowIndex].isolate)
+                if (MasterLvls[e.RowIndex].isolate)
                     e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
                 else
                     e.Graphics.FillRoundedRectangle(new SolidBrush(Color.Gray), bounds, 8);
             }
             else {
-                if ((sender as DataGridView).Rows[e.RowIndex].Selected)
-                    e.Graphics.FillRoundedRectangle(LvlColorSelected, bounds, 8);
-                else
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
+                e.Graphics.FillRoundedRectangle(new SolidBrush(e.InheritedRowStyle.BackColor), bounds, 8);
             }
+
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
