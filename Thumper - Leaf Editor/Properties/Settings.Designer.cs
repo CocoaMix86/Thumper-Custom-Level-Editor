@@ -918,5 +918,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["VolKey21"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PreviewTunnel {
+            get {
+                return ((bool)(this["PreviewTunnel"]));
+            }
+            set {
+                this["PreviewTunnel"] = value;
+            }
+        }
     }
 }

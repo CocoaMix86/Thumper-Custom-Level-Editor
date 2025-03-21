@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Input;
+using Thumper_Custom_Level_Editor.Other_Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -27,6 +28,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     savestate = load
                 });
             }
+            PathList = new("path", lvlLeafPaths);
+            PathList.Owner = this;
+
+            btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
@@ -85,6 +90,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         public int SampChannel;
+        public DragDropItemList PathList;
         #endregion
 
         #region EventHandlers
@@ -205,40 +211,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///
-        private void dgvPathsList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
-                // If the mouse moves outside the rectangle, start the drag.
-                if (RowToMove == null && dragBoxFromMouseDownPaths != Rectangle.Empty && !dragBoxFromMouseDownPaths.Contains(e.X, e.Y)) {
-                    // Proceed with the drag and drop, passing in the list item.                    
-                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = dgvPathsList.Rows[rowIndexFromMouseDownPaths];
-                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = lvlLeafPaths.DoDragDrop(dgvPathsList.Rows[rowIndexFromMouseDownPaths].Cells[0].Value.ToString(), DragDropEffects.Copy);
-                    RowToMove = null;
-                    previousDragOver = -1;
-                }
-            }
-        }
-        private void dgvPathsList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            rowIndexFromMouseDownPaths = dgvPathsList.HitTest(e.X, e.Y).RowIndex;
-            if (rowIndexFromMouseDownPaths != -1) {
-                Size dragSize = SystemInformation.DragSize;
-                dragBoxFromMouseDownPaths = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-            }
-            else
-                dragBoxFromMouseDownPaths = Rectangle.Empty;
-        }
-        private void dgvPathsList_DragOver(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-        private void dgvPathsList_DragDrop(object sender, DragEventArgs e)
-        {
-        }
-        private void dgvPathsList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Copy;
-        ///
         private void lvlLeafPaths_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
@@ -265,30 +237,51 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void lvlLeafPaths_DragOver(object sender, DragEventArgs e)
         {
-            if (RowToMove.DataGridView != dgvPathsList) {
-                //e.Effect = DragDropEffects.Move;
-            }
+            bool AddOrInsert = false;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = lvlLeafPaths.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafPaths.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             if (lvlLeafPaths.RowCount is 0 or 1)
                 targetRow = 0;
-            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
-                if (!lvlLeafPaths.Rows.Contains(RowToMove)) {
-                    lvlLeafPaths.Rows.Add(e.Data.GetData(typeof(string)) as string);
-                    RowToMove = lvlLeafPaths.Rows[^1];
+            if (targetRow is -1)
+                AddOrInsert = true;
+            if (e.Effect == DragDropEffects.Copy) {
+                if (targetRow != previousDragOver) {
+                    foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
+                        LvlProperties.sublevel.paths.Remove(path);
+                        /*
+                        var RowToRemove = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == path).FirstOrDefault();
+                        if (RowToRemove != null)
+                            lvlLeafPaths.Rows.Remove(RowToRemove);
+                        */
+                        if (AddOrInsert)
+                            LvlProperties.sublevel.paths.Add(path);
+                        //lvlLeafPaths.Rows.Add(path);
+                        else
+                            LvlProperties.sublevel.paths.Insert(targetRow, path);
+                    }
+                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
+                    previousDragOver = targetRow;
                 }
-                lvlLeafPaths.Rows.Remove(RowToMove);
-                lvlLeafPaths.Rows.Insert(targetRow, RowToMove);
-                lvlLeafPaths.ClearSelection();
-                previousDragOver = targetRow;
-                lvlLeafPaths.Rows[targetRow].Selected = true;
+            }
+            else {
+                if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                    if (!lvlLeafPaths.Rows.Contains(RowToMove)) {
+                        lvlLeafPaths.Rows.Add(e.Data.GetData(typeof(string)) as string);
+                        RowToMove = lvlLeafPaths.Rows[^1];
+                    }
+                    lvlLeafPaths.Rows.Remove(RowToMove);
+                    lvlLeafPaths.Rows.Insert(targetRow, RowToMove);
+                    lvlLeafPaths.ClearSelection();
+                    previousDragOver = targetRow;
+                    lvlLeafPaths.Rows[targetRow].Selected = true;
+                }
             }
         }
         private void lvlLeafPaths_DragEnter(object sender, DragEventArgs e)
         {
-            if (RowToMove.DataGridView != dgvPathsList) {
+            if (RowToMove != null && RowToMove.DataGridView == lvlLeafPaths) {
                 e.Effect = DragDropEffects.Move;
             }
             else
@@ -306,16 +299,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.Data.GetData(typeof(string)) is string rowToMove) {
                     LvlBuildPathList();
                     SaveCheckAndWrite(false, "Reorder Leafs");
-                    /*
-                    if (rowIndexOfItemUnderMouseToDrop == -1)
-                        lvlLeafPaths.Rows.Add(rowToMove);
-                    else {
-                        lvlLeafPaths.Rows.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
-                    }
-                    lvlLeafPaths.ClearSelection();
-                    LvlBuildPathList();
-                    SaveCheckAndWrite(false, "Reorder Leafs");
-                    */
                 }
             }
         }
@@ -465,6 +448,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
         }
 
+        private void btnLvlPathView_CheckedChanged(object sender, EventArgs e)
+        {
+            //save check state
+            Properties.Settings.Default.PreviewTunnel = btnLvlPathView.Checked;
+            //update every active lvl document with new state
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+                lvl.btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
+        }
+
         private void lvlLeafPaths_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -610,11 +602,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UItunneladd");
             SaveCheckAndWrite(false, "Add Tunnel");
             */
-            if (dgvPathsList.Location.X + dgvPathsList.Width > this.Width)
-                dgvPathsList.Location = new Point(this.Width - dgvPathsList.Width - 2, dgvPathsList.Location.Y);
+            if (PathList.Location.X + PathList.Width > this.Width)
+                PathList.Location = new Point(this.Width - PathList.Width - 2, PathList.Location.Y);
             else
-                dgvPathsList.Location = new Point(lvlPathsToolStrip.Width + 2, dgvPathsList.Location.Y);
-            dgvPathsList.Visible = btnLvlPathAdd.Checked;
+                PathList.Location = new Point(lvlPathsToolStrip.Width + 2, PathList.Location.Y);
+
+            if (btnLvlPathAdd.Checked)
+                PathList.Show();
+            else
+                PathList.Hide();
         }
 
         private void btnLvlPathUp_Click(object sender, EventArgs e)
@@ -746,27 +742,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeLvlStuff()
         {
-            TCLE.LvlPaths.Sort();
-            dgvPathsList.DataSource = TCLE.LvlPaths.Select(x => new { Name = x }).ToList();
-            dgvPathsList.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPathsList.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            ///customize Paths List a bit
-            //custom column containing comboboxes per cell
-            /*
-            DataGridViewComboBoxColumn _dgvlvlpaths = new() {
-                DataSource = TCLE.LvlPaths,
-                HeaderText = "Path Name",
-                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
-                DisplayStyleForCurrentCellOnly = true,
-                FlatStyle = FlatStyle.Flat,
-                DefaultCellStyle = new DataGridViewCellStyle() { BackColor = Color.DarkBlue, SelectionBackColor = Color.CornflowerBlue, ForeColor = Color.White }
-            };
-            lvlLeafPaths.Columns.Add(_dgvlvlpaths);
-            */
-            ///
-
             ///customize Loop Track list a bit
             //custom column containing comboboxes per cell
             lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
@@ -885,7 +860,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (string path in LvlLeafs[index].paths) {
                 //path may have been manually added and could not exist
                 if (TCLE.LvlPaths.Contains(path))
-                    lvlLeafPaths.Rows.Add(new object[] { path });
+                    lvlLeafPaths.Rows.Add(path);
                 else
                     MessageBox.Show($"Tunnel \"{path}\" not found in program. If you think this is wrong, please report this to CocoaMix on the github page!");
             }

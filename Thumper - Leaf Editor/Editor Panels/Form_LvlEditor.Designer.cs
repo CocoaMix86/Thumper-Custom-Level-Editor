@@ -42,10 +42,6 @@
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
             this.toolTip1 = new ToolTip(this.components);
             this.lblLvlTunnels = new Label();
@@ -87,7 +83,6 @@
             this.btnLvlLoopDelete = new ToolStripButton();
             this.label22 = new Label();
             this.pictureTunnelViewer = new Label();
-            this.dgvPathsList = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,7 +97,6 @@
             this.lvlPathsToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).BeginInit();
             this.lvlLoopToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.dgvPathsList).BeginInit();
             this.SuspendLayout();
             // 
             // lblLvlTunnels
@@ -634,6 +628,7 @@
             this.btnLvlPathView.Size = new Size(24, 22);
             this.btnLvlPathView.Text = "toolStripButton1";
             this.btnLvlPathView.ToolTipText = "Show/Hide tunnel preview";
+            this.btnLvlPathView.CheckedChanged += this.btnLvlPathView_CheckedChanged;
             // 
             // lvlLoopTracks
             // 
@@ -794,86 +789,12 @@
             this.pictureTunnelViewer.Visible = false;
             this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
             // 
-            // dgvPathsList
-            // 
-            this.dgvPathsList.AllowDrop = true;
-            this.dgvPathsList.AllowUserToAddRows = false;
-            this.dgvPathsList.AllowUserToDeleteRows = false;
-            this.dgvPathsList.AllowUserToResizeColumns = false;
-            this.dgvPathsList.AllowUserToResizeRows = false;
-            this.dgvPathsList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            this.dgvPathsList.BackgroundColor = Color.FromArgb(20, 20, 20);
-            this.dgvPathsList.BorderStyle = BorderStyle.Fixed3D;
-            this.dgvPathsList.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dgvPathsList.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle15.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle15.ForeColor = Color.White;
-            dataGridViewCellStyle15.SelectionBackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle15.SelectionForeColor = Color.White;
-            dataGridViewCellStyle15.WrapMode = DataGridViewTriState.False;
-            this.dgvPathsList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvPathsList.ColumnHeadersHeight = 20;
-            this.dgvPathsList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = Color.DarkBlue;
-            dataGridViewCellStyle16.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            dataGridViewCellStyle16.SelectionBackColor = Color.CornflowerBlue;
-            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.False;
-            this.dgvPathsList.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvPathsList.EnableHeadersVisualStyles = false;
-            this.dgvPathsList.GridColor = Color.Black;
-            this.dgvPathsList.Location = new Point(259, 44);
-            this.dgvPathsList.Margin = new Padding(4, 3, 4, 3);
-            this.dgvPathsList.MultiSelect = false;
-            this.dgvPathsList.Name = "dgvPathsList";
-            this.dgvPathsList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle17.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle17.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
-            this.dgvPathsList.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            this.dgvPathsList.RowHeadersVisible = false;
-            this.dgvPathsList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle18.BackColor = Color.DarkBlue;
-            dataGridViewCellStyle18.ForeColor = Color.White;
-            this.dgvPathsList.RowsDefaultCellStyle = dataGridViewCellStyle18;
-            this.dgvPathsList.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.DarkBlue;
-            this.dgvPathsList.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
-            this.dgvPathsList.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.CornflowerBlue;
-            this.dgvPathsList.RowTemplate.Height = 20;
-            this.dgvPathsList.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.dgvPathsList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPathsList.Size = new Size(272, 450);
-            this.dgvPathsList.TabIndex = 161;
-            this.dgvPathsList.Visible = false;
-            this.dgvPathsList.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
-            this.dgvPathsList.CellMouseLeave += this.lvlLeafPaths_CellMouseLeave;
-            this.dgvPathsList.CellPainting += this.lvlLeafList_CellPainting;
-            this.dgvPathsList.RowPrePaint += this.lvlLeafList_RowPrePaint;
-            this.dgvPathsList.DragDrop += this.dgvPathsList_DragDrop;
-            this.dgvPathsList.DragEnter += this.dgvPathsList_DragEnter;
-            this.dgvPathsList.DragOver += this.dgvPathsList_DragOver;
-            this.dgvPathsList.MouseDown += this.dgvPathsList_MouseDown;
-            this.dgvPathsList.MouseLeave += this.lvlLeafPaths_MouseLeave;
-            this.dgvPathsList.MouseMove += this.dgvPathsList_MouseMove;
-            // 
             // Form_LvlEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
             this.ClientSize = new Size(707, 506);
-            this.Controls.Add(this.dgvPathsList);
             this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.splitContainer1);
             this.DoubleBuffered = true;
@@ -905,7 +826,6 @@
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
             this.lvlLoopToolStrip.ResumeLayout(false);
             this.lvlLoopToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.dgvPathsList).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -935,7 +855,6 @@
         private DataGridViewButtonColumn LvlLoopPlay;
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
-        private DataGridView dgvPathsList;
         private DataGridViewTextBoxColumn columnLvlLeafPaths;
         private DataGridView lvlLeafList;
         private Label label29;
