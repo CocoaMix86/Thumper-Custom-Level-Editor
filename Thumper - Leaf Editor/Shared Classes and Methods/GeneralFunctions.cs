@@ -334,6 +334,15 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public static void WriteFileLock(FileStream fs, string _save)
+        {
+            string tosave = _save;
+            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
+                fs.SetLength(0);
+                sr.Write(tosave);
+            }
+        }
+
         public static dynamic LoadFileLock(string _selectedfilename)
         {
             dynamic _load;
@@ -1149,5 +1158,14 @@ namespace Thumper_Custom_Level_Editor
                 "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
                 _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1))
             };
+        
+        public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
+        {
+            if (extensions == null)
+                throw new ArgumentNullException("extensions");
+            IEnumerable<FileInfo> files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories);
+            return files.Where(f => extensions.Contains(f.Extension));
+        }
     }
+
 }

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO.Packaging;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -236,6 +237,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //move the folder or file
             if (node.ImageKey == "folder") {
                 Directory.Move(source, dest);
+                ProjectExplorer.CreateTreeView();
             }
             else {
                 if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
@@ -244,9 +246,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     File.Move(source, dest);
                     dynamic towrite = TCLE.LoadFileLock(dest);
                     File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
+                    ProjectExplorer.CreateTreeView();
+                    //need to update the name in every other file that references it too
+                    foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
+                        dynamic _loadfile = TCLE.LoadFileLock(file.FullName);
+                        //if load fails, skip
+                        if (_loadfile == null)
+                            continue;
+                        string _output = JsonConvert.SerializeObject(_loadfile, Formatting.Indented);
+                        //if files doesn't contain reference, skip
+                        if (!_output.Contains(Path.GetFileName(source)))
+                            continue;
+                        //some files may be lock loaded, so we use different writing methods for those
+                        //also force editor to reload the document
+                        if (TCLE.lockedfiles.FirstOrDefault(x => x.Key.FullName == file.FullName) is KeyValuePair<FileInfo, FileStream> stream && stream.Value != null) {
+                            TCLE.WriteFileLock(stream.Value, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                            if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(stream.Key.Name)) is IDockContent founddoc)
+                                founddoc.GetType().GetMethod("Reload").Invoke(founddoc, null);
+                        }
+                        else
+                            File.WriteAllText(file.FullName, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                    }
                 }
             }
-            ProjectExplorer.CreateTreeView();
         }
         #endregion
         #endregion

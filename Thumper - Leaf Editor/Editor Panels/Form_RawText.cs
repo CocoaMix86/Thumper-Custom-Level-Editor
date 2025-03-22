@@ -69,6 +69,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
+        public object GetProperties()
+        {
+            return null;
+        }
+
         public void Save(bool playsound = true)
         {
             SaveCheckAndWrite(true, playsound);
@@ -85,6 +90,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             EditorIsSaved = true;
             this.Text = LoadedFile.Name + " [Raw]";
+            this.Invalidate();
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)

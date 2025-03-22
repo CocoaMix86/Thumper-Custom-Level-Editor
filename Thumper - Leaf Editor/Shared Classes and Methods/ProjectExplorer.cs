@@ -26,6 +26,7 @@ namespace Thumper_Custom_Level_Editor
             expandednodes = GetExpandedNodes(ProjectTree);
             //clear existing treeview
             ProjectTree.Clear();
+            Files.Clear();
             ///projectfiles.Clear();
             ///projectfolders.Clear();
             if (TCLE.WorkingFolder.Exists) {

@@ -911,6 +911,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dynamic _load = TCLE.LoadFileLock(LoadedLvl.FullName);
             LoadLvl(_load, LoadedLvl);
+            RecalculateRuntime();
+            lvlLeafList.Invalidate();
         }
 
         public List<SaveState> UndoList = new();

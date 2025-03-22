@@ -505,6 +505,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = true;
         }
 
+        public void Reload()
+        {
+            dynamic _load = TCLE.LoadFileLock(LoadedSample.FullName);
+            LoadSample(_load, LoadedSample);
+            this.Invalidate();
+        }
+
         public List<SaveState> UndoList = new();
         public List<SaveState> GetUndoList()
         {
