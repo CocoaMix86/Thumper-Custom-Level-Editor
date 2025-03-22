@@ -124,7 +124,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private Rectangle dragBoxFromMouseDown;
         private Rectangle dragBoxFromMouseDownPaths;
-        private DataGridViewRow RowToMove;
+        private List<LvlLeafData> LeafsToMove;
         private int rowIndexFromMouseDown;
         private int rowIndexFromMouseDownPaths;
         private int rowIndexOfItemUnderMouseToDrop;
@@ -135,16 +135,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
-                    // Proceed with the drag and drop, passing in the list item.                    
-                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = lvlLeafList.Rows[rowIndexFromMouseDown];
-                    lvlLeafList.ClearSelection();
+                if (LeafsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    // Proceed with the drag and drop, passing in the list item.
+                    LeafsToMove = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => LvlLeafs[x.Index]).ToList();
                     DragSource = "LeafList";
                     //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LvlLeafs[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = null;
+                    DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LeafsToMove, DragDropEffects.Move);
+                    LeafsToMove = null;
                     DragSource = "none";
+                    TargetRowToPaint = -3;
+                    previousDragOver = -2;
                 }
             }
         }
@@ -176,15 +176,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
-            if (e.Effect == DragDropEffects.Copy) {
-                if (e.Data.GetData(typeof(List<string>)) is List<string>)
+            if (LeafsToMove == null) {
+                if (e.Data.GetData(typeof(List<string>)) is TreeNode dragdropnode)
                     return;
+                else {
+                    if (targetRow != previousDragOver) {
+                        previousDragOver = targetRow;
+                        TargetRowToPaint = targetRow;
+                        if (TargetRowToPaint is -1)
+                            TargetRowToPaint = lvlLeafList.RowCount;
+                        lvlLeafList.Invalidate();
+                    }
+                }
             }
             else {
-                if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
-                    lvlLeafList.Rows.Remove(RowToMove);
-                    lvlLeafList.Rows.Insert(targetRow, RowToMove);
-                    lvlLeafList.ClearSelection();
+                if (LeafsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                    foreach (LvlLeafData leaf in LeafsToMove) {
+                        LvlLeafs.Remove(leaf);
+                        LvlLeafs.Insert(targetRow, leaf);
+                    }
                     previousDragOver = targetRow;
                     lvlLeafList.Rows[targetRow].Selected = true;
                 }
@@ -195,10 +205,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (DragSource is not "LeafList")
                 return;
-            if (RowToMove != null && RowToMove.DataGridView == lvlLeafList)
+            if (LeafsToMove != null)
                 e.Effect = DragDropEffects.Move;
-            else
+            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
                 e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.Move;
         }
 
         private void lvlLeafList_DragDrop(object sender, DragEventArgs e)
@@ -211,17 +223,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // Get the row index of the item the mouse is below. 
             rowIndexOfItemUnderMouseToDrop = lvlLeafList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
 
-            // Save after dropping
-            if (e.Effect == DragDropEffects.Move) {
+            if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
+            }
+            else if (LeafsToMove != null) {
                 SaveCheckAndWrite(false, "Reorder Leafs");
-                RowToMove = null;
+                LeafsToMove = null;
                 previousDragOver = -2;
             }
-            else {
-                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                    AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
-                }
+            else if (e.Data.GetData(typeof(List<LvlLeafData>)) is List<LvlLeafData> leafs) {
+                foreach (LvlLeafData leaf in leafs)
+                    LvlLeafs.Insert(TargetRowToPaint, leaf.Clone());
             }
+            TargetRowToPaint = -3;
+            previousDragOver = -2;
         }
         ///
         private List<string> RowsToMove;
@@ -239,6 +254,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     DragDropEffects dropEffect = lvlLeafPaths.DoDragDrop(RowsToMove, DragDropEffects.Move);
                     RowsToMove = null;
                     DragSource = "none";
+                    TargetRowToPaint = -3;
+                    previousDragOver = -2;
                 }
             }
         }
@@ -318,9 +335,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SaveCheckAndWrite(false, "Reorder Paths on Leaf");
                 }
             }
-            RowToMove = null;
-            previousDragOver = -2;
             TargetRowToPaint = -3;
+            previousDragOver = -2;
         }
         ///
 
@@ -347,7 +363,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
 
-            if (sender == lvlLeafPaths) {
+            if ((sender == lvlLeafPaths && DragSource is "PathList") || (sender == lvlLeafList && DragSource is "LeafList")) {
                 if (e.RowIndex == TargetRowToPaint)
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
                 if (e.RowIndex + 1 == TargetRowToPaint)
