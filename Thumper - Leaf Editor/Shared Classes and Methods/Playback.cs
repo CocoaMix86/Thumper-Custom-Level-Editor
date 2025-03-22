@@ -209,7 +209,7 @@ namespace Thumper_Custom_Level_Editor
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
 
             for (int x = 1; x < ComboList.Count; x++) {
-                if (ComboList[x].chan is 8 or 13)
+                if (ComboList[x].chan is 8 or 13 or 22)
                     continue;
                 //test if the event behind current is within 500 ticks (5 beats) of the current event
                 if (ComboList[x].tick - ComboList[x - 1].tick is < 400 and not 0) {
