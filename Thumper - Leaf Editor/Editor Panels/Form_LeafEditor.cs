@@ -806,7 +806,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
                 //iterate over each cell in the selection
-                foreach (DataGridViewCell _cell in trackEditor.SelectedCells) {
+                List<DataGridViewCell> CellsToChange = new();
+                if (trackEditor[columnindex, rowindex].Selected)
+                    CellsToChange = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+                else
+                    CellsToChange.Add(trackEditor[columnindex, rowindex]);
+                foreach (DataGridViewCell _cell in CellsToChange) {
                     object _tempval = _val;
 
                     if (_cell.ReadOnly || !_cell.OwningRow.Visible)
