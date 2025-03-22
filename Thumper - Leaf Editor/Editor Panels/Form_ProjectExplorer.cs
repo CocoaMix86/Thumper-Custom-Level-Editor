@@ -261,8 +261,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //also force editor to reload the document
                         if (TCLE.lockedfiles.FirstOrDefault(x => x.Key.FullName == file.FullName) is KeyValuePair<FileInfo, FileStream> stream && stream.Value != null) {
                             TCLE.WriteFileLock(stream.Value, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
-                            if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(stream.Key.Name)) is IDockContent founddoc)
-                                founddoc.GetType().GetMethod("Reload").Invoke(founddoc, null);
+                            //a document might be open multiple times (normal and raw), so need to locate both of them
+                            foreach (IDockContent doc in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(stream.Key.Name)))
+                                doc.GetType().GetMethod("Reload").Invoke(doc, null);
                         }
                         else
                             File.WriteAllText(file.FullName, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));

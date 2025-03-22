@@ -568,6 +568,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorLoading = true;
 
             //setup new master properties
+            masterLvlList.Rows.Clear();
             masterproperties = new(this, filepath)
             {
                 skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
