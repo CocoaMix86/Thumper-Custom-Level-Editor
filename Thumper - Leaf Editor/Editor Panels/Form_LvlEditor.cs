@@ -130,18 +130,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int rowIndexOfItemUnderMouseToDrop;
         private int previousDragOver = -2;
         private int TargetRowToPaint = -3;
+        public static string DragSource = "none";
         private void lvlLeafList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+            if (DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
                     ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
                     RowToMove = lvlLeafList.Rows[rowIndexFromMouseDown];
                     lvlLeafList.ClearSelection();
+                    DragSource = "LeafList";
                     //RowToMove.DefaultCellStyle.BackColor = SelectColor;
                     DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LvlLeafs[rowIndexFromMouseDown], DragDropEffects.Move);
                     RowToMove = null;
+                    DragSource = "none";
                 }
             }
         }
@@ -166,6 +169,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_DragOver(object sender, DragEventArgs e)
         {
+            if (DragSource is not "LeafList")
+                return;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
@@ -188,6 +193,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_DragEnter(object sender, DragEventArgs e)
         {
+            if (DragSource is not "LeafList")
+                return;
             if (RowToMove != null && RowToMove.DataGridView == lvlLeafList)
                 e.Effect = DragDropEffects.Move;
             else
@@ -196,6 +203,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_DragDrop(object sender, DragEventArgs e)
         {
+            if (DragSource is not "LeafList")
+                return;
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
             Point clientPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
@@ -218,16 +227,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<string> RowsToMove;
         private void lvlLeafPaths_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+            if (DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (RowsToMove == null && dragBoxFromMouseDownPaths != Rectangle.Empty && !dragBoxFromMouseDownPaths.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
                     var SelectedRows = lvlLeafPaths.SelectedCells.Cast<DataGridViewCell>().ToList();
                     SelectedRows.Sort((row1, row2) => row1.RowIndex.CompareTo(row2.RowIndex));
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
+                    DragSource = "PathList";
                     //
                     DragDropEffects dropEffect = lvlLeafPaths.DoDragDrop(RowsToMove, DragDropEffects.Move);
                     RowsToMove = null;
+                    DragSource = "none";
                 }
             }
         }
@@ -243,13 +254,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void lvlLeafPaths_DragOver(object sender, DragEventArgs e)
         {
+            if (DragSource is not "PathList")
+                return;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = lvlLeafPaths.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafPaths.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
-            if (lvlLeafPaths.RowCount is 0 or 1)
-                targetRow = 0;
-            if (e.Effect == DragDropEffects.Copy) {
+            if (RowsToMove == null) {
                 if (targetRow != previousDragOver) {
                     previousDragOver = targetRow;
                     TargetRowToPaint = targetRow;
@@ -273,11 +284,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafPaths_DragEnter(object sender, DragEventArgs e)
         {
+            if (DragSource is not "PathList")
+                return;
             if (RowsToMove != null) {
                 e.Effect = DragDropEffects.Move;
             }
             else {
-                e.Effect = DragDropEffects.Copy;
+                e.Effect = DragDropEffects.Move;
             }
         }
 
@@ -287,12 +300,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafPaths_DragDrop(object sender, DragEventArgs e)
         {
+            if (DragSource is not "PathList")
+                return;
             // If the drag operation was a move then remove and insert the row.
-            if (e.Effect == DragDropEffects.Move) {
+            if (RowsToMove != null) {
                 LvlBuildPathList();
                 SaveCheckAndWrite(false, "Reorder Paths on Leaf");
             }
-            else if (e.Effect == DragDropEffects.Copy) {
+            else {
                 if (e.Data.GetData(typeof(List<string>)) is List<string>) {
                     foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
                         LvlProperties.sublevel.paths.Remove(path);

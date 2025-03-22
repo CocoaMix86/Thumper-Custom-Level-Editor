@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
@@ -78,9 +79,12 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                     var SelectedRows = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().ToList();
                     SelectedRows.Sort((row1, row2) => row2.RowIndex.CompareTo(row1.RowIndex));
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
-                    ///dgvPathsList.ClearSelection();
-                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Copy);
+
+                    if (Items is "path") {
+                        Form_LvlEditor.DragSource = "PathList";
+                    }
+
+                    DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Move);
                     RowsToMove = null;
                 }
             }
@@ -114,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void lvlLeafPaths_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            e.Effect = DragDropEffects.Move;
         }
 
         #region Methods
