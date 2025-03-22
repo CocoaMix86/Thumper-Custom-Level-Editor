@@ -475,6 +475,7 @@
             this.lvlLeafPaths.DragDrop += this.lvlLeafPaths_DragDrop;
             this.lvlLeafPaths.DragEnter += this.lvlLeafPaths_DragEnter;
             this.lvlLeafPaths.DragOver += this.lvlLeafPaths_DragOver;
+            this.lvlLeafPaths.DragLeave += this.lvlLeafPaths_DragLeave;
             this.lvlLeafPaths.MouseDown += this.lvlLeafPaths_MouseDown;
             this.lvlLeafPaths.MouseLeave += this.lvlLeafPaths_MouseLeave;
             this.lvlLeafPaths.MouseMove += this.lvlLeafPaths_MouseMove;
@@ -510,7 +511,6 @@
             // 
             // btnLvlPathAdd
             // 
-            this.btnLvlPathAdd.CheckOnClick = true;
             this.btnLvlPathAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnLvlPathAdd.Enabled = false;
             this.btnLvlPathAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -676,7 +676,6 @@
             dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
             this.lvlLoopTracks.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            this.lvlLoopTracks.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.lvlLoopTracks.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
             this.lvlLoopTracks.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             this.lvlLoopTracks.RowTemplate.Height = 20;
@@ -836,7 +835,6 @@
         private ToolStrip lvlLoopToolStrip;
         private ToolStripButton btnLvlLoopAdd;
         private ToolStripButton btnLvlLoopDelete;
-        private DataGridView lvlLeafPaths;
         private ToolStrip lvlPathsToolStrip;
         private ToolStripButton btnLvlPathAdd;
         private ToolStripButton btnLvlPathDelete;
@@ -870,5 +868,6 @@
         private DataGridViewImageColumn lvlLeafIcon;
         private DataGridViewTextBoxColumn Leaf;
         private DataGridViewTextBoxColumn Beats;
+        public DataGridView lvlLeafPaths;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Input;
+using System.Windows.Media.Effects;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -28,8 +29,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     savestate = load
                 });
             }
-            PathList = new("path", lvlLeafPaths);
-            PathList.Owner = this;
 
             btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
         }
@@ -90,7 +89,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         public int SampChannel;
-        public DragDropItemList PathList;
         #endregion
 
         #region EventHandlers
@@ -131,6 +129,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int rowIndexFromMouseDown;
         private int rowIndexFromMouseDownPaths;
         private int rowIndexOfItemUnderMouseToDrop;
+        private int previousDragOver = -2;
+        private int TargetRowToPaint = -3;
         private void lvlLeafList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
@@ -164,64 +164,71 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
-        private int previousDragOver = -1;
+
         private void lvlLeafList_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
-            if (previousDragOver != targetRow && previousDragOver != -1) { }
-            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
-                lvlLeafList.Rows.Remove(RowToMove);
-                lvlLeafList.Rows.Insert(targetRow, RowToMove);
-                lvlLeafList.ClearSelection();
-                previousDragOver = targetRow;
-                lvlLeafList.Rows[targetRow].Selected = true;
+            if (e.Effect == DragDropEffects.Copy) {
+                if (e.Data.GetData(typeof(List<string>)) is List<string>)
+                    return;
+            }
+            else {
+                if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                    lvlLeafList.Rows.Remove(RowToMove);
+                    lvlLeafList.Rows.Insert(targetRow, RowToMove);
+                    lvlLeafList.ClearSelection();
+                    previousDragOver = targetRow;
+                    lvlLeafList.Rows[targetRow].Selected = true;
+                }
             }
         }
-        private void lvlLeafList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+
+        private void lvlLeafList_DragEnter(object sender, DragEventArgs e)
+        {
+            if (RowToMove != null && RowToMove.DataGridView == lvlLeafList)
+                e.Effect = DragDropEffects.Move;
+            else
+                e.Effect = DragDropEffects.Copy;
+        }
+
         private void lvlLeafList_DragDrop(object sender, DragEventArgs e)
         {
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
             Point clientPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
-
             // Get the row index of the item the mouse is below. 
             rowIndexOfItemUnderMouseToDrop = lvlLeafList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
 
-            // If the drag operation was a move then remove and insert the row.
+            // Save after dropping
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(LvlLeafData)) is LvlLeafData rowToMove) {
-                    if (rowIndexOfItemUnderMouseToDrop == -1)
-                        return;
-                    ///LvlLeafData tomove = LvlLeafs[rowToMove.Index];
-                    LvlLeafs.Remove(rowToMove);
-                    LvlLeafs.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
-                    lvlLeafList.ClearSelection();
-                    lvlLeafList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
-                    SaveCheckAndWrite(false, "Reorder Leafs");
-                    RowToMove = null;
-                }
+                SaveCheckAndWrite(false, "Reorder Leafs");
+                RowToMove = null;
+                previousDragOver = -2;
+            }
+            else {
                 if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                     AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
                 }
             }
         }
         ///
+        private List<string> RowsToMove;
         private void lvlLeafPaths_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (RowToMove == null && dragBoxFromMouseDownPaths != Rectangle.Empty && !dragBoxFromMouseDownPaths.Contains(e.X, e.Y)) {
+                if (RowsToMove == null && dragBoxFromMouseDownPaths != Rectangle.Empty && !dragBoxFromMouseDownPaths.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
-                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = lvlLeafPaths.Rows[rowIndexFromMouseDownPaths];
-                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = lvlLeafPaths.DoDragDrop(lvlLeafPaths.Rows[rowIndexFromMouseDownPaths], DragDropEffects.Move);
-                    RowToMove = null;
+                    var SelectedRows = lvlLeafPaths.SelectedCells.Cast<DataGridViewCell>().ToList();
+                    SelectedRows.Sort((row1, row2) => row1.RowIndex.CompareTo(row2.RowIndex));
+                    RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
+                    //
+                    DragDropEffects dropEffect = lvlLeafPaths.DoDragDrop(RowsToMove, DragDropEffects.Move);
+                    RowsToMove = null;
                 }
             }
         }
@@ -237,79 +244,75 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void lvlLeafPaths_DragOver(object sender, DragEventArgs e)
         {
-            bool AddOrInsert = false;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = lvlLeafPaths.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = lvlLeafPaths.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             if (lvlLeafPaths.RowCount is 0 or 1)
                 targetRow = 0;
-            if (targetRow is -1)
-                AddOrInsert = true;
             if (e.Effect == DragDropEffects.Copy) {
                 if (targetRow != previousDragOver) {
-                    foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
-                        LvlProperties.sublevel.paths.Remove(path);
-                        /*
-                        var RowToRemove = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == path).FirstOrDefault();
-                        if (RowToRemove != null)
-                            lvlLeafPaths.Rows.Remove(RowToRemove);
-                        */
-                        if (AddOrInsert)
-                            LvlProperties.sublevel.paths.Add(path);
-                        //lvlLeafPaths.Rows.Add(path);
-                        else
-                            LvlProperties.sublevel.paths.Insert(targetRow, path);
-                    }
-                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
                     previousDragOver = targetRow;
+                    TargetRowToPaint = targetRow;
+                    if (TargetRowToPaint is -1)
+                        TargetRowToPaint = lvlLeafPaths.RowCount;
+                    lvlLeafPaths.Invalidate();
                 }
             }
             else {
-                if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver) {
-                    if (!lvlLeafPaths.Rows.Contains(RowToMove)) {
-                        lvlLeafPaths.Rows.Add(e.Data.GetData(typeof(string)) as string);
-                        RowToMove = lvlLeafPaths.Rows[^1];
+                if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                    foreach (string path in RowsToMove) {
+                        lvlProperties.sublevel.paths.Remove(path);
+                        lvlProperties.sublevel.paths.Insert(targetRow, path);
+                        previousDragOver = targetRow;
+                        lvlLeafPaths.Rows[targetRow].Selected = true;
                     }
-                    lvlLeafPaths.Rows.Remove(RowToMove);
-                    lvlLeafPaths.Rows.Insert(targetRow, RowToMove);
-                    lvlLeafPaths.ClearSelection();
-                    previousDragOver = targetRow;
-                    lvlLeafPaths.Rows[targetRow].Selected = true;
+                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
                 }
             }
         }
+
         private void lvlLeafPaths_DragEnter(object sender, DragEventArgs e)
         {
-            if (RowToMove != null && RowToMove.DataGridView == lvlLeafPaths) {
+            if (RowsToMove != null) {
                 e.Effect = DragDropEffects.Move;
             }
-            else
+            else {
                 e.Effect = DragDropEffects.Copy;
+            }
         }
+
+        private void lvlLeafPaths_DragLeave(object sender, EventArgs e)
+        {
+        }
+
         private void lvlLeafPaths_DragDrop(object sender, DragEventArgs e)
         {
-            Point clientPoint = lvlLeafList.PointToClient(new Point(e.X, e.Y));
-            // Get the row index of the item the mouse is below. 
-            rowIndexOfItemUnderMouseToDrop = lvlLeafList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
-            RowToMove = null;
-            previousDragOver = -1;
             // If the drag operation was a move then remove and insert the row.
-            if (e.Effect == DragDropEffects.Move || e.Effect == DragDropEffects.Copy) {
-                if (e.Data.GetData(typeof(string)) is string rowToMove) {
-                    LvlBuildPathList();
-                    SaveCheckAndWrite(false, "Reorder Leafs");
+            if (e.Effect == DragDropEffects.Move) {
+                LvlBuildPathList();
+                SaveCheckAndWrite(false, "Reorder Paths on Leaf");
+            }
+            else if (e.Effect == DragDropEffects.Copy) {
+                if (e.Data.GetData(typeof(List<string>)) is List<string>) {
+                    foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
+                        LvlProperties.sublevel.paths.Remove(path);
+                        LvlProperties.sublevel.paths.Insert(TargetRowToPaint, path);
+                    }
+
+                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
+                    SaveCheckAndWrite(false, "Reorder Paths on Leaf");
                 }
             }
+            RowToMove = null;
+            previousDragOver = -2;
+            TargetRowToPaint = -3;
         }
         ///
 
         private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
-        private static Color SelectColor = Color.FromArgb(199, 69, 255);
-        private static SolidBrush LvlLeafColorSelected = new SolidBrush(SelectColor);
         private static SolidBrush BrushWhite = new SolidBrush(Color.White);
-        private static Pen PenBlack = new Pen(Color.Black, 1);
+        private static Pen PenGreen = new Pen(Color.Green, 4);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -324,14 +327,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
-            //e.Graphics.FillRoundedRectangle(LvlLeafs[e.RowIndex].NotFound ? LvlLeafColorNotExist : LvlLeafColor, bounds, 6);
-            ///if (sender == lvlLeafList)
-            ///    e.Graphics.DrawImage(Properties.Resources.editor_leaf, bounds.X + 16, bounds.Y, 16, 16);
 
             if (sender == lvlLeafPaths)
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             else
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
+
+            if (sender == lvlLeafPaths) {
+                if (e.RowIndex == TargetRowToPaint)
+                    e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
+                if (e.RowIndex + 1 == TargetRowToPaint)
+                    e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
+            }
         }
 
         private void lvlLeafList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -446,6 +453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 r.HeaderCell.ToolTipText = "Edit volume levels in Sequencer with an [AUDIO] object";
             }
             btnLvlLoopDelete.Enabled = lvlLoopTracks.Rows.Count > 0;
+            TCLE.ResizeHeaders(lvlLoopTracks);
         }
 
         private void btnLvlPathView_CheckedChanged(object sender, EventArgs e)
@@ -595,22 +603,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathAdd_Click(object sender, EventArgs e)
         {
-            /*
-            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Add("");
-            LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
-            btnLvlPathDelete.Enabled = true;
-            TCLE.PlaySound("UItunneladd");
-            SaveCheckAndWrite(false, "Add Tunnel");
-            */
-            if (PathList.Location.X + PathList.Width > this.Width)
-                PathList.Location = new Point(this.Width - PathList.Width - 2, PathList.Location.Y);
+            if (!TCLE.PathList.Visible) {
+                TCLE.PathList.Show();
+                if (TCLE.PathList.Location.X + TCLE.PathList.Width > this.Width)
+                    TCLE.PathList.Location = new Point(this.Width - TCLE.PathList.Width - 2, TCLE.PathList.Location.Y);
+                else
+                    TCLE.PathList.Location = new Point(lvlPathsToolStrip.Width + 2, TCLE.PathList.Location.Y);
+            }
             else
-                PathList.Location = new Point(lvlPathsToolStrip.Width + 2, PathList.Location.Y);
-
-            if (btnLvlPathAdd.Checked)
-                PathList.Show();
-            else
-                PathList.Hide();
+                TCLE.PathList.Hide();
         }
 
         private void btnLvlPathUp_Click(object sender, EventArgs e)

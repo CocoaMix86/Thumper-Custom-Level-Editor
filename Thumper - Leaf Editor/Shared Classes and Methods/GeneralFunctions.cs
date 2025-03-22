@@ -298,6 +298,21 @@ namespace Thumper_Custom_Level_Editor
             return r;
         }
 
+        public static void ResizeHeaders(DataGridView dgv)
+        {
+            int biggestheader = 50;
+            //foreach (Sequencer_Object seq in SequencerObjects) {
+            foreach (DataGridViewRow dgvr in dgv.Rows) {
+            //measure header and see if it's the biggest
+            int tempsize = TextRenderer.MeasureText(dgvr.HeaderCell.Value.ToString(), dgvr.HeaderCell.Style.Font).Width;
+                if (tempsize > biggestheader)
+                    biggestheader = tempsize;
+            }
+            //set header width manually and allow resizing
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            dgv.RowHeadersWidth = biggestheader + 15;
+        }
+
         ///
         /// File Lock read/write methods
         /// 

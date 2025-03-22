@@ -101,6 +101,7 @@
             this.dgvPathsList.CellDoubleClick += this.dgvPathsList_CellDoubleClick;
             this.dgvPathsList.CellPainting += this.lvlLeafList_CellPainting;
             this.dgvPathsList.RowPrePaint += this.lvlLeafList_RowPrePaint;
+            this.dgvPathsList.SelectionChanged += this.dgvPathsList_SelectionChanged;
             this.dgvPathsList.DragEnter += this.lvlLeafPaths_DragEnter;
             this.dgvPathsList.MouseDown += this.lvlLeafList_MouseDown;
             this.dgvPathsList.MouseMove += this.lvlLeafList_MouseMove;
@@ -123,6 +124,7 @@
             this.MinimizeBox = false;
             this.Name = "DragDropItemList";
             this.TopMost = true;
+            this.FormClosing += this.DragDropItemList_FormClosing;
             this.Load += this.DragDropItemList_Load;
             ((System.ComponentModel.ISupportInitialize)this.dgvPathsList).EndInit();
             this.ResumeLayout(false);

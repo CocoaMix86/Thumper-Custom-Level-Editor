@@ -2378,21 +2378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TrackRawImport(seq, seq.data_points);
                 RowReadOnly(!seq.enabled, seq);
             }
-            ResizeHeaders();
-        }
-
-        public void ResizeHeaders()
-        {
-            int biggestheader = 50;
-            foreach (Sequencer_Object seq in SequencerObjects) {
-                //measure header and see if it's the biggest
-                int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
-                if (tempsize > biggestheader)
-                    biggestheader = tempsize;
-            }
-            //set header width manually and allow resizing
-            trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
-            trackEditor.RowHeadersWidth = biggestheader + 15;
+            TCLE.ResizeHeaders(trackEditor);
         }
 
         public void Reload()

@@ -54,10 +54,6 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             if (e.RowIndex == -1)
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
             else {
-                if (e.ColumnIndex is 0) {
-                    if (Items is "leaf")
-                        e.Graphics.DrawImage(Properties.Resources.editor_leaf, e.CellBounds.X, e.CellBounds.Y, 16, 16);
-                }
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentBackground);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Focus);
@@ -66,7 +62,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (Items == "path")
+                OwnerDGV.Rows.Add(dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString());
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -78,18 +75,28 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 // If the mouse moves outside the rectangle, start the drag.
                 if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.
-                    RowsToMove = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().Select(x => x.Value.ToString()).ToList();
+                    var SelectedRows = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().ToList();
+                    SelectedRows.Sort((row1, row2) => row2.RowIndex.CompareTo(row1.RowIndex));
+                    RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
                     ///dgvPathsList.ClearSelection();
                     //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = OwnerDGV.DoDragDrop(RowsToMove, DragDropEffects.Copy);
+                    DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Copy);
                     RowsToMove = null;
                 }
             }
         }
+
+        private List<DataGridViewRow> SelectedRows = new();
         private void lvlLeafList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDown = dgvPathsList.HitTest(e.X, e.Y).RowIndex;
+
+            if (dgvPathsList.Rows[rowIndexFromMouseDown].Selected)
+                SelectedRows = dgvPathsList.SelectedRows.Cast<DataGridViewRow>().ToList();
+            else
+                SelectedRows.Clear();
+
             if (rowIndexFromMouseDown != -1) {
                 // Remember the point where the mouse down occurred. 
                 // The DragSize indicates the size that the mouse can move 
@@ -113,6 +120,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         #region Methods
         public void Populate()
         {
+            dgvPathsList.Rows.Clear();
+            //
             if (Items == "path") {
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.DarkBlue;
                 this.Text = "Add Tunnel/Path";
@@ -122,5 +131,18 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             }
         }
         #endregion
+
+        private void DragDropItemList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+        }
+
+        private void dgvPathsList_SelectionChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow dgvr in SelectedRows) {
+                dgvPathsList.Rows[dgvr.Index].Selected = true;
+            }
+        }
     }
 }
