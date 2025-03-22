@@ -104,15 +104,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
             lvlProperties.sublevel = LvlLeafs[e.RowIndex];
-            LvlUpdatePaths(e.RowIndex);
+            LvlUpdatePaths(LvlProperties.sublevel);
         }
 
         private void lvlLeafList_SelectionChanged(object sender, EventArgs e)
         {
             if (lvlLeafList.RowCount < 1 || lvlLeafList.SelectedRows.Count == 0)
                 return;
-            LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
             lvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
+            LvlUpdatePaths(LvlProperties.sublevel);
         }
 
         private void lvlLeafList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -120,7 +120,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
             TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{LvlLeafs[e.RowIndex].leafname}")).Value?.File);
-
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -267,7 +266,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         previousDragOver = targetRow;
                         lvlLeafPaths.Rows[targetRow].Selected = true;
                     }
-                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
+                    LvlUpdatePaths(LvlProperties.sublevel);
                 }
             }
         }
@@ -300,7 +299,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         LvlProperties.sublevel.paths.Insert(TargetRowToPaint, path);
                     }
 
-                    LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
+                    LvlUpdatePaths(LvlProperties.sublevel);
                     SaveCheckAndWrite(false, "Reorder Paths on Leaf");
                 }
             }
@@ -590,13 +589,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathDelete_Click(object sender, EventArgs e)
         {
-            List<string> todelete = new();
             foreach (DataGridViewRow dgvr in lvlLeafPaths.SelectedRows) {
-                todelete.Add(dgvr.Cells[0].Value.ToString());
+                LvlProperties.sublevel.paths.Remove(dgvr.Cells[0].Value.ToString());
             }
-            foreach (string s in todelete)
-                LvlLeafs[lvlLeafList.CurrentRow.Index].paths.Remove(s);
-            LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+            LvlUpdatePaths(LvlProperties.sublevel);
             TCLE.PlaySound("UItunnelremove");
             SaveCheckAndWrite(false, "Remove Tunnel");
         }
@@ -618,14 +614,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == 0))
                 return;
-            int idx = lvlLeafList.CurrentRow.Index;
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                LvlLeafs[idx].paths.Insert(dgvr - 1, LvlLeafs[idx].paths[dgvr]);
-                LvlLeafs[idx].paths.RemoveAt(dgvr + 1);
+                LvlProperties.sublevel.paths.Insert(dgvr - 1, LvlProperties.sublevel.paths[dgvr]);
+                LvlProperties.sublevel.paths.RemoveAt(dgvr + 1);
             }
-            LvlUpdatePaths(idx);
+            LvlUpdatePaths(LvlProperties.sublevel);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] - 1];
             lvlLeafPaths.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -638,14 +633,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == lvlLeafPaths.Rows.Count - 1))
                 return;
-            int idx = lvlLeafList.CurrentRow.Index;
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                LvlLeafs[idx].paths.Insert(dgvr + 2, LvlLeafs[idx].paths[dgvr]);
-                LvlLeafs[idx].paths.RemoveAt(dgvr);
+                LvlProperties.sublevel.paths.Insert(dgvr + 2, LvlProperties.sublevel.paths[dgvr]);
+                LvlProperties.sublevel.paths.RemoveAt(dgvr);
             }
-            LvlUpdatePaths(idx);
+            LvlUpdatePaths(LvlProperties.sublevel);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] + 1];
             lvlLeafPaths.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -656,13 +650,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathClear_Click(object sender, EventArgs e)
         {
-            int idx = lvlLeafList.CurrentRow.Index;
-            if (LvlLeafs[idx].paths.Count > 0) {
+            if (LvlProperties.sublevel.paths.Count > 0) {
                 if (MessageBox.Show("Are you sure you want to clear all?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
-            LvlLeafs[idx].paths.Clear();
-            LvlUpdatePaths(idx);
+            LvlProperties.sublevel.paths.Clear();
+            LvlUpdatePaths(LvlProperties.sublevel);
             TCLE.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Tunnels on Leaf");
         }
@@ -690,7 +683,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
         {
             LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
-            LvlUpdatePaths(lvlLeafList.CurrentRow.Index);
+            LvlUpdatePaths(LvlProperties.sublevel);
             TCLE.PlaySound("UIkpaste");
             SaveCheckAndWrite(false, "Paste Tunnels");
         }
@@ -853,12 +846,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Add New Leaf");
         }
 
-        public void LvlUpdatePaths(int index)
+        public void LvlUpdatePaths(LvlLeafData leaf)
         {
             lvlLeafPaths.Rows.Clear();
-            lblLvlTunnels.Text = $"Paths/Tunnels - {LvlLeafs[index].leafname}";
+            lblLvlTunnels.Text = $"Paths/Tunnels - {leaf.leafname}";
             //for each path in the selected leaf, populate the paths DGV
-            foreach (string path in LvlLeafs[index].paths) {
+            foreach (string path in leaf.paths) {
                 //path may have been manually added and could not exist
                 if (TCLE.LvlPaths.Contains(path))
                     lvlLeafPaths.Rows.Add(path);
@@ -880,7 +873,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             LvlProperties.sublevel.paths.Clear();
             LvlProperties.sublevel.paths = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
-            LvlUpdatePaths(lvlLeafList.SelectedRows[^1].Index);
+            LvlUpdatePaths(LvlProperties.sublevel);
         }
 
         public void Reload()
