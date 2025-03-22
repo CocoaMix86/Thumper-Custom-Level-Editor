@@ -531,8 +531,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Drag Drop node moving
         ///
         /// Drag Drop file moving
-        private void treeView1_ItemDrag(object sender, ItemDragEventArgs e) => DoDragDrop(e.Item, DragDropEffects.Move);
-        private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            TCLE.DragSource = "FileExplorer";
+            DoDragDrop(e.Item, DragDropEffects.Copy);
+            TCLE.DragSource = "none";
+        }
+        private void treeView1_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Copy;
 
         private TreeNode previousDragOver;
         private void treeView1_DragOver(object sender, DragEventArgs e)

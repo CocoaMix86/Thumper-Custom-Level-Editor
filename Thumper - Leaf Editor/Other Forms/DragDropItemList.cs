@@ -81,7 +81,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
 
                     if (Items is "path") {
-                        Form_LvlEditor.DragSource = "PathList";
+                        TCLE.DragSource = "PathList";
                     }
 
                     DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Move);

@@ -37,6 +37,7 @@ namespace Thumper_Custom_Level_Editor
         public static ProjectProperties ProjectProperties;
         public static SettingsUITheme settingsUITheme = new();
         public static bool Fullscreen;
+        public static string DragSource = "none";
         //Public accessible clipboards
         public static List<Sequencer_Object> ClipboardSequencer = new();
         public static List<MasterLvlData> ClipboardMaster = new();
