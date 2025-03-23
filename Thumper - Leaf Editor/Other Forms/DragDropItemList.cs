@@ -17,8 +17,10 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             get => _items;
             set {
-                _items = value;
-                Populate();
+                if (_items != value) {
+                    _items = value;
+                    Populate();
+                }
             }
         }
         private string _items;
