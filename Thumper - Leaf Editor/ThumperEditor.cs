@@ -46,7 +46,7 @@ namespace Thumper_Custom_Level_Editor
         #region Form Construction
         public static Form_ProjectExplorer Explorer;
         public static Form_ProjectProperties dockProjectProperties;
-        public static DragDropItemList PathList = new("path", null);
+        public static DragDropItemList DragDropItems = new("path", null);
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
@@ -1000,7 +1000,7 @@ namespace Thumper_Custom_Level_Editor
                 dockProjectProperties.Text = $"{_GAD.DockHandler.TabText} Properties";
 
                 if (_GAD.GetType() == typeof(Form_LvlEditor)) {
-                    TCLE.PathList.OwnerDGV = (_GAD as Form_LvlEditor).lvlLeafPaths;
+                    TCLE.DragDropItems.OwnerDGV = (_GAD as Form_LvlEditor).lvlLeafPaths;
                 }
             }
         }

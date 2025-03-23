@@ -34,6 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DragDropItemList));
             this.dgvPathsList = new DataGridView();
             this.listName = new DataGridViewTextBoxColumn();
+            this.btnExternal = new Button();
             ((System.ComponentModel.ISupportInitialize)this.dgvPathsList).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +73,7 @@
             this.dgvPathsList.Dock = DockStyle.Fill;
             this.dgvPathsList.EnableHeadersVisualStyles = false;
             this.dgvPathsList.GridColor = Color.Black;
-            this.dgvPathsList.Location = new Point(0, 0);
+            this.dgvPathsList.Location = new Point(0, 24);
             this.dgvPathsList.Margin = new Padding(4, 3, 4, 3);
             this.dgvPathsList.Name = "dgvPathsList";
             this.dgvPathsList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -96,7 +97,7 @@
             this.dgvPathsList.RowTemplate.Height = 20;
             this.dgvPathsList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.dgvPathsList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPathsList.Size = new Size(296, 456);
+            this.dgvPathsList.Size = new Size(296, 432);
             this.dgvPathsList.TabIndex = 162;
             this.dgvPathsList.CellDoubleClick += this.dgvPathsList_CellDoubleClick;
             this.dgvPathsList.CellPainting += this.lvlLeafList_CellPainting;
@@ -113,12 +114,32 @@
             this.listName.Name = "listName";
             this.listName.ReadOnly = true;
             // 
+            // btnExternal
+            // 
+            this.btnExternal.BackColor = Color.Purple;
+            this.btnExternal.CausesValidation = false;
+            this.btnExternal.Dock = DockStyle.Top;
+            this.btnExternal.FlatStyle = FlatStyle.Flat;
+            this.btnExternal.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.btnExternal.ForeColor = Color.White;
+            this.btnExternal.Image = Properties.Resources.icon_folder;
+            this.btnExternal.ImageAlign = ContentAlignment.MiddleLeft;
+            this.btnExternal.Location = new Point(0, 0);
+            this.btnExternal.Margin = new Padding(4, 3, 4, 3);
+            this.btnExternal.Name = "btnExternal";
+            this.btnExternal.Size = new Size(296, 24);
+            this.btnExternal.TabIndex = 163;
+            this.btnExternal.Text = "Add Other...";
+            this.btnExternal.UseVisualStyleBackColor = false;
+            // 
             // DragDropItemList
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.Black;
             this.ClientSize = new Size(296, 456);
             this.Controls.Add(this.dgvPathsList);
+            this.Controls.Add(this.btnExternal);
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -134,5 +155,6 @@
 
         private DataGridView dgvPathsList;
         private DataGridViewTextBoxColumn listName;
+        public Button btnExternal;
     }
 }

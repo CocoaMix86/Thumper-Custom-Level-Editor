@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (LeafsToMove != null)
                 e.Effect = DragDropEffects.Move;
             else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
-                e.Effect = DragDropEffects.Copy;
+                e.Effect = DragDropEffects.Move;
             else
                 e.Effect = DragDropEffects.Move;
         }
@@ -234,8 +234,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (LvlLeafData leaf in leafs)
                     LvlLeafs.Insert(TargetRowToPaint, leaf.Clone());
             }
+            else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
+                foreach (string leaf in leafs2)
+                    AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+            }
             lvlLeafList.ClearSelection();
-            lvlLeafList.Rows[previousDragOver].Selected = true;
+            lvlLeafList.Rows[previousDragOver is -1 ? lvlLeafList.RowCount - 1 : previousDragOver].Selected = true;
             TargetRowToPaint = -3;
             previousDragOver = -2;
             lvlLeafList.Invalidate();
@@ -543,14 +547,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void btnLvlLeafAdd_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog ofd = new();
+            /*using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             ofd.Title = "Load a Thumper Leaf file";
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             TCLE.PlaySound("UIfolderopen");
             if (ofd.ShowDialog() == DialogResult.OK) {
                 AddFiletoLvl(ofd.FileName);
+            }*/
+            if (TCLE.DragDropItems.Items is not "leaf" || !TCLE.DragDropItems.Visible) {
+                TCLE.DragDropItems.Items = "leaf";
+                TCLE.DragDropItems.Show();
+                TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
+                if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
+                    TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
             }
+            else
+                TCLE.DragDropItems.Hide();
         }
 
         private void btnLvlLeafUp_Click(object sender, EventArgs e)
@@ -632,15 +645,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathAdd_Click(object sender, EventArgs e)
         {
-            if (!TCLE.PathList.Visible) {
-                TCLE.PathList.Show();
-                if (TCLE.PathList.Location.X + TCLE.PathList.Width > this.Width)
-                    TCLE.PathList.Location = new Point(this.Width - TCLE.PathList.Width - 2, TCLE.PathList.Location.Y);
+            if (TCLE.DragDropItems.Items is not "path" || !TCLE.DragDropItems.Visible) {
+                TCLE.DragDropItems.Items = "path";
+                TCLE.DragDropItems.Show();
+                if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
+                    TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
                 else
-                    TCLE.PathList.Location = new Point(lvlPathsToolStrip.Width + 2, TCLE.PathList.Location.Y);
+                    TCLE.DragDropItems.Location = new Point(lvlPathsToolStrip.Width + 2, TCLE.DragDropItems.Location.Y);
             }
             else
-                TCLE.PathList.Hide();
+                TCLE.DragDropItems.Hide();
         }
 
         private void btnLvlPathUp_Click(object sender, EventArgs e)

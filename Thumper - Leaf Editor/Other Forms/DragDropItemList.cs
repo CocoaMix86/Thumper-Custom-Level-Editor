@@ -13,15 +13,23 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 {
     public partial class DragDropItemList : Form
     {
-        public string Items;
+        public string Items
+        {
+            get => _items;
+            set {
+                _items = value;
+                Populate();
+            }
+        }
+        private string _items;
         public DataGridView OwnerDGV;
+        public string DragSource;
 
         public DragDropItemList(string _itemtype, DataGridView _owner)
         {
             InitializeComponent();
             OwnerDGV = _owner;
             Items = _itemtype;
-            Populate();
         }
 
         private void DragDropItemList_Load(object sender, EventArgs e)
@@ -63,8 +71,10 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Items == "path")
-                OwnerDGV.Rows.Add(dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString());
+            if (Items == "path") {
+                if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
+                    (TCLE.GlobalActiveDocument as Form_LvlEditor).lvlProperties.sublevel.paths.Add(dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString());
+            }
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -80,9 +90,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                     SelectedRows.Sort((row1, row2) => row2.RowIndex.CompareTo(row1.RowIndex));
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
 
-                    if (Items is "path") {
-                        TCLE.DragSource = "PathList";
-                    }
+                    TCLE.DragSource = DragSource;
 
                     DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Move);
                     RowsToMove = null;
@@ -127,11 +135,33 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             dgvPathsList.Rows.Clear();
             //
             if (Items == "path") {
+                btnExternal.Visible = false;
+                DragSource = "PathList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.DarkBlue;
                 this.Text = "Add Tunnel/Path";
                 TCLE.LvlPaths.Sort();
                 foreach (string _s in TCLE.LvlPaths)
                     dgvPathsList.Rows.Add(_s);
+            }
+            else if (Items == "lvl") {
+                btnExternal.Visible = true;
+                DragSource = "LvlList";
+                dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
+                this.Text = "Add Lvl";
+                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
+                    if (lvl.Extension is ".lvl")
+                        dgvPathsList.Rows.Add(lvl.Name);
+                }
+            }
+            else if (Items == "leaf") {
+                btnExternal.Visible = true;
+                DragSource = "LeafList";
+                dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
+                this.Text = "Add Leaf";
+                foreach (FileInfo leaf in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
+                    if (leaf.Extension is ".leaf")
+                        dgvPathsList.Rows.Add(leaf.Name);
+                }
             }
         }
         #endregion
