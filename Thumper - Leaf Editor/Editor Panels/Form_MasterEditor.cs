@@ -61,6 +61,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsSaved = true;
         public bool EditorLoading;
         private bool SaveOnlyNoLoad;
+        private bool IsAddingItems;
         public FileInfo loadedmaster
         {
             get { return LoadedMaster; }
@@ -133,23 +134,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private Rectangle dragBoxFromMouseDown;
-        private DataGridViewRow RowToMove;
+        private List<MasterLvlData> LvlsToMove;
         private int rowIndexFromMouseDown;
         private int rowIndexOfItemUnderMouseToDrop;
+        private int previousDragOver = -2;
+        private int TargetRowToPaint = -3;
         private void masterLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            if (TCLE.DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left)
             {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (RowToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
-                {
-                    // Proceed with the drag and drop, passing in the list item.                    
-                    ///DragDropEffects dropEffect = lvlLeafList.DoDragDrop(lvlLeafList.Rows[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = masterLvlList.Rows[rowIndexFromMouseDown];
-                    masterLvlList.ClearSelection();
+                if (LvlsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                    // Proceed with the drag and drop, passing in the list item.
+                    LvlsToMove = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index]).ToList();
+                    TCLE.DragSource = "MasterList";
+                    IsAddingItems = true;
                     //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = masterLvlList.DoDragDrop(MasterLvls[rowIndexFromMouseDown], DragDropEffects.Move);
-                    RowToMove = null;
+                    DragDropEffects dropEffect = masterLvlList.DoDragDrop(LvlsToMove, DragDropEffects.Move);
+                    LvlsToMove = null;
+                    IsAddingItems = false;
+                    TCLE.DragSource = "none";
+                    TargetRowToPaint = -3;
+                    previousDragOver = -2;
                 }
             }
         }
@@ -166,62 +172,87 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
 
-        private int previousDragOver = -1;
         private void masterLvlList_DragOver(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (TCLE.DragSource is not "LvlGateList" and not "MasterList" and not "FileExplorer")
+                return;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = masterLvlList.PointToClient(new Point(e.X, e.Y));
             // Retrieve the node at the drop location.
             int targetRow = masterLvlList.HitTest(targetPoint.X, targetPoint.Y).RowIndex;
             //changing the hovered node backcolor to make it obvious where the destination will be
-            if (previousDragOver != targetRow && previousDragOver != -1) { }
-            if (RowToMove != null && targetRow != -1 && targetRow != previousDragOver)
-            {
-                masterLvlList.Rows.Remove(RowToMove);
-                masterLvlList.Rows.Insert(targetRow, RowToMove);
-                masterLvlList.ClearSelection();
-                previousDragOver = targetRow;
-                masterLvlList.Rows[targetRow].Selected = true;
+            if (LvlsToMove == null) {
+                if (targetRow != previousDragOver) {
+                    previousDragOver = targetRow;
+                    TargetRowToPaint = targetRow;
+                    if (TargetRowToPaint is -1)
+                        TargetRowToPaint = masterLvlList.RowCount;
+                    masterLvlList.Invalidate();
+                }
+            }
+            else {
+                if (LvlsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                    foreach (MasterLvlData leaf in LvlsToMove) {
+                        MasterLvls.Remove(leaf);
+                        MasterLvls.Insert(targetRow, leaf);
+                    }
+                    previousDragOver = targetRow;
+                    masterLvlList.ClearSelection();
+                    masterLvlList.Rows[targetRow].Selected = true;
+                }
             }
         }
-        private void masterLvlList_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+
+        private void masterLvlList_DragEnter(object sender, DragEventArgs e)
+        {
+            if (TCLE.DragSource is not "LvlGateList" and not "MasterList" and not "FileExplorer")
+                return;
+            if (LvlsToMove != null)
+                e.Effect = DragDropEffects.Move;
+            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.Move;
+        }
+
         private void masterLvlList_DragDrop(object sender, DragEventArgs e)
         {
+            if (TCLE.DragSource is not "LvlGateList" and not "MasterList" and not "FileExplorer")
+                return;
             // The mouse locations are relative to the screen, so they must be 
             // converted to client coordinates.
             Point clientPoint = masterLvlList.PointToClient(new Point(e.X, e.Y));
-
             // Get the row index of the item the mouse is below. 
             rowIndexOfItemUnderMouseToDrop = masterLvlList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+            IsAddingItems = true;
 
-            // If the drag operation was a move then remove and insert the row.
-            if (e.Effect == DragDropEffects.Move)
-            {
-                if (e.Data.GetData(typeof(MasterLvlData)) is MasterLvlData rowToMove)
-                {
-                    if (rowIndexOfItemUnderMouseToDrop == -1)
-                        return;
-                    MasterLvls.Remove(rowToMove);
-                    MasterLvls.Insert(rowIndexOfItemUnderMouseToDrop, rowToMove);
-                    masterLvlList.ClearSelection();
-                    masterLvlList.Rows[rowIndexOfItemUnderMouseToDrop].Selected = true;
-                    SaveCheckAndWrite(false, "Reorder Leafs");
-                    RowToMove = null;
-                }
-                if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
-                {
-                    AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}");
-                }
+            if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
+                AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
             }
+            else if (LvlsToMove != null) {
+                SaveCheckAndWrite(false, "Reorder Sublevels");
+                LvlsToMove = null;
+            }
+            else if (e.Data.GetData(typeof(List<MasterLvlData>)) is List<MasterLvlData> sublevels) {
+                foreach (MasterLvlData leaf in sublevels)
+                    MasterLvls.Insert(TargetRowToPaint, leaf.Clone());
+            }
+            else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
+                foreach (string leaf in sublevels2)
+                    AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+            }
+            IsAddingItems = false;
+            masterLvlList.ClearSelection();
+            masterLvlList.Rows[previousDragOver is -1 ? masterLvlList.RowCount - 1 : previousDragOver].Selected = true;
+            TargetRowToPaint = -3;
+            previousDragOver = -2;
+            masterLvlList.Invalidate();
         }
 
         private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush LvlColorNotExist = new SolidBrush(Color.Maroon);
-        private static Color SelectColor = Color.FromArgb(199, 69, 255);
-        private static SolidBrush LvlColorSelected = new SolidBrush(SelectColor);
         private static SolidBrush BrushWhite = new SolidBrush(Color.White);
         private static Pen PenBlack = new Pen(Color.Black, 1);
+        private static Pen PenGreen = new Pen(Color.Green, 4);
         private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -291,6 +322,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
+
+            if (sender == masterLvlList && TCLE.DragSource is "LvlGateList" or "FileExplorer") {
+                if (e.RowIndex == TargetRowToPaint)
+                    e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
+                if (e.RowIndex + 1 == TargetRowToPaint)
+                    e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
+            }
         }
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -298,7 +336,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SaveOnlyNoLoad)
                 return;
 
-            masterLvlList.Rows.Clear();
+            /*masterLvlList.Rows.Clear();
             foreach (MasterLvlData lvl in MasterLvls)
             {
                 masterLvlList.Rows.Add(new object[] {
@@ -307,8 +345,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     lvl.name,
                     0
                 });
-            }
-            /*
+            }*/
+            
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 masterLvlList.RowCount = 0;
             }
@@ -327,7 +365,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
-            }*/
+            }
             RecalculateRuntime();
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = MasterLvls.Count > 0;
@@ -430,17 +468,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
         {
-            using OpenFileDialog ofd = new();
+            /*using OpenFileDialog ofd = new();
             ofd.Filter = "Thumper Lvl/Gate File|*.lvl;*.gate";
             ofd.Title = "Load a Thumper Lvl/Gate file";
             ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 AddFiletoMaster(ofd.FileName);
+            }*/
+            if (TCLE.DragDropItems.Items is not "lvlgate" || !TCLE.DragDropItems.Visible) {
+                TCLE.DragDropItems.Items = "lvlgate";
+                TCLE.DragDropItems.Show();
+                TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
+                if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
+                    TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
             }
+            else
+                TCLE.DragDropItems.Hide();
         }
 
-        private void AddFiletoMaster(string path)
+        private void AddFiletoMaster(string path, int index = -1)
         {
             //parse leaf to JSON
             dynamic _load = TCLE.LoadFileLock(path);
@@ -466,18 +513,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
-            MasterLvls.Add(new MasterLvlData()
-            {
-                type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
-                name = (string)_load["obj_name"],
-                playplus = true,
-                checkpoint = true,
-                checkpoint_leader = "<none>",
-                rest = "<none>",
-                gatesectiontype = "",
-                id = TCLE.rng.Next(0, 1000000)
-            });
-            propertyGridMaster.Refresh();
+            if (index is -1) {
+                MasterLvls.Add(new MasterLvlData() {
+                    type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
+                    name = (string)_load["obj_name"],
+                    playplus = true,
+                    checkpoint = true,
+                    checkpoint_leader = "<none>",
+                    rest = "<none>",
+                    gatesectiontype = "",
+                    id = TCLE.rng.Next(0, 1000000)
+                });
+            }
+            else {
+                MasterLvls.Insert(index, new MasterLvlData() {
+                    type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
+                    name = (string)_load["obj_name"],
+                    playplus = true,
+                    checkpoint = true,
+                    checkpoint_leader = "<none>",
+                    rest = "<none>",
+                    gatesectiontype = "",
+                    id = TCLE.rng.Next(0, 1000000)
+                });
+            }
+            if (!IsAddingItems)
+                propertyGridMaster.Refresh();
             SaveCheckAndWrite(false, "Add New Lvl");
         }
 

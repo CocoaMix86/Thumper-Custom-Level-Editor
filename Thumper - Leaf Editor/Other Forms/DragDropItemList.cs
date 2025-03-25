@@ -96,6 +96,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
                     DragDropEffects dropEffect = dgvPathsList.DoDragDrop(RowsToMove, DragDropEffects.Move);
                     RowsToMove = null;
+                    TCLE.DragSource = "none";
                 }
             }
         }
@@ -153,6 +154,22 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
                     if (lvl.Extension is ".lvl")
                         dgvPathsList.Rows.Add(lvl.Name);
+                }
+            }
+            else if (Items == "lvlgate") {
+                btnExternal.Visible = true;
+                DragSource = "LvlGateList";
+                dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
+                this.Text = "Add Lvl/Gate";
+                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
+                    if (lvl.Extension is ".lvl") {
+                        dgvPathsList.Rows.Add(lvl.Name);
+                        dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Green;
+                    }
+                    else if (lvl.Extension is ".gate") {
+                        dgvPathsList.Rows.Add(lvl.Name);
+                        dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Orange;
+                    }
                 }
             }
             else if (Items == "leaf") {

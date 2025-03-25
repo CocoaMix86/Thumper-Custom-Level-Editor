@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (LeafsToMove != null)
                 e.Effect = DragDropEffects.Move;
             else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
-                e.Effect = DragDropEffects.Move;
+                e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.Move;
         }
@@ -231,13 +231,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafsToMove = null;
             }
             else if (e.Data.GetData(typeof(List<LvlLeafData>)) is List<LvlLeafData> leafs) {
+                LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
                 foreach (LvlLeafData leaf in leafs)
                     LvlLeafs.Insert(TargetRowToPaint, leaf.Clone());
+                LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
+                LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
                 foreach (string leaf in leafs2)
                     AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+                LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
             }
+            lvlleaf_CollectionChanged(null, null);
             lvlLeafList.ClearSelection();
             lvlLeafList.Rows[previousDragOver is -1 ? lvlLeafList.RowCount - 1 : previousDragOver].Selected = true;
             TargetRowToPaint = -3;
@@ -538,9 +543,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 todelete.Add(LvlLeafs[dgvr.Index]);
             }
             int _in = lvlLeafList.CurrentRow.Index;
-            //LvlLeafs.RemoveAt(_in);
+            //disable event so it doesn't trigger every time
+            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (LvlLeafData lvd in todelete)
                 LvlLeafs.Remove(lvd);
+            //readd event and call it to populate dgv
+            LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
+            lvlleaf_CollectionChanged(null, null);
+            //
             TCLE.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Leaf");
             lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= LvlLeafs.Count ? _in - 1 : _in));
