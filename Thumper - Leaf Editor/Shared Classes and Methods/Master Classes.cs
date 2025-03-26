@@ -30,6 +30,13 @@ namespace Thumper_Custom_Level_Editor
         public string checkpoint_leader { get; set; }
         public int id { get; set; }
 
+        public int Beats
+        {
+            get => _beats;
+            set { _beats = value; }
+        }
+        private int _beats;
+
         public MasterLvlData Clone()
         {
             return (MasterLvlData)MemberwiseClone();
@@ -81,15 +88,15 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => parent.RecalculateRuntime();
+        public int Beats => masterlvls.Sum(x => x.Beats);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
         public string runtime { 
             get {
-                parent.RecalculateRuntime();
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                //parent.RecalculateRuntime();
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }
 

@@ -366,7 +366,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 masterLvlList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            RecalculateRuntime();
+            if (!IsAddingItems)
+                RecalculateRuntime();
             //enable certain buttons if there are enough items for them
             btnMasterLvlDelete.Enabled = MasterLvls.Count > 0;
             btnMasterLvlUp.Enabled = MasterLvls.Count > 1;
@@ -776,22 +777,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int beattotal = 0;
             foreach (MasterLvlData _lvl in MasterLvls)
             {
-                int beats = TCLE.CalculateSublevelRuntime(_lvl);
-                if (beats == -1)
-                {
-                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
-                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
-                }
-                else
-                {
-                    beattotal += beats;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle = null;
-                    masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
-                }
+                beattotal += RecalculateRuntimeSublevel(_lvl);
+                if (_lvl.rest is not "<none>" and not null)
+                    beattotal += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Value.Name == _lvl.rest).Value.FullPath);
             }
             masterLvlList.Refresh();
             return beattotal;
+        }
+
+        public int RecalculateRuntimeSublevel(MasterLvlData _lvl)
+        {
+            if (SaveOnlyNoLoad)
+                return 0;
+
+            int beats = TCLE.CalculateSublevelRuntime(_lvl);
+            if (beats == -1)
+            {
+                _lvl.Beats = beats;
+                masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle.BackColor = Color.Maroon;
+                masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"file not found";
+            }
+            else
+            {
+                _lvl.Beats = beats;
+                string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].DefaultCellStyle = null;
+                masterLvlList.Rows[MasterLvls.IndexOf(_lvl)].Cells[3].Value = $"{beats} beats -- {time}";
+            }
+            masterLvlList.InvalidateRow(MasterLvls.IndexOf(_lvl));
+
+            return beats;
         }
 
         public static JObject BuildSave(MasterProperties _properties)
