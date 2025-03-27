@@ -214,16 +214,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             else {
-                if (LvlsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                if (targetRow != -1 && targetRow != previousDragOver) {
                     foreach (MasterLvlData leaf in LvlsToMove) {
                         MasterLvls.Remove(leaf);
                     }
                     masterLvlList.ClearSelection();
-                    foreach (MasterLvlData leaf in LvlsToMove) {
-                        MasterLvls.Insert(targetRow, leaf);
-                        masterLvlList.Rows[targetRow].Selected = true;
+                    for (int x = 0; x < LvlsToMove.Count; x++) {
+                        try {
+                            MasterLvls.Insert(targetRow, LvlsToMove[x]);
+                            if (x == 0)
+                                masterLvlList.CurrentCell = masterLvlList[0, targetRow];
+                            masterLvlList.Rows[targetRow].Selected = true;
+                        } catch (Exception) {
+                            MasterLvls.Add(LvlsToMove[x]);
+                            if (x == 0)
+                                masterLvlList.CurrentCell = masterLvlList[0, masterLvlList.RowCount - 1];
+                            masterLvlList.Rows[masterLvlList.RowCount - 1].Selected = true;
+                        }
                     }
-                    masterLvlList
                     previousDragOver = targetRow;
                 }
             }
