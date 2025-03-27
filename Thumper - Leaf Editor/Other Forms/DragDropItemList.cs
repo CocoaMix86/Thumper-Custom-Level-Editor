@@ -106,25 +106,26 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDown = dgvPathsList.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown is -1) {
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+                return;
+            }
 
             if (dgvPathsList.Rows[rowIndexFromMouseDown].Selected)
                 SelectedRows = dgvPathsList.SelectedRows.Cast<DataGridViewRow>().ToList();
             else
                 SelectedRows.Clear();
 
-            if (rowIndexFromMouseDown != -1) {
-                // Remember the point where the mouse down occurred. 
-                // The DragSize indicates the size that the mouse can move 
-                // before a drag event should be started.                
-                Size dragSize = SystemInformation.DragSize;
+            // Remember the point where the mouse down occurred. 
+            // The DragSize indicates the size that the mouse can move 
+            // before a drag event should be started.                
+            Size dragSize = SystemInformation.DragSize;
 
-                // Create a rectangle using the DragSize, with the mouse position being
-                // at the center of the rectangle.
-                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-            }
-            else
-                // Reset the rectangle if the mouse is not over an item in the ListBox.
-                dragBoxFromMouseDown = Rectangle.Empty;
+            // Create a rectangle using the DragSize, with the mouse position being
+            // at the center of the rectangle.
+            dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
+
         }
 
         private void lvlLeafPaths_DragEnter(object sender, DragEventArgs e)

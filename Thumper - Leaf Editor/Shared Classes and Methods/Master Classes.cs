@@ -10,7 +10,12 @@ namespace Thumper_Custom_Level_Editor
     {
         public MasterLvlData() { }
 
+        [Browsable(false)]
         public string type { get; set; }
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Name")]
+        public string name2 => $"{Name}.{type}";
+        [Browsable(false)]
         public string name
         {
             get => $"{Name}.{type}";
@@ -19,23 +24,52 @@ namespace Thumper_Custom_Level_Editor
                 Name = idx != -1 ? value[..idx] : value;
             }
         }
-        private string Name;
-        public string lvlname => $"{name}.lvl";
-        public string gatename => $"{name}.gate";
+        [Browsable(false)]
+        public string Name;
+
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Play Plus")]
+        [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
         public bool playplus { get; set; }
+
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Checkpoint")]
+        [Description("Enables the checkpoint that follows this sublevel.")]
         public bool checkpoint { get; set; }
+
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Isolate")]
+        [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
         public bool isolate { get; set; }
+
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Rest Lvl")]
+        [Description("The rest lvl will play before the sublevel.")]
+        [TypeConverter(typeof(LvlList))]
         public string rest { get; set; }
+
+        [Browsable(false)]
         public string gatesectiontype { get; set; }
+        [Browsable(false)]
         public string checkpoint_leader { get; set; }
+        [Browsable(false)]
         public int id { get; set; }
 
+        [Browsable(false)]
         public int Beats
         {
             get => _beats;
             set { _beats = value; }
         }
+        [Browsable(false)]
         private int _beats;
+        [Browsable(false)]
+        public string runtime
+        {
+            get {
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+            }
+        }
 
         public MasterLvlData Clone()
         {
@@ -49,14 +83,11 @@ namespace Thumper_Custom_Level_Editor
         public Form_MasterEditor parent;
         [Browsable(false)]
         public ObservableCollection<MasterLvlData> masterlvls;
-        [Browsable(false)]
-        public MasterLvlData sublevel { get; set; }
 
         public MasterProperties(Form_MasterEditor Parent, FileInfo path)
         {
             parent = Parent;
             FilePath = path;
-            sublevel = new();
             masterlvls = new();
             masterlvls.CollectionChanged += parent.masterlvls_CollectionChanged;
         }
@@ -99,34 +130,6 @@ namespace Thumper_Custom_Level_Editor
                 return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Sublevel Name")]
-        public string sublevelname => sublevel.name;
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Play Plus")]
-        [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
-        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
-        public bool playplus { get => sublevel.playplus; set => sublevel.playplus = value; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Checkpoint")]
-        [Description("Enables the checkpoint that follows this sublevel.")]
-        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
-        public bool checkpoint { get => sublevel.checkpoint; set => sublevel.checkpoint = value; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Isolate")]
-        [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
-        [Editor(typeof(MyBoolEditor), typeof(UITypeEditor))]
-        public bool isolate { get => sublevel.isolate; set => sublevel.isolate = value; }
-
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Rest Lvl")]
-        [Description("The rest lvl will play before the sublevel.")]
-        [TypeConverter(typeof(LvlList))]
-        public string rest { get => sublevel.rest; set => sublevel.rest = value; }
     }
 
     public class LvlList : StringConverter
@@ -149,19 +152,6 @@ namespace Thumper_Custom_Level_Editor
         {
             TCLE.ReloadLvlsInProject();
             return new StandardValuesCollection(skyboxes);
-        }
-    }
-    public class MyBoolEditor : UITypeEditor
-    {
-        public override bool GetPaintValueSupported
-            (System.ComponentModel.ITypeDescriptorContext context)
-        { return true; }
-        public override void PaintValue(PaintValueEventArgs e)
-        {
-            var rect = e.Bounds;
-            rect.Inflate(1, 1);
-            ControlPaint.DrawCheckBox(e.Graphics, rect, ButtonState.Flat |
-                (((bool)e.Value) ? ButtonState.Checked : ButtonState.Normal));
         }
     }
 }
