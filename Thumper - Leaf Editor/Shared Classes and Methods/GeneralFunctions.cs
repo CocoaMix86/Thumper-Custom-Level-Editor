@@ -912,12 +912,36 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static bool AnyUnsaved()
+        public static bool AnyUnsaved(Form_WorkSpace work = null, Type type = null)
         {
-            foreach (IDockContent document in TCLE.Documents) {
-                bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
-                if (!save)
-                    return true;
+            //Different save check method depending on what files are to be closed
+
+            //closing an entire workspace
+            if (work != null) {
+                //closing a specific file type
+                if (type != null) {
+                    foreach (IDockContent document in work.dockMain.Documents.Where(x => x.GetType() == type)) {
+                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                        if (!save)
+                            return true;
+                    }
+                }
+                //closing all in workspace
+                else {
+                    foreach (IDockContent document in work.dockMain.Documents) {
+                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                        if (!save)
+                            return true;
+                    }
+                }
+            }
+            //closing everything
+            else {
+                foreach (IDockContent document in TCLE.Documents) {
+                    bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                    if (!save)
+                        return true;
+                }
             }
             return false;
         }

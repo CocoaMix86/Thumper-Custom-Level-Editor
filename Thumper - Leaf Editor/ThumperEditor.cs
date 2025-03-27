@@ -743,21 +743,37 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
+            if (AnyUnsaved()) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to close them?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
             while (dockMain.Documents.Any())
                 dockMain.Documents.First().DockHandler.Dispose();
         }
 
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
-            if (fws == null)
+            if (ActiveWorkspace == null)
                 return;
-            while (fws.dockMain.Documents.Any())
-                fws.dockMain.Documents.First().DockHandler.Dispose();
+            if (AnyUnsaved(ActiveWorkspace)) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to close them?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
+            while (ActiveWorkspace.dockMain.Documents.Any())
+                ActiveWorkspace.dockMain.Documents.First().DockHandler.Dispose();
         }
 
         private void toolstripWindowCloseFiletype_Click(object sender, EventArgs e)
         {
+            if (ActiveWorkspace == null)
+                return;
+            if (AnyUnsaved(ActiveWorkspace, GlobalActiveDocument.GetType())) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to close them?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
             foreach (IDockContent document in ActiveWorkspace.dockMain.Documents.ToList()) {
                 if (document != GlobalActiveDocument && document.GetType() == GlobalActiveDocument.GetType())
                     document.DockHandler.Dispose();
@@ -1012,13 +1028,24 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabClose_Click(object sender, EventArgs e)
         {
+            if ((bool)GlobalActiveDocument.GetType().GetMethod("IsSaved").Invoke(GlobalActiveDocument, null)) {
+                if (MessageBox.Show("File is unsaved. Are you sure you want to close it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
             GlobalActiveDocument.DockHandler.Dispose();
         }
 
         private void toolstripTabCloseOther_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace fws = dockMain.ActiveDocument as Form_WorkSpace;
-            foreach (IDockContent document in fws.dockMain.Documents.ToList()) {
+            if (ActiveWorkspace == null)
+                return;
+            if (AnyUnsaved(ActiveWorkspace)) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to close them?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
+            foreach (IDockContent document in ActiveWorkspace.dockMain.Documents.ToList()) {
                 if (document != GlobalActiveDocument)
                     document.DockHandler.Dispose();
             }
