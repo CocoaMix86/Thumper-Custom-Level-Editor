@@ -128,9 +128,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void masterLvlList_SelectionChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow dgvr in SelectedRows) {
-                if (dgvr.Index is not -1)
-                    masterLvlList.Rows[dgvr.Index].Selected = true;
+            if (!IsAddingItems) {
+                foreach (DataGridViewRow dgvr in SelectedRows) {
+                    if (dgvr.Index is not -1)
+                        masterLvlList.Rows[dgvr.Index].Selected = true;
+                }
             }
 
             propertyGridMaster.SelectedObjects = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index]).ToArray();
@@ -215,11 +217,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (LvlsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                     foreach (MasterLvlData leaf in LvlsToMove) {
                         MasterLvls.Remove(leaf);
-                        MasterLvls.Insert(targetRow, leaf);
                     }
-                    previousDragOver = targetRow;
                     masterLvlList.ClearSelection();
-                    masterLvlList.Rows[targetRow].Selected = true;
+                    foreach (MasterLvlData leaf in LvlsToMove) {
+                        MasterLvls.Insert(targetRow, leaf);
+                        masterLvlList.Rows[targetRow].Selected = true;
+                    }
+                    masterLvlList
+                    previousDragOver = targetRow;
                 }
             }
         }
@@ -270,8 +275,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(false, "Add Lvls");
             }
             IsAddingItems = false;
-            masterLvlList.ClearSelection();
-            masterLvlList.Rows[previousDragOver is -1 ? masterLvlList.RowCount - 1 : previousDragOver].Selected = true;
             TargetRowToPaint = -3;
             previousDragOver = -2;
             masterLvlList.Invalidate();
