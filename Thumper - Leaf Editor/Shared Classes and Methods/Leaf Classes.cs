@@ -114,6 +114,9 @@ namespace Thumper_Custom_Level_Editor
             {
                 data_points[x] = new() { Owner = this, Beat = x };
             }
+            if (editor_row != null)
+                for (int x = 0; x < editor_row.Cells.Count; x++)
+                    editor_row.Cells[x].Value = null;
         }
 
         public Sequencer_Object Clone()
