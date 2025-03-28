@@ -1501,12 +1501,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (CurrentRow < 0)
                 return;
+            trackEditor.SuspendLayout();
             //If multiple rows are selected, get all of them in a list. Then loop over list, deleting each one
-            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => SequencerObjects[cell.RowIndex]).Distinct().ToList();
-            //for (int objindex = 0; objindex < selectedrows.Count; objindex++)
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => SequencerObjects[x.Index]).ToList();
+            if (MessageBox.Show($"{selectedrows.Count} Sequencer objects selected.\nAre you sure you want to delete them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
             while (selectedrows.Count > 0) {
                 //if object is multilane, delete its other lanes too
-                //Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == selectedrows[objindex].category && x.friendly_param == selectedrows[objindex].friendly_param).ToArray();
                 Sequencer_Object[] Lanes = ReturnLanesFromName(selectedrows[0], selectedrows[0].friendly_lane);
                 for (int x = 0; x < Lanes.Length; x++) {
                     trackEditor.Rows.Remove(Lanes[x].editor_row);
@@ -1516,17 +1517,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     selectedrows.Remove(Lanes[x]);
                 }
             }
+            trackEditor.ResumeLayout();
+            trackEditor.Invalidate();
             SaveCheckAndWrite(false, "Delete Object");
             TCLE.PlaySound("UIobjectremove");
 
             //disable elements if there are no tracks
-            if (SequencerObjects.Count == 0) {
-                btnTrackAdd.Enabled = false;
-                btnTrackDelete.Enabled = false;
-                btnTrackUp.Enabled = false;
-                btnTrackDown.Enabled = false;
-                btnTrackClear.Enabled = false;
-            }
+            EnableLeafButtons();
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
@@ -1790,7 +1787,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackClear_Click(object sender, EventArgs e)
         {
             //finds each distinct row across all selected cells
-            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => SequencerObjects[x.Index]).ToList();
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Where(row => row.Visible).Select(x => SequencerObjects[x.Index]).ToList();
             if (MessageBox.Show($"{selectedrows.Count} Sequencer objects selected.\nAre you sure you want to clear them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             LogUndo = false;
