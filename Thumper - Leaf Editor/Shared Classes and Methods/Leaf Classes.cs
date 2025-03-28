@@ -144,6 +144,13 @@ namespace Thumper_Custom_Level_Editor
 
     public class SeqDataPoint
     {
+        public void Reset()
+        {
+            this.interpolation = "Linear";
+            this.ease = "Ease In Out";
+            this.value = null;
+        }
+
         [Browsable(false)]
         public Sequencer_Object Owner { get; set; }
         [CategoryAttribute("Selected Data Point(s)")]
@@ -162,7 +169,7 @@ namespace Thumper_Custom_Level_Editor
                 }
                 Value = value;
 
-                if (Owner != null && Owner.editor_row != null) {
+                if (this.beat < Owner.parent.beats && Owner != null && Owner.editor_row != null) {
                     if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
                         Owner.editor_row.Cells[beat + 3].Value = Value;
                         Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);

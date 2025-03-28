@@ -1799,18 +1799,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //check selected row
                 if (seq.friendly_lane is not "lane center" || seq.expandlanes) {
                     for (int x = 0; x < 255; x++) {
-                        seq.data_points[x] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                     }
                 }
                 else {
+                    int index = SequencerObjects.IndexOf(seq);
                     for (int x = 0; x < 255; x++) {
-                        seq.data_points[x - 2] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                        seq.data_points[x - 1] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                        seq.data_points[x] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                        seq.data_points[x + 1] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                        seq.data_points[x + 2] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        SequencerObjects[index - 2].data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        SequencerObjects[index - 1].data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        SequencerObjects[index + 1].data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        SequencerObjects[index + 2].data_points[x].Reset();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                     }
                 }
+                trackEditor.InvalidateRow(seq.editor_row.Index);
             }
 
             LogUndo = true;
