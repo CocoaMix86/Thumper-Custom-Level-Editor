@@ -349,11 +349,11 @@ namespace Thumper_Custom_Level_Editor
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
                         if (!EventsToAdd15.Any(x => x.tick == _event.tick - 400)) {
                             //Sentry call happens 4 beats ahead (400 ticks)
-                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
+                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)(int)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
                         }
                     }
                     if (sdp.beat + length < LeafLastBeat) {
-                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)Properties.Settings.Default[$"VolKey15"]), 15, (sdp.beat + length + CallOffset) * 100, 0));
+                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)(int)Properties.Settings.Default[$"VolKey15"]), 15, (sdp.beat + length + CallOffset) * 100, 0));
                     }
                 }
             }
