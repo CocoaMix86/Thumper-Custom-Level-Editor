@@ -110,6 +110,11 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public void ClearDataPoints(
+        {
+
+        }
+
         public Sequencer_Object Clone()
         {
             return (Sequencer_Object)MemberwiseClone();

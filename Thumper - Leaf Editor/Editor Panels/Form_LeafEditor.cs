@@ -750,7 +750,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
-            trackEditor.InvalidateColumn(0);
+            trackEditor.Invalidate();
             //get all selected cells and display them grouped together in the propertygrid
             //this allows for mass editing
             SelectedDPs.Clear();
@@ -2149,6 +2149,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     RandomizeRowValues(seq);
             } while (!seq.data_points.Any(x => x.value is not null));
 
+            trackEditor.Invalidate();
             TCLE.PlaySound("UIaddrandom");
             randomizing = false;
             SaveCheckAndWrite(false, "Added Random Object");
@@ -2181,6 +2182,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     } while (!seq.editor_row.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
+                trackEditor.Invalidate();
 
                 TCLE.PlaySound("UIaddrandom");
                 randomizing = false;
