@@ -1762,13 +1762,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Sequencer_Object clone = _newtrack.Clone();
                     clone.editor_row = dgvr;
                     clone.expandlanes = GlobalExpand;
+                    //need to remove beats beyond the beat count
+                    for (int x = LeafProperties.beats; x < 255; x++) {
+                        clone.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    }
                     SequencerObjects.Insert(_index, clone);
                     trackEditor.Rows.Insert(_index, clone.editor_row);
                     try {
                         //set the headercell names
                         ///ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
-                        TrackRawImport(clone, _newtrack.data_points);
+                        TrackRawImport(clone, _newtrack.data_points, LeafProperties);
                     }
                     catch (Exception) { }
                 }
@@ -1786,24 +1790,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackClear_Click(object sender, EventArgs e)
         {
             //finds each distinct row across all selected cells
-            List<DataGridViewRow> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().ToList();
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => SequencerObjects[x.Index]).ToList();
             if (MessageBox.Show($"{selectedrows.Count} rows selected.\nAre you sure you want to clear them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
-            //then get all cells in the rows that have values
-            List<DataGridViewCell> filledcells = selectedrows.SelectMany(x => x.Cells.Cast<DataGridViewCell>()).Where(x => x.Value != null).ToList();
-            if (filledcells.Count == 0)
-                return;
-            //select all of them
-            foreach (DataGridViewCell dgvc in filledcells) {
-                dgvc.Selected = true;
-            }
-            //then set a single one to null. The "cellvaluechanged" event will handle the rest
-            CellValueChanged(filledcells[0].RowIndex, filledcells[0].ColumnIndex, true);
-            UndoList.RemoveAt(0);
+            LogUndo = false;
 
+            foreach (Sequencer_Object seq in selectedrows) {
+                //check selected row
+                if (seq.friendly_lane is not "lane center" || seq.expandlanes) {
+                    for (int x = 0; x < 255; x++) {
+                        seq.data_points[x] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    }
+                }
+                else {
+                    for (int x = 0; x < 255; x++) {
+                        seq.data_points[x - 2] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x - 1] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x + 1] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                        seq.data_points[x + 2] = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    }
+                }
+            }
+
+            LogUndo = true;
             TCLE.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Object Values");
-            //SaveCheckAndWrite(false, $"Cleared {selectedrows.Count} track(s)", $"");
         }
 
         private void btnRawImport_Click(object sender, EventArgs e)
@@ -2382,7 +2394,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.RowHeadersVisible = true;
             foreach (Sequencer_Object seq in Seq_Objs) {
                 trackEditor.Rows.Add(seq.editor_row);
-                TrackRawImport(seq, seq.data_points);
+                TrackRawImport(seq, seq.data_points, LeafProperties);
                 RowReadOnly(!seq.enabled, seq);
             }
             TCLE.ResizeHeaders(trackEditor);
@@ -2553,9 +2565,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Import raw text from rich text box to selected row
-        public static void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points)
+        public static void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points, LeafProperties _properties)
         {
-            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.value is not null).ToList();
+            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.value is not null && x.beat < _properties.beats).ToList();
             //iterate over each data point, and fill cells
             foreach (SeqDataPoint data_point in DataNotNull) {
                 try {
