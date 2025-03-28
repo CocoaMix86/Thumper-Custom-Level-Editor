@@ -1654,8 +1654,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
             }
             ///RowsToMove = RowsToMove.OrderByDescending(cell => cell.editor_row.Index).ToList();
-            //if already at the top, do not move up
-            if (RowsToMove.First().editor_row.Index >= trackEditor.Rows.Count - 1)
+            //if already at the bottom, do not move down
+            if (RowsToMove.Last().editor_row.Index >= trackEditor.Rows.Count - 1)
                 return;
 
             List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
