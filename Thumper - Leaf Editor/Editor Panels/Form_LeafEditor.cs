@@ -1234,6 +1234,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
             trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[FrozenColumnOffset];
+            trackEditor.Invalidate();
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1760,11 +1761,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     DataGridViewRow dgvr = new();
                     Sequencer_Object clone = _newtrack.Clone();
                     clone.editor_row = dgvr;
+                    clone.expandlanes = GlobalExpand;
                     SequencerObjects.Insert(_index, clone);
-                    trackEditor.Rows.Insert(_index, dgvr);
+                    trackEditor.Rows.Insert(_index, clone.editor_row);
                     try {
                         //set the headercell names
-                        ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
+                        ///ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
                         //pass _griddata per row to be imported to the DGV
                         TrackRawImport(clone, _newtrack.data_points);
                     }
