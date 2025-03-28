@@ -2715,6 +2715,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackDown.Enabled = SequencerObjects.Count > 1;
             btnTrackClear.Enabled = SequencerObjects.Count > 0;
             btnTrackCopy.Enabled = SequencerObjects.Count > 0;
+            btnTrackPaste.Enabled = TCLE.ClipboardSequencer.Count > 0;
         }
 
         public static JObject BuildSave(LeafProperties _properties, bool skiprevertsave = false)
