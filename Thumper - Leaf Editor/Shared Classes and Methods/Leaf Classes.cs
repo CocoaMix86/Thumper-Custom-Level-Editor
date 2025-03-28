@@ -103,16 +103,17 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object(LeafProperties Parent)
         {
             parent = Parent;
-            int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
-            data_points = new SeqDataPoint[maxbeats].ToList();
-            for (int x = 0; x < maxbeats; x++) {
-                data_points[x] = new() { Owner = this, Beat = x, value = null, interpolation = "Linear", ease = "Ease In Out" };
-            }
+            ClearDataPoints();
         }
 
-        public void ClearDataPoints(
+        public void ClearDataPoints()
         {
-
+            int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
+            data_points = new SeqDataPoint[maxbeats].ToList();
+            for (int x = 0; x < maxbeats; x++)
+            {
+                data_points[x] = new() { Owner = this, Beat = x };
+            }
         }
 
         public Sequencer_Object Clone()
@@ -184,17 +185,17 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-        private object Value;
+        private object Value = null;
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Interp")]
         [TypeConverter(typeof(LeafInterpolations))]
-        public string interpolation { get; set; }
+        public string interpolation { get; set; } = "Linear";
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Easing")]
         [TypeConverter(typeof(LeafEasings))]
-        public string ease { get; set; }
+        public string ease { get; set; } = "Ease In Out";
     }
 
     public class LeafProperties
@@ -208,7 +209,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public Sequencer_Object selectedobj { get; set; }
         [Browsable(false)]
-        public string SequencerType { get; set; }
+        public string SequencerType { get; set; } = ".leaf";
 
         public LeafProperties(Form_LeafEditor Parent, FileInfo path, int _beats)
         {
