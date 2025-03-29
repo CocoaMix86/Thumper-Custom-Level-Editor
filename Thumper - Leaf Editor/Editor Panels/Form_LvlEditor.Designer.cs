@@ -77,7 +77,6 @@
             this.lvlLoopToolStrip = new ToolStrip();
             this.btnLvlLoopAdd = new ToolStripButton();
             this.btnLvlLoopDelete = new ToolStripButton();
-            this.pictureTunnelViewer = new Label();
             this.panelMain = new Panel();
             this.panelTunnel = new Panel();
             this.panelLoop = new Panel();
@@ -674,22 +673,6 @@
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
             this.btnLvlLoopDelete.Click += this.btnLvlLoopDelete_Click;
             // 
-            // pictureTunnelViewer
-            // 
-            this.pictureTunnelViewer.BackColor = Color.FromArgb(64, 0, 0);
-            this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
-            this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(622, 454);
-            this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
-            this.pictureTunnelViewer.MaximumSize = new Size(300, 300);
-            this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
-            this.pictureTunnelViewer.Name = "pictureTunnelViewer";
-            this.pictureTunnelViewer.Size = new Size(300, 300);
-            this.pictureTunnelViewer.TabIndex = 151;
-            this.pictureTunnelViewer.Visible = false;
-            this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
-            // 
             // panelMain
             // 
             this.panelMain.BackColor = Color.Black;
@@ -739,7 +722,6 @@
             this.Controls.Add(this.panelLoop);
             this.Controls.Add(this.panelTunnel);
             this.Controls.Add(this.panelMain);
-            this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.dockPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = Color.FromArgb(150, 150, 255);
@@ -780,7 +762,6 @@
         private ToolStripButton btnLvlPathClear;
         private ToolStripButton chkTunnelCopy;
         private ToolStripButton btnLvlRandomTunnel;
-        public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
         public DataGridView lvlLoopTracks;
         private DataGridViewButtonColumn LvlLoopPlay;

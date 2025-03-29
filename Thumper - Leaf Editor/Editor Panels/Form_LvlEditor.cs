@@ -546,16 +546,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (height < 0) height = 0;
             //get image of tunnel
             string pathname = (string)(sender as DataGridView).Rows[e.RowIndex].Cells[0].GetEditedFormattedValue(e.RowIndex, DataGridViewDataErrorContexts.Commit);
-            pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
+            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
             //show the image
-            pictureTunnelViewer.Visible = true;
-            pictureTunnelViewer.Location = new Point(mouse.X + 50, height);
-            pictureTunnelViewer.BringToFront();
+            TCLE.Instance.pictureTunnelViewer.Visible = true;
+            TCLE.Instance.pictureTunnelViewer.Location = new Point(mouse.X + 50, height);
+            TCLE.Instance.pictureTunnelViewer.BringToFront();
         }
 
-        private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => pictureTunnelViewer.Visible = false;
-        private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
-        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => pictureTunnelViewer.Visible = false;
+        private void lvlLeafPaths_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => TCLE.Instance.pictureTunnelViewer.Visible = false;
+        private void lvlLeafPaths_MouseLeave(object sender, EventArgs e) => TCLE.Instance.pictureTunnelViewer.Visible = false;
+        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e) => TCLE.Instance.pictureTunnelViewer.Visible = false;
 
         private void propertyGridLvl_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
