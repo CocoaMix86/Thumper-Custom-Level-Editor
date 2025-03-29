@@ -2,9 +2,8 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using Un4seen.Bass;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -54,6 +53,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void RenderForm()
         {
+            dockPanel1.Theme = new VS2015DarkTheme();
+            //
+            contentMain.Controls.Add(splitContainerLeafSide);
+            splitContainerLeafSide.Dock = DockStyle.Fill;
+            contentMain.Show(dockPanel1, DockState.Document);
+            //
+            contentPropertyGrid.Controls.Add(splitContainerLeftSide);
+            splitContainerLeftSide.Dock = DockStyle.Fill;
+            contentPropertyGrid.Show(dockPanel1, DockState.DockLeft);
+            //
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
@@ -154,6 +163,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
+        public DockContent contentPropertyGrid = new()
+        {
+            TabText = "Properties",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentMain = new()
+        {
+            TabText = "Sequencer",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
         #endregion
 
         #region EventHandlers
@@ -2224,12 +2251,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafPanelTemplate_Click(object sender, EventArgs e)
         {
             ///_mainform.toolstripLeafTemplate.PerformClick();
-        }
-
-        private void labelCollapsePanel_Click(object sender, EventArgs e)
-        {
-            splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
-            labelCollapsePanel.Text = splitContainer1.Panel1Collapsed ? ">" : "<";
         }
 
         private void labelCollapsePanel2_Click(object sender, EventArgs e)
