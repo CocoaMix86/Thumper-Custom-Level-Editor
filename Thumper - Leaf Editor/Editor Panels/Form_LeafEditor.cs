@@ -635,34 +635,64 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 int cellwidth = trackZoom.Value;
                 Color alpha = seqref.highlight_color;
-                alpha = seqref.editor_row.ReadOnly ? Color.Gray : Color.FromArgb(160, alpha.R, alpha.G, alpha.B);
+                alpha = seqref.editor_row.ReadOnly ? Color.Gray : Color.FromArgb(100, alpha.R, alpha.G, alpha.B);
                 //
                 if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
+                    int trailstop = 0;
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, beats * cellwidth, e.RowBounds.Height / 5);
+                        trailstop = sdp.beat + beats;
                     }
+                    trailstop = 0;
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 1].data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5, beats * cellwidth, e.RowBounds.Height / 5);
+                        trailstop = sdp.beat + beats;
                     }
+                    trailstop = 0;
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex].data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 2, beats * cellwidth, e.RowBounds.Height / 5);
+                        trailstop = sdp.beat + beats;
                     }
+                    trailstop = 0;
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 1].data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 3, beats * cellwidth, e.RowBounds.Height / 5);
+                        trailstop = sdp.beat + beats;
                     }
+                    trailstop = 0;
                     foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 2].data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 4, beats * cellwidth, e.RowBounds.Height / 5);
+                        trailstop = sdp.beat + beats;
                     }
                 }
                 else {
+                    int trailstop = 0;
                     foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                        //don't draw trail if it already has has happened from a previous one
+                        if (sdp.beat < trailstop)
+                            continue;
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, beats * cellwidth, e.RowBounds.Height - 4);
+                        trailstop = sdp.beat + beats;
                     }
                 }
                 RowPostPrePainting = true;
