@@ -93,7 +93,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButton = false,
         };
         public DockContent contentMain = new() {
-            TabText = "Master",
+            TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,
@@ -643,7 +643,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeMasterStuff()
         {
-            dockPanel1.Theme = new VS2015DarkTheme();
+            dockPanel1.Theme = TCLE.DockTheme;
             //
             contentMain.Controls.Add(panelMain);
             panelMain.Dock = DockStyle.Fill;

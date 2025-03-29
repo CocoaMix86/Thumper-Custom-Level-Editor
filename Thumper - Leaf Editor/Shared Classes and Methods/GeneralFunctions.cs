@@ -630,6 +630,11 @@ namespace Thumper_Custom_Level_Editor
                     return null;
                 }
             }
+            if (_bytes.Length == 0)
+            {
+                MessageBox.Show($@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.");
+                return null;
+            }
             //check if file has been converted already. Ready the path if true
             if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
                 _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
@@ -637,15 +642,21 @@ namespace Thumper_Custom_Level_Editor
             }
             _bytes = _bytes.Skip(4).ToArray();
 
-            // credit to https://github.com/SamboyCoding/Fmod5Sharp
-            FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-            List<FmodSample> samples = bank.Samples;
-            samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
+            try
+            {
+                // credit to https://github.com/SamboyCoding/Fmod5Sharp
+                FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+                List<FmodSample> samples = bank.Samples;
+                samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
 
-            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-            File.WriteAllBytes(finalfilename, dataBytes);
-            _samp.TempFile = finalfilename;
-            return _samp.TempFile;
+                string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+                File.WriteAllBytes(finalfilename, dataBytes);
+                _samp.TempFile = finalfilename;
+                return _samp.TempFile;
+            } catch (Exception) {
+                MessageBox.Show($@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.");
+                return null;
+            }
         }
 
         public static uint Hash32(string s)

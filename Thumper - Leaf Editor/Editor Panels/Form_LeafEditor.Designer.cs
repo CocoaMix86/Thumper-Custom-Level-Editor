@@ -95,11 +95,9 @@
             this.splitContainerLeftSide = new SplitContainer();
             this.treeObjects = new TreeViewEx();
             this.txtSearch = new TextBox();
-            this.label1 = new Label();
             this.propertyGridLeaf = new PropertyGrid();
             this.splitContainerLeafSide = new SplitContainer();
             this.splitContainerTopbar = new SplitContainer();
-            this.labelSequencer = new Label();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
             this.contextMenuFavRemove = new ContextMenuStrip(this.components);
             this.toolStripFavRemove = new ToolStripMenuItem();
@@ -124,7 +122,6 @@
             this.splitContainerLeafSide.Panel2.SuspendLayout();
             this.splitContainerLeafSide.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).BeginInit();
-            this.splitContainerTopbar.Panel1.SuspendLayout();
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
@@ -176,7 +173,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 64);
+            this.btnRawImport.Size = new Size(54, 65);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -192,7 +189,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 380);
+            this.labelCollapsePanel2.Location = new Point(0, 379);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -236,7 +233,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 365);
+            this.vScrollBarTrackEditor.Size = new Size(15, 364);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -338,7 +335,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 365);
+            this.trackEditor.Size = new Size(491, 364);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -427,7 +424,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 365);
+            this.leafToolStrip.Size = new Size(24, 364);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -557,7 +554,7 @@
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
             this.leaftoolsToolStrip.Padding = new Padding(0);
             this.leaftoolsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leaftoolsToolStrip.Size = new Size(425, 30);
+            this.leaftoolsToolStrip.Size = new Size(501, 30);
             this.leaftoolsToolStrip.Stretch = true;
             this.leaftoolsToolStrip.TabIndex = 143;
             // 
@@ -794,7 +791,6 @@
             // 
             this.splitContainerLeftSide.Panel1.Controls.Add(this.treeObjects);
             this.splitContainerLeftSide.Panel1.Controls.Add(this.txtSearch);
-            this.splitContainerLeftSide.Panel1.Controls.Add(this.label1);
             this.splitContainerLeftSide.Panel1MinSize = 200;
             // 
             // splitContainerLeftSide.Panel2
@@ -817,13 +813,13 @@
             this.treeObjects.ImageList = this.imageList1;
             this.treeObjects.ItemHeight = 16;
             this.treeObjects.LineColor = Color.White;
-            this.treeObjects.Location = new Point(0, 36);
+            this.treeObjects.Location = new Point(0, 23);
             this.treeObjects.Margin = new Padding(4, 3, 4, 3);
             this.treeObjects.Name = "treeObjects";
             this.treeObjects.SelectedImageKey = "other";
             this.treeObjects.ShowNodeToolTips = true;
             this.treeObjects.ShowRootLines = false;
-            this.treeObjects.Size = new Size(250, 234);
+            this.treeObjects.Size = new Size(250, 247);
             this.treeObjects.TabIndex = 99;
             this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
             this.treeObjects.KeyDown += this.treeObjects_KeyDown;
@@ -836,7 +832,7 @@
             this.txtSearch.BorderStyle = BorderStyle.FixedSingle;
             this.txtSearch.Dock = DockStyle.Top;
             this.txtSearch.ForeColor = Color.White;
-            this.txtSearch.Location = new Point(0, 13);
+            this.txtSearch.Location = new Point(0, 0);
             this.txtSearch.Margin = new Padding(4, 3, 4, 3);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new Size(250, 23);
@@ -845,22 +841,6 @@
             this.txtSearch.TextChanged += this.txtSearch_TextChanged;
             this.txtSearch.Enter += this.txtSearch_Enter;
             this.txtSearch.Leave += this.txtSearch_Leave;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = Color.FromArgb(10, 10, 10);
-            this.label1.Dock = DockStyle.Top;
-            this.label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(0, 0);
-            this.label1.Margin = new Padding(4, 0, 4, 0);
-            this.label1.MinimumSize = new Size(117, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new Size(117, 13);
-            this.label1.TabIndex = 97;
-            this.label1.Text = "Sequencer Objects";
-            this.label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // propertyGridLeaf
             // 
@@ -911,7 +891,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 395;
+            this.splitContainerLeafSide.SplitterDistance = 394;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -924,34 +904,15 @@
             this.splitContainerTopbar.Location = new Point(0, 0);
             this.splitContainerTopbar.Margin = new Padding(4, 3, 4, 3);
             this.splitContainerTopbar.Name = "splitContainerTopbar";
-            // 
-            // splitContainerTopbar.Panel1
-            // 
-            this.splitContainerTopbar.Panel1.Controls.Add(this.labelSequencer);
+            this.splitContainerTopbar.Panel1MinSize = 24;
             // 
             // splitContainerTopbar.Panel2
             // 
             this.splitContainerTopbar.Panel2.Controls.Add(this.leaftoolsToolStrip);
             this.splitContainerTopbar.Size = new Size(530, 30);
-            this.splitContainerTopbar.SplitterDistance = 100;
+            this.splitContainerTopbar.SplitterDistance = 24;
             this.splitContainerTopbar.SplitterWidth = 5;
             this.splitContainerTopbar.TabIndex = 144;
-            // 
-            // labelSequencer
-            // 
-            this.labelSequencer.AutoSize = true;
-            this.labelSequencer.BackColor = Color.FromArgb(10, 10, 10);
-            this.labelSequencer.Dock = DockStyle.Bottom;
-            this.labelSequencer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.labelSequencer.ForeColor = Color.White;
-            this.labelSequencer.Location = new Point(0, 17);
-            this.labelSequencer.Margin = new Padding(4, 0, 4, 0);
-            this.labelSequencer.MinimumSize = new Size(117, 0);
-            this.labelSequencer.Name = "labelSequencer";
-            this.labelSequencer.Size = new Size(117, 13);
-            this.labelSequencer.TabIndex = 96;
-            this.labelSequencer.Text = "Sequencer";
-            this.labelSequencer.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textEditor
             // 
@@ -983,6 +944,7 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -994,7 +956,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 64);
+            this.textEditor.Size = new Size(476, 65);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1091,8 +1053,6 @@
             this.splitContainerLeafSide.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.splitContainerLeafSide).EndInit();
             this.splitContainerLeafSide.ResumeLayout(false);
-            this.splitContainerTopbar.Panel1.ResumeLayout(false);
-            this.splitContainerTopbar.Panel1.PerformLayout();
             this.splitContainerTopbar.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
@@ -1130,13 +1090,11 @@
         private ToolStrip gateToolStrip;
         private SplitContainer splitContainerLeafSide;
         private SplitContainer splitContainerTopbar;
-        private Label labelSequencer;
         private FastColoredTextBoxNS.FastColoredTextBox textEditor;
         public DataGridView trackEditor;
         private SplitContainer splitContainerLeftSide;
         public PropertyGrid propertyGridLeaf;
         private ImageList imageList1;
-        private Label label1;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSplitButton btnLeafInterpLinear;

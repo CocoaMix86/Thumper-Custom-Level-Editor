@@ -53,7 +53,6 @@
             this.btnMasterLvlDown = new ToolStripButton();
             this.btnMasterLvlCopy = new ToolStripButton();
             this.btnMasterLvlPaste = new ToolStripButton();
-            this.label30 = new Label();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
@@ -98,7 +97,6 @@
             this.panelMain.BackColor = Color.Black;
             this.panelMain.Controls.Add(this.masterLvlList);
             this.panelMain.Controls.Add(this.masterToolStrip);
-            this.panelMain.Controls.Add(this.label30);
             this.panelMain.Location = new Point(24, 12);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new Size(354, 341);
@@ -137,7 +135,7 @@
             this.masterLvlList.Dock = DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = Color.Black;
-            this.masterLvlList.Location = new Point(24, 13);
+            this.masterLvlList.Location = new Point(24, 0);
             this.masterLvlList.Margin = new Padding(4, 3, 4, 3);
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -161,7 +159,7 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(330, 328);
+            this.masterLvlList.Size = new Size(330, 341);
             this.masterLvlList.TabIndex = 147;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
@@ -259,11 +257,11 @@
             this.masterToolStrip.ImageScalingSize = new Size(20, 20);
             this.masterToolStrip.Items.AddRange(new ToolStripItem[] { this.btnMasterLvlAdd, this.btnMasterLvlDelete, this.btnMasterLvlUp, this.btnMasterLvlDown, this.btnMasterLvlCopy, this.btnMasterLvlPaste });
             this.masterToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.masterToolStrip.Location = new Point(0, 13);
+            this.masterToolStrip.Location = new Point(0, 0);
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new Padding(0);
             this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new Size(24, 328);
+            this.masterToolStrip.Size = new Size(24, 341);
             this.masterToolStrip.Stretch = true;
             this.masterToolStrip.TabIndex = 149;
             // 
@@ -339,20 +337,6 @@
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             this.btnMasterLvlPaste.Click += this.btnMasterLvlPaste_Click;
             // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.BackColor = Color.FromArgb(10, 10, 10);
-            this.label30.Dock = DockStyle.Top;
-            this.label30.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label30.ForeColor = Color.White;
-            this.label30.Location = new Point(0, 0);
-            this.label30.Margin = new Padding(4, 0, 4, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new Size(91, 13);
-            this.label30.TabIndex = 148;
-            this.label30.Text = "Sublevel Order";
-            // 
             // Form_MasterEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -372,7 +356,6 @@
             this.Text = "Master Editor";
             this.Shown += this.Form_MasterEditor_Shown;
             this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
@@ -399,6 +382,5 @@
         private ToolStripButton btnMasterLvlDown;
         private ToolStripButton btnMasterLvlCopy;
         private ToolStripButton btnMasterLvlPaste;
-        private Label label30;
     }
 }

@@ -47,11 +47,12 @@ namespace Thumper_Custom_Level_Editor
         public static Form_ProjectExplorer Explorer;
         public static Form_ProjectProperties dockProjectProperties;
         public static DragDropItemList DragDropItems = new("path", null);
+        public static VS2015DarkTheme DockTheme = new();
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
-            dockMain.Theme = new VS2015DarkTheme();
+            dockMain.Theme = DockTheme;
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
             MainBeeble.Owner = this;

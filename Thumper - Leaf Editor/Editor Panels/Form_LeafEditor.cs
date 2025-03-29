@@ -53,7 +53,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void RenderForm()
         {
-            dockPanel1.Theme = new VS2015DarkTheme();
+            dockPanel1.Theme = TCLE.DockTheme;
             //
             contentMain.Controls.Add(splitContainerLeafSide);
             splitContainerLeafSide.Dock = DockStyle.Fill;
@@ -165,7 +165,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<SeqDataPoint> SelectedDPs = new();
         public DockContent contentPropertyGrid = new()
         {
-            TabText = "Properties",
+            TabText = "Objects & Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,

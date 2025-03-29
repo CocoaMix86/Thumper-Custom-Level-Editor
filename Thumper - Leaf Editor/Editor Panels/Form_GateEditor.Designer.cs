@@ -34,8 +34,6 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_GateEditor));
-            this.splitContainer1 = new SplitContainer();
-            this.labelCollapsePanel = new Label();
             this.gateLvlList = new DataGridView();
             this.gatePhaseNum = new DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new DataGridViewImageColumn();
@@ -47,61 +45,14 @@
             this.btnGateLvlUp = new ToolStripButton();
             this.btnGateLvlDown = new ToolStripButton();
             this.label1 = new Label();
-            this.lblMasterlvllistHelp = new Label();
             this.propertyGridGate = new PropertyGrid();
             this.toolTip1 = new ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.panelMain = new Panel();
             ((System.ComponentModel.ISupportInitialize)this.gateLvlList).BeginInit();
             this.gateToolStrip.SuspendLayout();
+            this.panelMain.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BackColor = Color.FromArgb(55, 55, 55);
-            this.splitContainer1.Dock = DockStyle.Fill;
-            this.splitContainer1.FixedPanel = FixedPanel.Panel2;
-            this.splitContainer1.Location = new Point(0, 0);
-            this.splitContainer1.Margin = new Padding(4, 3, 4, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.labelCollapsePanel);
-            this.splitContainer1.Panel1.Controls.Add(this.gateLvlList);
-            this.splitContainer1.Panel1.Controls.Add(this.gateToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.lblMasterlvllistHelp);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGridGate);
-            this.splitContainer1.Size = new Size(625, 364);
-            this.splitContainer1.SplitterDistance = 399;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 118;
-            // 
-            // labelCollapsePanel
-            // 
-            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.labelCollapsePanel.BackColor = Color.Gray;
-            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
-            this.labelCollapsePanel.Cursor = Cursors.Hand;
-            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
-            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(383, -2);
-            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
-            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
-            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
-            this.labelCollapsePanel.Name = "labelCollapsePanel";
-            this.labelCollapsePanel.Size = new Size(16, 16);
-            this.labelCollapsePanel.TabIndex = 144;
-            this.labelCollapsePanel.Text = ">";
-            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
-            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
             // 
             // gateLvlList
             // 
@@ -160,7 +111,7 @@
             this.gateLvlList.RowTemplate.Height = 20;
             this.gateLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.gateLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.gateLvlList.Size = new Size(375, 351);
+            this.gateLvlList.Size = new Size(269, 268);
             this.gateLvlList.TabIndex = 118;
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
@@ -227,7 +178,7 @@
             this.gateToolStrip.Name = "gateToolStrip";
             this.gateToolStrip.Padding = new Padding(0);
             this.gateToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.gateToolStrip.Size = new Size(24, 351);
+            this.gateToolStrip.Size = new Size(24, 268);
             this.gateToolStrip.Stretch = true;
             this.gateToolStrip.TabIndex = 143;
             // 
@@ -294,41 +245,25 @@
             this.label1.TabIndex = 117;
             this.label1.Text = "Boss Phases";
             // 
-            // lblMasterlvllistHelp
-            // 
-            this.lblMasterlvllistHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.lblMasterlvllistHelp.AutoSize = true;
-            this.lblMasterlvllistHelp.BackColor = Color.Transparent;
-            this.lblMasterlvllistHelp.Cursor = Cursors.Help;
-            this.lblMasterlvllistHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblMasterlvllistHelp.ForeColor = Color.DodgerBlue;
-            this.lblMasterlvllistHelp.Location = new Point(721, -3);
-            this.lblMasterlvllistHelp.Margin = new Padding(4, 0, 4, 0);
-            this.lblMasterlvllistHelp.Name = "lblMasterlvllistHelp";
-            this.lblMasterlvllistHelp.Size = new Size(15, 16);
-            this.lblMasterlvllistHelp.TabIndex = 95;
-            this.lblMasterlvllistHelp.Text = "?";
-            // 
             // propertyGridGate
             // 
             this.propertyGridGate.BackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridGate.CategoryForeColor = Color.White;
             this.propertyGridGate.CategorySplitterColor = Color.FromArgb(46, 46, 46);
             this.propertyGridGate.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
-            this.propertyGridGate.Dock = DockStyle.Fill;
             this.propertyGridGate.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.propertyGridGate.HelpBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridGate.HelpBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridGate.HelpForeColor = Color.White;
             this.propertyGridGate.LineColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridGate.Location = new Point(0, 0);
+            this.propertyGridGate.Location = new Point(353, 12);
             this.propertyGridGate.Margin = new Padding(4, 3, 4, 3);
             this.propertyGridGate.Name = "propertyGridGate";
             this.propertyGridGate.PropertySort = PropertySort.Categorized;
             this.propertyGridGate.RightToLeft = RightToLeft.No;
             this.propertyGridGate.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridGate.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridGate.Size = new Size(221, 364);
+            this.propertyGridGate.Size = new Size(221, 279);
             this.propertyGridGate.TabIndex = 0;
             this.propertyGridGate.ToolbarVisible = false;
             this.propertyGridGate.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -336,12 +271,33 @@
             this.propertyGridGate.ViewForeColor = Color.White;
             this.propertyGridGate.PropertyValueChanged += this.propertyGridGate_PropertyValueChanged;
             // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.dockPanel1.Location = new Point(-4, -4);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Size = new Size(633, 372);
+            this.dockPanel1.TabIndex = 119;
+            // 
+            // panelMain
+            // 
+            this.panelMain.Controls.Add(this.gateLvlList);
+            this.panelMain.Controls.Add(this.gateToolStrip);
+            this.panelMain.Controls.Add(this.label1);
+            this.panelMain.Location = new Point(12, 12);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new Size(293, 281);
+            this.panelMain.TabIndex = 120;
+            // 
             // Form_GateEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.Black;
             this.ClientSize = new Size(625, 364);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.propertyGridGate);
+            this.Controls.Add(this.dockPanel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
@@ -350,20 +306,15 @@
             this.Name = "Form_GateEditor";
             this.Text = "Gate Editor";
             this.Shown += this.Form_GateEditor_Shown;
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.gateLvlList).EndInit();
             this.gateToolStrip.ResumeLayout(false);
             this.gateToolStrip.PerformLayout();
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
             this.ResumeLayout(false);
         }
 
         #endregion
-        private SplitContainer splitContainer1;
-        private Label lblMasterlvllistHelp;
         public PropertyGrid propertyGridGate;
         private ToolStrip gateToolStrip;
         private ToolStripButton btnGateLvlAdd;
@@ -372,11 +323,12 @@
         private ToolStripButton btnGateLvlDown;
         private DataGridView gateLvlList;
         private Label label1;
-        private Label labelCollapsePanel;
         private ToolTip toolTip1;
         private DataGridViewTextBoxColumn gatePhaseNum;
         private DataGridViewImageColumn dataGridViewImageColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn GateLvlRuntime;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private Panel panelMain;
     }
 }

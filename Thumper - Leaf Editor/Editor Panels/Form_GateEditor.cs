@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -113,6 +114,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private GateProperties GateProperties;
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
+        public DockContent contentPropertyGrid = new()
+        {
+            TabText = "Properties",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentMain = new()
+        {
+            TabText = "Master",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
         #endregion
 
         #region EventHandlers
@@ -428,9 +447,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// Methods ///
         ///         ///
 
-        public static void InitializeGateStuff()
+        public void InitializeGateStuff()
         {
-            //GateProperties.gatelvls.CollectionChanged += gatelvls_CollectionChanged;
+            dockPanel1.Theme = TCLE.DockTheme;
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            contentMain.Show(dockPanel1, DockState.Document);
+            //
+            contentPropertyGrid.Controls.Add(propertyGridGate);
+            propertyGridGate.Dock = DockStyle.Fill;
+            contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
         }
 
         public object GetProperties()
@@ -739,12 +766,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lblGateSectionHelp_Click(object sender, EventArgs e)
         {
             new ImageMessageBox("bosssectionhelp").Show();
-        }
-
-        private void labelCollapsePanel_Click(object sender, EventArgs e)
-        {
-            splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
-            labelCollapsePanel.Text = splitContainer1.Panel2Collapsed ? "<" : ">";
         }
     }
 }

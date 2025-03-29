@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
 using Thumper_Custom_Level_Editor.Other_Forms;
@@ -89,6 +90,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         public int SampChannel;
+        public DockContent contentTunnel = new()
+        {
+            TabText = "Paths/Tunnels",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentMain = new()
+        {
+            TabText = "Leaf List",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentLoop = new()
+        {
+            TabText = "Loop Tracks",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
         #endregion
 
         #region EventHandlers
@@ -467,7 +495,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //enable/disable buttons if leaf exists or not
             if (LvlLeafs.Count == 0) {
                 btnLvlPathAdd.Enabled = false;
-                lblLvlTunnels.Text = $"Paths/Tunnels - <no leaf>";
+                contentTunnel.TabText = $"Paths/Tunnels - <no leaf>";
                 btnLvlRandomTunnel.Enabled = false;
             }
             if (btnLvlPathAdd.Enabled == false) btnLvlPathDelete.Enabled = false;
@@ -798,6 +826,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
             lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
             ///
+            dockPanel1.Theme = TCLE.DockTheme;
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            contentMain.Show(dockPanel1, DockState.Document);
+            //
+            contentTunnel.Controls.Add(panelTunnel);
+            panelTunnel.Dock = DockStyle.Fill;
+            contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
+            //
+            contentLoop.Controls.Add(panelLoop);
+            panelLoop.Dock = DockStyle.Fill;
+            contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
         }
 
         public object GetProperties()
@@ -914,7 +955,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LvlUpdatePaths(LvlLeafData leaf)
         {
             lvlLeafPaths.Rows.Clear();
-            lblLvlTunnels.Text = $"Paths/Tunnels - {leaf.leafname}";
+            contentTunnel.TabText = $"Paths/Tunnels - {leaf.leafname}";
             //for each path in the selected leaf, populate the paths DGV
             foreach (string path in leaf.paths) {
                 //path may have been manually added and could not exist

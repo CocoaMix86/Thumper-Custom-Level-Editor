@@ -44,8 +44,6 @@
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LvlEditor));
             this.toolTip1 = new ToolTip(this.components);
-            this.lblLvlTunnels = new Label();
-            this.splitContainer1 = new SplitContainer();
             this.lvlLeafList = new DataGridView();
             this.lvlLeafIcon = new DataGridViewImageColumn();
             this.Leaf = new DataGridViewTextBoxColumn();
@@ -59,8 +57,6 @@
             this.btnLvlLeafCopy = new ToolStripButton();
             this.btnLvlLeafPaste = new ToolStripButton();
             this.btnLvlLeafRandom = new ToolStripButton();
-            this.label29 = new Label();
-            this.splitContainer3 = new SplitContainer();
             this.lvlLeafPaths = new DataGridView();
             this.columnLvlLeafPaths = new DataGridViewTextBoxColumn();
             this.lvlPathsToolStrip = new ToolStrip();
@@ -81,61 +77,21 @@
             this.lvlLoopToolStrip = new ToolStrip();
             this.btnLvlLoopAdd = new ToolStripButton();
             this.btnLvlLoopDelete = new ToolStripButton();
-            this.label22 = new Label();
             this.pictureTunnelViewer = new Label();
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panelMain = new Panel();
+            this.panelTunnel = new Panel();
+            this.panelLoop = new Panel();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).BeginInit();
             this.lvlToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer3).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
             this.lvlPathsToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).BeginInit();
             this.lvlLoopToolStrip.SuspendLayout();
+            this.panelMain.SuspendLayout();
+            this.panelTunnel.SuspendLayout();
+            this.panelLoop.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lblLvlTunnels
-            // 
-            this.lblLvlTunnels.AutoSize = true;
-            this.lblLvlTunnels.BackColor = Color.FromArgb(10, 10, 10);
-            this.lblLvlTunnels.Dock = DockStyle.Top;
-            this.lblLvlTunnels.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.lblLvlTunnels.ForeColor = Color.White;
-            this.lblLvlTunnels.Location = new Point(0, 0);
-            this.lblLvlTunnels.Margin = new Padding(4, 0, 4, 0);
-            this.lblLvlTunnels.Name = "lblLvlTunnels";
-            this.lblLvlTunnels.Size = new Size(90, 13);
-            this.lblLvlTunnels.TabIndex = 161;
-            this.lblLvlTunnels.Text = "Paths/Tunnels";
-            this.toolTip1.SetToolTip(this.lblLvlTunnels, "Unique per leaf");
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BackColor = Color.FromArgb(55, 55, 55);
-            this.splitContainer1.Dock = DockStyle.Fill;
-            this.splitContainer1.Location = new Point(0, 0);
-            this.splitContainer1.Margin = new Padding(4, 3, 4, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.lvlLeafList);
-            this.splitContainer1.Panel1.Controls.Add(this.btnLvlSequencer);
-            this.splitContainer1.Panel1.Controls.Add(this.lvlToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.label29);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new Size(707, 506);
-            this.splitContainer1.SplitterDistance = 350;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 119;
             // 
             // lvlLeafList
             // 
@@ -170,7 +126,7 @@
             this.lvlLeafList.Dock = DockStyle.Fill;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = Color.Black;
-            this.lvlLeafList.Location = new Point(24, 13);
+            this.lvlLeafList.Location = new Point(24, 0);
             this.lvlLeafList.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
@@ -194,7 +150,7 @@
             this.lvlLeafList.RowTemplate.Height = 20;
             this.lvlLeafList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafList.Size = new Size(326, 465);
+            this.lvlLeafList.Size = new Size(234, 219);
             this.lvlLeafList.TabIndex = 152;
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += this.lvlLeafList_CellClick;
@@ -253,7 +209,7 @@
             this.btnLvlSequencer.ForeColor = Color.White;
             this.btnLvlSequencer.Image = Properties.Resources.icon_template;
             this.btnLvlSequencer.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnLvlSequencer.Location = new Point(24, 478);
+            this.btnLvlSequencer.Location = new Point(24, 219);
             this.btnLvlSequencer.Margin = new Padding(4, 3, 4, 3);
             this.btnLvlSequencer.MaximumSize = new Size(200, 28);
             this.btnLvlSequencer.MinimumSize = new Size(200, 28);
@@ -274,11 +230,11 @@
             this.lvlToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlLeafRandom });
             this.lvlToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.lvlToolStrip.Location = new Point(0, 13);
+            this.lvlToolStrip.Location = new Point(0, 0);
             this.lvlToolStrip.Name = "lvlToolStrip";
             this.lvlToolStrip.Padding = new Padding(0);
             this.lvlToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlToolStrip.Size = new Size(24, 493);
+            this.lvlToolStrip.Size = new Size(24, 247);
             this.lvlToolStrip.Stretch = true;
             this.lvlToolStrip.TabIndex = 154;
             // 
@@ -365,46 +321,6 @@
             this.btnLvlLeafRandom.ToolTipText = "Add a random leaf";
             this.btnLvlLeafRandom.Click += this.btnLvlLeafRandom_Click;
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.BackColor = Color.FromArgb(10, 10, 10);
-            this.label29.Dock = DockStyle.Top;
-            this.label29.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label29.ForeColor = Color.White;
-            this.label29.Location = new Point(0, 0);
-            this.label29.Margin = new Padding(4, 0, 4, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new Size(56, 13);
-            this.label29.TabIndex = 153;
-            this.label29.Text = "Leaf List";
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.BackColor = Color.FromArgb(55, 55, 55);
-            this.splitContainer3.Dock = DockStyle.Fill;
-            this.splitContainer3.Location = new Point(0, 0);
-            this.splitContainer3.Margin = new Padding(4, 3, 4, 3);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.lvlLeafPaths);
-            this.splitContainer3.Panel1.Controls.Add(this.lvlPathsToolStrip);
-            this.splitContainer3.Panel1.Controls.Add(this.lblLvlTunnels);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.AutoScroll = true;
-            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopTracks);
-            this.splitContainer3.Panel2.Controls.Add(this.lvlLoopToolStrip);
-            this.splitContainer3.Panel2.Controls.Add(this.label22);
-            this.splitContainer3.Size = new Size(352, 506);
-            this.splitContainer3.SplitterDistance = 250;
-            this.splitContainer3.SplitterWidth = 5;
-            this.splitContainer3.TabIndex = 163;
-            // 
             // lvlLeafPaths
             // 
             this.lvlLeafPaths.AllowDrop = true;
@@ -440,7 +356,7 @@
             this.lvlLeafPaths.Dock = DockStyle.Fill;
             this.lvlLeafPaths.EnableHeadersVisualStyles = false;
             this.lvlLeafPaths.GridColor = Color.Black;
-            this.lvlLeafPaths.Location = new Point(0, 38);
+            this.lvlLeafPaths.Location = new Point(0, 25);
             this.lvlLeafPaths.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafPaths.Name = "lvlLeafPaths";
             this.lvlLeafPaths.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -464,7 +380,7 @@
             this.lvlLeafPaths.RowTemplate.Height = 20;
             this.lvlLeafPaths.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.lvlLeafPaths.Size = new Size(352, 212);
+            this.lvlLeafPaths.Size = new Size(305, 194);
             this.lvlLeafPaths.TabIndex = 160;
             this.lvlLeafPaths.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
             this.lvlLeafPaths.CellMouseLeave += this.lvlLeafPaths_CellMouseLeave;
@@ -501,11 +417,11 @@
             this.lvlPathsToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlPathsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlPathAdd, this.btnLvlPathDelete, this.btnLvlPathUp, this.btnLvlPathDown, this.btnLvlCopyTunnel, this.btnLvlPasteTunnel, this.btnLvlPathClear, this.chkTunnelCopy, this.btnLvlRandomTunnel, this.btnLvlPathView });
             this.lvlPathsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlPathsToolStrip.Location = new Point(0, 13);
+            this.lvlPathsToolStrip.Location = new Point(0, 0);
             this.lvlPathsToolStrip.Name = "lvlPathsToolStrip";
             this.lvlPathsToolStrip.Padding = new Padding(0);
             this.lvlPathsToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlPathsToolStrip.Size = new Size(352, 25);
+            this.lvlPathsToolStrip.Size = new Size(305, 25);
             this.lvlPathsToolStrip.Stretch = true;
             this.lvlPathsToolStrip.TabIndex = 162;
             // 
@@ -663,7 +579,7 @@
             this.lvlLoopTracks.Dock = DockStyle.Fill;
             this.lvlLoopTracks.EnableHeadersVisualStyles = false;
             this.lvlLoopTracks.GridColor = Color.Black;
-            this.lvlLoopTracks.Location = new Point(0, 38);
+            this.lvlLoopTracks.Location = new Point(0, 25);
             this.lvlLoopTracks.Margin = new Padding(4, 3, 4, 3);
             this.lvlLoopTracks.MultiSelect = false;
             this.lvlLoopTracks.Name = "lvlLoopTracks";
@@ -681,7 +597,7 @@
             this.lvlLoopTracks.RowTemplate.Height = 20;
             this.lvlLoopTracks.RowTemplate.Resizable = DataGridViewTriState.False;
             this.lvlLoopTracks.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            this.lvlLoopTracks.Size = new Size(352, 213);
+            this.lvlLoopTracks.Size = new Size(348, 185);
             this.lvlLoopTracks.TabIndex = 161;
             this.lvlLoopTracks.CellClick += this.lvlLoopTracks_CellClick;
             this.lvlLoopTracks.CellPainting += this.lvlLoopTracks_CellPainting;
@@ -724,11 +640,11 @@
             this.lvlLoopToolStrip.ImageScalingSize = new Size(20, 20);
             this.lvlLoopToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLoopAdd, this.btnLvlLoopDelete });
             this.lvlLoopToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.lvlLoopToolStrip.Location = new Point(0, 13);
+            this.lvlLoopToolStrip.Location = new Point(0, 0);
             this.lvlLoopToolStrip.Name = "lvlLoopToolStrip";
             this.lvlLoopToolStrip.Padding = new Padding(0);
             this.lvlLoopToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.lvlLoopToolStrip.Size = new Size(352, 25);
+            this.lvlLoopToolStrip.Size = new Size(348, 25);
             this.lvlLoopToolStrip.Stretch = true;
             this.lvlLoopToolStrip.TabIndex = 163;
             // 
@@ -758,20 +674,6 @@
             this.btnLvlLoopDelete.ToolTipText = "Delete selected loop track";
             this.btnLvlLoopDelete.Click += this.btnLvlLoopDelete_Click;
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.BackColor = Color.FromArgb(10, 10, 10);
-            this.label22.Dock = DockStyle.Top;
-            this.label22.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.label22.ForeColor = Color.White;
-            this.label22.Location = new Point(0, 0);
-            this.label22.Margin = new Padding(4, 0, 4, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new Size(99, 13);
-            this.label22.TabIndex = 162;
-            this.label22.Text = "Lvl Loop Tracks";
-            // 
             // pictureTunnelViewer
             // 
             this.pictureTunnelViewer.BackColor = Color.FromArgb(64, 0, 0);
@@ -788,14 +690,57 @@
             this.pictureTunnelViewer.Visible = false;
             this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
             // 
+            // panelMain
+            // 
+            this.panelMain.BackColor = Color.Black;
+            this.panelMain.Controls.Add(this.lvlLeafList);
+            this.panelMain.Controls.Add(this.btnLvlSequencer);
+            this.panelMain.Controls.Add(this.lvlToolStrip);
+            this.panelMain.Location = new Point(12, 12);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new Size(258, 247);
+            this.panelMain.TabIndex = 152;
+            // 
+            // panelTunnel
+            // 
+            this.panelTunnel.BackColor = Color.Black;
+            this.panelTunnel.Controls.Add(this.lvlLeafPaths);
+            this.panelTunnel.Controls.Add(this.lvlPathsToolStrip);
+            this.panelTunnel.Location = new Point(360, 12);
+            this.panelTunnel.Name = "panelTunnel";
+            this.panelTunnel.Size = new Size(305, 219);
+            this.panelTunnel.TabIndex = 164;
+            // 
+            // panelLoop
+            // 
+            this.panelLoop.BackColor = Color.Black;
+            this.panelLoop.Controls.Add(this.lvlLoopTracks);
+            this.panelLoop.Controls.Add(this.lvlLoopToolStrip);
+            this.panelLoop.Location = new Point(327, 251);
+            this.panelLoop.Name = "panelLoop";
+            this.panelLoop.Size = new Size(348, 210);
+            this.panelLoop.TabIndex = 165;
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.dockPanel1.BackColor = Color.Black;
+            this.dockPanel1.Location = new Point(-4, -4);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Size = new Size(715, 514);
+            this.dockPanel1.TabIndex = 166;
+            // 
             // Form_LvlEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
             this.ClientSize = new Size(707, 506);
+            this.Controls.Add(this.panelLoop);
+            this.Controls.Add(this.panelTunnel);
+            this.Controls.Add(this.panelMain);
             this.Controls.Add(this.pictureTunnelViewer);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.dockPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = Color.FromArgb(150, 150, 255);
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -805,33 +750,23 @@
             this.Name = "Form_LvlEditor";
             this.Text = "Lvl Editor";
             this.Shown += this.Form_LvlEditor_Shown;
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).EndInit();
             this.lvlToolStrip.ResumeLayout(false);
             this.lvlToolStrip.PerformLayout();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer3).EndInit();
-            this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).EndInit();
             this.lvlPathsToolStrip.ResumeLayout(false);
             this.lvlPathsToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLoopTracks).EndInit();
             this.lvlLoopToolStrip.ResumeLayout(false);
             this.lvlLoopToolStrip.PerformLayout();
+            this.panelMain.ResumeLayout(false);
+            this.panelTunnel.ResumeLayout(false);
+            this.panelLoop.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private SplitContainer splitContainer1;
-        private Label label22;
         private ToolStrip lvlLoopToolStrip;
         private ToolStripButton btnLvlLoopAdd;
         private ToolStripButton btnLvlLoopDelete;
@@ -845,8 +780,6 @@
         private ToolStripButton btnLvlPathClear;
         private ToolStripButton chkTunnelCopy;
         private ToolStripButton btnLvlRandomTunnel;
-        private Label lblLvlTunnels;
-        private SplitContainer splitContainer3;
         public Label pictureTunnelViewer;
         private ToolStripButton btnLvlPathView;
         public DataGridView lvlLoopTracks;
@@ -855,7 +788,6 @@
         private DataGridViewTextBoxColumn BeatsPerLoop;
         private DataGridViewTextBoxColumn columnLvlLeafPaths;
         private DataGridView lvlLeafList;
-        private Label label29;
         public Button btnLvlSequencer;
         private ToolStrip lvlToolStrip;
         private ToolStripButton btnLvlLeafAdd;
@@ -869,5 +801,9 @@
         private DataGridViewTextBoxColumn Leaf;
         private DataGridViewTextBoxColumn Beats;
         public DataGridView lvlLeafPaths;
+        private Panel panelMain;
+        private Panel panelTunnel;
+        private Panel panelLoop;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
     }
 }

@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Text;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
-using System.Text;
-using System.Diagnostics;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -86,6 +87,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();
+        public DockContent contentPropertyGrid = new()
+        {
+            TabText = "Properties",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentMain = new()
+        {
+            TabText = "Samples",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentWave = new()
+        {
+            TabText = "Waveform",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
         #endregion
 
         #region EventHandlers
@@ -453,6 +481,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void InitializeSampleStuff()
         {
             sampleList.Columns[1].ValueType = typeof(string);
+            //
+            dockPanel1.Theme = TCLE.DockTheme;
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            contentMain.Show(dockPanel1, DockState.Document);
+            //
+            contentWave.Controls.Add(pictureSpectrum);
+            contentWave.Controls.Add(pictureWave);
+            pictureSpectrum.Dock = DockStyle.Top;
+            pictureWave.Dock = DockStyle.Top;
+            contentWave.SizeChanged += contentWave_SizeChanged;
+            contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
+            //
+            contentPropertyGrid.Controls.Add(propertyGridSample);
+            propertyGridSample.Dock = DockStyle.Fill;
+            contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
+        }
+
+        private void contentWave_SizeChanged(object sender, EventArgs e)
+        {
+            pictureSpectrum.Height = contentWave.Height / 2;
+            pictureWave.Height = contentWave.Height / 2;
         }
 
         public object GetProperties()
@@ -769,11 +820,5 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FSBtoSamp.Enabled = true;
         }
         #endregion
-
-        private void labelCollapsePanel_Click(object sender, EventArgs e)
-        {
-            splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
-            labelCollapsePanel.Text = splitContainer1.Panel2Collapsed ? "<" : ">";
-        }
     }
 }
