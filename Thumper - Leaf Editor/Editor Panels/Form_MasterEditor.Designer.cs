@@ -34,6 +34,10 @@
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_MasterEditor));
+            this.toolTip1 = new ToolTip(this.components);
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.propertyGridMaster = new PropertyGrid();
+            this.panelMain = new Panel();
             this.masterLvlList = new DataGridView();
             this.SublevelNum = new DataGridViewTextBoxColumn();
             this.masterfiletype = new DataGridViewImageColumn();
@@ -50,17 +54,55 @@
             this.btnMasterLvlCopy = new ToolStripButton();
             this.btnMasterLvlPaste = new ToolStripButton();
             this.label30 = new Label();
-            this.toolTip1 = new ToolTip(this.components);
-            this.labelCollapsePanel = new Label();
-            this.propertyGridMaster = new PropertyGrid();
-            this.splitContainer1 = new SplitContainer();
+            this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.dockPanel1.BackColor = Color.Black;
+            this.dockPanel1.Location = new Point(-4, -4);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Size = new Size(661, 527);
+            this.dockPanel1.TabIndex = 147;
+            // 
+            // propertyGridMaster
+            // 
+            this.propertyGridMaster.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.CategoryForeColor = Color.White;
+            this.propertyGridMaster.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridMaster.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridMaster.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridMaster.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridMaster.HelpForeColor = Color.White;
+            this.propertyGridMaster.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridMaster.Location = new Point(423, 12);
+            this.propertyGridMaster.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridMaster.Name = "propertyGridMaster";
+            this.propertyGridMaster.PropertySort = PropertySort.Categorized;
+            this.propertyGridMaster.RightToLeft = RightToLeft.No;
+            this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridMaster.Size = new Size(209, 341);
+            this.propertyGridMaster.TabIndex = 148;
+            this.propertyGridMaster.ToolbarVisible = false;
+            this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridMaster.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridMaster.ViewForeColor = Color.White;
+            // 
+            // panelMain
+            // 
+            this.panelMain.BackColor = Color.Black;
+            this.panelMain.Controls.Add(this.masterLvlList);
+            this.panelMain.Controls.Add(this.masterToolStrip);
+            this.panelMain.Controls.Add(this.label30);
+            this.panelMain.Location = new Point(24, 12);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new Size(354, 341);
+            this.panelMain.TabIndex = 149;
             // 
             // masterLvlList
             // 
@@ -119,8 +161,8 @@
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
             this.masterLvlList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.masterLvlList.Size = new Size(224, 506);
-            this.masterLvlList.TabIndex = 79;
+            this.masterLvlList.Size = new Size(330, 328);
+            this.masterLvlList.TabIndex = 147;
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
@@ -221,9 +263,9 @@
             this.masterToolStrip.Name = "masterToolStrip";
             this.masterToolStrip.Padding = new Padding(0);
             this.masterToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.masterToolStrip.Size = new Size(24, 506);
+            this.masterToolStrip.Size = new Size(24, 328);
             this.masterToolStrip.Stretch = true;
-            this.masterToolStrip.TabIndex = 138;
+            this.masterToolStrip.TabIndex = 149;
             // 
             // btnMasterLvlAdd
             // 
@@ -308,78 +350,8 @@
             this.label30.Margin = new Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
             this.label30.Size = new Size(91, 13);
-            this.label30.TabIndex = 94;
+            this.label30.TabIndex = 148;
             this.label30.Text = "Sublevel Order";
-            // 
-            // labelCollapsePanel
-            // 
-            this.labelCollapsePanel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.labelCollapsePanel.BackColor = Color.Gray;
-            this.labelCollapsePanel.BorderStyle = BorderStyle.FixedSingle;
-            this.labelCollapsePanel.Cursor = Cursors.Hand;
-            this.labelCollapsePanel.FlatStyle = FlatStyle.Popup;
-            this.labelCollapsePanel.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.labelCollapsePanel.ForeColor = Color.White;
-            this.labelCollapsePanel.Location = new Point(232, -2);
-            this.labelCollapsePanel.Margin = new Padding(4, 0, 4, 0);
-            this.labelCollapsePanel.MaximumSize = new Size(16, 16);
-            this.labelCollapsePanel.MinimumSize = new Size(16, 16);
-            this.labelCollapsePanel.Name = "labelCollapsePanel";
-            this.labelCollapsePanel.Size = new Size(16, 16);
-            this.labelCollapsePanel.TabIndex = 146;
-            this.labelCollapsePanel.Text = ">";
-            this.toolTip1.SetToolTip(this.labelCollapsePanel, "Hide/Reveal right panel");
-            this.labelCollapsePanel.Click += this.labelCollapsePanel_Click;
-            // 
-            // propertyGridMaster
-            // 
-            this.propertyGridMaster.BackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridMaster.CategoryForeColor = Color.White;
-            this.propertyGridMaster.CategorySplitterColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridMaster.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
-            this.propertyGridMaster.Dock = DockStyle.Fill;
-            this.propertyGridMaster.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.propertyGridMaster.HelpBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridMaster.HelpBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridMaster.HelpForeColor = Color.White;
-            this.propertyGridMaster.LineColor = Color.FromArgb(46, 46, 46);
-            this.propertyGridMaster.Location = new Point(0, 0);
-            this.propertyGridMaster.Margin = new Padding(4, 3, 4, 3);
-            this.propertyGridMaster.Name = "propertyGridMaster";
-            this.propertyGridMaster.PropertySort = PropertySort.Categorized;
-            this.propertyGridMaster.RightToLeft = RightToLeft.No;
-            this.propertyGridMaster.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
-            this.propertyGridMaster.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridMaster.Size = new Size(400, 519);
-            this.propertyGridMaster.TabIndex = 0;
-            this.propertyGridMaster.ToolbarVisible = false;
-            this.propertyGridMaster.ViewBackColor = Color.FromArgb(31, 31, 31);
-            this.propertyGridMaster.ViewBorderColor = Color.FromArgb(61, 61, 61);
-            this.propertyGridMaster.ViewForeColor = Color.White;
-            this.propertyGridMaster.PropertyValueChanged += this.propertyGridMaster_PropertyValueChanged;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = DockStyle.Fill;
-            this.splitContainer1.FixedPanel = FixedPanel.Panel2;
-            this.splitContainer1.Location = new Point(0, 0);
-            this.splitContainer1.Margin = new Padding(4, 3, 4, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.masterLvlList);
-            this.splitContainer1.Panel1.Controls.Add(this.masterToolStrip);
-            this.splitContainer1.Panel1.Controls.Add(this.label30);
-            this.splitContainer1.Panel1.Controls.Add(this.labelCollapsePanel);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.propertyGridMaster);
-            this.splitContainer1.Size = new Size(653, 519);
-            this.splitContainer1.SplitterDistance = 248;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 49;
             // 
             // Form_MasterEditor
             // 
@@ -387,7 +359,9 @@
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
             this.ClientSize = new Size(653, 519);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.propertyGridMaster);
+            this.Controls.Add(this.dockPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = Color.FromArgb(150, 150, 255);
             this.FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -397,31 +371,20 @@
             this.Name = "Form_MasterEditor";
             this.Text = "Master Editor";
             this.Shown += this.Form_MasterEditor_Shown;
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).EndInit();
             this.masterToolStrip.ResumeLayout(false);
             this.masterToolStrip.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.splitContainer1).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView masterLvlList;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.ToolStrip masterToolStrip;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlAdd;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlDelete;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlUp;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlDown;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlCopy;
-        private System.Windows.Forms.ToolStripButton btnMasterLvlPaste;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         public PropertyGrid propertyGridMaster;
-        private Label labelCollapsePanel;
+        private Panel panelMain;
+        private DataGridView masterLvlList;
         private DataGridViewTextBoxColumn SublevelNum;
         private DataGridViewImageColumn masterfiletype;
         private DataGridViewTextBoxColumn masterLvl;
@@ -429,5 +392,13 @@
         private DataGridViewTextBoxColumn masterCheckpoint;
         private DataGridViewTextBoxColumn masterPlayPlus;
         private DataGridViewTextBoxColumn masterIsolate;
+        private ToolStrip masterToolStrip;
+        private ToolStripButton btnMasterLvlAdd;
+        private ToolStripButton btnMasterLvlDelete;
+        private ToolStripButton btnMasterLvlUp;
+        private ToolStripButton btnMasterLvlDown;
+        private ToolStripButton btnMasterLvlCopy;
+        private ToolStripButton btnMasterLvlPaste;
+        private Label label30;
     }
 }

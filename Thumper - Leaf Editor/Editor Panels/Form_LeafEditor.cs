@@ -787,6 +787,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
                 SelectedDPs.Add(SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset]);
             }
+            LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
+            TCLE.dockProjectProperties.propertyGridProject.Refresh();
             propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
             propertyGridLeaf.Refresh();
         }
