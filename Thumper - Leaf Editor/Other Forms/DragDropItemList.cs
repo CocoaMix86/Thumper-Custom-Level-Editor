@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
@@ -16,8 +8,10 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         public string Items
         {
             get => _items;
-            set {
-                if (_items != value) {
+            set
+            {
+                if (_items != value)
+                {
                     _items = value;
                     Populate();
                 }
@@ -64,7 +58,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             e.Handled = true;
             if (e.RowIndex == -1)
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-            else {
+            else
+            {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentBackground);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Focus);
@@ -73,7 +68,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Items == "path") {
+            if (Items == "path")
+            {
                 if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
                     (TCLE.GlobalActiveDocument as Form_LvlEditor).lvlProperties.sublevel.paths.Add(dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString());
             }
@@ -84,9 +80,11 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private int rowIndexFromMouseDown;
         private void lvlLeafList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
                 // If the mouse moves outside the rectangle, start the drag.
-                if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
+                if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
                     // Proceed with the drag and drop, passing in the list item.
                     var SelectedRows = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().ToList();
                     SelectedRows.Sort((row1, row2) => row2.RowIndex.CompareTo(row1.RowIndex));
@@ -106,7 +104,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDown = dgvPathsList.HitTest(e.X, e.Y).RowIndex;
-            if (rowIndexFromMouseDown is -1) {
+            if (rowIndexFromMouseDown is -1)
+            {
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
                 dragBoxFromMouseDown = Rectangle.Empty;
                 return;
@@ -138,7 +137,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             dgvPathsList.Rows.Clear();
             //
-            if (Items == "path") {
+            if (Items == "path")
+            {
                 btnExternal.Visible = false;
                 DragSource = "PathList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.DarkBlue;
@@ -147,38 +147,46 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 foreach (string _s in TCLE.LvlPaths)
                     dgvPathsList.Rows.Add(_s);
             }
-            else if (Items == "lvl") {
+            else if (Items == "lvl")
+            {
                 btnExternal.Visible = true;
                 DragSource = "LvlList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
+                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                {
                     if (lvl.Extension is ".lvl")
                         dgvPathsList.Rows.Add(lvl.Name);
                 }
             }
-            else if (Items == "lvlgate") {
+            else if (Items == "lvlgate")
+            {
                 btnExternal.Visible = true;
                 DragSource = "LvlGateList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl/Gate";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
-                    if (lvl.Extension is ".lvl") {
+                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                {
+                    if (lvl.Extension is ".lvl")
+                    {
                         dgvPathsList.Rows.Add(lvl.Name);
                         dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Green;
                     }
-                    else if (lvl.Extension is ".gate") {
+                    else if (lvl.Extension is ".gate")
+                    {
                         dgvPathsList.Rows.Add(lvl.Name);
                         dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Orange;
                     }
                 }
             }
-            else if (Items == "leaf") {
+            else if (Items == "leaf")
+            {
                 btnExternal.Visible = true;
                 DragSource = "LeafList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Leaf";
-                foreach (FileInfo leaf in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File)) {
+                foreach (FileInfo leaf in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                {
                     if (leaf.Extension is ".leaf")
                         dgvPathsList.Rows.Add(leaf.Name);
                 }
@@ -194,9 +202,31 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_SelectionChanged(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow dgvr in SelectedRows) {
+            foreach (DataGridViewRow dgvr in SelectedRows)
+            {
                 dgvPathsList.Rows[dgvr.Index].Selected = true;
             }
+        }
+
+        private void dgvPathsList_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || Items != "path")
+                return;
+            //calculate position to show the tunnel image
+            Point mouse = TCLE.Instance.PointToClient(System.Windows.Forms.Cursor.Position);
+            int height = mouse.Y + 150 > TCLE.Instance.Height ? TCLE.Instance.Height - 300 : mouse.Y - 150;
+            //get image of tunnel
+            string pathname = (string)(sender as DataGridView).Rows[e.RowIndex].Cells[0].GetEditedFormattedValue(e.RowIndex, DataGridViewDataErrorContexts.Commit);
+            TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
+            //show the image
+            TCLE.Instance.pictureTunnelViewer.Visible = true;
+            TCLE.Instance.pictureTunnelViewer.Location = new Point(mouse.X + (this.Width - this.PointToClient(System.Windows.Forms.Cursor.Position).X), height);
+            TCLE.Instance.pictureTunnelViewer.BringToFront();
+        }
+
+        private void dgvPathsList_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            TCLE.Instance.pictureTunnelViewer.Visible = false;
         }
     }
 }

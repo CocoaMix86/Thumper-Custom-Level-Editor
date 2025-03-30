@@ -1735,7 +1735,6 @@
             // 
             this.panelFill.AutoScroll = true;
             this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
-            this.panelFill.Controls.Add(this.pictureTunnelViewer);
             this.panelFill.Controls.Add(this.dockMain);
             this.panelFill.Dock = DockStyle.Fill;
             this.panelFill.Location = new Point(0, 56);
@@ -1882,13 +1881,13 @@
             this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
             this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(83, 79);
+            this.pictureTunnelViewer.Location = new Point(342, 100);
             this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
             this.pictureTunnelViewer.MaximumSize = new Size(300, 300);
             this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
             this.pictureTunnelViewer.Name = "pictureTunnelViewer";
             this.pictureTunnelViewer.Size = new Size(300, 300);
-            this.pictureTunnelViewer.TabIndex = 154;
+            this.pictureTunnelViewer.TabIndex = 155;
             this.pictureTunnelViewer.Visible = false;
             // 
             // TCLE
@@ -1898,6 +1897,7 @@
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(984, 500);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelFill);

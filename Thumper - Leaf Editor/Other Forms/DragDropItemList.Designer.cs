@@ -100,6 +100,8 @@
             this.dgvPathsList.Size = new Size(296, 432);
             this.dgvPathsList.TabIndex = 162;
             this.dgvPathsList.CellDoubleClick += this.dgvPathsList_CellDoubleClick;
+            this.dgvPathsList.CellMouseEnter += this.dgvPathsList_CellMouseEnter;
+            this.dgvPathsList.CellMouseLeave += this.dgvPathsList_CellMouseLeave;
             this.dgvPathsList.CellPainting += this.lvlLeafList_CellPainting;
             this.dgvPathsList.RowPrePaint += this.lvlLeafList_RowPrePaint;
             this.dgvPathsList.SelectionChanged += this.dgvPathsList_SelectionChanged;
