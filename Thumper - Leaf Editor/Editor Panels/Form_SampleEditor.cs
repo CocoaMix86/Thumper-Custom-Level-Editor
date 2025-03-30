@@ -8,7 +8,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_SampleEditor : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_SampleEditor : DockContentEx
     {
         #region Form Construction
         public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
@@ -87,8 +87,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();
-        public DockContent contentPropertyGrid = new()
-        {
+        private DeserializeDockContent m_deserializeDockContent;
+        public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -96,8 +96,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentMain = new()
-        {
+        public DockContentEx contentMain = new() {
             TabText = "Samples",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -105,8 +104,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentWave = new()
-        {
+        public DockContentEx contentWave = new() {
             TabText = "Waveform",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -254,7 +252,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             // Get the index of the item the mouse is below.
             rowIndexFromMouseDown = sampleList.HitTest(e.X, e.Y).RowIndex;
-            if (rowIndexFromMouseDown != -1) {           
+            if (rowIndexFromMouseDown != -1) {
                 Size dragSize = SystemInformation.DragSize;
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
             }
@@ -377,8 +375,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.ogg");
                     if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav"))
                         File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav");
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{SampleList[_in].obj_name}\n\n{ex}");
                 }
                 SampleList.Remove(sd);
@@ -483,21 +480,45 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.Columns[1].ValueType = typeof(string);
             //
             dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             //
             contentMain.Controls.Add(panelMain);
             panelMain.Dock = DockStyle.Fill;
-            contentMain.Show(dockPanel1, DockState.Document);
             //
             contentWave.Controls.Add(pictureSpectrum);
             contentWave.Controls.Add(pictureWave);
             pictureSpectrum.Dock = DockStyle.Top;
             pictureWave.Dock = DockStyle.Top;
             contentWave.SizeChanged += contentWave_SizeChanged;
-            contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
             //
             contentPropertyGrid.Controls.Add(propertyGridSample);
             propertyGridSample.Dock = DockStyle.Fill;
-            contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
+            //
+            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_sample.config"))
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_sample.config", m_deserializeDockContent);
+            else {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
+                contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
+            }
+        }
+
+        private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
+        {
+            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_sample.config");
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            if (persistString is "Properties")
+                return contentPropertyGrid;
+            if (persistString is "Samples")
+                return contentMain;
+            if (persistString is "Waveform")
+                return contentWave;
+
+            throw new NotImplementedException();
         }
 
         private void contentWave_SizeChanged(object sender, EventArgs e)
@@ -705,8 +726,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //see if file is in use and can be read
                 try {
                     wavbytes = File.ReadAllBytes(filepath);
-                }
-                catch (Exception) {
+                } catch (Exception) {
                     MessageBox.Show("File in use in another program. Import did not succeed.");
                     lblLoading.Visible = false;
                     return;

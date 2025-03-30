@@ -66,6 +66,7 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new Size(661, 527);
             this.dockPanel1.TabIndex = 147;
+            this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
             // 
             // propertyGridMaster
             // 

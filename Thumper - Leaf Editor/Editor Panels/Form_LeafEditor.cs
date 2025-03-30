@@ -7,7 +7,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LeafEditor : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_LeafEditor : DockContentEx
     {
         #region Form Construction
         ///Load LEAF

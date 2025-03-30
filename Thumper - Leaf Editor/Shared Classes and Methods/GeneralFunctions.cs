@@ -15,6 +15,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {
+        private DeserializeDockContent m_deserializeDockContent;
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static decimal LeafQuickValue0 = 1.000m;
         public static decimal LeafQuickValue1 = 1.000m;

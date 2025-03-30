@@ -6,7 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_MasterEditor : DockContent
+    public partial class Form_MasterEditor : DockContentEx
     {
         #region Form Construction
         public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
@@ -84,7 +84,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public MasterProperties MasterProperties;
         private List<DataGridViewRow> SelectedRows = new();
-        public DockContent contentPropertyGrid = new() {
+        private DeserializeDockContent m_deserializeDockContent;
+        public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -92,7 +93,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentMain = new() {
+        public DockContentEx contentMain = new() {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -121,14 +122,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.checkpoint = MasterLvls[e.RowIndex].checkpoint;
                 }
-            }
-            else if (e.ColumnIndex is 5) {
+            } else if (e.ColumnIndex is 5) {
                 MasterLvls[e.RowIndex].playplus = !MasterLvls[e.RowIndex].playplus;
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.playplus = MasterLvls[e.RowIndex].playplus;
                 }
-            }
-            else if (e.ColumnIndex is 6) {
+            } else if (e.ColumnIndex is 6) {
                 MasterLvls[e.RowIndex].isolate = !MasterLvls[e.RowIndex].isolate;
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.isolate = MasterLvls[e.RowIndex].isolate;
@@ -223,8 +222,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TargetRowToPaint = masterLvlList.RowCount;
                     masterLvlList.Invalidate();
                 }
-            }
-            else {
+            } else {
                 if (targetRow != -1 && targetRow != previousDragOver) {
                     foreach (MasterLvlData leaf in LvlsToMove) {
                         MasterLvls.Remove(leaf);
@@ -273,20 +271,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                 AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
-            }
-            else if (LvlsToMove != null) {
+            } else if (LvlsToMove != null) {
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Reorder Sublevels");
                 LvlsToMove = null;
-            }
-            else if (e.Data.GetData(typeof(List<MasterLvlData>)) is List<MasterLvlData> sublevels) {
+            } else if (e.Data.GetData(typeof(List<MasterLvlData>)) is List<MasterLvlData> sublevels) {
                 LogUndo = false;
                 foreach (MasterLvlData leaf in sublevels)
                     MasterLvls.Insert(TargetRowToPaint, leaf.Clone());
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Lvls");
-            }
-            else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
+            } else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string leaf in sublevels2)
                     AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
@@ -308,8 +303,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Handled = true;
             if (e.RowIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-            }
-            else {
+            } else {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                 CellPaintIcons(e);
                 if (e.ColumnIndex is > 3)
@@ -366,8 +360,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
                 else
                     e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
-            }
-            else {
+            } else {
                 e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
 
@@ -526,8 +519,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
                 if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
-            }
-            else
+            } else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -548,8 +540,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                         ProjectExplorer.CreateTreeView();
-                    }
-                    else
+                    } else
                         return;
             }
             TCLE.PlaySound("UIobjectadd");
@@ -565,8 +556,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     gatesectiontype = "",
                     id = TCLE.rng.Next(0, 1000000)
                 });
-            }
-            else {
+            } else {
                 MasterLvls.Insert(index, new MasterLvlData() {
                     type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                     name = (string)_load["obj_name"],
@@ -644,14 +634,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void InitializeMasterStuff()
         {
             dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             //
             contentMain.Controls.Add(panelMain);
             panelMain.Dock = DockStyle.Fill;
-            contentMain.Show(dockPanel1, DockState.Document);
             //
             contentPropertyGrid.Controls.Add(propertyGridMaster);
             propertyGridMaster.Dock = DockStyle.Fill;
-            contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            //
+            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_master.config"))
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_master.config", m_deserializeDockContent);
+            else {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            }
+        }
+
+        private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
+        {
+            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_master.config");
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            if (persistString is "Properties")
+                return contentPropertyGrid;
+            if (persistString is "Sublevels")
+                return contentMain;
+
+            throw new NotImplementedException();
         }
 
         public object GetProperties()
@@ -781,8 +793,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     reason = Reason,
                     savestate = _saveJSON
                 });
-            }
-            else {
+            } else {
                 this.Text = LoadedMaster.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
@@ -833,8 +844,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (_lvl.Beats is -1) {
                 masterLvlList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
                 masterLvlList.Rows[index].Cells[3].Value = $"file not found";
-            }
-            else {
+            } else {
                 masterLvlList.Rows[index].DefaultCellStyle = null;
                 masterLvlList.Rows[index].Cells[3].Value = $"{_lvl.Beats} beats -- {_lvl.runtime}";
             }

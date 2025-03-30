@@ -2,7 +2,7 @@
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_WorkSpace : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_WorkSpace : DockContentEx
     {
         #region Form Construction
         public Form_WorkSpace()

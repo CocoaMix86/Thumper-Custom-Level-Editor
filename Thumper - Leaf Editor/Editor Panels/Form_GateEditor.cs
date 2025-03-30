@@ -5,7 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_GateEditor : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_GateEditor : DockContentEx
     {
         #region Form Construction
         public Form_GateEditor(dynamic load = null, FileInfo filepath = null)
@@ -114,8 +114,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private GateProperties GateProperties;
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
-        public DockContent contentPropertyGrid = new()
-        {
+        private DeserializeDockContent m_deserializeDockContent;
+        public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -123,8 +123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentMain = new()
-        {
+        public DockContentEx contentMain = new() {
             TabText = "Master",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -198,8 +197,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // Create a rectangle using the DragSize, with the mouse position being
                 // at the center of the rectangle.
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-            }
-            else
+            } else
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
@@ -450,14 +448,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void InitializeGateStuff()
         {
             dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             //
             contentMain.Controls.Add(panelMain);
             panelMain.Dock = DockStyle.Fill;
-            contentMain.Show(dockPanel1, DockState.Document);
             //
             contentPropertyGrid.Controls.Add(propertyGridGate);
             propertyGridGate.Dock = DockStyle.Fill;
-            contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            //
+            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_gate.config"))
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_gate.config", m_deserializeDockContent);
+            else {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            }
+        }
+
+        private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
+        {
+            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_gate.config");
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            if (persistString is "Properties")
+                return contentPropertyGrid;
+            if (persistString is "Sublevels")
+                return contentMain;
+
+            throw new NotImplementedException();
         }
 
         public object GetProperties()
@@ -588,8 +608,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     reason = Reason,
                     savestate = _saveJSON
                 });
-            }
-            else {
+            } else {
                 this.Text = LoadedGate.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _saveJSON);
@@ -618,8 +637,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                         ProjectExplorer.CreateTreeView();
-                    }
-                    else
+                    } else
                         return;
             }
             TCLE.PlaySound("UIobjectadd");
@@ -661,8 +679,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
                     gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
                     gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
-                }
-                else {
+                } else {
                     //load lvl and calc runtime
                     //show warning if file not found
                     FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{_lvl.lvlname}")).Value?.File;
@@ -670,15 +687,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (beats == -1) {
                         gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
                         gateLvlList.Rows[_in].Cells[3].Value = $"file not found";
-                    }
-                    else {
+                    } else {
                         if (GateProperties.random) {
                             if (!bucketscounted.Contains(_lvl.bucket)) {
                                 beattotal += beats;
                                 bucketscounted.Add(_lvl.bucket);
                             }
-                        }
-                        else
+                        } else
                             beattotal += beats;
                         string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                         gateLvlList.Rows[_in].DefaultCellStyle = null;

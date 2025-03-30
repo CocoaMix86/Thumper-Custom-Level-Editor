@@ -9,7 +9,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LvlEditor : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_LvlEditor : DockContentEx
     {
         #region Form Construction
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
@@ -90,8 +90,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         public int SampChannel;
-        public DockContent contentTunnel = new()
-        {
+        private DeserializeDockContent m_deserializeDockContent;
+        public DockContentEx contentTunnel = new() {
             TabText = "Paths/Tunnels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -99,8 +99,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentMain = new()
-        {
+        public DockContentEx contentMain = new() {
             TabText = "Leaf List",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -108,8 +107,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentLoop = new()
-        {
+        public DockContentEx contentLoop = new() {
             TabText = "Loop Tracks",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -207,13 +205,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if (e.Data.GetData(typeof(List<string>)) is TreeNode dragdropnode)
                 //    return;
                 //else {
-                    if (targetRow != previousDragOver) {
-                        previousDragOver = targetRow;
-                        TargetRowToPaint = targetRow;
-                        if (TargetRowToPaint is -1)
-                            TargetRowToPaint = lvlLeafList.RowCount;
-                        lvlLeafList.Invalidate();
-                    }
+                if (targetRow != previousDragOver) {
+                    previousDragOver = targetRow;
+                    TargetRowToPaint = targetRow;
+                    if (TargetRowToPaint is -1)
+                        TargetRowToPaint = lvlLeafList.RowCount;
+                    lvlLeafList.Invalidate();
+                }
                 //}
             }
             else {
@@ -344,8 +342,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (RowsToMove != null) {
                 e.Effect = DragDropEffects.Move;
-            }
-            else {
+            } else {
                 e.Effect = DragDropEffects.Move;
             }
         }
@@ -598,8 +595,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
                 if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
-            }
-            else
+            } else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -689,8 +685,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
                 else
                     TCLE.DragDropItems.Location = new Point(lvlPathsToolStrip.Width + 2, TCLE.DragDropItems.Location.Y);
-            }
-            else
+            } else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -826,18 +821,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
             ///
             dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             //
             contentMain.Controls.Add(panelMain);
             panelMain.Dock = DockStyle.Fill;
-            contentMain.Show(dockPanel1, DockState.Document);
             //
             contentTunnel.Controls.Add(panelTunnel);
             panelTunnel.Dock = DockStyle.Fill;
-            contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
             //
             contentLoop.Controls.Add(panelLoop);
             panelLoop.Dock = DockStyle.Fill;
-            contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
+            //
+            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_lvl.config"))
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_lvl.config", m_deserializeDockContent);
+            else {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
+                contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
+            }
+        }
+
+        private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
+        {
+            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_lvl.config");
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            if (persistString.Contains("Paths/Tunnels"))
+                return contentTunnel;
+            if (persistString is "Leaf List")
+                return contentMain;
+            if (persistString is "Loop Tracks")
+                return contentLoop;
+
+            throw new NotImplementedException();
         }
 
         public object GetProperties()
@@ -1090,8 +1109,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 try {
                     r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
                     r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                }
-                catch (ArgumentOutOfRangeException) { }
+                } catch (ArgumentOutOfRangeException) { }
             }
         }
 

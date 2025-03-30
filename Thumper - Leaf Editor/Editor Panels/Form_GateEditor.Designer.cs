@@ -278,6 +278,7 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new Size(633, 372);
             this.dockPanel1.TabIndex = 119;
+            this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
             // 
             // panelMain
             // 

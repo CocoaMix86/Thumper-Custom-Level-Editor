@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_ProjectProperties : WeifenLuo.WinFormsUI.Docking.DockContent
+    public partial class Form_ProjectProperties : DockContentEx
     {
         #region Form Construction
         public Form_ProjectProperties()

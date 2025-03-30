@@ -487,16 +487,22 @@ namespace Thumper_Custom_Level_Editor
             panelRecentFiles.Visible = false;
 
             //create Project Explorer and Project Property panels
-            Explorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-            Explorer.Show(dockMain, DockState.DockRight);
-            dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-            dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
+            Explorer = new() { TabText = "Project Explorer", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+            dockProjectProperties = new() { TabText = "Project Properties", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             //Load the project''s files into Explorer
             Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
-            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}" };
-            workspace1.Show(dockMain, DockState.Document);
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            if (File.Exists($@"{WorkingFolder}\editor_settings\layout_workspace.config")) {
+                dockMain.LoadFromXml($@"{WorkingFolder}\editor_settings\layout_workspace.config", m_deserializeDockContent);
+            }
+            else {
+                Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}" };
+                workspace1.Show(dockMain, DockState.Document);
+                Explorer.Show(dockMain, DockState.DockRight);
+                dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
+            }
             OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value?.File);
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
@@ -509,6 +515,20 @@ namespace Thumper_Custom_Level_Editor
 
             dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
             dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+        }
+
+        private static int WorkspaceCount = 1;
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            if (persistString.Contains("Workspace"))
+                return new Form_WorkSpace() { TabText = persistString };
+            if (persistString is "Project Explorer")
+                return Explorer;
+            if (persistString.EndsWith("Properties"))
+                return dockProjectProperties;
+
+            throw new NotImplementedException();
         }
 
         private void toolstripFileConvert_Click(object sender, EventArgs e)
@@ -783,7 +803,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
+            Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
             workspace1.Show(dockMain, DockState.Document);
         }
 
@@ -1005,6 +1025,9 @@ namespace Thumper_Custom_Level_Editor
                     (floats[i] as DockContent).Show(ActiveWorkspace.dockMain, DockState.Float);
                 }
             }*/
+            if (!Directory.Exists($@"{WorkingFolder}\editor_settings\"))
+                Directory.CreateDirectory($@"{WorkingFolder}\editor_settings");
+            dockMain.SaveAsXml($@"{WorkingFolder}\editor_settings\layout_workspace.config");
         }
         #endregion
         #region Dock Tab Rightclick
@@ -1014,7 +1037,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 _GAD = value;
                 dockProjectProperties.propertyGridProject.SelectedObject = _GAD.GetType().GetMethod("GetProperties").Invoke(_GAD, null);
-                dockProjectProperties.Text = $"{_GAD.DockHandler.TabText} Properties";
+                dockProjectProperties.TabText = $"{_GAD.DockHandler.TabText} Properties";
 
                 if (_GAD.GetType() == typeof(Form_LvlEditor)) {
                     TCLE.DragDropItems.OwnerDGV = (_GAD as Form_LvlEditor).lvlLeafPaths;

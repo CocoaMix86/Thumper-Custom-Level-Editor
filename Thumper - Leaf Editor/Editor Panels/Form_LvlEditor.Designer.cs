@@ -712,6 +712,7 @@
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new Size(715, 514);
             this.dockPanel1.TabIndex = 166;
+            this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
             // 
             // Form_LvlEditor
             // 
