@@ -178,7 +178,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContent contentPropertyGrid = new() {
+        public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -186,7 +186,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentMain = new() {
+        public DockContentEx contentMain = new() {
             TabText = "Sequencer",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -194,7 +194,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContent contentObjects = new() {
+        public DockContentEx contentObjects = new() {
             TabText = "Objects",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -205,10 +205,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private IDockContent GetContentFromPersistString(string persistString)
         {
-            if (persistString == typeof(DockContent).ToString())
-                return null;
+            persistString = persistString.Split(';')[1];
+            //if (persistString == typeof(DockContent).ToString())
+            //    return null;
+            if (persistString is "Properties")
+                return contentPropertyGrid;
+            if (persistString is "Objects")
+                return contentObjects;
+            if (persistString is "Sequencer")
+                return contentMain;
 
-            throw new NotImplementedException();
+                throw new NotImplementedException();
         }
         #endregion
 
