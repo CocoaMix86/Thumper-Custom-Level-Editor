@@ -548,7 +548,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
             //show the image
             TCLE.Instance.pictureTunnelViewer.Visible = true;
-            TCLE.Instance.pictureTunnelViewer.Location = new Point(mouse.X + (this.Width - this.PointToClient(System.Windows.Forms.Cursor.Position).X), height);
+            TCLE.Instance.pictureTunnelViewer.Location = new Point(mouse.X + 100, height);
             TCLE.Instance.pictureTunnelViewer.BringToFront();
         }
 

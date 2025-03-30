@@ -59,9 +59,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             splitContainerLeafSide.Dock = DockStyle.Fill;
             contentMain.Show(dockPanel1, DockState.Document);
             //
-            contentPropertyGrid.Controls.Add(splitContainerLeftSide);
-            splitContainerLeftSide.Dock = DockStyle.Fill;
-            contentPropertyGrid.Show(dockPanel1, DockState.DockLeft);
+            contentObjects.Controls.Add(panelObjects);
+            panelObjects.Dock = DockStyle.Fill;
+            contentObjects.Show(contentMain.Pane, DockAlignment.Left, 0.13);
+            //
+            contentPropertyGrid.Controls.Add(propertyGridLeaf);
+            propertyGridLeaf.Dock = DockStyle.Fill;
+            contentPropertyGrid.Show(contentObjects.Pane, DockAlignment.Bottom, 0.5);
             //
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
@@ -165,7 +169,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<SeqDataPoint> SelectedDPs = new();
         public DockContent contentPropertyGrid = new()
         {
-            TabText = "Objects & Properties",
+            TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,
@@ -175,6 +179,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public DockContent contentMain = new()
         {
             TabText = "Sequencer",
+            DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
+            HideOnClose = true,
+            BackColor = Color.Black,
+            CloseButtonVisible = false,
+            CloseButton = false,
+        };
+        public DockContent contentObjects = new()
+        {
+            TabText = "Objects",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,
