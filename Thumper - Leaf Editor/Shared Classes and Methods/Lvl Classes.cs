@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.WebSockets;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
@@ -90,7 +91,17 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Approach Beats")]
         [Description("How many beats ahead of this lvl starting do the loops start playing.")]
-        public int approachbeats { get; set; }
+        public int approachbeats
+        {
+            get => ApproachBeats;
+            set
+            {
+                if (value < 0)
+                    value = 0;
+                ApproachBeats = value;
+            }
+        }
+        private int ApproachBeats;
 
         [CategoryAttribute("Options")]
         [DisplayName("Volume")]
