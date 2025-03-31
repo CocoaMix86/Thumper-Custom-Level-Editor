@@ -432,8 +432,7 @@ namespace Thumper_Custom_Level_Editor
             try {
                 lockedfiles.Add(TCL, new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
                 ClearFileLock();
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
                 return;
             }
@@ -470,8 +469,7 @@ namespace Thumper_Custom_Level_Editor
                 projectProperties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
                 dynamic pathcolor = ProjectJson["path_color"];
                 projectProperties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 projectProperties.rail = Color.White;
                 projectProperties.railglow = Color.White;
                 projectProperties.path = Color.White;
@@ -1028,6 +1026,10 @@ namespace Thumper_Custom_Level_Editor
                     (floats[i] as DockContent).Show(ActiveWorkspace.dockMain, DockState.Float);
                 }
             }*/
+        }
+
+        private void dockMain_ActiveContentChanged(object sender, EventArgs e)
+        {
             if (!Directory.Exists($@"{WorkingFolder}\editor_settings\"))
                 Directory.CreateDirectory($@"{WorkingFolder}\editor_settings");
             dockMain.SaveAsXml($@"{WorkingFolder}\editor_settings\layout_workspace.config");
