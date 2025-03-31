@@ -87,7 +87,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LvlProperties LvlProperties;
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
-        private List<LvlLeafData> clipboardleaf = new();
         private List<string> clipboardpaths = new();
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
@@ -644,16 +643,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            clipboardleaf = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
+            TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
-            clipboardleaf.Reverse();
+            TCLE.ClipboardLvl.Reverse();
             btnLvlLeafPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
         private void btnLvlLeafPaste_Click(object sender, EventArgs e)
         {
             int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
-            foreach (LvlLeafData lld in clipboardleaf)
+            foreach (LvlLeafData lld in TCLE.ClipboardLvl)
                 LvlLeafs.Insert(_in, lld.Clone());
             TCLE.PlaySound("UIkpaste");
             SaveCheckAndWrite(false, "Paste Leaf");

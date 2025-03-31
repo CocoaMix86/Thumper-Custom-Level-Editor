@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using WeifenLuo.WinFormsUI.Docking;
-using Windows.Web.AtomPub;
+﻿using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -15,7 +13,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockMain.Theme = new VS2015DarkTheme();
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             if (TCLE.IsLoadingProject && configtoload != "") {
-                dockMain.LoadFromXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config", m_deserializeDockContent);
+                if (File.Exists($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config"))
+                    dockMain.LoadFromXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config", m_deserializeDockContent);
             }
         }
 
