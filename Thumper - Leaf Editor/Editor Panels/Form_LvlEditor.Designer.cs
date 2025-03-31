@@ -160,6 +160,7 @@
             this.lvlLeafList.DragDrop += this.lvlLeafList_DragDrop;
             this.lvlLeafList.DragEnter += this.lvlLeafList_DragEnter;
             this.lvlLeafList.DragOver += this.lvlLeafList_DragOver;
+            this.lvlLeafList.KeyDown += this.lvlLeafList_KeyDown;
             this.lvlLeafList.MouseDown += this.lvlLeafList_MouseDown;
             this.lvlLeafList.MouseMove += this.lvlLeafList_MouseMove;
             // 

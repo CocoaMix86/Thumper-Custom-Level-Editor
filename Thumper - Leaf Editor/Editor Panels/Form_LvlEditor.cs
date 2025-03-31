@@ -147,6 +147,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{LvlLeafs[e.RowIndex].leafname}")).Value?.File);
         }
 
+        private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyData == TCLE.Keybinds["Copy"]) {
+                Copy();
+            }
+            else if (e.KeyData == TCLE.Keybinds["Cut"]) {
+                Cut();
+            }
+            else if (e.KeyData == TCLE.Keybinds["Paste"]) {
+                Paste();
+            }
+        }
+
         private Rectangle dragBoxFromMouseDown;
         private Rectangle dragBoxFromMouseDownPaths;
         private List<LvlLeafData> LeafsToMove;
@@ -341,7 +354,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (RowsToMove != null) {
                 e.Effect = DragDropEffects.Move;
-            } else {
+            }
+            else {
                 e.Effect = DragDropEffects.Move;
             }
         }
@@ -594,7 +608,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
                 if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
-            } else
+            }
+            else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -641,22 +656,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///COPY PASTE of leaf
         private void btnLvlLeafCopy_Click(object sender, EventArgs e)
         {
-            List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
-            selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
-            //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
-            TCLE.ClipboardLvl.Reverse();
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
-                lvl.btnLvlLeafPaste.Enabled = true;
-            TCLE.PlaySound("UIkcopy");
+            Copy();
         }
         private void btnLvlLeafPaste_Click(object sender, EventArgs e)
         {
-            int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
-            foreach (LvlLeafData lld in TCLE.ClipboardLvl)
-                LvlLeafs.Insert(_in, lld.Clone());
-            TCLE.PlaySound("UIkpaste");
-            SaveCheckAndWrite(false, "Paste Leaf");
+            Paste();
         }
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
@@ -685,7 +689,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
                 else
                     TCLE.DragDropItems.Location = new Point(lvlPathsToolStrip.Width + 2, TCLE.DragDropItems.Location.Y);
-            } else
+            }
+            else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -805,8 +810,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-            foreach (Form_WorkSpace ws in workspacewithfloats)
-            {
+            foreach (Form_WorkSpace ws in workspacewithfloats) {
                 IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == LoadedLvl.Name + " [Sequencer]").FirstOrDefault();
                 if (activate != null) {
                     activate.DockHandler.Activate();
@@ -1246,6 +1250,45 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("start_angle_fracs", new JArray() { 1, 1, 1 });
             ///end building JSON output
             return _save;
+        }
+
+        public void Copy()
+        {
+            List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+            selectedrows.Sort((row, row2) => row.CompareTo(row2));
+            TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
+            //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
+            TCLE.ClipboardLvl.Reverse();
+            //enable the paste button everywhere
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+                lvl.btnLvlLeafPaste.Enabled = true;
+            TCLE.PlaySound("UIkcopy");
+        }
+
+        public void Cut()
+        {
+            List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+            selectedrows.Sort((row, row2) => row.CompareTo(row2));
+            TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
+            //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
+            TCLE.ClipboardLvl.Reverse();
+            //delete the copied items from the lvl now
+            foreach (LvlLeafData leaf in TCLE.ClipboardLvl) {
+                LvlLeafs.Remove(leaf);
+            }
+            //enable the paste button everywhere
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+                lvl.btnLvlLeafPaste.Enabled = true;
+            TCLE.PlaySound("UIkcopy");
+        }
+
+        public void Paste()
+        {
+            int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
+            foreach (LvlLeafData lld in TCLE.ClipboardLvl)
+                LvlLeafs.Insert(_in, lld.Clone());
+            TCLE.PlaySound("UIkpaste");
+            SaveCheckAndWrite(false, "Paste Leaf");
         }
 
         #endregion
