@@ -953,12 +953,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Cut()
         {
-            List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
-            selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            TCLE.ClipboardMaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
-            TCLE.ClipboardMaster.Reverse();
-            TCLE.PlaySound("UIkcopy");
-            btnMasterLvlPaste.Enabled = true;
+            Copy();
 
             MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
             foreach (MasterLvlData mld in TCLE.ClipboardMaster) {
@@ -966,6 +961,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
             masterlvls_CollectionChanged(null, null);
+            SaveCheckAndWrite(false, "Cut Sublevels");
         }
 
         public void Copy()
@@ -975,7 +971,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardMaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
             TCLE.ClipboardMaster.Reverse();
             TCLE.PlaySound("UIkcopy");
-            btnMasterLvlPaste.Enabled = true;
+            //enable the paste button everywhere
+            foreach (Form_MasterEditor master in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".master")))
+                master.btnMasterLvlPaste.Enabled = true;
         }
 
         public void Paste()

@@ -1268,19 +1268,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Cut()
         {
-            List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
-            selectedrows.Sort((row, row2) => row.CompareTo(row2));
-            TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
-            //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
-            TCLE.ClipboardLvl.Reverse();
+            Copy();
+
             //delete the copied items from the lvl now
+            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (LvlLeafData leaf in TCLE.ClipboardLvl) {
                 LvlLeafs.Remove(leaf);
             }
-            //enable the paste button everywhere
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
-                lvl.btnLvlLeafPaste.Enabled = true;
-            TCLE.PlaySound("UIkcopy");
+            LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
+            lvlleaf_CollectionChanged(null, null);
+            SaveCheckAndWrite(false, "Cut Leafs");
         }
 
         public void Paste()
