@@ -43,6 +43,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<Sequencer_Object> ClipboardSequencer = new();
         public static List<MasterLvlData> ClipboardMaster = new();
         public static List<LvlLeafData> ClipboardLvl = new();
+        public static List<GateLvlData> ClipboardGate = new();
         #endregion
 
         #region Form Construction

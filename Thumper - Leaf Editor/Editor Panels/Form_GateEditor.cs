@@ -776,6 +776,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("boss_patterns", boss_patterns);
             return _save;
         }
+
+        public void Cut()
+        {
+            Copy();
+
+            GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
+            foreach (GateLvlData mld in TCLE.ClipboardGate)
+            {
+                GateLvls.Remove(mld);
+            }
+            GateLvls.CollectionChanged += gatelvls_CollectionChanged;
+            gatelvls_CollectionChanged(null, null);
+            SaveCheckAndWrite(false, "Cut Sublevels");
+        }
+
+        public void Copy()
+        {
+            List<int> selectedrows = gateLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
+            selectedrows.Sort((row, row2) => row.CompareTo(row2));
+            TCLE.ClipboardGate = GateLvls.Where(x => selectedrows.Contains(GateLvls.IndexOf(x))).ToList();
+            //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
+            TCLE.ClipboardGate.Reverse();
+            //enable the paste button everywhere
+            foreach (Form_GateEditor gate in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".gate")))
+                gate.btnLvlLeafPaste.Enabled = true;
+            TCLE.PlaySound("UIkcopy");
+        }
+
+        public void Paste()
+        {
+            int _in = gateLvlList.CurrentRow?.Index + 1 ?? 0;
+
+            GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
+            foreach (GateLvlData mld in TCLE.ClipboardGate)
+                GateLvls.Insert(_in, mld.Clone());
+            GateLvls.CollectionChanged += gatelvls_CollectionChanged;
+            gatelvls_CollectionChanged(null, null);
+
+            SaveCheckAndWrite(false, "Paste Lvl");
+            TCLE.PlaySound("UIkpaste");
+        }
         #endregion
 
         private void lblGateSectionHelp_Click(object sender, EventArgs e)

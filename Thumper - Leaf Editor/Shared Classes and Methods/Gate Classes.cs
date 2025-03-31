@@ -23,6 +23,11 @@ namespace Thumper_Custom_Level_Editor
         [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
         [TypeConverter(typeof(GateBucket))]
         public int bucket { get; set; }
+
+        public GateLvlData Clone()
+        {
+            return (GateLvlData)MemberwiseClone();
+        }
     }
 
     public class BossData
