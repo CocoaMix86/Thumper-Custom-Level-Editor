@@ -646,7 +646,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardLvl = LvlLeafs.Where(x => selectedrows.Contains(LvlLeafs.IndexOf(x))).ToList();
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardLvl.Reverse();
-            btnLvlLeafPaste.Enabled = true;
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+                lvl.btnLvlLeafPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
         private void btnLvlLeafPaste_Click(object sender, EventArgs e)
@@ -796,7 +797,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
             //if the Sequencer is open already, attempt to locate it and open it
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText == LoadedLvl.Name + " [Sequencer]")));
+            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText == LoadedLvl.Name + " [Sequencer]"));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
                 (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText == LoadedLvl.Name + " [Sequencer]").DockHandler.Activate();
