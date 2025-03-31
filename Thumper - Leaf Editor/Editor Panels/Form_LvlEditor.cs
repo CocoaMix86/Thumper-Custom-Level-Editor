@@ -149,6 +149,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
+            /*
             if (e.KeyData == TCLE.Keybinds["Copy"]) {
                 Copy();
             }
@@ -157,7 +158,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.KeyData == TCLE.Keybinds["Paste"]) {
                 Paste();
-            }
+            }*/
         }
 
         private Rectangle dragBoxFromMouseDown;
