@@ -16,7 +16,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override string GetPersistString()
         {
-            return base.GetPersistString() + ";" + this.TabText.Replace("*", "");
+            return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
     }
 }

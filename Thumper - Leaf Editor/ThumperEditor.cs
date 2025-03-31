@@ -13,6 +13,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         public static bool IsClosing;
+        public static bool IsLoadingProject;
         public static TCLE Instance;
         public static DockPanel DockMain => Instance.dockMain;
         public static Form_WorkSpace ActiveWorkspace;
@@ -493,6 +494,7 @@ namespace Thumper_Custom_Level_Editor
             Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
+            IsLoadingProject = true;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             if (File.Exists($@"{WorkingFolder}\editor_settings\layout_workspace.config")) {
                 dockMain.LoadFromXml($@"{WorkingFolder}\editor_settings\layout_workspace.config", m_deserializeDockContent);
@@ -502,8 +504,9 @@ namespace Thumper_Custom_Level_Editor
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
+                OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value?.File);
             }
-            OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value?.File);
+            IsLoadingProject = false;
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
@@ -522,7 +525,7 @@ namespace Thumper_Custom_Level_Editor
         {
             persistString = persistString.Split(';')[1];
             if (persistString.Contains("Workspace"))
-                return new Form_WorkSpace() { TabText = persistString };
+                return new Form_WorkSpace(persistString) { TabText = persistString };
             if (persistString is "Project Explorer")
                 return Explorer;
             if (persistString.EndsWith("Properties"))

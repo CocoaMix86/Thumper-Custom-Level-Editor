@@ -773,10 +773,10 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static bool OpenFile(FileInfo filepath, bool openraw = false)
+        public static DockContent OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
         {
             if (filepath == null)
-                return false;
+                return null;
 
             if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
                 Image theimage = null;
@@ -785,14 +785,14 @@ namespace Thumper_Custom_Level_Editor
                 }
                 ImageViewer image = new(theimage) { Text = filepath.Name};
                 image.Show();
-                return true;
+                return null;
             }
 
             dynamic _load = LoadFileLock(filepath.FullName);
             if (_load == null)
-                return false;
+                return null;
             //if there are no workspaces, add one
-            if (!Workspaces.Any()) {
+            if (!ReturnContent && !Workspaces.Any()) {
                 Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
                 workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
             }
@@ -806,7 +806,7 @@ namespace Thumper_Custom_Level_Editor
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
                 (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.StartsWith(filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
-                return true;
+                return null;
             }
 
             IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
@@ -814,60 +814,61 @@ namespace Thumper_Custom_Level_Editor
                 IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
                 if (activate != null) {
                     activate.DockHandler.Activate();
-                    return true;
+                    return null;
                 }
             }
             //open document in raw viewer if that option was selected
             if (openraw) {
                 Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                if (ReturnContent)
+                    return rawtext;
                 rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                return null;
             }
             //otherwise, open a standard editor for the document type
             string filetype = filepath.Extension;
             //this finds a pane in the active workspace that has matching extensions already open on it
-            var Panes = ActiveWorkspace.dockMain.Panes;
-            DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
+            DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
 
             if (filetype == ".master") {
                 Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (OpenHere != null)
-                    master.Show(OpenHere, null);
-                else
-                    master.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                if (ReturnContent)
+                    return master;
+                if (OpenHere != null) master.Show(OpenHere, null);
+                else master.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return null;
             }
             else if (filetype == ".lvl") {
                 Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (OpenHere != null)
-                    lvl.Show(OpenHere, null);
-                else
-                    lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                if (ReturnContent)
+                    return lvl;
+                if (OpenHere != null) lvl.Show(OpenHere, null);
+                else lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return null;
             }
             else if (filetype == ".gate") {
                 Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (OpenHere != null)
-                    gate.Show(OpenHere, null);
-                else
-                    gate.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                if (ReturnContent)
+                    return gate;
+                if (OpenHere != null) gate.Show(OpenHere, null);
+                else gate.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return null;
             }
             else if (filetype == ".leaf") {
                 Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (OpenHere != null)
-                    leaf.Show(OpenHere, null);
-                else
-                    leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                if (ReturnContent)
+                    return leaf;
+                if (OpenHere != null) leaf.Show(OpenHere, null);
+                else leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return null;
             }
             else if (filetype == ".samp") {
                 Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (OpenHere != null)
-                    sample.Show(OpenHere, null);
-                else
-                    sample.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return true;
+                if (ReturnContent)
+                    return sample;
+                if (OpenHere != null) sample.Show(OpenHere, null);
+                else sample.Show(ActiveWorkspace.dockMain, DockState.Document);
+                return null;
             }
             //if file type not supported, open raw
             else {

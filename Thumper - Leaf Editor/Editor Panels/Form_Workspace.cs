@@ -1,14 +1,36 @@
-﻿using WeifenLuo.WinFormsUI.Docking;
+﻿using System.Windows;
+using WeifenLuo.WinFormsUI.Docking;
+using Windows.Web.AtomPub;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class Form_WorkSpace : DockContentEx
     {
+        private DeserializeDockContent m_deserializeDockContent;
+
         #region Form Construction
-        public Form_WorkSpace()
+        public Form_WorkSpace(string configtoload = "")
         {
             InitializeComponent();
             dockMain.Theme = new VS2015DarkTheme();
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            if (TCLE.IsLoadingProject && configtoload != "") {
+                dockMain.LoadFromXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config", m_deserializeDockContent);
+            }
+        }
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            persistString = persistString.Split(';')[1];
+            bool raw = persistString.Contains(" [Raw]");
+            persistString = persistString.Replace(" [Raw]", "");
+
+            FileInfo _topopen = ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name.Equals(persistString, StringComparison.OrdinalIgnoreCase)).Value?.File;
+            if (_topopen != null)
+                return TCLE.OpenFile(_topopen, raw, true);
+            return null;
+
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -25,8 +47,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
+            if (this.Disposing)
+                return;
             if (dockMain.ActiveContent != null)
                 TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+            dockMain.SaveAsXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{this.TabText}.config");
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
@@ -66,6 +91,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private void Form_WorkSpace_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void Form_WorkSpace_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //When workspace closes, close the file lock on all the files inside it
+            foreach (IDockContent doc in this.dockMain.Documents) {
+                FileInfo filetoclose = null;
+                if (!TCLE.Instance.Disposing) {
+                    if (doc.GetType() == typeof(Form_MasterEditor))
+                        filetoclose = (doc as Form_MasterEditor).loadedmaster;
+                    else if (doc.GetType() == typeof(Form_GateEditor))
+                        filetoclose = (doc as Form_GateEditor).loadedgate;
+                    else if (doc.GetType() == typeof(Form_LvlEditor))
+                        filetoclose = (doc as Form_LvlEditor).loadedlvl;
+                    else if (doc.GetType() == typeof(Form_SampleEditor))
+                        filetoclose = (doc as Form_SampleEditor).loadedsample;
+                    else if (doc.GetType() == typeof(Form_LeafEditor))
+                        filetoclose = (doc as Form_LeafEditor).loadedleaf;
+                    else if (doc.GetType() == typeof(Form_RawText))
+                        filetoclose = (doc as Form_RawText).loadedfile;
+
+                    if (filetoclose == null)
+                        continue;
+
+                    TCLE.CloseFileLock(filetoclose);
+                }
+            }
+        }
+
+        private void Form_WorkSpace_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            File.Delete($@"{TCLE.WorkingFolder}\editor_settings\layout_{this.TabText}.config");
+        }
+
+        private void Form_WorkSpace_Shown(object sender, EventArgs e)
         {
         }
     }

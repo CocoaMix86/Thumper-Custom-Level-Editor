@@ -124,7 +124,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButton = false,
         };
         public DockContentEx contentMain = new() {
-            TabText = "Master",
+            TabText = "Lvl Phases",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,
@@ -474,7 +474,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             persistString = persistString.Split(';')[1];
             if (persistString is "Properties")
                 return contentPropertyGrid;
-            if (persistString is "Sublevels")
+            if (persistString is "Lvl Phases")
                 return contentMain;
 
             throw new NotImplementedException();

@@ -560,6 +560,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void treeView1_DragLeave(object sender, EventArgs e)
         {
+            if (previousDragOver == null)
+                return;
             previousDragOver.BackColor = treeView1.BackColor;
         }
         private void treeView1_DragDrop(object sender, DragEventArgs e)
@@ -667,8 +669,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (selectedNodes[0].ImageKey is "folder")
                 return;
-            bool fileOpenSuccess = TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
-            ///bool fileOpenSuccess = TCLE.OpenFile(projectfiles[selectedNodes[0].FullPath]);
+            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
         }
 
         private void treeView1_Click(object sender, EventArgs e)
