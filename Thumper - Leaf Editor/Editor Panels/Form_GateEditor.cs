@@ -197,7 +197,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // Create a rectangle using the DragSize, with the mouse position being
                 // at the center of the rectangle.
                 dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
-            } else
+            }
+            else
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
                 dragBoxFromMouseDown = Rectangle.Empty;
         }
@@ -430,6 +431,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Move Lvl Down");
         }
 
+        private void btnGateCopy_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void btnGatePaste_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
+
         private void btnRevertGate_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -456,9 +467,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contentPropertyGrid.Controls.Add(propertyGridGate);
             propertyGridGate.Dock = DockStyle.Fill;
             //
-            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_gate.config"))
+            try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_gate.config", m_deserializeDockContent);
-            else {
+            }
+            catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
             }
@@ -608,7 +620,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     reason = Reason,
                     savestate = _saveJSON
                 });
-            } else {
+            }
+            else {
                 this.Text = LoadedGate.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _saveJSON);
@@ -637,7 +650,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                         ProjectExplorer.CreateTreeView();
-                    } else
+                    }
+                    else
                         return;
             }
             TCLE.PlaySound("UIobjectadd");
@@ -679,7 +693,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
                     gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
                     gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
-                } else {
+                }
+                else {
                     //load lvl and calc runtime
                     //show warning if file not found
                     FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{_lvl.lvlname}")).Value?.File;
@@ -687,13 +702,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (beats == -1) {
                         gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
                         gateLvlList.Rows[_in].Cells[3].Value = $"file not found";
-                    } else {
+                    }
+                    else {
                         if (GateProperties.random) {
                             if (!bucketscounted.Contains(_lvl.bucket)) {
                                 beattotal += beats;
                                 bucketscounted.Add(_lvl.bucket);
                             }
-                        } else
+                        }
+                        else
                             beattotal += beats;
                         string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                         gateLvlList.Rows[_in].DefaultCellStyle = null;
@@ -782,8 +799,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Copy();
 
             GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
-            foreach (GateLvlData mld in TCLE.ClipboardGate)
-            {
+            foreach (GateLvlData mld in TCLE.ClipboardGate) {
                 GateLvls.Remove(mld);
             }
             GateLvls.CollectionChanged += gatelvls_CollectionChanged;
@@ -800,7 +816,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardGate.Reverse();
             //enable the paste button everywhere
             foreach (Form_GateEditor gate in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".gate")))
-                gate.btnLvlLeafPaste.Enabled = true;
+                gate.btnGatePaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
 

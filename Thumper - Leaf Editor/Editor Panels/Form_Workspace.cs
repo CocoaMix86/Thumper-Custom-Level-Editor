@@ -13,8 +13,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockMain.Theme = new VS2015DarkTheme();
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             if (TCLE.IsLoadingProject && configtoload != "") {
-                if (File.Exists($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config"))
+                try {
                     dockMain.LoadFromXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config", m_deserializeDockContent);
+                } catch { }
             }
         }
 

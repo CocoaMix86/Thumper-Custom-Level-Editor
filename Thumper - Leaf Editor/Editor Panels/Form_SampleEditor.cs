@@ -15,9 +15,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             ColorFormElements();
-            _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
-            //
-            sampleToolStrip.Renderer = new ToolStripOverride();
             InitializeSampleStuff();
             TCLE.DoubleBufferDGV(sampleList, false);
 
@@ -477,6 +474,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeSampleStuff()
         {
+            _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
+            sampleToolStrip.Renderer = new ToolStripOverride();
+            //
             sampleList.Columns[1].ValueType = typeof(string);
             //
             dockPanel1.Theme = TCLE.DockTheme;
@@ -494,9 +494,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contentPropertyGrid.Controls.Add(propertyGridSample);
             propertyGridSample.Dock = DockStyle.Fill;
             //
-            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_sample.config"))
+            try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_sample.config", m_deserializeDockContent);
-            else {
+            }
+            catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
                 contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);

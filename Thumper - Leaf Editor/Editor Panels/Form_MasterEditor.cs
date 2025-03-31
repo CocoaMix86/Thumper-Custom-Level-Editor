@@ -642,9 +642,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contentPropertyGrid.Controls.Add(propertyGridMaster);
             propertyGridMaster.Dock = DockStyle.Fill;
             //
-            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_master.config"))
+            try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_master.config", m_deserializeDockContent);
-            else {
+            }
+            catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
             }

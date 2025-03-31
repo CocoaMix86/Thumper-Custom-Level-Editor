@@ -496,10 +496,10 @@ namespace Thumper_Custom_Level_Editor
             //create a workspace
             IsLoadingProject = true;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            if (File.Exists($@"{WorkingFolder}\editor_settings\layout_workspace.config")) {
+            try {
                 dockMain.LoadFromXml($@"{WorkingFolder}\editor_settings\layout_workspace.config", m_deserializeDockContent);
             }
-            else {
+            catch {
                 Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}" };
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);

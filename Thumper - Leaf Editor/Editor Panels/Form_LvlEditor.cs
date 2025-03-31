@@ -854,9 +854,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contentLoop.Controls.Add(panelLoop);
             panelLoop.Dock = DockStyle.Fill;
             //
-            if (File.Exists($@"{TCLE.AppLocation}\settings\layout_lvl.config"))
+            try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_lvl.config", m_deserializeDockContent);
-            else {
+            }
+            catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
                 contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
