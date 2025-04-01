@@ -15,6 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
+            this.TabText = filepath.Name;
             InitializeLvlStuff();
             ColorFormElements();
             SaveOnlyNoLoad = saveonlynoload;
@@ -35,6 +36,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
+            Form_LeafEditor _loadseq = new(lvlProperties);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -937,6 +939,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             lvlProperties.lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
             lvlleaf_CollectionChanged(null, null);
+            //populate the seq_objs list from JSON
 
             btnLvlLeafRandom.Enabled = true;
             //mark that lvl is saved (just freshly loaded)
