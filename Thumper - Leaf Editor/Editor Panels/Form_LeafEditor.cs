@@ -2910,14 +2910,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Copy()
         {
             ///copies selected cells
-            TCLE.ClipBoardDataPoints = trackEditor.GetClipboardContent();
-            TCLE.Instance.toolstripEditPaste.Enabled = true;
+            //TCLE.ClipboardDataPoints = trackEditor.GetClipboardContent();
+            IEnumerable<DataGridViewCell> _selected = trackEditor.SelectedCells.Cast<DataGridViewCell>();
+            _selected = _selected.OrderBy(x => x.ColumnIndex).ThenBy(x => x.RowIndex);
+            TCLE.ClipboardDataPoints = _selected.Select(x => SequencerObjects[x.RowIndex].data_points[x.ColumnIndex - FrozenColumnOffset].Clone()).ToList();
+            TCLE.PlaySound("UIkcopy");
         }
 
         public void Cut()
         {
-            ///cut and copies selected cells
-            TCLE.ClipBoardDataPoints = trackEditor.GetClipboardContent();
+            Copy();
             LogUndo = false;
             CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
             LogUndo = true;
@@ -2926,6 +2928,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Paste()
         {
+            /*
             //get content on clipboard to string and then split it to rows
             string s = TCLE.ClipBoardDataPoints.GetText().Replace("\r\n", "\n");
             string[][] copiedcells = s.Split('\n').Select(x => x.Split('\t')).ToArray();
@@ -2958,6 +2961,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.InvalidateRow(pastingrow + rowindex + offset);
             }
         exit:
+            ispasting = false;
+            LogUndo = true;
+            SaveCheckAndWrite(false, "Pasted cells");
+            */
+
+            ispasting = true;
+            LogUndo = false;
+            int pastingrow = trackEditor.CurrentCell.RowIndex;
+            int pastingcol = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
+            int rowoffset = pastingrow - TCLE.ClipboardDataPoints.First().index;
+            int coloffset = pastingcol - TCLE.ClipboardDataPoints.First().beat;
+            foreach (SeqDataPoint sdp in TCLE.ClipboardDataPoints) {
+                if (sdp.beat + coloffset >= leafProperties.beats)
+                    continue;
+                if (sdp.index + rowoffset >= SequencerObjects.Count)
+                    continue;
+                SeqDataPoint clone = sdp.CloneWithOwner(SequencerObjects[sdp.index + rowoffset], sdp.beat + coloffset);
+                SequencerObjects[sdp.index + rowoffset].data_points[sdp.beat + coloffset] = clone;
+                clone.UpdateCell();
+            }
             ispasting = false;
             LogUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");

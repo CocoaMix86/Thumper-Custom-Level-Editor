@@ -41,6 +41,7 @@ namespace Thumper_Custom_Level_Editor
         public static string DragSource = "none";
         //Public accessible clipboards
         public static List<Sequencer_Object> ClipboardSequencer = new();
+        public static List<SeqDataPoint> ClipboardDataPoints;
         public static List<MasterLvlData> ClipboardMaster = new();
         public static List<LvlLeafData> ClipboardLvl = new();
         public static List<GateLvlData> ClipboardGate = new();

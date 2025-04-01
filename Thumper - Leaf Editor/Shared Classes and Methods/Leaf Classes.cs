@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Buffers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -162,6 +163,8 @@ namespace Thumper_Custom_Level_Editor
 
         [Browsable(false)]
         public Sequencer_Object Owner { get; set; }
+        [Browsable(false)]
+        public int index { get; set; }
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Beat #")]
         public int beat { get => Beat; }
@@ -199,6 +202,34 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Easing")]
         [TypeConverter(typeof(LeafEasings))]
         public string ease { get; set; } = "Ease In Out";
+
+        public void UpdateCell()
+        {
+            if (this.beat < Owner.parent.beats && Owner != null && Owner.editor_row != null) {
+                if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
+                    Owner.editor_row.Cells[beat + 3].Value = Value;
+                    Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+                }
+
+                Owner.isdefault = false;
+            }
+        }
+
+        public SeqDataPoint Clone()
+        {
+            SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
+            sdp.index = Owner.parent.seq_objs.IndexOf(Owner);
+            sdp.Owner = null;
+            return sdp;
+        }
+
+        public SeqDataPoint CloneWithOwner(Sequencer_Object Owner, int newbeat)
+        {
+            SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
+            sdp.Beat = newbeat;
+            sdp.Owner = Owner;
+            return sdp;
+        }
     }
 
     public class LeafProperties
