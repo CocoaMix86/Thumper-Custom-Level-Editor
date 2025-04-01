@@ -184,7 +184,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
                     LvlsToMove = SelectedRows.Select(x => GateLvls[x.Index]).ToList();
                     //
-                    TCLE.DragSource = "GateList";
+                    TCLE.DragSource = "LvlList";
                     IsAddingItems = true;
                     LogUndo = false;
                     //
@@ -364,7 +364,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     0
                 });
             }
-            //RecalculateRuntime();
+            RecalculateRuntime();
             propertyGridGate.Refresh();
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
