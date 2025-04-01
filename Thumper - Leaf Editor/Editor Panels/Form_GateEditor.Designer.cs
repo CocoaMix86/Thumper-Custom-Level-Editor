@@ -44,13 +44,13 @@
             this.btnGateLvlDelete = new ToolStripButton();
             this.btnGateLvlUp = new ToolStripButton();
             this.btnGateLvlDown = new ToolStripButton();
+            this.btnGateCopy = new ToolStripButton();
+            this.btnGatePaste = new ToolStripButton();
             this.label1 = new Label();
             this.propertyGridGate = new PropertyGrid();
             this.toolTip1 = new ToolTip(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.panelMain = new Panel();
-            this.btnGateCopy = new ToolStripButton();
-            this.btnGatePaste = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)this.gateLvlList).BeginInit();
             this.gateToolStrip.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -233,6 +233,29 @@
             this.btnGateLvlDown.ToolTipText = "Move selected phase down";
             this.btnGateLvlDown.Click += this.btnGateLvlDown_Click;
             // 
+            // btnGateCopy
+            // 
+            this.btnGateCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnGateCopy.Enabled = false;
+            this.btnGateCopy.Image = Properties.Resources.icon_copy2;
+            this.btnGateCopy.ImageTransparentColor = Color.Magenta;
+            this.btnGateCopy.Margin = new Padding(0);
+            this.btnGateCopy.Name = "btnGateCopy";
+            this.btnGateCopy.Size = new Size(23, 24);
+            this.btnGateCopy.ToolTipText = "Copy selected sublevel";
+            this.btnGateCopy.Click += this.btnGateCopy_Click;
+            // 
+            // btnGatePaste
+            // 
+            this.btnGatePaste.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnGatePaste.Enabled = false;
+            this.btnGatePaste.Image = Properties.Resources.icon_paste2;
+            this.btnGatePaste.ImageTransparentColor = Color.Magenta;
+            this.btnGatePaste.Name = "btnGatePaste";
+            this.btnGatePaste.Size = new Size(23, 24);
+            this.btnGatePaste.ToolTipText = "Paste the copied sublevel";
+            this.btnGatePaste.Click += this.btnGatePaste_Click;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -291,29 +314,6 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new Size(293, 281);
             this.panelMain.TabIndex = 120;
-            // 
-            // btnGateCopy
-            // 
-            this.btnGateCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnGateCopy.Enabled = false;
-            this.btnGateCopy.Image = Properties.Resources.icon_copy2;
-            this.btnGateCopy.ImageTransparentColor = Color.Magenta;
-            this.btnGateCopy.Margin = new Padding(0);
-            this.btnGateCopy.Name = "btnGateCopy";
-            this.btnGateCopy.Size = new Size(23, 24);
-            this.btnGateCopy.ToolTipText = "Copy selected sublevel";
-            this.btnGateCopy.Click += this.btnGateCopy_Click;
-            // 
-            // btnGatePaste
-            // 
-            this.btnGatePaste.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnGatePaste.Enabled = false;
-            this.btnGatePaste.Image = Properties.Resources.icon_paste2;
-            this.btnGatePaste.ImageTransparentColor = Color.Magenta;
-            this.btnGatePaste.Name = "btnGatePaste";
-            this.btnGatePaste.Size = new Size(23, 24);
-            this.btnGatePaste.ToolTipText = "Paste the copied sublevel";
-            this.btnGatePaste.Click += this.btnGatePaste_Click;
             // 
             // Form_GateEditor
             // 
