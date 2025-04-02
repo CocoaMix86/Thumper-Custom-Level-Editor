@@ -498,7 +498,7 @@ namespace Thumper_Custom_Level_Editor
             IsLoadingProject = true;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             try {
-                dockMain.LoadFromXml($@"{WorkingFolder}\editor_settings\layout_workspace.config", m_deserializeDockContent);
+                dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config", m_deserializeDockContent);
             }
             catch {
                 Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}" };
@@ -1033,9 +1033,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (!Directory.Exists($@"{WorkingFolder}\editor_settings\"))
-                Directory.CreateDirectory($@"{WorkingFolder}\editor_settings");
-            dockMain.SaveAsXml($@"{WorkingFolder}\editor_settings\layout_workspace.config");
+            if (!Directory.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}"))
+                Directory.CreateDirectory($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}");
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config");
         }
         #endregion
         #region Dock Tab Rightclick

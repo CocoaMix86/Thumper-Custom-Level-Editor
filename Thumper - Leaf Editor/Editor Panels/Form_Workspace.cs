@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             if (TCLE.IsLoadingProject && configtoload != "") {
                 try {
-                    dockMain.LoadFromXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{configtoload}.config", m_deserializeDockContent);
+                    dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{configtoload}.config", m_deserializeDockContent);
                 } catch { }
             }
         }
@@ -51,7 +51,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (dockMain.ActiveContent != null)
                 TCLE.GlobalActiveDocument = dockMain.ActiveContent;
-            dockMain.SaveAsXml($@"{TCLE.WorkingFolder}\editor_settings\layout_{this.TabText}.config");
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
