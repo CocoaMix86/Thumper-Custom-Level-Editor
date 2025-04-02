@@ -2300,7 +2300,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             EditorIsSaved = true;
-            SaveCheckAndWrite(true, "");
+            SaveCheckAndWrite(true, "", false);
             TrackTimeSigHighlighting();
         }
 
