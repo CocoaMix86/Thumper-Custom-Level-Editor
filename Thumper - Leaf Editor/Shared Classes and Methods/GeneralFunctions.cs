@@ -801,10 +801,10 @@ namespace Thumper_Custom_Level_Editor
         //find if the document is loaded already in a tab
         //if so, make it activate
         openraw:
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.StartsWith(filepath.Name + (openraw ? " [Raw]" : ""))));
+            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
-                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.StartsWith(filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
+                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
                 return null;
             }
 
