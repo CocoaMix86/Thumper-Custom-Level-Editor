@@ -202,6 +202,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgvPathsList.RowCount <= 0)
+                return;
             foreach (DataGridViewRow dgvr in SelectedRows)
             {
                 dgvPathsList.Rows[dgvr.Index].Selected = true;
