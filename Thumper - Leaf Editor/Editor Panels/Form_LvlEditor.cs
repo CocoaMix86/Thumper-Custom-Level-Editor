@@ -15,7 +15,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
-            this.TabText = filepath.Name;
             InitializeLvlStuff();
             ColorFormElements();
             SaveOnlyNoLoad = saveonlynoload;

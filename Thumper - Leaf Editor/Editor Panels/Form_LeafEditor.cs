@@ -2540,7 +2540,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(LoadedLeaf.Name)) is Form_LvlEditor Owner) {
                         Owner.lvlProperties.seq_objs = LeafProperties.seq_objs;
-                        Owner.Save();
+                        Owner.Save(false);
                     }
                 }
 
