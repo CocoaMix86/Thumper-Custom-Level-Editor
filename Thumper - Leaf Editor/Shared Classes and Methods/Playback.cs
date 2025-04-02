@@ -212,7 +212,7 @@ namespace Thumper_Custom_Level_Editor
                 if (ComboList[x].chan is 8 or 13 or 22)
                     continue;
                 //test if the event behind current is within 500 ticks (5 beats) of the current event
-                if (ComboList[x].tick - ComboList[x - 1].tick is < 400 and not 0) {
+                if (ComboList[x].tick - ComboList[x - 1].tick is < 300 and not 0) {
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
                     if (Pitch < 9824) {
