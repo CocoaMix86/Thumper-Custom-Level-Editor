@@ -274,7 +274,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvr.Height = trackZoomVert.Value;
             }
             int display = trackEditor.FirstDisplayedScrollingRowIndex;
-            if (display != -1) {
+            if (trackEditor.RowCount > 1 && display != -1) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 vscrollbarTrackEditor_Resize();
                 if (trackEditor.Rows[display + 1].Visible == true) {
