@@ -248,7 +248,7 @@
             this.btnLvlLeafAdd.Margin = new Padding(0);
             this.btnLvlLeafAdd.Name = "btnLvlLeafAdd";
             this.btnLvlLeafAdd.Size = new Size(23, 24);
-            this.btnLvlLeafAdd.ToolTipText = "Add new sublevel to the list";
+            this.btnLvlLeafAdd.ToolTipText = "Add new leaf to the list";
             this.btnLvlLeafAdd.Click += this.btnLvlLeafAdd_Click;
             // 
             // btnLvlLeafDelete
