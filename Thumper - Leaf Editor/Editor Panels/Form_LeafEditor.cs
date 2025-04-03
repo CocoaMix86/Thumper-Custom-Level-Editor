@@ -2035,6 +2035,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLeafSplit_Click(object sender, EventArgs e)
         {
+            if (LvlSequencer != null) {
+                MessageBox.Show("Not allowed to split a lvl sequencer!", "Jumper Justum Jevel Jeditor");
+                return;
+            }
             //do nothing if no cells selected
             if (trackEditor.SelectedCells.Count == 0)
                 return;
@@ -2071,11 +2075,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //only copy datapoints after the split index
                 for (int x = splitindex; x < LeafProperties.beats; x++) {
                     clone.data_points[x - splitindex] = new SeqDataPoint() {
+                        Owner = clone,
                         Beat = seq.data_points[x].beat - splitindex,
                         value = seq.data_points[x].value,
                         ease = seq.data_points[x].ease,
                         interpolation = seq.data_points[x].interpolation,
-                        Owner = clone
                     };
                     //after copying, set the value to null since this datapoint is "leaving"
                     seq.data_points[x].value = null;
