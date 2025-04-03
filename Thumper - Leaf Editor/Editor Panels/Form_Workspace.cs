@@ -123,7 +123,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void Form_WorkSpace_FormClosed(object sender, FormClosedEventArgs e)
         {
-            File.Delete($@"{TCLE.WorkingFolder}\editor_settings\layout_{this.TabText}.config");
+            try {
+                File.Delete($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
+            } catch { }
         }
 
         private void Form_WorkSpace_Shown(object sender, EventArgs e)
