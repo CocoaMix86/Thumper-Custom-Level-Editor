@@ -791,7 +791,8 @@ namespace Thumper_Custom_Level_Editor
                 image.Show();
                 return null;
             }
-            else {
+
+            if (!ProjectExtensions.Contains(filepath.Extension.ToLower())) {
                 openraw = true;
             }
 
