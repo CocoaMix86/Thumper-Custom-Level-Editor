@@ -1030,7 +1030,7 @@ namespace Thumper_Custom_Level_Editor
                 if (sort) {
                     try {
                         Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");
-                    } catch { }
+                    } catch { continue; }
                 }
 
                 FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
