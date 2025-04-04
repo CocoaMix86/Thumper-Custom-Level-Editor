@@ -345,14 +345,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
         {
-            dynamic _load;
+            object _load;
             if (!File.Exists(_selectedfilename))
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
-                if (LoadText && !TCLE.ProjectExtensions.Contains(Path.GetExtension(_selectedfilename))) {
+                if (LoadText) {
                     _load = textReader.ReadToEnd();
                 }
                 else {
@@ -796,7 +796,7 @@ namespace Thumper_Custom_Level_Editor
                 openraw = true;
             }
 
-            dynamic _load = LoadFileLock(filepath.FullName, openraw);
+            object _load = LoadFileLock(filepath.FullName, openraw);
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
@@ -826,8 +826,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //open document in raw viewer if that option was selected
-            if (openraw) {
-                Form_RawText rawtext = new(_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+            if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
+                Form_RawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                 if (ReturnContent)
                     return rawtext;
                 rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
@@ -838,51 +838,27 @@ namespace Thumper_Custom_Level_Editor
             //this finds a pane in the active workspace that has matching extensions already open on it
             DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
 
+            DockContent OpenFile = new();
             if (filetype == ".master") {
-                Form_MasterEditor master = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return master;
-                if (OpenHere != null) master.Show(OpenHere, null);
-                else master.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+                OpenFile = new Form_MasterEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".lvl") {
-                Form_LvlEditor lvl = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return lvl;
-                if (OpenHere != null) lvl.Show(OpenHere, null);
-                else lvl.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+                OpenFile = new Form_LvlEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".gate") {
-                Form_GateEditor gate = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return gate;
-                if (OpenHere != null) gate.Show(OpenHere, null);
-                else gate.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+                OpenFile = new Form_GateEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".leaf") {
-                Form_LeafEditor leaf = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return leaf;
-                if (OpenHere != null) leaf.Show(OpenHere, null);
-                else leaf.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+                OpenFile = new Form_LeafEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".samp") {
-                Form_SampleEditor sample = new(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return sample;
-                if (OpenHere != null) sample.Show(OpenHere, null);
-                else sample.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+                OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            //if file type not supported, open raw
-            else {
-                openraw = true;
-                goto openraw;
-            }
+            if (ReturnContent)
+                return OpenFile;
+            if (OpenHere != null) OpenFile.Show(OpenHere, null);
+            else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
+            return null;
         }
 
         public static void CloseFile(FileInfo filepath)
