@@ -25,7 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool raw = persistString.Contains(" [Raw]");
             persistString = persistString.Replace(" [Raw]", "");
 
-            FileInfo _topopen = ProjectExplorer.AllFiles.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name.Equals(persistString, StringComparison.OrdinalIgnoreCase)).Value?.File;
+            FileInfo _topopen = ProjectExplorer.Files.FirstOrDefault(x => x.Name.Equals(persistString, StringComparison.OrdinalIgnoreCase));
             if (_topopen != null)
                 return TCLE.OpenFile(_topopen, raw, true);
             return null;
