@@ -8,7 +8,9 @@ namespace Thumper_Custom_Level_Editor
         //public static Dictionary<string, DirectoryInfo> Folders = new();
         public static TreeNodeCollection ProjectTree => TCLE.Explorer.treeView1.Nodes;
         public static TreeNode ProjectRoot => ProjectTree[0];
-        public static Dictionary<TreeNode, FileOrFolder> Files = new();
+        public static Dictionary<TreeNode, FileOrFolder> AllFiles = new();
+        public static IEnumerable<FileInfo> Files = AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
+        public static IEnumerable<DirectoryInfo> Folders = AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
         public static List<string> expandednodes = new();
         public static bool filterenabled;
         public static bool filtersearch;
@@ -26,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
             expandednodes = GetExpandedNodes(ProjectTree);
             //clear existing treeview
             ProjectTree.Clear();
-            Files.Clear();
+            AllFiles.Clear();
             ///projectfiles.Clear();
             ///projectfolders.Clear();
             if (TCLE.WorkingFolder.Exists) {
@@ -71,7 +73,7 @@ namespace Thumper_Custom_Level_Editor
                 ForeColor = Properties.Settings.Default.ColorProjExpText
             };
             addInMe.Add(folder);
-            Files.Add(folder, new(directoryInfo));
+            AllFiles.Add(folder, new(directoryInfo));
             ///projectfolders.Add(folder.FullPath, directoryInfo);
 
             //Build subtree for each folder inside this folder
@@ -91,7 +93,7 @@ namespace Thumper_Custom_Level_Editor
                     ContextMenuStrip = TCLE.Explorer.contextMenuFileClick,
                     ForeColor = Properties.Settings.Default.ColorProjExpText
                 };
-                Files.Add(_tn, new(file));
+                AllFiles.Add(_tn, new(file));
                 ///projectfiles.Add(_tn.FullPath, file);
                 //check for various filters being used
                 if (filtersearch && !file.Name.Contains(SearchString)) { }

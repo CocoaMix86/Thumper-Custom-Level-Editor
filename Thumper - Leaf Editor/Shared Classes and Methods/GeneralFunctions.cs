@@ -700,7 +700,7 @@ namespace Thumper_Custom_Level_Editor
         {
             int _beatcount = 0;
             if (_masterlvl.type == "lvl") {
-                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_masterlvl.name}")).Value?.File;
+                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.name}"));
                 if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
                 else return -1;
             }
@@ -712,7 +712,7 @@ namespace Thumper_Custom_Level_Editor
                 else
                     _beatcount += gatebeats;
             }
-            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_masterlvl.rest}")).Value?.File;
+            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.rest}"));
             if (lvlrest != null) _beatcount += CalculateLvlRuntime(lvlrest.FullName);
 
             return _beatcount;
@@ -725,7 +725,7 @@ namespace Thumper_Custom_Level_Editor
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{gatename}")).Value?.File;
+            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{gatename}"));
             if (gate != null) {
                 _load = TCLE.LoadFileLock(gate.FullName);
                 //if gate not found, _load is null. Return -1 to denote this
@@ -736,7 +736,7 @@ namespace Thumper_Custom_Level_Editor
                 //loop through each lvl in gate
                 foreach (dynamic _lvl in _load["boss_patterns"]) {
                     //attempt to load lvl
-                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{(string)_lvl["lvl_name"]}")).Value?.File;
+                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
                     if (lvl != null) {
                         //if random is enabled, count only the first entry in each bucket
                         if (israndom) {
@@ -766,7 +766,7 @@ namespace Thumper_Custom_Level_Editor
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
-                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{(leaf["leaf_name"])}")).Value?.File;
+                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(leaf["leaf_name"])}"));
                 if (_leaf != null && _leaf.Exists)
                     _beatcount += (int)TCLE.LoadFileLock(_leaf.FullName)["beat_cnt"];
                 ///_beatcount += (int)leaf["beat_cnt"];
@@ -781,7 +781,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (filepath == null)
                 return null;
-
+            //if item is an image, open in image viewer instead of a DockContent
             if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
                 Image theimage = null;
                 using (FileStream fs = new(filepath.FullName, FileMode.Open)) {
@@ -791,7 +791,7 @@ namespace Thumper_Custom_Level_Editor
                 image.Show();
                 return null;
             }
-
+            //if item is not an editor type, open raw
             if (!ProjectExtensions.Contains(filepath.Extension.ToLower())) {
                 openraw = true;
             }
@@ -804,12 +804,8 @@ namespace Thumper_Custom_Level_Editor
                 Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
                 workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
             }
-            //All methods below this point return true. So we can paint the node green to show it is loaded
-            ///TreeNode successNode = TCLE.ProjectExplorer.FindNode(filepath.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes);
-            ///successNode.ForeColor = Color.Green;
-        //find if the document is loaded already in a tab
-        //if so, make it activate
-        openraw:
+            //find if the document is loaded already in a tab
+            //if so, make it activate
             IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();

@@ -158,7 +158,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")).Value?.File);
+            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")));
         }
 
         private void gateLvlList_SelectionChanged(object sender, EventArgs e)
@@ -298,7 +298,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string leaf in sublevels2)
-                    AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+                    AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Phases");
             }
@@ -757,7 +757,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     //load lvl and calc runtime
                     //show warning if file not found
-                    FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{_lvl.lvlname}")).Value?.File;
+                    FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"{_lvl.lvlname}"));
                     int beats = lvlfile == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.FullName);
                     if (beats == -1) {
                         gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;

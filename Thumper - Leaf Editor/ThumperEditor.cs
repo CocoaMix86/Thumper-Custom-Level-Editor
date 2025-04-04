@@ -505,7 +505,7 @@ namespace Thumper_Custom_Level_Editor
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
-                OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).Value?.File);
+                OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
             }
             IsLoadingProject = false;
             //this will be the loading sound :D
@@ -1085,12 +1085,12 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabCopyPath_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(ProjectExplorer.Files.First(x => x.Value.File.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}")).Value.FullPath);
+            Clipboard.SetText(ProjectExplorer.Files.First(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText.Replace("*", "").Split(" [")[0]}"))?.FullName);
         }
 
         private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
         {
-            FileInfo foldertoopen = ProjectExplorer.Files.Select(x => x.Value.File).FirstOrDefault(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText}"));
+            FileInfo foldertoopen = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText.Replace("*", "").Split(" [")[0]}"));
             if (foldertoopen != null && foldertoopen.Directory.Exists)
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
         }
