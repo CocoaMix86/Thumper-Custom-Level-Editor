@@ -352,7 +352,7 @@ namespace Thumper_Custom_Level_Editor
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
-                if (LoadText) {
+                if (LoadText && !TCLE.ProjectExtensions.Contains(Path.GetExtension(_selectedfilename))) {
                     _load = textReader.ReadToEnd();
                 }
                 else {
