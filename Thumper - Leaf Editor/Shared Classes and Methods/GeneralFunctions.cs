@@ -343,7 +343,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static dynamic LoadFileLock(string _selectedfilename)
+        public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
         {
             dynamic _load;
             if (!File.Exists(_selectedfilename))
@@ -352,11 +352,16 @@ namespace Thumper_Custom_Level_Editor
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
-                try {
-                    _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
-                } catch (Exception) {
-                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
-                    _load = null;
+                if (LoadText) {
+                    _load = textReader.ReadToEnd();
+                }
+                else {
+                    try {
+                        _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                    } catch (Exception) {
+                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
+                        _load = null;
+                    }
                 }
             }
 
@@ -786,8 +791,11 @@ namespace Thumper_Custom_Level_Editor
                 image.Show();
                 return null;
             }
+            else {
+                openraw = true;
+            }
 
-            dynamic _load = LoadFileLock(filepath.FullName);
+            dynamic _load = LoadFileLock(filepath.FullName, openraw);
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
