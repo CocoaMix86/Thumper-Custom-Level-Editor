@@ -1097,7 +1097,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DataGridView dgv = sender as DataGridView;
             if (e.ColumnIndex is 0 or 1 or 2) {
                 dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
-            } else if (Control.MouseButtons == MouseButtons.Right) {
+            }
+            else if (Control.MouseButtons == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
@@ -1105,7 +1106,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         RightclickChanges = CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                         LogUndo = true;
                     }
-                } else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
+                }
+                else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     CellValueChanged(e.RowIndex, e.ColumnIndex, true);
                 }
@@ -1145,7 +1147,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyChar == (char)Keys.Back) {
                 LogUndo = false;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
+                CellValueChanged(trackEditor.SelectedCells[^1].RowIndex, trackEditor.SelectedCells[^1].ColumnIndex, true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             }
@@ -1155,7 +1157,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
                 LogUndo = false;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
+                CellValueChanged(trackEditor.SelectedCells[^1].RowIndex, trackEditor.SelectedCells[^1].ColumnIndex, true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             } else if (e.Control) {
@@ -2293,7 +2295,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     timesignature = "4/4"
                 };
             }
-
+            trackEditor.Rows.Clear();
 
             LeafLengthChanged();
         }

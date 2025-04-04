@@ -54,6 +54,8 @@ namespace Thumper_Custom_Level_Editor
                 if (dock.GetType() == typeof(Form_LvlEditor)) (dock as Form_LvlEditor).RecalculateRuntime();
                 if (dock.GetType() == typeof(Form_GateEditor)) (dock as Form_GateEditor).RecalculateRuntime();
             }
+            //repopulate dragdrop list
+            TCLE.DragDropItems.Populate();
         }
 
         private static void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)

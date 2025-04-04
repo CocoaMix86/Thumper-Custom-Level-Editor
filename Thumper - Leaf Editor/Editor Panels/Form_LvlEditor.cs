@@ -1175,44 +1175,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 { "obj_name", _properties.FilePath.Name },
                 { "approach_beats", _properties.approachbeats }
             };
-            //this section adds all colume sequencer controls
+            //this section adds all sequencer objects
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
-                //skip blank tracks
-                if (seq_obj.friendly_param == null)
-                    continue;
-                JObject s = new();
-                //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
-                    seq_obj.obj_name = (string)_save["obj_name"];
-                s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
-                //write param_path or param_path_hash
-                if (seq_obj.param_path.StartsWith("0x"))
-                    s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
-                else
-                    s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
-                s.Add("trait_type", seq_obj.trait_type);
-                JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
-                    JObject d = new() {
+            if (_properties.seq_objs.Count == 0) {
+                //do nothing if there are no objects
+            }
+            else {
+                foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
+                    //skip blank tracks
+                    if (seq_obj.friendly_param == null)
+                        continue;
+                    JObject s = new();
+                    //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
+                    if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
+                        seq_obj.obj_name = (string)_save["obj_name"];
+                    s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
+                    //write param_path or param_path_hash
+                    if (seq_obj.param_path.StartsWith("0x"))
+                        s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
+                    else
+                        s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
+                    s.Add("trait_type", seq_obj.trait_type);
+                    JArray datapoints = new();
+                    foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
+                        JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", decimal.Parse(datapoint.value.ToString()) },
                         { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
                         { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
-                    datapoints.Add(d);
-                }
-                s.Add("data_points", datapoints);
-                ///end
-                //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step.ToString());
-                s.Add("default", seq_obj.defaultvalue);
-                s.Add("footer", seq_obj.footer);
-                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                s.Add("enabled", seq_obj.enabled.ToString());
+                        datapoints.Add(d);
+                    }
+                    s.Add("data_points", datapoints);
+                    ///end
+                    //add the rest of the keys to this seq_obj
+                    s.Add("step", seq_obj.step.ToString());
+                    s.Add("default", seq_obj.defaultvalue);
+                    s.Add("footer", seq_obj.footer);
+                    s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
+                    s.Add("enabled", seq_obj.enabled.ToString());
 
-                seq_objs.Add(s);
+                    seq_objs.Add(s);
+                }
             }
             //add all seq_objs to the overall leaf
             _save.Add("seq_objs", seq_objs);

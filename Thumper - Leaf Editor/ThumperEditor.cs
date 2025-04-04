@@ -449,7 +449,7 @@ namespace Thumper_Custom_Level_Editor
             dynamic ProjectJson = LoadFileLock(TCL.FullName);
             Image Thumbnail = null;
             if (File.Exists($@"{TCL.Directory}\thumbnail.png")) {
-                using (FileStream fs = new($@"{TCL.Directory}\thumbnail.png", FileMode.Open)) {
+                using (FileStream fs = new($@"{TCL.Directory}\thumbnail.png", FileMode.Open, FileAccess.Read, FileShare.Read)) {
                     Thumbnail = Image.FromStream(fs);
                 }
             }

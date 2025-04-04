@@ -189,6 +189,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             dontcancelifrename = true;
+            //stop rename if file is open
+            string source = selectedNodes[0].ImageKey == "folder" ? ProjectExplorer.Files[selectedNodes[0]].Folder.FullName : ProjectExplorer.Files[selectedNodes[0]].File.FullName;
+            if (TCLE.lockedfiles.Any(x => x.Key.FullName == source)) {
+                MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
+                return;
+            }
+            //
             treeView1.SelectedNode = selectedNodes[0];
             selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
