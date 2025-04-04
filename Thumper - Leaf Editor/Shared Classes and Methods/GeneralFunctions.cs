@@ -1027,8 +1027,11 @@ namespace Thumper_Custom_Level_Editor
                 else if (file.Directory.Name.ToLower() is "extras")
                     continue;
                 string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
-                if (sort)
-                    Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");
+                if (sort) {
+                    try {
+                        Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");
+                    } catch { }
+                }
 
                 FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
                 File.Move(file.FullName, newfile.FullName);
