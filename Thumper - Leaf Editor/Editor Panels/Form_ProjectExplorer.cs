@@ -113,7 +113,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Context Menu File
         private void toolstripFileOpen_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
+            TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File);
         }
 
         private void contextMenuFileClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -122,11 +122,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             toolstripFileRename.Enabled = selectedNodes.Count == 1;
             toolstripFileCopyPath.Visible = selectedNodes.Count == 1;
         }
-        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.Files[selectedNodes[0]].File.FullName);
+        private void copyFilePathToolStripMenuItem1_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName);
 
         private void toolstripFileRaw_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File, true);
+            TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File, true);
         }
 
         private void toolstripFileSearch_Click(object sender, EventArgs e)
@@ -136,8 +136,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileExternal_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
-                if (File.Exists(ProjectExplorer.Files[tn].File.FullName))
-                    Process.Start(new ProcessStartInfo(ProjectExplorer.Files[tn].File.FullName) { UseShellExecute = true });
+                if (File.Exists(ProjectExplorer.AllFiles[tn].File.FullName))
+                    Process.Start(new ProcessStartInfo(ProjectExplorer.AllFiles[tn].File.FullName) { UseShellExecute = true });
             }
         }
         private void toolstripFileDelete_Click(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (TreeNode tn in selectedNodes) {
                 if (tn.ImageKey == "folder") {
-                    DirectoryInfo source = ProjectExplorer.Files[tn].Folder;
+                    DirectoryInfo source = ProjectExplorer.AllFiles[tn].Folder;
                     foreach (FileInfo file in source.GetFiles("*", SearchOption.AllDirectories)) {
                         TCLE.CloseFile(file);
                         TCLE.DeleteFileLock(file);
@@ -163,7 +163,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     source.Delete(true);
                 }
                 else {
-                    FileInfo source = ProjectExplorer.Files[tn].File;
+                    FileInfo source = ProjectExplorer.AllFiles[tn].File;
                     TCLE.CloseFile(source);
                     TCLE.DeleteFileLock(source);
                     ///FindDuplicateFile(tn, Color.White);
@@ -182,20 +182,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void openContainingFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(ProjectExplorer.Files[selectedNodes[0]].File.FullName))
-                Process.Start("explorer.exe", $@"/select, ""{ProjectExplorer.Files[selectedNodes[0]].File.FullName}""");
+            if (File.Exists(ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName))
+                Process.Start("explorer.exe", $@"/select, ""{ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName}""");
         }
         #region Rename Handling
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             dontcancelifrename = true;
-            //stop rename if file is open
-            string source = selectedNodes[0].ImageKey == "folder" ? ProjectExplorer.Files[selectedNodes[0]].Folder.FullName : ProjectExplorer.Files[selectedNodes[0]].File.FullName;
-            if (TCLE.lockedfiles.Any(x => x.Key.FullName == source)) {
-                MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
-                return;
-            }
-            //
             treeView1.SelectedNode = selectedNodes[0];
             selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
@@ -222,7 +215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 node.Text = OldName;
                 return;
             }
-            string source = renametype == "folder" ? ProjectExplorer.Files[NewNameNode].Folder.FullName : ProjectExplorer.Files[NewNameNode].File.FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
+            string source = renametype == "folder" ? ProjectExplorer.AllFiles[NewNameNode].Folder.FullName : ProjectExplorer.AllFiles[NewNameNode].File.FullName; //$@"{Path.GetDirectoryName(projectfolder.FullName)}\{renamefile}";
             string dest = $@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{node.FullPath}";
             //check if same name
             if (NewNameNode.Text == OldName) {
@@ -291,8 +284,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFolderExplorer_Click(object sender, EventArgs e)
         {
             foreach (TreeNode tn in selectedNodes) {
-                if (ProjectExplorer.Files[tn].Folder.Exists)
-                    Process.Start(new ProcessStartInfo(ProjectExplorer.Files[tn].Folder.FullName) { UseShellExecute = true });
+                if (ProjectExplorer.AllFiles[tn].Folder.Exists)
+                    Process.Start(new ProcessStartInfo(ProjectExplorer.AllFiles[tn].Folder.FullName) { UseShellExecute = true });
             }
         }
 
@@ -305,11 +298,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 FileInfo filetocopy = new(ofd.FileName);
-                if (File.Exists($"{ProjectExplorer.Files[selectedNodes[0]].File.FullName}\\{filetocopy.Name}")) {
+                if (File.Exists($"{ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName}\\{filetocopy.Name}")) {
                     MessageBox.Show($"A filed named {filetocopy.Name} already exists in folder {selectedNodes[0].Text}.", "Thumper Custom Level Editor");
                     return;
                 }
-                FileInfo projectfile = new($"{ProjectExplorer.Files[selectedNodes[0]].File.FullName}\\{filetocopy.Name}");
+                FileInfo projectfile = new($"{ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName}\\{filetocopy.Name}");
                 File.Copy(ofd.FileName, projectfile.FullName);
 
                 if (TCLE.fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
@@ -325,7 +318,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
 
-        private void toolstripFolderCopyPath_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.Files[selectedNodes[0]].Folder.FullName);
+        private void toolstripFolderCopyPath_Click(object sender, EventArgs e) => Clipboard.SetText(ProjectExplorer.AllFiles[selectedNodes[0]].Folder.FullName);
         #region Paste
         private void toolstripFolderPaste_Click(object sender, EventArgs e)
         {
@@ -338,24 +331,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             foreach (TreeNode tn in parentnodestocopy) {
-                string source = ProjectExplorer.Files[tn].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
-                string dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}";
+                string source = ProjectExplorer.AllFiles[tn].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
+                string dest = $@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{tn.Name}";
                 //check if the destination is within the copied node. If it is, skip this node.
                 if (IsAChildOfOtherNodes(targetnode, tn)) {
                     MessageBox.Show($"Item '{tn.Name}' not pasted as it contains the destination.", "Thumper Custom Level Editor");
                     continue;
                 }
                 //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
-                if (targetnode.Nodes.ContainsKey(ProjectExplorer.Files[tn].Name)) {
+                if (targetnode.Nodes.ContainsKey(ProjectExplorer.AllFiles[tn].Name)) {
                     /*
                     if (MessageBox.Show($"Item '{tn.Name}' already exists at the destination. Overwrite it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
                         continue;
                     */
-                    FileInfo fullname = new($@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{tn.Name}");
+                    FileInfo fullname = new($@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{tn.Name}");
                     string name = Path.GetFileNameWithoutExtension(fullname.Name);
                     ///int count = targetnode.Nodes.Cast<TreeNode>().Count(x => x.Name == tn.Name);
-                    int count = Directory.GetFiles($@"{ProjectExplorer.Files[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
-                    dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
+                    int count = Directory.GetFiles($@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
+                    dest = $@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
                 }
 
                 if (cutfile) {
@@ -388,15 +381,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TreeNode targetnode = selectedNodes[0].Parent;
             TreeNode sourcenode = selectedNodes[0];
 
-            string source = ProjectExplorer.Files[sourcenode].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
-            string dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{sourcenode.Name}";
+            string source = ProjectExplorer.AllFiles[sourcenode].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
+            string dest = $@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{sourcenode.Name}";
             //check if each node exists at the destination and ask to overwrite it. If' No', skip this node.
-            if (targetnode.Nodes.ContainsKey(ProjectExplorer.Files[sourcenode].Name)) {
+            if (targetnode.Nodes.ContainsKey(ProjectExplorer.AllFiles[sourcenode].Name)) {
                 //calculate how many copies exist and create new name appropriately
-                FileInfo fullname = new($@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{sourcenode.Name}");
+                FileInfo fullname = new($@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{sourcenode.Name}");
                 string name = Path.GetFileNameWithoutExtension(fullname.Name);
-                int count = Directory.GetFiles($@"{ProjectExplorer.Files[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
-                dest = $@"{ProjectExplorer.Files[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
+                int count = Directory.GetFiles($@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
+                dest = $@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
             }            
 
             if (File.Exists(source)) {
@@ -599,7 +592,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if destination contains any of the moved items
             //if so, cancel the whole operation
             foreach (TreeNode tn in selectedNodes) {
-                string dest = $@"{ProjectExplorer.Files[targetNode].Folder.FullName}\{ProjectExplorer.Files[tn].Name}";
+                string dest = $@"{ProjectExplorer.AllFiles[targetNode].Folder.FullName}\{ProjectExplorer.AllFiles[tn].Name}";
                 if (File.Exists(dest) || Directory.Exists(dest)) {
                     MessageBox.Show($"Cannot move the item '{tn.Name}'. An item with that name already exists in the destination folder.", "Thumper Custom Level Editor");
                     targetNode.BackColor = Color.FromArgb(56, 56, 56);
@@ -609,8 +602,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Finally, move each selected item to the destination
             string errorlog = "";
             foreach (TreeNode tn in selectedNodes) {
-                string source = ProjectExplorer.Files[tn].FullPath;
-                string dest = $@"{ProjectExplorer.Files[targetNode].Folder.FullName}\{ProjectExplorer.Files[tn].Name}";
+                string source = ProjectExplorer.AllFiles[tn].FullPath;
+                string dest = $@"{ProjectExplorer.AllFiles[targetNode].Folder.FullName}\{ProjectExplorer.AllFiles[tn].Name}";
                 if (tn.ImageKey == "folder") {
                     if (TCLE.lockedfiles.Any(x => x.Key.FullName.Contains(source)))
                         errorlog += source + '\n';
@@ -676,13 +669,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (selectedNodes[0].ImageKey is "folder")
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
+            TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File);
         }
 
         private void treeView1_Click(object sender, EventArgs e)
         {
             if (btnOpenOnClick.Checked)
-                TCLE.OpenFile(ProjectExplorer.Files[selectedNodes[0]].File);
+                TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File);
         }
         /*
         private FileInfo GetFileOrFolderPath(string name)
@@ -749,7 +742,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void folderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int newfolders = ProjectExplorer.Files.Where(x => x.Key.Text.Contains("New Folder")).Count();
+            int newfolders = ProjectExplorer.AllFiles.Where(x => x.Key.Text.Contains("New Folder")).Count();
             TCLE.WorkingFolder.CreateSubdirectory($"New Folder{(newfolders > 1 ? $" {newfolders}" : "")}");
             ProjectExplorer.CreateTreeView();
         }

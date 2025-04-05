@@ -145,7 +145,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"{LvlLeafs[e.RowIndex].leafname}")).Value?.File);
+            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == LvlLeafs[e.RowIndex].leafname));
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -279,7 +279,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
                 LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
                 foreach (string leaf in leafs2)
-                    AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+                    AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
                 LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
             }
             lvlleaf_CollectionChanged(null, null);
@@ -667,7 +667,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
-            List<FileInfo> leafs = ProjectExplorer.Files.Select(x => x.Value.File).Where(x => x.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
+            List<FileInfo> leafs = ProjectExplorer.Files.Where(x => x.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
             AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].FullName);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
@@ -1144,7 +1144,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{_leaf.leafname}")).Value?.File;
+                FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
                 leaffile?.Refresh();
                 int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
                 if (beats == -1) {
@@ -1175,49 +1175,44 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 { "obj_name", _properties.FilePath.Name },
                 { "approach_beats", _properties.approachbeats }
             };
-            //this section adds all sequencer objects
+            //this section adds all colume sequencer controls
             JArray seq_objs = new();
-            if (_properties.seq_objs.Count == 0) {
-                //do nothing if there are no objects
-            }
-            else {
-                foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
-                    //skip blank tracks
-                    if (seq_obj.friendly_param == null)
-                        continue;
-                    JObject s = new();
-                    //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                    if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
-                        seq_obj.obj_name = (string)_save["obj_name"];
-                    s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
-                    //write param_path or param_path_hash
-                    if (seq_obj.param_path.StartsWith("0x"))
-                        s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
-                    else
-                        s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
-                    s.Add("trait_type", seq_obj.trait_type);
-                    JArray datapoints = new();
-                    foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
-                        JObject d = new() {
+            foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
+                //skip blank tracks
+                if (seq_obj.friendly_param == null)
+                    continue;
+                JObject s = new();
+                //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
+                if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
+                    seq_obj.obj_name = (string)_save["obj_name"];
+                s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
+                //write param_path or param_path_hash
+                if (seq_obj.param_path.StartsWith("0x"))
+                    s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
+                else
+                    s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
+                s.Add("trait_type", seq_obj.trait_type);
+                JArray datapoints = new();
+                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
+                    JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", decimal.Parse(datapoint.value.ToString()) },
                         { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
                         { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
-                        datapoints.Add(d);
-                    }
-                    s.Add("data_points", datapoints);
-                    ///end
-                    //add the rest of the keys to this seq_obj
-                    s.Add("step", seq_obj.step.ToString());
-                    s.Add("default", seq_obj.defaultvalue);
-                    s.Add("footer", seq_obj.footer);
-                    s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                    s.Add("enabled", seq_obj.enabled.ToString());
-
-                    seq_objs.Add(s);
+                    datapoints.Add(d);
                 }
+                s.Add("data_points", datapoints);
+                ///end
+                //add the rest of the keys to this seq_obj
+                s.Add("step", seq_obj.step.ToString());
+                s.Add("default", seq_obj.defaultvalue);
+                s.Add("footer", seq_obj.footer);
+                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
+                s.Add("enabled", seq_obj.enabled.ToString());
+
+                seq_objs.Add(s);
             }
             //add all seq_objs to the overall leaf
             _save.Add("seq_objs", seq_objs);

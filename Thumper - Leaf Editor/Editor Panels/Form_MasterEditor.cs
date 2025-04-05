@@ -154,7 +154,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Value.FullPath.EndsWith($@"\{MasterLvls[e.RowIndex].name}")).Value?.File);
+            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{MasterLvls[e.RowIndex].name}")));
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -284,7 +284,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string leaf in sublevels2)
-                    AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Value.IsFile && x.Value.File.Name == leaf).Value.FullPath, TargetRowToPaint);
+                    AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Lvls");
             }
@@ -822,7 +822,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (MasterLvlData _lvl in MasterLvls) {
                 beattotal += RecalculateRuntimeSublevel(_lvl);
                 if (_lvl.rest is not "<none>" and not null)
-                    beattotal += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Value.Name == _lvl.rest).Value.FullPath);
+                    beattotal += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == _lvl.rest).FullName);
             }
             masterLvlList.Refresh();
             return beattotal;

@@ -153,7 +153,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                foreach (FileInfo lvl in ProjectExplorer.Files)
                 {
                     if (lvl.Extension is ".lvl")
                         dgvPathsList.Rows.Add(lvl.Name);
@@ -165,7 +165,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlGateList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl/Gate";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                foreach (FileInfo lvl in ProjectExplorer.Files)
                 {
                     if (lvl.Extension is ".lvl")
                     {
@@ -185,7 +185,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LeafList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Leaf";
-                foreach (FileInfo leaf in ProjectExplorer.Files.Where(x => x.Value.IsFile).Select(x => x.Value.File))
+                foreach (FileInfo leaf in ProjectExplorer.Files)
                 {
                     if (leaf.Extension is ".leaf")
                         dgvPathsList.Rows.Add(leaf.Name);

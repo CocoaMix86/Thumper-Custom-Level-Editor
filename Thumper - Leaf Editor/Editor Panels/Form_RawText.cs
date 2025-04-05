@@ -7,13 +7,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_RawText : DockContentEx
     {
         #region Form Construction
-        public Form_RawText(dynamic _load, FileInfo filepath)
+        public Form_RawText(string _load, FileInfo filepath)
         {
             loadedfile = filepath;
             InitializeComponent();
             ColorFormElements();
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
-            textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
+            textEditor.Text = _load;
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
             textEditor.TextChanged += textEditor_TextChanged;
