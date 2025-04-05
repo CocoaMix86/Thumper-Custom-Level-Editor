@@ -405,7 +405,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     0
                 });
                 RecalculateRuntimeSublevel(MasterLvls[_in]);
-                ColorRow(MasterLvls[_in], _in);
             }
             //if action REMOVE, remove row from the master DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
@@ -805,6 +804,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
                     TCLE.LevelSections.Add("SECTION_LINEAR");
                 }
+                if (TCLE.LevelSections.Count == 0)
+                    TCLE.LevelSections.Add("SECTION_LINEAR");
                 if (!SaveOnlyNoLoad) {
                     dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
                     File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));

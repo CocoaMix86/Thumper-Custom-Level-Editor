@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.WebSockets;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -12,7 +13,13 @@ namespace Thumper_Custom_Level_Editor
         public int beats { get; set; }
         public List<string> paths { get; set; }
         public int id { get; set; }
-        public bool NotFound { get; set; }
+        [Browsable(false)]
+        public string runtime
+        {
+            get {
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+            }
+        }
 
         public LvlLeafData()
         {
@@ -122,7 +129,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => parent.RecalculateRuntime();
+        public int beats => parent.RecalculateRuntime() + ApproachBeats;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]

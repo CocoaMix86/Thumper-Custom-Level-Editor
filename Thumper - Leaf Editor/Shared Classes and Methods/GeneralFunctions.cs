@@ -1061,7 +1061,7 @@ namespace Thumper_Custom_Level_Editor
                 { "level_name", _properties.projectname },
                 { "difficulty", _properties.difficulty },
                 { "description", _properties.description },
-                {"author", _properties.authornames },
+                { "author", _properties.authornames },
                 { "bpm", _properties.bpm },
                 { "level_sections", new JArray() {LevelSections} },
                 { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },

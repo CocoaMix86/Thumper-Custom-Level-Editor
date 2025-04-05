@@ -59,6 +59,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         private bool EditorIsLoading;
+        public bool LogUndo = true;
         private bool SaveOnlyNoLoad;
         public FileInfo loadedlvl
         {
@@ -229,7 +230,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //}
             }
             else {
-                if (LeafsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
+                if (targetRow != -1 && targetRow != previousDragOver) {
+                    /*
                     foreach (LvlLeafData leaf in LeafsToMove) {
                         LvlLeafs.Remove(leaf);
                         LvlLeafs.Insert(targetRow, leaf);
@@ -237,6 +239,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     previousDragOver = targetRow;
                     lvlLeafList.ClearSelection();
                     lvlLeafList.Rows[targetRow].Selected = true;
+                    */
+                    foreach (LvlLeafData leaf in LeafsToMove) {
+                        LvlLeafs.Remove(leaf);
+                    }
+                    lvlLeafList.ClearSelection();
+                    for (int x = 0; x < LeafsToMove.Count; x++) {
+                        try {
+                            LvlLeafs.Insert(targetRow, LeafsToMove[x]);
+                            if (x == 0)
+                                lvlLeafList.CurrentCell = lvlLeafList[0, targetRow];
+                            lvlLeafList.Rows[targetRow].Selected = true;
+                        } catch (Exception) {
+                            LvlLeafs.Add(LeafsToMove[x]);
+                            if (x == 0)
+                                lvlLeafList.CurrentCell = lvlLeafList[0, lvlLeafList.RowCount - 1];
+                            lvlLeafList.Rows[lvlLeafList.RowCount - 1].Selected = true;
+                        }
+                    }
+                    previousDragOver = targetRow;
                 }
             }
         }
@@ -271,18 +292,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafsToMove = null;
             }
             else if (e.Data.GetData(typeof(List<LvlLeafData>)) is List<LvlLeafData> leafs) {
-                LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
                 foreach (LvlLeafData leaf in leafs)
                     LvlLeafs.Insert(TargetRowToPaint, leaf.Clone());
-                LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
-                LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
                 foreach (string leaf in leafs2)
                     AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
-                LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
             }
-            lvlleaf_CollectionChanged(null, null);
             lvlLeafList.ClearSelection();
             lvlLeafList.Rows[previousDragOver is -1 ? lvlLeafList.RowCount - 1 : previousDragOver].Selected = true;
             TargetRowToPaint = -3;
@@ -471,33 +487,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (LvlProperties.LeafReload)
                 return;
-            ///int _in = e.NewStartingIndex;
-
+            /*
             lvlLeafList.Rows.Clear();
             foreach (LvlLeafData leaf in LvlLeafs) {
                 lvlLeafList.Rows.Add(new object[] {
                     Properties.Resources.editor_leaf,
                     leaf.leafname,
                     0 });
-            }
-            /*
+            }*/
+            
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 lvlLeafList.RowCount = 0;
             }
             //if action ADD, add new row to the lvl DGV
             //NewStartingIndex and OldStartingIndex track where the changes were made
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+                int _in = e.NewStartingIndex;
                 lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] {
                     Properties.Resources.editor_leaf,
                     LvlLeafs[_in].leafname,
                     0 });
+                RecalculateRuntimeSublevel(LvlLeafs[_in]);
             }
             //if action REMOVE, remove row from the lvl DGV
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
-            */
-            RecalculateRuntime();
 
             //enable certain buttons if there are enough items for them
             btnLvlLeafDelete.Enabled = LvlLeafs.Count > 0;
@@ -575,6 +590,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Buttons
+        ///         ///
+        /// BUTTONS ///
+        ///         ///
+
         private void btnLvlLeafDelete_Click(object sender, EventArgs e)
         {
             List<LvlLeafData> todelete = new();
@@ -582,14 +601,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 todelete.Add(LvlLeafs[dgvr.Index]);
             }
             int _in = lvlLeafList.CurrentRow.Index;
-            //disable event so it doesn't trigger every time
-            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
+            LogUndo = false;
             foreach (LvlLeafData lvd in todelete)
                 LvlLeafs.Remove(lvd);
-            //readd event and call it to populate dgv
-            LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
-            lvlleaf_CollectionChanged(null, null);
-            //
+
+            LogUndo = true;
             TCLE.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Leaf");
             lvlLeafList_CellClick(null, new DataGridViewCellEventArgs(0, _in >= LvlLeafs.Count ? _in - 1 : _in));
@@ -927,7 +943,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             ///load leafs associated with this lvl
-            lvlProperties.lvlleafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
                     leafname = (string)leaf["leaf_name"],
@@ -936,9 +951,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 1000000)
                 });
             }
-            lvlProperties.lvlleafs.CollectionChanged += lvlleaf_CollectionChanged;
-            lvlleaf_CollectionChanged(null, null);
-            //populate the seq_objs list from JSON
 
             btnLvlLeafRandom.Enabled = true;
             //mark that lvl is saved (just freshly loaded)
@@ -1091,7 +1103,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorIsLoading)
+            if (EditorIsLoading || !LogUndo)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -1121,50 +1133,46 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        ///Import raw text from rich text box to selected row
-        public static void LvlTrackRawImport(DataGridViewRow r, JObject _rawdata)
-        {
-            //_rawdata contains a list of all data points. By getting Properties() of it,
-            //each point becomes its own index
-            List<JProperty> data_points = _rawdata.Properties().ToList();
-            //set highlighting color
-            Color _color = Color.Purple;
-            //iterate over each data point, and fill cells
-            foreach (JProperty data_point in data_points) {
-                try {
-                    r.Cells[int.Parse(data_point.Name)].Value = (float)data_point.Value;
-                    r.Cells[int.Parse(data_point.Name)].Style.BackColor = _color;
-                } catch (ArgumentOutOfRangeException) { }
-            }
-        }
-
         public int RecalculateRuntime()
         {
             if (EditorIsLoading || SaveOnlyNoLoad)
                 return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
-                leaffile?.Refresh();
-                int beats = (leaffile != null && leaffile.Exists) ? 0 : -1;
-                if (beats == -1) {
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle.BackColor = Color.Maroon;
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"file not found";
-                    _leaf.beats = 1;
-                    _leaf.NotFound = true;
-                }
-                else {
-                    beats = (int)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"];
-                    beattotal += beats;
-                    _leaf.beats = beats;
-                    _leaf.NotFound = false;
-                    string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].DefaultCellStyle = null;
-                    lvlLeafList.Rows[LvlLeafs.IndexOf(_leaf)].Cells[2].Value = $"{beats} beats -- {time}";
-                }
+                beattotal += RecalculateRuntimeSublevel(_leaf);
             }
             lvlLeafList.Refresh();
             return beattotal;
+        }
+
+        public int RecalculateRuntimeSublevel(LvlLeafData _leaf)
+        {
+            if (EditorIsLoading || SaveOnlyNoLoad)
+                return 0;
+
+            FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
+            leaffile?.Refresh();
+
+            if (leaffile == null || !leaffile.Exists) 
+                _leaf.beats = -1;            
+            else 
+                _leaf.beats = (int?)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"] ?? -1;
+            ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
+            
+            return _leaf.beats;
+        }
+
+        public void ColorRow(LvlLeafData _leaf, int index)
+        {
+            if (_leaf.beats is -1) {
+                lvlLeafList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
+                lvlLeafList.Rows[index].Cells[2].Value = $"file not found";
+            }
+            else {
+                lvlLeafList.Rows[index].DefaultCellStyle = null;
+                lvlLeafList.Rows[index].Cells[2].Value = $"{_leaf.beats} beats -- {_leaf.runtime}";
+            }
+            lvlLeafList.InvalidateRow(LvlLeafs.IndexOf(_leaf));
         }
 
         public static JObject BuildSave(LvlProperties _properties)

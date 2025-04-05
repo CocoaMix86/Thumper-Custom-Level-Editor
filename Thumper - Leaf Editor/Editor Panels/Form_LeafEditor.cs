@@ -2290,7 +2290,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } else if (filepath.Extension == ".lvl") {
                 this.Text = $"{LoadedLeaf.Name} [Sequencer]";
                 //
-                leafProperties = new(this, filepath, Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats) {
+                leafProperties = new(this, filepath, Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats + (Lvl.lvlleafs.Count(x => x.beats == -1) * 2)) {
                     SequencerType = filepath.Extension,
                     timesignature = "4/4"
                 };
@@ -2367,6 +2367,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
                             ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
                         };
+                        if (data.beat >= parent.Beats)
+                            continue;
                         _s.data_points[data.beat] = data;
                     } else {
                         SeqDataPoint data = new() {
@@ -2677,7 +2679,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Columns[index].HeaderCell.Style.ForeColor = Color.Black;
                 trackEditor.Columns[index].HeaderText = leaf.leafname;
                 //trackEditor.Columns[index].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                index += leaf.beats;
+                index += leaf.beats != -1 ? leaf.beats : 1;
             }
         }
         private void trackEditor_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

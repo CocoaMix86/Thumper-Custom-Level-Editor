@@ -99,7 +99,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             }
         }
 
-        private List<DataGridViewRow> SelectedRows = new();
+        private List<int> SelectedRows = new();
         private void lvlLeafList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
@@ -112,7 +112,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             }
 
             if (dgvPathsList.Rows[rowIndexFromMouseDown].Selected)
-                SelectedRows = dgvPathsList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                SelectedRows = dgvPathsList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             else
                 SelectedRows.Clear();
 
@@ -204,9 +204,9 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             if (dgvPathsList.RowCount <= 0)
                 return;
-            foreach (DataGridViewRow dgvr in SelectedRows)
+            foreach (int dgvr in SelectedRows)
             {
-                dgvPathsList.Rows[dgvr.Index].Selected = true;
+                dgvPathsList.Rows[dgvr].Selected = true;
             }
         }
 
