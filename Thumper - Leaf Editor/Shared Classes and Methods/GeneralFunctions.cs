@@ -1006,6 +1006,11 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else if (file.Directory.Name.ToLower() is "extras")
                     continue;
+                if (file.Extension == ".pc" && file.Directory.Name != "extras") {
+                    if (!Directory.Exists($@"{file.DirectoryName}\extras"))
+                        Directory.CreateDirectory($@"{file.DirectoryName}\extras");
+                    file.MoveTo($@"{file.DirectoryName}\extras\{file.Name}");
+                }
                 string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
                 if (sort) {
                     try {
