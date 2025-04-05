@@ -189,6 +189,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             dontcancelifrename = true;
+            if (TCLE.lockedfiles.Any(x => x.Key.Name.Equals(selectedNodes[0].Text, StringComparison.OrdinalIgnoreCase)))
+                MessageBox.Show($"{selectedNodes[0].Text} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
             treeView1.SelectedNode = selectedNodes[0];
             selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
@@ -379,6 +381,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileDuplicate_Click(object sender, EventArgs e)
         {
             TreeNode targetnode = selectedNodes[0].Parent;
+            string targetpath = targetnode.FullPath;
             TreeNode sourcenode = selectedNodes[0];
 
             string source = ProjectExplorer.AllFiles[sourcenode].FullPath;/* GetFileOrFolderPath(tn.FullPath).FullName;*/
@@ -398,6 +401,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             ProjectExplorer.CreateTreeView();
+            changeSelection(treeView1.FlattenTree().Where(x => x.FullPath == $"{targetpath}\\{Path.GetFileName(dest)}").ToList(), selectedNodes.ToList());
+            toolstripFileRename_Click(null, null);
         }
         #endregion
         #endregion
@@ -758,6 +763,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void filterLeaf_Click(object sender, EventArgs e)
         {
 
+        }
+    }
+
+    public static class SOExtension
+    {
+        public static IEnumerable<TreeNode> FlattenTree(this TreeView tv)
+        {
+            return FlattenTree(tv.Nodes);
+        }
+
+        public static IEnumerable<TreeNode> FlattenTree(this TreeNodeCollection coll)
+        {
+            return coll.Cast<TreeNode>()
+                        .Concat(coll.Cast<TreeNode>()
+                                    .SelectMany(x => FlattenTree(x.Nodes)));
         }
     }
 }
