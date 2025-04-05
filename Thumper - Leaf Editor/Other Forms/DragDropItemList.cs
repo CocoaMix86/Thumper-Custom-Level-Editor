@@ -136,6 +136,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         public void Populate()
         {
             dgvPathsList.Rows.Clear();
+            SelectedRows.Clear();
             //
             if (Items == "path")
             {
