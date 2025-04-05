@@ -1004,15 +1004,14 @@ namespace Thumper_Custom_Level_Editor
 
             //load the properties of the TCL and create projectProperties
             dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
+            dynamic ProjectConfig = LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
             ProjectProperties Convert = new() {
                 projectname = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
                 description = (string)ProjectJson["description"] ?? "Please add a description",
                 authornames = (string)ProjectJson["author"] ?? "a person",
-                bpm = (decimal?)ProjectJson["bpm"] ?? 400m
+                bpm = (decimal?)ProjectConfig["bpm"] ?? 400m
             };
-            ConfigFile = new($@"{LevelDetails.DirectoryName}\config_{Convert.projectname}.txt");
-            dynamic ProjectConfig = LoadFileLock(ConfigFile.FullName);
             //load colors, with failover to White
             try {
                 Convert.bpm = (decimal?)ProjectConfig["bpm"] ?? 400m;
