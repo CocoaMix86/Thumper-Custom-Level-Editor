@@ -2549,10 +2549,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //else if a different sequencer, pass data back and force save
                 else {
-                    if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(LoadedLeaf.Name)) is Form_LvlEditor Owner) {
+                    LvlSequencer.seq_objs = LeafProperties.seq_objs;
+                    /*
+                    if (TCLE.Documents.FirstOrDefault(x => x.GetType() == typeof(Form_LvlEditor) && (x as Form_LvlEditor).LoadedLvl.Name == LoadedLeaf.Name) is Form_LvlEditor Owner) {
                         Owner.lvlProperties.seq_objs = LeafProperties.seq_objs;
                         Owner.Save(false);
-                    }
+                    }*/
                 }
 
                 //find if any raw text docs are open of this gate and update them

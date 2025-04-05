@@ -25,6 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadLvl(load, filepath);
+                Form_LeafEditor _loadseq = new(lvlProperties);
                 UndoList.Add(new SaveState() {
                     reason = "",
                     savestate = load
@@ -35,7 +36,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
-            Form_LeafEditor _loadseq = new(lvlProperties);
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
