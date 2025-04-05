@@ -189,14 +189,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripFileRename_Click(object sender, EventArgs e)
         {
             dontcancelifrename = true;
-            if (TCLE.lockedfiles.Any(x => x.Key.Name.Equals(selectedNodes[0].Text, StringComparison.OrdinalIgnoreCase)))
+            //check if file is open. Prevent renaming if it is
+            if (TCLE.lockedfiles.Any(x => x.Key.Name.Equals(selectedNodes[0].Text, StringComparison.OrdinalIgnoreCase))) {
                 MessageBox.Show($"{selectedNodes[0].Text} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
+                return;
+            }
             treeView1.SelectedNode = selectedNodes[0];
             selectedNodes[0].BeginEdit();
             treeView1.SelectedNode = null;
             dontcancelifrename = false;
-            //check for same name
-            ///FindDuplicateFile(selectedNodes[0], Color.Red);
         }
         private void treeView1_BeforeLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
@@ -242,6 +243,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ProjectExplorer.CreateTreeView();
             }
             else {
+                //check if file is open. Prevent renaming if it is
                 if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
                     MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
                 else {
