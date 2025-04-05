@@ -353,9 +353,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void gatelvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            /*
             //clear dgv
             gateLvlList.RowCount = 0;
             //repopulate dgv from list
+
             foreach (GateLvlData _lvl in GateLvls) {
                 gateLvlList.Rows.Add(new object[] {
                     GateProperties.random ? _lvl.bucket : GateLvls.IndexOf(_lvl),
@@ -364,8 +366,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     0
                 });
             }
-            RecalculateRuntime();
             propertyGridGate.Refresh();
+            RecalculateRuntime();*/
+
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+                gateLvlList.RowCount = 0;
+            }
+            //if action ADD, add new row to the master DGV
+            //NewStartingIndex and OldStartingIndex track where the changes were made
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+                int _in = e.NewStartingIndex;
+                //get the runtime of the object
+                gateLvlList.Rows.Insert(_in, new object[] {
+                    GateProperties.random ? GateLvls[_in].bucket : GateLvls.IndexOf(GateLvls[_in]),
+                    Properties.Resources.editor_lvl,
+                    GateLvls[_in].lvlname,
+                    0
+                });
+            }
+            //if action REMOVE, remove row from the master DGV
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
+                gateLvlList.Rows.RemoveAt(e.OldStartingIndex);
+            }
+            RecalculateRuntime();
+
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
@@ -744,7 +768,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (GateLvlData _lvl in GateLvls) {
                 int _in = GateLvls.IndexOf(_lvl);
                 //if random, the phase counter will instead show bucket numbers
-                gateLvlList.Rows[_in].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : GateLvls.IndexOf(_lvl) + 1;
+                gateLvlList.Rows[_in].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : _in + 1;
                 if (_in >= rows) {
                     gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
                     gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in list (max. {rows})";
@@ -758,23 +782,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //load lvl and calc runtime
                     //show warning if file not found
                     FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"{_lvl.lvlname}"));
-                    int beats = lvlfile == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.FullName);
-                    if (beats == -1) {
+                    _lvl.beats = lvlfile == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.FullName);
+                    if (_lvl.beats == -1) {
                         gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
                         gateLvlList.Rows[_in].Cells[3].Value = $"file not found";
                     }
                     else {
                         if (GateProperties.random) {
                             if (!bucketscounted.Contains(_lvl.bucket)) {
-                                beattotal += beats;
+                                beattotal += _lvl.beats;
                                 bucketscounted.Add(_lvl.bucket);
                             }
                         }
                         else
-                            beattotal += beats;
-                        string time = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                            beattotal += _lvl.beats;
                         gateLvlList.Rows[_in].DefaultCellStyle = null;
-                        gateLvlList.Rows[_in].Cells[3].Value = $"{beats} beats -- {time}";
+                        gateLvlList.Rows[_in].Cells[3].Value = $"{_lvl.beats} beats -- {_lvl.runtime}";
                     }
                 }
             }

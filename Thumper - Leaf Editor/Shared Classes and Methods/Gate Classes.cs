@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -23,6 +24,16 @@ namespace Thumper_Custom_Level_Editor
         [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
         [TypeConverter(typeof(GateBucket))]
         public int bucket { get; set; }
+
+        [Browsable(false)]
+        public int beats { get; set; }
+        [Browsable(false)]
+        public string runtime
+        {
+            get {
+                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+            }
+        }
 
         public GateLvlData Clone()
         {
