@@ -500,8 +500,7 @@ namespace Thumper_Custom_Level_Editor
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             try {
                 dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config", m_deserializeDockContent);
-            }
-            catch {
+            } catch {
                 Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}" };
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
@@ -1133,6 +1132,11 @@ namespace Thumper_Custom_Level_Editor
             GC.Collect();
             GC.WaitForPendingFinalizers();
             _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
+        }
+
+        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e)
+        {
+            pictureTunnelViewer.Visible = false;
         }
     }
 }

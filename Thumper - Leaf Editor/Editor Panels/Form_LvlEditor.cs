@@ -395,7 +395,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.Data.GetData(typeof(List<string>)) is List<string>) {
                     foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
                         LvlProperties.sublevel.paths.Remove(path);
-                        LvlProperties.sublevel.paths.Insert(TargetRowToPaint, path);
+                        if (TargetRowToPaint >= LvlProperties.sublevel.paths.Count)
+                            LvlProperties.sublevel.paths.Add(path);
+                        else
+                            LvlProperties.sublevel.paths.Insert(TargetRowToPaint, path);
                     }
 
                     LvlUpdatePaths(LvlProperties.sublevel);
@@ -1164,6 +1167,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ColorRow(LvlLeafData _leaf, int index)
         {
+            if (lvlLeafList.RowCount == 0)
+                return;
             if (_leaf.beats is -1) {
                 lvlLeafList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
                 lvlLeafList.Rows[index].Cells[2].Value = $"file not found";
