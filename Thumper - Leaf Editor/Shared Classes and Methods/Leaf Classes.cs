@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
@@ -288,7 +289,29 @@ namespace Thumper_Custom_Level_Editor
         public int Beats;
 
         [Category​Attribute("Editor")]
-        [DisplayName("Time Signature")]
+        [DisplayName("Set Time Sig")]
+        [Description("Editor only. Affects the column highlighting so you can see the measuers")]
+        public string timeedit
+        {
+            get => timesignature;
+            set {
+                //check if incoming value matches time sig pattern #/#
+                var reg = Regex.Match(value, "(^\\d+\\/\\d+$)");
+                if (!reg.Success) {
+                    MessageBox.Show("Time signature input was not in a valid form.\nIt should follow \"#/#\".", "Custom Editor Thumper Level");
+                    return;
+                }
+
+                if (!TCLE.TimeSignatures.Contains(value))
+                    TCLE.TimeSignatures.Add(value);
+                TimeSignature = value;
+                parent.SaveCheckAndWrite(false, "Time signature changed");
+                if (!parent.EditorIsLoading)
+                    parent.TrackTimeSigHighlighting();
+            }
+        }
+        [Category​Attribute("Editor")]
+        [DisplayName("Preset Time Sigs")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
         public string timesignature
@@ -296,8 +319,7 @@ namespace Thumper_Custom_Level_Editor
             get => TimeSignature; 
             set {
                 TimeSignature = value;
-                if (!TCLE.TimeSignatures.Contains(value))
-                    TCLE.TimeSignatures.Add(value);
+                parent.SaveCheckAndWrite(false, "Time signature changed");
                 if (!parent.EditorIsLoading)
                     parent.TrackTimeSigHighlighting();
             }
