@@ -1050,11 +1050,11 @@ namespace Thumper_Custom_Level_Editor
                 if (_GAD.GetType() == typeof(Form_LvlEditor)) {
                     GlobalLastLvl = _GAD as Form_LvlEditor;
                 }
-                if (_GAD.GetType() == typeof(Form_GateEditor)) {
-                    GlobalLastLvl = _GAD as Form_GateEditor;
+                else if (_GAD.GetType() == typeof(Form_GateEditor)) {
+                    GlobalLastGate = _GAD as Form_GateEditor;
                 }
-                if (_GAD.GetType() == typeof(Form_MasterEditor)) {
-                    GlobalLastLvl = _GAD as Form_MasterEditor;
+                else if (_GAD.GetType() == typeof(Form_MasterEditor)) {
+                    GlobalLastMaster = _GAD as Form_MasterEditor;
                 }
             }
         }
