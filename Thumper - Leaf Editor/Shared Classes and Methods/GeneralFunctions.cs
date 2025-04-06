@@ -165,7 +165,7 @@ namespace Thumper_Custom_Level_Editor
         public void ImportDefaultColors()
         {
             Dictionary<string, Color> ObjectColors = new();
-            if (!File.Exists($@"{AppLocation}\settings\settings\objects_defaultcolors_v3.txt")) {
+            if (!File.Exists($@"{AppLocation}\settings\objects_defaultcolors_v3.txt")) {
                 File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
             }
             ObjectColors = File.ReadAllLines($@"{AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));

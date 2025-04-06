@@ -156,7 +156,8 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.ColorIcons.TryAdd(colorname, color);
                 imageList1.Images.Add(colorname, color);
                 //apply color to object
-                TCLE.LeafObjects.First(x => x.param_displayname == e.Node.Text).defaultcolor = colorDialog.Color;
+                Object_Params param = TCLE.LeafObjects.First(x => x.param_displayname == e.Node.Text);
+                param.defaultcolor = colorDialog.Color;
                 e.Node.ImageKey = colorname;
                 e.Node.SelectedImageKey = colorname;
             }
