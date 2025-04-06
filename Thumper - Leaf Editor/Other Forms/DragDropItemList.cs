@@ -68,10 +68,27 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void dgvPathsList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            string cellval = dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString();
             if (Items == "path")
             {
                 if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
-                    (TCLE.GlobalActiveDocument as Form_LvlEditor).lvlProperties.sublevel.paths.Add(dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString());
+                    (TCLE.GlobalActiveDocument as Form_LvlEditor).lvlProperties.sublevel.paths.Add(cellval);
+            }
+            else if (Items == "leaf")
+            {
+                if (TCLE.GlobalLastLvl != null) {
+                    TCLE.GlobalLastLvl.AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                }
+            }
+            else if (Items == "lvl") {
+                if (TCLE.GlobalLastGate != null) {
+                    TCLE.GlobalLastGate.AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                }
+            }
+            else if (Items == "lvlgate") {
+                if (TCLE.GlobalLastMaster != null) {
+                    TCLE.GlobalLastMaster.AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                }
             }
         }
 

@@ -522,7 +522,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Hide();
         }
 
-        private void AddFiletoMaster(string path, int index = -1)
+        public void AddFiletoMaster(string path, int index = -1)
         {
             //parse leaf to JSON
             dynamic _load = TCLE.LoadFileLock(path);

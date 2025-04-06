@@ -707,7 +707,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void AddFileToGate(string path, int index = -1)
+        public void AddFileToGate(string path, int index = -1)
         {
             //parse leaf to JSON
             dynamic _load = TCLE.LoadFileLock(path);

@@ -138,6 +138,15 @@ dotnet_diagnostic.CA1708.severity = none
 # CA1002: Do not expose generic lists
 dotnet_diagnostic.CA1002.severity = none
 
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
+
+# CA2211: Non-constant fields should not be visible
+dotnet_diagnostic.CA2211.severity = none
+
+# CS8765: Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
+dotnet_diagnostic.CS8765.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

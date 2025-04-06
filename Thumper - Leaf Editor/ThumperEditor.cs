@@ -1048,11 +1048,20 @@ namespace Thumper_Custom_Level_Editor
                 dockProjectProperties.TabText = $"{_GAD.DockHandler.TabText} Properties";
 
                 if (_GAD.GetType() == typeof(Form_LvlEditor)) {
-                    TCLE.DragDropItems.OwnerDGV = (_GAD as Form_LvlEditor).lvlLeafPaths;
+                    GlobalLastLvl = _GAD as Form_LvlEditor;
+                }
+                if (_GAD.GetType() == typeof(Form_GateEditor)) {
+                    GlobalLastLvl = _GAD as Form_GateEditor;
+                }
+                if (_GAD.GetType() == typeof(Form_MasterEditor)) {
+                    GlobalLastLvl = _GAD as Form_MasterEditor;
                 }
             }
         }
         private static IDockContent _GAD;
+        public static Form_LvlEditor GlobalLastLvl;
+        public static Form_GateEditor GlobalLastGate;
+        public static Form_MasterEditor GlobalLastMaster;
         private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;
