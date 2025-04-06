@@ -521,8 +521,9 @@ namespace Thumper_Custom_Level_Editor
                 });
             }
 
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(".leaf"))) {
-                leaf.BuildObjectTree();
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
             return;
         }

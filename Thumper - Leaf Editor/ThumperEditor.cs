@@ -111,6 +111,7 @@ namespace Thumper_Custom_Level_Editor
             JumpListUpdate();
             LoadQuickValues();
             SetKeyBinds();
+            SeqObjTreeBuilder.Initialize();
             //import default object colors
             colorDialog1.CustomColors = AppSettings.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels or the level from input arg

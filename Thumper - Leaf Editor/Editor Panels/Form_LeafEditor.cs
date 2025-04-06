@@ -14,6 +14,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
+            ContextMenuFavClear = contextMenuFavClear;
+            ContextMenuFav = contextMenuFav;
+            ContextMenuFavRemove = contextMenuFavRemove;
             RenderForm();
             ColorFormElements();
             SaveOnlyNoLoad = saveonlynoload;
@@ -82,7 +85,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
-            BuildObjectTree();
+            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 60;
@@ -178,6 +181,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
+        public static ContextMenuStrip ContextMenuFavClear;
+        public static ContextMenuStrip ContextMenuFav;
+        public static ContextMenuStrip ContextMenuFavRemove;
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
@@ -1428,7 +1434,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            BuildObjectTree();
+            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
         }
 
         private void txtSearch_Enter(object sender, EventArgs e)
@@ -1459,7 +1465,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             treeObjects.SelectedNode.ImageKey = "fav";
             treeObjects.SelectedNode.SelectedImageKey = "fav";
             treeObjects.SelectedNode.ContextMenuStrip = contextMenuFavRemove;
-            BuildTreeFavorites();
+            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
             TCLE.PlaySound("UIselect");
         }
 
@@ -1471,17 +1477,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 treeObjects.SelectedNode.SelectedImageKey = "none";
                 treeObjects.SelectedNode.ImageKey = "none";
                 treeObjects.SelectedNode.ContextMenuStrip = contextMenuFav;
-                BuildTreeFavorites();
+                SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             } else {
                 TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
                 treeObjects.SelectedNode.Remove();
-                TreeNode node = FindNode(find, treeObjects.Nodes);
+                TreeNode node = SeqObjTreeBuilder.FindNode(find, treeObjects.Nodes);
                 if (node != null) {
                     node.SelectedImageKey = "none";
                     node.ImageKey = "none";
                     node.ContextMenuStrip = contextMenuFav;
                 }
             }
+            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
             TCLE.PlaySound("UIselect");
         }
 
@@ -1489,7 +1496,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             TCLE.ObjectFavorites.Clear();
             TCLE.PlaySound("UIdelete");
-            BuildObjectTree();
+            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
         }
         #endregion
 
@@ -2818,105 +2825,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Clear();
             this.Text = "Leaf Editor";
             SaveCheckAndWrite(true, "");
-        }
-
-        public void BuildObjectTree()
-        {
-            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
-
-            treeObjects.Nodes.Clear();
-            //Add Favorites right at the top
-            TreeNode fav = new() {
-                Text = "*FAVORITES*",
-                ImageKey = "fav",
-                SelectedImageKey = "fav",
-                ContextMenuStrip = contextMenuFavClear
-            };
-            treeObjects.Nodes.Add(fav);
-            BuildTreeFavorites();
-            if (filtersearch && fav.Nodes.Count == 0)
-                fav.Remove();
-
-            //make each category of objects its own node
-            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
-                TreeNode _node = new() {
-                    Text = category.ToUpper(),
-                    ImageKey = "category",
-                    SelectedImageKey = "category"
-                };
-                if (category == "PLAY SAMPLE") {
-                    //samples are not stored in LeafObjects, so we loop over a different list to find them
-                    //seperate samples into sub-nodes by the file they came from
-                    foreach (string file in TCLE.ProjectSamples.Select(x => x.File?.Name).Distinct()) {
-                        if (string.IsNullOrEmpty(file))
-                            continue;
-                        TreeNode sampfile = new() {
-                            Text = file,
-                            ImageKey = "samp",
-                            SelectedImageKey = "samp"
-                        };
-                        foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.File?.Name == file)) {
-                            TreeNode _param = new() {
-                                Text = samp.obj_name,
-                                ImageKey = "none",
-                                SelectedImageKey = "none",
-                                ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
-                            };
-                            if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
-                                sampfile.Nodes.Add(_param);
-                        }
-                        if ((filtersearch && sampfile.Nodes.Count != 0) || !filtersearch)
-                            _node.Nodes.Add(sampfile);
-                    }
-                } else {
-                    //each object becomes its own node
-                    foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
-                        TreeNode _param = new() {
-                            Text = obj.param_displayname,
-                            ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
-                            SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
-                            ContextMenuStrip = contextMenuFav
-                        };
-                        if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
-                            _node.Nodes.Add(_param);
-                    }
-                }
-                if ((filtersearch && _node.Nodes.Count != 0) || !filtersearch)
-                    treeObjects.Nodes.Add(_node);
-            }
-
-            if (filtersearch)
-                treeObjects.ExpandAll();
-        }
-
-        private void BuildTreeFavorites()
-        {
-            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
-
-            treeObjects.Nodes[0].Nodes.Clear();
-            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
-                TreeNode _param = new() {
-                    Text = obj,
-                    ImageKey = "none",
-                    SelectedImageKey = "none",
-                    ContextMenuStrip = contextMenuFavRemove
-                };
-                if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
-                    treeObjects.Nodes[0].Nodes.Add(_param);
-            }
-        }
-
-        private static TreeNode FindNode(string search, TreeNodeCollection nodes)
-        {
-            TreeNode foundnode = null;
-            foreach (TreeNode tn in nodes) {
-                if (tn.Text == search)
-                    return tn;
-                foundnode = FindNode(search, tn.Nodes);
-                if (foundnode != null)
-                    break;
-            }
-            return foundnode;
         }
 
         #region Cut Copy Paste
