@@ -1794,6 +1794,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
                 //check if copied row is longer than the leaf beat length
+                /*
                 int lastbeat = TCLE.ClipboardSequencer.First().editor_row.Cells.Count - FrozenColumnOffset;
                 if (lastbeat > LeafProperties.beats) {
                     DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "repmuhT motsuC leveL rotidE", MessageBoxButtons.YesNoCancel);
@@ -1805,12 +1806,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else if (_paste == DialogResult.Cancel)
                         return;
                 }
+                */
                 ispasting = true;
                 //add copied Sequencer_Object to main _tracks list
                 foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
                     _index++;
                     DataGridViewRow dgvr = new();
                     Sequencer_Object clone = _newtrack.Clone();
+                    clone.parent = leafProperties;
                     clone.editor_row = dgvr;
                     clone.expandlanes = GlobalExpand;
                     //need to remove beats beyond the beat count
@@ -1832,6 +1835,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ispasting = false;
             TCLE.PlaySound("UIkpaste");
+            LogUndo = true;
             SaveCheckAndWrite(false, "Paste Objects");
             //SaveCheckAndWrite(false, "Pasted tracks", "");
         }

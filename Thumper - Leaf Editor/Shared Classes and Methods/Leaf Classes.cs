@@ -95,6 +95,8 @@ namespace Thumper_Custom_Level_Editor
                 ExpandLanes = value;
                 if (this.friendly_lane is not "lane center" and not "none")
                     editor_row.Visible = value;
+                if (this.editor_row == null)
+                    return;
                 Form_LeafEditor.ChangeTrackName(this, Properties.Settings.Default.LeafOptionShowCategory ? $"[{this.category}] " : "");
                 Form_LeafEditor.TrackUpdateHighlighting(this);
             }
@@ -106,6 +108,14 @@ namespace Thumper_Custom_Level_Editor
         {
             parent = Parent;
             ClearDataPoints();
+        }
+
+        public Sequencer_Object(Sequencer_Object ToClone)
+        {
+            data_points = new SeqDataPoint[ToClone.data_points.Count].ToList();
+            for (int x = 0; x < this.data_points.Count; x++) {
+                this.data_points[x] = ToClone.data_points[x].CloneWithOwner(this, ToClone.data_points[x].beat);
+            }
         }
 
         public void ClearDataPoints()
@@ -123,7 +133,30 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object Clone()
         {
-            return (Sequencer_Object)MemberwiseClone();
+            //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
+            Sequencer_Object clone = new(this) {
+                obj_name = this.obj_name,
+                param_path = this.param_path,
+                trait_type = this.trait_type,
+                //skip data points
+                step = this.step,
+                defaultvalue = this.defaultvalue,
+                footer = this.footer,
+                category = this.category,
+                friendly_param = this.friendly_param,
+                highlight_color = this.highlight_color,
+                highlight_value = this.highlight_value,
+                enabled = true,
+                isdefault = true,
+                mute = false,
+                id = TCLE.rng.Next(),
+                param_path_lane = this.param_path_lane,
+                friendly_lane = this.friendly_lane,
+                expandlanes = false,
+                editor_row = null
+            };
+            clone.parent = null;
+            return clone;
         }
 
         public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
