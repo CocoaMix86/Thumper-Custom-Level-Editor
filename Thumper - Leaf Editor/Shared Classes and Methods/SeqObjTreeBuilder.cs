@@ -143,8 +143,8 @@ namespace Thumper_Custom_Level_Editor
             foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
                 TreeNode _param = new() {
                     Text = obj,
-                    ImageKey = "none",
-                    SelectedImageKey = "none",
+                    ImageKey = "fav",
+                    SelectedImageKey = "fav",
                     ContextMenuStrip = contextMenuFavRemove
                 };
                 if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
