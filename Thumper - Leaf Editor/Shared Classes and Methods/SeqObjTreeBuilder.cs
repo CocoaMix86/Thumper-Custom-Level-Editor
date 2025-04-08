@@ -169,13 +169,13 @@ namespace Thumper_Custom_Level_Editor
             _tree.Refresh();
             if (txtSearch is not "" and not "Search Objects (Ctrl+;)")
                 _tree.ExpandAll();
-
-            foreach (TreeNode tn in _tree.Nodes)
-            {
-                if (ExpandNodes.Contains(tn.Text))
-                    tn.Expand();
+            else {
+                foreach (TreeNode tn in _tree.Nodes) {
+                    if (ExpandNodes.Contains(tn.Text))
+                        tn.Expand();
+                }
+                _tree.Nodes[0].Expand();
             }
-            _tree.Nodes[0].Expand();
         }
 
         public static bool FilterNode(TreeNode _node, string txtSearch)
