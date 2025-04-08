@@ -485,7 +485,7 @@
             this.btnLvlCopyTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
             this.btnLvlCopyTunnel.Size = new Size(24, 22);
-            this.btnLvlCopyTunnel.ToolTipText = "Copy all paths/tunnels";
+            this.btnLvlCopyTunnel.ToolTipText = "Copy selected paths/tunnels";
             this.btnLvlCopyTunnel.Click += this.btnLvlCopyTunnel_Click;
             // 
             // btnLvlPasteTunnel

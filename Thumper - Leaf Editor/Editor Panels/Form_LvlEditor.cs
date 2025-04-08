@@ -883,6 +883,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
                 contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
             }
+
+            if (TCLE.ClipboardPaths.Count > 0)
+                btnLvlPasteTunnel.Enabled = true;
         }
 
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
