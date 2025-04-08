@@ -264,7 +264,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Width = trackZoom.Value;
             }
             int display = trackEditor.FirstDisplayedScrollingColumnIndex;
-            if (trackEditor.ColumnCount > 1 && display != -1) {
+            if (trackEditor.ColumnCount > 1 && display != -1 && display + 1 < trackEditor.FirstDisplayedScrollingColumnIndex) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 trackEditor.FirstDisplayedScrollingColumnIndex = display + 1;
                 trackEditor.FirstDisplayedScrollingColumnIndex = display;
