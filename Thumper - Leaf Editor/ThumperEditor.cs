@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<MasterLvlData> ClipboardMaster = new();
         public static List<LvlLeafData> ClipboardLvl = new();
         public static List<GateLvlData> ClipboardGate = new();
+        public static List<string> ClipboardPaths = new();
         #endregion
 
         #region Form Construction

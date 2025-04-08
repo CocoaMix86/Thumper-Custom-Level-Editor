@@ -289,11 +289,11 @@ namespace Thumper_Custom_Level_Editor
             }
             //handle last beat
             if (IsTurning == -1)
-                AddNoteToChannel(lastprocessed.beat - 1, 13, 8, 10);
+                AddNoteToChannel(lastprocessed.beat, 13, 8, 10);
             else if (IsTurning == 1)
-                AddNoteToChannel(lastprocessed.beat - 1, 13, 8, 12);
+                AddNoteToChannel(lastprocessed.beat, 13, 8, 12);
             else if (IsTurning is 2 or -2)
-                AddNoteToChannel(lastprocessed.beat - 1, 22, 0, 0, true);
+                AddNoteToChannel(lastprocessed.beat, 22, 0, 0, true);
         }
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)

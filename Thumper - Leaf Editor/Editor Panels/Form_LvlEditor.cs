@@ -89,7 +89,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LvlProperties LvlProperties;
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
-        private List<string> clipboardpaths = new();
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentTunnel = new() {
@@ -780,14 +779,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (loadedlvl == null)
                 return;
-            clipboardpaths = new List<string>(LvlLeafs[lvlLeafList.CurrentRow.Index].paths);
-            btnLvlPasteTunnel.Enabled = true;
+            TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
+            //enable the paste button everywhere
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+                lvl.btnLvlPasteTunnel.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
 
         private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
         {
-            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(new List<string>(clipboardpaths));
+            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(TCLE.ClipboardPaths);
             LvlUpdatePaths(LvlProperties.sublevel);
             TCLE.PlaySound("UIkpaste");
             SaveCheckAndWrite(false, "Paste Tunnels");
