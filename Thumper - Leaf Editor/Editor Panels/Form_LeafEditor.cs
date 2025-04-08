@@ -1504,6 +1504,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIdelete");
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
         }
+
+        public void seqobjs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            trackEditor.Invalidate();
+        }
         #endregion
 
         #region Buttons
@@ -1534,7 +1539,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!objmatch.param_path.EndsWith(".ent")) {
                     Lanes[x].param_path_lane = "none";
                     Lanes[x].friendly_lane = "none";
-                } else if (Lanes[x].friendly_lane == "none") {
+                }
+                else if (Lanes[x].friendly_lane == "none") {
                     Lanes[x].param_path_lane = "ent";
                     Lanes[x].friendly_lane = "lane center";
                     Lanes[x].expandlanes = Properties.Settings.Default.LeafOptionShowLane;

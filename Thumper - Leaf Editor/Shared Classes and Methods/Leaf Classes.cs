@@ -286,7 +286,7 @@ namespace Thumper_Custom_Level_Editor
             Beats = _beats;
             selectedobj = new(this);
             seq_objs = new();
-            //seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
+            seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
         }
 
         [CategoryAttribute("General")]
