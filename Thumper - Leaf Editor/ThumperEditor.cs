@@ -383,7 +383,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripLevelName_Click(object sender, EventArgs e)
         {
             dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
-            dockProjectProperties.Text = $"Project Properties";
+            dockProjectProperties.TabText = $"Project Properties";
         }
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)
