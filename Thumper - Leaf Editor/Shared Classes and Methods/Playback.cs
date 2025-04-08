@@ -241,8 +241,10 @@ namespace Thumper_Custom_Level_Editor
         public static void MidiEventsForTurns(Sequencer_Object Seq)
         {
             int IsTurning = 0;
+            SeqDataPoint lastprocessed = null;
             for (int x = 0; x < LeafLastBeat; x++)
             {
+                lastprocessed = Seq.data_points[x];
                 //account for default value being +-15
                 decimal valuetotest = Seq.data_points[x].value == null ? (decimal)Seq.defaultvalue : (decimal)Seq.data_points[x].value;
                 if (valuetotest >= 15) {
@@ -287,11 +289,11 @@ namespace Thumper_Custom_Level_Editor
             }
             //handle last beat
             if (IsTurning == -1)
-                AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 10);
+                AddNoteToChannel(lastprocessed.beat - 1, 13, 8, 10);
             else if (IsTurning == 1)
-                AddNoteToChannel(Seq.data_points[^1].beat - 1, 13, 8, 12);
+                AddNoteToChannel(lastprocessed.beat - 1, 13, 8, 12);
             else if (IsTurning is 2 or -2)
-                AddNoteToChannel(Seq.data_points[^1].beat - 1, 22, 0, 0, true);
+                AddNoteToChannel(lastprocessed.beat - 1, 22, 0, 0, true);
         }
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)
