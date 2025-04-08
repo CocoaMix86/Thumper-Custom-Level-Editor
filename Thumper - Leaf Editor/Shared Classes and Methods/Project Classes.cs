@@ -26,7 +26,17 @@ namespace Thumper_Custom_Level_Editor
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]
-        public string projectname { get; set; }
+        public string projectname
+        {
+            get => _ProjectName;
+            set {
+                if (String.IsNullOrEmpty(value))
+                    return;
+                _ProjectName = value;
+                TCLE.Instance.toolstripLevelName.Text = value;
+            }
+        }
+        private string _ProjectName;
 
         [Category("General Project Info")]
         [DisplayName("Author(s)")]
