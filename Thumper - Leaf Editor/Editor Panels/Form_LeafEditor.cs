@@ -14,9 +14,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
-            ContextMenuFavClear = contextMenuFavClear;
-            ContextMenuFav = contextMenuFav;
-            ContextMenuFavRemove = contextMenuFavRemove;
             RenderForm();
             ColorFormElements();
             SaveOnlyNoLoad = saveonlynoload;
@@ -57,13 +54,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dockPanel1.Theme = TCLE.DockTheme;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            //
             contentMain.Controls.Add(splitContainerLeafSide);
             splitContainerLeafSide.Dock = DockStyle.Fill;
-            //
             contentObjects.Controls.Add(panelObjects);
             panelObjects.Dock = DockStyle.Fill;
-            //
             contentPropertyGrid.Controls.Add(propertyGridLeaf);
             propertyGridLeaf.Dock = DockStyle.Fill;
             //
@@ -79,13 +73,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leaftoolsToolStrip.Renderer = new ToolStripOverride();
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
-            contextMenuFav.Renderer = new ContextMenuColors();
-            contextMenuFavClear.Renderer = new ContextMenuColors();
-            contextMenuFavRemove.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor, true);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
+            //
+            treeObjects.Tag = txtSearch.Text;
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
+            //
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 60;
@@ -181,9 +175,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
-        public static ContextMenuStrip ContextMenuFavClear;
-        public static ContextMenuStrip ContextMenuFav;
-        public static ContextMenuStrip ContextMenuFavRemove;
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
@@ -1343,7 +1334,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
+            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
             if (e.Node.Text.EndsWith(".samp"))
@@ -1440,6 +1431,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
+            treeObjects.Tag = txtSearch.Text;
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
         }
 
@@ -1468,9 +1460,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
             if (match != null && !TCLE.ObjectFavorites.Contains(match))
                 TCLE.ObjectFavorites.Add(match);
-            treeObjects.SelectedNode.ImageKey = "fav";
-            treeObjects.SelectedNode.SelectedImageKey = "fav";
-            treeObjects.SelectedNode.ContextMenuStrip = contextMenuFavRemove;
+            SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
             TCLE.PlaySound("UIselect");
         }

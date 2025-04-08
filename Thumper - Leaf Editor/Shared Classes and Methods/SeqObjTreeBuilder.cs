@@ -6,10 +6,72 @@ namespace Thumper_Custom_Level_Editor
     {
         public static TreeView GlobalObjectTree = new();
         public static List<TreeNode> GlobalObjectTreeNodes = new();
+        //
+        public static ContextMenuStrip contextMenuFav = new ContextMenuStrip();
+        public static ToolStripMenuItem toolStripFavAdd = new ToolStripMenuItem();
+        public static ContextMenuStrip contextMenuFavRemove = new ContextMenuStrip();
+        public static ToolStripMenuItem toolStripFavRemove = new ToolStripMenuItem();
+        public static ContextMenuStrip contextMenuFavClear = new ContextMenuStrip();
+        public static ToolStripMenuItem toolStripFavClear = new ToolStripMenuItem();
 
         public static void Initialize()
         {
             BuildObjectTree(GlobalObjectTree, "");
+            // 
+            // contextMenuFav
+            // 
+            contextMenuFav.BackColor = Color.FromArgb(46, 46, 46);
+            contextMenuFav.Items.AddRange(new ToolStripItem[] { toolStripFavAdd });
+            contextMenuFav.Name = "workingfolderRightClick";
+            contextMenuFav.RenderMode = ToolStripRenderMode.System;
+            contextMenuFav.Size = new Size(162, 26);
+            // 
+            // toolStripFavAdd
+            // 
+            toolStripFavAdd.ForeColor = Color.White;
+            toolStripFavAdd.Image = Properties.Resources.icon_fav;
+            toolStripFavAdd.Name = "toolStripFavAdd";
+            toolStripFavAdd.Size = new Size(161, 22);
+            toolStripFavAdd.Text = "Add To Favorites";
+            toolStripFavAdd.Click += toolStripFavAdd_Click;
+            // 
+            // contextMenuFavRemove
+            // 
+            contextMenuFavRemove.BackColor = Color.FromArgb(46, 46, 46);
+            contextMenuFavRemove.Items.AddRange(new ToolStripItem[] { toolStripFavRemove });
+            contextMenuFavRemove.Name = "workingfolderRightClick";
+            contextMenuFavRemove.RenderMode = ToolStripRenderMode.System;
+            contextMenuFavRemove.Size = new Size(199, 26);
+            // 
+            // toolStripFavRemove
+            // 
+            toolStripFavRemove.ForeColor = Color.White;
+            toolStripFavRemove.Image = Properties.Resources.icon_remove2;
+            toolStripFavRemove.Name = "toolStripFavRemove";
+            toolStripFavRemove.Size = new Size(198, 22);
+            toolStripFavRemove.Text = "Remove From Favorites";
+            toolStripFavRemove.Click += toolStripFavRemove_Click;
+            // 
+            // contextMenuFavClear
+            // 
+            contextMenuFavClear.BackColor = Color.FromArgb(46, 46, 46);
+            contextMenuFavClear.Items.AddRange(new ToolStripItem[] { toolStripFavClear });
+            contextMenuFavClear.Name = "workingfolderRightClick";
+            contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
+            contextMenuFavClear.Size = new Size(152, 26);
+            // 
+            // toolStripFavClear
+            // 
+            toolStripFavClear.ForeColor = Color.White;
+            toolStripFavClear.Image = Properties.Resources.icon_remove2;
+            toolStripFavClear.Name = "toolStripFavClear";
+            toolStripFavClear.Size = new Size(151, 22);
+            toolStripFavClear.Text = "Clear Favorites";
+            toolStripFavClear.Click += toolStripFavClear_Click;
+            //
+            contextMenuFav.Renderer = new ContextMenuColors();
+            contextMenuFavClear.Renderer = new ContextMenuColors();
+            contextMenuFavRemove.Renderer = new ContextMenuColors();
         }
 
         public static void BuildObjectTree(TreeView _tree, string txtSearch)
@@ -20,7 +82,7 @@ namespace Thumper_Custom_Level_Editor
                 Text = "*FAVORITES*",
                 ImageKey = "fav",
                 SelectedImageKey = "fav",
-                ContextMenuStrip = Form_LeafEditor.ContextMenuFavClear
+                ContextMenuStrip = contextMenuFavClear
             };
             _tree.Nodes.Add(fav);
             BuildTreeFavorites(_tree, txtSearch);
@@ -64,7 +126,7 @@ namespace Thumper_Custom_Level_Editor
                             Text = obj.param_displayname,
                             ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
                             SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
-                            ContextMenuStrip = Form_LeafEditor.ContextMenuFav
+                            ContextMenuStrip = TCLE.ObjectFavorites.Contains(obj) ? contextMenuFavRemove : contextMenuFav
                         };
                         _node.Nodes.Add(_param);
                     }
@@ -83,7 +145,7 @@ namespace Thumper_Custom_Level_Editor
                     Text = obj,
                     ImageKey = "none",
                     SelectedImageKey = "none",
-                    ContextMenuStrip = Form_LeafEditor.ContextMenuFavRemove
+                    ContextMenuStrip = contextMenuFavRemove
                 };
                 if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
                     _tree.Nodes[0].Nodes.Add(_param);
@@ -92,6 +154,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void FilterTree(TreeView _tree, string txtSearch)
         {
+            List<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToList();
             _tree.Nodes.Clear();
             List<TreeNode> filternodes = GlobalObjectTree.Nodes.Cast<TreeNode>().Select(x => (TreeNode)x.Clone()).ToList();
             if (txtSearch is not "" and not "Search Objects (Ctrl+;)") {
@@ -106,6 +169,13 @@ namespace Thumper_Custom_Level_Editor
             _tree.Refresh();
             if (txtSearch is not "" and not "Search Objects (Ctrl+;)")
                 _tree.ExpandAll();
+
+            foreach (TreeNode tn in _tree.Nodes)
+            {
+                if (ExpandNodes.Contains(tn.Text))
+                    tn.Expand();
+            }
+            _tree.Nodes[0].Expand();
         }
 
         public static bool FilterNode(TreeNode _node, string txtSearch)
@@ -141,6 +211,39 @@ namespace Thumper_Custom_Level_Editor
                     break;
             }
             return foundnode;
+        }
+
+        public static void toolStripFavAdd_Click(object sender, EventArgs e)
+        {
+            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            if (Source.SelectedNode.ImageKey != "none")
+                return;
+            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == Source.SelectedNode.Text && x.category.ToUpper() == Source.SelectedNode.Parent.Text);
+            if (match != null && !TCLE.ObjectFavorites.Contains(match))
+                TCLE.ObjectFavorites.Add(match);
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            SeqObjTreeBuilder.FilterTree(Source, Source.Tag.ToString());
+            TCLE.PlaySound("UIselect");
+            
+        }
+
+        public static void toolStripFavRemove_Click(object sender, EventArgs e)
+        {
+            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            string find = Source.SelectedNode.Text;
+            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            SeqObjTreeBuilder.FilterTree(Source, Source.Tag.ToString());
+            TCLE.PlaySound("UIselect");            
+        }
+
+        public static void toolStripFavClear_Click(object sender, EventArgs e)
+        {
+            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            TCLE.ObjectFavorites.Clear();
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            SeqObjTreeBuilder.FilterTree(Source, Source.Tag.ToString());
+            TCLE.PlaySound("UIdelete");
         }
     }
 }
