@@ -374,10 +374,14 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
+        VolumeMaster volma = new VolumeMaster();
         private void btnVolumeMixer_Click(object sender, EventArgs e)
         {
-            VolumeMaster volma = new VolumeMaster();
+            if (volma == null || volma.IsDisposed)
+                volma = new();
             volma.Show();
+            volma.BringToFront();
+            volma.Focus();
         }
 
         private void toolstripLevelName_Click(object sender, EventArgs e)
