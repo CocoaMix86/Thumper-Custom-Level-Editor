@@ -1066,11 +1066,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } else if (e.Button == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
+                    //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                         LogUndo = false;
                         RightclickChanges = CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                         LogUndo = true;
-                    }
+                    trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
+                    //}
                 } else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
                         return;
@@ -1104,11 +1105,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (Control.MouseButtons == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
+                    //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                         LogUndo = false;
                         RightclickChanges = CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                         LogUndo = true;
-                    }
+                    //}
+                    trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
