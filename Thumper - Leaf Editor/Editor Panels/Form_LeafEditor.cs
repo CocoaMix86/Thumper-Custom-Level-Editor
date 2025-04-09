@@ -3122,7 +3122,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                 previousDragOver = targetRow;
-                TCLE.Instance.toolstripLevelName.Text = $"{targetRow}";
                 trackEditor.SuspendLayout();
                 /*
                 trackEditor.Rows.Remove(CenterLane.editor_row);
