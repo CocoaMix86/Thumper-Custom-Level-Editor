@@ -321,7 +321,7 @@ namespace Thumper_Custom_Level_Editor
             if (file == null)
                 return;
             if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
-                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
+                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite));
             }
         }
 
@@ -350,7 +350,7 @@ namespace Thumper_Custom_Level_Editor
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
                 if (LoadText) {
                     _load = textReader.ReadToEnd();
@@ -801,34 +801,36 @@ namespace Thumper_Custom_Level_Editor
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
-            if (!ReturnContent && !Workspaces.Any()) {
-                Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
-                workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
-            }
-            //find if the document is loaded already in a tab
-            //if so, make it activate
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
-            if (workspacehastab != null) {
-                workspacehastab.DockHandler.Activate();
-                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
-                return null;
-            }
-
-            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-            foreach(Form_WorkSpace ws in workspacewithfloats) {
-                IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
-                if (activate != null) {
-                    activate.DockHandler.Activate();
+            if (!ReturnContent) {
+                if (!Workspaces.Any()) {
+                    Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
+                    workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
+                }
+                //find if the document is loaded already in a tab
+                //if so, make it activate
+                IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
+                if (workspacehastab != null) {
+                    workspacehastab.DockHandler.Activate();
+                    (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
                     return null;
                 }
-            }
-            //open document in raw viewer if that option was selected
-            if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
-                Form_RawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
-                if (ReturnContent)
-                    return rawtext;
-                rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
-                return null;
+
+                IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+                foreach (Form_WorkSpace ws in workspacewithfloats) {
+                    IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
+                    if (activate != null) {
+                        activate.DockHandler.Activate();
+                        return null;
+                    }
+                }
+                //open document in raw viewer if that option was selected
+                if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
+                    Form_RawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                    if (ReturnContent)
+                        return rawtext;
+                    rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
+                    return null;
+                }
             }
             //otherwise, open a standard editor for the document type
             string filetype = filepath.Extension;

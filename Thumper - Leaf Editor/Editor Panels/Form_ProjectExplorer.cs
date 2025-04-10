@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using System.IO.Packaging;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -250,7 +251,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     File.Move(source, dest);
                     dynamic towrite = TCLE.LoadFileLock(dest);
                     File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
+                    //Set scroll position and rebuild the tree
                     ProjectExplorer.CreateTreeView();
+                    //
                     //need to update the name in every other file that references it too
                     foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
                         dynamic _loadfile = TCLE.LoadFileLock(file.FullName);

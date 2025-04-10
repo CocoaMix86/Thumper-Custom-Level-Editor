@@ -314,12 +314,14 @@ namespace Thumper_Custom_Level_Editor
                 else
                     return;
                 Beats = (int)value;
+                BeatsChangedSinceSave = true;
                 if (!parent.EditorIsLoading)
                     parent.LeafLengthChanged();
             }
         }
         [Browsable(false)]
         public int Beats;
+        public bool BeatsChangedSinceSave = false;
 
         [Category​Attribute("Editor")]
         [DisplayName("Set Time Sig")]

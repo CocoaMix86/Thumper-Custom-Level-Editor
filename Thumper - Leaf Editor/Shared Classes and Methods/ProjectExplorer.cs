@@ -1,9 +1,31 @@
-﻿using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using System.Runtime.InteropServices;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
     public static class ProjectExplorer
     {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+
+        public static Point GetTreeViewScrollPos(TreeView treeView)
+        {
+            return new Point(
+                GetScrollPos(treeView.Handle, SB_HORZ),
+                GetScrollPos(treeView.Handle, SB_VERT));
+        }
+
+        public static void SetTreeViewScrollPos(TreeView treeView, Point scrollPosition)
+        {
+            SetScrollPos(treeView.Handle, SB_HORZ, scrollPosition.X, true);
+            SetScrollPos(treeView.Handle, SB_VERT, scrollPosition.Y, true);
+        }
+
+        private const int SB_HORZ = 0x0;
+        private const int SB_VERT = 0x1;
         //public static Dictionary<string, FileInfo> Files = new();
         //public static Dictionary<string, DirectoryInfo> Folders = new();
         public static TreeNodeCollection ProjectTree => TCLE.Explorer.treeView1.Nodes;
@@ -27,6 +49,7 @@ namespace Thumper_Custom_Level_Editor
             expandednodes.Clear();
             expandednodes = GetExpandedNodes(ProjectTree);
             //clear existing treeview
+            Point LastScrollPosition = GetTreeViewScrollPos(TCLE.Explorer.treeView1);
             ProjectTree.Clear();
             AllFiles.Clear();
             ///projectfiles.Clear();
@@ -58,6 +81,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //repopulate dragdrop list
             TCLE.DragDropItems.Populate();
+            SetTreeViewScrollPos(TCLE.Explorer.treeView1, LastScrollPosition);
         }
 
         private static void BuildTree(DirectoryInfo directoryInfo, TreeNodeCollection addInMe)

@@ -1499,6 +1499,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void seqobjs_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            EnableLeafButtons();
             trackEditor.Invalidate();
         }
         #endregion
@@ -1573,9 +1574,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Invalidate();
             SaveCheckAndWrite(false, "Delete Object");
             TCLE.PlaySound("UIobjectremove");
-
-            //disable elements if there are no tracks
-            EnableLeafButtons();
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
@@ -2065,7 +2063,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //split leaf into 2 leafs
             int splitindex = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
-            if (MessageBox.Show($"Split this leaf before beat {splitindex}?\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show($"Split this leaf before beat {splitindex}?\nThis leaf will end at beat {splitindex - 1}. The new leaf will have all data from beat {splitindex} and onward.\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
             //create file renaming dialog and show it
@@ -2079,20 +2077,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } else
                 return;
 
-            //create a new LeafProperties with a copy of the split leaf's properties, so that both splits are identical
-            LeafProperties LeafSplitAfter = new(new Form_LeafEditor(), SplitFile, LeafProperties.beats - splitindex) {
-                timesignature = LeafProperties.timesignature
-            };
-            //copy objects to the new split
-            foreach (Sequencer_Object seq in LeafProperties.seq_objs) {
-                Sequencer_Object clone = seq.Clone();
-                clone.editor_row = null;
-                clone.data_points = new SeqDataPoint[255].ToList();
-                LeafSplitAfter.seq_objs.Add(clone);
-                //only copy datapoints after the split index
-                for (int x = splitindex; x < LeafProperties.beats; x++) {
-                    clone.data_points[x - splitindex] = new SeqDataPoint() {
-                        Owner = clone,
+            Form_LeafEditor LeafSplitAfter = (Form_LeafEditor)TCLE.OpenFile(LoadedLeaf, false, true);
+            LeafSplitAfter.loadedleaf = SplitFile;
+            //after setting the loadedleaf like that, it will kick this leafs file out of locked files. So we have to readd it
+            TCLE.AddFileLock(LoadedLeaf);
+            //go over each sequencer object, and shift data points backwards so they align at beat 0
+            foreach (Sequencer_Object seq in LeafSplitAfter.SequencerObjects) {
+                //some objects need the leaf name. Change them to the new leaf's name
+                if (seq.obj_name.Contains(".leaf"))
+                    seq.obj_name = LeafSplitAfter.loadedleaf.Name;
+                //shift data points backwards so they align at beat 0
+                for (int x = splitindex; x < LeafSplitAfter.LeafProperties.beats; x++) {
+                    seq.data_points[x - splitindex] = new SeqDataPoint() {
+                        Owner = seq,
                         Beat = seq.data_points[x].beat - splitindex,
                         value = seq.data_points[x].value,
                         ease = seq.data_points[x].ease,
@@ -2102,11 +2099,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     seq.data_points[x].value = null;
                 }
             }
-            //save the new split
-            JObject tosave = BuildSave(LeafSplitAfter);
-            using (StreamWriter sw = SplitFile.CreateText()) {
-                sw.Write(JsonConvert.SerializeObject(tosave, Formatting.Indented));
-            }
+            //reduce split leafs beat count and save
+            LeafSplitAfter.LeafProperties.beats = LeafProperties.beats - splitindex;
+            LeafSplitAfter.SaveCheckAndWrite(true, "");
+
             //reduce beat count of the leaf that was just split and save it
             LeafProperties.beats = splitindex;
             SaveCheckAndWrite(true, "");
@@ -2318,7 +2314,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadEnd()
         {
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
-            EnableLeafButtons();
             trackZoom_Scroll(null, null);
 
             //mark that lvl is saved (just freshly loaded)
@@ -2535,7 +2530,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorIsLoading)
                 return;
-            EnableLeafButtons();
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
@@ -2544,7 +2538,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}" + "*";
+                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}" + "*";
                 //update the undo list
                 if (LogUndo) {
                     UndoList.Insert(0, new SaveState() {
@@ -2553,13 +2547,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     });
                 }
             } else {
-                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension == ".lvl" ? " [Sequencer]" : "")}";
+                this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
                 leafProperties.revertPoint = _saveJSON;
                 //If leaf, build the JSON to write to file
                 if (LoadedLeaf.Extension == ".leaf") {
                     //write JSON to file
                     TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLeaf], _saveJSON);
-                    TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+                    //need to update leaf beat count in every lvl that references this file
+                    if (LeafProperties.BeatsChangedSinceSave) {
+                        foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))) {
+                            dynamic _loadfile = TCLE.LoadFileLock(lvl.FullName);
+                            //if load fails, skip
+                            if (_loadfile == null)
+                                continue;
+                            bool changes = false;
+                            //some files may be lock loaded, so we use different writing methods for those
+                            //also force editor to reload the document
+                            foreach (dynamic leafseq in _loadfile["leaf_seq"]) {
+                                if (leafseq["leaf_name"] == LoadedLeaf.Name) {
+                                    leafseq["beat_cnt"] = LeafProperties.beats;
+                                    changes = true;
+                                }
+                            }
+                            if (changes)
+                                TCLE.WriteFileLock(new FileStream(lvl.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
+                        }
+                        TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+                    }
                     if (playsound) TCLE.PlaySound("UIsave");
                 }
                 //else if a different sequencer, pass data back and force save
@@ -2574,6 +2588,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedLeaf.Name);
+                LeafProperties.BeatsChangedSinceSave = false;
             }
         }
         ///LEAF LENGTH
@@ -2591,7 +2606,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear out data that exists beyond the beatcount
             foreach (Sequencer_Object seq in SequencerObjects) {
                 for (int x = LeafProperties.beats; x < 255; x++) {
-                    seq.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    seq.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out", Owner = seq };
                 }
             }
             //set cell zoom

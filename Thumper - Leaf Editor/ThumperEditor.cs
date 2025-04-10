@@ -314,7 +314,7 @@ namespace Thumper_Custom_Level_Editor
         #region Form Key Press
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
-            if (dockMain.ActiveContent == (IDockContent)Explorer)
+            if (dockMain.ActiveContent == (IDockContent)Explorer || dockMain.ActiveContent == (IDockContent)dockProjectProperties)
                 return;
 
             if (e.KeyData == Keybinds["Cut"]) {
