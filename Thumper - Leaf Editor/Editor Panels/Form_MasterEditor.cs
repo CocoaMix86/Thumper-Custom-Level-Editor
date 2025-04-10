@@ -681,7 +681,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             loadedmaster = filepath;
             //set some visual elements
-            this.Text = $"sequin.master";
+            this.Text = $"{loadedmaster.Name}";
             EditorLoading = true;
 
             //setup new master properties

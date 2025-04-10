@@ -2860,7 +2860,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<DataGridViewCell> lanecells = new();
             foreach (DataGridViewCell dgvc in _selected) {
                 if (SequencerObjects[dgvc.RowIndex].friendly_lane == "lane center" && SequencerObjects[dgvc.RowIndex].expandlanes == false) {
-                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex - 2])
+                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex - 2]);
                     lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex - 1]);
                     lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + 1]);
                     lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + 2]);
