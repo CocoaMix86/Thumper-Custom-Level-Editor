@@ -2856,7 +2856,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///copies selected cells
             //TCLE.ClipboardDataPoints = trackEditor.GetClipboardContent();
             IEnumerable<DataGridViewCell> _selected = trackEditor.SelectedCells.Cast<DataGridViewCell>();
-            _selected = _selected.OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex);
+            //_selected = _selected.OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex);
+            List<DataGridViewCell> lanecells = new();
+            foreach (DataGridViewCell dgvc in _selected) {
+                if (SequencerObjects[dgvc.RowIndex].friendly_lane == "lane center" && SequencerObjects[dgvc.RowIndex].expandlanes == false) {
+                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex - 2])
+                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex - 1]);
+                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + 1]);
+                    lanecells.Add(trackEditor[dgvc.ColumnIndex, dgvc.RowIndex + 2]);
+                }
+            }
+            _selected = lanecells.Concat(_selected).OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex);
             TCLE.ClipboardDataPoints = _selected.Select(x => SequencerObjects[x.RowIndex].data_points[x.ColumnIndex - FrozenColumnOffset].Clone()).ToList();
             TCLE.PlaySound("UIkcopy");
         }
