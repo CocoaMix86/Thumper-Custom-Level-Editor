@@ -2063,7 +2063,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //split leaf into 2 leafs
             int splitindex = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
-            if (MessageBox.Show($"Split this leaf before beat {splitindex}?\nThis leaf will end at beat {splitindex - 1}. The new leaf will have all data from beat {splitindex} and onward.\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (MessageBox.Show($"Split this leaf between beat {splitindex - 1} and {splitindex}?\nThis leaf will end at beat {splitindex - 1}. The new leaf will have all data from beat {splitindex} and onward.\nTHIS CHANGE CANNOT BE UNDONE!", "Split leaf", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
             //create file renaming dialog and show it
@@ -2509,8 +2509,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leafProperties = new(this, loadedleaf, 32) {
                         timesignature = "4/4"
                     };
-                } else
-                    leafProperties.FilePath = loadedleaf;
+                } //else
+                    //leafProperties.FilePath = loadedleaf;
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)

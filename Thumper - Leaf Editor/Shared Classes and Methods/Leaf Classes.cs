@@ -282,7 +282,6 @@ namespace Thumper_Custom_Level_Editor
         public LeafProperties(Form_LeafEditor Parent, FileInfo path, int _beats)
         {
             parent = Parent;
-            FilePath = path;
             Beats = _beats;
             selectedobj = new(this);
             seq_objs = new();
@@ -294,7 +293,7 @@ namespace Thumper_Custom_Level_Editor
         [Description("The full path to this file.")]
         public string filepath => FilePath.FullName;
         [Browsable(false)]
-        public FileInfo FilePath;
+        public FileInfo FilePath => parent.loadedleaf;
 
         [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]
