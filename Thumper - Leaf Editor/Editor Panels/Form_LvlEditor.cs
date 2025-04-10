@@ -1086,14 +1086,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedlvl = new FileInfo(sfd.FileName);
-
+                EditorIsLoading = true;
                 lvlProperties ??= new(this, loadedlvl) {
                     approachbeats = 16,
                     volume = 1,
                     allowinput = true,
                     tutorialtype = "TUTORIAL_NONE"
                 };
-
+                EditorIsLoading = false;
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedlvl);
