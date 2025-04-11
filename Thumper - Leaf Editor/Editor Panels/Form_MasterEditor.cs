@@ -21,7 +21,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadMaster(load, filepath);
-                UndoList.Add(new SaveState() {
+                UndoList.Add(new SaveState()
+                {
                     reason = "",
                     savestate = load
                 });
@@ -85,7 +86,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public MasterProperties MasterProperties;
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new() {
+        public DockContentEx contentPropertyGrid = new()
+        {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -93,7 +95,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new() {
+        public DockContentEx contentMain = new()
+        {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -122,12 +125,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.checkpoint = MasterLvls[e.RowIndex].checkpoint;
                 }
-            } else if (e.ColumnIndex is 5) {
+            }
+            else if (e.ColumnIndex is 5) {
                 MasterLvls[e.RowIndex].playplus = !MasterLvls[e.RowIndex].playplus;
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.playplus = MasterLvls[e.RowIndex].playplus;
                 }
-            } else if (e.ColumnIndex is 6) {
+            }
+            else if (e.ColumnIndex is 6) {
                 MasterLvls[e.RowIndex].isolate = !MasterLvls[e.RowIndex].isolate;
                 foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
                     lvl.isolate = MasterLvls[e.RowIndex].isolate;
@@ -138,15 +143,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void masterLvlList_SelectionChanged(object sender, EventArgs e)
         {
+            /*
             if (!IsAddingItems) {
+                masterLvlList.SelectionChanged -= masterLvlList_SelectionChanged;
                 foreach (DataGridViewRow dgvr in SelectedRows) {
                     if (dgvr.Index is not -1)
                         masterLvlList.Rows[dgvr.Index].Selected = true;
                 }
-            }
+                masterLvlList.SelectionChanged += masterLvlList_SelectionChanged;
+            }*/
 
             propertyGridMaster.SelectedObjects = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index]).ToArray();
             propertyGridMaster.Refresh();
+        }
+
+        private void masterLvlList_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+
+        }
+
+        private void masterLvlList_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            /*
+            if (ModifierKeys.HasFlag(Keys.Control))
+                masterLvlList.Rows[e.RowIndex].Selected = false;
+            else {
+                SelectedRows.Clear();
+                masterLvlList.ClearSelection();
+                masterLvlList.Rows[e.RowIndex].Selected = true;
+            }*/
         }
 
         private void masterLvlList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -222,7 +247,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         TargetRowToPaint = masterLvlList.RowCount;
                     masterLvlList.Invalidate();
                 }
-            } else {
+            }
+            else {
                 if (targetRow != -1 && targetRow != previousDragOver) {
                     foreach (MasterLvlData leaf in LvlsToMove) {
                         MasterLvls.Remove(leaf);
@@ -234,7 +260,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             if (x == 0)
                                 masterLvlList.CurrentCell = masterLvlList[0, targetRow];
                             masterLvlList.Rows[targetRow].Selected = true;
-                        } catch (Exception) {
+                        }
+                        catch (Exception) {
                             MasterLvls.Add(LvlsToMove[x]);
                             if (x == 0)
                                 masterLvlList.CurrentCell = masterLvlList[0, masterLvlList.RowCount - 1];
@@ -271,17 +298,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
                 AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
-            } else if (LvlsToMove != null) {
+            }
+            else if (LvlsToMove != null) {
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Reorder Sublevels");
                 LvlsToMove = null;
-            } else if (e.Data.GetData(typeof(List<MasterLvlData>)) is List<MasterLvlData> sublevels) {
+            }
+            else if (e.Data.GetData(typeof(List<MasterLvlData>)) is List<MasterLvlData> sublevels) {
                 LogUndo = false;
                 foreach (MasterLvlData leaf in sublevels)
                     MasterLvls.Insert(TargetRowToPaint, leaf.Clone());
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Lvls");
-            } else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
+            }
+            else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string leaf in sublevels2)
                     AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
@@ -303,7 +333,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Handled = true;
             if (e.RowIndex == -1) {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
-            } else {
+            }
+            else {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                 CellPaintIcons(e);
                 if (e.ColumnIndex is > 3)
@@ -360,7 +391,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
                 else
                     e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
-            } else {
+            }
+            else {
                 e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
 
@@ -518,7 +550,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Location = new Point(System.Windows.Forms.Cursor.Position.X + 2, System.Windows.Forms.Cursor.Position.Y + 2);
                 if (TCLE.DragDropItems.Location.X + TCLE.DragDropItems.Width > this.Width)
                     TCLE.DragDropItems.Location = new Point(this.Width - TCLE.DragDropItems.Width - 2, TCLE.DragDropItems.Location.Y);
-            } else
+            }
+            else
                 TCLE.DragDropItems.Hide();
         }
 
@@ -539,13 +572,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
                         File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
                         ProjectExplorer.CreateTreeView();
-                    } else
+                    }
+                    else
                         return;
             }
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             if (index is -1) {
-                MasterLvls.Add(new MasterLvlData() {
+                MasterLvls.Add(new MasterLvlData()
+                {
                     type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                     name = (string)_load["obj_name"],
                     playplus = true,
@@ -555,8 +590,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     gatesectiontype = "",
                     id = TCLE.rng.Next(0, 1000000)
                 });
-            } else {
-                MasterLvls.Insert(index, new MasterLvlData() {
+            }
+            else {
+                MasterLvls.Insert(index, new MasterLvlData()
+                {
                     type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                     name = (string)_load["obj_name"],
                     playplus = true,
@@ -686,7 +723,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //setup new master properties
             masterLvlList.Rows.Clear();
-            masterproperties = new(this, filepath) {
+            masterproperties = new(this, filepath)
+            {
                 skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
@@ -696,7 +734,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             MasterLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
-                MasterLvls.Add(new MasterLvlData() {
+                MasterLvls.Add(new MasterLvlData()
+                {
                     type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
                     name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
@@ -755,7 +794,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedmaster = new FileInfo(sfd.FileName);
 
-                masterproperties ??= new(this, loadedmaster) {
+                masterproperties ??= new(this, loadedmaster)
+                {
                     skybox = "<none>",
                     introlvl = "<none>",
                     checkpointlvl = "<none>"
@@ -789,11 +829,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is not saved
                 this.Text = LoadedMaster.Name + "*";
                 //update the undo list
-                UndoList.Insert(0, new SaveState() {
+                UndoList.Insert(0, new SaveState()
+                {
                     reason = Reason,
                     savestate = _saveJSON
                 });
-            } else {
+            }
+            else {
                 this.Text = LoadedMaster.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
@@ -846,7 +888,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (_lvl.Beats is -1) {
                 masterLvlList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
                 masterLvlList.Rows[index].Cells[3].Value = $"file not found";
-            } else {
+            }
+            else {
                 masterLvlList.Rows[index].DefaultCellStyle = null;
                 masterLvlList.Rows[index].Cells[3].Value = $"{_lvl.Beats} beats -- {_lvl.runtime}";
             }

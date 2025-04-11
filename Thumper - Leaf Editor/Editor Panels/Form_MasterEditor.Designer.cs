@@ -165,6 +165,7 @@
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
+            this.masterLvlList.CellMouseUp += this.masterLvlList_CellMouseUp;
             this.masterLvlList.CellPainting += this.masterLvlList_CellPainting;
             this.masterLvlList.RowPrePaint += this.masterLvlList_RowPrePaint;
             this.masterLvlList.SelectionChanged += this.masterLvlList_SelectionChanged;
@@ -173,6 +174,7 @@
             this.masterLvlList.DragOver += this.masterLvlList_DragOver;
             this.masterLvlList.MouseDown += this.masterLvlList_MouseDown;
             this.masterLvlList.MouseMove += this.masterLvlList_MouseMove;
+            this.masterLvlList.MouseUp += this.masterLvlList_MouseUp;
             // 
             // SublevelNum
             // 
