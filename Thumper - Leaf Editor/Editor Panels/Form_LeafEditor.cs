@@ -167,8 +167,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool ResetRowAfterEdit;
         private bool RightclickDown;
         private bool RightclickChanges;
-        private int PlaybackStart = -1;
-        private int PlaybackEnd = -1;
+        private int PlaybackStart = -2;
+        private int PlaybackEnd = -2;
         private bool PlaybackLoop;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
@@ -423,18 +423,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Point p1 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
                         Point p2 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
                         Point p3 = new Point(e.CellBounds.Left /*+ (e.CellBounds.Width / 2)*/, e.CellBounds.Top + 10);
-                        if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
-                            p1 = new Point(e.CellBounds.Right + -6, e.CellBounds.Top);
-                            p2 = new Point(e.CellBounds.Right + +6, e.CellBounds.Top);
-                            p3 = new Point(e.CellBounds.Right, e.CellBounds.Top + 10);
-                        }
                         if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset)
                             e.Graphics.FillPolygon(BrushCorn, new[] { p1, p2, p3 });
                         else
                             e.Graphics.FillPolygon(PlaybackLoop ? BrushGreen : BrushRed, new[] { p1, p2, p3 });
                         //e.Graphics.FillRectangle(BrushCorn, e.CellBounds);
                     }
-                    else if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
+                    if (PlaybackEnd != -2 && e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
                         Point p1 = new Point(e.CellBounds.Right + -6, e.CellBounds.Top);
                         Point p2 = new Point(e.CellBounds.Right + +6, e.CellBounds.Top);
                         Point p3 = new Point(e.CellBounds.Right, e.CellBounds.Top + 10);
@@ -998,29 +993,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (PlaybackEnd == e.ColumnIndex - FrozenColumnOffset) {
                         if (PlaybackLoop) {
                             PlaybackLoop = false;
-                            PlaybackEnd = -1;
-                            trackEditor.InvalidateColumn(e.ColumnIndex);
-                            trackEditor.InvalidateColumn(e.ColumnIndex + 1);
+                            PlaybackEnd = -2;
+                            trackEditor.Invalidate();
                         } else {
                             PlaybackLoop = true;
-                            trackEditor.InvalidateColumn(e.ColumnIndex);
-                            trackEditor.InvalidateColumn(e.ColumnIndex + 1);
+                            trackEditor.Invalidate();
                         }
                     } else {
                         PlaybackEnd = e.ColumnIndex - FrozenColumnOffset;
-                        if (PlaybackEnd <= PlaybackStart)
-                            PlaybackEnd = PlaybackStart + 1;
+                        if (PlaybackEnd < PlaybackStart)
+                            PlaybackEnd = PlaybackStart;
                         trackEditor.Invalidate();
                     }
                 } else {
                     if (PlaybackStart == e.ColumnIndex - FrozenColumnOffset) {
-                        PlaybackStart = -1;
-                        trackEditor.InvalidateColumn(e.ColumnIndex);
-                        trackEditor.InvalidateColumn(e.ColumnIndex - 1);
+                        PlaybackStart = -2;
+                        trackEditor.Invalidate();
                     } else {
                         PlaybackStart = e.ColumnIndex - FrozenColumnOffset;
-                        if (PlaybackEnd != -1 && PlaybackEnd <= PlaybackStart)
-                            PlaybackEnd = PlaybackStart + 1;
+                        if (PlaybackEnd != -2 && PlaybackEnd <= PlaybackStart)
+                            PlaybackEnd = PlaybackStart;
                         trackEditor.Invalidate();
                     }
                 }
@@ -2522,14 +2514,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedleaf = new FileInfo(sfd.FileName);
-
+                EditorIsLoading = true;
                 if (LeafProperties == null) {
                     leafProperties = new(this, loadedleaf, 32) {
                         timesignature = "4/4"
                     };
                 } //else
-                    //leafProperties.FilePath = loadedleaf;
-
+                  //leafProperties.FilePath = loadedleaf;
+                EditorIsLoading = false;
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)
                     TCLE.CloseFileLock(loadedleaf);
