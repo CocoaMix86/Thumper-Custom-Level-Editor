@@ -146,7 +146,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DragDropItemList";
-            this.TopMost = true;
             this.FormClosing += this.DragDropItemList_FormClosing;
             this.Load += this.DragDropItemList_Load;
             ((System.ComponentModel.ISupportInitialize)this.dgvPathsList).EndInit();

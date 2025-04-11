@@ -214,7 +214,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void DragDropItemList_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
+            if (!TCLE.IsClosing)
+                e.Cancel = true;
             this.Hide();
         }
 

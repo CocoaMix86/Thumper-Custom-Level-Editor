@@ -61,6 +61,7 @@ namespace Thumper_Custom_Level_Editor
             Instance = this;
             TabRightClickMenu = contextmenuTabClick;
             MainBeeble.Owner = this;
+            DragDropItems.Owner = this;
             projectProperties = new() {
                 projectname = "",
                 description = "",
@@ -283,7 +284,11 @@ namespace Thumper_Custom_Level_Editor
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        private void toolstripFormClose_Click(object sender, EventArgs e) => this.Close();
+        private void toolstripFormClose_Click(object sender, EventArgs e)
+        {
+            DragDropItems.Dispose();
+            this.Close();
+        }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -601,6 +606,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileExit_Click(object sender, EventArgs e)
         {
+            DragDropItems.Dispose();
             this.Close();
         }
         #endregion
