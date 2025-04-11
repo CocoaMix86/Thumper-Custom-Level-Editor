@@ -419,15 +419,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } else {
                 if (e.RowIndex == -1) {
                     e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
-                    if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex == PlaybackEnd + FrozenColumnOffset) {
+                    if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
                         Point p1 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
                         Point p2 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
                         Point p3 = new Point(e.CellBounds.Left /*+ (e.CellBounds.Width / 2)*/, e.CellBounds.Top + 10);
+                        if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
+                            p1 = new Point(e.CellBounds.Right + -6, e.CellBounds.Top);
+                            p2 = new Point(e.CellBounds.Right + +6, e.CellBounds.Top);
+                            p3 = new Point(e.CellBounds.Right, e.CellBounds.Top + 10);
+                        }
                         if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset)
                             e.Graphics.FillPolygon(BrushCorn, new[] { p1, p2, p3 });
                         else
                             e.Graphics.FillPolygon(PlaybackLoop ? BrushGreen : BrushRed, new[] { p1, p2, p3 });
                         //e.Graphics.FillRectangle(BrushCorn, e.CellBounds);
+                    }
+                    else if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
+                        Point p1 = new Point(e.CellBounds.Right + -6, e.CellBounds.Top);
+                        Point p2 = new Point(e.CellBounds.Right + +6, e.CellBounds.Top);
+                        Point p3 = new Point(e.CellBounds.Right, e.CellBounds.Top + 10);
+                        e.Graphics.FillPolygon(PlaybackLoop ? BrushGreen : BrushRed, new[] { p1, p2, p3 });
                     }
                     return;
                 }
@@ -469,19 +480,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///}
 
             e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
-
+            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+            //Painting playback head and end
             if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left, e.CellBounds.Top), new Point(e.CellBounds.Left, e.CellBounds.Bottom));
             }
             if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset) {
-                e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Left, e.CellBounds.Top), new Point(e.CellBounds.Left, e.CellBounds.Bottom));
+                e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
             if (Playback.IsPlaying && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
                 //e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
-
-            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
 
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {
@@ -990,11 +1000,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             PlaybackLoop = false;
                             PlaybackEnd = -1;
                             trackEditor.InvalidateColumn(e.ColumnIndex);
-                            trackEditor.InvalidateColumn(e.ColumnIndex - 1);
+                            trackEditor.InvalidateColumn(e.ColumnIndex + 1);
                         } else {
                             PlaybackLoop = true;
                             trackEditor.InvalidateColumn(e.ColumnIndex);
-                            trackEditor.InvalidateColumn(e.ColumnIndex - 1);
+                            trackEditor.InvalidateColumn(e.ColumnIndex + 1);
                         }
                     } else {
                         PlaybackEnd = e.ColumnIndex - FrozenColumnOffset;

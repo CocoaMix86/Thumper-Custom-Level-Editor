@@ -161,7 +161,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
         {
-            Sequencer_Object clone = new(this) {
+            Sequencer_Object clone = new(this.parent) {
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
