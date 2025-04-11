@@ -189,8 +189,8 @@ namespace Thumper_Custom_Level_Editor
             if (key != -1) {
                 SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, beat, 0));
                 //bar collect also plays ring collect noise
-                if (key == 19)
-                    SequencerEvents[20].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
+                if (key == 20)
+                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
             }
         }
 
