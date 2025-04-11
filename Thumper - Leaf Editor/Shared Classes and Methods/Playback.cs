@@ -304,13 +304,13 @@ namespace Thumper_Custom_Level_Editor
                 if (Seq.defaultvalue == 0) {
                     if (value is 0 or null) {
                         if ((decimal?)Seq.data_points[x - 1].value == 1)
-                            AddNoteToChannel(Seq.data_points[x].beat, -1, 8, 21);
+                            AddNoteToChannel(Seq.data_points[x].beat - 1, -1, 8, 21);
                     }
                 }
                 else if (Seq.defaultvalue == 1) {
                     if (value is 0) {
                         if ((decimal?)Seq.data_points[x - 1].value is 1 or null)
-                            AddNoteToChannel(Seq.data_points[x].beat, -1, 8, 21);
+                            AddNoteToChannel(Seq.data_points[x].beat - 1, -1, 8, 21);
                     }
                 }
             }
