@@ -1754,29 +1754,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnTrackCopy_Click(object sender, EventArgs e)
         {
             IEnumerable<Sequencer_Object> Copied = trackEditor.SelectedCells.Cast<DataGridViewCell>()
-                .Select(cell => SequencerObjects[cell.RowIndex])
+                .Select(cell => cell.RowIndex)
                 .Distinct()
-                .OrderBy(cell => cell.editor_row.Index).Select(x => x.Clone());
+                .Order().Select(x => SequencerObjects[x]);
 
             TCLE.ClipboardSequencer = new();
             foreach (Sequencer_Object copyseq in Copied) {
-                if (copyseq.friendly_lane is not "none") {
-                    Sequencer_Object lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
+                if (copyseq.friendly_lane == "lane center") {
+                    ///Sequencer_Object lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
                     //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
-                    if (lookup == null) {
+                    /*if (lookup == null) {
                         TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("a01", "lane left 2", new DataGridViewRow()));
                         TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("a02", "lane left 1", new DataGridViewRow()));
                         TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("ent", "lane center", new DataGridViewRow()));
                         TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("z01", "lane right 1", new DataGridViewRow()));
                         TCLE.ClipboardSequencer.Add(copyseq.CloneAsDefault("z02", "lane right 2", new DataGridViewRow()));
-                    }
-                    lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
-                    int index = TCLE.ClipboardSequencer.IndexOf(lookup);
-                    TCLE.ClipboardSequencer[index] = copyseq;
+                    }*/
+                    TCLE.ClipboardSequencer.Add(SequencerObjects[SequencerObjects.IndexOf(copyseq) - 2].Clone());
+                    TCLE.ClipboardSequencer.Add(SequencerObjects[SequencerObjects.IndexOf(copyseq) - 1].Clone());
+                    TCLE.ClipboardSequencer.Add(SequencerObjects[SequencerObjects.IndexOf(copyseq)    ].Clone());
+                    TCLE.ClipboardSequencer.Add(SequencerObjects[SequencerObjects.IndexOf(copyseq) + 1].Clone());
+                    TCLE.ClipboardSequencer.Add(SequencerObjects[SequencerObjects.IndexOf(copyseq) + 2].Clone());
+                    ///lookup = TCLE.ClipboardSequencer.FirstOrDefault(x => x.obj_name == copyseq.obj_name && x.param_path == copyseq.param_path && x.param_path_lane == copyseq.param_path_lane && x.isdefault == true);
+                    ///int index = TCLE.ClipboardSequencer.IndexOf(lookup);
+                    ///TCLE.ClipboardSequencer[index] = copyseq;
                 }
                 //else just add the object without needing extra lanes
-                else {
-                    TCLE.ClipboardSequencer.Add(copyseq);
+                else if (copyseq.friendly_lane == "none") {
+                    TCLE.ClipboardSequencer.Add(copyseq.Clone());
                 }
             }
 
@@ -1789,24 +1794,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             try {
                 int _index = trackEditor.CurrentRow?.Index ?? -1;
-                //check if copied row is longer than the leaf beat length
-                /*
-                int lastbeat = TCLE.ClipboardSequencer.First().editor_row.Cells.Count - FrozenColumnOffset;
-                if (lastbeat > LeafProperties.beats) {
-                    DialogResult _paste = MessageBox.Show("Copied track is longer than this leaf's beat count. Do you want to extend this leaf's beat count?\nYES = extend leaf and paste\nNO = paste, do not extend leaf\nCANCEL = do not paste", "repmuhT motsuC leveL rotidE", MessageBoxButtons.YesNoCancel);
-                    //YES = extend the leaf and then paste
-                    if (_paste == DialogResult.Yes)
-                        LeafProperties.beats = lastbeat;
-                    //NO = do not extend leaf and then paste
-                    //CANCEL = do nothing
-                    else if (_paste == DialogResult.Cancel)
-                        return;
-                }
-                */
                 ispasting = true;
                 //add copied Sequencer_Object to main _tracks list
                 foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
                     _index++;
+                    //if pasting inside a multilane object, skip index down a few rows
+                    switch (SequencerObjects[_index].friendly_lane) {
+                        case "lane left 2":
+                            _index += 5;
+                            break;
+                        case "lane left 1":
+                            _index += 4;
+                            break;
+                        case "lane center":
+                            _index += 3;
+                            break;
+                        case "lane right 1":
+                            _index += 2;
+                            break;
+                        case "lane right 2":
+                            _index += 1;
+                            break;
+                    }
                     DataGridViewRow dgvr = new();
                     Sequencer_Object clone = _newtrack.Clone();
                     clone.parent = leafProperties;
@@ -1833,7 +1842,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIkpaste");
             LogUndo = true;
             SaveCheckAndWrite(false, "Paste Objects");
-            //SaveCheckAndWrite(false, "Pasted tracks", "");
         }
 
         private void btnTrackClear_Click(object sender, EventArgs e)
@@ -2773,7 +2781,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void EnableLeafButtons()
+        public void EnableLeafButtons()
         {
             btnTrackDelete.Enabled = SequencerObjects.Count > 0;
             btnTrackUp.Enabled = SequencerObjects.Count > 1;

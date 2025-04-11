@@ -93,10 +93,10 @@ namespace Thumper_Custom_Level_Editor
             get => ExpandLanes;
             set {
                 ExpandLanes = value;
-                if (this.friendly_lane is not "lane center" and not "none")
-                    editor_row.Visible = value;
                 if (this.editor_row == null)
                     return;
+                if (this.friendly_lane is not "lane center" and not "none")
+                    editor_row.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, Properties.Settings.Default.LeafOptionShowCategory ? $"[{this.category}] " : "");
                 Form_LeafEditor.TrackUpdateHighlighting(this);
             }
@@ -147,7 +147,7 @@ namespace Thumper_Custom_Level_Editor
                 highlight_color = this.highlight_color,
                 highlight_value = this.highlight_value,
                 enabled = true,
-                isdefault = true,
+                isdefault = false,
                 mute = false,
                 id = TCLE.rng.Next(),
                 param_path_lane = this.param_path_lane,
@@ -161,7 +161,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
         {
-            Sequencer_Object clone = new(this.parent) {
+            Sequencer_Object clone = new(this) {
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
@@ -273,7 +273,15 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public JObject revertPoint { get; set; }
         [Browsable(false)]
-        public ObservableCollection<Sequencer_Object> seq_objs;
+        public ObservableCollection<Sequencer_Object> seq_objs {
+            get => _SeqObjs;
+            set {
+                _SeqObjs = value;
+                _SeqObjs.CollectionChanged += parent.seqobjs_CollectionChanged;
+                parent.EnableLeafButtons();
+            }
+        }
+        private ObservableCollection<Sequencer_Object> _SeqObjs = new();
         [Browsable(false)]
         public Sequencer_Object selectedobj { get; set; }
         [Browsable(false)]
@@ -284,8 +292,6 @@ namespace Thumper_Custom_Level_Editor
             parent = Parent;
             Beats = _beats;
             selectedobj = new(this);
-            seq_objs = new();
-            seq_objs.CollectionChanged += parent.seqobjs_CollectionChanged;
         }
 
         [CategoryAttribute("General")]
