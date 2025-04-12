@@ -88,6 +88,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private LvlProperties LvlProperties;
+        private List<DataGridViewRow> SelectedRows = new();
         public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
@@ -133,12 +134,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlUpdatePaths(LvlProperties.sublevel);
         }
 
+        bool MouseDown;
+        int LastRow = -1;
         private void lvlLeafList_SelectionChanged(object sender, EventArgs e)
         {
+            if (MouseDown) {
+                lvlLeafList.SelectionChanged -= lvlLeafList_SelectionChanged;
+                lvlLeafList.ClearSelection();
+                foreach (DataGridViewRow dgvr in SelectedRows) {
+                    if (dgvr.Index is not -1)
+                        lvlLeafList.Rows[dgvr.Index].Selected = true;
+                }
+                lvlLeafList.SelectionChanged += lvlLeafList_SelectionChanged;
+            }
+
             if (lvlLeafList.RowCount < 1 || lvlLeafList.SelectedRows.Count == 0)
                 return;
             lvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
             LvlUpdatePaths(LvlProperties.sublevel);
+        }
+
+        private void lvlLeafList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control) || e.RowIndex == LastRow)
+                return;
+            if (lvlLeafList.Rows[e.RowIndex].Selected) {
+                SelectedRows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                MouseDown = true;
+            }
+            else {
+                MouseDown = false;
+                lvlLeafList.ClearSelection();
+            }
+        }
+
+        private void lvlLeafList_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control) || !MouseDown)
+                return;
+            SelectedRows = new() { lvlLeafList.Rows[e.RowIndex] };
+            lvlLeafList.ClearSelection();
+            MouseDown = false;
         }
 
         private void lvlLeafList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -150,16 +186,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            /*
-            if (e.KeyData == TCLE.Keybinds["Copy"]) {
-                Copy();
-            }
-            else if (e.KeyData == TCLE.Keybinds["Cut"]) {
-                Cut();
-            }
-            else if (e.KeyData == TCLE.Keybinds["Paste"]) {
-                Paste();
-            }*/
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -175,12 +201,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (LeafsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
-                    // Proceed with the drag and drop, passing in the list item.
-                    LeafsToMove = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => LvlLeafs[x.Index]).ToList();
+                    // Proceed with the drag and drop, passing in the list item.var SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                    var _SelectedRows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                    _SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
+                    LeafsToMove = _SelectedRows.Select(x => LvlLeafs[x.Index]).ToList();
+                    //
                     TCLE.DragSource = "LeafList";
-                    //RowToMove.DefaultCellStyle.BackColor = SelectColor;
+                    LogUndo = false;
+                    //
                     DragDropEffects dropEffect = lvlLeafList.DoDragDrop(LeafsToMove, DragDropEffects.Move);
+                    //
                     LeafsToMove = null;
+                    LogUndo = true;
                     TCLE.DragSource = "none";
                     TargetRowToPaint = -3;
                     previousDragOver = -2;
@@ -230,15 +262,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 if (targetRow != -1 && targetRow != previousDragOver) {
-                    /*
-                    foreach (LvlLeafData leaf in LeafsToMove) {
-                        LvlLeafs.Remove(leaf);
-                        LvlLeafs.Insert(targetRow, leaf);
-                    }
-                    previousDragOver = targetRow;
-                    lvlLeafList.ClearSelection();
-                    lvlLeafList.Rows[targetRow].Selected = true;
-                    */
+                    if (targetRow + LeafsToMove.Count > LvlLeafs.Count)
+                        return;
+                    lvlLeafList.SelectionChanged -= lvlLeafList_SelectionChanged;
                     foreach (LvlLeafData leaf in LeafsToMove) {
                         LvlLeafs.Remove(leaf);
                     }
@@ -256,6 +282,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             lvlLeafList.Rows[lvlLeafList.RowCount - 1].Selected = true;
                         }
                     }
+                    lvlLeafList.SelectionChanged += lvlLeafList_SelectionChanged;
                     previousDragOver = targetRow;
                 }
             }
@@ -298,8 +325,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (string leaf in leafs2)
                     AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
             }
-            lvlLeafList.ClearSelection();
-            lvlLeafList.Rows[previousDragOver is -1 ? lvlLeafList.RowCount - 1 : previousDragOver].Selected = true;
             TargetRowToPaint = -3;
             previousDragOver = -2;
             lvlLeafList.Invalidate();
@@ -497,7 +522,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leaf.leafname,
                     0 });
             }*/
-            
+
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 lvlLeafList.RowCount = 0;
             }
@@ -877,8 +902,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_lvl.config", m_deserializeDockContent);
-            }
-            catch {
+            } catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
                 contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
@@ -1160,12 +1184,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
             leaffile?.Refresh();
 
-            if (leaffile == null || !leaffile.Exists) 
-                _leaf.beats = -1;            
-            else 
+            if (leaffile == null || !leaffile.Exists)
+                _leaf.beats = -1;
+            else
                 _leaf.beats = (int?)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"] ?? -1;
             ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
-            
+
             return _leaf.beats;
         }
 

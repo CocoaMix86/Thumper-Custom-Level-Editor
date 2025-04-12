@@ -139,6 +139,7 @@
             this.masterLvlList.Location = new Point(24, 0);
             this.masterLvlList.Margin = new Padding(4, 3, 4, 3);
             this.masterLvlList.Name = "masterLvlList";
+            this.masterLvlList.ReadOnly = true;
             this.masterLvlList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(90, 90, 90);
@@ -165,6 +166,7 @@
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
+            this.masterLvlList.CellMouseDown += this.masterLvlList_CellMouseDown;
             this.masterLvlList.CellMouseUp += this.masterLvlList_CellMouseUp;
             this.masterLvlList.CellPainting += this.masterLvlList_CellPainting;
             this.masterLvlList.RowPrePaint += this.masterLvlList_RowPrePaint;

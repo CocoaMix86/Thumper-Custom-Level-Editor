@@ -118,6 +118,8 @@
             this.gateLvlList.Tag = "editorpaneldgv";
             this.gateLvlList.CellClick += this.gateLvlList_CellClick_1;
             this.gateLvlList.CellDoubleClick += this.gateLvlList_CellDoubleClick;
+            this.gateLvlList.CellMouseDown += this.gateLvlList_CellMouseDown;
+            this.gateLvlList.CellMouseUp += this.gateLvlList_CellMouseUp;
             this.gateLvlList.CellPainting += this.gateLvlList_CellPainting;
             this.gateLvlList.RowPrePaint += this.gateLvlList_RowPrePaint;
             this.gateLvlList.SelectionChanged += this.gateLvlList_SelectionChanged;

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ABI.Windows.ApplicationModel.Activation;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WeifenLuo.WinFormsUI.Docking;
@@ -161,11 +162,46 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")));
         }
 
+        bool MouseDown;
+        int LastRow = -1;
         private void gateLvlList_SelectionChanged(object sender, EventArgs e)
         {
+            if (MouseDown) {
+                gateLvlList.SelectionChanged -= gateLvlList_SelectionChanged;
+                gateLvlList.ClearSelection();
+                foreach (DataGridViewRow dgvr in SelectedRows) {
+                    if (dgvr.Index is not -1)
+                        gateLvlList.Rows[dgvr.Index].Selected = true;
+                }
+                gateLvlList.SelectionChanged += gateLvlList_SelectionChanged;
+            }
+
             propertyGridGate.SelectedObjects = gateLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => GateLvls[x.Index]).ToArray();
             propertyGridGate.ExpandAllGridItems();
             propertyGridGate.Refresh();
+        }
+
+        private void gateLvlList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control) || e.RowIndex == LastRow)
+                return;
+            if (gateLvlList.Rows[e.RowIndex].Selected) {
+                SelectedRows = gateLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                MouseDown = true;
+            }
+            else {
+                MouseDown = false;
+                gateLvlList.ClearSelection();
+            }
+        }
+
+        private void gateLvlList_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control) || !MouseDown)
+                return;
+            SelectedRows = new() { gateLvlList.Rows[e.RowIndex] };
+            gateLvlList.ClearSelection();
+            MouseDown = false;
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -236,6 +272,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 if (targetRow != -1 && targetRow != previousDragOver) {
+                    if (targetRow + LvlsToMove.Count > GateLvls.Count)
+                        return;
+                    gateLvlList.SelectionChanged -= gateLvlList_SelectionChanged;
                     foreach (GateLvlData leaf in LvlsToMove) {
                         GateLvls.Remove(leaf);
                     }
@@ -253,6 +292,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             gateLvlList.Rows[gateLvlList.RowCount - 1].Selected = true;
                         }
                     }
+                    gateLvlList.SelectionChanged += gateLvlList_SelectionChanged;
                     previousDragOver = targetRow;
                 }
             }
@@ -543,8 +583,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_gate.config", m_deserializeDockContent);
-            }
-            catch {
+            } catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
             }

@@ -21,8 +21,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadMaster(load, filepath);
-                UndoList.Add(new SaveState()
-                {
+                UndoList.Add(new SaveState() {
                     reason = "",
                     savestate = load
                 });
@@ -55,6 +54,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorLoading;
         private bool SaveOnlyNoLoad;
         private bool IsAddingItems;
+        private bool GlobalCheckpoint;
+        private bool GlobalPlayPlus;
+        private bool GlobalIsolate;
         private bool LogUndo = true;
         public FileInfo loadedmaster
         {
@@ -86,8 +88,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public MasterProperties MasterProperties;
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new()
-        {
+        public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -95,8 +96,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new()
-        {
+        public DockContentEx contentMain = new() {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -115,8 +115,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if not selecting the file column, return and do nothing
-            if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
+            if (e.ColumnIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
+            if (e.RowIndex == -1) {
+                if (e.ColumnIndex == 4) {
+                    GlobalCheckpoint = !GlobalCheckpoint;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.checkpoint = GlobalCheckpoint;
+                    }
+                }
+                else if (e.ColumnIndex == 5) {
+                    GlobalPlayPlus = !GlobalPlayPlus;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.playplus = GlobalPlayPlus;
+                    }
+                }
+                else if (e.ColumnIndex == 6) {
+                    GlobalIsolate = !GlobalIsolate;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.isolate = GlobalIsolate;
+                    }
+                }
+                masterLvlList.Invalidate();
+                return;
+            }
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
 
@@ -141,37 +163,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterLvlList.Invalidate();
         }
 
+        bool MouseDown;
+        int LastRow = -1;
         private void masterLvlList_SelectionChanged(object sender, EventArgs e)
         {
-            /*
-            if (!IsAddingItems) {
+            if (MouseDown) {
                 masterLvlList.SelectionChanged -= masterLvlList_SelectionChanged;
+                masterLvlList.ClearSelection();
                 foreach (DataGridViewRow dgvr in SelectedRows) {
                     if (dgvr.Index is not -1)
                         masterLvlList.Rows[dgvr.Index].Selected = true;
                 }
                 masterLvlList.SelectionChanged += masterLvlList_SelectionChanged;
-            }*/
+            }
 
             propertyGridMaster.SelectedObjects = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index]).ToArray();
             propertyGridMaster.Refresh();
         }
 
+        private void masterLvlList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (ModifierKeys.HasFlag(Keys.Control) || e.RowIndex == LastRow)
+                return;
+            if (masterLvlList.Rows[e.RowIndex].Selected) {
+                SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                MouseDown = true;
+            }
+            else {
+                MouseDown = false;
+                masterLvlList.ClearSelection();
+            }
+        }
+
         private void masterLvlList_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-
         }
 
         private void masterLvlList_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            /*
-            if (ModifierKeys.HasFlag(Keys.Control))
-                masterLvlList.Rows[e.RowIndex].Selected = false;
-            else {
-                SelectedRows.Clear();
-                masterLvlList.ClearSelection();
-                masterLvlList.Rows[e.RowIndex].Selected = true;
-            }*/
+            if (ModifierKeys.HasFlag(Keys.Control) || !MouseDown)
+                return;
+            SelectedRows = new() { masterLvlList.Rows[e.RowIndex] };
+            masterLvlList.ClearSelection();
+            MouseDown = false;
         }
 
         private void masterLvlList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -194,9 +228,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // If the mouse moves outside the rectangle, start the drag.
                 if (LvlsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.
-                    var SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
-                    SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
-                    LvlsToMove = SelectedRows.Select(x => MasterLvls[x.Index]).ToList();
+                    var _SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                    _SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
+                    LvlsToMove = _SelectedRows.Select(x => MasterLvls[x.Index]).ToList();
                     //
                     TCLE.DragSource = "MasterList";
                     IsAddingItems = true;
@@ -216,15 +250,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void masterLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //if selection is in the checkbox columns, do not dragdrop
+            if (masterLvlList.HitTest(e.X, e.Y).ColumnIndex >= 4)
+                return;
             rowIndexFromMouseDown = masterLvlList.HitTest(e.X, e.Y).RowIndex;
             if (rowIndexFromMouseDown is -1) {
                 dragBoxFromMouseDown = Rectangle.Empty;
                 return;
             }
-            if (masterLvlList.Rows[rowIndexFromMouseDown].Selected)
-                SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
-            else
-                SelectedRows.Clear();
 
             Size dragSize = SystemInformation.DragSize;
             dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2), e.Y - (dragSize.Height / 2)), dragSize);
@@ -250,6 +283,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 if (targetRow != -1 && targetRow != previousDragOver) {
+                    if (targetRow + LvlsToMove.Count > MasterLvls.Count)
+                        return;
+                    masterLvlList.SelectionChanged -= masterLvlList_SelectionChanged;
                     foreach (MasterLvlData leaf in LvlsToMove) {
                         MasterLvls.Remove(leaf);
                     }
@@ -260,14 +296,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             if (x == 0)
                                 masterLvlList.CurrentCell = masterLvlList[0, targetRow];
                             masterLvlList.Rows[targetRow].Selected = true;
-                        }
-                        catch (Exception) {
+                        } catch (Exception) {
                             MasterLvls.Add(LvlsToMove[x]);
                             if (x == 0)
                                 masterLvlList.CurrentCell = masterLvlList[0, masterLvlList.RowCount - 1];
                             masterLvlList.Rows[masterLvlList.RowCount - 1].Selected = true;
                         }
                     }
+                    masterLvlList.SelectionChanged += masterLvlList_SelectionChanged;
                     previousDragOver = targetRow;
                 }
             }
@@ -579,8 +615,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             if (index is -1) {
-                MasterLvls.Add(new MasterLvlData()
-                {
+                MasterLvls.Add(new MasterLvlData() {
                     type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                     name = (string)_load["obj_name"],
                     playplus = true,
@@ -592,8 +627,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                MasterLvls.Insert(index, new MasterLvlData()
-                {
+                MasterLvls.Insert(index, new MasterLvlData() {
                     type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                     name = (string)_load["obj_name"],
                     playplus = true,
@@ -680,8 +714,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_master.config", m_deserializeDockContent);
-            }
-            catch {
+            } catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
             }
@@ -723,8 +756,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //setup new master properties
             masterLvlList.Rows.Clear();
-            masterproperties = new(this, filepath)
-            {
+            masterproperties = new(this, filepath) {
                 skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
@@ -734,8 +766,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             MasterLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
-                MasterLvls.Add(new MasterLvlData()
-                {
+                MasterLvls.Add(new MasterLvlData() {
                     type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
                     name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
@@ -794,8 +825,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedmaster = new FileInfo(sfd.FileName);
 
-                masterproperties ??= new(this, loadedmaster)
-                {
+                masterproperties ??= new(this, loadedmaster) {
                     skybox = "<none>",
                     introlvl = "<none>",
                     checkpointlvl = "<none>"
@@ -829,8 +859,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is not saved
                 this.Text = LoadedMaster.Name + "*";
                 //update the undo list
-                UndoList.Insert(0, new SaveState()
-                {
+                UndoList.Insert(0, new SaveState() {
                     reason = Reason,
                     savestate = _saveJSON
                 });

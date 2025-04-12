@@ -154,6 +154,8 @@
             this.lvlLeafList.Tag = "editorpaneldgv";
             this.lvlLeafList.CellClick += this.lvlLeafList_CellClick;
             this.lvlLeafList.CellDoubleClick += this.lvlLeafList_CellDoubleClick;
+            this.lvlLeafList.CellMouseDown += this.lvlLeafList_CellMouseDown;
+            this.lvlLeafList.CellMouseUp += this.lvlLeafList_CellMouseUp;
             this.lvlLeafList.CellPainting += this.lvlLeafList_CellPainting;
             this.lvlLeafList.RowPrePaint += this.lvlLeafList_RowPrePaint;
             this.lvlLeafList.SelectionChanged += this.lvlLeafList_SelectionChanged;
