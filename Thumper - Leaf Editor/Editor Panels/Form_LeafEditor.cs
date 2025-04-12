@@ -767,16 +767,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             object _tempval = trackEditor[e.ColumnIndex, e.RowIndex].Value;
             //check if value to be set works with the objects type
-            if (SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
-                if ((decimal)_tempval is not 1 or 0)
-                    _tempval = 1m;
-            } else if (SequencerObjects[e.RowIndex].trait_type == "kTraitColor") {
-                _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
-            } else if (SequencerObjects[e.RowIndex].trait_type == "kTraitAction") {
-                if ((decimal)_tempval is not 1)
-                    _tempval = 1m;
-            } else if (SequencerObjects[e.RowIndex].trait_type == "kTraitInt") {
-                _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+            if (_tempval != null) {
+                if (SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
+                    if ((decimal)_tempval is not 1 or 0)
+                        _tempval = 1m;
+                }
+                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitColor") {
+                    _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                }
+                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitAction") {
+                    if ((decimal)_tempval is not 1)
+                        _tempval = 1m;
+                }
+                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitInt") {
+                    _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
+                }
             }
 
             trackEditor[e.ColumnIndex, e.RowIndex].Value = _tempval;
@@ -851,6 +856,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyCode == Keys.Enter)
                 ResetRowAfterEdit = true;
+            if (trackEditor.CurrentCell.RowIndex == trackEditor.RowCount - 1)
+                trackEditor_SelectionChanged(null, null);
         }
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -1283,7 +1290,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
-            trackEditor.CurrentCell = trackEditor.Rows[e.RowIndex].Cells[FrozenColumnOffset];
+            trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
             trackEditor.Invalidate();
         }
 
