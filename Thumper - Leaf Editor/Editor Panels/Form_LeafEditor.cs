@@ -1290,7 +1290,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
-            trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
+            trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex < FrozenColumnOffset ? FrozenColumnOffset : trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
             trackEditor.Invalidate();
         }
 
