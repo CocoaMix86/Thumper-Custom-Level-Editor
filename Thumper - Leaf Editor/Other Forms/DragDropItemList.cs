@@ -71,8 +71,11 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             string cellval = dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString();
             if (Items == "path")
             {
-                if (TCLE.GlobalActiveDocument.GetType() == typeof(Form_LvlEditor))
-                    (TCLE.GlobalActiveDocument as Form_LvlEditor).lvlProperties.sublevel.paths.Add(cellval);
+                if (TCLE.GlobalLastLvl != null) {
+                    TCLE.GlobalLastLvl.lvlProperties.sublevel.paths.Add(cellval);
+                    TCLE.GlobalLastLvl.LvlUpdatePaths(TCLE.GlobalLastLvl.lvlProperties.sublevel);
+                    TCLE.GlobalLastLvl.SaveCheckAndWrite(false, "Added path/tunnel");
+                }
             }
             else if (Items == "leaf")
             {

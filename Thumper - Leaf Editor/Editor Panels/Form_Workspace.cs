@@ -72,6 +72,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (DocClosing.GetType() == typeof(Form_RawText))
                     filetoclose = (DocClosing as Form_RawText).loadedfile;
 
+                if (TCLE.GlobalLastGate == DocClosing)
+                    TCLE.GlobalLastGate = null;
+                if (TCLE.GlobalLastLvl == DocClosing)
+                    TCLE.GlobalLastLvl = null;
+                if (TCLE.GlobalLastMaster == DocClosing)
+                    TCLE.GlobalLastMaster = null;
                 //check if any other tab is open that is the same file
                 //if it is, we don't want to close the file lock
                 if (filetoclose == null)
