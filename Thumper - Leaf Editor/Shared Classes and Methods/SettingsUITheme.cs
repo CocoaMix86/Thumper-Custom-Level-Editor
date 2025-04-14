@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -32,6 +27,8 @@ namespace Thumper_Custom_Level_Editor
             samplelistbg = Properties.Settings.Default.ColorSampleListBG;
             samplewaveformbg = Properties.Settings.Default.ColorWaveformBG;
             projectexplorerbg = Properties.Settings.Default.ColorProjectExplorerBG;
+            projectexplorerhighlight = Properties.Settings.Default.ColorProjExpHighlight;
+            projectexplorertext = Properties.Settings.Default.ColorProjExpText;
             rawbg = Properties.Settings.Default.ColorRawBG;
             rawtext = Properties.Settings.Default.ColorRawText;
         }

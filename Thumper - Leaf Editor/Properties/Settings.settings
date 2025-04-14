@@ -123,7 +123,7 @@
       <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="ColorProjectExplorerBG" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">55, 55, 55</Value>
+      <Value Profile="(Default)">31, 31, 31</Value>
     </Setting>
     <Setting Name="ColorRawBG" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">31, 31, 31</Value>

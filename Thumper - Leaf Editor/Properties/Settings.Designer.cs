@@ -502,7 +502,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
         public global::System.Drawing.Color ColorProjectExplorerBG {
             get {
                 return ((global::System.Drawing.Color)(this["ColorProjectExplorerBG"]));
