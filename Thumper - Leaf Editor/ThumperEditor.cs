@@ -379,7 +379,7 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
-        VolumeMaster volma = new VolumeMaster();
+        VolumeMaster volma = null;
         private void btnVolumeMixer_Click(object sender, EventArgs e)
         {
             if (volma == null || volma.IsDisposed)
