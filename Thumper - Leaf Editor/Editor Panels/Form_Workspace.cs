@@ -11,6 +11,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             dockMain.Theme = new VS2015DarkTheme();
+            dockMain.Theme.Extender.FloatWindowFactory = new CustomFloatWindowFactory();
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             if (TCLE.IsLoadingProject && configtoload != "") {
                 try {
@@ -52,6 +53,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dockMain.ActiveContent != null)
                 TCLE.GlobalActiveDocument = dockMain.ActiveContent;
             dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
+        }
+
+        private void dockMain_ActivePaneChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)

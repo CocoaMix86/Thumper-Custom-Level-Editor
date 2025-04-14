@@ -775,7 +775,7 @@ namespace Thumper_Custom_Level_Editor
                 dc.DockHandler.DockState = DockState.Float;
             }
         }
-        private void toolstripWindowDock_Click(object sender, EventArgs e) => dockMain.ActiveDocument.DockHandler.DockState = DockState.Document;
+        private void toolstripWindowDock_Click(object sender, EventArgs e) => TCLE.GlobalActiveDocument.DockHandler.DockState = DockState.Document;
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {

@@ -582,7 +582,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(293, 242);
+            this.contextmenuFile.Size = new Size(293, 220);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // toolstripFileNewProject

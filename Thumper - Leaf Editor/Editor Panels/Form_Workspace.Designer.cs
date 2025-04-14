@@ -50,6 +50,7 @@
             this.dockMain.ContentRemoved += this.dockMain_ContentRemoved;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
             this.dockMain.ActiveContentChanged += this.dockMain_ActiveContentChanged;
+            this.dockMain.ActivePaneChanged += this.dockMain_ActivePaneChanged;
             this.dockMain.Enter += this.dockMain_Enter;
             // 
             // Form_WorkSpace
