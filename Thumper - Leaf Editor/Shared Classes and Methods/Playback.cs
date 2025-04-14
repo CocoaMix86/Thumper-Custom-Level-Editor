@@ -69,7 +69,7 @@ namespace Thumper_Custom_Level_Editor
 
             LastBeatWithCall = Leaf.beats + CallOffset;
             LeafLastBeat = Leaf.beats;
-            if (BeatStop != -1) {
+            if (BeatStop > 0) {
                 BeatStop += 1;
                 LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
                 LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset;
