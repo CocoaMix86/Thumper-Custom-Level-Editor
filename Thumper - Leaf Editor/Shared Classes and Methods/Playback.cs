@@ -202,7 +202,7 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> EventsToAdd19 = new();
             List<BASS_MIDI_EVENT> EventsToAdd20 = new();
             //combine ring and bar hit events to get a single track of events, in choronological order
-            List<BASS_MIDI_EVENT> ComboList = SequencerEvents[20];/*.Concat(SequencerEvents[20]).ToList();*/
+            List<BASS_MIDI_EVENT> ComboList = SequencerEvents[19];/*.Concat(SequencerEvents[20]).ToList();*/
             //concat turn and thump hits, as they contribute to keeping a combo going
             ComboList = ComboList.Concat(SequencerEvents[8]).ToList();
             ComboList = ComboList.Concat(SequencerEvents[13]).ToList();
@@ -213,7 +213,7 @@ namespace Thumper_Custom_Level_Editor
                 if (ComboList[x].chan is 8 or 13 or 22)
                     continue;
                 //test if the event behind current is within 500 ticks (5 beats) of the current event
-                if (ComboList[x].tick - ComboList[x - 1].tick is < 300 and not 0) {
+                if (ComboList[x].tick - ComboList[x - 1].tick is < 400 and not 0) {
                     //if found, pitch up next sound.
                     //add the pitch events to the lists.
                     if (Pitch < 9824) {
