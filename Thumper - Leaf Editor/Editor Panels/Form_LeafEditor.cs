@@ -251,10 +251,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
             ZoomHasChanged = true;
+            int display = trackEditor.FirstDisplayedScrollingColumnIndex;
             foreach (DataGridViewColumn dgvc in Columns) {
                 dgvc.Width = trackZoom.Value;
             }
-            int display = trackEditor.FirstDisplayedScrollingColumnIndex;
             if (trackEditor.ColumnCount > 1 && display != -1 && display + 1 < trackEditor.ColumnCount - 1) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 trackEditor.FirstDisplayedScrollingColumnIndex = display + 1;
@@ -267,10 +267,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
             ZoomHasChanged = true;
+            int display = trackEditor.FirstDisplayedScrollingRowIndex;
             foreach (DataGridViewRow dgvr in trackEditor.Rows) {
                 dgvr.Height = trackZoomVert.Value;
             }
-            int display = trackEditor.FirstDisplayedScrollingRowIndex;
             if (trackEditor.RowCount > 1 && display != -1) {
                 trackEditor.Scroll -= trackEditor_Scroll;
                 vscrollbarTrackEditor_Resize();

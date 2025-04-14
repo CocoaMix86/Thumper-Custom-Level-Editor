@@ -231,7 +231,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.PlaySound("UIselect");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
-                SeqObjTreeBuilder.UpdateFavorites(leaf.treeObjects);
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
 
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
@@ -243,7 +243,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.PlaySound("UIselect");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
-                SeqObjTreeBuilder.UpdateFavorites(leaf.treeObjects);
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
 
         public static void toolStripFavClear_Click(object sender, EventArgs e)
@@ -254,7 +254,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.PlaySound("UIdelete");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
-                SeqObjTreeBuilder.UpdateFavorites(leaf.treeObjects);
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
     }
 }
