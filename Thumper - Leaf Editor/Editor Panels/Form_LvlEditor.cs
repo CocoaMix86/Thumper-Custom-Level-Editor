@@ -435,6 +435,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush ClearColor = new SolidBrush(Color.Black);
         private static SolidBrush BrushWhite = new SolidBrush(Color.White);
         private static Pen PenGreen = new Pen(Color.Green, 4);
+        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -460,6 +461,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
                 if (e.RowIndex + 1 == TargetRowToPaint)
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
+            }
+
+            if (Playback.IsPlaying) {
+                if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart) < LvlLeafs[e.RowIndex].beats) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].beats;
+                    double offset = Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart;
+                    e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
+                }
             }
         }
 
@@ -1187,8 +1196,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 _leaf.beats = (int?)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"] ?? -1;
             ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
+            UpdateBeatPosition();
 
             return _leaf.beats;
+        }
+
+        public void UpdateBeatPosition()
+        {
+            int beatpos = 0;
+            foreach (LvlLeafData _leaf in LvlLeafs) {
+                _leaf.beatstart = beatpos;
+                beatpos += _leaf.beats;
+            }
         }
 
         public void ColorRow(LvlLeafData _leaf, int index)
@@ -1385,7 +1404,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int PlaybackStart = -2;
         private int PlaybackEnd = -2;
         private bool PlaybackLoop;
-        private int PreviousSetColumn = 3;
         private bool ForceStop;
         private void btnLvlPlayback_Click(object sender, EventArgs e)
         {
@@ -1405,7 +1423,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     beatoffset += leaf.beats;
                 }
                 //Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
-                Playback.Play(PlaybackStart, PlaybackLoop);
+                Playback.Play(PlaybackStart, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -1421,11 +1439,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (Playback.PlaybackBeat < 0)
                 return;
-            if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
-                //trackEditor.InvalidateColumn(PreviousSetColumn);
-                //trackEditor.InvalidateColumn(PreviousSetColumn - 1);
-                //trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
-                //PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
+            if (Playback.IsPlaying ) {
+                lvlLeafList.Invalidate();
             }
             else {
                 if (PlaybackLoop && !ForceStop)
@@ -1437,7 +1452,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 var Error = Bass.BASS_ErrorGetCode();
                 Playback.SyncTimer.Dispose();
                 btnLvlPlayback.Image = Properties.Resources.icon_play2;
-                PreviousSetColumn = 3;
                 //trackEditor.Invalidate();
             }
         }

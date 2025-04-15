@@ -20,6 +20,7 @@ namespace Thumper_Custom_Level_Editor
                 return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }
+        public int beatstart;
 
         public LvlLeafData()
         {

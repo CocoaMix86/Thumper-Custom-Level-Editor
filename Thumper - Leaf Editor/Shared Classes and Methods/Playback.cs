@@ -23,6 +23,8 @@ namespace Thumper_Custom_Level_Editor
         //
         public static List<BASS_MIDI_EVENT>[] GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
         public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
+        public static List<Tuple<string, int>> GlobalLeafQueue = new();
+        public static string GlobalCurrentLeaf;
 
         public static void Initialize()
         {
@@ -34,6 +36,7 @@ namespace Thumper_Custom_Level_Editor
                     GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
             SamplesToPlay = new();
+            GlobalLeafQueue = new();
             //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", Properties.Resources.Thumper_Sequencer);
@@ -87,6 +90,7 @@ namespace Thumper_Custom_Level_Editor
                 LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
                 LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset + BeatOffset;
             }
+            GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.FilePath.Name, BeatOffset * 100));
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
             {
@@ -478,7 +482,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static int channelsync;
-        public static void Play(double StartTime, bool Loop = false)
+        public static void Play(double StartTime, bool Loop = false, int _ApproachBeats = 0)
         {
             ChannelEnd();
             CreateSampleSoundfont();
@@ -515,6 +519,7 @@ namespace Thumper_Custom_Level_Editor
                 Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + 9));
                 Error = Bass.BASS_ErrorGetCode();
             }
+            ApproachBeats = _ApproachBeats;
             //play the sequence
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat >= 0 ? false : true)) {
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
@@ -549,12 +554,17 @@ namespace Thumper_Custom_Level_Editor
         public static int PlaybackBeat;
         public static double PlaybackTick;
         public static double PlaybackSubBeat;
+        public static int ApproachBeats;
         private static void SyncTimer_Tick(object sender)
         {
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
-            PlaybackBeat = (int)(PlaybackTick / 100d) - 9;
+            PlaybackBeat = (int)(PlaybackTick / 100d) - 9 - ApproachBeats;
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
             //ColumnPlaybackHead++;
+            /*if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
+                GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
+                GlobalLeafQueue.RemoveAt(0);
+            }*/
         }
     }
 }
