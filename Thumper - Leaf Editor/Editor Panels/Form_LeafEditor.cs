@@ -2964,6 +2964,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ispasting = true;
             LogUndo = false;
             int pastingrow = trackEditor.CurrentCell.RowIndex;
+            if (SequencerObjects[pastingrow].friendly_lane == "lane center" && SequencerObjects[pastingrow].expandlanes == false && TCLE.ClipboardDataPoints.Count >= 5)
+                pastingrow -= 2;
             int pastingcol = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
             int rowoffset = pastingrow - TCLE.ClipboardDataPoints.First().index;
             int coloffset = pastingcol - TCLE.ClipboardDataPoints.First().beat;
