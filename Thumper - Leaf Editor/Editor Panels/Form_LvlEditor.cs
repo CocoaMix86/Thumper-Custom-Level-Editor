@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Effects;
-using Thumper_Custom_Level_Editor.Other_Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels

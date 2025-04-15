@@ -965,7 +965,9 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     if (files.Any(x => x.Name == pack.Item1.Name)) {
+                        TCLE.CloseFile(pack.Item1);
                         TCLE.DeleteFileLock(files.First(x => x.Name == pack.Item1.Name));
+                        TCLE.RemoveProjectSamples(files.First(x => x.Name == pack.Item1.Name));
                         filesupdates = true;
                     }
                 }

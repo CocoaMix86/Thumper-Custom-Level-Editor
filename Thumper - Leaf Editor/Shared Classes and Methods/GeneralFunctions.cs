@@ -10,6 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
+using Windows.ApplicationModel.AppExtensions;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -521,11 +522,26 @@ namespace Thumper_Custom_Level_Editor
                 });
             }
 
+            UpdateEditorsWithSamples();
+        }
+
+        public static void RemoveProjectSamples(FileInfo SampFile)
+        {
+            TCLE.ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            UpdateEditorsWithSamples();
+        }
+
+        public static void UpdateEditorsWithSamples()
+        {
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.DockHandler.TabText.Contains(".leaf"))) {
+
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
-            return;
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+                //load loop track names and paths to lvlLoopTracks DGV
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
+            }
         }
 
         public static void CalculateSampleRuntimes()

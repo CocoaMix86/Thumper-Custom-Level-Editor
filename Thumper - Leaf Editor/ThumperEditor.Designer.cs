@@ -927,10 +927,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
-            this.contextmenuSampPacks.Size = new Size(165, 290);
+            this.contextmenuSampPacks.Size = new Size(181, 312);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
             // 
@@ -940,7 +938,7 @@
             this.toolstripSampLevel1.ForeColor = Color.White;
             this.toolstripSampLevel1.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel1.Name = "toolstripSampLevel1";
-            this.toolstripSampLevel1.Size = new Size(164, 22);
+            this.toolstripSampLevel1.Size = new Size(180, 22);
             this.toolstripSampLevel1.Text = "Level 1 (320bpm)";
             // 
             // toolstripSampLevel2
@@ -949,7 +947,7 @@
             this.toolstripSampLevel2.ForeColor = Color.White;
             this.toolstripSampLevel2.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel2.Name = "toolstripSampLevel2";
-            this.toolstripSampLevel2.Size = new Size(164, 22);
+            this.toolstripSampLevel2.Size = new Size(180, 22);
             this.toolstripSampLevel2.Text = "Level 2 (340bpm)";
             // 
             // toolstripSampLevel3
@@ -958,7 +956,7 @@
             this.toolstripSampLevel3.ForeColor = Color.White;
             this.toolstripSampLevel3.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel3.Name = "toolstripSampLevel3";
-            this.toolstripSampLevel3.Size = new Size(164, 22);
+            this.toolstripSampLevel3.Size = new Size(180, 22);
             this.toolstripSampLevel3.Text = "Level 3 (360bpm)";
             // 
             // toolstripSampLevel4
@@ -967,7 +965,7 @@
             this.toolstripSampLevel4.ForeColor = Color.White;
             this.toolstripSampLevel4.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel4.Name = "toolstripSampLevel4";
-            this.toolstripSampLevel4.Size = new Size(164, 22);
+            this.toolstripSampLevel4.Size = new Size(180, 22);
             this.toolstripSampLevel4.Text = "Level 4 (380bpm)";
             // 
             // toolstripSampLevel5
@@ -976,7 +974,7 @@
             this.toolstripSampLevel5.ForeColor = Color.White;
             this.toolstripSampLevel5.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel5.Name = "toolstripSampLevel5";
-            this.toolstripSampLevel5.Size = new Size(164, 22);
+            this.toolstripSampLevel5.Size = new Size(180, 22);
             this.toolstripSampLevel5.Text = "Level 5 (400bpm)";
             // 
             // toolstripSampLevel6
@@ -985,7 +983,7 @@
             this.toolstripSampLevel6.ForeColor = Color.White;
             this.toolstripSampLevel6.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel6.Name = "toolstripSampLevel6";
-            this.toolstripSampLevel6.Size = new Size(164, 22);
+            this.toolstripSampLevel6.Size = new Size(180, 22);
             this.toolstripSampLevel6.Text = "Level 6 (420bpm)";
             // 
             // toolstripSampLevel7
@@ -994,7 +992,7 @@
             this.toolstripSampLevel7.ForeColor = Color.White;
             this.toolstripSampLevel7.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel7.Name = "toolstripSampLevel7";
-            this.toolstripSampLevel7.Size = new Size(164, 22);
+            this.toolstripSampLevel7.Size = new Size(180, 22);
             this.toolstripSampLevel7.Text = "Level 7 (440bpm)";
             // 
             // toolstripSampLevel8
@@ -1003,7 +1001,7 @@
             this.toolstripSampLevel8.ForeColor = Color.White;
             this.toolstripSampLevel8.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel8.Name = "toolstripSampLevel8";
-            this.toolstripSampLevel8.Size = new Size(164, 22);
+            this.toolstripSampLevel8.Size = new Size(180, 22);
             this.toolstripSampLevel8.Text = "Level 8 (460bpm)";
             // 
             // toolstripSampLevel9
@@ -1012,7 +1010,7 @@
             this.toolstripSampLevel9.ForeColor = Color.White;
             this.toolstripSampLevel9.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevel9.Name = "toolstripSampLevel9";
-            this.toolstripSampLevel9.Size = new Size(164, 22);
+            this.toolstripSampLevel9.Size = new Size(180, 22);
             this.toolstripSampLevel9.Text = "Level 9 (480bpm)";
             // 
             // toolstripSampLevelDiss
@@ -1021,7 +1019,7 @@
             this.toolstripSampLevelDiss.ForeColor = Color.White;
             this.toolstripSampLevelDiss.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelDiss.Name = "toolstripSampLevelDiss";
-            this.toolstripSampLevelDiss.Size = new Size(164, 22);
+            this.toolstripSampLevelDiss.Size = new Size(180, 22);
             this.toolstripSampLevelDiss.Text = "Dissonance";
             // 
             // toolstripSampLevelDrones
@@ -1030,7 +1028,7 @@
             this.toolstripSampLevelDrones.ForeColor = Color.White;
             this.toolstripSampLevelDrones.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelDrones.Name = "toolstripSampLevelDrones";
-            this.toolstripSampLevelDrones.Size = new Size(164, 22);
+            this.toolstripSampLevelDrones.Size = new Size(180, 22);
             this.toolstripSampLevelDrones.Text = "Drones";
             // 
             // toolstripSampLevelRests
@@ -1039,7 +1037,7 @@
             this.toolstripSampLevelRests.ForeColor = Color.White;
             this.toolstripSampLevelRests.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelRests.Name = "toolstripSampLevelRests";
-            this.toolstripSampLevelRests.Size = new Size(164, 22);
+            this.toolstripSampLevelRests.Size = new Size(180, 22);
             this.toolstripSampLevelRests.Text = "Rests";
             // 
             // toolstripSampLevelMisc
@@ -1048,7 +1046,7 @@
             this.toolstripSampLevelMisc.ForeColor = Color.White;
             this.toolstripSampLevelMisc.Image = Properties.Resources.editor_sample;
             this.toolstripSampLevelMisc.Name = "toolstripSampLevelMisc";
-            this.toolstripSampLevelMisc.Size = new Size(164, 22);
+            this.toolstripSampLevelMisc.Size = new Size(180, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
             // toolstripProjectPreload
