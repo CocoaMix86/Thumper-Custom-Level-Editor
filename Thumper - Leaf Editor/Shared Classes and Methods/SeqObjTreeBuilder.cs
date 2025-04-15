@@ -95,6 +95,8 @@ namespace Thumper_Custom_Level_Editor
                     SelectedImageKey = "category"
                 };
                 if (category == "PLAY SAMPLE") {
+                    _node.ImageKey = "samp";
+                    _node.SelectedImageKey = "samp";
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
                     foreach (string file in TCLE.ProjectSamples.Select(x => x.File?.Name).Distinct()) {
