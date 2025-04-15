@@ -57,6 +57,7 @@
             this.btnLvlLeafCopy = new ToolStripButton();
             this.btnLvlLeafPaste = new ToolStripButton();
             this.btnLvlLeafRandom = new ToolStripButton();
+            this.btnLvlPlayback = new ToolStripButton();
             this.lvlLeafPaths = new DataGridView();
             this.columnLvlLeafPaths = new DataGridViewTextBoxColumn();
             this.lvlPathsToolStrip = new ToolStrip();
@@ -81,6 +82,7 @@
             this.panelTunnel = new Panel();
             this.panelLoop = new Panel();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).BeginInit();
             this.lvlToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
@@ -230,7 +232,7 @@
             this.lvlToolStrip.GripMargin = new Padding(0);
             this.lvlToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.lvlToolStrip.ImageScalingSize = new Size(20, 20);
-            this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlLeafRandom });
+            this.lvlToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLvlLeafAdd, this.btnLvlLeafDelete, this.btnLvlLeafUp, this.btnLvlLeafDown, this.btnLvlLeafCopy, this.btnLvlLeafPaste, this.btnLvlLeafRandom, this.btnLvlPlayback });
             this.lvlToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.lvlToolStrip.Location = new Point(0, 0);
             this.lvlToolStrip.Name = "lvlToolStrip";
@@ -322,6 +324,16 @@
             this.btnLvlLeafRandom.Size = new Size(23, 24);
             this.btnLvlLeafRandom.ToolTipText = "Add a random leaf";
             this.btnLvlLeafRandom.Click += this.btnLvlLeafRandom_Click;
+            // 
+            // btnLvlPlayback
+            // 
+            this.btnLvlPlayback.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLvlPlayback.Image = Properties.Resources.icon_play2;
+            this.btnLvlPlayback.ImageTransparentColor = Color.Magenta;
+            this.btnLvlPlayback.Name = "btnLvlPlayback";
+            this.btnLvlPlayback.Size = new Size(23, 24);
+            this.btnLvlPlayback.Text = "toolStripButton1";
+            this.btnLvlPlayback.Click += this.btnLvlPlayback_Click;
             // 
             // lvlLeafPaths
             // 
@@ -717,6 +729,11 @@
             this.dockPanel1.TabIndex = 166;
             this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += this.timer1_Tick;
+            // 
             // Form_LvlEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -790,5 +807,7 @@
         private Panel panelTunnel;
         private Panel panelLoop;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private ToolStripButton btnLvlPlayback;
+        private System.Windows.Forms.Timer timer1;
     }
 }

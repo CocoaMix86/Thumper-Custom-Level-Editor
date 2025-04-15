@@ -13,14 +13,27 @@ namespace Thumper_Custom_Level_Editor
         public static int MidiStream = -1;
         public static int MidiSoundfontHandle = -1;
         public static BASS_MIDI_FONT[] MidiSoundFonts;
-        public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[20];
+        public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[23];
+        public static List<string> SamplesToPlay = new();
+        public static List<List<BASS_MIDI_EVENT>> SampleEvents = new();
         private static int LastBeatWithCall;
         private static int LeafLastBeat;
         private static BASSError Error;
         public static System.Threading.Timer SyncTimer;
+        //
+        public static List<BASS_MIDI_EVENT>[] GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
+        public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
 
         public static void Initialize()
         {
+            GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
+            for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
+                // +8 for lead time
+                GlobalSequencerEvents[x] = new();
+                if (x != 0)
+                    GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
+            }
+            SamplesToPlay = new();
             //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", Properties.Resources.Thumper_Sequencer);
@@ -55,16 +68,16 @@ namespace Thumper_Custom_Level_Editor
         ///21= lane end
         ///22= turn silent (for long turns)
 
-        public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1)
+        public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1, int _BeatOffset = 0)
         {
-            SamplesToPlay = new();
+            BeatOffset = _BeatOffset;
             SampleEvents = new();
             SequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < SequencerEvents.Length; x++) {
                 // +8 for lead time
                 SequencerEvents[x] = new(Leaf.beats + CallOffset);
-                if (x != 0)
-                    SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
+                //if (x != 0)
+                //    SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
 
             LastBeatWithCall = Leaf.beats + CallOffset;
@@ -72,7 +85,7 @@ namespace Thumper_Custom_Level_Editor
             if (BeatStop > 0) {
                 BeatStop += 1;
                 LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
-                LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset;
+                LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset + BeatOffset;
             }
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
@@ -170,18 +183,23 @@ namespace Thumper_Custom_Level_Editor
             }
             PitchShiftingBarsRings(Leaf);
             MidiEventsForSentry(Leaf);
-            CreateSampleSoundfont();
             MidiEventsForSpeed(Leaf.seq_objs.FirstOrDefault(x => x.obj_name == "avatar.lib" && x.friendly_param == "speed"));
+
+            for (int x = 0; x < SequencerEvents.Length; x++) {
+                GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Concat(SequencerEvents[x]).ToList();
+                GlobalSampleEvents.AddRange(SampleEvents);
+            }
         }
 
         /// Key and Channel are the same thing
         private static int Pitch = 8192;
         private static int CallOffset = 9;
+        private static int BeatOffset = 0;
         public static void AddNoteToChannel(int beat, int key, int call, int callkey, bool mute = false)
         {
             //beats land on multiples of 100 ticks.
             //to handle offsetting calls, increase beats by 8.
-            beat = (beat + CallOffset) * 100;
+            beat = (beat + CallOffset + BeatOffset) * 100;
             call *= 100;
             if (call > 0) {
                 SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(int)Properties.Settings.Default[$"VolKey{callkey}"]), callkey, beat - call, 0));
@@ -191,7 +209,7 @@ namespace Thumper_Custom_Level_Editor
                 SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 20)
-                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)20, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 20, beat, 0));
+                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 19, beat, 0));
             }
         }
 
@@ -392,8 +410,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static List<string> SamplesToPlay = new();
-        public static List<List<BASS_MIDI_EVENT>> SampleEvents = new();
         public static void MidiEventPlaySample(Sequencer_Object Seq)
         {
             SamplesToPlay.Add(Seq.obj_name);
@@ -406,7 +422,7 @@ namespace Thumper_Custom_Level_Editor
                 velocity = 127;
             //write each data point as a sample event
             foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
-                SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, (byte)velocity), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset) * 100, 0));
+                SampleEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)SamplesToPlay.Count, (byte)velocity), SequencerEvents.Length + SamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
             }
         }
 
@@ -434,30 +450,30 @@ namespace Thumper_Custom_Level_Editor
             //set instrument to use and tempo
             //These need to be at tick 0, on channel 0
             //SequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0));
-            SequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 36, 0, 0, 0));
-            SequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0));
+            GlobalSequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 36, 0, 0, 0));
+            GlobalSequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0));
             //cap off each channel with an END event
-            for (int x = 0; x < SequencerEvents.Length; x++) {
-                if (SequencerEvents[x].Count > 0) {
-                    int tickend = SequencerEvents[x].Last().tick;
-                    SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (LastBeatWithCall * 100), 0));
+            for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
+                if (GlobalSequencerEvents[x].Count > 0) {
+                    int tickend = GlobalSequencerEvents[x].Last().tick;
+                    GlobalSequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (LastBeatWithCall * 100), 0));
                 }
                 //make sure all events are in proper tick order
-                SequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+                GlobalSequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
 
             //for sample play events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
-            for (int x = 0; x < SampleEvents.Count; x++) {
-                int channeloffset = SequencerEvents.Length + x;
-                SampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 1, channeloffset, 0, 0));
+            for (int x = 0; x < GlobalSampleEvents.Count; x++) {
+                int channeloffset = GlobalSequencerEvents.Length + x;
+                GlobalSampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
-                SampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
-                if (SampleEvents[x].Count > 0) {
-                    int tickend = SampleEvents[x].Last().tick;
-                    SampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeatWithCall * 100), 0));
+                GlobalSampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
+                if (GlobalSampleEvents[x].Count > 0) {
+                    int tickend = GlobalSampleEvents[x].Last().tick;
+                    GlobalSampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeatWithCall * 100), 0));
                 }
                 //make sure all events are in proper tick order
-                SampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+                GlobalSampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
         }
 
@@ -465,9 +481,10 @@ namespace Thumper_Custom_Level_Editor
         public static void Play(double StartTime, bool Loop = false)
         {
             ChannelEnd();
+            CreateSampleSoundfont();
             //merge all channels to a single array of events
-            List<BASS_MIDI_EVENT> _SequencerEvents = Playback.SequencerEvents.SelectMany(x => x).Distinct().ToList();
-            List<BASS_MIDI_EVENT> _SampleEvents = Playback.SampleEvents.SelectMany(x => x).Distinct().ToList();
+            List<BASS_MIDI_EVENT> _SequencerEvents = Playback.GlobalSequencerEvents.SelectMany(x => x).Distinct().ToList();
+            List<BASS_MIDI_EVENT> _SampleEvents = Playback.GlobalSampleEvents.SelectMany(x => x).Distinct().ToList();
             var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeatWithCall * 100), 0));

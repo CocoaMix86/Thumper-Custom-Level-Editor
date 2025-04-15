@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -1378,6 +1380,66 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
         {
             //Bass.BASS_SetVolume(volumeSlider1.Volume);
+        }
+
+        private int PlaybackStart = -2;
+        private int PlaybackEnd = -2;
+        private bool PlaybackLoop;
+        private int PreviousSetColumn = 3;
+        private bool ForceStop;
+        private void btnLvlPlayback_Click(object sender, EventArgs e)
+        {
+            if (Playback.IsPlaying) {
+                Playback.IsPlaying = false;
+                ForceStop = true;
+            }
+            else {
+                //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
+                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                btnLvlPlayback.Image = Properties.Resources.icon_stop;
+                Playback.Initialize();
+                int beatoffset = LvlProperties.approachbeats;
+                foreach (LvlLeafData leaf in LvlLeafs) {
+                    Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
+                    Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
+                    beatoffset += leaf.beats;
+                }
+                //Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
+                Playback.Play(PlaybackStart, PlaybackLoop);
+                if (Playback.IsPlaying) {
+                    timer1.Enabled = true;
+                }
+                else {
+                    Bass.BASS_ChannelFree(Playback.MidiStream);
+                    TCLE.alzheimer();
+                    btnLvlPlayback.Image = Properties.Resources.icon_play2;
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Playback.PlaybackBeat < 0)
+                return;
+            if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
+                //trackEditor.InvalidateColumn(PreviousSetColumn);
+                //trackEditor.InvalidateColumn(PreviousSetColumn - 1);
+                //trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
+                //PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
+            }
+            else {
+                if (PlaybackLoop && !ForceStop)
+                    return;
+                ForceStop = false;
+                timer1.Enabled = false;
+                Playback.IsPlaying = false;
+                Bass.BASS_ChannelStop(Playback.MidiStream);
+                var Error = Bass.BASS_ErrorGetCode();
+                Playback.SyncTimer.Dispose();
+                btnLvlPlayback.Image = Properties.Resources.icon_play2;
+                PreviousSetColumn = 3;
+                //trackEditor.Invalidate();
+            }
         }
     }
 }
