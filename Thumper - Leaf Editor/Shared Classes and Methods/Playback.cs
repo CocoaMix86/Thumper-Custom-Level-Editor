@@ -1,5 +1,6 @@
 ﻿using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
+using Windows.Devices.Geolocation;
 
 namespace Thumper_Custom_Level_Editor
 { 
@@ -25,9 +26,13 @@ namespace Thumper_Custom_Level_Editor
         public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
         public static string GlobalCurrentLeaf;
+        public static int GlobalCurrentOffset;
 
         public static void Initialize()
         {
+            CallOffset = 9;
+            //
+            GlobalSampleEvents = new();
             GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
@@ -90,7 +95,7 @@ namespace Thumper_Custom_Level_Editor
                 LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
                 LastBeatWithCall = Math.Min(Leaf.beats, BeatStop) + CallOffset + BeatOffset;
             }
-            GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.FilePath.Name, BeatOffset * 100));
+            GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.FilePath.Name, (BeatOffset) * 100));
 
             foreach (Sequencer_Object Seq in Leaf.seq_objs)
             {
@@ -196,9 +201,9 @@ namespace Thumper_Custom_Level_Editor
         }
 
         /// Key and Channel are the same thing
-        private static int Pitch = 8192;
-        private static int CallOffset = 9;
-        private static int BeatOffset = 0;
+        public static int Pitch = 8192;
+        public static int CallOffset = 9;
+        public static int BeatOffset = 0;
         public static void AddNoteToChannel(int beat, int key, int call, int callkey, bool mute = false)
         {
             //beats land on multiples of 100 ticks.
@@ -516,7 +521,7 @@ namespace Thumper_Custom_Level_Editor
             PlaybackBeat = -9;
             if (StartTime != -1) {
                 PlaybackBeat = (int)StartTime;
-                Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + 9));
+                Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + CallOffset));
                 Error = Bass.BASS_ErrorGetCode();
             }
             ApproachBeats = _ApproachBeats;
@@ -558,13 +563,14 @@ namespace Thumper_Custom_Level_Editor
         private static void SyncTimer_Tick(object sender)
         {
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
-            PlaybackBeat = (int)(PlaybackTick / 100d) - 9 - ApproachBeats;
+            PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
             //ColumnPlaybackHead++;
-            /*if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
+            if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
+                GlobalCurrentOffset = GlobalLeafQueue[0].Item2;
                 GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
                 GlobalLeafQueue.RemoveAt(0);
-            }*/
+            }
         }
     }
 }

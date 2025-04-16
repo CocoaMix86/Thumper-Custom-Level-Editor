@@ -483,7 +483,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset) {
                 e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
-            if (Playback.IsPlaying && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset) {
+            if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf.Name && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - (Playback.GlobalCurrentOffset / 100)) {
                 e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
                 //e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }

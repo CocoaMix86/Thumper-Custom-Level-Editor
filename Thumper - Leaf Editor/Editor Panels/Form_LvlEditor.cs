@@ -464,9 +464,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (Playback.IsPlaying) {
-                if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart) < LvlLeafs[e.RowIndex].beats) {
+                //if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0) && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0)) < LvlLeafs[e.RowIndex].beats)
+                if (LvlLeafs[e.RowIndex].leafname == Playback.GlobalCurrentLeaf) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].beats;
-                    double offset = Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart;
+                    double offset = Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart - (LvlProperties.approachbeats < 8 ? 8 : 0) + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
             }
@@ -1203,7 +1204,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void UpdateBeatPosition()
         {
-            int beatpos = 0;
+            int beatpos = LvlProperties.approachbeats;
             foreach (LvlLeafData _leaf in LvlLeafs) {
                 _leaf.beatstart = beatpos;
                 beatpos += _leaf.beats;
@@ -1401,8 +1402,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Bass.BASS_SetVolume(volumeSlider1.Volume);
         }
 
-        private int PlaybackStart = -2;
-        private int PlaybackEnd = -2;
+        private int PlaybackStart = -1;
+        private int PlaybackEnd = -1;
         private bool PlaybackLoop;
         private bool ForceStop;
         private void btnLvlPlayback_Click(object sender, EventArgs e)
@@ -1416,7 +1417,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
-                int beatoffset = LvlProperties.approachbeats;
+                Playback.CallOffset = 0;
+                int beatoffset = LvlProperties.approachbeats < 8 ? 8 : LvlProperties.approachbeats;
                 foreach (LvlLeafData leaf in LvlLeafs) {
                     Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                     Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
@@ -1439,12 +1441,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (Playback.PlaybackBeat < 0)
                 return;
-            if (Playback.IsPlaying ) {
+            if (Playback.IsPlaying && !ForceStop) {
                 lvlLeafList.Invalidate();
+                if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf ?? "~$~$~")) is Form_LeafEditor leaf)
+                    leaf.trackEditor.Invalidate();
             }
             else {
-                if (PlaybackLoop && !ForceStop)
-                    return;
                 ForceStop = false;
                 timer1.Enabled = false;
                 Playback.IsPlaying = false;
@@ -1453,6 +1455,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Playback.SyncTimer.Dispose();
                 btnLvlPlayback.Image = Properties.Resources.icon_play2;
                 //trackEditor.Invalidate();
+                Playback.PlaybackTick = -1;
+                lvlLeafList.Invalidate();
             }
         }
     }
