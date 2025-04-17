@@ -454,7 +454,7 @@ namespace Thumper_Custom_Level_Editor
                     velocity = 127;
                 //
                 for (decimal x = 0; x < Lvl.beats; x += loop.beats) {
-                    LoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50, (int)((x + CallOffset + BeatOffset) * 100), 0));
+                    LoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + LoopEvents.Count() - 1, (int)((x + CallOffset) * 100), 0));
                 }
             }
         }
@@ -485,7 +485,13 @@ namespace Thumper_Custom_Level_Editor
 
             int SamplesSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz");
             int SamplesLoopsSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfontLoops.sfz");
-            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 2, 0) };
+
+            if (SamplesToPlay.Count > 0 && GlobalLoopTracks.Count > 0)
+                MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 2, 0) };
+            else if (SamplesToPlay.Count > 0)
+                MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0) };
+            else if (GlobalLoopTracks.Count > 0)
+                MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 1, 0) };
         }
 
         public static void ChannelEnd()
@@ -521,8 +527,8 @@ namespace Thumper_Custom_Level_Editor
 
             //for ;v; loop events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
             for (int x = 0; x < LoopEvents.Count; x++) {
-                int channeloffset = 50;
-                LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 2, channeloffset, 0, 0));
+                int channeloffset = GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + x;
+                LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, GlobalSampleEvents.Count() > 0 ? 2 : 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
                 LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (LoopEvents[x].Count > 0) {
@@ -563,7 +569,7 @@ namespace Thumper_Custom_Level_Editor
             }
             Error = Bass.BASS_ErrorGetCode();
             //apply soundfonts
-            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts, MidiSoundFonts.Length);
+            BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts.ToArray(), MidiSoundFonts.Length);
             //set ending sync
             Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
             //calculate where playback should start
