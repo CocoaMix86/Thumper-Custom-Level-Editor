@@ -91,12 +91,10 @@ namespace Thumper_Custom_Level_Editor
             foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
                 TreeNode _node = new() {
                     Text = category.ToUpper(),
-                    ImageKey = "category",
-                    SelectedImageKey = "category"
+                    ImageKey = $"{category.ToUpper().Replace("/", "")}.png",
+                    SelectedImageKey = $"{category.ToUpper().Replace("/", "")}.png"
                 };
                 if (category == "PLAY SAMPLE") {
-                    _node.ImageKey = "samp";
-                    _node.SelectedImageKey = "samp";
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
                     foreach (string file in TCLE.ProjectSamples.Select(x => x.File?.Name).Distinct()) {

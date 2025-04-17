@@ -140,7 +140,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             LeafObjects.Add(new Object_Params() {
-                category = "AUDIO",
+                category = "LOOP TRACK VOLUME",
                 obj_name = "leafname",
                 param_displayname = "Loop Track x Volume",
                 param_path = "layer_volume,x",

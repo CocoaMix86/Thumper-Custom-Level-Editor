@@ -26,8 +26,6 @@ grindable.spn;bar;grindable_still.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensitySc
 grindable.spn;bar[left];left_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 grindable.spn;bar[center];center_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 grindable.spn;bar[right];right_multi.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
-###
-BARS - MULTI
 grindable_multi.spn;thump and bar;grindable_with_thump.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 grindable_multi.spn;bar[double];grindable_double.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
 grindable_multi.spn;bar[triple];grindable_thirds.ent;kTraitBool;True;0;[2,1,2,1,2,'kIntensityScale','kIntensityScale',1,0,1,1,1,1,1,1,0,0,0]
