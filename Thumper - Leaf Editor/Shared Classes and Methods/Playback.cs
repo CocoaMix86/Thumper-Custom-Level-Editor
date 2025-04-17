@@ -42,8 +42,8 @@ namespace Thumper_Custom_Level_Editor
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
                 GlobalSequencerEvents[x] = new();
-                if (x != 0)
-                    GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
+                //if (x != 0)
+                //    GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
             SamplesToPlay = new();
             GlobalLeafQueue = new();
@@ -207,7 +207,7 @@ namespace Thumper_Custom_Level_Editor
 
         /// Key and Channel are the same thing
         public static int Pitch = 8192;
-        public static int CallOffset = 9;
+        public static int CallOffset = 8;
         public static int BeatOffset = 0;
         public static void AddNoteToChannel(int beat, int key, int call, int callkey, bool mute = false)
         {
@@ -496,6 +496,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void ChannelEnd()
         {
+            int tickend = 0;
             //set instrument to use and tempo
             //These need to be at tick 0, on channel 0
             //SequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 0, 0, 0, 0));
@@ -503,9 +504,10 @@ namespace Thumper_Custom_Level_Editor
             GlobalSequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0));
             //cap off each channel with an END event
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
+                GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
                 if (GlobalSequencerEvents[x].Count > 0) {
-                    int tickend = GlobalSequencerEvents[x].Last().tick;
-                    GlobalSequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (LastBeatWithCall * 100), 0));
+                    tickend = GlobalSequencerEvents[x].Last().tick + 100;
+                    GlobalSequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, tickend, 0));
                 }
                 //make sure all events are in proper tick order
                 GlobalSequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
@@ -518,8 +520,8 @@ namespace Thumper_Custom_Level_Editor
                 //add pitch range as first event to the sample channel
                 GlobalSampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (GlobalSampleEvents[x].Count > 0) {
-                    int tickend = GlobalSampleEvents[x].Last().tick;
-                    GlobalSampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (LastBeatWithCall * 100), 0));
+                    tickend = GlobalSampleEvents[x].Last().tick + 100;
+                    GlobalSampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, tickend, 0));
                 }
                 //make sure all events are in proper tick order
                 GlobalSampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
@@ -532,8 +534,8 @@ namespace Thumper_Custom_Level_Editor
                 //add pitch range as first event to the sample channel
                 LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (LoopEvents[x].Count > 0) {
-                    int tickend = LoopEvents[x].Last().tick;
-                    LoopEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, LoopEvents[x].Last().tick, 0));
+                    tickend = LoopEvents[x].Last().tick + 100;
+                    LoopEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, tickend, 0));
                 }
                 //make sure all events are in proper tick order
                 LoopEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
