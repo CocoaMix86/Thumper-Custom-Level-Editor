@@ -1,4 +1,5 @@
-﻿using Un4seen.Bass;
+﻿using System.Runtime.Intrinsics.Arm;
+using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
 using Windows.Devices.Geolocation;
 
@@ -17,6 +18,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<BASS_MIDI_EVENT>[] SequencerEvents = new List<BASS_MIDI_EVENT>[23];
         public static List<string> SamplesToPlay = new();
         public static List<List<BASS_MIDI_EVENT>> SampleEvents = new();
+        public static List<List<BASS_MIDI_EVENT>> LoopEvents = new();
         private static int LastBeatWithCall;
         private static int LeafLastBeat;
         private static BASSError Error;
@@ -25,6 +27,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<BASS_MIDI_EVENT>[] GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
         public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
+        public static List<Tuple<string, string, decimal>> GlobalLoopTracks = new();
         public static string GlobalCurrentLeaf;
         public static int GlobalCurrentOffset;
 
@@ -33,6 +36,8 @@ namespace Thumper_Custom_Level_Editor
             CallOffset = 9;
             //
             GlobalSampleEvents = new();
+            LoopEvents = new();
+            GlobalLoopTracks = new();
             GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
@@ -435,23 +440,52 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public static void MidiEventLoopTracks(LvlProperties Lvl)
+        {
+            foreach (LvlLoop loop in Lvl.lvlloops) {
+                //add new entry to the loops
+                GlobalLoopTracks.Add(new(Lvl.FilePath.Name, loop.sample, loop.beats));
+                LoopEvents.Add(new());
+                //get sample data and its volume
+                SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.sample);
+                int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+                velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
+                if (velocity > 127)
+                    velocity = 127;
+                //
+                for (decimal x = 0; x < Lvl.beats; x += loop.beats) {
+                    LoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50, (int)((x + CallOffset + BeatOffset) * 100), 0));
+                }
+            }
+        }
+
         public static void CreateSampleSoundfont()
         {
             //skip this if there are no samples
-            if (SamplesToPlay.Count == 0)
-                return;
+            //if (SamplesToPlay.Count == 0)
+            //    return;
 
             string path = $@"{TCLE.AppLocation}\temp\";
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
+            string _outloops = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             foreach (string sample in SamplesToPlay) {
                 string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == sample));
                 _out += $"<region> sample={Path.GetFileName(FileName)} key={SamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
+
+            foreach (var loop in GlobalLoopTracks) {
+                string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
+                _outloops += $"<region> sample={Path.GetFileName(FileName)} key={SamplesToPlay.Count + GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
+            }
+
             _out += "\r\n\r\n";
+            _outloops += "\r\n\r\n";
             File.WriteAllText($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz", _out);
+            File.WriteAllText($@"{TCLE.AppLocation}\temp\SamplesSoundfontLoops.sfz", _outloops);
 
             int SamplesSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz");
-            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0) };
+            int SamplesLoopsSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfontLoops.sfz");
+            MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 2, 0) };
         }
 
         public static void ChannelEnd()
@@ -484,6 +518,20 @@ namespace Thumper_Custom_Level_Editor
                 //make sure all events are in proper tick order
                 GlobalSampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
+
+            //for ;v; loop events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
+            for (int x = 0; x < LoopEvents.Count; x++) {
+                int channeloffset = 50;
+                LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 2, channeloffset, 0, 0));
+                //add pitch range as first event to the sample channel
+                LoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
+                if (LoopEvents[x].Count > 0) {
+                    int tickend = LoopEvents[x].Last().tick;
+                    LoopEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, LoopEvents[x].Last().tick, 0));
+                }
+                //make sure all events are in proper tick order
+                LoopEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+            }
         }
 
         public static int channelsync;
@@ -494,7 +542,8 @@ namespace Thumper_Custom_Level_Editor
             //merge all channels to a single array of events
             List<BASS_MIDI_EVENT> _SequencerEvents = Playback.GlobalSequencerEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.GlobalSampleEvents.SelectMany(x => x).Distinct().ToList();
-            var AllEvents = _SequencerEvents.Concat(_SampleEvents).ToList();
+            List<BASS_MIDI_EVENT> _SampleLoopEvents = Playback.LoopEvents.SelectMany(x => x).Distinct().ToList();
+            var AllEvents = _SequencerEvents.Concat(_SampleEvents).Concat(_SampleLoopEvents).ToList();
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (LastBeatWithCall * 100), 0));
             //create the stream

@@ -1424,6 +1424,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
                     beatoffset += leaf.beats;
                 }
+                Playback.MidiEventLoopTracks(LvlProperties);
                 //Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
                 Playback.Play(PlaybackStart, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
