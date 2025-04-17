@@ -475,7 +475,7 @@ namespace Thumper_Custom_Level_Editor
 
             foreach (var loop in GlobalLoopTracks) {
                 string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
-                _outloops += $"<region> sample={Path.GetFileName(FileName)} key={SamplesToPlay.Count + GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
+                _outloops += $"<region> sample={Path.GetFileName(FileName)} key={GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
             }
 
             _out += "\r\n\r\n";
