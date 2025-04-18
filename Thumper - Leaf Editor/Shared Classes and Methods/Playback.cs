@@ -12,8 +12,8 @@ namespace Thumper_Custom_Level_Editor
         public static bool IsPlaying {
             get => _isplay;
             set {
-                TCLE.MainBeeble.Dance(value);
                 _isplay = value;
+                TCLE.MainBeeble.Dance(value);
             }
         }
         private static bool _isplay;

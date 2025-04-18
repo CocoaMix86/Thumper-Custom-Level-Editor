@@ -4,17 +4,19 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class Beeble : Form
     {
-        private static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu };
+        private static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu, Properties.Resources.beeblehop };
         private Random rng = new();
-        private static Image BeebleDance = Properties.Resources.beebledance;
+        private static Image BeebleDanceGif = Properties.Resources.beeblehop;
 
         public Beeble()
         {
             InitializeComponent();
             if (!Directory.Exists($@"{TCLE.AppLocation}\beeble") || Directory.GetFiles($@"{TCLE.AppLocation}\beeble").Length == 0) {
                 Directory.CreateDirectory($@"{TCLE.AppLocation}\beeble");
-                foreach (Image img in beebleimages)
-                    img.Save($@"{TCLE.AppLocation}\beeble\beeble{beebleimages.IndexOf(img)}.png");
+                foreach (Image img in beebleimages) {
+                    int frames = img.GetFrameCount(new System.Drawing.Imaging.FrameDimension(img.FrameDimensionsList[0]));
+                    img.Save($@"{TCLE.AppLocation}\beeble\beeble{beebleimages.IndexOf(img)}.{(frames > 1 ? "gif" : "png")}");
+                }
             }
             else {
                 beebleimages.Clear();
@@ -56,7 +58,7 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.PlaySound("UIbeetleclickGOLD");
             }
             else {
-                pictureBeeble.Image = BeebleDance;// beebleimages[i % beebleimages.Count];
+                pictureBeeble.Image = beebleimages[i % beebleimages.Count];
             }
             timerBeeble.Start();
         }
@@ -64,13 +66,19 @@ namespace Thumper_Custom_Level_Editor
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
             timerBeeble.Stop();
-            pictureBeeble.Image = Properties.Resources.beeble;
+            if (BeebleIsDance) {
+                pictureBeeble.Image = BeebleDanceGif;
+            }
+            else
+                pictureBeeble.Image = Properties.Resources.beeble;
         }
 
+        public static bool BeebleIsDance;
         public void Dance(bool dance)
         {
-            if (dance)
-                pictureBeeble.Image = BeebleDance;
+            BeebleIsDance = dance;
+            if (BeebleIsDance)
+                pictureBeeble.Image = BeebleDanceGif;
             else
                 pictureBeeble.Image = Properties.Resources.beeble;
         }

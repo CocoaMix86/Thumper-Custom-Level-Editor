@@ -333,6 +333,7 @@
             this.btnLvlPlayback.Name = "btnLvlPlayback";
             this.btnLvlPlayback.Size = new Size(23, 24);
             this.btnLvlPlayback.Text = "toolStripButton1";
+            this.btnLvlPlayback.ToolTipText = "Preview how the Lvl will sound.\r\n!!! NOTE !!!\r\nThis is only a preview, and may not be entirely accurate\r\nto how it will sound in-game.\r\n!!\r\nSelect 1 leaf to set playback to start at that position";
             this.btnLvlPlayback.Click += this.btnLvlPlayback_Click;
             // 
             // lvlLeafPaths

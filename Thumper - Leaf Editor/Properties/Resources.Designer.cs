@@ -163,6 +163,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap beeblehop {
+            get {
+                object obj = ResourceManager.GetObject("beeblehop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap beeblelaugh {
             get {
                 object obj = ResourceManager.GetObject("beeblelaugh", resourceCulture);
@@ -3638,7 +3648,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;misc-beautiful-beautiful_sensuality.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;misc-beautiful-beautiful_sensuality.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/beautiful/beautiful_sensuality.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3649,7 +3659,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;misc-boss-ending_sequence.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;misc-boss-ending_sequence.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/boss/ending_sequence.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3660,7 +3670,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;misc- [rest of string was truncated]&quot;;.
+        ///&apos;obj_name&apos;: &apos;mis [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string samp_misc {
             get {
@@ -3673,7 +3683,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///&apos;items&apos;: [
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level8a.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;rests-rests_level8a.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8a.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3684,7 +3694,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level8b.wav&apos;,
+        ///&apos;obj_name&apos;: &apos;rests-rests_level8b.samp&apos;,
         ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
         ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8b.wav&apos;,
         ///&apos;volume&apos;: 1.0,
@@ -3695,7 +3705,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         ///},
         ///{
         ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level9a.wav&apos;, [rest of string was truncated]&quot;;.
+        ///&apos;obj_name&apos;: &apos;rests-rests_level9a.sam [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string samp_rests {
             get {
