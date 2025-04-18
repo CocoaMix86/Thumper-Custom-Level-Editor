@@ -1419,14 +1419,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Playback.Initialize();
                 Playback.CallOffset = 0;
                 int beatoffset = LvlProperties.approachbeats < 8 ? 8 : LvlProperties.approachbeats;
+                //create playback of the lvl sequencer
+                Form_LeafEditor lvlseq = new(LvlProperties);
+                Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties);
+                //create playback for each leaf
                 foreach (LvlLeafData leaf in LvlLeafs) {
                     Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                     Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
                     beatoffset += leaf.beats;
                 }
+                //create midi events for the loop tracks
                 Playback.MidiEventLoopTracks(LvlProperties);
-                //Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
-                Playback.Play(PlaybackStart, PlaybackLoop, LvlProperties.approachbeats);
+                Playback.Play(PlaybackStart, LvlProperties.beats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -1438,12 +1442,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private string _playingleaf;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
                 return;
             if (Playback.IsPlaying && !ForceStop) {
                 lvlLeafList.Invalidate();
+                //show the leaf that's playing
+                if (_playingleaf != Playback.GlobalCurrentLeaf) {
+                    _playingleaf = Playback.GlobalCurrentLeaf;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
+                    }
+                }
                 if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf ?? "~$~$~")) is Form_LeafEditor leaf)
                     leaf.trackEditor.Invalidate();
             }

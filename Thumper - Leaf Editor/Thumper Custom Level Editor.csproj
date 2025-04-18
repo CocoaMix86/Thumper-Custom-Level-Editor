@@ -192,6 +192,7 @@
     <EmbeddedResource Include="audio assets\UI sounds\UItunnelremove.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowclose.ogg" />
     <EmbeddedResource Include="audio assets\UI sounds\UIwindowopen.ogg" />
+    <EmbeddedResource Include="image assets\beeble\beebledance.gif" />
     <None Include="image assets\icon-info.png" />
     <None Include="image assets\D0.png" />
     <None Include="image assets\D1.png" />
@@ -277,6 +278,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Utility Classes\PictureBoxEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="image assets\beeble\beebledance.gif" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Bass.Net">

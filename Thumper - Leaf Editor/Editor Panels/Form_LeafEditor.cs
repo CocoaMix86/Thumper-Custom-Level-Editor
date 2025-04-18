@@ -3231,7 +3231,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
                 Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
-                Playback.Play(PlaybackStart, PlaybackLoop);
+                Playback.Play(PlaybackStart, LeafProperties.beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 } else {

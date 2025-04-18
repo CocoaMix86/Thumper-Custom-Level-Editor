@@ -1,9 +1,12 @@
-﻿namespace Thumper_Custom_Level_Editor
+﻿using System.Windows.Media.Imaging;
+
+namespace Thumper_Custom_Level_Editor
 {
     public partial class Beeble : Form
     {
         private static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu };
         private Random rng = new();
+        private static Image BeebleDance = Properties.Resources.beebledance;
 
         public Beeble()
         {
@@ -49,11 +52,11 @@
         {
             int i = new Random().Next(0, 1001);
             if (i == 1000) {
-                this.BackgroundImage = Properties.Resources.beeblegold;
+                pictureBeeble.Image = Properties.Resources.beeblegold;
                 TCLE.PlaySound("UIbeetleclickGOLD");
             }
             else {
-                this.BackgroundImage = beebleimages[i % beebleimages.Count];
+                pictureBeeble.Image = BeebleDance;// beebleimages[i % beebleimages.Count];
             }
             timerBeeble.Start();
         }
@@ -61,7 +64,15 @@
         private void timerBeeble_Tick(object sender, EventArgs e)
         {
             timerBeeble.Stop();
-            this.BackgroundImage = Properties.Resources.beeble;
+            pictureBeeble.Image = Properties.Resources.beeble;
+        }
+
+        public void Dance(bool dance)
+        {
+            if (dance)
+                pictureBeeble.Image = BeebleDance;
+            else
+                pictureBeeble.Image = Properties.Resources.beeble;
         }
     }
 }

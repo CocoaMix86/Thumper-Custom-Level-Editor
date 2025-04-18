@@ -170,7 +170,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 75);
+            this.btnRawImport.Size = new Size(54, 76);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -186,7 +186,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 369);
+            this.labelCollapsePanel2.Location = new Point(0, 368);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -214,26 +214,26 @@
             this.imageList1.Images.SetKeyName(9, "CAMERA.png");
             this.imageList1.Images.SetKeyName(10, "CONTROLLER.png");
             this.imageList1.Images.SetKeyName(11, "DECORATIVE MILLIPEDES.png");
-            this.imageList1.Images.SetKeyName(12, "EXPERIMENTAL.png");
-            this.imageList1.Images.SetKeyName(13, "FX.png");
-            this.imageList1.Images.SetKeyName(14, "GAMMA.png");
-            this.imageList1.Images.SetKeyName(15, "INTROFLOW.png");
-            this.imageList1.Images.SetKeyName(16, "JUMPSSPIKES.png");
-            this.imageList1.Images.SetKeyName(17, "MILLIPEDES.png");
-            this.imageList1.Images.SetKeyName(18, "PLAY SAMPLE.png");
-            this.imageList1.Images.SetKeyName(19, "POST PROCESSING.png");
-            this.imageList1.Images.SetKeyName(20, "RAIL COLORS.png");
-            this.imageList1.Images.SetKeyName(21, "RINGS.png");
-            this.imageList1.Images.SetKeyName(22, "SENTRY.png");
-            this.imageList1.Images.SetKeyName(23, "SKYBOX_COLORS.png");
-            this.imageList1.Images.SetKeyName(24, "SMOKE FX.png");
-            this.imageList1.Images.SetKeyName(25, "TENTACLES.png");
-            this.imageList1.Images.SetKeyName(26, "THUMPS.png");
-            this.imageList1.Images.SetKeyName(27, "TRACK EFFECTS.png");
-            this.imageList1.Images.SetKeyName(28, "TRACK FX.png");
-            this.imageList1.Images.SetKeyName(29, "WIN & MISC.png");
-            this.imageList1.Images.SetKeyName(30, "LOOP TRACK VOLUME.png");
-            this.imageList1.Images.SetKeyName(31, "DISSONANT_BURSTS.png");
+            this.imageList1.Images.SetKeyName(12, "DISSONANT_BURSTS.png");
+            this.imageList1.Images.SetKeyName(13, "EXPERIMENTAL.png");
+            this.imageList1.Images.SetKeyName(14, "FX.png");
+            this.imageList1.Images.SetKeyName(15, "GAMMA.png");
+            this.imageList1.Images.SetKeyName(16, "INTROFLOW.png");
+            this.imageList1.Images.SetKeyName(17, "JUMPSSPIKES.png");
+            this.imageList1.Images.SetKeyName(18, "LOOP TRACK VOLUME.png");
+            this.imageList1.Images.SetKeyName(19, "MILLIPEDES.png");
+            this.imageList1.Images.SetKeyName(20, "PLAY SAMPLE.png");
+            this.imageList1.Images.SetKeyName(21, "POST PROCESSING.png");
+            this.imageList1.Images.SetKeyName(22, "RAIL COLORS.png");
+            this.imageList1.Images.SetKeyName(23, "RINGS.png");
+            this.imageList1.Images.SetKeyName(24, "SENTRY.png");
+            this.imageList1.Images.SetKeyName(25, "SKYBOX_COLORS.png");
+            this.imageList1.Images.SetKeyName(26, "SMOKE FX.png");
+            this.imageList1.Images.SetKeyName(27, "TENTACLES.png");
+            this.imageList1.Images.SetKeyName(28, "THUMPS.png");
+            this.imageList1.Images.SetKeyName(29, "TRACK EFFECTS.png");
+            this.imageList1.Images.SetKeyName(30, "TRACK FX.png");
+            this.imageList1.Images.SetKeyName(31, "WIN & MISC.png");
             // 
             // contextMenuFav
             // 
@@ -257,7 +257,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 354);
+            this.vScrollBarTrackEditor.Size = new Size(15, 353);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -359,7 +359,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 354);
+            this.trackEditor.Size = new Size(491, 353);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -448,7 +448,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 354);
+            this.leafToolStrip.Size = new Size(24, 353);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -892,7 +892,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 384;
+            this.splitContainerLeafSide.SplitterDistance = 383;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -945,7 +945,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -957,7 +956,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 75);
+            this.textEditor.Size = new Size(476, 76);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
