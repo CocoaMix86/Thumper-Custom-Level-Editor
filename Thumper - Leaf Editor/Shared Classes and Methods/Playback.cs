@@ -38,7 +38,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
         public static List<Tuple<string, string, decimal>> GlobalLoopTracks = new();
         public static string GlobalCurrentLeaf = "???";
-        public static int GlobalCurrentOffset;
+        public static int GlobalCurrentOffset = -1;
 
         public static void Initialize()
         {
@@ -638,20 +638,23 @@ namespace Thumper_Custom_Level_Editor
             var Error = Bass.BASS_ErrorGetCode();
             Playback.SyncTimer.Dispose();
             Playback.PlaybackTick = -1;
+            //
+            GlobalCurrentLeaf = "???";
+            GlobalCurrentOffset = -1;
         }
 
         public static int BeatSubdivisions = 4;
-        public static int PlaybackBeat;
-        public static double PlaybackTick;
-        public static double PlaybackSubBeat;
+        public static double PlaybackTick = -1;
+        public static int PlaybackBeat = -1;
+        public static double PlaybackSubBeat = -1;
         public static int ApproachBeats;
         private static void SyncTimer_Tick(object sender)
         {
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
             PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
-            //ColumnPlaybackHead++;
-            if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
+            if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2)
+            {
                 GlobalCurrentOffset = GlobalLeafQueue[0].Item2;
                 GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
                 GlobalLeafQueue.RemoveAt(0);
