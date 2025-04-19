@@ -3249,20 +3249,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.PlaybackBeat < 0)
                 return;
             if (Playback.IsPlaying && Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount) {
-                trackEditor.InvalidateColumn(PreviousSetColumn);
-                trackEditor.InvalidateColumn(PreviousSetColumn - 1);
-                trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
-                PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
+                trackEditor.Invalidate();
+                //trackEditor.InvalidateColumn(PreviousSetColumn);
+                //trackEditor.InvalidateColumn(PreviousSetColumn - 1);
+                //trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
+                //PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
             } else {
                 if (PlaybackLoop && !ForceStop)
                     return;
                 ForceStop = false;
                 timer1.Enabled = false;
-                Playback.IsPlaying = false;
-                Bass.BASS_ChannelStop(Playback.MidiStream);
-                var Error = Bass.BASS_ErrorGetCode();
-                Playback.SyncTimer.Dispose();
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
+                Playback.StopPlayback();
                 PreviousSetColumn = 3;
                 trackEditor.Invalidate();
             }

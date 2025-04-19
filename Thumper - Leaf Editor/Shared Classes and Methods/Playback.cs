@@ -34,9 +34,10 @@ namespace Thumper_Custom_Level_Editor
         public static List<List<BASS_MIDI_EVENT>> GlobalLoopEvents = new();
         public static List<BASS_MIDI_EVENT>[] GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
         public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
+        public static List<SeqDataPoint> GlobalSpeedEvents = new();
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
         public static List<Tuple<string, string, decimal>> GlobalLoopTracks = new();
-        public static string GlobalCurrentLeaf;
+        public static string GlobalCurrentLeaf = "???";
         public static int GlobalCurrentOffset;
 
         public static void Initialize()
@@ -46,15 +47,14 @@ namespace Thumper_Custom_Level_Editor
             GlobalSampleEvents = new();
             GlobalLoopEvents = new();
             GlobalLoopTracks = new();
+            GlobalSpeedEvents = new();
+            GlobalSamplesToPlay = new();
+            GlobalLeafQueue = new();
             GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
                 GlobalSequencerEvents[x] = new();
-                //if (x != 0)
-                //    GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
-            GlobalSamplesToPlay = new();
-            GlobalLeafQueue = new();
             //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2"))
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", Properties.Resources.Thumper_Sequencer);
@@ -94,10 +94,7 @@ namespace Thumper_Custom_Level_Editor
             BeatOffset = _BeatOffset;
             SequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < SequencerEvents.Length; x++) {
-                // +8 for lead time
                 SequencerEvents[x] = new(Leaf.beats + CallOffset);
-                //if (x != 0)
-                //    SequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
             }
 
             LeafLastBeat = Leaf.beats;
@@ -208,6 +205,23 @@ namespace Thumper_Custom_Level_Editor
                 if (SequencerEvents[x].Count > 0)
                     GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Concat(SequencerEvents[x]).ToList();
             }
+        }
+
+        public static void CreatePlaybackFromLvl(LvlProperties Lvl, int BeatStop = -1, int _BeatOffset = 0)
+        {
+            Playback.CallOffset = 0;
+            int beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
+            //create playback of the lvl sequencer
+            Form_LeafEditor lvlseq = new(Lvl);
+            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties);
+            //create playback for each leaf
+            foreach (LvlLeafData leaf in Lvl.lvlleafs) {
+                Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
+                Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
+                beatoffset += leaf.beats;
+            }
+            //create midi events for the loop tracks
+            Playback.MidiEventLoopTracks(Lvl);
         }
 
         /// Key and Channel are the same thing
@@ -615,6 +629,15 @@ namespace Thumper_Custom_Level_Editor
                 bool free2 = Bass.BASS_ChannelFree(channel);
                 //TCLE.alzheimer();
             }
+        }
+
+        public static void StopPlayback()
+        {
+            Playback.IsPlaying = false;
+            Bass.BASS_ChannelStop(Playback.MidiStream);
+            var Error = Bass.BASS_ErrorGetCode();
+            Playback.SyncTimer.Dispose();
+            Playback.PlaybackTick = -1;
         }
 
         public static int BeatSubdivisions = 4;

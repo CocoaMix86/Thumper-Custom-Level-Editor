@@ -1417,19 +1417,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize();
-                Playback.CallOffset = 0;
-                int beatoffset = LvlProperties.approachbeats < 8 ? 8 : LvlProperties.approachbeats;
-                //create playback of the lvl sequencer
-                Form_LeafEditor lvlseq = new(LvlProperties);
-                Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties);
-                //create playback for each leaf
-                foreach (LvlLeafData leaf in LvlLeafs) {
-                    Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
-                    Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
-                    beatoffset += leaf.beats;
-                }
-                //create midi events for the loop tracks
-                Playback.MidiEventLoopTracks(LvlProperties);
+                Playback.CreatePlaybackFromLvl(LvlProperties);
                 Playback.Play(PlaybackStart, LvlProperties.beats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
@@ -1459,19 +1447,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
                     }
                 }
-                if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf ?? "~$~$~")) is Form_LeafEditor leaf)
+                if (TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) is Form_LeafEditor leaf)
                     leaf.trackEditor.Invalidate();
             }
             else {
                 ForceStop = false;
                 timer1.Enabled = false;
-                Playback.IsPlaying = false;
-                Bass.BASS_ChannelStop(Playback.MidiStream);
-                var Error = Bass.BASS_ErrorGetCode();
-                Playback.SyncTimer.Dispose();
                 btnLvlPlayback.Image = Properties.Resources.icon_play2;
-                //trackEditor.Invalidate();
-                Playback.PlaybackTick = -1;
+                Playback.StopPlayback();
                 lvlLeafList.Invalidate();
             }
         }
