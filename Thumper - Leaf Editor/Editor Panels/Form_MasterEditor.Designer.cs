@@ -53,6 +53,8 @@
             this.btnMasterLvlDown = new ToolStripButton();
             this.btnMasterLvlCopy = new ToolStripButton();
             this.btnMasterLvlPaste = new ToolStripButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnMasterPlayback = new ToolStripButton();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
@@ -260,7 +262,7 @@
             this.masterToolStrip.GripMargin = new Padding(0);
             this.masterToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.masterToolStrip.ImageScalingSize = new Size(20, 20);
-            this.masterToolStrip.Items.AddRange(new ToolStripItem[] { this.btnMasterLvlAdd, this.btnMasterLvlDelete, this.btnMasterLvlUp, this.btnMasterLvlDown, this.btnMasterLvlCopy, this.btnMasterLvlPaste });
+            this.masterToolStrip.Items.AddRange(new ToolStripItem[] { this.btnMasterLvlAdd, this.btnMasterLvlDelete, this.btnMasterLvlUp, this.btnMasterLvlDown, this.btnMasterLvlCopy, this.btnMasterLvlPaste, this.btnMasterPlayback });
             this.masterToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.masterToolStrip.Location = new Point(0, 0);
             this.masterToolStrip.Name = "masterToolStrip";
@@ -342,6 +344,22 @@
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             this.btnMasterLvlPaste.Click += this.btnMasterLvlPaste_Click;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += this.timer1_Tick;
+            // 
+            // btnMasterPlayback
+            // 
+            this.btnMasterPlayback.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnMasterPlayback.Image = Properties.Resources.icon_play2;
+            this.btnMasterPlayback.ImageTransparentColor = Color.Magenta;
+            this.btnMasterPlayback.Name = "btnMasterPlayback";
+            this.btnMasterPlayback.Size = new Size(23, 24);
+            this.btnMasterPlayback.Text = "toolStripButton1";
+            this.btnMasterPlayback.ToolTipText = "Preview how the Lvl will sound.\r\n!!! NOTE !!!\r\nThis is only a preview, and may not be entirely accurate\r\nto how it will sound in-game.\r\n!!\r\nSelect 1 leaf to set playback to start at that position";
+            this.btnMasterPlayback.Click += this.btnMasterPlayback_Click;
+            // 
             // Form_MasterEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -387,5 +405,7 @@
         private ToolStripButton btnMasterLvlDown;
         private ToolStripButton btnMasterLvlCopy;
         private ToolStripButton btnMasterLvlPaste;
+        private System.Windows.Forms.Timer timer1;
+        private ToolStripButton btnMasterPlayback;
     }
 }

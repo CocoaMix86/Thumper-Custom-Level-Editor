@@ -70,6 +70,12 @@ namespace Thumper_Custom_Level_Editor
                 return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
             }
         }
+        [Browsable(false)]
+        public int beatstart;
+        [Browsable(false)]
+        public int restlevelbeats = 0;
+        [Browsable(false)]
+        public int restlevelbeatstart;
 
         public MasterLvlData Clone()
         {
@@ -109,12 +115,16 @@ namespace Thumper_Custom_Level_Editor
         [Description("This lvl will play at the beginning of your level, and whenever you restart.")]
         [TypeConverter(typeof(LvlList))]
         public string introlvl { get; set; }
+        [Browsable(false)]
+        public int introlevelbeats = 0;
 
         [CategoryAttribute("Options")]
         [DisplayName("Checkpoint Lvl")]
         [Description("This lvl will play immediately after each checkpoint.")]
         [TypeConverter(typeof(LvlList))]
         public string checkpointlvl { get; set; }
+        [Browsable(false)]
+        public int checkpointbeats;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]

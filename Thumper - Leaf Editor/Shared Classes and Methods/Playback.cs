@@ -36,13 +36,20 @@ namespace Thumper_Custom_Level_Editor
         public static List<List<BASS_MIDI_EVENT>> GlobalSampleEvents = new();
         public static List<SeqDataPoint> GlobalSpeedEvents = new();
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
+        public static List<Tuple<string, int>> GlobalLvlQueue = new();
         public static List<Tuple<string, string, decimal>> GlobalLoopTracks = new();
         public static string GlobalCurrentLeaf = "???";
+        public static string GlobalCurrentLvl = "???";
         public static int GlobalCurrentOffset = -1;
+        public static int GlobalCurrentOffsetLvl = -1;
 
         public static void Initialize()
         {
             CallOffset = 9;
+            GlobalCurrentLeaf = "???";
+            GlobalCurrentLvl = "???";
+            GlobalCurrentOffset = -1;
+            GlobalCurrentOffsetLvl = -1;
             //
             GlobalSampleEvents = new();
             GlobalLoopEvents = new();
@@ -50,6 +57,7 @@ namespace Thumper_Custom_Level_Editor
             GlobalSpeedEvents = new();
             GlobalSamplesToPlay = new();
             GlobalLeafQueue = new();
+            GlobalLvlQueue = new();
             GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
@@ -197,7 +205,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
             }
-            PitchShiftingBarsRings(Leaf);
+
             MidiEventsForSentry(Leaf);
             MidiEventsForSpeed(Leaf.seq_objs.FirstOrDefault(x => x.obj_name == "avatar.lib" && x.friendly_param == "speed"));
             //copy over single leaf results to global so it doesn't get cleared
@@ -209,11 +217,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CreatePlaybackFromLvl(LvlProperties Lvl, int BeatStop = -1, int _BeatOffset = 0)
         {
+            GlobalLvlQueue.Add(new Tuple<string, int>(Lvl.FilePath.Name, (_BeatOffset) * 100));
             Playback.CallOffset = 0;
-            int beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
+            int beatoffset = _BeatOffset;
+            if (_BeatOffset == 0)
+                beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
             Form_LeafEditor lvlseq = new(Lvl);
-            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties);
+            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats, beatoffset - Lvl.approachbeats);
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
@@ -221,7 +232,40 @@ namespace Thumper_Custom_Level_Editor
                 beatoffset += leaf.beats;
             }
             //create midi events for the loop tracks
-            Playback.MidiEventLoopTracks(Lvl);
+            Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.approachbeats));
+        }
+
+        public static void CreatePlaybackFromMaster(MasterProperties Master, int BeatStop = -1, int _BeatOffset = 0)
+        {
+            Playback.CallOffset = 0;
+            int beatoffset = 0;
+            //setup checkpoint lvl so we can call it later if needed
+            Form_LvlEditor lvlcheckpoint = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == Master.checkpointlvl), false, true);
+            //create playback of the intro lvl
+            Form_LvlEditor lvlintro = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == Master.introlvl), false, true);
+            if (lvlintro != null) {
+                Playback.CreatePlaybackFromLvl(lvlintro.lvlProperties);
+                beatoffset += lvlintro.lvlProperties.beats + (lvlintro.lvlProperties.approachbeats < 8 ? 8 : lvlintro.lvlProperties.approachbeats);
+            }
+            //create playback for each lvl
+            foreach (MasterLvlData lvl in Master.masterlvls) {
+                Form_LvlEditor lvlrest = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.rest), false, true);
+                if (lvlrest != null) {
+                    Playback.CreatePlaybackFromLvl(lvlrest.lvlProperties, lvlrest.lvlProperties.beats, beatoffset);
+                    if (beatoffset == 0)
+                        beatoffset += (lvlrest.lvlProperties.approachbeats < 8 ? 8 : lvlrest.lvlProperties.approachbeats);
+                    beatoffset += lvl.restlevelbeats;
+                }
+                Form_LvlEditor lvltoplay = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
+                Playback.CreatePlaybackFromLvl(lvltoplay.lvlProperties, lvltoplay.lvlProperties.beats, beatoffset);
+                if (beatoffset == 0)
+                    beatoffset += (lvltoplay.lvlProperties.approachbeats < 8 ? 8 : lvltoplay.lvlProperties.approachbeats);
+                beatoffset += lvltoplay.lvlProperties.beats;
+                if (lvl.checkpoint && lvlcheckpoint != null) {
+                    Playback.CreatePlaybackFromLvl(lvlcheckpoint.lvlProperties, lvlcheckpoint.lvlProperties.beats, beatoffset);
+                    beatoffset += lvlcheckpoint.lvlProperties.beats;
+                }
+            }
         }
 
         /// Key and Channel are the same thing
@@ -246,18 +290,18 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void PitchShiftingBarsRings(LeafProperties Leaf)
+        public static void PitchShiftingBarsRings()
         {
             Pitch = 8192;
             int Missed = 0;
             List<BASS_MIDI_EVENT> EventsToAdd19 = new();
             List<BASS_MIDI_EVENT> EventsToAdd20 = new();
             //combine ring and bar hit events to get a single track of events, in choronological order
-            List<BASS_MIDI_EVENT> ComboList = SequencerEvents[19];/*.Concat(SequencerEvents[20]).ToList();*/
+            List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19];/*.Concat(SequencerEvents[20]).ToList();*/
             //concat turn and thump hits, as they contribute to keeping a combo going
-            ComboList = ComboList.Concat(SequencerEvents[8]).ToList();
-            ComboList = ComboList.Concat(SequencerEvents[13]).ToList();
-            ComboList = ComboList.Concat(SequencerEvents[22]).ToList();
+            ComboList = ComboList.Concat(GlobalSequencerEvents[8]).ToList();
+            ComboList = ComboList.Concat(GlobalSequencerEvents[13]).ToList();
+            ComboList = ComboList.Concat(GlobalSequencerEvents[22]).ToList();
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
 
             for (int x = 1; x < ComboList.Count; x++) {
@@ -284,10 +328,10 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //concat new events into lists, then sort by tick to make them chronological
-            SequencerEvents[19] = SequencerEvents[19].Concat(EventsToAdd19).ToList();
-            SequencerEvents[19].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
-            SequencerEvents[20] = SequencerEvents[20].Concat(EventsToAdd20).ToList();
-            SequencerEvents[20].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+            GlobalSequencerEvents[19] = GlobalSequencerEvents[19].Concat(EventsToAdd19).ToList();
+            GlobalSequencerEvents[19].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+            GlobalSequencerEvents[20] = GlobalSequencerEvents[20].Concat(EventsToAdd20).ToList();
+            GlobalSequencerEvents[20].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
         }
 
         public static void MidiEventsForTurns(Sequencer_Object Seq)
@@ -461,7 +505,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void MidiEventLoopTracks(LvlProperties Lvl)
+        public static void MidiEventLoopTracks(LvlProperties Lvl, int offset = 0)
         {
             foreach (LvlLoop loop in Lvl.lvlloops) {
                 //add new entry to the loops
@@ -474,8 +518,8 @@ namespace Thumper_Custom_Level_Editor
                 if (velocity > 127)
                     velocity = 127;
                 //
-                for (decimal x = 0; x < Lvl.beats; x += loop.beats) {
-                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + GlobalLoopEvents.Count() - 1, (int)((x + CallOffset) * 100), 0));
+                for (decimal x = 0; x < Lvl.beats + Lvl.approachbeats; x += loop.beats) {
+                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + GlobalLoopEvents.Count() - 1, (int)((x + CallOffset - offset) * 100), 0));
                 }
             }
         }
@@ -513,6 +557,13 @@ namespace Thumper_Custom_Level_Editor
                 MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0) };
             else if (GlobalLoopTracks.Count > 0)
                 MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 1, 0) };
+        }
+
+        public static void RemoveNegativeTickEvents()
+        {
+            for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
+                GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Where(x => x.tick > -1).ToList();
+            }
         }
 
         public static void ChannelEnd(int EndBeat)
@@ -563,6 +614,8 @@ namespace Thumper_Custom_Level_Editor
         public static void Play(double StartTime, int EndBeat, bool Loop = false, int _ApproachBeats = 0)
         {
             EndBeat += 8; //+ call offset
+            RemoveNegativeTickEvents();
+            PitchShiftingBarsRings();
             ChannelEnd(EndBeat);
             CreateSampleSoundfont();
             //merge all channels to a single array of events
@@ -658,6 +711,11 @@ namespace Thumper_Custom_Level_Editor
                 GlobalCurrentOffset = GlobalLeafQueue[0].Item2;
                 GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
                 GlobalLeafQueue.RemoveAt(0);
+            }
+            if (GlobalLvlQueue.Count > 0 && PlaybackTick > GlobalLvlQueue[0].Item2) {
+                GlobalCurrentOffsetLvl = GlobalLvlQueue[0].Item2 / 100;
+                GlobalCurrentLvl = GlobalLvlQueue[0].Item1;
+                GlobalLvlQueue.RemoveAt(0);
             }
         }
     }

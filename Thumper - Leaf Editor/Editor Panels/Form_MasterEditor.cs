@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using NAudio.Wave;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -364,6 +366,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static SolidBrush BrushWhite = new SolidBrush(Color.White);
         private static Pen PenBlack = new Pen(Color.Black, 1);
         private static Pen PenGreen = new Pen(Color.Green, 4);
+        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -439,6 +442,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
                 if (e.RowIndex + 1 == TargetRowToPaint)
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
+            }
+
+            if (Playback.IsPlaying) {
+                if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentLvl) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
+                    double offset = Playback.PlaybackBeat - MasterLvls[e.RowIndex].beatstart - 16 - (MasterLvls[e.RowIndex].restlevelbeats) + Playback.PlaybackSubBeat;
+                    e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
+                }
             }
         }
 
@@ -761,6 +772,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
+            //calc intro lvl
+            MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == MasterProperties.introlvl).FullName);
+            //calc checkpoint lvl
+            MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
 
             ///Clear form elements so new data can load
             MasterLvls.Clear();
@@ -891,25 +906,53 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SaveOnlyNoLoad)
                 return 0;
             int beattotal = 0;
+            //calc intro lvl
+            MasterProperties.introlevelbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == MasterProperties.introlvl).FullName);
+            //calc checkpoint lvl
+            MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
+            //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
-                beattotal += RecalculateRuntimeSublevel(_lvl);
-                if (_lvl.rest is not "<none>" and not null)
-                    beattotal += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == _lvl.rest).FullName);
+                beattotal += RecalculateRuntimeSublevel(_lvl, false);
             }
+            UpdateBeatPosition();
             masterLvlList.Refresh();
-            return beattotal;
+            return beattotal + MasterProperties.introlevelbeats;
         }
 
-        public int RecalculateRuntimeSublevel(MasterLvlData _lvl)
+        public int RecalculateRuntimeSublevel(MasterLvlData _lvl, bool updatebeats = true)
         {
             if (SaveOnlyNoLoad)
                 return 0;
 
-            int beats = TCLE.CalculateSublevelRuntime(_lvl);
-            _lvl.Beats = beats;
+            _lvl.Beats = TCLE.CalculateSublevelRuntime(_lvl);
+            //include rest in lvl's runtime
+            if (_lvl.rest is not "<none>" and not null)
+                _lvl.restlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == _lvl.rest).FullName);
+            //uptime visuals to show if lvl found or not
             ColorRow(_lvl, MasterLvls.IndexOf(_lvl));
+            if (updatebeats)
+                UpdateBeatPosition();
+            //index for previous lvl checkpoint status
+            int index = MasterLvls.IndexOf(_lvl);
+            return _lvl.Beats + _lvl.restlevelbeats + (index > 0 && MasterLvls[index - 1].checkpoint ? MasterProperties.checkpointbeats : 0);
+        }
 
-            return beats;
+        public void UpdateBeatPosition()
+        {
+            int beatpos = MasterProperties.introlevelbeats;
+            foreach (MasterLvlData _lvl in MasterLvls) {
+                //if previous lvl checkpoint status, this lvl will start later
+                int index = MasterLvls.IndexOf(_lvl);
+                if (index > 0 && MasterLvls[MasterLvls.IndexOf(_lvl) - 1].checkpoint) {
+                    beatpos += MasterProperties.checkpointbeats;
+                }
+                //beat position for rest
+                _lvl.restlevelbeatstart = beatpos;
+                beatpos += _lvl.restlevelbeats;
+                //beat position for lvl
+                _lvl.beatstart = beatpos;
+                beatpos += _lvl.Beats;
+            }
         }
 
         public void ColorRow(MasterLvlData _lvl, int index)
@@ -1064,5 +1107,84 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIkpaste");
         }
         #endregion
+
+
+        private int PlaybackStart = -1;
+        private int PlaybackEnd = -1;
+        private bool PlaybackLoop;
+        private bool ForceStop;
+        private void btnMasterPlayback_Click(object sender, EventArgs e)
+        {
+            if (Playback.IsPlaying) {
+                Playback.IsPlaying = false;
+                ForceStop = true;
+            }
+            else {
+                //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
+                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                btnMasterPlayback.Image = Properties.Resources.icon_stop;
+                Playback.Initialize();
+                Playback.CreatePlaybackFromMaster(MasterProperties);
+                Playback.Play(PlaybackStart, MasterProperties.Beats, PlaybackLoop);
+                if (Playback.IsPlaying) {
+                    timer1.Enabled = true;
+                }
+                else {
+                    Bass.BASS_ChannelFree(Playback.MidiStream);
+                    TCLE.alzheimer();
+                    btnMasterPlayback.Image = Properties.Resources.icon_play2;
+                }
+            }
+        }
+
+        private string _playingleaf;
+        private Form_LeafEditor _playingleafform;
+        private string _playinglvl;
+        private Form_LvlEditor _playinglvlform;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Playback.PlaybackBeat < 0)
+                return;
+            if (Playback.IsPlaying && !ForceStop) {
+                masterLvlList.Invalidate();
+                //show the leaf that's playing
+                if (_playingleaf != Playback.GlobalCurrentLeaf) {
+                    _playingleaf = Playback.GlobalCurrentLeaf;
+                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) as Form_LeafEditor;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
+                    }
+                }
+                if (_playingleafform != null)
+                    _playingleafform.trackEditor.Invalidate();
+                //show the lvl that's playing
+                if (_playinglvl != Playback.GlobalCurrentLvl) {
+                    _playinglvl = Playback.GlobalCurrentLvl;
+                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLvl)) as Form_LvlEditor;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl).DockHandler.Activate();
+                    }
+                }
+                if (_playinglvlform != null)
+                    _playinglvlform.lvlLeafList.Invalidate();
+            }
+            else {
+                ForceStop = false;
+                timer1.Enabled = false;
+                btnMasterPlayback.Image = Properties.Resources.icon_play2;
+                Playback.StopPlayback();
+                masterLvlList.Invalidate();
+                if (_playingleafform != null)
+                    _playingleafform.trackEditor.Invalidate();
+                if (_playinglvlform != null)
+                    _playinglvlform.lvlLeafList.Invalidate();
+            }
+        }
     }
 }

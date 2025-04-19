@@ -790,7 +790,6 @@
         private DataGridViewComboBoxColumn LoopSample;
         private DataGridViewTextBoxColumn BeatsPerLoop;
         private DataGridViewTextBoxColumn columnLvlLeafPaths;
-        private DataGridView lvlLeafList;
         public Button btnLvlSequencer;
         private ToolStrip lvlToolStrip;
         private ToolStripButton btnLvlLeafAdd;
@@ -810,5 +809,6 @@
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private ToolStripButton btnLvlPlayback;
         private System.Windows.Forms.Timer timer1;
+        public DataGridView lvlLeafList;
     }
 }
