@@ -116,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -185,6 +185,11 @@
             this.toolStripSeparator22 = new ToolStripSeparator();
             this.btnVolumeMixer = new ToolStripButton();
             this.panelFill = new Panel();
+            this.panelLoadingMessage = new Panel();
+            this.lblLoadingLeaf = new Label();
+            this.lblLoadingLvl = new Label();
+            this.pictureBeeble = new PictureBox();
+            this.lblLoadingPlayback = new Label();
             this.contextmenuTabClick = new ContextMenuStrip(this.components);
             this.toolstripTabSave = new ToolStripMenuItem();
             this.toolstripTabClose = new ToolStripMenuItem();
@@ -220,6 +225,8 @@
             this.toolStripTitle.SuspendLayout();
             this.contextmenuView.SuspendLayout();
             this.panelFill.SuspendLayout();
+            this.panelLoadingMessage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).BeginInit();
             this.contextmenuTabClick.SuspendLayout();
             this.contextmenuMoveWorkspace.SuspendLayout();
             this.SuspendLayout();
@@ -927,8 +934,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1050,14 +1058,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1078,6 +1078,14 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1735,12 +1743,86 @@
             // 
             this.panelFill.AutoScroll = true;
             this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
+            this.panelFill.Controls.Add(this.panelLoadingMessage);
             this.panelFill.Controls.Add(this.dockMain);
             this.panelFill.Dock = DockStyle.Fill;
             this.panelFill.Location = new Point(0, 56);
             this.panelFill.Name = "panelFill";
             this.panelFill.Size = new Size(984, 444);
             this.panelFill.TabIndex = 153;
+            // 
+            // panelLoadingMessage
+            // 
+            this.panelLoadingMessage.AutoScroll = true;
+            this.panelLoadingMessage.BackColor = Color.Black;
+            this.panelLoadingMessage.BorderStyle = BorderStyle.Fixed3D;
+            this.panelLoadingMessage.Controls.Add(this.lblLoadingLeaf);
+            this.panelLoadingMessage.Controls.Add(this.lblLoadingLvl);
+            this.panelLoadingMessage.Controls.Add(this.pictureBeeble);
+            this.panelLoadingMessage.Controls.Add(this.lblLoadingPlayback);
+            this.panelLoadingMessage.Location = new Point(147, 121);
+            this.panelLoadingMessage.Name = "panelLoadingMessage";
+            this.panelLoadingMessage.Size = new Size(399, 124);
+            this.panelLoadingMessage.TabIndex = 157;
+            this.panelLoadingMessage.Tag = "editorpanel";
+            this.panelLoadingMessage.Visible = false;
+            // 
+            // lblLoadingLeaf
+            // 
+            this.lblLoadingLeaf.AutoSize = true;
+            this.lblLoadingLeaf.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLoadingLeaf.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLoadingLeaf.ForeColor = Color.White;
+            this.lblLoadingLeaf.ImageAlign = ContentAlignment.MiddleLeft;
+            this.lblLoadingLeaf.Location = new Point(141, 79);
+            this.lblLoadingLeaf.Margin = new Padding(4, 0, 4, 0);
+            this.lblLoadingLeaf.Name = "lblLoadingLeaf";
+            this.lblLoadingLeaf.Size = new Size(45, 16);
+            this.lblLoadingLeaf.TabIndex = 159;
+            this.lblLoadingLeaf.Text = "Leaf: ";
+            this.lblLoadingLeaf.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblLoadingLvl
+            // 
+            this.lblLoadingLvl.AutoSize = true;
+            this.lblLoadingLvl.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLoadingLvl.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLoadingLvl.ForeColor = Color.White;
+            this.lblLoadingLvl.ImageAlign = ContentAlignment.MiddleLeft;
+            this.lblLoadingLvl.Location = new Point(141, 63);
+            this.lblLoadingLvl.Margin = new Padding(4, 0, 4, 0);
+            this.lblLoadingLvl.Name = "lblLoadingLvl";
+            this.lblLoadingLvl.Size = new Size(35, 16);
+            this.lblLoadingLvl.TabIndex = 158;
+            this.lblLoadingLvl.Text = "Lvl: ";
+            this.lblLoadingLvl.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pictureBeeble
+            // 
+            this.pictureBeeble.Dock = DockStyle.Left;
+            this.pictureBeeble.Image = Properties.Resources.beebledance;
+            this.pictureBeeble.Location = new Point(0, 0);
+            this.pictureBeeble.Name = "pictureBeeble";
+            this.pictureBeeble.Size = new Size(134, 120);
+            this.pictureBeeble.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pictureBeeble.TabIndex = 157;
+            this.pictureBeeble.TabStop = false;
+            // 
+            // lblLoadingPlayback
+            // 
+            this.lblLoadingPlayback.AutoSize = true;
+            this.lblLoadingPlayback.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLoadingPlayback.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLoadingPlayback.ForeColor = Color.White;
+            this.lblLoadingPlayback.ImageAlign = ContentAlignment.MiddleLeft;
+            this.lblLoadingPlayback.Location = new Point(131, 3);
+            this.lblLoadingPlayback.Margin = new Padding(4, 0, 4, 0);
+            this.lblLoadingPlayback.MinimumSize = new Size(260, 60);
+            this.lblLoadingPlayback.Name = "lblLoadingPlayback";
+            this.lblLoadingPlayback.Size = new Size(260, 60);
+            this.lblLoadingPlayback.TabIndex = 156;
+            this.lblLoadingPlayback.Text = "GENERATING PLAYBACK";
+            this.lblLoadingPlayback.TextAlign = ContentAlignment.MiddleRight;
             // 
             // contextmenuTabClick
             // 
@@ -1945,6 +2027,9 @@
             this.toolStripTitle.PerformLayout();
             this.contextmenuView.ResumeLayout(false);
             this.panelFill.ResumeLayout(false);
+            this.panelLoadingMessage.ResumeLayout(false);
+            this.panelLoadingMessage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).EndInit();
             this.contextmenuTabClick.ResumeLayout(false);
             this.contextmenuMoveWorkspace.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2118,6 +2203,12 @@
         private ToolStripMenuItem toolstripWindowCloseFiletype;
         private ToolStripMenuItem toolStripMenuItem5;
         public Label pictureTunnelViewer;
+        public Label lblLoadingPlayback;
+        private PictureBox pictureBeeble;
+        public Panel panelLoadingMessage;
+        private Label lblLoading;
+        public Label lblLoadingLeaf;
+        public Label lblLoadingLvl;
     }
 }
 

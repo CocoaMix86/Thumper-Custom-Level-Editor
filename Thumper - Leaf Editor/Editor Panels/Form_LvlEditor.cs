@@ -12,6 +12,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Form Construction
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
+            if (Playback.Generating) {
+                LoadLvlSimple(load, filepath);
+                return;
+            }
             InitializeComponent();
             InitializeLvlStuff();
             ColorFormElements();
@@ -467,7 +471,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0) && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0)) < LvlLeafs[e.RowIndex].beats)
                 if (LvlLeafs[e.RowIndex].leafname == Playback.GlobalCurrentLeaf) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].beats;
-                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl - LvlLeafs[e.RowIndex].beatstart /*- (LvlProperties.approachbeats < 8 ? 8 : 0)*/ + Playback.PlaybackSubBeat;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl - LvlLeafs[e.RowIndex].beatstart + (Playback.Type != "lvl" ? LvlProperties.approachbeats : 0) + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
             }
@@ -945,10 +949,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LoadLvl(dynamic _load, FileInfo filepath)
         {
-            if (_load == null)
-                return;
             //reset flag in case it got stuck previously
             EditorIsLoading = false;
+            if (_load == null)
+                return;
             //detect if file is actually Lvl or not
             if ((string)_load["obj_type"] != "SequinLevel") {
                 MessageBox.Show("This does not appear to be a lvl file!");
@@ -996,6 +1000,44 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = false;
             EditorIsSaved = true;
             btnLvlSequencer.Enabled = true;
+            RecalculateRuntime();
+        }
+
+        public void LoadLvlSimple(dynamic _load, FileInfo filepath)
+        {
+            //set flag that load is in progress. This skips Save method
+            EditorIsLoading = true;
+            LoadedLvl = filepath;
+
+            lvlProperties = new(this, filepath) {
+                approachbeats = (int)_load["approach_beats"],
+                volume = (decimal)_load["volume"],
+                allowinput = (string)_load["input_allowed"] == "True",
+                tutorialtype = (string)_load["tutorial_type"],
+                seqJSON = _load["seq_objs"]
+            };
+            //load loop tracks
+            LvlProperties.lvlloops.CollectionChanged -= lvlloop_CollectionChanged;
+            foreach (dynamic samp in _load["loops"]) {
+                lvlProperties.lvlloops.Add(new LvlLoop() {
+                    sample = (string)samp["samp_name"],
+                    beats = (decimal?)samp["beats_per_loop"] == null ? 0 : (decimal)samp["beats_per_loop"]
+                });
+            }
+            //load leafs associated with this lvl
+            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
+            foreach (dynamic leaf in _load["leaf_seq"]) {
+                LvlLeafs.Add(new LvlLeafData() {
+                    leafname = (string)leaf["leaf_name"],
+                    beats = (int)leaf["beat_cnt"],
+                    paths = leaf["sub_paths"].ToObject<List<string>>(),
+                    id = TCLE.rng.Next(0, 1000000)
+                });
+            }
+
+            //mark that lvl is saved (just freshly loaded)
+            EditorIsLoading = false;
+            EditorIsSaved = true;
             RecalculateRuntime();
         }
 
@@ -1142,7 +1184,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorIsLoading || !LogUndo)
+            if (EditorIsLoading || !LogUndo || Playback.Generating)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -1180,7 +1222,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData _leaf in LvlLeafs) {
                 beattotal += RecalculateRuntimeSublevel(_leaf);
             }
-            lvlLeafList.Refresh();
+            if (!Playback.Generating)
+                lvlLeafList.Refresh();
             return beattotal;
         }
 
@@ -1196,7 +1239,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _leaf.beats = -1;
             else
                 _leaf.beats = (int?)TCLE.LoadFileLock(leaffile.FullName)["beat_cnt"] ?? -1;
-            ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
+            //if playback generating, this was reached during generation, and the form won't exist
+            //ColorRow calls form objects which won't be initialized yet.
+            if (!Playback.Generating)
+                ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
             UpdateBeatPosition();
 
             return _leaf.beats;
@@ -1416,9 +1462,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
-                Playback.Initialize();
+                Playback.Initialize("lvl");
                 Playback.CreatePlaybackFromLvl(LvlProperties);
-                Playback.Play(PlaybackStart, LvlProperties.beats, PlaybackLoop, LvlProperties.approachbeats);
+                Playback.Play(PlaybackStart, LvlProperties.beats + lvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -1458,7 +1504,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPlayback.Image = Properties.Resources.icon_play2;
                 Playback.StopPlayback();
                 lvlLeafList.Invalidate();
-                _playingleafform.trackEditor.Invalidate();
+                if (_playingleafform != null)
+                    _playingleafform.trackEditor.Invalidate();
             }
         }
     }

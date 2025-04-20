@@ -129,7 +129,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int Beats => masterlvls.Sum(x => x.Beats);
+        public int Beats => introlevelbeats + masterlvls.Sum(x => x.Beats) + masterlvls.Sum(x => x.restlevelbeats) + (masterlvls.Count(x => x.checkpoint) * checkpointbeats);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]

@@ -13,6 +13,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Load LEAF
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
+            if (Playback.Generating) {
+                LoadLeafSimple(load, filepath);
+                LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
+                return;
+            }
+
             InitializeComponent();
             RenderForm();
             ColorFormElements();
@@ -37,6 +43,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload)
         {
+            if (Playback.Generating) {
+                LvlSequencer = toload;
+                LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
+                LeafProperties.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                return;
+            }
+
             InitializeComponent();
             RenderForm();
             ColorFormElements();
@@ -2352,6 +2365,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafLengthChanged();
         }
 
+        public void LoadLeafSimple(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
+        {
+            LoadedLeaf = filepath;
+            //set flag that load is in progress. This skips Save method
+            EditorIsLoading = true;
+            if (filepath.Extension == ".leaf") {
+                leafProperties = new(this, filepath, (int?)_load["beat_cnt"] ?? 1) {
+                    SequencerType = filepath.Extension,
+                    timesignature = (string)_load["time_sig"] ?? "4/4"
+                };
+            }
+            else if (filepath.Extension == ".lvl") {
+                leafProperties = new(this, filepath, Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats + (Lvl.lvlleafs.Count(x => x.beats == -1) * 2)) {
+                    SequencerType = filepath.Extension,
+                    timesignature = "4/4"
+                };
+            }
+        }
+
         public void LoadEnd()
         {
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
@@ -2569,7 +2601,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorIsLoading)
+            if (EditorIsLoading || Playback.Generating)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -2816,6 +2848,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void EnableLeafButtons()
         {
+            if (Playback.Generating)
+                return;
             btnTrackDelete.Enabled = SequencerObjects.Count > 0;
             btnTrackUp.Enabled = SequencerObjects.Count > 1;
             btnTrackDown.Enabled = SequencerObjects.Count > 1;
@@ -3229,7 +3263,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
-                Playback.Initialize();
+                Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
                 Playback.Play(PlaybackStart, LeafProperties.beats, PlaybackLoop);
                 if (Playback.IsPlaying) {

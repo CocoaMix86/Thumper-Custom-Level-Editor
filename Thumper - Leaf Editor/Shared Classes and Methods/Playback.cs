@@ -1,9 +1,6 @@
-﻿using System.Runtime.Intrinsics.Arm;
-using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
-using WeifenLuo.WinFormsUI.Docking;
-using Windows.Devices.Geolocation;
 
 namespace Thumper_Custom_Level_Editor
 { 
@@ -17,7 +14,9 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private static bool _isplay;
+        public static string Type;
         public static bool IsLooping;
+        public static bool Generating;
         public static double LoopingStartTime;
         public static double BPM => (double)TCLE.BPM;
         public static double Microseconds => (60 / BPM) * 1_000_000;
@@ -43,13 +42,20 @@ namespace Thumper_Custom_Level_Editor
         public static int GlobalCurrentOffset = -1;
         public static int GlobalCurrentOffsetLvl = -1;
 
-        public static void Initialize()
+        public static void Initialize(string _Type)
         {
             CallOffset = 9;
             GlobalCurrentLeaf = "???";
             GlobalCurrentLvl = "???";
             GlobalCurrentOffset = -1;
             GlobalCurrentOffsetLvl = -1;
+            Type = _Type;
+            //show the loading message
+            TCLE.Instance.panelLoadingMessage.Visible = true;
+            TCLE.Instance.panelLoadingMessage.Invalidate();
+            TCLE.Instance.panelLoadingMessage.Update();
+            TCLE.Instance.panelLoadingMessage.Refresh();
+            Application.DoEvents();
             //
             GlobalSampleEvents = new();
             GlobalLoopEvents = new();
@@ -99,6 +105,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1, int _BeatOffset = 0)
         {
+            //show the loading message
+            TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.FilePath.Name}";
+            TCLE.Instance.lblLoadingLeaf.Invalidate();
+            TCLE.Instance.lblLoadingLeaf.Update();
+            TCLE.Instance.lblLoadingLeaf.Refresh();
+            Application.DoEvents();
+            //
+            Generating = true;
             BeatOffset = _BeatOffset;
             SequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < SequencerEvents.Length; x++) {
@@ -217,6 +231,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CreatePlaybackFromLvl(LvlProperties Lvl, int BeatStop = -1, int _BeatOffset = 0)
         {
+            //show the loading message
+            TCLE.Instance.lblLoadingLvl.Text = $"Lvl: {Lvl.FilePath.Name}";
+            TCLE.Instance.lblLoadingLvl.Invalidate();
+            TCLE.Instance.lblLoadingLvl.Update();
+            TCLE.Instance.lblLoadingLvl.Refresh();
+            Application.DoEvents();
+            //
+            Generating = true;
             GlobalLvlQueue.Add(new Tuple<string, int>(Lvl.FilePath.Name, (_BeatOffset) * 100));
             Playback.CallOffset = 0;
             int beatoffset = _BeatOffset;
@@ -225,18 +247,21 @@ namespace Thumper_Custom_Level_Editor
             //create playback of the lvl sequencer
             Form_LeafEditor lvlseq = new(Lvl);
             Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats, beatoffset - Lvl.approachbeats);
+            lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                 Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
                 beatoffset += leaf.beats;
+                leaftoplay.Dispose();
             }
             //create midi events for the loop tracks
-            Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.approachbeats));
+            Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.approachbeats), _BeatOffset);
         }
 
         public static void CreatePlaybackFromMaster(MasterProperties Master, int BeatStop = -1, int _BeatOffset = 0)
         {
+            Generating = true;
             Playback.CallOffset = 0;
             int beatoffset = 0;
             //setup checkpoint lvl so we can call it later if needed
@@ -246,21 +271,27 @@ namespace Thumper_Custom_Level_Editor
             if (lvlintro != null) {
                 Playback.CreatePlaybackFromLvl(lvlintro.lvlProperties);
                 beatoffset += lvlintro.lvlProperties.beats + (lvlintro.lvlProperties.approachbeats < 8 ? 8 : lvlintro.lvlProperties.approachbeats);
+                lvlintro.Dispose();
             }
             //create playback for each lvl
             foreach (MasterLvlData lvl in Master.masterlvls) {
+                //load rest lvl first
                 Form_LvlEditor lvlrest = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.rest), false, true);
                 if (lvlrest != null) {
                     Playback.CreatePlaybackFromLvl(lvlrest.lvlProperties, lvlrest.lvlProperties.beats, beatoffset);
                     if (beatoffset == 0)
                         beatoffset += (lvlrest.lvlProperties.approachbeats < 8 ? 8 : lvlrest.lvlProperties.approachbeats);
                     beatoffset += lvl.restlevelbeats;
+                    lvlrest.Dispose();
                 }
+                //load main lvl
                 Form_LvlEditor lvltoplay = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
                 Playback.CreatePlaybackFromLvl(lvltoplay.lvlProperties, lvltoplay.lvlProperties.beats, beatoffset);
                 if (beatoffset == 0)
                     beatoffset += (lvltoplay.lvlProperties.approachbeats < 8 ? 8 : lvltoplay.lvlProperties.approachbeats);
                 beatoffset += lvltoplay.lvlProperties.beats;
+                lvltoplay.Dispose();
+                //load checkpoint
                 if (lvl.checkpoint && lvlcheckpoint != null) {
                     Playback.CreatePlaybackFromLvl(lvlcheckpoint.lvlProperties, lvlcheckpoint.lvlProperties.beats, beatoffset);
                     beatoffset += lvlcheckpoint.lvlProperties.beats;
@@ -465,6 +496,7 @@ namespace Thumper_Custom_Level_Editor
         private static int SpeedPitch = 8192;
         public static void MidiEventsForSpeed(Sequencer_Object Seq)
         {
+            return;
             if (Seq == null)
                 return;
 
@@ -505,7 +537,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void MidiEventLoopTracks(LvlProperties Lvl, int offset = 0)
+        public static void MidiEventLoopTracks(LvlProperties Lvl, int offset = 0, int lvloffset = 0)
         {
             foreach (LvlLoop loop in Lvl.lvlloops) {
                 //add new entry to the loops
@@ -518,8 +550,10 @@ namespace Thumper_Custom_Level_Editor
                 if (velocity > 127)
                     velocity = 127;
                 //
+                if (200 + GlobalLoopEvents.Count() - 1 == 316)
+                    ;
                 for (decimal x = 0; x < Lvl.beats + Lvl.approachbeats; x += loop.beats) {
-                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + GlobalLoopEvents.Count() - 1, (int)((x + CallOffset - offset) * 100), 0));
+                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50 + GlobalLoopEvents.Count() - 1, (int)((x + CallOffset - offset + lvloffset) * 100), 0));
                 }
             }
         }
@@ -564,6 +598,12 @@ namespace Thumper_Custom_Level_Editor
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Where(x => x.tick > -1).ToList();
             }
+            for (int x = 0; x < GlobalSampleEvents.Count; x++) {
+                GlobalSampleEvents[x] = GlobalSampleEvents[x].Where(x => x.tick > -1).ToList();
+            }
+            for (int x = 0; x < GlobalLoopEvents.Count; x++) {
+                GlobalLoopEvents[x] = GlobalLoopEvents[x].Where(x => x.tick > -1).ToList();
+            }
         }
 
         public static void ChannelEnd(int EndBeat)
@@ -598,7 +638,7 @@ namespace Thumper_Custom_Level_Editor
 
             //for ;v; loop events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
             for (int x = 0; x < GlobalLoopEvents.Count; x++) {
-                int channeloffset = GlobalSequencerEvents.Count() + GlobalSampleEvents.Count() + x;
+                int channeloffset = 50 + x;
                 GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, GlobalSampleEvents.Count() > 0 ? 2 : 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
                 GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
@@ -618,6 +658,8 @@ namespace Thumper_Custom_Level_Editor
             PitchShiftingBarsRings();
             ChannelEnd(EndBeat);
             CreateSampleSoundfont();
+            Generating = false;
+            TCLE.Instance.panelLoadingMessage.Visible = false;
             //merge all channels to a single array of events
             List<BASS_MIDI_EVENT> _SequencerEvents = Playback.GlobalSequencerEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.GlobalSampleEvents.SelectMany(x => x).Distinct().ToList();
@@ -628,6 +670,7 @@ namespace Thumper_Custom_Level_Editor
             //create the stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
             Error = Bass.BASS_ErrorGetCode();
+            List<BASS_MIDI_EVENT> BadTick = AllEvents.Where(x => x.tick > (EndBeat + 1)*100).ToList();
             channelsync = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
             //setup channel for looping
             if (Loop) {

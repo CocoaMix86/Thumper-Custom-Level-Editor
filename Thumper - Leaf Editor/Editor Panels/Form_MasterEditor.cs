@@ -862,7 +862,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorLoading || !LogUndo)
+            if (EditorLoading || !LogUndo || Playback.Generating)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -1123,7 +1123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnMasterPlayback.Image = Properties.Resources.icon_stop;
-                Playback.Initialize();
+                Playback.Initialize("master");
                 Playback.CreatePlaybackFromMaster(MasterProperties);
                 Playback.Play(PlaybackStart, MasterProperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
