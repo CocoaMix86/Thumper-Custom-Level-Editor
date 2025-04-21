@@ -447,7 +447,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.IsPlaying) {
                 if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentLvl) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
-                    double offset = Playback.PlaybackBeat - MasterLvls[e.RowIndex].beatstart - 16 - (MasterLvls[e.RowIndex].restlevelbeats) + Playback.PlaybackSubBeat;
+                    double offset = Playback.PlaybackBeat - MasterLvls[e.RowIndex].beatstart - (MasterLvls[e.RowIndex].restlevelbeats) + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
             }
