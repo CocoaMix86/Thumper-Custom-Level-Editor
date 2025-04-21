@@ -474,11 +474,11 @@ namespace Thumper_Custom_Level_Editor
 
                 foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
                     //find events that fall inside the sentry activation time
-                    foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > (sdp.beat*100)+400 && x.tick <= (sdp.beat + length)*100)) {
+                    foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > ((sdp.beat + BeatOffset) *100)+400 && x.tick <= (sdp.beat + length + BeatOffset) *100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
                         if (!EventsToAdd15.Any(x => x.tick == _event.tick - 400)) {
                             //Sentry call happens 4 beats ahead (400 ticks)
-                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)(int)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400 + (BeatOffset * 100), 0));
+                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)(int)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
                         }
                     }
                     if (sdp.beat + length < LeafLastBeat) {

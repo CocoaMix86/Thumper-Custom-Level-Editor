@@ -465,7 +465,7 @@ namespace Thumper_Custom_Level_Editor
             ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
             string warning = "";
             //iterate over each file
-            foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "default.samp")) {
+            foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "?!?!default?!?!?!?.samp")) {
                 UpdateProjectSamplesFromFile(sampfile, false, out string _warning);
                 warning += _warning;
             }
