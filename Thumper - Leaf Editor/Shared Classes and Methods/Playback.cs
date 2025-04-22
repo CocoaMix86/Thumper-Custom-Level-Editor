@@ -213,13 +213,13 @@ namespace Thumper_Custom_Level_Editor
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
                             if (Seq.data_points[beat].value == null || (Seq.data_points[beat].value != null && (decimal)Seq.data_points[beat].value != 0))
-                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey);
+                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
                         }
                     }
                     else {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
                             if (Seq.data_points[beat].value != null)
-                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey);
+                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
                         }
                     }
                 }
@@ -315,14 +315,14 @@ namespace Thumper_Custom_Level_Editor
             beat = (beat + CallOffset + BeatOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(int)Properties.Settings.Default[$"VolKey{callkey}"]), callkey, beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{callkey}"])), callkey, beat - call, 0));
             }
 
             if (key != -1) {
                 SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 20)
-                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(int)Properties.Settings.Default[$"VolKey{key}"]), 19, beat, 0));
+                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), 19, beat, 0));
             }
         }
 
