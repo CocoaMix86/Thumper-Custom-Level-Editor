@@ -773,7 +773,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
             //calc intro lvl
-            MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == MasterProperties.introlvl).FullName);
+            MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
             MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
 
@@ -907,7 +907,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             //calc intro lvl
-            MasterProperties.introlevelbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == MasterProperties.introlvl).FullName);
+            MasterProperties.introlevelbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
             MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
             //calc each lvl/gate
@@ -927,7 +927,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _lvl.Beats = TCLE.CalculateSublevelRuntime(_lvl);
             //include rest in lvl's runtime
             if (_lvl.rest is not "<none>" and not null)
-                _lvl.restlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.First(x => x.Name == _lvl.rest).FullName);
+                _lvl.restlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.rest)?.FullName);
             //uptime visuals to show if lvl found or not
             ColorRow(_lvl, MasterLvls.IndexOf(_lvl));
             if (updatebeats)

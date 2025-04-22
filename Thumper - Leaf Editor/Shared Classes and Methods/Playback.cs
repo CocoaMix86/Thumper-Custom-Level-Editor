@@ -212,14 +212,44 @@ namespace Thumper_Custom_Level_Editor
                     //instead, check for any beat set to 0.
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq.data_points[beat].value == null || (Seq.data_points[beat].value != null && (decimal)Seq.data_points[beat].value != 0))
+                            if (Seq.data_points[beat].value == null || (Seq.data_points[beat].value != null && (decimal)Seq.data_points[beat].value != 0)) {
                                 AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
+                                if (Seq.obj_name == "grindable_multi.spn") {
+                                    if (Seq.friendly_param == "bar[double]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                    else if (Seq.friendly_param == "bar[triple]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                    else if (Seq.friendly_param == "bar[quad]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                }
+                            }
                         }
                     }
                     else {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq.data_points[beat].value != null)
+                            if (Seq.data_points[beat].value != null) {
                                 AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
+                                if (Seq.obj_name == "grindable_multi.spn") {
+                                    if (Seq.friendly_param == "bar[double]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                    else if (Seq.friendly_param == "bar[triple]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                    else if (Seq.friendly_param == "bar[quad]") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -308,21 +338,21 @@ namespace Thumper_Custom_Level_Editor
         public static int Pitch = 8192;
         public static int CallOffset = 8;
         public static int BeatOffset = 0;
-        public static void AddNoteToChannel(int beat, int key, int call, int callkey, bool mute = false)
+        public static void AddNoteToChannel(double beat, int key, int call, int callkey, bool mute = false)
         {
             //beats land on multiples of 100 ticks.
             //to handle offsetting calls, increase beats by 8.
             beat = (beat + CallOffset + BeatOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{callkey}"])), callkey, beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{callkey}"])), callkey, (int)beat - call, 0));
             }
 
             if (key != -1) {
-                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, beat, 0));
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, (int)beat, 0));
                 //bar collect also plays ring collect noise
                 if (key == 20)
-                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), 19, beat, 0));
+                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), 19, (int)beat, 0));
             }
         }
 
