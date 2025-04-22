@@ -164,6 +164,11 @@ namespace Thumper_Custom_Level_Editor
                             Call = 8;
                             CallKey = 1;
                             break;
+                        case "grindable_multi.spn":
+                            Key = 19;
+                            Call = 8;
+                            CallKey = 1;
+                            break;
                         case "ducker.spn":
                             Key = 20;
                             Call = 8;
