@@ -1439,7 +1439,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         SampleData SamplePlaying = new();
         private void treeObjects_KeyDown(object sender, KeyEventArgs e)
         {
-            if (treeObjects.SelectedNode.Parent.Text.EndsWith(".samp") && e.KeyCode == Keys.Space) {
+            if (e.KeyCode == Keys.Space && treeObjects.SelectedNode.Nodes.Count == 0 && treeObjects.SelectedNode.Text.EndsWith(".samp")) {
                 SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == treeObjects.SelectedNode.Text);
                 if (SampToPlay == null || SamplePlaying == SampToPlay)
                     return;
@@ -2928,6 +2928,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Cut Copy Paste
         public void Copy()
         {
+            if (textEditor.Focused)
+                return;
             ///copies selected cells
             //TCLE.ClipboardDataPoints = trackEditor.GetClipboardContent();
             IEnumerable<DataGridViewCell> _selected = trackEditor.SelectedCells.Cast<DataGridViewCell>();

@@ -170,7 +170,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 77);
+            this.btnRawImport.Size = new Size(54, 78);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -186,7 +186,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 367);
+            this.labelCollapsePanel2.Location = new Point(0, 366);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -257,7 +257,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 352);
+            this.vScrollBarTrackEditor.Size = new Size(15, 351);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -359,7 +359,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 352);
+            this.trackEditor.Size = new Size(491, 351);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -448,7 +448,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 352);
+            this.leafToolStrip.Size = new Size(24, 351);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -892,7 +892,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 382;
+            this.splitContainerLeafSide.SplitterDistance = 381;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -945,7 +945,6 @@
             this.textEditor.FindForm = null;
             this.textEditor.FoldingHighlightColor = Color.LightGray;
             this.textEditor.FoldingHighlightEnabled = false;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -957,7 +956,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 77);
+            this.textEditor.Size = new Size(476, 78);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1099,7 +1098,6 @@
         private ToolStrip gateToolStrip;
         private SplitContainer splitContainerLeafSide;
         private SplitContainer splitContainerTopbar;
-        private FastColoredTextBoxNS.FastColoredTextBox textEditor;
         public DataGridView trackEditor;
         public PropertyGrid propertyGridLeaf;
         private ImageList imageList1;
@@ -1145,5 +1143,6 @@
         private Panel panelObjects;
         public TreeViewEx treeObjects;
         public TextBox txtSearch;
+        public FastColoredTextBoxNS.FastColoredTextBox textEditor;
     }
 }
