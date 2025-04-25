@@ -1838,50 +1838,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackPaste_Click(object sender, EventArgs e)
         {
-            try {
-                int _index = trackEditor.CurrentRow?.Index ?? -1;
-                ispasting = true;
-                //add copied Sequencer_Object to main _tracks list
-                foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
-                    _index++;
-                    //if pasting inside a multilane object, skip index down a few rows
-                    switch (SequencerObjects[_index].friendly_lane) {
-                        case "lane left 2":
-                            _index += 5;
-                            break;
-                        case "lane left 1":
-                            _index += 4;
-                            break;
-                        case "lane center":
-                            _index += 3;
-                            break;
-                        case "lane right 1":
-                            _index += 2;
-                            break;
-                        case "lane right 2":
-                            _index += 1;
-                            break;
-                    }
-                    DataGridViewRow dgvr = new();
-                    Sequencer_Object clone = _newtrack.Clone();
-                    clone.parent = leafProperties;
-                    clone.editor_row = dgvr;
-                    clone.expandlanes = GlobalExpand;
-                    //need to remove beats beyond the beat count
-                    for (int x = LeafProperties.beats; x < 255; x++) {
-                        clone.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                    }
-                    SequencerObjects.Insert(_index, clone);
-                    trackEditor.Rows.Insert(_index, clone.editor_row);
-                    try {
-                        //set the headercell names
-                        ///ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
-                        //pass _griddata per row to be imported to the DGV
-                        TrackRawImport(clone, _newtrack.data_points, LeafProperties);
-                    } catch (Exception) { }
+            int _index = trackEditor.CurrentRow?.Index ?? -1;
+            //if pasting inside a multilane object, skip index down a few rows
+            switch (SequencerObjects[_index].friendly_lane) {
+                case "lane left 2":
+                    _index += 5;
+                    break;
+                case "lane left 1":
+                    _index += 4;
+                    break;
+                case "lane center":
+                    _index += 3;
+                    break;
+                case "lane right 1":
+                    _index += 2;
+                    break;
+                case "lane right 2":
+                case "none":
+                    _index += 1;
+                    break;
+            }
+            ispasting = true;
+            //add copied Sequencer_Object to main _tracks list
+            foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
+                DataGridViewRow dgvr = new();
+                Sequencer_Object clone = _newtrack.Clone();
+                clone.parent = leafProperties;
+                clone.editor_row = dgvr;
+                clone.expandlanes = GlobalExpand;
+                //need to remove beats beyond the beat count
+                for (int x = LeafProperties.beats; x < 255; x++) {
+                    clone.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                 }
-            } catch (Exception ex) {
-                MessageBox.Show("something went wrong with pasting. Show this error to the dev.\n\n" + ex);
+                SequencerObjects.Insert(_index, clone);
+                trackEditor.Rows.Insert(_index, clone.editor_row);
+                try {
+                    //set the headercell names
+                    ///ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
+                    //pass _griddata per row to be imported to the DGV
+                    TrackRawImport(clone, _newtrack.data_points, LeafProperties);
+                } catch (Exception) { }
+                _index++;
             }
 
             ispasting = false;
