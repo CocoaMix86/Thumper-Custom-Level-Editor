@@ -527,8 +527,11 @@ namespace Thumper_Custom_Level_Editor
             toolstripViewExplorer.Enabled = true;
             toolstripViewProperties.Enabled = true;
 
-            dockMain.Panes.First(x => x.DockState == DockState.Document).Resize += DockPanelDocumentArea_Resize;
-            dockMain.DefaultFloatWindowSize = dockMain.Panes.First(x => x.DockState == DockState.Document).Size;
+            DockPane documentsPane = dockMain.Panes.FirstOrDefault(x => x.DockState == DockState.Document);
+            if (documentsPane != null) {
+                documentsPane.Resize += DockPanelDocumentArea_Resize;
+                dockMain.DefaultFloatWindowSize = documentsPane.Size;
+            }
         }
 
         private static int WorkspaceCount = 1;
