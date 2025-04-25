@@ -1136,8 +1136,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
+            bool _trackNotSaved = EditorIsSaved;
             LoadLvl(UndoList[undolistindex].savestate, LoadedLvl);
             UndoList.RemoveRange(0, undolistindex);
+
+            if (!_trackNotSaved) {
+                EditorIsSaved = false;
+                if (!this.Text.EndsWith("*"))
+                    this.Text += '*';
+            }
         }
 
         ///SAVE

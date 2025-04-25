@@ -2547,12 +2547,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
+            bool _trackNotSaved = EditorIsSaved;
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
             LeafProperties.seq_objs = LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
             UndoList.RemoveRange(0, undolistindex);
             propertyGridLeaf.Refresh();
+
+            if (!_trackNotSaved) {
+                EditorIsSaved = false;
+                if (!this.Text.EndsWith("*"))
+                    this.Text += '*';
+            }
         }
 
         ///SAVE
