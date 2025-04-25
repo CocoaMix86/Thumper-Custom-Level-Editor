@@ -2963,6 +2963,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Paste()
         {
+            if (textEditor.Focused)
+                return;
             /*
             //get content on clipboard to string and then split it to rows
             string s = TCLE.ClipBoardDataPoints.GetText().Replace("\r\n", "\n");

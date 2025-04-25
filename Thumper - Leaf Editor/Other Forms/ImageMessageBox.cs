@@ -52,9 +52,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tcle.MaximizeScreenBounds();
-            TCLE.MainBeeble.Visible = true;
-            TCLE.MainBeeble.Location = Properties.Settings.Default.beebleloc;
+            if (tcle != null) {
+                tcle.MaximizeScreenBounds();
+                TCLE.MainBeeble.Visible = true;
+                TCLE.MainBeeble.Location = Properties.Settings.Default.beebleloc;
+            }
             this.Close();
         }
     }

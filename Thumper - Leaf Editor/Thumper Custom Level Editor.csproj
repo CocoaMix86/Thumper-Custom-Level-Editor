@@ -235,6 +235,7 @@
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
     <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="1.7.2" />
+    <PackageReference Include="Dax-FCTB" Version="2.16.26.120" />
     <PackageReference Include="DockPanelSuite">
       <Version>3.1.1</Version>
       <TreatAsUsed>true</TreatAsUsed>
@@ -242,7 +243,6 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2015">
       <Version>3.1.1</Version>
     </PackageReference>
-    <PackageReference Include="FCTB-wired" Version="2.17.0" />
     <PackageReference Include="Fmod5Sharp">
       <Version>3.0.1</Version>
     </PackageReference>
@@ -259,20 +259,20 @@
       <Version>13.0.3</Version>
     </PackageReference>
     <PackageReference Include="System.Collections.Immutable">
-      <Version>9.0.1</Version>
+      <Version>9.0.4</Version>
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>9.0.1</Version>
+      <Version>9.0.4</Version>
     </PackageReference>
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>6.1.0</Version>
+      <Version>6.1.2</Version>
     </PackageReference>
     <PackageReference Include="System.Security.Permissions">
-      <Version>9.0.1</Version>
+      <Version>9.0.4</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
-      <Version>9.0.1</Version>
+      <Version>9.0.4</Version>
     </PackageReference>
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
   </ItemGroup>
@@ -294,9 +294,7 @@
     <Compile Update="Editor Panels\Form_Workspace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Editor Panels\Form_RawText.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Editor Panels\Form_RawText.cs" />
     <Compile Update="Editor Panels\Form_ProjectProperties.cs">
       <SubType>Form</SubType>
     </Compile>

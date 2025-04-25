@@ -626,7 +626,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripEditCopy_Click(object sender, EventArgs e)
         {
-            GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
+            //GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripEditPaste_Click(object sender, EventArgs e)
@@ -645,7 +645,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
-            CustomizeWorkspace custom = new() { Owner = this};
+            CustomizeWorkspace custom = new() { Owner = this };
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
                 ColorFormElements();
@@ -1153,6 +1153,11 @@ namespace Thumper_Custom_Level_Editor
         private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e)
         {
             pictureTunnelViewer.Visible = false;
+        }
+
+        private void TCLE_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            alzheimer();
         }
     }
 }

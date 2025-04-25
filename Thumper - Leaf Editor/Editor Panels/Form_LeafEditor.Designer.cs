@@ -943,8 +943,8 @@
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
-            this.textEditor.FoldingHighlightColor = Color.LightGray;
-            this.textEditor.FoldingHighlightEnabled = false;
+            //this.textEditor.FoldingHighlightColor = Color.LightGray;
+            //this.textEditor.FoldingHighlightEnabled = false;
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");

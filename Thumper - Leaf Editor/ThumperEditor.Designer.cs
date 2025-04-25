@@ -1995,6 +1995,7 @@
             this.ShowIcon = false;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += this.TCLE_FormClosing;
+            this.FormClosed += this.TCLE_FormClosed;
             this.Load += this.FormLeafEditor_Load;
             this.LocationChanged += this.TCLE_LocationChanged;
             this.KeyDown += this.TCLE_KeyDown;

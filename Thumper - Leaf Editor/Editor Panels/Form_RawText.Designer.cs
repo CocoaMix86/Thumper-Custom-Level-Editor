@@ -62,8 +62,6 @@
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
-            this.textEditor.FoldingHighlightColor = Color.LightGray;
-            this.textEditor.FoldingHighlightEnabled = false;
             this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
