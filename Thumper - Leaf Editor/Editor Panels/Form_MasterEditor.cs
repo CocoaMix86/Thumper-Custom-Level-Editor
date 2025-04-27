@@ -1132,7 +1132,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnMasterPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("master");
                 Playback.CreatePlaybackFromMaster(MasterProperties);
-                Playback.Play(PlaybackStart, MasterProperties.Beats, PlaybackLoop);
+                Playback.Play(MasterLvls[masterLvlList.SelectedRows[^1].Index].beatstart, MasterProperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -1148,6 +1148,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private Form_LeafEditor _playingleafform;
         private string _playinglvl;
         private Form_LvlEditor _playinglvlform;
+        private string _playinggate;
+        private Form_GateEditor _playinggateform;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
@@ -1180,6 +1182,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 if (_playinglvlform != null)
                     _playinglvlform.lvlLeafList.Invalidate();
+                //show the lvl that's playing
+                if (_playinggate != Playback.GlobalCurrentGate) {
+                    _playinggate = Playback.GlobalCurrentGate;
+                    _playinggateform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentGate)) as Form_GateEditor;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playinggate));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playinggate).DockHandler.Activate();
+                    }
+                }
+                if (_playinggateform != null)
+                    _playinggateform.gateLvlList.Invalidate();
             }
             else {
                 ForceStop = false;

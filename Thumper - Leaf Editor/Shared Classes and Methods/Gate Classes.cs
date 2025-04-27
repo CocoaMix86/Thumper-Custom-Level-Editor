@@ -26,7 +26,9 @@ namespace Thumper_Custom_Level_Editor
         public int bucket { get; set; }
 
         [Browsable(false)]
-        public int beats { get; set; }
+        public int beats { get; set; } = 0;
+        [Browsable(false)]
+        public int beatstart { get; set; } = 0;
         [Browsable(false)]
         public string runtime
         {
@@ -97,12 +99,16 @@ namespace Thumper_Custom_Level_Editor
         [Description("THis lvl will play when the gate starts, before the boss spawns in.")]
         [TypeConverter(typeof(LvlList))]
         public string prelvl { get; set; }
+        [Browsable(false)]
+        public int prebeats = 0;
 
         [CategoryAttribute("Options")]
         [DisplayName("Post Lvl")]
         [Description("This lvl plays after the boss spawns in, before phase0 starts.")]
         [TypeConverter(typeof(LvlList))]
         public string postlvl { get; set; }
+        [Browsable(false)]
+        public int postbeats = 0;
 
         [CategoryAttribute("Options")]
         [DisplayName("Restart Lvl")]
@@ -125,11 +131,13 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private bool Random;
+        [Browsable(false)]
+        public int MaximumRows;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => parent.RecalculateRuntime();
+        public int beats => gatelvls.Sum(x => x.beats) + prebeats + postbeats;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]

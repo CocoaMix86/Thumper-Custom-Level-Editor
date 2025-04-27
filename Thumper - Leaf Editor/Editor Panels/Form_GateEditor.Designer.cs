@@ -349,7 +349,6 @@
         private ToolStripButton btnGateLvlDelete;
         private ToolStripButton btnGateLvlUp;
         private ToolStripButton btnGateLvlDown;
-        private DataGridView gateLvlList;
         private Label label1;
         private ToolTip toolTip1;
         private DataGridViewTextBoxColumn gatePhaseNum;
@@ -360,5 +359,6 @@
         private Panel panelMain;
         private ToolStripButton btnGateCopy;
         private ToolStripButton btnGatePaste;
+        public DataGridView gateLvlList;
     }
 }

@@ -36,19 +36,24 @@ namespace Thumper_Custom_Level_Editor
         public static List<SeqDataPoint> GlobalSpeedEvents = new();
         public static List<Tuple<string, int>> GlobalLeafQueue = new();
         public static List<Tuple<string, int>> GlobalLvlQueue = new();
+        public static List<Tuple<string, int>> GlobalGateQueue = new();
         public static List<Tuple<string, string, decimal>> GlobalLoopTracks = new();
         public static string GlobalCurrentLeaf = "???";
         public static string GlobalCurrentLvl = "???";
+        public static string GlobalCurrentGate = "???";
         public static int GlobalCurrentOffset = -1;
         public static int GlobalCurrentOffsetLvl = -1;
+        public static int GlobalCurrentOffsetGate = -1;
 
         public static void Initialize(string _Type)
         {
             CallOffset = 9;
             GlobalCurrentLeaf = "???";
             GlobalCurrentLvl = "???";
+            GlobalCurrentGate = "???";
             GlobalCurrentOffset = -1;
             GlobalCurrentOffsetLvl = -1;
+            GlobalCurrentOffsetGate = -1;
             Type = _Type;
             //show the loading message
             TCLE.Instance.panelLoadingMessage.Visible = true;
@@ -64,6 +69,7 @@ namespace Thumper_Custom_Level_Editor
             GlobalSamplesToPlay = new();
             GlobalLeafQueue = new();
             GlobalLvlQueue = new();
+            GlobalGateQueue = new();
             GlobalSequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
                 // +8 for lead time
@@ -294,6 +300,49 @@ namespace Thumper_Custom_Level_Editor
             Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.approachbeats), _BeatOffset);
         }
 
+        public static void CreatePlaybackFromGate(GateProperties Gate, int BeatStop = -1, int _BeatOffset = 0)
+        {
+            //show the loading message
+            TCLE.Instance.lblLoadingGate.Text = $"Gate: {Gate.FilePath.Name}";
+            TCLE.Instance.lblLoadingGate.Invalidate();
+            TCLE.Instance.lblLoadingGate.Update();
+            TCLE.Instance.lblLoadingGate.Refresh();
+            Application.DoEvents();
+            //
+            Generating = true;
+            GlobalGateQueue.Add(new Tuple<string, int>(Gate.FilePath.Name, (_BeatOffset) * 100));
+            Playback.CallOffset = 0;
+            int beatoffset = _BeatOffset;
+            //create playback of the pre lvl
+            Form_LvlEditor lvlpre = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == Gate.prelvl), false, true);
+            if (lvlpre != null) {
+                Playback.CreatePlaybackFromLvl(lvlpre.lvlProperties, lvlpre.lvlProperties.beats, beatoffset);
+                beatoffset += lvlpre.lvlProperties.beats;
+                lvlpre.Dispose();
+            }
+            //create playback of the pre lvl
+            Form_LvlEditor lvlpost = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == Gate.postlvl), false, true);
+            if (lvlpost != null) {
+                Playback.CreatePlaybackFromLvl(lvlpost.lvlProperties, lvlpost.lvlProperties.beats, beatoffset);
+                beatoffset += lvlpre.lvlProperties.beats;
+                lvlpost.Dispose();
+            }
+            //create playback for each lvl phase
+            foreach (GateLvlData lvl in Gate.gatelvls) {
+                Form_LvlEditor lvltoplay = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.lvlname), false, true);
+                Playback.CreatePlaybackFromLvl(lvltoplay.lvlProperties, lvltoplay.lvlProperties.beats, beatoffset);
+                beatoffset += lvl.beats;
+                lvltoplay.Dispose();
+            }
+            //clear the gate name after loading it
+            TCLE.Instance.lblLoadingGate.Text = $"Gate:";
+            TCLE.Instance.lblLoadingGate.Invalidate();
+            TCLE.Instance.lblLoadingGate.Update();
+            TCLE.Instance.lblLoadingGate.Refresh();
+            Application.DoEvents();
+            //
+        }
+
         public static void CreatePlaybackFromMaster(MasterProperties Master, int BeatStop = -1, int _BeatOffset = 0)
         {
             Generating = true;
@@ -320,12 +369,20 @@ namespace Thumper_Custom_Level_Editor
                     lvlrest.Dispose();
                 }
                 //load main lvl
-                Form_LvlEditor lvltoplay = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
-                Playback.CreatePlaybackFromLvl(lvltoplay.lvlProperties, lvltoplay.lvlProperties.beats, beatoffset);
-                if (beatoffset == 0)
-                    beatoffset += (lvltoplay.lvlProperties.approachbeats < 8 ? 8 : lvltoplay.lvlProperties.approachbeats);
-                beatoffset += lvltoplay.lvlProperties.beats;
-                lvltoplay.Dispose();
+                if (lvl.type == "gate") {
+                    Form_GateEditor gatetoplay = (Form_GateEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
+                    Playback.CreatePlaybackFromGate(gatetoplay.gateproperties, gatetoplay.gateproperties.beats, beatoffset);
+                    beatoffset += gatetoplay.gateproperties.beats;
+                    gatetoplay.Dispose();
+                }
+                else {
+                    Form_LvlEditor lvltoplay = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
+                    Playback.CreatePlaybackFromLvl(lvltoplay.lvlProperties, lvltoplay.lvlProperties.beats, beatoffset);
+                    if (beatoffset == 0)
+                        beatoffset += (lvltoplay.lvlProperties.approachbeats < 8 ? 8 : lvltoplay.lvlProperties.approachbeats);
+                    beatoffset += lvltoplay.lvlProperties.beats;
+                    lvltoplay.Dispose();
+                }
                 //load checkpoint
                 if (lvl.checkpoint && lvlcheckpoint != null) {
                     Playback.CreatePlaybackFromLvl(lvlcheckpoint.lvlProperties, lvlcheckpoint.lvlProperties.beats, beatoffset);
@@ -794,6 +851,11 @@ namespace Thumper_Custom_Level_Editor
                 GlobalCurrentOffsetLvl = GlobalLvlQueue[0].Item2 / 100;
                 GlobalCurrentLvl = GlobalLvlQueue[0].Item1;
                 GlobalLvlQueue.RemoveAt(0);
+            }
+            if (GlobalGateQueue.Count > 0 && PlaybackTick > GlobalGateQueue[0].Item2) {
+                GlobalCurrentOffsetGate = GlobalGateQueue[0].Item2 / 100;
+                GlobalCurrentGate = GlobalGateQueue[0].Item1;
+                GlobalGateQueue.RemoveAt(0);
             }
         }
     }

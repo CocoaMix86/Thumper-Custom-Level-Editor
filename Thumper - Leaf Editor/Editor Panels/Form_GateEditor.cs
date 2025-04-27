@@ -11,6 +11,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Form Construction
         public Form_GateEditor(dynamic load = null, FileInfo filepath = null)
         {
+            if (Playback.Generating) {
+                LoadGateSimple(load, filepath);
+                return;
+            }
+
             InitializeComponent();
             InitializeGateStuff();
             gateToolStrip.Renderer = new ToolStripOverride();
@@ -350,12 +355,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
 
         private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush LvlLeafColorNotExist = new SolidBrush(Color.Maroon);
-        private static Color SelectColor = Color.FromArgb(199, 69, 255);
-        private static SolidBrush LvlLeafColorSelected = new SolidBrush(SelectColor);
         private static SolidBrush BrushWhite = new SolidBrush(Color.White);
         private static Pen PenBlack = new Pen(Color.Black, 1);
         private static Pen PenGreen = new Pen(Color.Green, 4);
+        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void gateLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -388,6 +391,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Top, e.RowBounds.Right, e.RowBounds.Top);
                 if (e.RowIndex + 1 == TargetRowToPaint)
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
+            }
+
+            if (Playback.IsPlaying) {
+                if (GateProperties.FilePath.Name == Playback.GlobalCurrentGate && GateLvls[e.RowIndex].lvlname == Playback.GlobalCurrentLvl) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)GateLvls[e.RowIndex].beats;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;
+                    e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
+                }
             }
         }
 
@@ -650,6 +661,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
         }
 
+        public void LoadGateSimple(dynamic _load, FileInfo filepath)
+        {
+            EditorLoading = true;
+            LoadedGate = filepath;
+
+            gateproperties = new(this, filepath) {
+                boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
+                prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
+                postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
+                restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
+                sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
+                random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
+            };
+
+            GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
+            foreach (dynamic _lvl in _load["boss_patterns"]) {
+                GateProperties.gatelvls.Add(new GateLvlData() {
+                    _Lvlname = _lvl["lvl_name"],
+                    sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
+                    bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
+                });
+            }
+
+            EditorLoading = false;
+            EditorIsSaved = true;
+            RecalculateRuntime();
+        }
+
         public void Reload()
         {
             dynamic _load = TCLE.LoadFileLock(LoadedGate.FullName);
@@ -800,56 +839,91 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorLoading || GateProperties == null)
                 return 0;
             //depending on the gate configuration, it can have a different amount of lvls in it
-            int rows = 0;
+            GateProperties.MaximumRows = 0;
             if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
-                rows = 4;
+                GateProperties.MaximumRows = 4;
             else if (GateProperties.boss == "Level 9 - pyramid")
-                rows = 5;
+                GateProperties.MaximumRows = 5;
             else if (GateProperties.random)
-                rows = 16;
+                GateProperties.MaximumRows = 16;
 
             int beattotal = 0;
             List<int> bucketscounted = new();
+            //calc pre lvl beats
+            GateProperties.prebeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == GateProperties.prelvl)?.FullName);
+            //calc post lvl beats
+            GateProperties.postbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == GateProperties.postlvl)?.FullName);
             //loop over each lvl and update the grid with runtime or a warning
             foreach (GateLvlData _lvl in GateLvls) {
-                int _in = GateLvls.IndexOf(_lvl);
-                //if random, the phase counter will instead show bucket numbers
-                gateLvlList.Rows[_in].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : _in + 1;
-                if (_in >= rows) {
-                    gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
-                    gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in list (max. {rows})";
-                }
-                //each bucket can have 4 lvls only. Show warning if more than 4.
-                else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
-                    gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.DarkOrange;
-                    gateLvlList.Rows[_in].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
-                }
-                else {
-                    //load lvl and calc runtime
-                    //show warning if file not found
-                    FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"{_lvl.lvlname}"));
-                    _lvl.beats = lvlfile == null ? -1 : TCLE.CalculateLvlRuntime(lvlfile.FullName);
-                    if (_lvl.beats == -1) {
-                        gateLvlList.Rows[_in].DefaultCellStyle.BackColor = Color.Maroon;
-                        gateLvlList.Rows[_in].Cells[3].Value = $"file not found";
-                    }
-                    else {
-                        if (GateProperties.random) {
-                            if (!bucketscounted.Contains(_lvl.bucket)) {
-                                beattotal += _lvl.beats;
-                                bucketscounted.Add(_lvl.bucket);
-                            }
-                        }
-                        else
-                            beattotal += _lvl.beats;
-                        gateLvlList.Rows[_in].DefaultCellStyle = null;
-                        gateLvlList.Rows[_in].Cells[3].Value = $"{_lvl.beats} beats -- {_lvl.runtime}";
+                RecalculateRuntimeSublevel(_lvl);
+                if (GateProperties.random) {
+                    if (!bucketscounted.Contains(_lvl.bucket)) {
+                        beattotal += _lvl.beats;
+                        bucketscounted.Add(_lvl.bucket);
                     }
                 }
+                else
+                    beattotal += _lvl.beats;
             }
 
-            gateLvlList.Refresh();
+            if (!Playback.Generating)
+                gateLvlList.Refresh();
             return beattotal;
+        }
+
+        public int RecalculateRuntimeSublevel(GateLvlData _lvl)
+        {
+            if (EditorLoading)
+                return 0;
+
+            FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_lvl.lvlname}"));
+            lvlfile?.Refresh();
+
+            if (lvlfile == null || !lvlfile.Exists)
+                _lvl.beats = -1;
+            else
+                _lvl.beats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.lvlname)?.FullName);
+            //if playback generating, this was reached during generation, and the form won't exist
+            //ColorRow calls form objects which won't be initialized yet.
+            if (!Playback.Generating)
+                ColorRow(_lvl, GateLvls.IndexOf(_lvl));
+            UpdateBeatPosition();
+
+            return _lvl.beats;
+        }
+
+        public void UpdateBeatPosition()
+        {
+            int beatpos = GateProperties.prebeats + GateProperties.postbeats;
+            foreach (GateLvlData _lvl in GateLvls) {
+                _lvl.beatstart = beatpos;
+                beatpos += _lvl.beats;
+            }
+        }
+
+        public void ColorRow(GateLvlData _lvl, int index)
+        {
+            //if random, the phase counter will instead show bucket numbers
+            gateLvlList.Rows[index].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : index + 1;
+            if (index >= GateProperties.MaximumRows) {
+                gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
+                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in list (max. {GateProperties.MaximumRows})";
+            }
+            //each bucket can have 4 lvls only. Show warning if more than 4.
+            else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
+                gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
+                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
+            }
+            else {
+                if (_lvl.beats == -1) {
+                    gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
+                    gateLvlList.Rows[index].Cells[3].Value = $"file not found";
+                }
+                else {
+                    gateLvlList.Rows[index].DefaultCellStyle = null;
+                    gateLvlList.Rows[index].Cells[3].Value = $"{_lvl.beats} beats -- {_lvl.runtime}";
+                }
+            }
         }
 
         public static JObject BuildSave(GateProperties _properties)
