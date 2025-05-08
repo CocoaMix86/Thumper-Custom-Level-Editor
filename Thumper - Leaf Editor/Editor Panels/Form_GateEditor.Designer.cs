@@ -46,11 +46,13 @@
             this.btnGateLvlDown = new ToolStripButton();
             this.btnGateCopy = new ToolStripButton();
             this.btnGatePaste = new ToolStripButton();
+            this.btnGatePlayback = new ToolStripButton();
             this.label1 = new Label();
             this.propertyGridGate = new PropertyGrid();
             this.toolTip1 = new ToolTip(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.panelMain = new Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)this.gateLvlList).BeginInit();
             this.gateToolStrip.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -176,7 +178,7 @@
             this.gateToolStrip.GripMargin = new Padding(0);
             this.gateToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.gateToolStrip.ImageScalingSize = new Size(20, 20);
-            this.gateToolStrip.Items.AddRange(new ToolStripItem[] { this.btnGateLvlAdd, this.btnGateLvlDelete, this.btnGateLvlUp, this.btnGateLvlDown, this.btnGateCopy, this.btnGatePaste });
+            this.gateToolStrip.Items.AddRange(new ToolStripItem[] { this.btnGateLvlAdd, this.btnGateLvlDelete, this.btnGateLvlUp, this.btnGateLvlDown, this.btnGateCopy, this.btnGatePaste, this.btnGatePlayback });
             this.gateToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.gateToolStrip.Location = new Point(0, 13);
             this.gateToolStrip.Name = "gateToolStrip";
@@ -258,6 +260,17 @@
             this.btnGatePaste.ToolTipText = "Paste the copied sublevel";
             this.btnGatePaste.Click += this.btnGatePaste_Click;
             // 
+            // btnGatePlayback
+            // 
+            this.btnGatePlayback.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnGatePlayback.Image = Properties.Resources.icon_play2;
+            this.btnGatePlayback.ImageTransparentColor = Color.Magenta;
+            this.btnGatePlayback.Name = "btnGatePlayback";
+            this.btnGatePlayback.Size = new Size(23, 24);
+            this.btnGatePlayback.Text = "toolStripButton1";
+            this.btnGatePlayback.ToolTipText = resources.GetString("btnGatePlayback.ToolTipText");
+            this.btnGatePlayback.Click += this.btnGatePlayback_Click;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -317,6 +330,11 @@
             this.panelMain.Size = new Size(293, 281);
             this.panelMain.TabIndex = 120;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += this.timer1_Tick;
+            // 
             // Form_GateEditor
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -360,5 +378,7 @@
         private ToolStripButton btnGateCopy;
         private ToolStripButton btnGatePaste;
         public DataGridView gateLvlList;
+        private ToolStripButton btnGatePlayback;
+        private System.Windows.Forms.Timer timer1;
     }
 }

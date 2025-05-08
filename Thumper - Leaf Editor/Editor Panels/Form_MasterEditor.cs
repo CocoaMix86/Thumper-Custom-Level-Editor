@@ -445,7 +445,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (Playback.IsPlaying) {
-                if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentLvl || MasterLvls[e.RowIndex].name == Playback.GlobalCurrentGate) {
+                if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentGate && MasterLvls[e.RowIndex].beatstart + MasterLvls[e.RowIndex].Beats > Playback.PlaybackBeat) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetGate + Playback.PlaybackSubBeat;//MasterLvls[e.RowIndex].beatstart - (MasterLvls[e.RowIndex].restlevelbeats) + 
+                    e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
+                }
+                else if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentLvl) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;//MasterLvls[e.RowIndex].beatstart - (MasterLvls[e.RowIndex].restlevelbeats) + 
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
@@ -1132,7 +1137,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnMasterPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("master");
                 Playback.CreatePlaybackFromMaster(MasterProperties);
-                Playback.Play(MasterLvls[masterLvlList.SelectedRows[^1].Index].beatstart, MasterProperties.Beats, PlaybackLoop);
+                Playback.Play(masterLvlList.SelectedRows.Count > 0 ? MasterLvls[masterLvlList.SelectedRows[^1].Index].beatstart : -1, MasterProperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }

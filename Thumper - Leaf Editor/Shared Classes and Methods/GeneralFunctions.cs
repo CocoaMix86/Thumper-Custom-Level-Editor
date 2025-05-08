@@ -767,7 +767,15 @@ namespace Thumper_Custom_Level_Editor
                             _beatcount += CalculateLvlRuntime(lvl.FullName);
                     }
                 }
-
+                //need to also count pre and post lvl
+                FileInfo prelvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["pre_lvl_name"]}"));
+                if (prelvl != null) {
+                    _beatcount += CalculateLvlRuntime(prelvl.FullName);
+                }
+                FileInfo postlvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["post_lvl_name"]}"));
+                if (postlvl != null) {
+                    _beatcount += CalculateLvlRuntime(postlvl.FullName);
+                }
             }
             else
                 return -1;

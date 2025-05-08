@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -1041,6 +1042,84 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lblGateSectionHelp_Click(object sender, EventArgs e)
         {
             new ImageMessageBox("bosssectionhelp").Show();
+        }
+
+        private int PlaybackStart = -1;
+        private int PlaybackEnd = -1;
+        private bool PlaybackLoop;
+        private bool ForceStop;
+        private void btnGatePlayback_Click(object sender, EventArgs e)
+        {
+            if (Playback.IsPlaying) {
+                Playback.IsPlaying = false;
+                ForceStop = true;
+            }
+            else {
+                //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
+                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                btnGatePlayback.Image = Properties.Resources.icon_stop;
+                Playback.Initialize("gate");
+                Playback.CreatePlaybackFromGate(GateProperties);
+                Playback.Play(gateLvlList.SelectedRows.Count > 0 ? GateLvls[gateLvlList.SelectedRows[^1].Index].beatstart : -1, GateProperties.beats, PlaybackLoop);
+                if (Playback.IsPlaying) {
+                    timer1.Enabled = true;
+                }
+                else {
+                    Bass.BASS_ChannelFree(Playback.MidiStream);
+                    TCLE.alzheimer();
+                    btnGatePlayback.Image = Properties.Resources.icon_play2;
+                }
+            }
+        }
+
+        private string _playingleaf;
+        private Form_LeafEditor _playingleafform;
+        private string _playinglvl;
+        private Form_LvlEditor _playinglvlform;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Playback.PlaybackBeat < 0)
+                return;
+            if (Playback.IsPlaying && !ForceStop) {
+                gateLvlList.Invalidate();
+                //show the leaf that's playing
+                if (_playingleaf != Playback.GlobalCurrentLeaf) {
+                    _playingleaf = Playback.GlobalCurrentLeaf;
+                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) as Form_LeafEditor;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
+                    }
+                }
+                if (_playingleafform != null)
+                    _playingleafform.trackEditor.Invalidate();
+                //show the lvl that's playing
+                if (_playinglvl != Playback.GlobalCurrentLvl) {
+                    _playinglvl = Playback.GlobalCurrentLvl;
+                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLvl)) as Form_LvlEditor;
+                    //switch to the leaf if it's open
+                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl));
+                    if (workspacehastab != null) {
+                        workspacehastab.DockHandler.Activate();
+                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl).DockHandler.Activate();
+                    }
+                }
+                if (_playinglvlform != null)
+                    _playinglvlform.lvlLeafList.Invalidate();
+            }
+            else {
+                ForceStop = false;
+                timer1.Enabled = false;
+                btnGatePlayback.Image = Properties.Resources.icon_play2;
+                Playback.StopPlayback();
+                gateLvlList.Invalidate();
+                if (_playingleafform != null)
+                    _playingleafform.trackEditor.Invalidate();
+                if (_playinglvlform != null)
+                    _playinglvlform.lvlLeafList.Invalidate();
+            }
         }
     }
 }

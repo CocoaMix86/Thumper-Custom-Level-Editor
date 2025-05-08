@@ -53,8 +53,8 @@
             this.btnMasterLvlDown = new ToolStripButton();
             this.btnMasterLvlCopy = new ToolStripButton();
             this.btnMasterLvlPaste = new ToolStripButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnMasterPlayback = new ToolStripButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.masterLvlList).BeginInit();
             this.masterToolStrip.SuspendLayout();
@@ -344,11 +344,6 @@
             this.btnMasterLvlPaste.ToolTipText = "Paste the copied sublevel";
             this.btnMasterLvlPaste.Click += this.btnMasterLvlPaste_Click;
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 2000;
-            this.timer1.Tick += this.timer1_Tick;
-            // 
             // btnMasterPlayback
             // 
             this.btnMasterPlayback.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -357,8 +352,13 @@
             this.btnMasterPlayback.Name = "btnMasterPlayback";
             this.btnMasterPlayback.Size = new Size(23, 24);
             this.btnMasterPlayback.Text = "toolStripButton1";
-            this.btnMasterPlayback.ToolTipText = "Preview how the Lvl will sound.\r\n!!! NOTE !!!\r\nThis is only a preview, and may not be entirely accurate\r\nto how it will sound in-game.\r\n!!\r\nSelect 1 leaf to set playback to start at that position";
+            this.btnMasterPlayback.ToolTipText = resources.GetString("btnMasterPlayback.ToolTipText");
             this.btnMasterPlayback.Click += this.btnMasterPlayback_Click;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += this.timer1_Tick;
             // 
             // Form_MasterEditor
             // 

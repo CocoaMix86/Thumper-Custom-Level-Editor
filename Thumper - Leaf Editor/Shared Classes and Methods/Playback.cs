@@ -324,7 +324,7 @@ namespace Thumper_Custom_Level_Editor
             Form_LvlEditor lvlpost = (Form_LvlEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == Gate.postlvl), false, true);
             if (lvlpost != null) {
                 Playback.CreatePlaybackFromLvl(lvlpost.lvlProperties, lvlpost.lvlProperties.beats, beatoffset);
-                beatoffset += lvlpre.lvlProperties.beats;
+                beatoffset += lvlpost.lvlProperties.beats;
                 lvlpost.Dispose();
             }
             //create playback for each lvl phase
@@ -841,18 +841,18 @@ namespace Thumper_Custom_Level_Editor
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
             PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
-            if (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2)
-            {
+
+            while (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
                 GlobalCurrentOffset = GlobalLeafQueue[0].Item2;
                 GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
                 GlobalLeafQueue.RemoveAt(0);
             }
-            if (GlobalLvlQueue.Count > 0 && PlaybackTick > GlobalLvlQueue[0].Item2) {
+            while (GlobalLvlQueue.Count > 0 && PlaybackTick > GlobalLvlQueue[0].Item2) {
                 GlobalCurrentOffsetLvl = GlobalLvlQueue[0].Item2 / 100;
                 GlobalCurrentLvl = GlobalLvlQueue[0].Item1;
                 GlobalLvlQueue.RemoveAt(0);
             }
-            if (GlobalGateQueue.Count > 0 && PlaybackTick > GlobalGateQueue[0].Item2) {
+            while (GlobalGateQueue.Count > 0 && PlaybackTick > GlobalGateQueue[0].Item2) {
                 GlobalCurrentOffsetGate = GlobalGateQueue[0].Item2 / 100;
                 GlobalCurrentGate = GlobalGateQueue[0].Item1;
                 GlobalGateQueue.RemoveAt(0);

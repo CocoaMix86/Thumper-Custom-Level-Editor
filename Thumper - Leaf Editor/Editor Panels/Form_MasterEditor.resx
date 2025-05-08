@@ -144,6 +144,14 @@
   <metadata name="masterToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
+  <data name="btnMasterPlayback.ToolTipText" xml:space="preserve">
+    <value>Preview how the Master will sound.
+!!! NOTE !!!
+This is only a preview, and may not be entirely accurate
+to how it will sound in-game.
+!!
+Select 1 sublevel to set playback to start at that position</value>
+  </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>258, 15</value>
   </metadata>
