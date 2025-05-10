@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Media.Media3D;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -1984,10 +1985,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 index = SequencerObjects.IndexOf(seq);
 
                 if (seq.friendly_lane == "lane center") {
-                    del = CheckObjectIfEmpty(SequencerObjects[index - 2]) & 
-                        CheckObjectIfEmpty(SequencerObjects[index - 1]) & 
-                        CheckObjectIfEmpty(SequencerObjects[index]) & 
-                        CheckObjectIfEmpty(SequencerObjects[index + 1]) & 
+                    del = CheckObjectIfEmpty(SequencerObjects[index - 2]) &
+                        CheckObjectIfEmpty(SequencerObjects[index - 1]) &
+                        CheckObjectIfEmpty(SequencerObjects[index]) &
+                        CheckObjectIfEmpty(SequencerObjects[index + 1]) &
                         CheckObjectIfEmpty(SequencerObjects[index + 2]);
                 }
                 else
@@ -2056,9 +2057,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Interpolate(e.ClickedItem.Text);
         }
 
+        private void contextMenuInterps_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void linearToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            TCLE.Instance.pictureEasing.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{item.Text.Replace(" ", "_")}");
+            //show the image
+            TCLE.Instance.pictureEasing.Visible = true;
+            TCLE.Instance.pictureEasing.Location = new Point(item.Owner.Location.X + item.Owner.Width, item.Owner.Location.Y);
+            TCLE.Instance.pictureEasing.BringToFront();
+        }
+
+        private void contextMenuInterps_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            TCLE.Instance.pictureEasing.Visible = false;
+        }
+
         private void Interpolate(string interpOption)
         {
             InterpLastUsed = interpOption;
+            btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{interpOption.Replace(" ", "_")}");
+            btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {interpOption}\n";
+            TCLE.Instance.pictureEasing.Visible = false;
+            //
             DataGridViewSelectedCellCollection SelectedCells = trackEditor.SelectedCells;
             //interpolation requires 2 cells only
             if (SelectedCells.Count != 2) {

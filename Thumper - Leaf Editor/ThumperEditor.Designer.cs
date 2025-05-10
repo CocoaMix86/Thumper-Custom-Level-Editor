@@ -116,9 +116,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -186,6 +186,7 @@
             this.btnVolumeMixer = new ToolStripButton();
             this.panelFill = new Panel();
             this.panelLoadingMessage = new Panel();
+            this.lblLoadingGate = new Label();
             this.lblLoadingLeaf = new Label();
             this.lblLoadingLvl = new Label();
             this.pictureBeeble = new PictureBox();
@@ -206,7 +207,7 @@
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
             this.pictureTunnelViewer = new Label();
-            this.lblLoadingGate = new Label();
+            this.pictureEasing = new Label();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -935,9 +936,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1059,6 +1059,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1079,14 +1087,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1769,6 +1769,21 @@
             this.panelLoadingMessage.Tag = "editorpanel";
             this.panelLoadingMessage.Visible = false;
             // 
+            // lblLoadingGate
+            // 
+            this.lblLoadingGate.AutoSize = true;
+            this.lblLoadingGate.BackColor = Color.FromArgb(10, 10, 10);
+            this.lblLoadingGate.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblLoadingGate.ForeColor = Color.White;
+            this.lblLoadingGate.ImageAlign = ContentAlignment.MiddleLeft;
+            this.lblLoadingGate.Location = new Point(141, 57);
+            this.lblLoadingGate.Margin = new Padding(4, 0, 4, 0);
+            this.lblLoadingGate.Name = "lblLoadingGate";
+            this.lblLoadingGate.Size = new Size(48, 16);
+            this.lblLoadingGate.TabIndex = 160;
+            this.lblLoadingGate.Text = "Gate: ";
+            this.lblLoadingGate.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // lblLoadingLeaf
             // 
             this.lblLoadingLeaf.AutoSize = true;
@@ -1975,20 +1990,20 @@
             this.pictureTunnelViewer.Visible = false;
             this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
             // 
-            // lblLoadingGate
+            // pictureEasing
             // 
-            this.lblLoadingGate.AutoSize = true;
-            this.lblLoadingGate.BackColor = Color.FromArgb(10, 10, 10);
-            this.lblLoadingGate.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.lblLoadingGate.ForeColor = Color.White;
-            this.lblLoadingGate.ImageAlign = ContentAlignment.MiddleLeft;
-            this.lblLoadingGate.Location = new Point(141, 57);
-            this.lblLoadingGate.Margin = new Padding(4, 0, 4, 0);
-            this.lblLoadingGate.Name = "lblLoadingGate";
-            this.lblLoadingGate.Size = new Size(48, 16);
-            this.lblLoadingGate.TabIndex = 160;
-            this.lblLoadingGate.Text = "Gate: ";
-            this.lblLoadingGate.TextAlign = ContentAlignment.MiddleLeft;
+            this.pictureEasing.BackColor = Color.Black;
+            this.pictureEasing.BorderStyle = BorderStyle.Fixed3D;
+            this.pictureEasing.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.pictureEasing.ForeColor = Color.White;
+            this.pictureEasing.Location = new Point(350, 108);
+            this.pictureEasing.Margin = new Padding(4, 0, 4, 0);
+            this.pictureEasing.MaximumSize = new Size(107, 73);
+            this.pictureEasing.MinimumSize = new Size(107, 73);
+            this.pictureEasing.Name = "pictureEasing";
+            this.pictureEasing.Size = new Size(107, 73);
+            this.pictureEasing.TabIndex = 156;
+            this.pictureEasing.Visible = false;
             // 
             // TCLE
             // 
@@ -1997,6 +2012,7 @@
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(984, 500);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureEasing);
             this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
@@ -2228,6 +2244,7 @@
         public Label lblLoadingLeaf;
         public Label lblLoadingLvl;
         public Label lblLoadingGate;
+        public Label pictureEasing;
     }
 }
 

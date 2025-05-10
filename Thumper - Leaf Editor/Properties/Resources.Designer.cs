@@ -364,6 +364,166 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ease_Cubic_Ease_In {
+            get {
+                object obj = ResourceManager.GetObject("ease_Cubic_Ease_In", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Cubic_Ease_In_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Cubic_Ease_In_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Cubic_Ease_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Cubic_Ease_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Linear {
+            get {
+                object obj = ResourceManager.GetObject("ease_Linear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quadratic_Ease_In {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quadratic_Ease_In", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quadratic_Ease_In_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quadratic_Ease_In_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quadratic_Ease_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quadratic_Ease_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quartic_Ease_In {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quartic_Ease_In", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quartic_Ease_In_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quartic_Ease_In_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quartic_Ease_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quartic_Ease_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quintic_Ease_In {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quintic_Ease_In", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quintic_Ease_In_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quintic_Ease_In_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Quintic_Ease_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Quintic_Ease_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Sine_Ease_In {
+            get {
+                object obj = ResourceManager.GetObject("ease_Sine_Ease_In", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Sine_Ease_In_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Sine_Ease_In_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ease_Sine_Ease_Out {
+            get {
+                object obj = ResourceManager.GetObject("ease_Sine_Ease_Out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap editor_gate {
             get {
                 object obj = ResourceManager.GetObject("editor_gate", resourceCulture);

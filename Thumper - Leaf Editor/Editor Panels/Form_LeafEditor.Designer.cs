@@ -171,7 +171,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 80);
+            this.btnRawImport.Size = new Size(54, 83);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -187,7 +187,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 364);
+            this.labelCollapsePanel2.Location = new Point(0, 361);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -258,7 +258,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 349);
+            this.vScrollBarTrackEditor.Size = new Size(15, 346);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
@@ -360,7 +360,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 349);
+            this.trackEditor.Size = new Size(491, 346);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -449,7 +449,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 349);
+            this.leafToolStrip.Size = new Size(24, 346);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -612,6 +612,7 @@
             this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
             this.btnLeafInterpLinear.Size = new Size(40, 27);
             this.btnLeafInterpLinear.TextAlign = ContentAlignment.MiddleRight;
+            this.btnLeafInterpLinear.ToolTipText = "Interpolate values between 2 selected cells in the same row.\r\nUse the drop down to select different easing styles.\r\n=======\r\nLast Used: <none>";
             this.btnLeafInterpLinear.ButtonClick += this.btnLeafInterpLinear_ButtonClick;
             // 
             // contextMenuInterps
@@ -621,8 +622,10 @@
             this.contextMenuInterps.Name = "workingfolderRightClick";
             this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
             this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuInterps.Size = new Size(189, 414);
+            this.contextMenuInterps.Size = new Size(189, 436);
+            this.contextMenuInterps.Closing += this.contextMenuInterps_Closing;
             this.contextMenuInterps.ItemClicked += this.contextMenuInterps_ItemClicked;
+            this.contextMenuInterps.MouseMove += this.contextMenuInterps_MouseMove;
             // 
             // linearToolStripMenuItem
             // 
@@ -630,6 +633,7 @@
             this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
             this.linearToolStripMenuItem.Size = new Size(188, 22);
             this.linearToolStripMenuItem.Text = "Linear";
+            this.linearToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator4
             // 
@@ -642,6 +646,7 @@
             this.quadraticToolStripMenuItem1.Name = "quadraticToolStripMenuItem1";
             this.quadraticToolStripMenuItem1.Size = new Size(188, 22);
             this.quadraticToolStripMenuItem1.Text = "Quadratic Ease In";
+            this.quadraticToolStripMenuItem1.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quadraticEaseOutToolStripMenuItem
             // 
@@ -649,6 +654,7 @@
             this.quadraticEaseOutToolStripMenuItem.Name = "quadraticEaseOutToolStripMenuItem";
             this.quadraticEaseOutToolStripMenuItem.Size = new Size(188, 22);
             this.quadraticEaseOutToolStripMenuItem.Text = "Quadratic Ease Out";
+            this.quadraticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quadraticEaseInOutToolStripMenuItem
             // 
@@ -656,6 +662,7 @@
             this.quadraticEaseInOutToolStripMenuItem.Name = "quadraticEaseInOutToolStripMenuItem";
             this.quadraticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
             this.quadraticEaseInOutToolStripMenuItem.Text = "Quadratic Ease In Out";
+            this.quadraticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator3
             // 
@@ -668,6 +675,7 @@
             this.cubicEaseInToolStripMenuItem.Name = "cubicEaseInToolStripMenuItem";
             this.cubicEaseInToolStripMenuItem.Size = new Size(188, 22);
             this.cubicEaseInToolStripMenuItem.Text = "Cubic Ease In";
+            this.cubicEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // cubicEaseOutToolStripMenuItem
             // 
@@ -675,6 +683,7 @@
             this.cubicEaseOutToolStripMenuItem.Name = "cubicEaseOutToolStripMenuItem";
             this.cubicEaseOutToolStripMenuItem.Size = new Size(188, 22);
             this.cubicEaseOutToolStripMenuItem.Text = "Cubic Ease Out";
+            this.cubicEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // cubicEaseInOutToolStripMenuItem
             // 
@@ -682,6 +691,7 @@
             this.cubicEaseInOutToolStripMenuItem.Name = "cubicEaseInOutToolStripMenuItem";
             this.cubicEaseInOutToolStripMenuItem.Size = new Size(188, 22);
             this.cubicEaseInOutToolStripMenuItem.Text = "Cubic Ease In Out";
+            this.cubicEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator5
             // 
@@ -694,6 +704,7 @@
             this.quarticEaseInToolStripMenuItem.Name = "quarticEaseInToolStripMenuItem";
             this.quarticEaseInToolStripMenuItem.Size = new Size(188, 22);
             this.quarticEaseInToolStripMenuItem.Text = "Quartic Ease In";
+            this.quarticEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quarticEaseOutToolStripMenuItem
             // 
@@ -701,6 +712,7 @@
             this.quarticEaseOutToolStripMenuItem.Name = "quarticEaseOutToolStripMenuItem";
             this.quarticEaseOutToolStripMenuItem.Size = new Size(188, 22);
             this.quarticEaseOutToolStripMenuItem.Text = "Quartic Ease Out";
+            this.quarticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quarticEaseInOutToolStripMenuItem
             // 
@@ -708,6 +720,7 @@
             this.quarticEaseInOutToolStripMenuItem.Name = "quarticEaseInOutToolStripMenuItem";
             this.quarticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
             this.quarticEaseInOutToolStripMenuItem.Text = "Quartic Ease In Out";
+            this.quarticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator6
             // 
@@ -720,6 +733,7 @@
             this.quinticEaseInToolStripMenuItem.Name = "quinticEaseInToolStripMenuItem";
             this.quinticEaseInToolStripMenuItem.Size = new Size(188, 22);
             this.quinticEaseInToolStripMenuItem.Text = "Quintic Ease In";
+            this.quinticEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quinticEaseOutToolStripMenuItem
             // 
@@ -727,6 +741,7 @@
             this.quinticEaseOutToolStripMenuItem.Name = "quinticEaseOutToolStripMenuItem";
             this.quinticEaseOutToolStripMenuItem.Size = new Size(188, 22);
             this.quinticEaseOutToolStripMenuItem.Text = "Quintic Ease Out";
+            this.quinticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // quinticEaseInOutToolStripMenuItem
             // 
@@ -734,6 +749,7 @@
             this.quinticEaseInOutToolStripMenuItem.Name = "quinticEaseInOutToolStripMenuItem";
             this.quinticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
             this.quinticEaseInOutToolStripMenuItem.Text = "Quintic Ease In Out";
+            this.quinticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator7
             // 
@@ -746,6 +762,7 @@
             this.sineEaseInToolStripMenuItem.Name = "sineEaseInToolStripMenuItem";
             this.sineEaseInToolStripMenuItem.Size = new Size(188, 22);
             this.sineEaseInToolStripMenuItem.Text = "Sine Ease In";
+            this.sineEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // sineEaseOutToolStripMenuItem
             // 
@@ -753,6 +770,7 @@
             this.sineEaseOutToolStripMenuItem.Name = "sineEaseOutToolStripMenuItem";
             this.sineEaseOutToolStripMenuItem.Size = new Size(188, 22);
             this.sineEaseOutToolStripMenuItem.Text = "Sine Ease Out";
+            this.sineEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // sineEaseInOutToolStripMenuItem
             // 
@@ -760,6 +778,7 @@
             this.sineEaseInOutToolStripMenuItem.Name = "sineEaseInOutToolStripMenuItem";
             this.sineEaseInOutToolStripMenuItem.Size = new Size(188, 22);
             this.sineEaseInOutToolStripMenuItem.Text = "Sine Ease In Out";
+            this.sineEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
             // 
             // toolStripSeparator8
             // 
@@ -903,7 +922,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 379;
+            this.splitContainerLeafSide.SplitterDistance = 376;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -954,6 +973,7 @@
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -965,7 +985,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 80);
+            this.textEditor.Size = new Size(476, 83);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
