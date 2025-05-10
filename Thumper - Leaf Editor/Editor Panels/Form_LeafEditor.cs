@@ -1327,8 +1327,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
-            trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex < FrozenColumnOffset ? FrozenColumnOffset : trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
-            trackEditor.Invalidate();
+            if (ModifierKeys is Keys.Shift) {
+                foreach (DataGridViewCell dgvc in trackEditor.Rows[e.RowIndex].Cells)
+                    dgvc.Selected = true;
+            }
+            else {
+                trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex < FrozenColumnOffset ? FrozenColumnOffset : trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
+                trackEditor.Invalidate();
+            }
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
