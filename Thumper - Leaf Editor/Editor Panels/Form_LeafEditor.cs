@@ -875,6 +875,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SelectedDPs.Add(SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset]);
             }
             LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
+            TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
             TCLE.dockProjectProperties.propertyGridProject.Refresh();
             propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
             propertyGridLeaf.Refresh();
@@ -1969,6 +1970,64 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LogUndo = true;
             TCLE.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Object Values");
+        }
+
+        private void btnLeafClean_Click(object sender, EventArgs e)
+        {
+            List<Sequencer_Object> todelete = new();
+            bool del = false;
+            int index = 0;
+            foreach (Sequencer_Object seq in SequencerObjects) {
+                del = false;
+                if (seq.friendly_lane is not "none" and not "lane center")
+                    continue;
+                index = SequencerObjects.IndexOf(seq);
+
+                if (seq.friendly_lane == "lane center") {
+                    del = CheckObjectIfEmpty(SequencerObjects[index - 2]) & 
+                        CheckObjectIfEmpty(SequencerObjects[index - 1]) & 
+                        CheckObjectIfEmpty(SequencerObjects[index]) & 
+                        CheckObjectIfEmpty(SequencerObjects[index + 1]) & 
+                        CheckObjectIfEmpty(SequencerObjects[index + 2]);
+                }
+                else
+                    del = CheckObjectIfEmpty(seq);
+
+                if (del) {
+                    if (seq.friendly_lane == "lane center") {
+                        todelete.Add(SequencerObjects[index - 2]);
+                        todelete.Add(SequencerObjects[index - 1]);
+                        todelete.Add(seq);
+                        todelete.Add(SequencerObjects[index + 1]);
+                        todelete.Add(SequencerObjects[index + 2]);
+                    }
+                    else
+                        todelete.Add(seq);
+                }
+            }
+
+            foreach (Sequencer_Object seq in todelete) {
+                trackEditor.Rows.Remove(seq.editor_row);
+                SequencerObjects.Remove(seq);
+            }
+
+            SaveCheckAndWrite(false, "cleaned up empty objects");
+            EnableLeafButtons();
+        }
+
+        public static bool CheckObjectIfEmpty(Sequencer_Object seq)
+        {
+            bool dodelete = true;
+            if (seq.data_points.Any(x => x.value != null))
+                dodelete = false;
+
+            Object_Params baseobj = TCLE.LeafObjects.FirstOrDefault(x => x.param_path == seq.param_path && x.category == seq.category);
+            if (baseobj != null) {
+                if (float.Parse(baseobj.def) != seq.defaultvalue)
+                    dodelete = false;
+            }
+
+            return dodelete;
         }
 
         private void btnRawImport_Click(object sender, EventArgs e)
