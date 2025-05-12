@@ -200,52 +200,52 @@
     <value>..\audio assets\duck.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ease_Cubic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Cubic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Cubic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Cubic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Cubic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Cubic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Cubic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Cubic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Cubic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Linear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Linear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Linear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quadratic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quadratic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quadratic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quadratic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quadratic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quadratic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quadratic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quadratic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quadratic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quartic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quartic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quartic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quartic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quartic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quartic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quartic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quartic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quartic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quintic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quintic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quintic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quintic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quintic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quintic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Quintic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Quintic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Quintic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Sine_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Sine Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Sine Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Sine_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Sine Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Sine Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ease_Sine_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\Easings\ease_Sine Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\image assets\Easings\with graph\ease_Sine Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editor_gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
