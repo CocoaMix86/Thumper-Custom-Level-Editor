@@ -2868,7 +2868,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    seq.editor_row.Cells[int.Parse(data_point.Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                     //seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 } catch (ArgumentOutOfRangeException) {
                     break;

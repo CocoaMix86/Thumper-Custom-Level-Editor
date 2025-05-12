@@ -326,7 +326,7 @@ namespace Thumper_Custom_Level_Editor
                 toolstripEditCut_Click(null, null);
             }
             else if (e.KeyData == Keybinds["Copy"]) {
-                //toolstripEditCopy_Click(null, null);
+                toolstripEditCopy_Click(null, null);
             }
             else if (e.KeyData == Keybinds["Paste"]) {
                 toolstripEditPaste_Click(null, null);
@@ -626,7 +626,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripEditCopy_Click(object sender, EventArgs e)
         {
-            //GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
+            GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
         }
 
         private void toolstripEditPaste_Click(object sender, EventArgs e)
