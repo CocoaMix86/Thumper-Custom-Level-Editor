@@ -43,6 +43,7 @@
             this.btnSampleAdd = new ToolStripButton();
             this.btnSampleDelete = new ToolStripButton();
             this.FSBtoSamp = new ToolStripButton();
+            this.btnSampleChunk = new ToolStripButton();
             this.propertyGridSample = new PropertyGrid();
             this.lblLoading = new Label();
             this.label1 = new Label();
@@ -121,6 +122,7 @@
             this.sampleList.CellClick += this.sampleList_CellClick;
             this.sampleList.CellPainting += this.sampleList_CellPainting;
             this.sampleList.RowPrePaint += this.sampleList_RowPrePaint;
+            this.sampleList.SelectionChanged += this.sampleList_SelectionChanged;
             this.sampleList.DragDrop += this.sampleList_DragDrop;
             this.sampleList.DragEnter += this.sampleList_DragEnter;
             this.sampleList.DragOver += this.sampleList_DragOver;
@@ -164,7 +166,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampleChunk });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 0);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -209,6 +211,17 @@
             this.FSBtoSamp.Size = new Size(23, 24);
             this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
             this.FSBtoSamp.Click += this.FSBtoSamp_Click;
+            // 
+            // btnSampleChunk
+            // 
+            this.btnSampleChunk.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSampleChunk.Enabled = false;
+            this.btnSampleChunk.Image = Properties.Resources.icon_split;
+            this.btnSampleChunk.ImageTransparentColor = Color.Magenta;
+            this.btnSampleChunk.Name = "btnSampleChunk";
+            this.btnSampleChunk.Size = new Size(23, 24);
+            this.btnSampleChunk.ToolTipText = "Chunk/split the selected sample into\r\nspecific beat/time lengths.";
+            this.btnSampleChunk.Click += this.btnSampleChunk_Click;
             // 
             // propertyGridSample
             // 
@@ -364,5 +377,6 @@
         private Label lblLoading;
         private Panel panelMain;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        public ToolStripButton btnSampleChunk;
     }
 }

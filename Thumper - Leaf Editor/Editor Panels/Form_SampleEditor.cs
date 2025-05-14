@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
+using Thumper_Custom_Level_Editor.Other_Forms;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using WeifenLuo.WinFormsUI.Docking;
@@ -115,6 +116,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         /// EVENTS  ///
         ///         ///
+
+        private void sampleList_SelectionChanged(object sender, EventArgs e)
+        {
+            if (sampleList.SelectedRows.Count > 0)
+                btnSampleChunk.Enabled = true;
+        }
 
         private void sampleList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -403,6 +410,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
         }
 
+        private void btnSampleChunk_Click(object sender, EventArgs e)
+        {
+            SampleChunker chunky = new(SampleList[sampleList.SelectedRows[^1].Index], this);
+            chunky.ShowDialog();
+        }
+
         //Opens an .FSB audio file, hashes the name, and adds it to the loaded SAMP_ file
         private void FSBtoSamp_Click(object sender, EventArgs e)
         {
@@ -496,8 +509,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_sample.config", m_deserializeDockContent);
-            }
-            catch {
+            } catch {
                 contentMain.Show(dockPanel1, DockState.Document);
                 contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
                 contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
