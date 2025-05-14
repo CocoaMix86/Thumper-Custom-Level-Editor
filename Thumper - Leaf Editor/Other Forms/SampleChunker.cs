@@ -42,7 +42,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
             DrawWave();
 
-            lblName.Text = $"Sample: {SampleToChunk.obj_name}";
+            this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
             lblBpm.Text = $"CURRENT BPM = {TCLE.projectProperties.bpm} = 1 min";
             lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fffff")}";
             lblBeats.Text = $"Beats: {SampleToChunk.beats.ToString("0.#####")}";
@@ -73,6 +73,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private void chkLimit_CheckedChanged(object sender, EventArgs e)
         {
             numChunks.Enabled = chkLimit.Checked;
+            ParseInputs();
+            DrawMarkers();
         }
         #endregion
 
@@ -105,10 +107,12 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 SampleToChunk.wave.AddMarker($"chunk {markernum}", markerpos);
                 markerpos += ChunkTime;
                 markernum++;
-                if (chkLimit.Checked && markernum > Chunklimit)
+                if (chkLimit.Checked && markernum > Chunklimit) {
                     break;
+                }
             } 
             while (markerpos < Endtime);
+            SampleToChunk.wave.AddMarker($"chunk end", markerpos);
 
             DrawWave();
         }

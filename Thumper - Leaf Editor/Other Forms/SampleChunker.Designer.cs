@@ -29,7 +29,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pictureWave = new PictureBox();
-            this.lblName = new Label();
             this.lblBpm = new Label();
             this.lblRuntime = new Label();
             this.radioTime = new RadioButton();
@@ -37,7 +36,6 @@
             this.label2 = new Label();
             this.txtBeatChunk = new TextBox();
             this.label3 = new Label();
-            this.txtTimeChunk = new TextBox();
             this.chkPosStart = new CheckBox();
             this.chkPosEnd = new CheckBox();
             this.txtTimeStart = new TextBox();
@@ -52,12 +50,22 @@
             this.numChunks = new NumericUpDown();
             this.button1 = new Button();
             this.label1 = new Label();
+            this.sampleToolStrip = new ToolStrip();
+            this.btnSampleAdd = new ToolStripButton();
+            this.btnSampleDelete = new ToolStripButton();
+            this.FSBtoSamp = new ToolStripButton();
+            this.btnSampleChunk = new ToolStripButton();
+            this.txtTimeChunk = new NumericUpDown();
+            this.label4 = new Label();
+            this.label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)this.pictureWave).BeginInit();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatStart).BeginInit();
             this.panelEnd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatEnd).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.numChunks).BeginInit();
+            this.sampleToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.txtTimeChunk).BeginInit();
             this.SuspendLayout();
             // 
             // pictureWave
@@ -73,21 +81,6 @@
             this.pictureWave.SizeMode = PictureBoxSizeMode.CenterImage;
             this.pictureWave.TabIndex = 152;
             this.pictureWave.TabStop = false;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.BackColor = Color.Transparent;
-            this.lblName.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.lblName.ForeColor = Color.White;
-            this.lblName.Location = new Point(13, 9);
-            this.lblName.Margin = new Padding(4, 0, 4, 0);
-            this.lblName.Name = "lblName";
-            this.lblName.RightToLeft = RightToLeft.No;
-            this.lblName.Size = new Size(64, 15);
-            this.lblName.TabIndex = 153;
-            this.lblName.Text = "Sample: ";
-            this.lblName.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblBpm
             // 
@@ -168,6 +161,7 @@
             this.txtBeatChunk.Size = new Size(62, 22);
             this.txtBeatChunk.TabIndex = 159;
             this.txtBeatChunk.Text = "0";
+            this.txtBeatChunk.TextAlign = HorizontalAlignment.Right;
             this.txtBeatChunk.TextChanged += this.txtBeatChunk_TextChanged;
             // 
             // label3
@@ -184,16 +178,6 @@
             this.label3.TabIndex = 160;
             this.label3.Text = "Every:";
             this.label3.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // txtTimeChunk
-            // 
-            this.txtTimeChunk.Font = new Font("Consolas", 9F);
-            this.txtTimeChunk.Location = new Point(118, 229);
-            this.txtTimeChunk.Name = "txtTimeChunk";
-            this.txtTimeChunk.Size = new Size(109, 22);
-            this.txtTimeChunk.TabIndex = 161;
-            this.txtTimeChunk.Text = "00:00:00.00000";
-            this.txtTimeChunk.TextAlign = HorizontalAlignment.Right;
             // 
             // chkPosStart
             // 
@@ -312,6 +296,7 @@
             this.numChunks.Size = new Size(53, 23);
             this.numChunks.TabIndex = 173;
             this.numChunks.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            this.numChunks.ValueChanged += this.txtBeatChunk_TextChanged;
             // 
             // button1
             // 
@@ -340,12 +325,115 @@
             this.label1.Text = "Chunking a sample will split it where shown on the waveform\r\nand create new samples in the .samp file.\r\n\r\nThe original sample will not be altered.\r\n";
             this.label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // sampleToolStrip
+            // 
+            this.sampleToolStrip.AutoSize = false;
+            this.sampleToolStrip.BackColor = Color.FromArgb(10, 10, 10);
+            this.sampleToolStrip.GripMargin = new Padding(0);
+            this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampleChunk });
+            this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.sampleToolStrip.Location = new Point(0, 0);
+            this.sampleToolStrip.Name = "sampleToolStrip";
+            this.sampleToolStrip.Padding = new Padding(0);
+            this.sampleToolStrip.RenderMode = ToolStripRenderMode.System;
+            this.sampleToolStrip.Size = new Size(487, 24);
+            this.sampleToolStrip.Stretch = true;
+            this.sampleToolStrip.TabIndex = 176;
+            // 
+            // btnSampleAdd
+            // 
+            this.btnSampleAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSampleAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnSampleAdd.ForeColor = Color.White;
+            this.btnSampleAdd.Image = Properties.Resources.icon_plus;
+            this.btnSampleAdd.ImageTransparentColor = Color.Magenta;
+            this.btnSampleAdd.Margin = new Padding(0);
+            this.btnSampleAdd.Name = "btnSampleAdd";
+            this.btnSampleAdd.Size = new Size(24, 24);
+            this.btnSampleAdd.ToolTipText = "Add new sample";
+            // 
+            // btnSampleDelete
+            // 
+            this.btnSampleDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSampleDelete.Enabled = false;
+            this.btnSampleDelete.Image = Properties.Resources.icon_remove2;
+            this.btnSampleDelete.ImageTransparentColor = Color.Magenta;
+            this.btnSampleDelete.Margin = new Padding(0);
+            this.btnSampleDelete.Name = "btnSampleDelete";
+            this.btnSampleDelete.Size = new Size(24, 24);
+            this.btnSampleDelete.ToolTipText = "Delete selected phase";
+            // 
+            // FSBtoSamp
+            // 
+            this.FSBtoSamp.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.FSBtoSamp.Enabled = false;
+            this.FSBtoSamp.Image = Properties.Resources.icon_import;
+            this.FSBtoSamp.ImageTransparentColor = Color.Magenta;
+            this.FSBtoSamp.Name = "FSBtoSamp";
+            this.FSBtoSamp.Size = new Size(24, 21);
+            this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
+            // 
+            // btnSampleChunk
+            // 
+            this.btnSampleChunk.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSampleChunk.Enabled = false;
+            this.btnSampleChunk.Image = Properties.Resources.icon_split;
+            this.btnSampleChunk.ImageTransparentColor = Color.Magenta;
+            this.btnSampleChunk.Name = "btnSampleChunk";
+            this.btnSampleChunk.Size = new Size(24, 21);
+            this.btnSampleChunk.ToolTipText = "Chunk/split the selected sample into\r\nspecific beat/time lengths.";
+            // 
+            // txtTimeChunk
+            // 
+            this.txtTimeChunk.DecimalPlaces = 5;
+            this.txtTimeChunk.Location = new Point(118, 228);
+            this.txtTimeChunk.Name = "txtTimeChunk";
+            this.txtTimeChunk.Size = new Size(86, 23);
+            this.txtTimeChunk.TabIndex = 177;
+            this.txtTimeChunk.TextAlign = HorizontalAlignment.Right;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = Color.Transparent;
+            this.label4.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label4.ForeColor = Color.White;
+            this.label4.Location = new Point(203, 230);
+            this.label4.Margin = new Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.RightToLeft = RightToLeft.No;
+            this.label4.Size = new Size(26, 15);
+            this.label4.TabIndex = 178;
+            this.label4.Text = "sec";
+            this.label4.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = Color.Transparent;
+            this.label5.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label5.ForeColor = Color.White;
+            this.label5.Location = new Point(311, 232);
+            this.label5.Margin = new Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.RightToLeft = RightToLeft.No;
+            this.label5.Size = new Size(37, 15);
+            this.label5.TabIndex = 179;
+            this.label5.Text = "beats";
+            this.label5.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // SampleChunker
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(40, 40, 40);
             this.ClientSize = new Size(487, 462);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtTimeChunk);
+            this.Controls.Add(this.sampleToolStrip);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numChunks);
             this.Controls.Add(this.lblBeats);
@@ -354,7 +442,6 @@
             this.Controls.Add(this.chkLimit);
             this.Controls.Add(this.chkPosEnd);
             this.Controls.Add(this.chkPosStart);
-            this.Controls.Add(this.txtTimeChunk);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBeatChunk);
             this.Controls.Add(this.label2);
@@ -362,7 +449,6 @@
             this.Controls.Add(this.radioTime);
             this.Controls.Add(this.lblRuntime);
             this.Controls.Add(this.lblBpm);
-            this.Controls.Add(this.lblName);
             this.Controls.Add(this.pictureWave);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
@@ -379,6 +465,9 @@
             this.panelEnd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatEnd).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.numChunks).EndInit();
+            this.sampleToolStrip.ResumeLayout(false);
+            this.sampleToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.txtTimeChunk).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -386,7 +475,6 @@
         #endregion
 
         private PictureBox pictureWave;
-        private Label lblName;
         private Label lblBpm;
         private Label lblRuntime;
         private RadioButton radioTime;
@@ -394,7 +482,6 @@
         private Label label2;
         private TextBox txtBeatChunk;
         private Label label3;
-        private TextBox txtTimeChunk;
         private CheckBox chkPosStart;
         private CheckBox chkPosEnd;
         private TextBox txtTimeStart;
@@ -409,5 +496,13 @@
         private NumericUpDown txtBeatEnd;
         private Button button1;
         private Label label1;
+        private ToolStrip sampleToolStrip;
+        private ToolStripButton btnSampleAdd;
+        private ToolStripButton btnSampleDelete;
+        private ToolStripButton FSBtoSamp;
+        public ToolStripButton btnSampleChunk;
+        private NumericUpDown txtTimeChunk;
+        private Label label4;
+        private Label label5;
     }
 }
