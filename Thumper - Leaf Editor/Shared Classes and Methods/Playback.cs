@@ -233,6 +233,9 @@ namespace Thumper_Custom_Level_Editor
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
                                     }
+                                    else if (Seq.friendly_param == "thump and bar") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 8, 8, 18, Seq.mute);
+                                    }
                                 }
                             }
                         }

@@ -316,6 +316,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
             }
             else if (LeafsToMove != null) {
+                LogUndo = true;
                 SaveCheckAndWrite(false, "Reorder Leafs");
                 LeafsToMove = null;
             }
