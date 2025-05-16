@@ -60,7 +60,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public bool EditorIsSaved = true;
-        private bool EditorIsLoading;
+        private bool EditorIsLoading
+        {
+            get;
+            set;
+        }
         public bool LogUndo = true;
         private bool SaveOnlyNoLoad;
         public FileInfo loadedlvl
@@ -676,7 +680,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == 0))
                 return;
-            EditorIsLoading = true;
             lvlLeafList.ClearSelection();
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
@@ -687,7 +690,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafList.Rows[dgvr - 1].Selected = true;
             }
-            EditorIsLoading = false;
             SaveCheckAndWrite(false, "Move Leaf Up");
         }
 
@@ -696,7 +698,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             if (selectedrows.Any(r => r == lvlLeafList.RowCount - 1))
                 return;
-            EditorIsLoading = true;
             lvlLeafList.ClearSelection();
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
@@ -707,7 +708,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (int dgvr in selectedrows) {
                 lvlLeafList.Rows[dgvr + 1].Selected = true;
             }
-            EditorIsLoading = false;
             SaveCheckAndWrite(false, "Move Leaf Down");
         }
 
