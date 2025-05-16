@@ -324,7 +324,6 @@
             this.dockPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.dockPanel1.BackColor = Color.Black;
             this.dockPanel1.Location = new Point(-4, -4);
-            this.dockPanel1.MinimumSize = new Size(933, 519);
             this.dockPanel1.Name = "dockPanel1";
             this.dockPanel1.Size = new Size(941, 527);
             this.dockPanel1.TabIndex = 152;

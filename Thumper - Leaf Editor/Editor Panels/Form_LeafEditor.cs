@@ -1613,7 +1613,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         private void btnTrackAdd_Click(object sender, EventArgs e)
         {
-            if (treeObjects.SelectedNode.Nodes.Count > 0)
+            if (treeObjects.SelectedNode.Nodes.Count > 0 || trackEditor.SelectedCells.Count == 0)
                 return;
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text);
             if (objmatch == null)

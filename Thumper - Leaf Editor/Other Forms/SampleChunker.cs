@@ -39,6 +39,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             SampleToChunk.wave.ColorMarker = Color.LimeGreen;
             SampleToChunk.wave.DrawMarker = Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Line | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Name | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NamePositionTop | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NameBoxFilled;
             SampleToChunk.wave.BeatWidth = 2;
+            SampleToChunk.wave.DetectBeats = true;
+            SampleToChunk.wave.DrawBeat = Un4seen.Bass.Misc.WaveForm.BEATDRAWTYPE.Bottom;
 
             DrawWave();
 
