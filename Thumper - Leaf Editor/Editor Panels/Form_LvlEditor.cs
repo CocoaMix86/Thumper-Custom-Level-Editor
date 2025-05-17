@@ -1472,7 +1472,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("lvl");
                 Playback.CreatePlaybackFromLvl(LvlProperties);
-                Playback.Play(PlaybackStart, LvlProperties.beats + lvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
+                Playback.Play(lvlLeafList.SelectedRows.Count > 0 ? LvlLeafs[lvlLeafList.SelectedRows[^1].Index].beatstart : -1, LvlProperties.beats + lvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
