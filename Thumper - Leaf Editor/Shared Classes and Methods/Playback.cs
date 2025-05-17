@@ -295,6 +295,8 @@ namespace Thumper_Custom_Level_Editor
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
+                if (leaftoplay == null)
+                    continue;
                 Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
                 beatoffset += leaf.beats;
                 leaftoplay.Dispose();

@@ -18,6 +18,7 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             tcle = _tcle;
             lblVersion.Visible = false;
+            this.ControlBox = true;
 
             if (path == "railcolorhelp") {
                 this.BackgroundImage = Properties.Resources.help_railcolor;

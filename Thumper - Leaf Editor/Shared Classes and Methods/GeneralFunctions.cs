@@ -376,6 +376,9 @@ namespace Thumper_Custom_Level_Editor
                 lockedfiles.Remove(filetodelete);
             }
             filetodelete.Delete();
+            TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+            TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
+            TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
         }
 
         public static void CloseFileLock(FileInfo filetoclose)
