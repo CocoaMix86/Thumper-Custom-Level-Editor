@@ -1631,6 +1631,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Lanes[x].friendly_param = objmatch.param_displayname;
                 Lanes[x].trait_type = objmatch.trait_type;
                 Lanes[x].footer = objmatch.footer;
+                Lanes[x].highlight_color = objmatch.defaultcolor;
                 //if the new object is not multilane, change each lane to "none"
                 if (!objmatch.param_path.EndsWith(".ent")) {
                     Lanes[x].param_path_lane = "none";
