@@ -1616,8 +1616,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (treeObjects.SelectedNode.Nodes.Count > 0 || trackEditor.SelectedCells.Count == 0)
                 return;
             Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text);
-            if (objmatch == null)
-                return;
+            if (objmatch == null) {
+                if (treeObjects.SelectedNode.Text.EndsWith(".samp")) {
+                    objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.category == "PLAY SAMPLE");
+                }
+                else
+                    return;
+            }
             Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
             if (!objmatch.param_path.EndsWith(".ent") && _currentseq.friendly_lane != "none") {
                 MessageBox.Show("Due to reasons, you cannot change a multi-lane object into a non-multi-lane object. Please just add a new object.", "Thumper Custom Level Editor");
@@ -1625,7 +1630,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
             for (int x = 0; x < Lanes.Length; x++) {
-                Lanes[x].obj_name = objmatch.obj_name == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
+                Lanes[x].obj_name = objmatch.category == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
                 Lanes[x].category = objmatch.category;
                 Lanes[x].param_path = objmatch.param_path.Split('.')[0];
                 Lanes[x].friendly_param = objmatch.param_displayname;
