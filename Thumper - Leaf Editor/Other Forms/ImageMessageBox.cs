@@ -44,6 +44,7 @@ namespace Thumper_Custom_Level_Editor
                 this.BackgroundImageLayout = ImageLayout.Center;
                 this.Text = "";
                 this.ControlBox = false;
+                this.FormBorderStyle = FormBorderStyle.None;
                 _size = this.BackgroundImage.Size;
                 timer1.Enabled = true;
             }

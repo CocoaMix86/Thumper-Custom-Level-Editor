@@ -61,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
             this.BackgroundImageLayout = ImageLayout.Center;
             this.ClientSize = new Size(506, 309);
             this.Controls.Add(this.lblVersion);
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Margin = new Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
