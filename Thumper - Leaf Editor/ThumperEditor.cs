@@ -727,19 +727,26 @@ namespace Thumper_Custom_Level_Editor
         {
             if (Explorer.IsDisposed) {
                 Explorer = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+                ProjectExplorer.CreateTreeView();
             }
-            Explorer.Show(dockMain, DockState.DockRight);
+
+            if (dockProjectProperties.Pane != null)
+                Explorer.Show(dockProjectProperties.Pane, DockAlignment.Top, 0.7);
+            else
+                Explorer.Show(dockMain, DockState.DockRight);
         }
 
         private void toolstripViewProperties_Click(object sender, EventArgs e)
         {
             if (dockProjectProperties.IsDisposed) {
                 dockProjectProperties = new() { DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
-                dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.3);
                 dockProjectProperties.LoadProjectProperties();
             }
-            else
+
+            if (Explorer.Pane != null)
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.3);
+            else
+                dockProjectProperties.Show(dockMain, DockState.DockRight);
         }
 
         private void toolstripViewFullscreen_Click(object sender, EventArgs e)
