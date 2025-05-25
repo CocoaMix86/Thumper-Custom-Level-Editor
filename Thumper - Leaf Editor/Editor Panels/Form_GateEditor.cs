@@ -638,11 +638,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorLoading = true;
 
             gateproperties = new(this, filepath) {
-                boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
+                boss = bossdata.FirstOrDefault(x => x.boss_spn == (string)_load["spn_name"])?.boss_name ?? bossdata[0].boss_name,
                 prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
                 postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
                 restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
-                sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
+                sectiontype = gatesectiontypes.FirstOrDefault(x => x.Key == (string)_load["section_type"]).Value ?? "Boss",
                 random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
 

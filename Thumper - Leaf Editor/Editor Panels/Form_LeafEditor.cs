@@ -43,8 +43,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///Load LVL Sequencer
-        public Form_LeafEditor(LvlProperties toload)
+        public Form_LeafEditor(LvlProperties toload, bool saveonlynoload = false)
         {
+            SaveOnlyNoLoad = saveonlynoload;
             if (Playback.Generating) {
                 LvlSequencer = toload;
                 LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
@@ -99,6 +100,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 60;
             splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
         }
+
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
         {
             vscrollbarTrackEditor_Resize();
@@ -1098,9 +1100,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.ColumnIndex is 0) {
                     seq.enabled = !seq.enabled;
                     RowReadOnly(!seq.enabled, seq);
+                    TCLE.PlaySound("UIselect");
                 }
                 if (e.ColumnIndex is 1) {
                     seq.mute = !seq.mute;
+                    TCLE.PlaySound("UIselect");
                 }
                 if (e.ColumnIndex is 2 && seq.friendly_lane == "lane center") {
                     //if ShowLanes, don't alter lane visibility
@@ -1112,11 +1116,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[seq.editor_row.Index - 1].expandlanes = seq.expandlanes;
                     SequencerObjects[seq.editor_row.Index + 1].expandlanes = seq.expandlanes;
                     SequencerObjects[seq.editor_row.Index + 2].expandlanes = seq.expandlanes;
+                    TCLE.PlaySound("UIselect");
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
-                TCLE.PlaySound("UIselect");
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
                 if (SequencerObjects[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
@@ -2699,12 +2703,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
+            //track which objects are expanded
+            List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.expandlanes == true).ToList();
+            //
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
             LeafProperties.seq_objs = LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
             UndoList.RemoveRange(0, undolistindex);
             propertyGridLeaf.Refresh();
+            //restore expanded lanes
+            foreach (Sequencer_Object seq in SequencerObjects) {
+                if (_expanded.Any(x => x.obj_name == seq.obj_name && x.friendly_lane == seq.friendly_lane && x.friendly_param == seq.friendly_param))
+                    seq.expandlanes = true;
+            }
 
             if (!_trackNotSaved) {
                 EditorIsSaved = false;
@@ -2907,7 +2919,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates column highlighting in the DGV based on time sig
         public void TrackTimeSigHighlighting()
         {
-            if (LeafProperties == null || EditorIsLoading)
+            if (LeafProperties == null || EditorIsLoading || SaveOnlyNoLoad)
                 return;
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar

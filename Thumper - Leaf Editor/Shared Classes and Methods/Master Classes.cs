@@ -108,7 +108,7 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Skybox")]
         [Description("")]
         [TypeConverter(typeof(SkyboxList))]
-        public string skybox { get; set; }
+        public string skybox { get; set; } = "skybox_cube";
 
         [CategoryAttribute("Options")]
         [DisplayName("Intro Lvl")]

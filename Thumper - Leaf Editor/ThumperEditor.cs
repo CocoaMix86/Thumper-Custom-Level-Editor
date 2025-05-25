@@ -1066,6 +1066,12 @@ namespace Thumper_Custom_Level_Editor
         {
             get => _GAD;
             set {
+                if (value == null) {
+                    dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
+                    dockProjectProperties.TabText = $"Project Properties";
+                    _GAD = value;
+                    return;
+                }
                 _GAD = value;
                 dockProjectProperties.propertyGridProject.SelectedObject = _GAD.GetType().GetMethod("GetProperties").Invoke(_GAD, null);
                 dockProjectProperties.TabText = $"{_GAD.DockHandler.TabText} Properties";

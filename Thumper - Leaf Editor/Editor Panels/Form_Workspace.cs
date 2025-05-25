@@ -35,29 +35,44 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
 
-        private void dockMain_ContentAdded(object sender, DockContentEventArgs e) => e.Content.DockHandler.TabPageContextMenuStrip = TCLE.TabRightClickMenu;
+        private void dockMain_ContentAdded(object sender, DockContentEventArgs e)
+        {
+            e.Content.DockHandler.TabPageContextMenuStrip = TCLE.TabRightClickMenu;
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
+        }
+
         private void dockMain_Enter(object sender, EventArgs e)
         {
-            if (dockMain.ActiveContent != null)
-                TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+            if (this.Disposing)
+                return;
+            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            if (dockMain.ActiveContent != null)
-                TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+            if (this.Disposing)
+                return;
+            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
             if (this.Disposing)
                 return;
-            if (dockMain.ActiveContent != null)
-                TCLE.GlobalActiveDocument = dockMain.ActiveContent;
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
+            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
         }
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
-
+            if (this.Disposing)
+                return;
+            //if (dockMain.ActivePane == null) {
+                //if (dockMain.ActiveContent == null)
+                //if (dockMain.Panes.Count > 0)
+                //    dockMain.Panes[0].Activate();
+                //TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+            //}
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
@@ -93,6 +108,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 TCLE.CloseFileLock(filetoclose);
+                dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.TabText}.config");
                 ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
             }
         }
