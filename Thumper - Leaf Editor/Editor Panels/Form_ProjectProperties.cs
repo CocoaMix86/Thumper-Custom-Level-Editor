@@ -21,6 +21,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void propertyGridProject_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
+            if (this.TabText != "Project Properties")
+                return;
             //build the JSON to write to file
             JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
             //write JSON to file

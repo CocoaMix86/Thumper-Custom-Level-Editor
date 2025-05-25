@@ -28,6 +28,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     savestate = load
                 });
             }
+
+            TCLE.LevelSections = new() { "SECTION_LINEAR" };
+            foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
+                TCLE.LevelSections.Add("SECTION_LINEAR");
+            }
         }
 
         private void Form_MasterEditor_Shown(object sender, EventArgs e)
@@ -898,12 +903,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(LoadedMaster.Name);
                 //update level sections
-                TCLE.LevelSections = new();
+                TCLE.LevelSections = new() { "SECTION_LINEAR" };
                 foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
                     TCLE.LevelSections.Add("SECTION_LINEAR");
                 }
-                if (TCLE.LevelSections.Count == 0)
-                    TCLE.LevelSections.Add("SECTION_LINEAR");
                 if (!SaveOnlyNoLoad) {
                     dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
                     File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
