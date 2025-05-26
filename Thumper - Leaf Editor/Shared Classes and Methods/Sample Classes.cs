@@ -60,6 +60,7 @@ namespace Thumper_Custom_Level_Editor
         public double time = -1;
         public double alteredtime => (this.time - ((double)this.offset / 1000d)) / (double)this.pitch;
         public double beats => (this.alteredtime / 60) * (double)TCLE.BPM;
+        public string message { get; set; }
 
         public override string ToString()
         {

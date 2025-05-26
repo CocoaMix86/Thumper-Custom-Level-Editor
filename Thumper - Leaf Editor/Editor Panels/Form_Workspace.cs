@@ -43,6 +43,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_Enter(object sender, EventArgs e)
         {
+            if (TCLE.DontSwitchGAD)
+                return;
             if (this.Disposing)
                 return;
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -50,6 +52,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
+            if (TCLE.DontSwitchGAD)
+                return;
             if (this.Disposing)
                 return;
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -57,6 +61,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
+            if (TCLE.DontSwitchGAD)
+                return;
             if (this.Disposing)
                 return;
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -65,6 +71,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
+            if (TCLE.DontSwitchGAD)
+                return;
             if (this.Disposing)
                 return;
             //if (dockMain.ActivePane == null) {

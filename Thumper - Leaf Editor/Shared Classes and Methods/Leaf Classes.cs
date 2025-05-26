@@ -103,6 +103,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private bool ExpandLanes;
         public string friendly_lane { get; set; }
+        public bool HasShownError = false;
 
         public Sequencer_Object(LeafProperties Parent)
         {

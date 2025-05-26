@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Media.Media3D;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -646,15 +647,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
         }
 
-        private void trackEditor_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
+            if (RowPrePainting)
+                return;
+            base.OnPaint(e);
         }
-
         private bool RowPrePainting;
         private bool RowPostPrePainting;
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
+            string message = null;
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
@@ -669,33 +673,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
                 if (samp == null) {
+                    if (!SequencerObjects[e.RowIndex].HasShownError) {
+                        message = $@"{SequencerObjects[e.RowIndex].obj_name} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
+                        SequencerObjects[e.RowIndex].HasShownError = true;
+                    }
                     goto paintheader;
                 }
                 //export pc file to playable file
                 if (samp.wave == null) {
+                    RowPrePainting = true;
                     samp.CalculateRuntime();
+                    RowPrePainting = false;
                 }
-                int cellwidth = trackZoom.Value;
-                samp.wave.ColorBackground = seqref.editor_row.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.highlight_color;
-                //if object has no drawn wave, create it. Wave is null whenever cell sizes change
-                if (seqref.WaveBitmap == null) {
-                    Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
-                    using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
-                        graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
-                        graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
+                //CalculateRuntime can fail. In that case, skip drawing the waveform
+                if (samp.wave != null) {
+                    int cellwidth = trackZoom.Value;
+                    samp.wave.ColorBackground = seqref.editor_row.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.highlight_color;
+                    //if object has no drawn wave, create it. Wave is null whenever cell sizes change
+                    if (seqref.WaveBitmap == null) {
+                        Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
+                        if (WaveToDraw == null)
+                            goto skipwaveform;
+                        using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
+                            graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
+                            graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
+                        }
+                        seqref.WaveBitmap = WaveToDraw;
                     }
-                    seqref.WaveBitmap = WaveToDraw;
+                    //once the bitmap is created, now we can do some funky stuff
+                    foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
+                            continue;
+                        //math to offset drawing the wave horizontally based on where the active beats are
+                        e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4);
+                    }
                 }
-                //once the bitmap is created, now we can do some funky stuff
-                foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
-                        continue;
-                    //math to offset drawing the wave horizontally based on where the active beats are
-                    e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4);
-                }
+            skipwaveform:;
                 RowPostPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPostPrePainting = false;
+                if (samp.message != null) {
+                    message = samp.message;
+                    samp.message = null;
+                }
             }
             //HANDLE OBJECTS THAT LAST LONGER THAN 1 BEAT
             else if (SequencerObjects[e.RowIndex].friendly_param.Contains('[')) {
@@ -791,6 +811,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RowPrePainting = true;
             e.PaintHeader(true);
             RowPrePainting = false;
+            if (message != null) {
+                MessageBox.Show(message, "Lumper Eustum Tevel Cditor");
+            }
         }
 
         private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

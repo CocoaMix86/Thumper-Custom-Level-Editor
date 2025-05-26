@@ -14,6 +14,7 @@ namespace Thumper_Custom_Level_Editor
         #region Variables
         public static bool IsClosing;
         public static bool IsLoadingProject;
+        public static bool DontSwitchGAD;
         public static TCLE Instance;
         public static DockPanel DockMain => Instance.dockMain;
         public static Form_WorkSpace ActiveWorkspace;

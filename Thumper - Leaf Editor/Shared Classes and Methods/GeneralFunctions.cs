@@ -568,7 +568,7 @@ namespace Thumper_Custom_Level_Editor
                     else
                         filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
 
-                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))) {
+                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))) {
                         reader.ReadUInt32(); //pc header
                         reader.ReadUInt32(); //fsb5 header
                         reader.ReadUInt32(); //version
@@ -639,7 +639,7 @@ namespace Thumper_Custom_Level_Editor
                     _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                 }
                 catch {
-                    MessageBox.Show($@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. Is the custom audio file in the extras folder? You may need to re-import the file.");
+                    _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
                     return null;
                 }
             }
@@ -650,13 +650,12 @@ namespace Thumper_Custom_Level_Editor
                     _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
                 }
                 catch {
-                    MessageBox.Show($@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc to play sample. If you need to change your Game Directory, go to the the Help menu.");
+                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
                     return null;
                 }
             }
-            if (_bytes.Length == 0)
-            {
-                MessageBox.Show($@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.");
+            if (_bytes.Length == 0) {
+                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample {_samp.obj_name}. You may need to re-import the file.";
                 return null;
             }
             //check if file has been converted already. Ready the path if true
@@ -678,7 +677,7 @@ namespace Thumper_Custom_Level_Editor
                 _samp.TempFile = finalfilename;
                 return _samp.TempFile;
             } catch (Exception) {
-                MessageBox.Show($@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.");
+                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
                 return null;
             }
         }
