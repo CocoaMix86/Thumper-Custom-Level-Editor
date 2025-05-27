@@ -610,7 +610,11 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileClearTemp_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to clear all temp files?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
+                return;
 
+            foreach (string file in Directory.GetFiles($@"{TCLE.AppLocation}\temp\", "*.*"))
+                File.Delete(file);
         }
 
         private void toolstripFileExit_Click(object sender, EventArgs e)
