@@ -608,6 +608,11 @@ namespace Thumper_Custom_Level_Editor
             OpenProject(tcl);
         }
 
+        private void toolstripFileClearTemp_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolstripFileExit_Click(object sender, EventArgs e)
         {
             DragDropItems.Dispose();

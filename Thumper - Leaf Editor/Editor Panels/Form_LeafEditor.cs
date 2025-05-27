@@ -1831,15 +1831,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //now we have a well ordered list of objects to move
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
-                .Distinct();
+                .Distinct()
+                .OrderByDescending(cell => cell.editor_row.Index);
             List<Sequencer_Object> RowsToMove = new();
             foreach (Sequencer_Object row in selectedrows) {
                 if (!RowsToMove.Contains(row))
-                    RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
+                    RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane).Reverse());
             }
             ///RowsToMove = RowsToMove.OrderByDescending(cell => cell.editor_row.Index).ToList();
             //if already at the bottom, do not move down
-            if (RowsToMove.Last().editor_row.Index >= trackEditor.Rows.Count - 1)
+            if (RowsToMove[0].editor_row.Index >= trackEditor.Rows.Count - 1)
                 return;
 
             List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
@@ -1847,7 +1848,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             for (int x = 0; x < RowsToMove.Count; x++) {
                 int currentindex = RowsToMove[x].editor_row.Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjBelow = SequencerObjects[RowsToMove[^1].editor_row.Index + 1];
+                Sequencer_Object ObjBelow = SequencerObjects[RowsToMove[x].editor_row.Index + 1];
                 int Lanes = ObjBelow.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
                 trackEditor.Rows.Remove(RowsToMove[x].editor_row);
@@ -1867,14 +1868,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x]);
                 trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x].editor_row);
                 if (RowsToMove[x].friendly_lane != "none") {
-                    SequencerObjects.Insert(objbelowindex + Lanes + 1, RowsToMove[x + 1]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes + 1, RowsToMove[x + 1].editor_row);
-                    SequencerObjects.Insert(objbelowindex + Lanes + 2, RowsToMove[x + 2]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes + 2, RowsToMove[x + 2].editor_row);
-                    SequencerObjects.Insert(objbelowindex + Lanes + 3, RowsToMove[x + 3]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes + 3, RowsToMove[x + 3].editor_row);
-                    SequencerObjects.Insert(objbelowindex + Lanes + 4, RowsToMove[x + 4]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes + 4, RowsToMove[x + 4].editor_row);
+                    SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 1]);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 1].editor_row);
+                    SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 2]);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 2].editor_row);
+                    SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 3]);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 3].editor_row);
+                    SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 4]);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 4].editor_row);
                     x += 4;
                 }
             }
