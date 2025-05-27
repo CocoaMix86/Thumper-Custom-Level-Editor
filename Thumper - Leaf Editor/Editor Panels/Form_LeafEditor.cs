@@ -467,7 +467,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //paint notifier circles for changed interp and ease
             ///if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected || ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") && Properties.Settings.Default.LeafOptionShowWave)) {
+            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected /*|| ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") && Properties.Settings.Default.LeafOptionShowWave)*/) {
 
             }
             else if (SequencerObjects[e.RowIndex].editor_row.ReadOnly) {
@@ -520,7 +520,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if previous cell is the same value. If so, hide it
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {
                 //
-                if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) ;
+                if (SequencerObjects[e.RowIndex].category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) ;
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor") ;
                 else if ((Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false)) ;
                 else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex >= FrozenColumnOffset && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) ;

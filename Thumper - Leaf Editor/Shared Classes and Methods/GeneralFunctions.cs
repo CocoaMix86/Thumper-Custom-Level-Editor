@@ -828,7 +828,7 @@ namespace Thumper_Custom_Level_Editor
             //if there are no workspaces, add one
             if (!ReturnContent) {
                 if (!Workspaces.Any()) {
-                    Form_WorkSpace workspace1 = new() { Text = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
+                    Form_WorkSpace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
                     workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
                 }
                 //find if the document is loaded already in a tab

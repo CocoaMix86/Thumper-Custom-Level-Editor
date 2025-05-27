@@ -512,7 +512,7 @@ namespace Thumper_Custom_Level_Editor
             try {
                 dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config", m_deserializeDockContent);
             } catch {
-                Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}" };
+                Form_WorkSpace workspace1 = new($"Workspace {Workspaces.Count() + 1}");
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
@@ -829,7 +829,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void addNewWorkspaceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form_WorkSpace workspace1 = new() { TabText = $"Workspace {Workspaces.Count() + 1}", DockAreas = DockAreas.Document };
+            Form_WorkSpace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
             workspace1.Show(dockMain, DockState.Document);
         }
 
