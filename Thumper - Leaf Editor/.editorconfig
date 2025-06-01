@@ -147,6 +147,9 @@ dotnet_diagnostic.CA2211.severity = none
 # CS8765: Nullability of type of parameter doesn't match overridden member (possibly because of nullability attributes).
 dotnet_diagnostic.CS8765.severity = none
 
+# CA2213: Disposable fields should be disposed
+dotnet_diagnostic.CA2213.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

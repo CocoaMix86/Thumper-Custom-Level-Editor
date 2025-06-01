@@ -32,7 +32,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
     public class CustomFloatWindow : FloatWindow
     {
-        int i = 5;
         public CustomFloatWindow(DockPanel dockPanel, DockPane pane)
             : base(dockPanel, pane)
         {

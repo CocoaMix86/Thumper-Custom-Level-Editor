@@ -715,7 +715,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (!_trackNotSaved) {
                 EditorIsSaved = false;
-                if (!this.Text.EndsWith("*"))
+                if (!this.Text.EndsWith('*'))
                     this.Text += '*';
             }
         }
