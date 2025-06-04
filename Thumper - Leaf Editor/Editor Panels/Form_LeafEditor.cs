@@ -864,8 +864,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (SequencerObjects[e.RowIndex].friendly_lane != "none")
                     trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide Lanes";
             }
-
-
         }
 
         ///DATAGRIDVIEW - TRACK EDITOR
@@ -2113,6 +2111,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void Interpolate(string interpOption)
         {
+            if (interpOption == null)
+                return;
             InterpLastUsed = interpOption;
             btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{interpOption.Replace(" ", "_")}");
             btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {interpOption}\n";
