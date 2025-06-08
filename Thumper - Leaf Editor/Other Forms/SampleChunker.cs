@@ -62,7 +62,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             txtBeatEnd.Maximum = (decimal)SampleToChunk.beats;
             txtBeatChunk.Maximum = (decimal)SampleToChunk.beats;
 
-            txtBaseName.Text = SampleToChunk.obj_name.Replace(".samp", "");
+            txtChunkName.Text = SampleToChunk.obj_name.Replace(".samp", "") + "_chunk{X}";
         }
         private void SampleChunker_ResizeEnd(object sender, EventArgs e)
         {
@@ -224,8 +224,14 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
         ///(of this file)
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SampleToChunk.wave.Wave.marker.Count == 0)
+            if (SampleToChunk.wave.Wave.marker.Count == 0) {
+                MessageBox.Show("No splits have been set yet.", "Nwolc Custom Level Editor");
                 return;
+            }
+            if (!txtChunkName.Text.Contains("{X}")) {
+                MessageBox.Show("Chunk name must include at least 1 {X}.", "ZWest Custom Level Editor");
+                return;
+            }
             //initialize the sample
             int channel = Bass.BASS_SampleLoad(SampleToChunk.TempFile, 0, 0, 1, BASSFlag.BASS_SAMPLE_8BITS);
             //get byte buffer
@@ -265,7 +271,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                 byte[] chunkbytes = buffer[(int)pos..(int)pos2];
 
                 //get the hash of the FSB filename. This will be used to name the final .PC file
-                string chunkname = $"{txtPrepend.Text.Replace("{X}", x.ToString())}{txtBaseName.Text.Replace("{X}", x.ToString())}{txtAppend.Text.Replace("{X}", x.ToString())}";
+                string chunkname = $"{txtChunkName.Text.Replace("{X}", x.ToString())}";
                 string _hashedname = "";
                 byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"Asamples/levels/custom/{chunkname}.wav"));
                 Array.Reverse(hashbytes);
