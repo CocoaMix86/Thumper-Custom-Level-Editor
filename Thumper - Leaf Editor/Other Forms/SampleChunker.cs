@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup.Primitives;
+using System.Xml;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Windows.Devices.Lights;
@@ -20,8 +22,11 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         SampleData SampleToChunk;
         Form_SampleEditor ReturnForm;
 
+        //how many seconds pass for 1 beat
         double BeatTime => 60d / (double)TCLE.projectProperties.bpm;
+        //how many beats 1 chunk is
         double ChunkSize = 0;
+        //total seconds for 1 chunk
         double ChunkTime => BeatTime * ChunkSize;
         double Starttime = 0;
         double Endtime = 0;
@@ -56,6 +61,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             txtBeatStart.Maximum = (decimal)SampleToChunk.beats;
             txtBeatEnd.Maximum = (decimal)SampleToChunk.beats;
             txtBeatChunk.Maximum = (decimal)SampleToChunk.beats;
+
+            txtBaseName.Text = SampleToChunk.obj_name.Replace(".samp", "");
         }
         private void SampleChunker_ResizeEnd(object sender, EventArgs e)
         {
@@ -143,6 +150,17 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             if (e.ColumnIndex == 2)
                 dgvSplits.Rows.RemoveAt(e.RowIndex);
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($@"Chunking a sample will split it where shown on the waveform and create new samples in the .samp file. The original sample will not be altered.
+
+If ""End Position"" or ""Limit Chunks"" is checked, the last chunk will end at the last marker. Otherwise, the last chunk will continue until end of the file.
+
+If ""Start Position"" is checked, the first chunk will start at that position. Otherwise, the first chunk will start from the beginning of the file.
+
+", "Cepheus deviL TrommEl tutor");
+        }
         #endregion
 
         #region Methods Functions
@@ -206,32 +224,110 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         ///(of this file)
         private void button1_Click(object sender, EventArgs e)
         {
+            if (SampleToChunk.wave.Wave.marker.Count == 0)
+                return;
             //initialize the sample
-            int channel = Bass.BASS_StreamCreateFile(SampleToChunk.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-            //pitch shift, pan, other fx
-            float initialfreq = 0;
-            Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-            var err = Bass.BASS_ErrorGetCode();
-            Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)SampleToChunk.pitch);
-            err = Bass.BASS_ErrorGetCode();
+            int channel = Bass.BASS_SampleLoad(SampleToChunk.TempFile, 0, 0, 1, BASSFlag.BASS_SAMPLE_8BITS);
             //get byte buffer
-            long bytelength = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            byte[] buffer = new byte[bytelength];
+            BASS_SAMPLE _samp = Bass.BASS_SampleGetInfo(channel);
+            byte[] buffer = new byte[_samp.length];
+            Bass.BASS_SampleGetData(channel, buffer);
 
             //get markers
+            int syncchan = Bass.BASS_SampleGetChannel(channel, BASSFlag.BASS_SAMPLE_8BITS);
+            SampleToChunk.wave.SyncPlayback(syncchan);
             string[] markers = SampleToChunk.wave.GetMarkers();
             List<long> markerpos = markers.Select(x => SampleToChunk.wave.GetMarker(x)).Order().ToList();
+            //add a 0 marker if it doesn't exist
+            if (markerpos.Count == 0)
+                markerpos.Add(0);
+            if (!chkPosStart.Checked && markerpos[0] != 0)
+                markerpos.Insert(0, 0);
+            //align markers to 4 byte increments (4bytes per channel)
+            for (int x = 0; x < markerpos.Count; x++) {
+                markerpos[x] = markerpos[x] - (markerpos[x] % (4 * _samp.chans));
+            }
+
             //loop over markers to start splitting them
             for (int x = 0; x < markerpos.Count; x++) {
-                //pos and pos2 are the cutoffs for the split. pos2 = -1 means end of file
+                //pos and pos2 are the cutoffs for the split.
                 long pos = markerpos[x];
-                long pos2 = -1;
-                if (x + 1 < markerpos.Count)
-                    pos2 = SampleToChunk.wave.GetMarker(markers[x + 1]);
+                long pos2 = buffer.Length - 1;
+                if (x + 1 < markerpos.Count) {
+                    pos2 = markerpos[x + 1];
+                }
+                //if limiting chunks, break if we're at the last one.
+                //otherwise, pos2 becomes buffer.length and final chunk goes to end of file.
+                else if (chkLimit.Checked)
+                    break;
 
-                Bass.BASS_ChannelGetData(channel, buffer);
-                err = Bass.BASS_ErrorGetCode();
+                //get the portion of bytes that are for this chunk
+                byte[] chunkbytes = buffer[(int)pos..(int)pos2];
+
+                //get the hash of the FSB filename. This will be used to name the final .PC file
+                string chunkname = $"{txtPrepend.Text.Replace("{X}", x.ToString())}{txtBaseName.Text.Replace("{X}", x.ToString())}{txtAppend.Text.Replace("{X}", x.ToString())}";
+                string _hashedname = "";
+                byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"Asamples/levels/custom/{chunkname}.wav"));
+                Array.Reverse(hashbytes);
+                foreach (byte b in hashbytes)
+                    _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+                //if the hashed name starts with a '0', remove it
+                if (_hashedname[0] == '0')
+                    _hashedname = _hashedname[1..];
+
+                //write the bytes to a new .pc file
+                if (!Directory.Exists($@"{TCLE.WorkingFolder}\extras"))
+                    Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
+                using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.OpenOrCreate))) {
+                    //write pc file header
+                    sw.Write(Form_SampleEditor.PCfileheader, 0, Form_SampleEditor.PCfileheader.Length);
+                    //
+                    sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
+                    sw.Write((UInt32)1); //version
+                    sw.Write((UInt32)1); //how many tracks in fsb
+                    sw.Write((UInt32)8); //size of sample header
+                    sw.Write((UInt32)0x1c); //size of header table
+                    sw.Write((UInt32)chunkbytes.Length); //sample bytes
+                    sw.Write((UInt32)2); //audio type
+                    sw.Write((UInt32)0); //always 0, unknown
+                    sw.Write((UInt32)0); //flags
+                    sw.Write((UInt64)0); //hash1
+                    sw.Write((UInt64)0); //hash2
+                    sw.Write((UInt64)0); //hash3
+
+                    UInt64 metadata = (UInt64)(chunkbytes.Length / 4);//samples in audio
+                    metadata <<= 27; //make room for next item
+                    metadata |= 0; //data offset
+                    metadata <<= 2; //make room for next item
+                    metadata |= 1; //2^n channels in audio
+                    metadata <<= 4; //make room for next item
+                    metadata |= Form_SampleEditor.FrequencyID[_samp.freq]; //frequency of audio
+                    metadata <<= 1; //make room for next item
+                    //the last bit of the metadata is always 0, so I don't need to manip it here.
+                    sw.Write(metadata);
+                    sw.Write(Form_SampleEditor.nametable, 0, Form_SampleEditor.nametable.Length);
+                    foreach (byte val in chunkbytes)
+                        sw.Write(val);
+                }
+
+                //add new entry to the sample file for the chunk
+                ReturnForm.SampleList.Add(new() {
+                    obj_name = $"{chunkname}.samp",
+                    volume = SampleToChunk.volume,
+                    pitch = SampleToChunk.pitch,
+                    pan = SampleToChunk.pan,
+                    offset = 0,
+                    path = $"samples/levels/custom/{chunkname}.wav",
+                    channel_group = "sequin.ch",
+                    time = -1,
+                    Editor = ReturnForm
+                });
             }
+
+            ReturnForm.SaveCheckAndWrite(false, "Sample chunking");
+            if (MessageBox.Show("Chunking has finished. Close the chunker?", "Thlumper Clustom Llevel Elditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                this.Close();
         }
     }
 }
+

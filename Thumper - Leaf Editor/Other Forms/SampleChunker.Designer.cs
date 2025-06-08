@@ -28,12 +28,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             this.pictureWave = new PictureBox();
             this.lblBpm = new Label();
             this.lblRuntime = new Label();
@@ -54,12 +54,8 @@
             this.lblBeats = new Label();
             this.numChunks = new NumericUpDown();
             this.button1 = new Button();
-            this.label1 = new Label();
             this.sampleToolStrip = new ToolStrip();
             this.btnSampleAdd = new ToolStripButton();
-            this.btnSampleDelete = new ToolStripButton();
-            this.FSBtoSamp = new ToolStripButton();
-            this.btnSampleChunk = new ToolStripButton();
             this.txtTimeChunk = new NumericUpDown();
             this.label4 = new Label();
             this.label5 = new Label();
@@ -69,11 +65,20 @@
             this.numSplitSec = new NumericUpDown();
             this.btnAddSplit1 = new Button();
             this.dgvSplits = new DataGridView();
-            this.numSplitBeat = new NumericUpDown();
-            this.txtBeatChunk = new NumericUpDown();
             this.LeafEnabled = new DataGridViewTextBoxColumn();
             this.LeafAudio = new DataGridViewTextBoxColumn();
             this.removesplit = new DataGridViewImageColumn();
+            this.numSplitBeat = new NumericUpDown();
+            this.txtBeatChunk = new NumericUpDown();
+            this.btnHelp = new Button();
+            this.label1 = new Label();
+            this.txtAppend = new TextBox();
+            this.txtBaseName = new TextBox();
+            this.txtPrepend = new TextBox();
+            this.label9 = new Label();
+            this.label10 = new Label();
+            this.label11 = new Label();
+            this.label12 = new Label();
             ((System.ComponentModel.ISupportInitialize)this.pictureWave).BeginInit();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatStart).BeginInit();
@@ -315,28 +320,13 @@
             this.button1.BackColor = Color.Green;
             this.button1.FlatStyle = FlatStyle.Flat;
             this.button1.ForeColor = Color.White;
-            this.button1.Location = new Point(256, 475);
+            this.button1.Location = new Point(254, 501);
             this.button1.Name = "button1";
-            this.button1.Size = new Size(75, 38);
+            this.button1.Size = new Size(98, 38);
             this.button1.TabIndex = 174;
             this.button1.Text = "Chunk It";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += this.button1_Click;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = Color.Transparent;
-            this.label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(6, 455);
-            this.label1.Margin = new Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.RightToLeft = RightToLeft.No;
-            this.label1.Size = new Size(337, 60);
-            this.label1.TabIndex = 175;
-            this.label1.Text = "Chunking a sample will split it where shown on the waveform\r\nand create new samples in the .samp file.\r\n\r\nThe original sample will not be altered.\r\n";
-            this.label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // sampleToolStrip
             // 
@@ -345,7 +335,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampleChunk });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 0);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -366,37 +356,6 @@
             this.btnSampleAdd.Name = "btnSampleAdd";
             this.btnSampleAdd.Size = new Size(24, 24);
             this.btnSampleAdd.ToolTipText = "Add new sample";
-            // 
-            // btnSampleDelete
-            // 
-            this.btnSampleDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnSampleDelete.Enabled = false;
-            this.btnSampleDelete.Image = Properties.Resources.icon_remove2;
-            this.btnSampleDelete.ImageTransparentColor = Color.Magenta;
-            this.btnSampleDelete.Margin = new Padding(0);
-            this.btnSampleDelete.Name = "btnSampleDelete";
-            this.btnSampleDelete.Size = new Size(24, 24);
-            this.btnSampleDelete.ToolTipText = "Delete selected phase";
-            // 
-            // FSBtoSamp
-            // 
-            this.FSBtoSamp.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.FSBtoSamp.Enabled = false;
-            this.FSBtoSamp.Image = Properties.Resources.icon_import;
-            this.FSBtoSamp.ImageTransparentColor = Color.Magenta;
-            this.FSBtoSamp.Name = "FSBtoSamp";
-            this.FSBtoSamp.Size = new Size(24, 21);
-            this.FSBtoSamp.ToolTipText = "Import FSB files to Sample format";
-            // 
-            // btnSampleChunk
-            // 
-            this.btnSampleChunk.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnSampleChunk.Enabled = false;
-            this.btnSampleChunk.Image = Properties.Resources.icon_split;
-            this.btnSampleChunk.ImageTransparentColor = Color.Magenta;
-            this.btnSampleChunk.Name = "btnSampleChunk";
-            this.btnSampleChunk.Size = new Size(24, 21);
-            this.btnSampleChunk.ToolTipText = "Chunk/split the selected sample into\r\nspecific beat/time lengths.";
             // 
             // txtTimeChunk
             // 
@@ -515,44 +474,44 @@
             this.dgvSplits.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.dgvSplits.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvSplits.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            this.dgvSplits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle13.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+            this.dgvSplits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvSplits.ColumnHeadersHeight = 20;
             this.dgvSplits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSplits.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.removesplit });
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle4.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.Format = "0.###";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            this.dgvSplits.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle16.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle16.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle16.ForeColor = Color.White;
+            dataGridViewCellStyle16.Format = "0.###";
+            dataGridViewCellStyle16.NullValue = null;
+            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
+            this.dgvSplits.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgvSplits.EnableHeadersVisualStyles = false;
             this.dgvSplits.GridColor = Color.Black;
             this.dgvSplits.Location = new Point(298, 242);
             this.dgvSplits.Margin = new Padding(4, 3, 4, 3);
             this.dgvSplits.Name = "dgvSplits";
             this.dgvSplits.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle5.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            this.dgvSplits.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle17.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle17.ForeColor = Color.White;
+            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
+            this.dgvSplits.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvSplits.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.dgvSplits.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvSplits.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvSplits.RowTemplate.Height = 20;
             this.dgvSplits.ScrollBars = ScrollBars.Horizontal;
             this.dgvSplits.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -562,6 +521,44 @@
             this.dgvSplits.TabIndex = 187;
             this.dgvSplits.Tag = "editorpaneldgv";
             this.dgvSplits.CellClick += this.dgvSplits_CellClick;
+            // 
+            // LeafEnabled
+            // 
+            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle14.Format = "N5";
+            dataGridViewCellStyle14.NullValue = "0";
+            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle14;
+            this.LeafEnabled.HeaderText = "Sec.";
+            this.LeafEnabled.MinimumWidth = 25;
+            this.LeafEnabled.Name = "LeafEnabled";
+            this.LeafEnabled.ReadOnly = true;
+            this.LeafEnabled.Resizable = DataGridViewTriState.False;
+            this.LeafEnabled.SortMode = DataGridViewColumnSortMode.Programmatic;
+            this.LeafEnabled.ToolTipText = "Enable/Disable All";
+            // 
+            // LeafAudio
+            // 
+            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = "0";
+            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle15;
+            this.LeafAudio.HeaderText = "Beat";
+            this.LeafAudio.MinimumWidth = 25;
+            this.LeafAudio.Name = "LeafAudio";
+            this.LeafAudio.ReadOnly = true;
+            this.LeafAudio.Resizable = DataGridViewTriState.False;
+            this.LeafAudio.SortMode = DataGridViewColumnSortMode.Programmatic;
+            this.LeafAudio.ToolTipText = "Mute/Unmute All";
+            this.LeafAudio.Width = 55;
+            // 
+            // removesplit
+            // 
+            this.removesplit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.removesplit.HeaderText = "";
+            this.removesplit.Image = Properties.Resources.icon_trash;
+            this.removesplit.Name = "removesplit";
+            this.removesplit.SortMode = DataGridViewColumnSortMode.Programmatic;
+            this.removesplit.Width = 5;
             // 
             // numSplitBeat
             // 
@@ -583,50 +580,135 @@
             this.txtBeatChunk.TextAlign = HorizontalAlignment.Right;
             this.txtBeatChunk.ValueChanged += this.txtBeatChunk_TextChanged;
             // 
-            // LeafEnabled
+            // btnHelp
             // 
-            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Format = "N5";
-            dataGridViewCellStyle2.NullValue = "0";
-            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle2;
-            this.LeafEnabled.HeaderText = "Sec.";
-            this.LeafEnabled.MinimumWidth = 25;
-            this.LeafEnabled.Name = "LeafEnabled";
-            this.LeafEnabled.ReadOnly = true;
-            this.LeafEnabled.Resizable = DataGridViewTriState.False;
-            this.LeafEnabled.SortMode = DataGridViewColumnSortMode.Programmatic;
-            this.LeafEnabled.ToolTipText = "Enable/Disable All";
+            this.btnHelp.BackColor = Color.Orange;
+            this.btnHelp.FlatStyle = FlatStyle.Flat;
+            this.btnHelp.ForeColor = Color.Black;
+            this.btnHelp.Location = new Point(431, 513);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new Size(111, 26);
+            this.btnHelp.TabIndex = 190;
+            this.btnHelp.Text = "More Info....";
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Click += this.btnHelp_Click;
             // 
-            // LeafAudio
+            // label1
             // 
-            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle3;
-            this.LeafAudio.HeaderText = "Beat";
-            this.LeafAudio.MinimumWidth = 25;
-            this.LeafAudio.Name = "LeafAudio";
-            this.LeafAudio.ReadOnly = true;
-            this.LeafAudio.Resizable = DataGridViewTriState.False;
-            this.LeafAudio.SortMode = DataGridViewColumnSortMode.Programmatic;
-            this.LeafAudio.ToolTipText = "Mute/Unmute All";
-            this.LeafAudio.Width = 55;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = Color.Transparent;
+            this.label1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.label1.ForeColor = Color.White;
+            this.label1.Location = new Point(62, 440);
+            this.label1.Margin = new Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.RightToLeft = RightToLeft.No;
+            this.label1.Size = new Size(101, 15);
+            this.label1.TabIndex = 191;
+            this.label1.Text = "Chunk Naming";
+            this.label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // removesplit
+            // txtAppend
             // 
-            this.removesplit.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.removesplit.HeaderText = "";
-            this.removesplit.Image = Properties.Resources.icon_trash;
-            this.removesplit.Name = "removesplit";
-            this.removesplit.SortMode = DataGridViewColumnSortMode.Programmatic;
-            this.removesplit.Width = 5;
+            this.txtAppend.Font = new Font("Consolas", 9F);
+            this.txtAppend.Location = new Point(60, 514);
+            this.txtAppend.Name = "txtAppend";
+            this.txtAppend.Size = new Size(156, 22);
+            this.txtAppend.TabIndex = 192;
+            this.txtAppend.Text = "_chunk{X}";
+            // 
+            // txtBaseName
+            // 
+            this.txtBaseName.Font = new Font("Consolas", 9F);
+            this.txtBaseName.Location = new Point(60, 486);
+            this.txtBaseName.Name = "txtBaseName";
+            this.txtBaseName.Size = new Size(156, 22);
+            this.txtBaseName.TabIndex = 193;
+            // 
+            // txtPrepend
+            // 
+            this.txtPrepend.Font = new Font("Consolas", 9F);
+            this.txtPrepend.Location = new Point(60, 458);
+            this.txtPrepend.Name = "txtPrepend";
+            this.txtPrepend.Size = new Size(156, 22);
+            this.txtPrepend.TabIndex = 194;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = Color.Transparent;
+            this.label9.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label9.ForeColor = Color.White;
+            this.label9.Location = new Point(0, 459);
+            this.label9.Margin = new Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.RightToLeft = RightToLeft.No;
+            this.label9.Size = new Size(53, 15);
+            this.label9.TabIndex = 195;
+            this.label9.Text = "prepend";
+            this.label9.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = Color.Transparent;
+            this.label10.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label10.ForeColor = Color.White;
+            this.label10.Location = new Point(4, 515);
+            this.label10.Margin = new Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.RightToLeft = RightToLeft.No;
+            this.label10.Size = new Size(49, 15);
+            this.label10.TabIndex = 196;
+            this.label10.Text = "append";
+            this.label10.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = Color.Transparent;
+            this.label11.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label11.ForeColor = Color.White;
+            this.label11.Location = new Point(19, 487);
+            this.label11.Margin = new Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.RightToLeft = RightToLeft.No;
+            this.label11.Size = new Size(34, 15);
+            this.label11.TabIndex = 197;
+            this.label11.Text = "base";
+            this.label11.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = Color.Transparent;
+            this.label12.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.label12.ForeColor = Color.Aqua;
+            this.label12.Location = new Point(160, 440);
+            this.label12.Margin = new Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.RightToLeft = RightToLeft.No;
+            this.label12.Size = new Size(14, 15);
+            this.label12.TabIndex = 198;
+            this.label12.Text = "?";
+            this.label12.TextAlign = ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.label12, "Insert {X} to have it replaced with the chunk number\r\n");
             // 
             // SampleChunker
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(40, 40, 40);
-            this.ClientSize = new Size(546, 517);
+            this.ClientSize = new Size(546, 541);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtPrepend);
+            this.Controls.Add(this.txtBaseName);
+            this.Controls.Add(this.txtAppend);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.txtBeatChunk);
             this.Controls.Add(this.numSplitBeat);
             this.Controls.Add(this.dgvSplits);
@@ -653,7 +735,6 @@
             this.Controls.Add(this.lblRuntime);
             this.Controls.Add(this.lblBpm);
             this.Controls.Add(this.pictureWave);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAddSplit1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -702,12 +783,8 @@
         private NumericUpDown txtBeatStart;
         private NumericUpDown txtBeatEnd;
         private Button button1;
-        private Label label1;
         private ToolStrip sampleToolStrip;
         private ToolStripButton btnSampleAdd;
-        private ToolStripButton btnSampleDelete;
-        private ToolStripButton FSBtoSamp;
-        public ToolStripButton btnSampleChunk;
         private NumericUpDown txtTimeChunk;
         private Label label4;
         private Label label5;
@@ -722,5 +799,14 @@
         private DataGridViewTextBoxColumn LeafEnabled;
         private DataGridViewTextBoxColumn LeafAudio;
         private DataGridViewImageColumn removesplit;
+        private Button btnHelp;
+        private Label label1;
+        private TextBox txtAppend;
+        private TextBox txtBaseName;
+        private TextBox txtPrepend;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Label label12;
     }
 }
