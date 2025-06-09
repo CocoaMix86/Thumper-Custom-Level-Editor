@@ -56,7 +56,9 @@
             this.numChunks = new NumericUpDown();
             this.button1 = new Button();
             this.sampleToolStrip = new ToolStrip();
-            this.btnSampleAdd = new ToolStripButton();
+            this.btnChunkName = new ToolStripButton();
+            this.btnChunkBeats = new ToolStripButton();
+            this.btnChunkTime = new ToolStripButton();
             this.txtTimeChunk = new NumericUpDown();
             this.label4 = new Label();
             this.label5 = new Label();
@@ -74,6 +76,7 @@
             this.btnHelp = new Button();
             this.label1 = new Label();
             this.txtChunkName = new TextBox();
+            this.lblChunkTotal = new Label();
             ((System.ComponentModel.ISupportInitialize)this.pictureWave).BeginInit();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatStart).BeginInit();
@@ -218,10 +221,11 @@
             this.txtTimeStart.Font = new Font("Consolas", 9F);
             this.txtTimeStart.Location = new Point(11, 2);
             this.txtTimeStart.Name = "txtTimeStart";
+            this.txtTimeStart.PlaceholderText = "hh:mm:ss.ddddd";
             this.txtTimeStart.Size = new Size(109, 22);
             this.txtTimeStart.TabIndex = 165;
-            this.txtTimeStart.Text = "00:00:00.00000";
             this.txtTimeStart.TextAlign = HorizontalAlignment.Right;
+            this.txtTimeStart.TextChanged += this.txtTimeStart_TextChanged;
             // 
             // chkLimit
             // 
@@ -296,10 +300,11 @@
             this.txtTimeEnd.Font = new Font("Consolas", 9F);
             this.txtTimeEnd.Location = new Point(11, 2);
             this.txtTimeEnd.Name = "txtTimeEnd";
+            this.txtTimeEnd.PlaceholderText = "hh:mm:ss.ddddd";
             this.txtTimeEnd.Size = new Size(109, 22);
             this.txtTimeEnd.TabIndex = 165;
-            this.txtTimeEnd.Text = "00:00:00.00000";
             this.txtTimeEnd.TextAlign = HorizontalAlignment.Right;
+            this.txtTimeEnd.TextChanged += this.txtTimeEnd_TextChanged;
             // 
             // lblBeats
             // 
@@ -346,7 +351,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnChunkName, this.btnChunkBeats, this.btnChunkTime });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 0);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -356,17 +361,44 @@
             this.sampleToolStrip.Stretch = true;
             this.sampleToolStrip.TabIndex = 176;
             // 
-            // btnSampleAdd
+            // btnChunkName
             // 
-            this.btnSampleAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnSampleAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.btnSampleAdd.ForeColor = Color.White;
-            this.btnSampleAdd.Image = Properties.Resources.icon_plus;
-            this.btnSampleAdd.ImageTransparentColor = Color.Magenta;
-            this.btnSampleAdd.Margin = new Padding(0);
-            this.btnSampleAdd.Name = "btnSampleAdd";
-            this.btnSampleAdd.Size = new Size(24, 24);
-            this.btnSampleAdd.ToolTipText = "Add new sample";
+            this.btnChunkName.Checked = true;
+            this.btnChunkName.CheckOnClick = true;
+            this.btnChunkName.CheckState = CheckState.Checked;
+            this.btnChunkName.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            this.btnChunkName.ForeColor = Color.White;
+            this.btnChunkName.ImageTransparentColor = Color.Magenta;
+            this.btnChunkName.Name = "btnChunkName";
+            this.btnChunkName.Size = new Size(43, 21);
+            this.btnChunkName.Text = "Name";
+            this.btnChunkName.Click += this.btnChunkName_Click;
+            // 
+            // btnChunkBeats
+            // 
+            this.btnChunkBeats.Checked = true;
+            this.btnChunkBeats.CheckOnClick = true;
+            this.btnChunkBeats.CheckState = CheckState.Checked;
+            this.btnChunkBeats.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            this.btnChunkBeats.ForeColor = Color.White;
+            this.btnChunkBeats.ImageTransparentColor = Color.Magenta;
+            this.btnChunkBeats.Name = "btnChunkBeats";
+            this.btnChunkBeats.Size = new Size(39, 21);
+            this.btnChunkBeats.Text = "Beats";
+            this.btnChunkBeats.Click += this.btnChunkName_Click;
+            // 
+            // btnChunkTime
+            // 
+            this.btnChunkTime.Checked = true;
+            this.btnChunkTime.CheckOnClick = true;
+            this.btnChunkTime.CheckState = CheckState.Checked;
+            this.btnChunkTime.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            this.btnChunkTime.ForeColor = Color.White;
+            this.btnChunkTime.ImageTransparentColor = Color.Magenta;
+            this.btnChunkTime.Name = "btnChunkTime";
+            this.btnChunkTime.Size = new Size(37, 21);
+            this.btnChunkTime.Text = "Time";
+            this.btnChunkTime.Click += this.btnChunkName_Click;
             // 
             // txtTimeChunk
             // 
@@ -376,6 +408,7 @@
             this.txtTimeChunk.Size = new Size(86, 23);
             this.txtTimeChunk.TabIndex = 177;
             this.txtTimeChunk.TextAlign = HorizontalAlignment.Right;
+            this.txtTimeChunk.ValueChanged += this.txtBeatChunk_TextChanged;
             // 
             // label4
             // 
@@ -528,7 +561,7 @@
             this.dgvSplits.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.dgvSplits.ShowCellErrors = false;
             this.dgvSplits.ShowRowErrors = false;
-            this.dgvSplits.Size = new Size(227, 187);
+            this.dgvSplits.Size = new Size(227, 163);
             this.dgvSplits.TabIndex = 187;
             this.dgvSplits.Tag = "editorpaneldgv";
             this.dgvSplits.CellClick += this.dgvSplits_CellClick;
@@ -628,12 +661,28 @@
             this.txtChunkName.TabIndex = 194;
             this.txtChunkName.Text = "_chunk{X}";
             // 
+            // lblChunkTotal
+            // 
+            this.lblChunkTotal.AutoSize = true;
+            this.lblChunkTotal.BackColor = Color.Transparent;
+            this.lblChunkTotal.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.lblChunkTotal.ForeColor = Color.White;
+            this.lblChunkTotal.Location = new Point(230, 427);
+            this.lblChunkTotal.Margin = new Padding(4, 0, 4, 0);
+            this.lblChunkTotal.Name = "lblChunkTotal";
+            this.lblChunkTotal.RightToLeft = RightToLeft.No;
+            this.lblChunkTotal.Size = new Size(94, 15);
+            this.lblChunkTotal.TabIndex = 199;
+            this.lblChunkTotal.Text = "Total Chunks:";
+            this.lblChunkTotal.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // SampleChunker
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(40, 40, 40);
             this.ClientSize = new Size(546, 487);
+            this.Controls.Add(this.lblChunkTotal);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtChunkName);
             this.Controls.Add(this.label1);
@@ -713,7 +762,6 @@
         private NumericUpDown txtBeatEnd;
         private Button button1;
         private ToolStrip sampleToolStrip;
-        private ToolStripButton btnSampleAdd;
         private NumericUpDown txtTimeChunk;
         private Label label4;
         private Label label5;
@@ -732,5 +780,9 @@
         private Label label1;
         private TextBox txtChunkName;
         private Label label12;
+        private ToolStripButton btnChunkName;
+        private ToolStripButton btnChunkBeats;
+        private ToolStripButton btnChunkTime;
+        private Label lblChunkTotal;
     }
 }

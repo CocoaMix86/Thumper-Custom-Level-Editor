@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Markup.Primitives;
-using System.Xml;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
@@ -28,7 +18,9 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         double ChunkSize = 0;
         //total seconds for 1 chunk
         double ChunkTime => BeatTime * ChunkSize;
+        //represents seconds
         double Starttime = 0;
+        //represents seconds
         double Endtime = 0;
         int Chunklimit = 0;
         #endregion
@@ -38,13 +30,16 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             InitializeComponent();
             ReturnForm = _return;
+            btnChunkName.Checked = Properties.Settings.Default.ChunkShowName;
+            btnChunkBeats.Checked = Properties.Settings.Default.ChunkShowBeats;
+            btnChunkTime.Checked = Properties.Settings.Default.ChunkShowTime;
 
             SampleToChunk = _samp;
             SampleToChunk.CalculateRuntime();
             SampleToChunk.wave.ColorBackground = Color.Black;
             SampleToChunk.wave.MarkerLength = 1;
             SampleToChunk.wave.ColorMarker = Color.LimeGreen;
-            SampleToChunk.wave.DrawMarker = Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Line | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Name | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NamePositionTop | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NameBoxFilled;
+            SampleToChunk.wave.DrawMarker = Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Line | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Name | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NameBoxFilled | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NamePositionTop;
             SampleToChunk.wave.BeatWidth = 2;
             SampleToChunk.wave.DetectBeats = true;
             SampleToChunk.wave.DrawBeat = Un4seen.Bass.Misc.WaveForm.BEATDRAWTYPE.Bottom;
@@ -66,6 +61,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         }
         private void SampleChunker_ResizeEnd(object sender, EventArgs e)
         {
+            ParseInputs();
             DrawWave();
         }
         #endregion
@@ -75,20 +71,42 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             txtTimeChunk.Enabled = txtTimeEnd.Enabled = txtTimeStart.Enabled = radioTime.Checked;
             txtBeatChunk.Enabled = txtBeatEnd.Enabled = txtBeatStart.Enabled = !radioTime.Checked;
+            ParseInputs();
+            DrawMarkers();
         }
 
         private void chkPosStart_CheckedChanged(object sender, EventArgs e)
         {
             panelStart.Enabled = chkPosStart.Checked;
             if (chkPosStart.Checked)
-                Starttime = (double)((txtBeatStart.Value / TCLE.projectProperties.bpm) * 60m);
+                if (radioBeats.Checked)
+                    Starttime = (double)((txtBeatStart.Value / TCLE.projectProperties.bpm) * 60m);
+                else {
+                    if (TimeSpan.TryParse(txtTimeStart.Text, out TimeSpan _result))
+                        Starttime = _result.TotalSeconds;
+                }
             else
                 Starttime = 0;
+            ParseInputs();
+            DrawMarkers();
         }
 
         private void chkPosEnd_CheckedChanged(object sender, EventArgs e)
         {
             panelEnd.Enabled = chkPosEnd.Checked;
+            if (chkPosEnd.Checked) {
+                if (radioBeats.Checked)
+                    Endtime = (double)((txtBeatEnd.Value / TCLE.projectProperties.bpm) * 60m);
+                else {
+                    if (TimeSpan.TryParse(txtTimeEnd.Text, out TimeSpan _result))
+                        Endtime = _result.TotalSeconds;
+                }
+            }
+            else {
+                Endtime = SampleToChunk.alteredtime;
+            }
+            ParseInputs();
+            DrawMarkers();
         }
 
         private void chkLimit_CheckedChanged(object sender, EventArgs e)
@@ -124,6 +142,24 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             DrawMarkers();
         }
 
+        private void txtTimeStart_TextChanged(object sender, EventArgs e)
+        {
+            if (TimeSpan.TryParse(txtTimeStart.Text, out TimeSpan _result)) {
+                Starttime = _result.TotalSeconds;
+                ParseInputs();
+                DrawMarkers();
+            }
+        }
+
+        private void txtTimeEnd_TextChanged(object sender, EventArgs e)
+        {
+            if (TimeSpan.TryParse(txtTimeEnd.Text, out TimeSpan _result)) {
+                Endtime = _result.TotalSeconds;
+                ParseInputs();
+                DrawMarkers();
+            }
+        }
+
         private void numSplitSec_ValueChanged(object sender, EventArgs e)
         {
             numSplitBeat.ValueChanged -= numSplitBeat_ValueChanged;
@@ -153,7 +189,11 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($@"Chunking a sample will split it where shown on the waveform and create new samples in the .samp file. The original sample will not be altered.
+            MessageBox.Show($@"Chunking a sample is useful to prevent desyncs in-game. When crashing or pounding, the playing audio can desync and will be off-beat.
+
+By splitting up your sample into smaller chunks, even if 1 chunk desyncs, the remaining ones will start exactly on their designated beats. Smaller chunks make for more desync proof levels (hence why standard loop tracks are only a couple of seconds long).
+
+Chunking a sample will split it where shown on the waveform and create new samples in the .samp file where the original came from. The original sample will not be altered.
 
 If ""End Position"" or ""Limit Chunks"" is checked, the last chunk will end at the last marker. Otherwise, the last chunk will continue until end of the file.
 
@@ -169,6 +209,10 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             if (radioBeats.Checked) {
                 double.TryParse(txtBeatChunk.Text, out ChunkSize);
             }
+            else {
+                double.TryParse(txtTimeChunk.Text, out double _ChunkTime);
+                ChunkSize = _ChunkTime / BeatTime;
+            }
             Chunklimit = (int)numChunks.Value;
         }
 
@@ -177,15 +221,12 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             //clear stuff to prep for drawing new markers
             SampleToChunk.wave.ClearAllMarker();
             double markerpos = Starttime;
-            if (!chkPosEnd.Checked) {
-                Endtime = SampleToChunk.alteredtime;
-            }
-            int markernum = 1;
+            int markernum = 0;
             //draw nothing if the chunk size is 0 (effectively making infinity)
             if (ChunkSize != 0) {
                 //there will always be at least 1 split. So "do" first before the while
                 do {
-                    SampleToChunk.wave.AddMarker($"chunk {markernum}", markerpos);
+                    SampleToChunk.wave.AddMarker($"{(btnChunkName.Checked ? $"chunk {markernum}\n" : " ")}{(btnChunkBeats.Checked ? $"{Math.Round(markerpos / BeatTime, 3)}\n" : " ")}{(btnChunkTime.Checked ? TimeSpan.FromSeconds(markerpos).ToString(@"mm\:ss\.fff") : " ")}".Replace("   ", $"{markernum}"), markerpos);
                     markerpos += ChunkTime;
                     markernum++;
                     if (chkLimit.Checked && markernum > Chunklimit) {
@@ -199,6 +240,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             DrawManualSplits();
             //draw all the markers and the wave
             DrawWave();
+            lblChunkTotal.Text = $"Total Chunks: {SampleToChunk.wave.Wave.marker?.Count}";
         }
 
         private void DrawManualSplits()
@@ -333,6 +375,15 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             ReturnForm.SaveCheckAndWrite(false, "Sample chunking");
             if (MessageBox.Show("Chunking has finished. Close the chunker?", "Thlumper Clustom Llevel Elditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 this.Close();
+        }
+
+        private void btnChunkName_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ChunkShowName = btnChunkName.Checked;
+            Properties.Settings.Default.ChunkShowBeats = btnChunkBeats.Checked;
+            Properties.Settings.Default.ChunkShowTime = btnChunkTime.Checked;
+            Properties.Settings.Default.Save();
+            DrawMarkers();
         }
     }
 }
