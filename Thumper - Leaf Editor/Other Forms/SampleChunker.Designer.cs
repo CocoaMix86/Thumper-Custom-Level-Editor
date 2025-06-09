@@ -28,14 +28,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle25 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle28 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle29 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle30 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle26 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle27 = new DataGridViewCellStyle();
             this.pictureWave = new PictureBox();
-            this.lblBpm = new Label();
+            this.lblMousePos = new Label();
             this.lblRuntime = new Label();
             this.radioTime = new RadioButton();
             this.radioBeats = new RadioButton();
@@ -77,6 +77,11 @@
             this.label1 = new Label();
             this.txtChunkName = new TextBox();
             this.lblChunkTotal = new Label();
+            this.label9 = new Label();
+            this.label10 = new Label();
+            this.label11 = new Label();
+            this.toolStripLabel1 = new ToolStripLabel();
+            this.lblBpm = new Label();
             ((System.ComponentModel.ISupportInitialize)this.pictureWave).BeginInit();
             this.panelStart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.txtBeatStart).BeginInit();
@@ -97,28 +102,29 @@
             this.pictureWave.BackColor = Color.Black;
             this.pictureWave.BackgroundImageLayout = ImageLayout.None;
             this.pictureWave.BorderStyle = BorderStyle.FixedSingle;
-            this.pictureWave.Location = new Point(13, 27);
+            this.pictureWave.Location = new Point(13, 43);
             this.pictureWave.Margin = new Padding(4, 3, 4, 3);
             this.pictureWave.Name = "pictureWave";
-            this.pictureWave.Size = new Size(515, 100);
+            this.pictureWave.Size = new Size(515, 84);
             this.pictureWave.SizeMode = PictureBoxSizeMode.CenterImage;
             this.pictureWave.TabIndex = 152;
             this.pictureWave.TabStop = false;
+            this.pictureWave.MouseMove += this.pictureWave_MouseMove;
             // 
-            // lblBpm
+            // lblMousePos
             // 
-            this.lblBpm.AutoSize = true;
-            this.lblBpm.BackColor = Color.Transparent;
-            this.lblBpm.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.lblBpm.ForeColor = Color.White;
-            this.lblBpm.Location = new Point(13, 130);
-            this.lblBpm.Margin = new Padding(4, 0, 4, 0);
-            this.lblBpm.Name = "lblBpm";
-            this.lblBpm.RightToLeft = RightToLeft.No;
-            this.lblBpm.Size = new Size(161, 15);
-            this.lblBpm.TabIndex = 154;
-            this.lblBpm.Text = "CURRENT BPM = {} = 1 min";
-            this.lblBpm.TextAlign = ContentAlignment.MiddleRight;
+            this.lblMousePos.AutoSize = true;
+            this.lblMousePos.BackColor = Color.Transparent;
+            this.lblMousePos.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.lblMousePos.ForeColor = Color.White;
+            this.lblMousePos.Location = new Point(13, 128);
+            this.lblMousePos.Margin = new Padding(4, 0, 4, 0);
+            this.lblMousePos.Name = "lblMousePos";
+            this.lblMousePos.RightToLeft = RightToLeft.No;
+            this.lblMousePos.Size = new Size(72, 15);
+            this.lblMousePos.TabIndex = 154;
+            this.lblMousePos.Text = "Mouse Pos:";
+            this.lblMousePos.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblRuntime
             // 
@@ -221,7 +227,7 @@
             this.txtTimeStart.Font = new Font("Consolas", 9F);
             this.txtTimeStart.Location = new Point(11, 2);
             this.txtTimeStart.Name = "txtTimeStart";
-            this.txtTimeStart.PlaceholderText = "hh:mm:ss.ddddd";
+            this.txtTimeStart.PlaceholderText = "hh:mm:ss.fffff";
             this.txtTimeStart.Size = new Size(109, 22);
             this.txtTimeStart.TabIndex = 165;
             this.txtTimeStart.TextAlign = HorizontalAlignment.Right;
@@ -300,7 +306,7 @@
             this.txtTimeEnd.Font = new Font("Consolas", 9F);
             this.txtTimeEnd.Location = new Point(11, 2);
             this.txtTimeEnd.Name = "txtTimeEnd";
-            this.txtTimeEnd.PlaceholderText = "hh:mm:ss.ddddd";
+            this.txtTimeEnd.PlaceholderText = "hh:mm:ss.fffff";
             this.txtTimeEnd.Size = new Size(109, 22);
             this.txtTimeEnd.TabIndex = 165;
             this.txtTimeEnd.TextAlign = HorizontalAlignment.Right;
@@ -351,7 +357,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnChunkName, this.btnChunkBeats, this.btnChunkTime });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.toolStripLabel1, this.btnChunkName, this.btnChunkBeats, this.btnChunkTime });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 0);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -500,7 +506,7 @@
             this.btnAddSplit1.BackColor = Color.Green;
             this.btnAddSplit1.FlatStyle = FlatStyle.Flat;
             this.btnAddSplit1.ForeColor = Color.White;
-            this.btnAddSplit1.Location = new Point(371, 212);
+            this.btnAddSplit1.Location = new Point(371, 213);
             this.btnAddSplit1.Name = "btnAddSplit1";
             this.btnAddSplit1.Size = new Size(63, 24);
             this.btnAddSplit1.TabIndex = 185;
@@ -518,44 +524,44 @@
             this.dgvSplits.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.dgvSplits.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvSplits.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle7.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            this.dgvSplits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle25.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle25.ForeColor = Color.White;
+            dataGridViewCellStyle25.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = DataGridViewTriState.True;
+            this.dgvSplits.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dgvSplits.ColumnHeadersHeight = 20;
             this.dgvSplits.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSplits.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.removesplit });
-            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle10.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle10.ForeColor = Color.White;
-            dataGridViewCellStyle10.Format = "0.###";
-            dataGridViewCellStyle10.NullValue = null;
-            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
-            this.dgvSplits.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle28.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle28.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle28.ForeColor = Color.White;
+            dataGridViewCellStyle28.Format = "0.###";
+            dataGridViewCellStyle28.NullValue = null;
+            dataGridViewCellStyle28.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = DataGridViewTriState.True;
+            this.dgvSplits.DefaultCellStyle = dataGridViewCellStyle28;
             this.dgvSplits.EnableHeadersVisualStyles = false;
             this.dgvSplits.GridColor = Color.Black;
             this.dgvSplits.Location = new Point(298, 242);
             this.dgvSplits.Margin = new Padding(4, 3, 4, 3);
             this.dgvSplits.Name = "dgvSplits";
             this.dgvSplits.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle11.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle11.ForeColor = Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
-            this.dgvSplits.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle29.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle29.ForeColor = Color.White;
+            dataGridViewCellStyle29.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = DataGridViewTriState.False;
+            this.dgvSplits.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.dgvSplits.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.dgvSplits.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle30.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvSplits.RowsDefaultCellStyle = dataGridViewCellStyle30;
             this.dgvSplits.RowTemplate.Height = 20;
             this.dgvSplits.ScrollBars = ScrollBars.Horizontal;
             this.dgvSplits.SelectionMode = DataGridViewSelectionMode.CellSelect;
@@ -569,9 +575,9 @@
             // LeafEnabled
             // 
             this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle8.Format = "N5";
-            dataGridViewCellStyle8.NullValue = "0";
-            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Format = "N5";
+            dataGridViewCellStyle26.NullValue = "0";
+            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle26;
             this.LeafEnabled.HeaderText = "Sec.";
             this.LeafEnabled.MinimumWidth = 25;
             this.LeafEnabled.Name = "LeafEnabled";
@@ -583,9 +589,9 @@
             // LeafAudio
             // 
             this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = "0";
-            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Format = "N2";
+            dataGridViewCellStyle27.NullValue = "0";
+            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle27;
             this.LeafAudio.HeaderText = "Beat";
             this.LeafAudio.MinimumWidth = 25;
             this.LeafAudio.Name = "LeafAudio";
@@ -676,12 +682,89 @@
             this.lblChunkTotal.Text = "Total Chunks:";
             this.lblChunkTotal.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = Color.Transparent;
+            this.label9.BorderStyle = BorderStyle.FixedSingle;
+            this.label9.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label9.ForeColor = Color.White;
+            this.label9.Location = new Point(14, 165);
+            this.label9.Margin = new Padding(4, 0, 4, 0);
+            this.label9.MaximumSize = new Size(0, 1);
+            this.label9.MinimumSize = new Size(515, 0);
+            this.label9.Name = "label9";
+            this.label9.RightToLeft = RightToLeft.No;
+            this.label9.Size = new Size(515, 1);
+            this.label9.TabIndex = 200;
+            this.label9.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = Color.Transparent;
+            this.label10.BorderStyle = BorderStyle.FixedSingle;
+            this.label10.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label10.ForeColor = Color.White;
+            this.label10.Location = new Point(275, 166);
+            this.label10.Margin = new Padding(4, 0, 4, 0);
+            this.label10.MaximumSize = new Size(1, 0);
+            this.label10.MinimumSize = new Size(0, 250);
+            this.label10.Name = "label10";
+            this.label10.RightToLeft = RightToLeft.No;
+            this.label10.Size = new Size(1, 250);
+            this.label10.TabIndex = 201;
+            this.label10.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = Color.Transparent;
+            this.label11.BorderStyle = BorderStyle.FixedSingle;
+            this.label11.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label11.ForeColor = Color.White;
+            this.label11.Location = new Point(14, 415);
+            this.label11.Margin = new Padding(4, 0, 4, 0);
+            this.label11.MaximumSize = new Size(0, 1);
+            this.label11.MinimumSize = new Size(515, 0);
+            this.label11.Name = "label11";
+            this.label11.RightToLeft = RightToLeft.No;
+            this.label11.Size = new Size(515, 1);
+            this.label11.TabIndex = 202;
+            this.label11.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.ForeColor = Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new Size(79, 21);
+            this.toolStripLabel1.Text = "Show Marker:";
+            // 
+            // lblBpm
+            // 
+            this.lblBpm.AutoSize = true;
+            this.lblBpm.BackColor = Color.Transparent;
+            this.lblBpm.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.lblBpm.ForeColor = Color.White;
+            this.lblBpm.Location = new Point(13, 27);
+            this.lblBpm.Margin = new Padding(4, 0, 4, 0);
+            this.lblBpm.Name = "lblBpm";
+            this.lblBpm.RightToLeft = RightToLeft.No;
+            this.lblBpm.Size = new Size(161, 15);
+            this.lblBpm.TabIndex = 203;
+            this.lblBpm.Text = "CURRENT BPM = {} = 1 min";
+            this.lblBpm.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // SampleChunker
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(40, 40, 40);
             this.ClientSize = new Size(546, 487);
+            this.Controls.Add(this.lblBpm);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.lblChunkTotal);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtChunkName);
@@ -711,7 +794,7 @@
             this.Controls.Add(this.radioBeats);
             this.Controls.Add(this.radioTime);
             this.Controls.Add(this.lblRuntime);
-            this.Controls.Add(this.lblBpm);
+            this.Controls.Add(this.lblMousePos);
             this.Controls.Add(this.pictureWave);
             this.Controls.Add(this.btnAddSplit1);
             this.MaximizeBox = false;
@@ -742,7 +825,7 @@
         #endregion
 
         private PictureBox pictureWave;
-        private Label lblBpm;
+        private Label lblMousePos;
         private Label lblRuntime;
         private RadioButton radioTime;
         private RadioButton radioBeats;
@@ -784,5 +867,10 @@
         private ToolStripButton btnChunkBeats;
         private ToolStripButton btnChunkTime;
         private Label lblChunkTotal;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private ToolStripLabel toolStripLabel1;
+        private Label lblBpm;
     }
 }

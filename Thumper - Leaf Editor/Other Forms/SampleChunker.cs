@@ -47,7 +47,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             DrawWave();
 
             this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
-            lblBpm.Text = $"CURRENT BPM = {TCLE.projectProperties.bpm} = 1 min";
+            lblMousePos.Text = $"CURRENT BPM = {TCLE.projectProperties.bpm} = 1 min";
             lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fffff")}";
             lblBeats.Text = $"Beats: {SampleToChunk.beats.ToString("0.#####")}";
 
@@ -384,6 +384,13 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             Properties.Settings.Default.ChunkShowTime = btnChunkTime.Checked;
             Properties.Settings.Default.Save();
             DrawMarkers();
+        }
+
+        private void pictureWave_MouseMove(object sender, MouseEventArgs e)
+        {
+            long bytepos = SampleToChunk.wave.GetBytePositionFromX(e.Location.X, pictureWave.Width, -1, -1);
+            SampleToChunk.wave.AddMarker("mousepos", bytepos);
+
         }
     }
 }
