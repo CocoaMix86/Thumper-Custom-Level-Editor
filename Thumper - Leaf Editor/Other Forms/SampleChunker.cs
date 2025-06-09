@@ -23,6 +23,11 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         //represents seconds
         double Endtime = 0;
         int Chunklimit = 0;
+
+        int SampleChannel;
+        int SampleHandle;
+        BASS_SAMPLE SampleInfo;
+        byte[] SampleBuffer;
         #endregion
 
         #region Form Construction
@@ -44,12 +49,22 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             SampleToChunk.wave.DetectBeats = true;
             SampleToChunk.wave.DrawBeat = Un4seen.Bass.Misc.WaveForm.BEATDRAWTYPE.Bottom;
 
+            //initialize the sample
+            SampleHandle = Bass.BASS_SampleLoad(SampleToChunk.TempFile, 0, 0, 1, BASSFlag.BASS_SAMPLE_8BITS);
+            //get byte buffer
+            SampleInfo = Bass.BASS_SampleGetInfo(SampleHandle);
+            SampleBuffer = new byte[SampleInfo.length];
+            Bass.BASS_SampleGetData(SampleHandle, SampleBuffer);
+            SampleChannel = Bass.BASS_SampleGetChannel(SampleHandle, BASSFlag.BASS_SAMPLE_8BITS);
+            SampleToChunk.wave.SyncPlayback(SampleChannel);
+
             DrawWave();
 
             this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
             lblMousePos.Text = $"CURRENT BPM = {TCLE.projectProperties.bpm} = 1 min";
             lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fffff")}";
             lblBeats.Text = $"Beats: {SampleToChunk.beats.ToString("0.#####")}";
+            lblBpm.Text = $"Current BPM = {TCLE.projectProperties.bpm} = 1 min";
 
             numSplitBeat.Maximum = (decimal)SampleToChunk.beats;
             numSplitSec.Maximum = (decimal)_samp.alteredtime;
@@ -266,7 +281,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
         ///(of this file)
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SampleToChunk.wave.Wave.marker.Count == 0) {
+            if (SampleToChunk.wave.Wave.marker == null || SampleToChunk.wave.Wave.marker.Count == 0) {
                 MessageBox.Show("No splits have been set yet.", "Nwolc Custom Level Editor");
                 return;
             }
@@ -274,16 +289,8 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                 MessageBox.Show("Chunk name must include at least 1 {X}.", "ZWest Custom Level Editor");
                 return;
             }
-            //initialize the sample
-            int channel = Bass.BASS_SampleLoad(SampleToChunk.TempFile, 0, 0, 1, BASSFlag.BASS_SAMPLE_8BITS);
-            //get byte buffer
-            BASS_SAMPLE _samp = Bass.BASS_SampleGetInfo(channel);
-            byte[] buffer = new byte[_samp.length];
-            Bass.BASS_SampleGetData(channel, buffer);
 
             //get markers
-            int syncchan = Bass.BASS_SampleGetChannel(channel, BASSFlag.BASS_SAMPLE_8BITS);
-            SampleToChunk.wave.SyncPlayback(syncchan);
             string[] markers = SampleToChunk.wave.GetMarkers();
             List<long> markerpos = markers.Select(x => SampleToChunk.wave.GetMarker(x)).Order().ToList();
             //add a 0 marker if it doesn't exist
@@ -293,14 +300,14 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                 markerpos.Insert(0, 0);
             //align markers to 4 byte increments (4bytes per channel)
             for (int x = 0; x < markerpos.Count; x++) {
-                markerpos[x] = markerpos[x] - (markerpos[x] % (4 * _samp.chans));
+                markerpos[x] = markerpos[x] - (markerpos[x] % (4 * SampleInfo.chans));
             }
 
             //loop over markers to start splitting them
             for (int x = 0; x < markerpos.Count; x++) {
                 //pos and pos2 are the cutoffs for the split.
                 long pos = markerpos[x];
-                long pos2 = buffer.Length - 1;
+                long pos2 = SampleBuffer.Length - 1;
                 if (x + 1 < markerpos.Count) {
                     pos2 = markerpos[x + 1];
                 }
@@ -310,7 +317,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     break;
 
                 //get the portion of bytes that are for this chunk
-                byte[] chunkbytes = buffer[(int)pos..(int)pos2];
+                byte[] chunkbytes = SampleBuffer[(int)pos..(int)pos2];
 
                 //get the hash of the FSB filename. This will be used to name the final .PC file
                 string chunkname = $"{txtChunkName.Text.Replace("{X}", x.ToString())}";
@@ -349,7 +356,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     metadata <<= 2; //make room for next item
                     metadata |= 1; //2^n channels in audio
                     metadata <<= 4; //make room for next item
-                    metadata |= Form_SampleEditor.FrequencyID[_samp.freq]; //frequency of audio
+                    metadata |= Form_SampleEditor.FrequencyID[SampleInfo.freq]; //frequency of audio
                     metadata <<= 1; //make room for next item
                     //the last bit of the metadata is always 0, so I don't need to manip it here.
                     sw.Write(metadata);
@@ -389,8 +396,9 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
         private void pictureWave_MouseMove(object sender, MouseEventArgs e)
         {
             long bytepos = SampleToChunk.wave.GetBytePositionFromX(e.Location.X, pictureWave.Width, -1, -1);
-            SampleToChunk.wave.AddMarker("mousepos", bytepos);
-
+            double time = Bass.BASS_ChannelBytes2Seconds(SampleHandle, bytepos);
+            double beats = time / BeatTime;
+            lblMousePos.Text = $"Mouse Pos: {TimeSpan.FromSeconds(time).ToString(@"mm\:ss\.fffff")} ;; Beat {Math.Round(beats, 5)}";
         }
     }
 }
