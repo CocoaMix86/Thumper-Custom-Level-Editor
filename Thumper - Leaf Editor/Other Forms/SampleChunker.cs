@@ -58,6 +58,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             SampleChannel = Bass.BASS_SampleGetChannel(SampleHandle, BASSFlag.BASS_SAMPLE_8BITS);
             SampleToChunk.wave.SyncPlayback(SampleChannel);
 
+            Endtime = SampleToChunk.alteredtime;
             DrawWave();
 
             this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
