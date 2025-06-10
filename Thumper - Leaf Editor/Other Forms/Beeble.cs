@@ -51,7 +51,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             //spawn new beeble randomly
-            if (rng.Next(0, 100) != 0)
+            if (rng.Next(0, 50) != 0)
                 return;
             Beeble newbeeb = new() { Visible = true, Owner = TCLE.Instance };
             TCLE.ExistingBeebles.Add(newbeeb);
