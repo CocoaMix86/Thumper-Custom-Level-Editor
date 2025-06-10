@@ -979,12 +979,12 @@ namespace Thumper_Custom_Level_Editor
             FileInfo ConfigFile;
             using OpenFileDialog ofd = new();
             ofd.Title = "Find a LEVEL DETAILS.txt file";
-            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt";
+            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt"; 
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 LevelDetails = new FileInfo(ofd.FileName);
-                if (LevelDetails.Name.ToUpper() != "LEVEL DETAILS.TXT") {
+                if (!LevelDetails.Name.Equals("LEVEL DETAILS.TXT", StringComparison.OrdinalIgnoreCase)) {
                     MessageBox.Show("That's not the level details file");
                     return;
                 }
