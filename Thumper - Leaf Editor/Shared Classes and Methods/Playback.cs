@@ -11,6 +11,8 @@ namespace Thumper_Custom_Level_Editor
             set {
                 _isplay = value;
                 TCLE.MainBeeble.Dance(value);
+                foreach (Beeble beeb in TCLE.ExistingBeebles)
+                    beeb.Dance(value);
             }
         }
         private static bool _isplay;

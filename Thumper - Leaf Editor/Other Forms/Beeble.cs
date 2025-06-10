@@ -49,6 +49,13 @@ namespace Thumper_Custom_Level_Editor
                 ReleaseCapture();
                 _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+
+            //spawn new beeble randomly
+            if (rng.Next(0, 100) != 0)
+                return;
+            Beeble newbeeb = new() { Visible = true, Owner = TCLE.Instance };
+            TCLE.ExistingBeebles.Add(newbeeb);
+            newbeeb.Show();
         }
         public void MakeFace()
         {
