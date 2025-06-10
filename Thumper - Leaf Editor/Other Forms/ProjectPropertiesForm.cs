@@ -124,6 +124,7 @@ namespace Thumper_Custom_Level_Editor
             bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
             bool exists = Directory.Exists($@"{txtCustomPath}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
+            bool endsinspace = txtCustomName.Text.EndsWith(' ');
 
             if (illegal) {
                 lblNameError.Visible = true; 
@@ -136,6 +137,10 @@ namespace Thumper_Custom_Level_Editor
             else if (endsindot) {
                 lblNameError.Visible = true;
                 lblNameError.Text = "A level name cannot end with '.'";
+            }
+            else if (endsinspace) {
+                lblNameError.Visible = true;
+                lblNameError.Text = "A level name cannot end with ' ' (space)";
             }
             else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 255) {
                 lblNameError.Visible = true;
