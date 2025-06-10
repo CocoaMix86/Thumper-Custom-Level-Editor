@@ -33,8 +33,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         }
 
-        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
+        private static SolidBrush ClearColor = new(Color.Black);
+        private static SolidBrush BrushWhite = new(Color.White);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -79,19 +79,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             }
             else if (Items == "leaf")
             {
-                if (TCLE.GlobalLastLvl != null) {
-                    TCLE.GlobalLastLvl.AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
-                }
+                TCLE.GlobalLastLvl?.AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
             }
             else if (Items == "lvl") {
-                if (TCLE.GlobalLastGate != null) {
-                    TCLE.GlobalLastGate.AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
-                }
+                TCLE.GlobalLastGate?.AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
             }
             else if (Items == "lvlgate") {
-                if (TCLE.GlobalLastMaster != null) {
-                    TCLE.GlobalLastMaster.AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
-                }
+                TCLE.GlobalLastMaster?.AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
             }
         }
 
@@ -106,7 +100,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y))
                 {
                     // Proceed with the drag and drop, passing in the list item.
-                    var SelectedRows = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().ToList();
+                    List<DataGridViewCell> SelectedRows = dgvPathsList.SelectedCells.Cast<DataGridViewCell>().ToList();
                     SelectedRows.Sort((row1, row2) => row2.RowIndex.CompareTo(row1.RowIndex));
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
 

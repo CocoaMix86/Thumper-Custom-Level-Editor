@@ -55,7 +55,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             TrackBar mixer = sender as TrackBar;
             int key = int.Parse((sender as Control).Tag.ToString());
             BassMidi.BASS_MIDI_StreamEvent(MidiStream, 0, BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)mixer.Value));
-            var error = Bass.BASS_ErrorGetCode();
+            _ = Bass.BASS_ErrorGetCode();
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private void VolumeChanged(object sender, EventArgs e)
         {
             TrackBar mixer = sender as TrackBar;
-            var lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(Label) && x.Tag.ToString() == mixer.Tag.ToString());
+            Control lblvol = mixer.Parent.Controls.Cast<Control>().First(x => x.GetType() == typeof(Label) && x.Tag.ToString() == mixer.Tag.ToString());
             lblvol.Text = $"{mixer.Value}";
 
             if (mixer.Tag.ToString() == "100")
@@ -138,7 +138,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
         public IEnumerable<Control> GetAll(Control control, Type type)
         {
-            var controls = control.Controls.Cast<Control>();
+            IEnumerable<Control> controls = control.Controls.Cast<Control>();
 
             return controls.SelectMany(ctrl => GetAll(ctrl, type))
                                       .Concat(controls)

@@ -150,6 +150,9 @@ dotnet_diagnostic.CS8765.severity = none
 # CA2213: Disposable fields should be disposed
 dotnet_diagnostic.CA2213.severity = none
 
+# IDE0220: Add explicit cast
+dotnet_diagnostic.IDE0220.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

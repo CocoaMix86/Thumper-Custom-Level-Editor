@@ -11,15 +11,15 @@ namespace Thumper_Custom_Level_Editor
     {
         private static GraphicsPath CreateRoundedRectangle(Rectangle bounds, int radius)
         {
-            var path = new GraphicsPath();
+            GraphicsPath path = new GraphicsPath();
             if (radius == 0) {
                 path.AddRectangle(bounds);
                 return path;
             }
 
             int diameter = radius * 2;
-            var size = new Size(diameter, diameter);
-            var arc = new Rectangle(bounds.Location, size);
+            Size size = new Size(diameter, diameter);
+            Rectangle arc = new Rectangle(bounds.Location, size);
 
             // top left arc
             path.AddArc(arc, 180, 90);

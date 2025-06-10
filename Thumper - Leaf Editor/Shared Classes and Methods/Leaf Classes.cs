@@ -337,7 +337,7 @@ namespace Thumper_Custom_Level_Editor
             get => timesignature;
             set {
                 //check if incoming value matches time sig pattern #/#
-                var reg = Regex.Match(value, "(^\\d+\\/\\d+$)");
+                Match reg = Regex.Match(value, "(^\\d+\\/\\d+$)");
                 if (!reg.Success) {
                     MessageBox.Show("Time signature input was not in a valid form.\nIt should follow \"#/#\".", "Custom Editor Thumper Level");
                     return;
@@ -555,12 +555,13 @@ namespace Thumper_Custom_Level_Editor
             }
 
             if (editorService != null) {
-                NumericUpDown udControl = new();
-                udControl.DecimalPlaces = 0;
-                udControl.Minimum = 1;
-                udControl.Maximum = 255;
-                udControl.Value = Decimal.Parse(value.ToString());
-                udControl.Increment = 1;
+                NumericUpDown udControl = new() {
+                    DecimalPlaces = 0,
+                    Minimum = 1,
+                    Maximum = 255,
+                    Value = Decimal.Parse(value.ToString()),
+                    Increment = 1
+                };
                 editorService.DropDownControl(udControl);
                 value = (int)udControl.Value;
             }

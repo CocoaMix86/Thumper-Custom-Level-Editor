@@ -222,7 +222,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // If the mouse moves outside the rectangle, start the drag.
                 if (LvlsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.
-                    var SelectedRows = gateLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                    List<DataGridViewRow> SelectedRows = gateLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
                     SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
                     LvlsToMove = SelectedRows.Select(x => GateLvls[x.Index]).ToList();
                     //
@@ -310,7 +310,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (LvlsToMove != null)
                 e.Effect = DragDropEffects.Move;
-            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
+            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode)
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.Move;
@@ -355,10 +355,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
 
-        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
-        private static Pen PenBlack = new Pen(Color.Black, 1);
-        private static Pen PenGreen = new Pen(Color.Green, 4);
+        private static SolidBrush ClearColor = new(Color.Black);
+        private static SolidBrush BrushWhite = new(Color.White);
+        private static Pen PenBlack = new(Color.Black, 1);
+        private static Pen PenGreen = new(Color.Green, 4);
         private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void gateLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -1093,8 +1093,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
                     }
                 }
-                if (_playingleafform != null)
-                    _playingleafform.trackEditor.Invalidate();
+                _playingleafform?.trackEditor.Invalidate();
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
@@ -1106,8 +1105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl).DockHandler.Activate();
                     }
                 }
-                if (_playinglvlform != null)
-                    _playinglvlform.lvlLeafList.Invalidate();
+                _playinglvlform?.lvlLeafList.Invalidate();
             }
             else {
                 ForceStop = false;
@@ -1115,10 +1113,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnGatePlayback.Image = Properties.Resources.icon_play2;
                 Playback.StopPlayback();
                 gateLvlList.Invalidate();
-                if (_playingleafform != null)
-                    _playingleafform.trackEditor.Invalidate();
-                if (_playinglvlform != null)
-                    _playinglvlform.lvlLeafList.Invalidate();
+                _playingleafform?.trackEditor.Invalidate();
+                _playinglvlform?.lvlLeafList.Invalidate();
             }
         }
     }

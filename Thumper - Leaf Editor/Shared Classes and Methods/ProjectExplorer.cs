@@ -3,13 +3,13 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public static class ProjectExplorer
+    public static partial class ProjectExplorer
     {
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+        [LibraryImport("user32.dll")]
+        public static partial int GetScrollPos(IntPtr hWnd, int nBar);
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        [LibraryImport("user32.dll")]
+        public static partial int SetScrollPos(IntPtr hWnd, int nBar, int nPos, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
 
         public static Point GetTreeViewScrollPos(TreeView treeView)
         {

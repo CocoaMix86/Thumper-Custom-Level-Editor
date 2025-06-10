@@ -603,7 +603,7 @@ namespace Thumper_Custom_Level_Editor
                 double semitones = Math.Log2((double)(decimal)sdp.value) * 12;
                 //each semitone takes 136.5 units on the pitchwheel
                 double pitchadjust = semitones * 136.5;
-                foreach (var listevents in GlobalSampleEvents) {
+                foreach (List<BASS_MIDI_EVENT> listevents in GlobalSampleEvents) {
                     listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), SequencerEvents.Length + GlobalSampleEvents.IndexOf(listevents), ((sdp.beat + CallOffset) * 100) - 1, 0));
                 }
                 for (int x = 1; x < SequencerEvents.Length; x++) {
@@ -669,7 +669,7 @@ namespace Thumper_Custom_Level_Editor
                 _out += $"<region> sample={Path.GetFileName(FileName)} key={GlobalSamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
 
-            foreach (var loop in GlobalLoopTracks) {
+            foreach (Tuple<string, string, decimal> loop in GlobalLoopTracks) {
                 string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
                 _outloops += $"<region> sample={Path.GetFileName(FileName)} key={GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
             }
@@ -761,7 +761,7 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> _SequencerEvents = Playback.GlobalSequencerEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.GlobalSampleEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleLoopEvents = Playback.GlobalLoopEvents.SelectMany(x => x).Distinct().ToList();
-            var AllEvents = _SequencerEvents.Concat(_SampleEvents).Concat(_SampleLoopEvents).ToList();
+            List<BASS_MIDI_EVENT> AllEvents = _SequencerEvents.Concat(_SampleEvents).Concat(_SampleLoopEvents).ToList();
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, ((EndBeat + 1) * 100), 0));
             //create the stream
@@ -795,7 +795,7 @@ namespace Thumper_Custom_Level_Editor
             }
             ApproachBeats = _ApproachBeats;
             //play the sequence
-            if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat >= 0 ? false : true)) {
+            if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat < 0)) {
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
                 IsPlaying = true;
             }
@@ -818,8 +818,8 @@ namespace Thumper_Custom_Level_Editor
                 IsPlaying = false;
                 SyncTimer.Dispose();
                 //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
-                bool free1 = Bass.BASS_ChannelStop(channel);
-                bool free2 = Bass.BASS_ChannelFree(channel);
+                _ = Bass.BASS_ChannelStop(channel);
+                _ = Bass.BASS_ChannelFree(channel);
                 //TCLE.alzheimer();
             }
         }
@@ -828,7 +828,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Playback.IsPlaying = false;
             Bass.BASS_ChannelStop(Playback.MidiStream);
-            var Error = Bass.BASS_ErrorGetCode();
+            _ = Bass.BASS_ErrorGetCode();
             Playback.SyncTimer.Dispose();
             Playback.PlaybackTick = -1;
             //

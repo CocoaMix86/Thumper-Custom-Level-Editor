@@ -142,12 +142,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
         }
 
-        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush SampColorNotExist = new SolidBrush(Color.Maroon);
+        private static SolidBrush ClearColor = new(Color.Black);
+        private static SolidBrush SampColorNotExist = new(Color.Maroon);
         private static Color SelectColor = Color.FromArgb(199, 69, 255);
-        private static SolidBrush SampColorSelected = new SolidBrush(SelectColor);
-        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
-        private static Pen PenBlack = new Pen(Color.Black, 1);
+        private static SolidBrush SampColorSelected = new(SelectColor);
+        private static SolidBrush BrushWhite = new(Color.White);
+        private static Pen PenBlack = new(Color.Black, 1);
         private void sampleList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -247,7 +247,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     RowToMove = sampleList.Rows[rowIndexFromMouseDown];
                     sampleList.ClearSelection();
                     //RowToMove.DefaultCellStyle.BackColor = SelectColor;
-                    DragDropEffects dropEffect = sampleList.DoDragDrop(SampleList[rowIndexFromMouseDown], DragDropEffects.Move);
+                    _ = sampleList.DoDragDrop(SampleList[rowIndexFromMouseDown], DragDropEffects.Move);
                 }
             }
         }

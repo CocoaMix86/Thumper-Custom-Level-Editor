@@ -444,9 +444,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.RowIndex == -1) {
                     e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                     if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
-                        Point p1 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
-                        Point p2 = new Point(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
-                        Point p3 = new Point(e.CellBounds.Left /*+ (e.CellBounds.Width / 2)*/, e.CellBounds.Top + 10);
+                        Point p1 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
+                        Point p2 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
+                        Point p3 = new(e.CellBounds.Left /*+ (e.CellBounds.Width / 2)*/, e.CellBounds.Top + 10);
                         if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset)
                             e.Graphics.FillPolygon(BrushCorn, new[] { p1, p2, p3 });
                         else
@@ -454,9 +454,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //e.Graphics.FillRectangle(BrushCorn, e.CellBounds);
                     }
                     if (PlaybackEnd != -2 && e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
-                        Point p1 = new Point(e.CellBounds.Right + -6, e.CellBounds.Top);
-                        Point p2 = new Point(e.CellBounds.Right + +6, e.CellBounds.Top);
-                        Point p3 = new Point(e.CellBounds.Right, e.CellBounds.Top + 10);
+                        Point p1 = new(e.CellBounds.Right + -6, e.CellBounds.Top);
+                        Point p2 = new(e.CellBounds.Right + +6, e.CellBounds.Top);
+                        Point p3 = new(e.CellBounds.Right, e.CellBounds.Top + 10);
                         e.Graphics.FillPolygon(PlaybackLoop ? BrushGreen : BrushRed, new[] { p1, p2, p3 });
                     }
                     return;
@@ -586,10 +586,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        SolidBrush CellPaintingPen = new SolidBrush(Color.FromArgb(60, 60, 60));
-        SolidBrush CellPaintingBlack = new SolidBrush(Color.Black);
-        SolidBrush CellPaintingWhite = new SolidBrush(Color.White);
-        SolidBrush CellPaintingColor = new SolidBrush(Color.Black);
+        SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
+        SolidBrush CellPaintingBlack = new(Color.Black);
+        SolidBrush CellPaintingWhite = new(Color.White);
+        SolidBrush CellPaintingColor = new(Color.Black);
         private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1)
@@ -1412,7 +1412,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
         {
-            int width = trackEditor.RowHeadersWidth;
+            _ = trackEditor.RowHeadersWidth;
             trackEditor_Resize(null, null);
         }
 
@@ -3339,7 +3339,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     CenterLane = RowsToMove.Length == 5 ? RowsToMove[2] : RowsToMove[0];
                     ismoving = true;
                     // Proceed with the drag and drop, passing in the list item.                    
-                    DragDropEffects dropEffect = trackEditor.DoDragDrop(CenterLane.editor_row, DragDropEffects.Move);
+                    _ = trackEditor.DoDragDrop(CenterLane.editor_row, DragDropEffects.Move);
                     RowsToMove = null;
                     ismoving = false;
                 }
@@ -3375,7 +3375,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             // If the drag operation was a move then remove and insert the row.
             if (e.Effect == DragDropEffects.Move) {
-                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow rowToMove) {
+                if (e.Data.GetData(typeof(DataGridViewRow)) is DataGridViewRow) {
                     if (rowIndexOfItemUnderMouseToDrop == -1)
                         return;
                     /*

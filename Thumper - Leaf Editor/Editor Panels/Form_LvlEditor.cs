@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadLvl(load, filepath);
-                Form_LeafEditor _loadseq = new(lvlProperties, saveonlynoload);
+                _ = new Form_LeafEditor(lvlProperties, saveonlynoload);
                 UndoList.Add(new SaveState() {
                     reason = "",
                     savestate = load
@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // If the mouse moves outside the rectangle, start the drag.
                 if (LeafsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.var SelectedRows = masterLvlList.SelectedRows.Cast<DataGridViewRow>().ToList();
-                    var _SelectedRows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().ToList();
+                    List<DataGridViewRow> _SelectedRows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().ToList();
                     _SelectedRows.Sort((row1, row2) => row2.Index.CompareTo(row1.Index));
                     LeafsToMove = _SelectedRows.Select(x => LvlLeafs[x.Index]).ToList();
                     //
@@ -300,7 +300,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (LeafsToMove != null)
                 e.Effect = DragDropEffects.Move;
-            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode)
+            else if (e.Data.GetData(typeof(TreeNode)) is TreeNode)
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.Move;
@@ -344,7 +344,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 // If the mouse moves outside the rectangle, start the drag.
                 if (RowsToMove == null && dragBoxFromMouseDownPaths != Rectangle.Empty && !dragBoxFromMouseDownPaths.Contains(e.X, e.Y)) {
                     // Proceed with the drag and drop, passing in the list item.                    
-                    var SelectedRows = lvlLeafPaths.SelectedCells.Cast<DataGridViewCell>().ToList();
+                    List<DataGridViewCell> SelectedRows = lvlLeafPaths.SelectedCells.Cast<DataGridViewCell>().ToList();
                     SelectedRows.Sort((row1, row2) => row1.RowIndex.CompareTo(row2.RowIndex));
                     RowsToMove = SelectedRows.Select(x => x.Value.ToString()).ToList();
                     TCLE.DragSource = "PathList";
@@ -441,9 +441,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         ///
 
-        private static SolidBrush ClearColor = new SolidBrush(Color.Black);
-        private static SolidBrush BrushWhite = new SolidBrush(Color.White);
-        private static Pen PenGreen = new Pen(Color.Green, 4);
+        private static SolidBrush ClearColor = new(Color.Black);
+        private static SolidBrush BrushWhite = new(Color.White);
+        private static Pen PenGreen = new(Color.Green, 4);
         private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -878,7 +878,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //this finds a pane in the active workspace that has matching extensions already open on it
-            var Panes = TCLE.ActiveWorkspace.dockMain.Panes;
+            DockPaneCollection Panes = TCLE.ActiveWorkspace.dockMain.Panes;
             DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(".leaf")).Any());
 
             Form_LeafEditor leaf = new(LvlProperties) { DockAreas = DockAreas.Document | DockAreas.Float };
@@ -1503,8 +1503,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
                     }
                 }
-                if (_playingleafform != null)
-                    _playingleafform.trackEditor.Invalidate();
+                _playingleafform?.trackEditor.Invalidate();
             }
             else {
                 ForceStop = false;
@@ -1512,8 +1511,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPlayback.Image = Properties.Resources.icon_play2;
                 Playback.StopPlayback();
                 lvlLeafList.Invalidate();
-                if (_playingleafform != null)
-                    _playingleafform.trackEditor.Invalidate();
+                _playingleafform?.trackEditor.Invalidate();
             }
         }
     }

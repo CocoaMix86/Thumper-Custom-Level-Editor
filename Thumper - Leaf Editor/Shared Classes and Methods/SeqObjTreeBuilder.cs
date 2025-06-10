@@ -7,12 +7,12 @@ namespace Thumper_Custom_Level_Editor
         public static TreeView GlobalObjectTree = new();
         public static List<TreeNode> GlobalObjectTreeNodes = new();
         //
-        public static ContextMenuStrip contextMenuFav = new ContextMenuStrip();
-        public static ToolStripMenuItem toolStripFavAdd = new ToolStripMenuItem();
-        public static ContextMenuStrip contextMenuFavRemove = new ContextMenuStrip();
-        public static ToolStripMenuItem toolStripFavRemove = new ToolStripMenuItem();
-        public static ContextMenuStrip contextMenuFavClear = new ContextMenuStrip();
-        public static ToolStripMenuItem toolStripFavClear = new ToolStripMenuItem();
+        public static ContextMenuStrip contextMenuFav = new();
+        public static ToolStripMenuItem toolStripFavAdd = new();
+        public static ContextMenuStrip contextMenuFavRemove = new();
+        public static ToolStripMenuItem toolStripFavRemove = new();
+        public static ContextMenuStrip contextMenuFavClear = new();
+        public static ToolStripMenuItem toolStripFavClear = new();
 
         public static void Initialize()
         {
@@ -221,7 +221,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void toolStripFavAdd_Click(object sender, EventArgs e)
         {
-            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             if (Source.SelectedNode.ImageKey != "none")
                 return;
             Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == Source.SelectedNode.Text && x.category.ToUpper() == Source.SelectedNode.Parent.Text);
@@ -236,7 +236,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
         {
-            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             string find = Source.SelectedNode.Text;
             TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
@@ -248,7 +248,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void toolStripFavClear_Click(object sender, EventArgs e)
         {
-            var Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
+            TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             TCLE.ObjectFavorites.Clear();
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIdelete");
