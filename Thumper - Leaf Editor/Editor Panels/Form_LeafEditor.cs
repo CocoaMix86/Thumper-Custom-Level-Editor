@@ -2,10 +2,8 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Windows.Media.Media3D;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
