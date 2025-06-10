@@ -27,11 +27,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     reason = "",
                     savestate = load
                 });
-            }
 
-            TCLE.LevelSections = new() { "SECTION_LINEAR" };
-            foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
-                TCLE.LevelSections.Add("SECTION_LINEAR");
+                TCLE.LevelSections = new() { "SECTION_LINEAR" };
+                foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
+                    TCLE.LevelSections.Add("SECTION_LINEAR");
+                }
             }
         }
 
