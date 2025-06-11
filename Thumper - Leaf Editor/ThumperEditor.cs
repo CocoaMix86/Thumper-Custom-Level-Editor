@@ -112,7 +112,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //call methods to initialize various aspects of the editors
             ImportObjects();
-            ColorFormElements();
+            ColorFormElements(TCLE.Instance);
             JumpListUpdate();
             LoadQuickValues();
             SetKeyBinds();
@@ -198,6 +198,11 @@ namespace Thumper_Custom_Level_Editor
             //write quick values to file
             File.WriteAllText($@"{TCLE.AppLocation}\settings\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
             AppSettings.Save();
+        }
+
+        private void TCLE_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            alzheimer();
         }
 
         public void SetKeyBinds()
@@ -660,7 +665,7 @@ namespace Thumper_Custom_Level_Editor
             CustomizeWorkspace custom = new() { Owner = this };
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
-                ColorFormElements();
+                ColorFormElements(TCLE.Instance);
                 ImportDefaultColors();
                 SetKeyBinds();
                 AppSettings.Save();
@@ -1182,11 +1187,6 @@ namespace Thumper_Custom_Level_Editor
         private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e)
         {
             pictureTunnelViewer.Visible = false;
-        }
-
-        private void TCLE_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            alzheimer();
         }
     }
 }

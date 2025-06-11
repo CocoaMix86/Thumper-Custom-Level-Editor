@@ -51,7 +51,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //save colors to settings
             TCLE.settingsUITheme.SaveSettings();
-            TCLE.Instance.ColorFormElements();
+            TCLE.ColorFormElements(TCLE.Instance);
             //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();

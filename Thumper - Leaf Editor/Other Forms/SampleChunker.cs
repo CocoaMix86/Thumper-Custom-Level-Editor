@@ -246,11 +246,11 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     markerpos += ChunkTime;
                     markernum++;
                     if (chkLimit.Checked && markernum > Chunklimit) {
+                        SampleToChunk.wave.AddMarker($"chunk end", markerpos);
                         break;
                     }
                 }
                 while (markerpos < Endtime);
-                SampleToChunk.wave.AddMarker($"chunk end", markerpos);
             }
 
             DrawManualSplits();
@@ -292,6 +292,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             }
 
             //get markers
+            SampleToChunk.wave.SyncPlayback(SampleChannel);
             string[] markers = SampleToChunk.wave.GetMarkers();
             List<long> markerpos = markers.Select(x => SampleToChunk.wave.GetMarker(x)).Order().ToList();
             //add a 0 marker if it doesn't exist

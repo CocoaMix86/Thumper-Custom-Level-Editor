@@ -97,8 +97,8 @@ namespace Thumper_Custom_Level_Editor
 
         public static HashSet<Object_Params> LeafObjects = new();
         public static HashSet<Object_Params> ObjectFavorites = new();
-        private string _errorlog = "";
-        public void ImportObjects()
+        public static string _errorlog = "";
+        public static void ImportObjects()
         {
             LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
@@ -162,7 +162,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static Dictionary<string, Bitmap> ColorIcons = new();
-        public void ImportDefaultColors()
+        public static void ImportDefaultColors()
         {
             Dictionary<string, Color> ObjectColors = new();
             if (!File.Exists($@"{AppLocation}\settings\objects_defaultcolors_v3.txt")) {
@@ -170,7 +170,7 @@ namespace Thumper_Custom_Level_Editor
             }
             ObjectColors = File.ReadAllLines($@"{AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
 
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //once all the colors are processed, assign them directly to the objects
             foreach (Object_Params obj in LeafObjects) {
                 obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
@@ -183,11 +183,11 @@ namespace Thumper_Custom_Level_Editor
         }
 
         ///Color elements based on set properties
-        public void ColorFormElements()
+        public static void ColorFormElements(TCLE MainForm)
         {
-            toolStripTitle.BackColor = AppSettings.ColorMainMenuBar;
-            panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
-            dockMain.BackColor = AppSettings.ColorMainBG;
+            MainForm.toolStripTitle.BackColor = AppSettings.ColorMainMenuBar;
+            MainForm.panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
+            MainForm.dockMain.BackColor = AppSettings.ColorMainBG;
 
             TCLE.Explorer?.ColorFormElements();
 
