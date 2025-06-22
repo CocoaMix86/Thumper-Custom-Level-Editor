@@ -1489,8 +1489,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             if (seq.obj_name == "leafname")
                 seq.obj_name = LeafProperties.FilePath.Name;
-            if (seq.category == "AUDIO") {
-                int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
+            if (seq.category == "LOOP TRACK AUDIO") {
+                int audiochannels = SequencerObjects.Count(x => x.category == "LOOP TRACK AUDIO");
                 seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
                 seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
             }
@@ -2390,8 +2390,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             if (seq.obj_name == "leafname")
                 seq.obj_name = LeafProperties.FilePath.Name;
-            if (seq.category == "AUDIO") {
-                int audiochannels = SequencerObjects.Count(x => x.category == "AUDIO");
+            if (seq.category == "LOOP TRACK AUDIO") {
+                int audiochannels = SequencerObjects.Count(x => x.category == "LOOP TRACK AUDIO");
                 seq.param_path = seq.param_path.Replace("x", $"{audiochannels}");
                 seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
             }
@@ -2606,8 +2606,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _s.friendly_param = objmatch?.param_displayname ?? "";
                         _s.category = objmatch?.category ?? "";
                         //set audio channel numbers on load
-                        if (_s.category == "AUDIO") {
-                            int audiochannels = Seq_Objs.Count(x => x.category == "AUDIO");
+                        if (_s.category == "LOOP TRACK AUDIO") {
+                            int audiochannels = Seq_Objs.Count(x => x.category == "LOOP TRACK AUDIO");
                             _s.param_path = _s.param_path.Replace("x", $"{audiochannels}");
                             _s.friendly_param = _s.friendly_param.Replace("x", $"{audiochannels}");
                         }
