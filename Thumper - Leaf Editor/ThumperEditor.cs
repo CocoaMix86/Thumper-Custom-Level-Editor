@@ -1188,5 +1188,11 @@ namespace Thumper_Custom_Level_Editor
         {
             pictureTunnelViewer.Visible = false;
         }
+
+        private void exportProjectAsFinishedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProject _Export = new();
+            _Export.ShowDialog();
+        }
     }
 }

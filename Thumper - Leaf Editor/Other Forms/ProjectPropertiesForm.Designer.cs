@@ -63,6 +63,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomPath.Name = "txtCustomPath";
             this.txtCustomPath.Size = new Size(438, 25);
             this.txtCustomPath.TabIndex = 0;
+            this.txtCustomPath.TextChanged += this.txtCustomPath_TextChanged;
             // 
             // label1
             // 

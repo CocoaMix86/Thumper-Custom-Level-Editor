@@ -119,6 +119,8 @@
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
             this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
+            this.toolStripSeparator23 = new ToolStripSeparator();
+            this.exportProjectAsFinishedToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
@@ -849,11 +851,11 @@
             // contextMenuProject
             // 
             this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolstripProjectLeaf, this.toolstripProjectLvl, this.toolstripProjectGate, this.toolstripProjectMaster, this.toolstripProjectSample, this.toolStripSeparator7, this.toolstripProjectExisting, this.toolstripProjectRegen, this.toolStripSeparator8, this.addSamplePackToolStripMenuItem1, this.toolstripProjectPreload });
+            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolstripProjectLeaf, this.toolstripProjectLvl, this.toolstripProjectGate, this.toolstripProjectMaster, this.toolstripProjectSample, this.toolStripSeparator7, this.toolstripProjectExisting, this.toolstripProjectRegen, this.toolStripSeparator8, this.addSamplePackToolStripMenuItem1, this.toolstripProjectPreload, this.toolStripSeparator23, this.exportProjectAsFinishedToolStripMenuItem });
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(267, 214);
+            this.contextMenuProject.Size = new Size(267, 264);
             // 
             // toolstripProjectLeaf
             // 
@@ -1085,6 +1087,21 @@
             this.toolstripProjectPreload.Size = new Size(266, 22);
             this.toolstripProjectPreload.Text = "Get All Sample Runtimes";
             this.toolstripProjectPreload.Click += this.toolstripProjectPreload_Click;
+            // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            this.toolStripSeparator23.Size = new Size(263, 6);
+            // 
+            // exportProjectAsFinishedToolStripMenuItem
+            // 
+            this.exportProjectAsFinishedToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.exportProjectAsFinishedToolStripMenuItem.ForeColor = Color.White;
+            this.exportProjectAsFinishedToolStripMenuItem.Image = Properties.Resources.icon_export;
+            this.exportProjectAsFinishedToolStripMenuItem.Name = "exportProjectAsFinishedToolStripMenuItem";
+            this.exportProjectAsFinishedToolStripMenuItem.Size = new Size(266, 22);
+            this.exportProjectAsFinishedToolStripMenuItem.Text = "Export Project For Public Release...";
+            this.exportProjectAsFinishedToolStripMenuItem.Click += this.exportProjectAsFinishedToolStripMenuItem_Click;
             // 
             // toolstripProject
             // 
@@ -2256,6 +2273,8 @@
         public Label lblLoadingGate;
         public Label pictureEasing;
         private ToolStripMenuItem toolstripFileClearTemp;
+        private ToolStripSeparator toolStripSeparator23;
+        private ToolStripMenuItem exportProjectAsFinishedToolStripMenuItem;
     }
 }
 

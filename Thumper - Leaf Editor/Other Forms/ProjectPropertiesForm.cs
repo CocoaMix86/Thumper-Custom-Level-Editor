@@ -12,11 +12,11 @@ namespace Thumper_Custom_Level_Editor
         public FileInfo ProjectToLoad;
 
         public ProjectPropertiesForm()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-        
+
         private void btnCustomFolder_Click(object sender, EventArgs e)
         {
             cfd_lvl.InitialDirectory = Application.StartupPath;
@@ -32,10 +32,10 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		private void lblCustomDiffHelp_Click(object sender, EventArgs e)
-		{
-			new ImageMessageBox("difficultyhelp").Show();
-		}
+        private void lblCustomDiffHelp_Click(object sender, EventArgs e)
+        {
+            new ImageMessageBox("difficultyhelp").Show();
+        }
 
         private void txtCustomDiff_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -90,7 +90,7 @@ namespace Thumper_Custom_Level_Editor
                 {"defaultspn", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.spn")},
                 {"defaultxfm", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm")}
             };
-            
+
             ///these 4 files below are required defaults of new levels.
             ///create them if they don't exist
             if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["defaultsamp"].Name, SearchOption.AllDirectories).Any()) {
@@ -127,7 +127,7 @@ namespace Thumper_Custom_Level_Editor
             bool endsinspace = txtCustomName.Text.EndsWith(' ');
 
             if (illegal) {
-                lblNameError.Visible = true; 
+                lblNameError.Visible = true;
                 lblNameError.Text = "Illegal characters in name (\\, /, :, *, ?, <, >, |)";
             }
             else if (exists) {
@@ -187,6 +187,11 @@ namespace Thumper_Custom_Level_Editor
                     e.Graphics.DrawString(cbx.Items[e.Index].ToString(), cbx.Font, brush, e.Bounds, sf);
                 }
             }
+        }
+
+        private void txtCustomPath_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

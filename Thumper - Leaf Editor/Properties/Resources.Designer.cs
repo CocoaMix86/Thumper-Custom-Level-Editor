@@ -642,6 +642,36 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] footer_1 {
+            get {
+                object obj = ResourceManager.GetObject("footer_1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] footer_2 {
+            get {
+                object obj = ResourceManager.GetObject("footer_2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] header {
+            get {
+                object obj = ResourceManager.GetObject("header", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap help_bosssection {
@@ -1654,6 +1684,36 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string leaf_singletrack_new {
             get {
                 return ResourceManager.GetString("leaf_singletrack_new", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] obj_def_customlevel {
+            get {
+                object obj = ResourceManager.GetObject("obj_def_customlevel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] obj_list_1 {
+            get {
+                object obj = ResourceManager.GetObject("obj_list_1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] obj_list_2 {
+            get {
+                object obj = ResourceManager.GetObject("obj_list_2", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
