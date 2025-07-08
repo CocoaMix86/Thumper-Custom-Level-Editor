@@ -161,7 +161,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = Color.Green;
+            this.btnExport.BackColor = Color.Gray;
             this.btnExport.Enabled = false;
             this.btnExport.FlatStyle = FlatStyle.Flat;
             this.btnExport.ForeColor = Color.White;

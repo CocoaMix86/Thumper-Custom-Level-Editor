@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Compression;
 using Thumper_Custom_Level_Editor.Shared_Classes_and_Methods;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
@@ -69,12 +71,17 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 }
                 txtCustomPath.Text = cfd_lvl.FileName;
                 btnExport.Enabled = true;
+                btnExport.BackColor = Color.Green;
                 ProjectZIP = cfd_lvl.FileName + $"\\{TCLE.ProjectProperties.projectname}.zip";
             }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            //resave the .TCL so it's accurate before export
+            //mainly to make sure Level Sections is good
+            dynamic _saveTCL = TCLE.BuildSave(TCLE.projectProperties);
+            File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
             //build the objlib and sec files
             //these will get stored in \temp
             BuildObjlib.Make_Custom_Level(TCLE.ProjectProperties);
@@ -87,10 +94,18 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             if (TCLE.ProjectProperties.Thumbnail != null)
                 FilesToZip.Add(FilesInProject.First(x => x.Contains("\\thumbnail.")));
             //zip relevant files together
-            using (ZipArchive archive = ZipFile.Open(txtCustomPath.Text, ZipArchiveMode.Create)) {
+            int exists = 0;
+            if (File.Exists($@"{txtCustomPath.Text}\{TCLE.ProjectProperties.projectname}.zip")) {
+                exists = Directory.GetFiles($@"{txtCustomPath.Text}\", $"{TCLE.ProjectProperties.projectname}*.zip").Count();
+            }
+            using (ZipArchive archive = ZipFile.Open($@"{txtCustomPath.Text}\{TCLE.ProjectProperties.projectname}{(exists > 0 ? $" {exists + 1}" : "")}.zip", ZipArchiveMode.Create)) {
                 foreach (string fPath in FilesToZip) {
                     archive.CreateEntryFromFile(fPath, Path.GetFileName(fPath));
                 }
+            }
+
+            if (MessageBox.Show($"Level export is complete.\nDo you want to open the containing folder?", "Foxo Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                Process.Start("explorer.exe", $@"/select, ""{txtCustomPath.Text}\{TCLE.ProjectProperties.projectname}.zip""");
             }
         }
     }
