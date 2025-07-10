@@ -16,10 +16,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadLvlSimple(load, filepath);
                 return;
             }
+            SaveOnlyNoLoad = saveonlynoload;
             InitializeComponent();
             InitializeLvlStuff();
             ColorFormElements();
-            SaveOnlyNoLoad = saveonlynoload;
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
@@ -896,6 +896,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeLvlStuff()
         {
+            if (SaveOnlyNoLoad)
+                return;
             ///customize Loop Track list a bit
             //custom column containing comboboxes per cell
             lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
@@ -1353,7 +1355,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_loop.sample == null)
                     continue;
                 JObject s = new() {
-                    { "samp_name", $"{_loop.sample}"},
+                    { "samp_name", $"{_loop.sample.Replace(".wav", ".samp")}"},
                     { "beats_per_loop", _loop.beats }
                 };
 

@@ -12,19 +12,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_SampleEditor : DockContentEx
     {
         #region Form Construction
-        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null)
+        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
+            SaveOnlyNoLoad = saveonlynoload;
             InitializeComponent();
             ColorFormElements();
             InitializeSampleStuff();
-            TCLE.DoubleBufferDGV(sampleList, false);
 
             if (load != null) {
-                LoadSample(load, filepath);
-                UndoList.Add(new SaveState() {
-                    reason = "",
-                    savestate = load
-                });
+                if (!SaveOnlyNoLoad) {
+                    TCLE.DoubleBufferDGV(sampleList, false);
+                    LoadSample(load, filepath);
+                    UndoList.Add(new SaveState() {
+                        reason = "",
+                        savestate = load
+                    });
+                }
+                else
+                    LoadSampleSimple(load, filepath);
             }
             propertyGridSample.SelectedObject = SampleProperties;
         }
@@ -44,6 +49,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ColorFormElements()
         {
+            if (SaveOnlyNoLoad)
+                return;
             this.BackColor = Properties.Settings.Default.ColorSampleBG;
             sampleList.BackgroundColor = Properties.Settings.Default.ColorSampleListBG;
             pictureSpectrum.BackColor = Properties.Settings.Default.ColorWaveformBG;
@@ -54,6 +61,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading;
+        public bool SaveOnlyNoLoad;
         public FileInfo loadedsample
         {
             get { return LoadedSample; }
@@ -487,6 +495,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void InitializeSampleStuff()
         {
+            if (SaveOnlyNoLoad)
+                return;
             _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
             sampleToolStrip.Renderer = new ToolStripOverride();
             //
@@ -569,7 +579,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
                 SampleList.Add(new SampleData() {
-                    obj_name = (string)_samp["obj_name"],
+                    obj_name = ((string)_samp["obj_name"]).Replace(".wav", ".samp"),
                     path = _samp["path"],
                     volume = _samp["volume"],
                     pitch = _samp["pitch"],
@@ -586,6 +596,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///set save flag (samples just loaded, has no changes)
             SaveCheckAndWrite(true, "");
+            EditorLoading = false;
+            EditorIsSaved = true;
+        }
+        public void LoadSampleSimple(dynamic _load, FileInfo filepath)
+        {
+            //detect if file is actually Gate or not
+            if (!_load.ContainsKey("items")) {
+                return;
+            }
+            loadedsample = filepath;
+            //set flag that load is in progress. This skips Save method
+            EditorLoading = true;
+            sampleproperties = new(this, filepath);
+            ///Clear form elements so new data can load
+            SampleList.CollectionChanged -= _samplelist_CollectionChanged;
+            SampleList.Clear();
+            ///load lvls associated with this master
+            foreach (dynamic _samp in _load["items"]) {
+                SampleList.Add(new SampleData() {
+                    obj_name = ((string)_samp["obj_name"]).Replace(".wav", ".samp"),
+                    path = _samp["path"],
+                    volume = _samp["volume"],
+                    pitch = _samp["pitch"],
+                    pan = _samp["pan"],
+                    offset = _samp["offset"],
+                    channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
+                    Editor = this,
+                });
+            }
             EditorLoading = false;
             EditorIsSaved = true;
         }

@@ -19,10 +19,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
 
+            SaveOnlyNoLoad = saveonlynoload;
             InitializeComponent();
             RenderForm();
             ColorFormElements();
-            SaveOnlyNoLoad = saveonlynoload;
 
             if (load != null) {
                 LoadLeaf(load, filepath);
@@ -60,13 +60,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (toload != null) {
                 LvlSequencer = toload;
                 LoadLeaf(null, LvlSequencer.FilePath, LvlSequencer);
-                LeafProperties.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
-                LoadTracksFromSequencer(LeafProperties.seq_objs);
-                LoadEnd();
+                if (!SaveOnlyNoLoad) {
+                    LeafProperties.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                    LoadTracksFromSequencer(LeafProperties.seq_objs);
+                    LoadEnd();
+                }
+                else
+                    LvlSequencer.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
             }
         }
         private void RenderForm()
         {
+            if (SaveOnlyNoLoad)
+                return;
+
             dockPanel1.Theme = TCLE.DockTheme;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             contentMain.Controls.Add(splitContainerLeafSide);
@@ -117,6 +124,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ColorFormElements()
         {
+            if (SaveOnlyNoLoad)
+                return;
             this.BackColor = Properties.Settings.Default.ColorLeafBG;
             trackEditor.BackgroundColor = Properties.Settings.Default.ColorLeafSeqBG;
             textEditor.BackColor = Properties.Settings.Default.ColorLeafRawBG;
@@ -2578,7 +2587,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
                 Sequencer_Object _s = new(parent) {
-                    obj_name = seq_obj["obj_name"],
+                    obj_name = ((string)seq_obj["obj_name"]),
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
                     defaultvalue = seq_obj["default"],
@@ -2597,6 +2606,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_s.param_path == "play") {
                     _s.category = "PLAY SAMPLE";
                     _s.friendly_param = _s.param_path;
+                    _s.obj_name.Replace(".wav", ".samp");
                 }
                 //otherwise, search _objects for the friendly names for display purposes
                 else {

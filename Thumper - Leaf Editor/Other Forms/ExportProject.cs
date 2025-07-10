@@ -58,6 +58,9 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 panelThumb.Width = pictureThumb.Width + 5;
                 panelThumb.Height = pictureThumb.Height + label3.Height + 10;
             }
+
+            txtCustomPath.Text = TCLE.ProjectProperties.WorkingFolder.FullName;
+            btnExport.Enabled = true;
         }
 
         private void btnCustomFolder_Click(object sender, EventArgs e)
@@ -107,6 +110,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             if (MessageBox.Show($"Level export is complete.\nDo you want to open the containing folder?", "Foxo Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 Process.Start("explorer.exe", $@"/select, ""{txtCustomPath.Text}\{TCLE.ProjectProperties.projectname}.zip""");
             }
+
+            this.Close();
         }
     }
 }

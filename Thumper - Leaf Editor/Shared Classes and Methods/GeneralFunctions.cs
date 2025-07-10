@@ -1067,6 +1067,12 @@ namespace Thumper_Custom_Level_Editor
                     _master.SaveCheckAndWrite(true, "");
                     CloseFileLock(newfile);
                 }
+                else if (newfile.Extension == ".samp") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_SampleEditor _samp = new(_load, newfile, true);
+                    _samp.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
             }
             //build the JSON to write to file
             JObject _saveJSON = BuildSave(Convert);
