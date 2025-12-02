@@ -7,9 +7,10 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class ProjectPropertiesForm : Form
     {
-        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
+        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false, InitialDirectory = Application.StartupPath, Title = "Choose where to save the custom level" };
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
         public FileInfo ProjectToLoad;
+        private nint WindowHandle => this.Handle;
 
         public ProjectPropertiesForm()
         {
@@ -19,9 +20,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomFolder_Click(object sender, EventArgs e)
         {
-            cfd_lvl.InitialDirectory = Application.StartupPath;
-            cfd_lvl.Title = "Choose where to save the custom level";
-            if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok) {
+            if (cfd_lvl.ShowDialog(WindowHandle) == CommonFileDialogResult.Ok) {
                 if (cfd_lvl.FileName.Length > 255) {
                     MessageBox.Show("Folder path too long, due to Windows limits. Max length 255.\nChoose a different path.", "Thumper Custom Level Editor");
                     return;
