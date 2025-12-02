@@ -673,6 +673,8 @@ namespace Thumper_Custom_Level_Editor
                 List<FmodSample> samples = bank.Samples;
                 samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
 
+                FmodAudioType.pcm  
+
                 string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
                 File.WriteAllBytes(finalfilename, dataBytes);
                 _samp.TempFile = finalfilename;

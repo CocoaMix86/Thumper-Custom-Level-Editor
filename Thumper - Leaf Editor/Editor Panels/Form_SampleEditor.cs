@@ -809,6 +809,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 int bytespersample = wavbytes[32];
                 int bits = (bytespersample / 2) * 8;
+                //catch 24bit PCM
+                if (bits == 24) {
+                    MessageBox.Show("TCLE (rather, fmod), does not support 24bit PCM. Please export in a different format like 16 or 32bit.", "Thumper Custom Level Editor");
+                    lblLoading.Visible = false;
+                    return;
+                }
                 uint freq = BitConverter.ToUInt32(wavbytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
