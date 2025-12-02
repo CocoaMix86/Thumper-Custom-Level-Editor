@@ -82,6 +82,7 @@
             this.toolstripFileClearTemp = new ToolStripMenuItem();
             this.toolStripSeparator4 = new ToolStripSeparator();
             this.toolstripFileExit = new ToolStripMenuItem();
+            this.toolstripFileRestart = new ToolStripMenuItem();
             this.toolstripFile = new ToolStripMenuItem();
             this.contextmenuEdit = new ContextMenuStrip(this.components);
             this.toolstripEditUndo = new ToolStripMenuItem();
@@ -117,11 +118,11 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolStripSeparator23 = new ToolStripSeparator();
             this.exportProjectAsFinishedToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -590,11 +591,11 @@
             // contextmenuFile
             // 
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolstripFileRecent, this.toolStripMenuItem63, this.toolstripFileClearTemp, this.toolStripSeparator4, this.toolstripFileExit });
+            this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolstripFileRecent, this.toolStripMenuItem63, this.toolstripFileClearTemp, this.toolStripSeparator4, this.toolstripFileExit, this.toolstripFileRestart });
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(293, 242);
+            this.contextmenuFile.Size = new Size(293, 286);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // toolstripFileNewProject
@@ -745,6 +746,15 @@
             this.toolstripFileExit.Size = new Size(292, 22);
             this.toolstripFileExit.Text = "Exit";
             this.toolstripFileExit.Click += this.toolstripFileExit_Click;
+            // 
+            // toolstripFileRestart
+            // 
+            this.toolstripFileRestart.ForeColor = Color.White;
+            this.toolstripFileRestart.Name = "toolstripFileRestart";
+            this.toolstripFileRestart.ShortcutKeys = Keys.Alt | Keys.F6;
+            this.toolstripFileRestart.Size = new Size(292, 22);
+            this.toolstripFileRestart.Text = "Restart";
+            this.toolstripFileRestart.Click += this.toolstripFileRestart_Click;
             // 
             // toolstripFile
             // 
@@ -948,8 +958,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1071,14 +1082,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1115,6 +1118,14 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -2276,6 +2287,7 @@
         private ToolStripMenuItem toolstripFileClearTemp;
         private ToolStripSeparator toolStripSeparator23;
         private ToolStripMenuItem exportProjectAsFinishedToolStripMenuItem;
+        private ToolStripMenuItem toolstripFileRestart;
     }
 }
 

@@ -221,6 +221,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripFileSaveAs.ShortcutKeys = Keybinds["Save File As"];
             toolstripFileSaveAll.ShortcutKeys = Keybinds["Save All"];
             toolstripFileExit.ShortcutKeys = Keybinds["Close App"];
+            toolstripFileRestart.ShortcutKeys = Keybinds["Restart App"];
             ///
             toolstripViewFullscreen.ShortcutKeys = Keybinds["Fullscreen"];
             ///
@@ -628,6 +629,13 @@ namespace Thumper_Custom_Level_Editor
         {
             DragDropItems.Dispose();
             this.Close();
+        }
+
+        private void toolstripFileRestart_Click(object sender, EventArgs e)
+        {
+            DragDropItems.Dispose();
+            Application.Restart();
+            Environment.Exit(0);
         }
         #endregion
         #region Toolstrip Edit

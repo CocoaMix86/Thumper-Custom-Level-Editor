@@ -31,6 +31,7 @@ Quick Value 7;D7, Control
 Quick Value 8;D8, Control
 Quick Value 9;D9, Control
 Close App;F4, Alt
+Restart App;F6, Alt
 Undo;Z, Control
 Redo;R, Control
 Fullscreen;F11
