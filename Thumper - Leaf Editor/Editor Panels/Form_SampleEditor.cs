@@ -811,7 +811,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int bits = (bytespersample / 2) * 8;
                 //catch 24bit PCM
                 if (bits == 24) {
-                    MessageBox.Show("TCLE (rather, fmod), does not support 24bit PCM. Please export in a different format like 16 or 32bit.", "Thumper Custom Level Editor");
+                    MessageBox.Show("24bit PCM is not supported. Please export in a different format like 16 or 32bit.", "Thumper Custom Level Editor");
                     lblLoading.Visible = false;
                     return;
                 }
