@@ -384,12 +384,12 @@ namespace Thumper_Custom_Level_Editor
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]
-        [Description("FALSE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. TRUE: Blank cells use the Default value")]
+        [Description("FALSE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. TRUE: Blank cells use the Default Value")]
         public bool step { get => selectedobj.step; set => selectedobj.step = value; }
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Default Value")]
-        [Description("If Step FALSE, blank cells will use this value")]
+        [Description("If Step TRUE, blank cells will use this value")]
         public float defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
 
         [CategoryAttribute("Sequencer Object")]
