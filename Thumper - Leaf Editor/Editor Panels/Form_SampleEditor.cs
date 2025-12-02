@@ -759,6 +759,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             { 44_100, 8 },
             { 48_000, 9 },
             { 96_000, 10 }};
+        public static Dictionary<int, ulong> FormatID = new() {
+            { 8, 1 },
+            { 16, 2 },
+            { 32, 4 }};
         public static byte[] nametable = new byte[] { 0x04, 0x00, 0x00, 0x00, 0x52, 0x54, 0x4C, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         public static byte[] PCfileheader = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
         private void ImportAudioToSamp(string filepath)
@@ -803,6 +807,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     byte[] wavafter = wavbytes.AsSpan(20 + (int)junktable).ToArray();
                     wavbytes = wavbefore.Concat(wavafter).ToArray();
                 }
+                int bytespersample = wavbytes[32];
+                int bits = (bytespersample / 2) * 8;
                 uint freq = BitConverter.ToUInt32(wavbytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
@@ -820,14 +826,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     sw.Write((UInt32)8); //size of sample header
                     sw.Write((UInt32)0x1c); //size of header table
                     sw.Write((UInt32)wavbytes.Length); //sample bytes
-                    sw.Write((UInt32)2); //audio type
+                    sw.Write((UInt32)FormatID[bits]); //audio type
                     sw.Write((UInt32)0); //always 0, unknown
                     sw.Write((UInt32)0); //flags
                     sw.Write((UInt64)0); //hash1
                     sw.Write((UInt64)0); //hash2
                     sw.Write((UInt64)0); //hash3
 
-                    UInt64 metadata = (UInt64)(wavbytes.Length / 4);//samples in audio (bytes div 4)
+                    UInt64 metadata = (UInt64)(wavbytes.Length / bytespersample);//samples in audio
                     metadata <<= 27; //make room for next item
                     metadata |= 0; //data offset
                     metadata <<= 2; //make room for next item
