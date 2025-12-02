@@ -71,6 +71,7 @@ namespace Thumper_Custom_Level_Editor
             this.ShowInTaskbar = false;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.Load += this.ImageMessageBox_Load;
             this.ResumeLayout(false);
         }
 

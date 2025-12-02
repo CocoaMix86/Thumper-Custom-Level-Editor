@@ -10,7 +10,7 @@ namespace Thumper_Custom_Level_Editor
         public ImageMessageBox()
         {
             InitializeComponent();
-            lblVersion.Text = $"Thumper Custom Level Editor -- {Assembly.GetExecutingAssembly().GetName().Version}";
+            lblVersion.Text = $"Thumper Custom Level Editor -- {Assembly.GetExecutingAssembly().GetName().Version}{TCLE.AppReleaseNumber}";
         }
 
         public ImageMessageBox(string path, TCLE _tcle = null)
@@ -40,6 +40,7 @@ namespace Thumper_Custom_Level_Editor
             }
             if (path == "splashscreen") {
                 lblVersion.Visible = true;
+                lblVersion.Text = $"Thumper Custom Level Editor -- {Assembly.GetExecutingAssembly().GetName().Version}{TCLE.AppReleaseNumber}";
                 this.BackgroundImage = Properties.Resources.Thumper_Splash;
                 this.BackgroundImageLayout = ImageLayout.Center;
                 this.Text = "";
@@ -60,6 +61,11 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.MainBeeble.Location = Properties.Settings.Default.beebleloc;
             }
             this.Close();
+        }
+
+        private void ImageMessageBox_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
