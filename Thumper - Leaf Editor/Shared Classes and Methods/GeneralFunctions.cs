@@ -668,6 +668,9 @@ namespace Thumper_Custom_Level_Editor
                 return _samp.TempFile;
             }
             _bytes = _bytes.Skip(4).ToArray();
+            // credit to https://github.com/SamboyCoding/Fmod5Sharp
+            FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+            List<FmodSample> samples = bank.Samples;
             /*byte 24 of FSB files contains the data type of the audio
             PCM8 = 1,
             PCM16 = 2,
@@ -685,26 +688,28 @@ namespace Thumper_Custom_Level_Editor
             XWMA = 14,
             VORBIS = 15,*/
             int type = _bytes[24];
-
+            byte[] dataBytes = null;
+            string fileExtension = "";
+            //PCM types
             if (type is 1 or 2 or 3 or 4) {
                 try {
-                    // credit to https://github.com/SamboyCoding/Fmod5Sharp
-                    FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-                    List<FmodSample> samples = bank.Samples;
                     //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
-                    byte[] dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
-                    string fileExtension = "wav";
-                    //samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
-
-                    string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-                    File.WriteAllBytes(finalfilename, dataBytes);
-                    _samp.TempFile = finalfilename;
-                    return _samp.TempFile;
+                    dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
+                    fileExtension = "wav";
                 } catch (Exception) {
                     _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
                     return null;
                 }
             }
+            //Vorbis (ogg)
+            else if (type is 15) {
+                samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
+            }
+
+            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+            File.WriteAllBytes(finalfilename, dataBytes);
+            _samp.TempFile = finalfilename;
+            return _samp.TempFile;
         }
 
         public static byte[] RebuildWav(FmodSample sample, FmodAudioType type)
