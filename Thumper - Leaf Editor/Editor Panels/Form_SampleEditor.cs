@@ -762,6 +762,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static Dictionary<int, ulong> FormatID = new() {
             { 8, 1 },
             { 16, 2 },
+            { 24, 3 },
             { 32, 4 }};
         public static byte[] nametable = new byte[] { 0x04, 0x00, 0x00, 0x00, 0x52, 0x54, 0x4C, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         public static byte[] PCfileheader = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
@@ -809,9 +810,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 int bytespersample = wavbytes[32];
                 int bits = (bytespersample / 2) * 8;
-                //catch 24bit PCM
-                if (bits == 24) {
-                    MessageBox.Show("24bit PCM is not supported. Please export your audio in a different format like 16 or 32bit.", "Thumper Custom Level Editor");
+                //catch non supported type
+                if (!FormatID.ContainsKey(bits)) {
+                    MessageBox.Show("That audio format is not supported. Please export your audio in a different format like 16 or 32bit PCM.", "Thumper Custom Level Editor");
                     lblLoading.Visible = false;
                     return;
                 }

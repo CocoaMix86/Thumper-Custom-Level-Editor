@@ -10,6 +10,8 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
+using Fmod5Sharp.CodecRebuilders;
+using NAudio.Wave;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -671,7 +673,10 @@ namespace Thumper_Custom_Level_Editor
                 // credit to https://github.com/SamboyCoding/Fmod5Sharp
                 FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
                 List<FmodSample> samples = bank.Samples;
-                samples[0].RebuildAsStandardFileFormat(out byte[] dataBytes, out string fileExtension);
+                //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
+                byte[] dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
+                string fileExtension = "wav";
+                    //samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
 
                 string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
                 File.WriteAllBytes(finalfilename, dataBytes);
@@ -681,6 +686,33 @@ namespace Thumper_Custom_Level_Editor
                 _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
                 return null;
             }
+        }
+
+        public static byte[] RebuildWav(FmodSample sample, FmodAudioType type)
+        {
+            var width = type switch {
+                FmodAudioType.PCM8 => 1,
+                FmodAudioType.PCM16 => 2,
+                FmodAudioType.PCM24 => 3,
+                FmodAudioType.PCM32 => 4,
+                _ => throw new($"FmodPcmRebuilder does not support encoding of type {type}"),
+            };
+
+            var numChannels = sample.Metadata.IsStereo ? 2 : 1;
+            var format = WaveFormat.CreateCustomFormat(
+                WaveFormatEncoding.Pcm,
+                sample.Metadata.Frequency,
+                numChannels,
+                sample.Metadata.Frequency * numChannels * width,
+                numChannels * width,
+                width * 8
+            );
+            using var stream = new MemoryStream();
+            using var writer = new WaveFileWriter(stream, format);
+
+            writer.Write(sample.SampleBytes, 0, sample.SampleBytes.Length);
+
+            return stream.GetBuffer();
         }
 
         public static uint Hash32(string s)
