@@ -12,6 +12,7 @@ using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using Fmod5Sharp.CodecRebuilders;
 using NAudio.Wave;
+using System.Runtime.Intrinsics.X86;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -66,7 +67,7 @@ namespace Thumper_Custom_Level_Editor
             LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1.000m;
         }
 
-        public static void DoubleBufferDGV(DataGridView grid, bool columnstyle)
+        public static void DoubleBufferDGV(DataGridView grid)
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
@@ -667,39 +668,58 @@ namespace Thumper_Custom_Level_Editor
                 return _samp.TempFile;
             }
             _bytes = _bytes.Skip(4).ToArray();
+            /*byte 24 of FSB files contains the data type of the audio
+            PCM8 = 1,
+            PCM16 = 2,
+            PCM24 = 3,
+            PCM32 = 4,
+            PCMFLOAT = 5,
+            GCADPCM = 6,
+            IMAADPCM = 7,
+            VAG = 8,
+            HEVAG = 9,
+            XMA = 10,
+            MPEG = 11,
+            CELT = 12,
+            AT9 = 13,
+            XWMA = 14,
+            VORBIS = 15,*/
+            int type = _bytes[24];
 
-            try
-            {
-                // credit to https://github.com/SamboyCoding/Fmod5Sharp
-                FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-                List<FmodSample> samples = bank.Samples;
-                //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
-                byte[] dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
-                string fileExtension = "wav";
+            if (type is 1 or 2 or 3 or 4) {
+                try {
+                    // credit to https://github.com/SamboyCoding/Fmod5Sharp
+                    FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+                    List<FmodSample> samples = bank.Samples;
+                    //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
+                    byte[] dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
+                    string fileExtension = "wav";
                     //samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
 
-                string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-                File.WriteAllBytes(finalfilename, dataBytes);
-                _samp.TempFile = finalfilename;
-                return _samp.TempFile;
-            } catch (Exception) {
-                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
-                return null;
+                    string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+                    File.WriteAllBytes(finalfilename, dataBytes);
+                    _samp.TempFile = finalfilename;
+                    return _samp.TempFile;
+                } catch (Exception) {
+                    _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
+                    return null;
+                }
             }
         }
 
         public static byte[] RebuildWav(FmodSample sample, FmodAudioType type)
         {
-            var width = type switch {
+            int width = type switch {
                 FmodAudioType.PCM8 => 1,
                 FmodAudioType.PCM16 => 2,
                 FmodAudioType.PCM24 => 3,
                 FmodAudioType.PCM32 => 4,
-                _ => throw new($"FmodPcmRebuilder does not support encoding of type {type}"),
+                _ => 0
+                //_ => throw new($"FmodPcmRebuilder does not support encoding of type {type}"),
             };
 
-            var numChannels = sample.Metadata.IsStereo ? 2 : 1;
-            var format = WaveFormat.CreateCustomFormat(
+            int numChannels = sample.Metadata.IsStereo ? 2 : 1;
+            WaveFormat format = WaveFormat.CreateCustomFormat(
                 WaveFormatEncoding.Pcm,
                 sample.Metadata.Frequency,
                 numChannels,
@@ -707,8 +727,8 @@ namespace Thumper_Custom_Level_Editor
                 numChannels * width,
                 width * 8
             );
-            using var stream = new MemoryStream();
-            using var writer = new WaveFileWriter(stream, format);
+            using MemoryStream stream = new();
+            using WaveFileWriter writer = new(stream, format);
 
             writer.Write(sample.SampleBytes, 0, sample.SampleBytes.Length);
 

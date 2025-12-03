@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///propertyGridMaster.Controls[2].MouseClick += propertyGridMaster_MouseClick;
             SaveOnlyNoLoad = saveonlynoload;
             masterToolStrip.Renderer = new ToolStripOverride();
-            TCLE.DoubleBufferDGV(masterLvlList, false);
+            TCLE.DoubleBufferDGV(masterLvlList);
 
             if (load != null) {
                 LoadMaster(load, filepath);

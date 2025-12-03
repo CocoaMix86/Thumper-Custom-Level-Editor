@@ -21,7 +21,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 if (!SaveOnlyNoLoad) {
-                    TCLE.DoubleBufferDGV(sampleList, false);
+                    TCLE.DoubleBufferDGV(sampleList);
                     LoadSample(load, filepath);
                     UndoList.Add(new SaveState() {
                         reason = "",

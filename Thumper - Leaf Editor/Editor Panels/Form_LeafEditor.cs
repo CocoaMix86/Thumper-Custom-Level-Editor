@@ -95,7 +95,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
-            TCLE.DoubleBufferDGV(trackEditor, true);
+            TCLE.DoubleBufferDGV(trackEditor);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             //
             treeObjects.Tag = txtSearch.Text;
@@ -2015,8 +2015,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafClean_Click(object sender, EventArgs e)
         {
             List<Sequencer_Object> todelete = new();
-            bool del = false;
-            int index = 0;
+            bool del;
+            int index;
             foreach (Sequencer_Object seq in SequencerObjects) {
                 del = false;
                 if (seq.friendly_lane is not "none" and not "lane center")

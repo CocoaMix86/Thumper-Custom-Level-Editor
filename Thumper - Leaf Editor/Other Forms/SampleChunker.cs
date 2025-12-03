@@ -15,14 +15,14 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         //how many seconds pass for 1 beat
         double BeatTime => 60d / (double)TCLE.projectProperties.bpm;
         //how many beats 1 chunk is
-        double ChunkSize = 0;
+        double ChunkSize;
         //total seconds for 1 chunk
         double ChunkTime => BeatTime * ChunkSize;
         //represents seconds
-        double Starttime = 0;
+        double Starttime;
         //represents seconds
-        double Endtime = 0;
-        int Chunklimit = 0;
+        double Endtime;
+        int Chunklimit;
 
         int SampleChannel;
         int SampleHandle;

@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlToolStrip.Renderer = new ToolStripOverride();
             lvlPathsToolStrip.Renderer = new ToolStripOverride();
             lvlLoopToolStrip.Renderer = new ToolStripOverride();
-            TCLE.DoubleBufferDGV(lvlLeafList, false);
+            TCLE.DoubleBufferDGV(lvlLeafList);
 
             if (load != null) {
                 LoadLvl(load, filepath);

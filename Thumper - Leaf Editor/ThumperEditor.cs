@@ -426,8 +426,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
-            ProjectPropertiesForm customlevel = new();
-            customlevel.Owner = this;
+            ProjectPropertiesForm customlevel = new() { Owner = this };
             customlevel.ShowDialog();
             if (customlevel.DialogResult == DialogResult.Yes)
                 OpenProject(customlevel.ProjectToLoad);
