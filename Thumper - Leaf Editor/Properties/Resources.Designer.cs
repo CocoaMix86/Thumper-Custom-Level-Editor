@@ -333,11 +333,12 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream duck {
+        internal static byte[] duck {
             get {
-                return ResourceManager.GetStream("duck", resourceCulture);
+                object obj = ResourceManager.GetObject("duck", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -3455,16 +3456,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pixeltrans {
-            get {
-                object obj = ResourceManager.GetObject("pixeltrans", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{
@@ -3986,22 +3977,22 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Thumper_Sequencer {
-            get {
-                object obj = ResourceManager.GetObject("Thumper_Sequencer", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Thumper_Splash {
             get {
                 object obj = ResourceManager.GetObject("Thumper_Splash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ThumperSequencerZip {
+            get {
+                object obj = ResourceManager.GetObject("ThumperSequencerZip", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

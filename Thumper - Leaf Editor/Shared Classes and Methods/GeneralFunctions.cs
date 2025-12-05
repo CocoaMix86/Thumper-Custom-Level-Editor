@@ -12,6 +12,8 @@ using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using Fmod5Sharp.CodecRebuilders;
 using NAudio.Wave;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -1135,8 +1137,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             if (rng.Next(0, 1001) == 1000) {
                 MemoryStream tempstream = new();
-                Properties.Resources.duck.CopyTo(tempstream);
-                byte[] duckbytes = tempstream.ToArray();
+                byte[] duckbytes = Properties.Resources.duck;
                 PlaySampleOneOff("duck", duckbytes, out _);
             }
             else

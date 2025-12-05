@@ -2,6 +2,7 @@
 using Un4seen.Bass.AddOn.Midi;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
+using System.IO.Compression;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
@@ -18,8 +19,10 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         {
             InitializeComponent();
             //write soundfont to file if it doesn't exist
-            if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer.sf2"))
-                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer.sf2", Properties.Resources.Thumper_Sequencer);
+            if (!File.Exists($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2")) {
+                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", Properties.Resources.ThumperSequencerZip);
+                ZipFile.ExtractToDirectory($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", $@"{TCLE.AppLocation}\temp\");
+            }
             //load soundfont
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0) };

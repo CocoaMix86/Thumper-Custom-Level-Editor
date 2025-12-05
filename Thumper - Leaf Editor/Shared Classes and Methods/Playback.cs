@@ -1,4 +1,5 @@
-﻿using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using System.IO.Compression;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
 
@@ -78,10 +79,12 @@ namespace Thumper_Custom_Level_Editor
                 GlobalSequencerEvents[x] = new();
             }
             //write soundfont to file if it doesn't exist
-            if (!File.Exists($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2"))
-                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", Properties.Resources.Thumper_Sequencer);
+            if (!File.Exists($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2")) {
+                File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", Properties.Resources.ThumperSequencerZip);
+                ZipFile.ExtractToDirectory($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", $@"{TCLE.AppLocation}\temp\");
+            }
             //load soundfont
-            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer_21.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
+            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0)};
         }
 
