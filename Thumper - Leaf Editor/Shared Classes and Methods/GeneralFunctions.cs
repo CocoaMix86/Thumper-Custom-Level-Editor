@@ -10,10 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
-using Fmod5Sharp.CodecRebuilders;
 using NAudio.Wave;
-using System.Drawing.Imaging;
-using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {

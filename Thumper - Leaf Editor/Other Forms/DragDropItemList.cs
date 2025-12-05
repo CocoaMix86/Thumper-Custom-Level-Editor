@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
