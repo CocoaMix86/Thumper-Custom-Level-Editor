@@ -704,7 +704,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 this.Text = LoadedSample.Name;
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
-                TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, out string _);
+                TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, true, out string _);
                 if (playsound) TCLE.PlaySound("UIsave");
             }
         }
@@ -891,7 +891,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SampleEditor.SampleList.Add(newsample);
             newsample.UpdateRuntime();
 
-            TCLE.UpdateProjectSamplesFromFile(SampleEditor.LoadedSample, true, out string _);
+            //TCLE.UpdateProjectSamplesFromFile(SampleEditor.LoadedSample, true, out string _);
         }
 
         private void ResetSample()

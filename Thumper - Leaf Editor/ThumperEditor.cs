@@ -1002,7 +1002,7 @@ namespace Thumper_Custom_Level_Editor
                         using (StreamWriter sw = pack.Item1.CreateText()) {
                             sw.Write(pack.Item3);
                         }
-                        UpdateProjectSamplesFromFile(pack.Item1, true, out string _);
+                        UpdateProjectSamplesFromFile(pack.Item1, true, false, out string _);
                         filesupdates = true;
                     }
                 }
@@ -1016,8 +1016,10 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
 
-            if (filesupdates)
+            if (filesupdates) {
+                UpdateEditorsWithSamples();
                 ProjectExplorer.CreateTreeView();
+            }
         }
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
