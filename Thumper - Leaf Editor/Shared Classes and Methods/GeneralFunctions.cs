@@ -110,9 +110,7 @@ namespace Thumper_Custom_Level_Editor
                     sw.Write(Properties.Resources.trackobjects_v4);
                 }
             }
-
-            ///import selectable objects from file and parse them into lists for manipulation
-            //splits input at "###". Each section is a collection of param_paths
+            //import selectable objects from file and parse them into lists for manipulation
             string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
             LeafObjects = _importedObjects.Select(x => x.Split(';'))
                                         .Select(x => new Object_Params {

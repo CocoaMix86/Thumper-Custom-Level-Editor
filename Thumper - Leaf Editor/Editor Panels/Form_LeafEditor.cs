@@ -130,6 +130,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.BackgroundColor = Properties.Settings.Default.ColorLeafSeqBG;
             textEditor.BackColor = Properties.Settings.Default.ColorLeafRawBG;
             textEditor.ForeColor = Properties.Settings.Default.ColorLeafRawText;
+
+            foreach (var _ColorIcon in TCLE.ColorIcons)
+                treeObjects.ImageList.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
         }
 
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
