@@ -36,7 +36,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             // timer1
             // 
-            this.timer1.Interval = 2000;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += this.timer1_Tick;
             // 
             // lblVersion

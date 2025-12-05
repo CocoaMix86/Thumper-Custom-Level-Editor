@@ -110,9 +110,7 @@ namespace Thumper_Custom_Level_Editor
                     sw.Write(Properties.Resources.trackobjects_v4);
                 }
             }
-
-            ///import selectable objects from file and parse them into lists for manipulation
-            //splits input at "###". Each section is a collection of param_paths
+            //import selectable objects from file and parse them into lists for manipulation
             string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
             LeafObjects = _importedObjects.Select(x => x.Split(';'))
                                         .Select(x => new Object_Params {
@@ -440,7 +438,7 @@ namespace Thumper_Custom_Level_Editor
             string warning = "";
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "?!?!default?!?!?!?.samp")) {
-                UpdateProjectSamplesFromFile(sampfile, false, out string _warning);
+                UpdateProjectSamplesFromFile(sampfile, false, false, out string _warning);
                 warning += _warning;
             }
             if (warning.Length > 2)
@@ -462,10 +460,12 @@ namespace Thumper_Custom_Level_Editor
                 CalculateSampleRuntimes();
                 StopAudio();
             }
+
+            UpdateEditorsWithSamples();
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
-        public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, out string warning)
+        public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, bool updateeditors, out string warning)
         {
             //remove samples that match the incoming sample file, so that they're rewritten
             ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
@@ -496,7 +496,8 @@ namespace Thumper_Custom_Level_Editor
                 });
             }
 
-            UpdateEditorsWithSamples();
+            if (updateeditors)
+                UpdateEditorsWithSamples();
         }
 
         public static void RemoveProjectSamples(FileInfo SampFile)

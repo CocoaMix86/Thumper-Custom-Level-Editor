@@ -122,8 +122,8 @@ namespace Thumper_Custom_Level_Editor
                     foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
-                            ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
-                            SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : "none",
+                            ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
+                            SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
                             ContextMenuStrip = TCLE.ObjectFavorites.Contains(obj) ? contextMenuFavRemove : contextMenuFav
                         };
                         _node.Nodes.Add(_param);
