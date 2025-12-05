@@ -858,9 +858,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //InputFileBytes = null;
             }
             else if (filepath.EndsWith(".ogg")) {
-                string OggToFsbApp = Path.Combine($@"{TCLE.AppLocation}\temp", "oggvorbis2fsb5.exe");
-                var proc = Process.Start(OggToFsbApp, $@"""{filepath}"" ""{TCLE.WorkingFolder}\extras\{_filename}.fsb""");
-                Thread.Sleep(2000);
+                byte[] _fsb = OggVorvisFsb5.convert_ogg_vorbis_fsb5(InputFileBytes);
+                using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.OpenOrCreate))) {
+                    sw.Write(PCfileheader); //4 byte PC file header
+                    sw.Write(_fsb);
+                }
             }
             /*
             filepath = $@"{TCLE.WorkingFolder}\extras\{_filename}.fsb";
