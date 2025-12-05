@@ -246,7 +246,6 @@
     <PackageReference Include="Fmod5Sharp">
       <Version>3.0.1</Version>
     </PackageReference>
-    <PackageReference Include="FSBLib" Version="1.1.0" />
     <PackageReference Include="ICSharpCode.TextEditor" Version="3.2.1.6466" />
     <PackageReference Include="Microsoft-Windows10-APICodePack-Core">
       <Version>1.1.8</Version>

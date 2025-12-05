@@ -127,6 +127,10 @@ namespace Thumper_Custom_Level_Editor
             else if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
                 OpenProject(LevelToLoad);
             }
+
+            if (!File.Exists($@"{AppLocation}\temp\oggvorbis2fsb5.exe")) {
+                File.WriteAllBytes($@"{AppLocation}\temp\oggvorbis2fsb5.exe", Properties.Resources.oggvorbis2fsb5);
+            }
         }
         #endregion
         #region Form Loading Closing

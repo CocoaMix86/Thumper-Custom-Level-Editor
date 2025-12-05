@@ -290,17 +290,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string[] data = (string[])e.Data.GetData(DataFormats.FileDrop);
                 bool addedfile = false;
                 foreach (string dir in data) {
-                    if (File.Exists(dir) && Path.GetExtension(dir) is ".fsb" or ".wav") {
-                        ImportAudioToSamp(dir);
-                        TCLE.alzheimer();
-                        addedfile = true;
-                    }
-                    else
-                        MessageBox.Show($@"{dir} is not an .fsb file. It was {Path.GetExtension(dir)}. File not added to sample list.", "Sample load error");
+                    ImportAudioStart(dir);
                 }
-                if (addedfile)
-                    SaveCheckAndWrite(false, "Add Sample");
-                TCLE.PlaySound("UIobjectadd");
             }
             else {
                 Point clientPoint = sampleList.PointToClient(new Point(e.X, e.Y));
@@ -435,15 +426,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ofd.ShowDialog() == DialogResult.OK) {
                 bool addedfile = false;
                 foreach (string _file in ofd.FileNames) {
-                    if (_file.EndsWith(".wav") || _file.EndsWith(".fsb")) {
-                        ImportAudioToSamp(_file);
-                        TCLE.alzheimer();
-                        addedfile = true;
-                    }
+                    ImportAudioStart(_file);
                 }
-                if (addedfile)
-                    SaveCheckAndWrite(false, "Add Sample");
-                TCLE.PlaySound("UIobjectadd");
             }
         }
         //How to create an FSB
@@ -766,73 +750,91 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             { 32, 4 }};
         public static byte[] nametable = new byte[] { 0x04, 0x00, 0x00, 0x00, 0x52, 0x54, 0x4C, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
         public static byte[] PCfileheader = new byte[] { 0x0d, 0x00, 0x00, 0x00 };
-        private void ImportAudioToSamp(string filepath)
+        private void ImportAudioStart(string filepath)
+        {
+            bool addedfile = false;
+            if (File.Exists(filepath) && Path.GetExtension(filepath) is ".fsb" or ".wav" or ".ogg") {
+                //loading label
+                lblLoading.Visible = true;
+                lblLoading.Invalidate();
+                lblLoading.Update();
+                lblLoading.Refresh();
+                Application.DoEvents();
+                //if the `extras` folder doesn't exist, make it
+                Directory.CreateDirectory($@"{TCLE.WorkingFolder.FullName}\extras");
+                //
+                ImportAudioToSamp(filepath, this);
+                TCLE.alzheimer();
+                addedfile = true;
+                //
+                lblLoading.Visible = false;
+            }
+            else
+                MessageBox.Show($"{filepath} is not an accepted format (.wav, .ogg, .fsb). It was {Path.GetExtension(filepath)}. File not added to sample list.", "Sample load error");
+            if (addedfile) {
+                SaveCheckAndWrite(false, "Add Sample");
+                TCLE.PlaySound("UIobjectadd");
+            }
+        }
+
+        private static void ImportAudioToSamp(string filepath, Form_SampleEditor SampleEditor)
         {
             string _filename = Path.GetFileNameWithoutExtension(filepath);
-
+            //check if a sample with the same name already exists
             if (TCLE.ProjectSamples.Any(x => x.obj_name == $"{_filename}.samp")) {
                 MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples.First(x => x.obj_name == $"{_filename}.samp").File.FullName}", "Thumper Custom Level Editor");
                 return;
             }
 
-            byte[] bytesFromFSB;
-            string _hashedname = "";
-            bool convertedwav = false;
-            //loading label
-            lblLoading.Visible = true;
-            lblLoading.Invalidate();
-            lblLoading.Update();
-            lblLoading.Refresh();
-            Application.DoEvents();
+            byte[] InputFileBytes;
+            //get the hash of the FSB filename. This will be used to name the final .PC file
+            string _hashedname = TCLE.HashPCName($"Asamples/levels/custom/{_filename}.wav");
+            //see if file is in use and can be read
+            try {
+                InputFileBytes = File.ReadAllBytes(filepath);
+            } catch (Exception) {
+                MessageBox.Show("File in use in another program. Import did not succeed.");
+                return;
+            }
             //
             if (filepath.EndsWith(".wav")) {
-                byte[] wavbytes;
-                //see if file is in use and can be read
-                try {
-                    wavbytes = File.ReadAllBytes(filepath);
-                } catch (Exception) {
-                    MessageBox.Show("File in use in another program. Import did not succeed.");
-                    lblLoading.Visible = false;
-                    return;
-                }
-                //catch non-WAV files  that just happen to have the wav extension
-                if (Encoding.UTF8.GetString(wavbytes, 0, 4) != "RIFF") {
+                //catch non-WAV files that just happen to have the wav extension
+                if (Encoding.UTF8.GetString(InputFileBytes, 0, 4) != "RIFF") {
                     MessageBox.Show("This does not appear to be a proper .WAV file (header problems).", "Thumper Custom Level Editor");
-                    lblLoading.Visible = false;
                     return;
                 }
                 //some WAV have a "JUNK" header. Need to bypass this
-                if (Encoding.UTF8.GetString(wavbytes, 12, 4) == "JUNK") {
-                    uint junktable = BitConverter.ToUInt32(wavbytes, 16);
-                    byte[] wavbefore = wavbytes[0..12];
-                    byte[] wavafter = wavbytes.AsSpan(20 + (int)junktable).ToArray();
-                    wavbytes = wavbefore.Concat(wavafter).ToArray();
+                if (Encoding.UTF8.GetString(InputFileBytes, 12, 4) == "JUNK") {
+                    uint junktable = BitConverter.ToUInt32(InputFileBytes, 16);
+                    byte[] wavbefore = InputFileBytes[0..12];
+                    byte[] wavafter = InputFileBytes.AsSpan(20 + (int)junktable).ToArray();
+                    InputFileBytes = wavbefore.Concat(wavafter).ToArray();
                 }
-                int bytespersample = wavbytes[32];
+                int bytespersample = InputFileBytes[32];
                 int bits = (bytespersample / 2) * 8;
                 //catch non supported type
                 if (!FormatID.ContainsKey(bits)) {
                     MessageBox.Show("That audio format is not supported. Please export your audio in a different format like 16 or 32bit PCM.", "Thumper Custom Level Editor");
-                    lblLoading.Visible = false;
                     return;
                 }
-                uint freq = BitConverter.ToUInt32(wavbytes, 24);
+                uint freq = BitConverter.ToUInt32(InputFileBytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
-                int indexofdata = TCLE.ByteSearch(wavbytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
-                int datalength = BitConverter.ToInt32(wavbytes.AsSpan(indexofdata + 4, 4));
+                int indexofdata = TCLE.ByteSearch(InputFileBytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
+                int datalength = BitConverter.ToInt32(InputFileBytes.AsSpan(indexofdata + 4, 4));
                 indexofdata += 8;
-                wavbytes = wavbytes.AsSpan(indexofdata, datalength).ToArray();
+                InputFileBytes = InputFileBytes.AsSpan(indexofdata, datalength).ToArray();
 
                 if (!Directory.Exists($@"{TCLE.WorkingFolder}\extras"))
                     Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
-                using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_filename}.fsb", FileMode.OpenOrCreate))) {
+                using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.OpenOrCreate))) {
+                    sw.Write(PCfileheader); //4 byte PC file header
                     sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
                     sw.Write((UInt32)1); //version
                     sw.Write((UInt32)1); //how many tracks in fsb
                     sw.Write((UInt32)8); //size of sample header
                     sw.Write((UInt32)0x1c); //size of header table
-                    sw.Write((UInt32)wavbytes.Length); //sample bytes
+                    sw.Write((UInt32)InputFileBytes.Length); //sample bytes
                     sw.Write((UInt32)FormatID[bits]); //audio type
                     sw.Write((UInt32)0); //always 0, unknown
                     sw.Write((UInt32)0); //flags
@@ -840,7 +842,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     sw.Write((UInt64)0); //hash2
                     sw.Write((UInt64)0); //hash3
 
-                    UInt64 metadata = (UInt64)(wavbytes.Length / bytespersample);//samples in audio
+                    UInt64 metadata = (UInt64)(InputFileBytes.Length / bytespersample);//samples in audio
                     metadata <<= 27; //make room for next item
                     metadata |= 0; //data offset
                     metadata <<= 2; //make room for next item
@@ -851,32 +853,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //the last bit of the metadata is always 0, so I don't need to manip it here.
                     sw.Write(metadata);
                     sw.Write(nametable, 0, nametable.Length);
-                    sw.Write(wavbytes, 0, wavbytes.Length);
+                    sw.Write(InputFileBytes, 0, InputFileBytes.Length);
                 }
-                filepath = $@"{TCLE.WorkingFolder}\extras\{_filename}.fsb";
-                convertedwav = true;
-                wavbytes = null;
+                //InputFileBytes = null;
             }
-
+            else if (filepath.EndsWith(".ogg")) {
+                string OggToFsbApp = Path.Combine($@"{TCLE.AppLocation}\temp", "oggvorbis2fsb5.exe");
+                var proc = Process.Start(OggToFsbApp, $@"""{filepath}"" ""{TCLE.WorkingFolder}\extras\{_filename}.fsb""");
+                Thread.Sleep(2000);
+            }
+            /*
+            filepath = $@"{TCLE.WorkingFolder}\extras\{_filename}.fsb";
             bytesFromFSB = File.ReadAllBytes(filepath);
-            //get the hash of the FSB filename. This will be used to name the final .PC file
-            byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"Asamples/levels/custom/{_filename}.wav"));
-            Array.Reverse(hashbytes);
-            foreach (byte b in hashbytes)
-                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-            //if the hashed name starts with a '0', remove it
-            if (_hashedname[0] == '0')
-                _hashedname = _hashedname[1..];
 
             ///With hashing complete, can now save the file to a .PC
-            //if the `extras` folder doesn't exist, make it
-            Directory.CreateDirectory($@"{TCLE.WorkingFolder.FullName}\extras");
             //write header and bytes of fsb to new file
             using (FileStream f = File.Open($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc", FileMode.Create, FileAccess.Write, FileShare.None)) {
                 f.Write(PCfileheader, 0, PCfileheader.Length);
                 f.Write(bytesFromFSB, 0, bytesFromFSB.Length);
             }
             bytesFromFSB = null;
+            */
 
             //Add new sample entry to the loaded samp_ file
             SampleData newsample = new() {
@@ -888,17 +885,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 path = $"samples/levels/custom/{_filename}.wav",
                 channel_group = "sequin.ch",
                 time = -1,
-                Editor = this
+                Editor = SampleEditor
             };
             newsample.CalculateRuntime();
-            SampleList.Add(newsample);
+            SampleEditor.SampleList.Add(newsample);
             newsample.UpdateRuntime();
 
-            if (convertedwav)
-                File.Delete(filepath);
-
-            TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, out string _);
-            lblLoading.Visible = false;
+            TCLE.UpdateProjectSamplesFromFile(SampleEditor.LoadedSample, true, out string _);
         }
 
         private void ResetSample()

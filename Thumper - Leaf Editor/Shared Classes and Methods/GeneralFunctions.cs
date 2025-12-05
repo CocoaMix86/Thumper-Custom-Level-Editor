@@ -12,7 +12,6 @@ using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using Fmod5Sharp.CodecRebuilders;
 using NAudio.Wave;
-using System.Runtime.Intrinsics.X86;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -106,58 +105,27 @@ namespace Thumper_Custom_Level_Editor
         {
             LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{AppLocation}\settings\track_objects_v3.txt")) {
-                using (StreamWriter sw = File.CreateText($@"{AppLocation}\settings\track_objects_v3.txt")) {
-                    sw.Write(Properties.Resources.track_objects);
+            if (!File.Exists($@"{AppLocation}\settings\track_objects_v4.txt")) {
+                using (StreamWriter sw = File.CreateText($@"{AppLocation}\settings\track_objects_v4.txt")) {
+                    sw.Write(Properties.Resources.trackobjects_v4);
                 }
             }
 
             ///import selectable objects from file and parse them into lists for manipulation
             //splits input at "###". Each section is a collection of param_paths
-            List<string> import = File.ReadAllText($@"{AppLocation}\settings\track_objects_v3.txt").Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
-            for (int x = 0; x < import.Count; x++) {
-                //split each section into individual lines
-                List<string> import2 = import[x].Split('\n').ToList();
-
-                for (int y = 1; y < import2.Count - 1; y++) {
-                    //split each line by ';'. Now each property is separated
-                    string[] import3 = import2[y].Split(';');
-                    try {
-                        Object_Params objpar = new() {
-                            category = import2[0],
-                            obj_name = import3[0],
-                            param_displayname = import3[1],
-                            param_path = import3[2],
-                            trait_type = import3[3],
-                            step = import3[4] == "True",
-                            def = import3[5],
-                            footer = import3[6].Replace("[", "").Replace("]", ""),
-                            defaultcolor = Color.Purple
-                        };
-                        //finally, add complete object and values to list
-                        LeafObjects.Add(objpar);
-                    }
-                    catch {
-                        _errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + import2[0] + ".\n";
-                    }
-                }
-            }
-            LeafObjects.Add(new Object_Params() {
-                category = "LOOP TRACK VOLUME",
-                obj_name = "leafname",
-                param_displayname = "Loop Track x Volume",
-                param_path = "layer_volume,x",
-                trait_type = "kTraitFloat",
-                step = false,
-                def = "0.0",
-                footer = "1,1,2,1,2,kIntensityScale,kIntensityScale,1,1,1,1,1,1,1,1,0,0,0",
-                defaultcolor = Color.DarkMagenta
-            });
-            //show errors to user if any imports failed
-            if (_errorlog.Length > 1) {
-                MessageBox.Show(_errorlog);
-                _errorlog = "";
-            }
+            string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
+            LeafObjects = _importedObjects.Select(x => x.Split(';'))
+                                        .Select(x => new Object_Params {
+                                            category = x[0],
+                                            obj_name = x[1],
+                                            param_displayname = x[2],
+                                            param_path = x[3],
+                                            trait_type = x[4],
+                                            step = x[5] == "True",
+                                            def = x[6],
+                                            footer = x[7].Replace("[", "").Replace("]", ""),
+                                            defaultcolor = Color.Purple
+                                        }).ToHashSet();
             //import default colors per object
             ImportDefaultColors();
             //import favorites
@@ -555,15 +523,7 @@ namespace Thumper_Custom_Level_Editor
             foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
-                string _hashedname = "";
-                byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{samp.path}"));
-                Array.Reverse(hashbytes);
-                foreach (byte b in hashbytes)
-                    _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-                //if the hashed name starts with a '0', remove it
-                if (_hashedname[0] == '0')
-                    _hashedname = _hashedname[1..];
-
+                string _hashedname = TCLE.HashPCName($"A{samp.path}");
                 //check if sample is custom or not. This changes where we load audio from
                 string filetoread;
                 try {
@@ -579,8 +539,8 @@ namespace Thumper_Custom_Level_Editor
                         reader.ReadUInt32(); //# of tracks
                         reader.ReadUInt32(); //size of sample header
                         reader.ReadUInt32(); //size of header table
-                        uint sampbytes = reader.ReadUInt32(); //sample bytes
-                        uint type = reader.ReadUInt32(); //audio type
+                        reader.ReadUInt32(); //sample bytes
+                        reader.ReadUInt32(); //audio type
                         reader.ReadUInt32(); //unknown
                         reader.ReadUInt32(); //flags
                         reader.ReadUInt64(); //hash1
@@ -626,20 +586,12 @@ namespace Thumper_Custom_Level_Editor
 
             byte[] _bytes;
             //get the hash of this filename. This will be used to locate the sample's .PC file
-            string _hashedname = "";
-            byte[] hashbytes = BitConverter.GetBytes(Hash32($"A{_samp.path}"));
-            Array.Reverse(hashbytes);
-            foreach (byte b in hashbytes)
-                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-            //if the hashed name starts with a '0', remove it
-            if (_hashedname[0] == '0')
-                _hashedname = _hashedname[1..];
+            string _hashedname = HashPCName($"A{_samp.path}");
 
             //check if sample is custom or not. This changes where we load audio from
             if (_samp.path.Contains("custom")) {
                 //attempt to locate file. But error and return safely if nothing found
                 try {
-                    //read the .pc file as bytes, and skip the first 4 header bytes
                     _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                 }
                 catch {
@@ -648,9 +600,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             else {
-                //attempt to locate file. But error and return safely if nothing found
                 try {
-                    //read the .pc file as bytes, and skip the first 4 header bytes
                     _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
                 }
                 catch {
@@ -703,7 +653,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //Vorbis (ogg)
             else if (type is 15) {
-                samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
+                samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);                
             }
 
             string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
@@ -754,6 +704,19 @@ namespace Thumper_Custom_Level_Editor
             h = (h * 0x21) & 0xffffffff;
 
             return h;
+        }
+
+        public static string HashPCName(string StringToHash)
+        {
+            string _hashedname = "";
+            byte[] hashbytes = BitConverter.GetBytes(Hash32(StringToHash));
+            Array.Reverse(hashbytes);
+            foreach (byte b in hashbytes)
+                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+            //if the hashed name starts with a '0', remove it
+            if (_hashedname[0] == '0')
+                _hashedname = _hashedname[1..];
+            return _hashedname;
         }
 
         public static int ByteSearch(byte[] src, byte[] pattern)

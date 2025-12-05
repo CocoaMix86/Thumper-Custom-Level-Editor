@@ -1752,6 +1752,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] oggvorbis2fsb5 {
+            get {
+                object obj = ResourceManager.GetObject("oggvorbis2fsb5", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap path_arms_deca {
@@ -4058,6 +4068,18 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string track_objects {
             get {
                 return ResourceManager.GetString("track_objects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BARS;grindable.spn;bar;grindable_still.ent;kTraitBool;True;0;[2,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///BARS;grindable.spn;bar[center];center_multi.ent;kTraitBool;True;0;[2,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///BARS;grindable.spn;bar[left];left_multi.ent;kTraitBool;True;0;[2,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0]
+        ///BARS;grindable.spn;bar[right];right_multi.ent;kTraitBool;True;0;[2,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string trackobjects_v4 {
+            get {
+                return ResourceManager.GetString("trackobjects_v4", resourceCulture);
             }
         }
         

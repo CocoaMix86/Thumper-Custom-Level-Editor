@@ -592,6 +592,9 @@
   <data name="obj_list_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\export objlibs\obj_list_2.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="oggvorbis2fsb5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\audio assets\oggvorbis2fsb5.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -1164,6 +1167,9 @@
   </data>
   <data name="Thumper_Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\misc\Thumper_Splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trackobjects_v4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\text assets\trackobjects-v4.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
