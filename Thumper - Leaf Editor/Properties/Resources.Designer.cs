@@ -61,26 +61,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to coin_collect
-        ///ducker_ring_approach
-        ///grindable_birth2
-        ///hammer_two_handed_hit
-        ///high_jump
-        ///thump_birth1
-        ///thump1b
-        ///turn_birth
-        ///turn_birth_lft
-        ///turn_hit_perfect2
-        ///turn_long_lft
-        ///jumper_approach.
-        /// </summary>
-        internal static string audionames {
-            get {
-                return ResourceManager.GetString("audionames", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap beeble {
@@ -1748,16 +1728,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string objects_defaultcolors {
             get {
                 return ResourceManager.GetString("objects_defaultcolors", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] oggvorbis2fsb5 {
-            get {
-                object obj = ResourceManager.GetObject("oggvorbis2fsb5", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         
@@ -3964,28 +3934,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to level_2,drums,crakhed_pattern1.wav
-        ///level_2,drums,crakhed_pattern2.wav
-        ///level_2,drums,crakhed_pattern3.wav
-        ///level_2,drums,crakhed_pattern4.wav
-        ///level_2,drums,drums_boss_pattern1.wav
-        ///level_2,drums,drums_boss_pattern2.wav
-        ///level_2,drums,drums_boss_pattern3.wav
-        ///level_2,drums,drums_boss_pattern4.wav
-        ///level_2,drums,drums_jagged_pattern1.wav
-        ///level_2,drums,drums_jagged_pattern2.wav
-        ///level_2,drums,drums_jagged_pattern3.wav
-        ///level_2,drums,drums_jagged_pattern4_sparse.wav
-        ///level_2,drums,drums_long_pattern1.wav
-        ///le [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samples {
-            get {
-                return ResourceManager.GetString("samples", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{
@@ -4080,29 +4028,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string trackobjects_v4 {
             get {
                 return ResourceManager.GetString("trackobjects_v4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&quot;keybindnewfile&quot;: &quot;New File&quot;
-        ///&quot;keybindopenfile&quot;: &quot;Open File&quot;
-        ///&quot;keybindsavefile&quot;: &quot;Save File&apos;
-        ///&quot;keybindsavefileas&quot;: &quot;Save File As&quot;
-        ///&quot;keybindsaveall&quot;: &quot;Save All&quot;
-        ///&quot;keybindtemplateopen&quot;: &quot;Open Template&quot;
-        ///&quot;keybindprojectnew&quot;: &quot;New Project&quot;
-        ///&quot;keybindprojectopen&quot;: &quot;Open Project&quot;
-        ///&quot;keybindprojectrecent&quot;: &quot;Recent Projects&quot;
-        ///&quot;keybindcolordialog&quot;: &quot;Insert Color Value&quot;
-        ///&quot;keybindinterpolate&quot;: &quot;Interpolate Cells&quot;
-        ///&quot;keybindsplitleaf&quot;: &quot;Split Leaf&quot;
-        ///&quot;keybindrandomizerow&quot;: &quot;Randomize Row Values&quot;
-        ///&quot;keybindtoggleautoplace [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string TranslationTable {
-            get {
-                return ResourceManager.GetString("TranslationTable", resourceCulture);
             }
         }
         

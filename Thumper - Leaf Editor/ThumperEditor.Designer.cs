@@ -28,13 +28,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TCLE));
             this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.colorDialog1 = new ColorDialog();
@@ -51,6 +51,7 @@
             this.toolStripSeparator5 = new ToolStripSeparator();
             this.toolStripSeparator6 = new ToolStripSeparator();
             this.btnLevelFolder2 = new ToolStripButton();
+            this.pictureTunnelViewer = new Label();
             this.panelChangelog = new Panel();
             this.panel8 = new Panel();
             this.lblChangelog = new Label();
@@ -210,7 +211,6 @@
             this.moveToWorkspaceToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
-            this.pictureTunnelViewer = new Label();
             this.pictureEasing = new Label();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
@@ -282,26 +282,26 @@
             this.dgvRecentFiles.BorderStyle = BorderStyle.None;
             this.dgvRecentFiles.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             this.dgvRecentFiles.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle8.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.Silver;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.Silver;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRecentFiles.ColumnHeadersHeight = 20;
             this.dgvRecentFiles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRecentFiles.Columns.AddRange(new DataGridViewColumn[] { this.dataGridViewImageColumn1, this.dataGridViewTextBoxColumn1, this.dataGridViewTextBoxColumn2, this.closerecent });
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle13.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle13.ForeColor = Color.White;
-            dataGridViewCellStyle13.NullValue = null;
-            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle6.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvRecentFiles.Dock = DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = Color.Black;
@@ -310,13 +310,13 @@
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
             this.dgvRecentFiles.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 20;
@@ -330,12 +330,12 @@
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle9.ForeColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(55, 55, 55);
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(55, 55, 55);
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewImageColumn1.FlatStyle = FlatStyle.Flat;
             this.dataGridViewImageColumn1.HeaderText = "";
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
@@ -347,8 +347,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle10.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -359,9 +359,9 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.Font = new Font("Arial Narrow", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Font = new Font("Arial Narrow", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -371,12 +371,12 @@
             // closerecent
             // 
             this.closerecent.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle12.ForeColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(55, 55, 55);
-            this.closerecent.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(55, 55, 55);
+            this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
             this.closerecent.FlatStyle = FlatStyle.Flat;
             this.closerecent.HeaderText = "";
             this.closerecent.Name = "closerecent";
@@ -442,6 +442,22 @@
             this.btnLevelFolder2.Size = new Size(23, 19);
             this.btnLevelFolder2.ToolTipText = "Open a project file that's not in this list";
             this.btnLevelFolder2.Click += this.toolstripFileOpenProject_Click;
+            // 
+            // pictureTunnelViewer
+            // 
+            this.pictureTunnelViewer.BackColor = Color.FromArgb(64, 0, 0);
+            this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
+            this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.pictureTunnelViewer.ForeColor = Color.White;
+            this.pictureTunnelViewer.Location = new Point(280, 268);
+            this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
+            this.pictureTunnelViewer.MaximumSize = new Size(150, 150);
+            this.pictureTunnelViewer.MinimumSize = new Size(150, 150);
+            this.pictureTunnelViewer.Name = "pictureTunnelViewer";
+            this.pictureTunnelViewer.Size = new Size(150, 150);
+            this.pictureTunnelViewer.TabIndex = 155;
+            this.pictureTunnelViewer.Visible = false;
+            this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
             // 
             // panelChangelog
             // 
@@ -595,7 +611,7 @@
             this.contextmenuFile.Name = "contextmenuFile";
             this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuFile.Size = new Size(293, 286);
+            this.contextmenuFile.Size = new Size(293, 264);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
             // 
             // toolstripFileNewProject
@@ -1784,6 +1800,7 @@
             // 
             this.panelFill.AutoScroll = true;
             this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
+            this.panelFill.Controls.Add(this.pictureTunnelViewer);
             this.panelFill.Controls.Add(this.panelLoadingMessage);
             this.panelFill.Controls.Add(this.dockMain);
             this.panelFill.Dock = DockStyle.Fill;
@@ -2014,22 +2031,6 @@
             this.eToolStripMenuItem.Size = new Size(80, 22);
             this.eToolStripMenuItem.Text = "e";
             // 
-            // pictureTunnelViewer
-            // 
-            this.pictureTunnelViewer.BackColor = Color.FromArgb(64, 0, 0);
-            this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
-            this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(342, 100);
-            this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
-            this.pictureTunnelViewer.MaximumSize = new Size(300, 300);
-            this.pictureTunnelViewer.MinimumSize = new Size(300, 300);
-            this.pictureTunnelViewer.Name = "pictureTunnelViewer";
-            this.pictureTunnelViewer.Size = new Size(300, 300);
-            this.pictureTunnelViewer.TabIndex = 155;
-            this.pictureTunnelViewer.Visible = false;
-            this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
-            // 
             // pictureEasing
             // 
             this.pictureEasing.BackColor = Color.Black;
@@ -2052,7 +2053,6 @@
             this.ClientSize = new Size(984, 500);
             this.ControlBox = false;
             this.Controls.Add(this.pictureEasing);
-            this.Controls.Add(this.pictureTunnelViewer);
             this.Controls.Add(this.panelRecentFiles);
             this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelFill);

@@ -232,7 +232,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 return;
             //calculate position to show the tunnel image
             Point mouse = TCLE.Instance.PointToClient(System.Windows.Forms.Cursor.Position);
-            int height = mouse.Y + 150 > TCLE.Instance.Height ? TCLE.Instance.Height - 300 : mouse.Y - 150;
+            int height = mouse.Y + 75 > TCLE.Instance.Height ? TCLE.Instance.Height - 150 : mouse.Y - 75;
             //get image of tunnel
             string pathname = (string)(sender as DataGridView).Rows[e.RowIndex].Cells[0].GetEditedFormattedValue(e.RowIndex, DataGridViewDataErrorContexts.Commit);
             TCLE.Instance.pictureTunnelViewer.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"path_{pathname.Replace(".path", "")}");
