@@ -3,7 +3,7 @@ using System.Windows.Shell;
 using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using Un4seen.Bass;
+using Un4seen.Bass; 
 using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Other_Forms;
 

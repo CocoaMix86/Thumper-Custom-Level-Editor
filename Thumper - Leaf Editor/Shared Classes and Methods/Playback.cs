@@ -2,6 +2,7 @@
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
+using static System.Windows.Forms.DataFormats;
 
 namespace Thumper_Custom_Level_Editor
 { 
@@ -423,42 +424,91 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        enum BeetleState { Normal, Grind, Fly, FlyGrind, LongFly, LongFlyGrind };
         public static void PitchShiftingBarsRings()
         {
             Pitch = 8192;
-            int Missed = 0;
             List<BASS_MIDI_EVENT> EventsToAdd19 = new();
             List<BASS_MIDI_EVENT> EventsToAdd20 = new();
             //combine ring and bar hit events to get a single track of events, in choronological order
-            List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19];/*.Concat(SequencerEvents[20]).ToList();*/
+            List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19].Concat(SequencerEvents[20]).ToList();
             //concat turn and thump hits, as they contribute to keeping a combo going
             ComboList = ComboList.Concat(GlobalSequencerEvents[8]).ToList();
             ComboList = ComboList.Concat(GlobalSequencerEvents[13]).ToList();
             ComboList = ComboList.Concat(GlobalSequencerEvents[22]).ToList();
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
 
-            for (int x = 1; x < ComboList.Count; x++) {
-                if (ComboList[x].chan is 8 or 13 or 22)
+            bool InCombo = false;
+            bool Smashing = false;
+            bool RaisePitch = false;
+            int LastRingBar = 0;
+            int LastTurn = 0;
+            int LastThump = 0;
+            BeetleState state = BeetleState.Normal;
+            for (int x = 0; x < ComboList.Count; x++) {
+                //8 = thump, 13 = turn, 19 = bar, 20 = ring, 22 = turn long
+                if (ComboList[x].chan is 8 or 13 or 20 or 22) {
+                    if (ComboList[x].chan is 8) {
+                        LastThump = ComboList[x].tick;
+                        if (state is BeetleState.Normal or BeetleState.Grind)
+                            state = BeetleState.FlyGrind;
+                        else if (state is BeetleState.FlyGrind or BeetleState.Fly or BeetleState.LongFly)
+                            state = BeetleState.LongFlyGrind;
+
+                        if (InCombo && LastThump - LastRingBar > 200) {
+                            InCombo = false;
+                        }
+                    }
+                    else if (ComboList[x].chan is 13) {
+                        LastTurn = ComboList[x].tick;
+                        if (state is BeetleState.Fly or BeetleState.FlyGrind)
+                            state = BeetleState.LongFlyGrind;
+                    }
+                    else if (ComboList[x].chan is 22) {
+                        LastTurn = ComboList[x].tick;
+                        if (state is not BeetleState.Normal)
+                            state = BeetleState.Grind;
+                    }
                     continue;
-                //test if the event behind current is within 500 ticks (5 beats) of the current event
-                if (ComboList[x].tick - ComboList[x - 1].tick is < 400 and not 0) {
-                    //if found, pitch up next sound.
-                    //add the pitch events to the lists.
+                }
+                LastRingBar = ComboList[x].tick;
+
+                if (InCombo) {
+                    if (ComboList[x].tick - ComboList[x - 1].tick is <= 200 and not 0) {
+                        RaisePitch = true;
+                    }
+                    else {
+                        InCombo = false;
+                    }
+                }
+                else {
+                    if (state is BeetleState.Grind or BeetleState.FlyGrind or BeetleState.LongFlyGrind && LastRingBar - LastThump <= 1100)
+                        InCombo = true;
+                    //check if hit corresponds with a ring. If not and not in combo, play bar breaking at half speed
+                    else if (!GlobalSequencerEvents[20].Any(y => y.tick == LastRingBar)) {
+                        Smashing = true;
+                    }
+                }
+
+                if (RaisePitch) {
                     if (Pitch < 9824) {
                         Pitch += 136;
-                        EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, ComboList[x].tick - 1, 0));
-                        EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, ComboList[x].tick - 1, 0));
+                        EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, LastRingBar - 1, 0));
+                        EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, LastRingBar - 1, 0));
                     }
-                    Missed = 0;
                 }
-                else if (ComboList[x].tick - ComboList[x - 1].tick == 0) { }
+                else if (Smashing) {
+                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192 - (136 * 12), 19, LastRingBar - 1, 0));
+                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192, 19, LastRingBar + 50, 0));
+                }
                 //else, reset pitch and start again
-                else if (Missed == 0) {
+                else {
                     Pitch = 8192;
-                    Missed = 1;
-                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, ComboList[x].tick - 1, 0));
-                    EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, ComboList[x].tick - 1, 0));
+                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, LastRingBar - 1, 0));
+                    EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, LastRingBar - 1, 0));
                 }
+                Smashing = false;
+                RaisePitch = false;
             }
             //concat new events into lists, then sort by tick to make them chronological
             GlobalSequencerEvents[19] = GlobalSequencerEvents[19].Concat(EventsToAdd19).ToList();
