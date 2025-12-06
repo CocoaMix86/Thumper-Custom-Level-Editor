@@ -463,6 +463,10 @@ namespace Thumper_Custom_Level_Editor
                         LastTurn = ComboList[x].tick;
                         if (state is BeetleState.Fly or BeetleState.FlyGrind)
                             state = BeetleState.LongFlyGrind;
+
+                        if (InCombo && LastTurn - LastRingBar > 200) {
+                            InCombo = false;
+                        }
                     }
                     else if (ComboList[x].chan is 22) {
                         LastTurn = ComboList[x].tick;
