@@ -222,7 +222,7 @@ namespace Thumper_Custom_Level_Editor
         public static void toolStripFavAdd_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            if (Source.SelectedNode.ImageKey != "none")
+            if (Source.SelectedNode.ImageKey == "fav")
                 return;
             Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == Source.SelectedNode.Text && x.category.ToUpper() == Source.SelectedNode.Parent.Text);
             if (match != null && !TCLE.ObjectFavorites.Contains(match))
