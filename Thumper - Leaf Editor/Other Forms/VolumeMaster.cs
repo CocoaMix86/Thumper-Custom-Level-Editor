@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 ZipFile.ExtractToDirectory($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", $@"{TCLE.AppLocation}\temp\");
             }
             //load soundfont
-            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
+            MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0) };
             //set volume levels according to user saved settings
             IsResetting = true;
