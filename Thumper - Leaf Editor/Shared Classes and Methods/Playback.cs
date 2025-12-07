@@ -455,7 +455,7 @@ namespace Thumper_Custom_Level_Editor
                         else if (state is BeetleState.FlyGrind or BeetleState.Fly or BeetleState.LongFly)
                             state = BeetleState.LongFlyGrind;
 
-                        if (InCombo && LastThump - LastRingBar > 200) {
+                        if (InCombo && LastThump - LastRingBar > 300) {
                             InCombo = false;
                         }
                     }
@@ -464,7 +464,7 @@ namespace Thumper_Custom_Level_Editor
                         if (state is BeetleState.Fly or BeetleState.FlyGrind)
                             state = BeetleState.LongFlyGrind;
 
-                        if (InCombo && LastTurn - LastRingBar > 200) {
+                        if (InCombo && LastTurn - LastRingBar > 300) {
                             InCombo = false;
                         }
                     }
