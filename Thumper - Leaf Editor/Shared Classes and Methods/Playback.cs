@@ -431,7 +431,7 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> EventsToAdd19 = new();
             List<BASS_MIDI_EVENT> EventsToAdd20 = new();
             //combine ring and bar hit events to get a single track of events, in choronological order
-            List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19].Concat(SequencerEvents[20]).ToList();
+            List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19];//.Concat(SequencerEvents[20]).ToList();
             //concat turn and thump hits, as they contribute to keeping a combo going
             ComboList = ComboList.Concat(GlobalSequencerEvents[8]).ToList();
             ComboList = ComboList.Concat(GlobalSequencerEvents[13]).ToList();
