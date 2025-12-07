@@ -478,7 +478,7 @@ namespace Thumper_Custom_Level_Editor
                 LastRingBar = ComboList[x].tick;
 
                 if (InCombo) {
-                    if (ComboList[x].tick - ComboList[x - 1].tick is <= 200 and not 0) {
+                    if (ComboList[x].tick - ComboList[x - 1].tick is <= 300 and not 0) {
                         RaisePitch = true;
                     }
                     else {
