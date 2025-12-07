@@ -515,29 +515,9 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap editor_gate64 {
-            get {
-                object obj = ResourceManager.GetObject("editor_gate64", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap editor_leaf {
             get {
                 object obj = ResourceManager.GetObject("editor_leaf", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap editor_leaf64 {
-            get {
-                object obj = ResourceManager.GetObject("editor_leaf64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -568,16 +548,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static System.Drawing.Bitmap editor_sample {
             get {
                 object obj = ResourceManager.GetObject("editor_sample", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap editor_sample64 {
-            get {
-                object obj = ResourceManager.GetObject("editor_sample64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

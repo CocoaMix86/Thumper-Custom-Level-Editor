@@ -1606,7 +1606,7 @@
             // 
             this.toolStripMenuItem11.DropDownItems.AddRange(new ToolStripItem[] { this.leafoptionShowCategory, this.leafoptionShowGrid, this.leafoptionConnectBars, this.leafoptionShowLanes, this.leafoptionEaseDots, this.leafoptionThinValues, this.leafoptionShowWave });
             this.toolStripMenuItem11.ForeColor = Color.White;
-            this.toolStripMenuItem11.Image = Properties.Resources.editor_leaf64;
+            this.toolStripMenuItem11.Image = Properties.Resources.editor_leaf;
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.Size = new Size(214, 22);
             this.toolStripMenuItem11.Text = "Leaf Editor Options             ";

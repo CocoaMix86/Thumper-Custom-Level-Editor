@@ -247,14 +247,8 @@
   <data name="editor_gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="editor_gate64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\editors\editor-gate64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="editor_leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="editor_leaf64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\editors\editor-leaf64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editor_lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-lvl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -264,9 +258,6 @@
   </data>
   <data name="editor_sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="editor_sample64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\editors\editor-sample64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="editor_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\editors\editor-workspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
