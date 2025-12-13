@@ -3079,23 +3079,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     continue;
                 JObject s = new();
                 //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
-                    seq_obj.obj_name = (string)_save["obj_name"];
-                //also adjust default leafname to the actual leaf's name
-                if (seq_obj.obj_name == "leafname")
-                    seq_obj.obj_name = (string)_save["obj_name"];
-                s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
+                if (seq_obj.obj_name == "leafname" || seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
+                    seq_obj.obj_name = _properties.FilePath.Name;
+                s.Add("obj_name", seq_obj.obj_name);
                 //write param_path or param_path_hash
                 if (seq_obj.param_path.StartsWith("0x"))
                     s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
                 else
                     s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
                 s.Add("trait_type", seq_obj.trait_type);
+                //
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
                     JObject d = new() {
                         { "beat", datapoint.beat },
-                        { "value", decimal.Parse(datapoint.value.ToString()) },
+                        { "value", datapoint.value },
                         { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
                         { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
@@ -3103,7 +3101,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     datapoints.Add(d);
                 }
                 s.Add("data_points", datapoints);
-                ///end
                 //add the rest of the keys to this seq_obj
                 s.Add("step", seq_obj.step.ToString());
                 s.Add("default", seq_obj.defaultvalue);

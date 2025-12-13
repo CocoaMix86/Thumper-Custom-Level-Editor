@@ -592,7 +592,13 @@ namespace Thumper_Custom_Level_Editor
             if (_samp.path.Contains("custom")) {
                 //attempt to locate file. But error and return safely if nothing found
                 try {
-                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                    using (var fileStream = File.OpenRead($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc")) {
+                        fileStream.Seek(4, SeekOrigin.Begin);
+                        _bytes = new byte[fileStream.Length - 4];
+                        fileStream.Read(_bytes, 0, _bytes.Length);
+                        //Do your thing
+                    }
+                    //_bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                 }
                 catch {
                     _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
@@ -617,7 +623,7 @@ namespace Thumper_Custom_Level_Editor
                 _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
                 return _samp.TempFile;
             }
-            _bytes = _bytes.Skip(4).ToArray();
+            ///_bytes = _bytes.Skip(4).ToArray();
             // credit to https://github.com/SamboyCoding/Fmod5Sharp
             FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
             List<FmodSample> samples = bank.Samples;
@@ -657,7 +663,12 @@ namespace Thumper_Custom_Level_Editor
             }
 
             string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-            File.WriteAllBytes(finalfilename, dataBytes);
+            using (var stream = File.Open(finalfilename, FileMode.Create)) {
+                using (BinaryWriter bw = new(stream)) {
+                    bw.Write(dataBytes);
+                }
+            }
+            //File.WriteAllBytes(finalfilename, dataBytes);
             _samp.TempFile = finalfilename;
             return _samp.TempFile;
         }
