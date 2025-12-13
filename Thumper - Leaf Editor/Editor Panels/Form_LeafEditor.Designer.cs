@@ -29,1432 +29,1071 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.trackZoomVert = new System.Windows.Forms.TrackBar();
-            this.trackZoom = new System.Windows.Forms.TrackBar();
-            this.lblRawData = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panelLeaf = new System.Windows.Forms.Panel();
-            this.panelZoom = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
-            this.vScrollBarTrackEditor = new System.Windows.Forms.VScrollBar();
-            this.trackEditor = new System.Windows.Forms.DataGridView();
-            this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.leafToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnTrackAdd = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackDelete = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackUp = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackDown = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackCopy = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackPaste = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackClear = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackPlayback = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackColorExport = new System.Windows.Forms.ToolStripButton();
-            this.btnTrackColorImport = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafRandom = new System.Windows.Forms.ToolStripButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panelRawData = new System.Windows.Forms.Panel();
-            this.btnRawImport = new System.Windows.Forms.Button();
-            this.richRawTrackData = new System.Windows.Forms.RichTextBox();
-            this.leaftoolsToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnLeafColors = new System.Windows.Forms.ToolStripButton();
-            this.btnLEafInterpLinear = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafSplit = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafRandomValues = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.dropTimeSig = new System.Windows.Forms.ToolStripComboBox();
-            this.btnLeafZoom = new System.Windows.Forms.ToolStripButton();
-            this.btnLeafAutoPlace = new System.Windows.Forms.ToolStripButton();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.NUDquick9 = new System.Windows.Forms.NumericUpDown();
-            this.label69 = new System.Windows.Forms.Label();
-            this.NUDquick8 = new System.Windows.Forms.NumericUpDown();
-            this.label64 = new System.Windows.Forms.Label();
-            this.NUDquick7 = new System.Windows.Forms.NumericUpDown();
-            this.label65 = new System.Windows.Forms.Label();
-            this.NUDquick6 = new System.Windows.Forms.NumericUpDown();
-            this.label66 = new System.Windows.Forms.Label();
-            this.NUDquick5 = new System.Windows.Forms.NumericUpDown();
-            this.label67 = new System.Windows.Forms.Label();
-            this.NUDquick4 = new System.Windows.Forms.NumericUpDown();
-            this.label62 = new System.Windows.Forms.Label();
-            this.NUDquick3 = new System.Windows.Forms.NumericUpDown();
-            this.label63 = new System.Windows.Forms.Label();
-            this.NUDquick2 = new System.Windows.Forms.NumericUpDown();
-            this.label61 = new System.Windows.Forms.Label();
-            this.NUDquick1 = new System.Windows.Forms.NumericUpDown();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.btnTrackColorDialog = new System.Windows.Forms.Button();
-            this.NUD_TrackHighlight = new System.Windows.Forms.NumericUpDown();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtTrait = new System.Windows.Forms.Label();
-            this.dropLeafInterp = new System.Windows.Forms.ComboBox();
-            this.txtDefault = new System.Windows.Forms.NumericUpDown();
-            this.dropLeafStep = new System.Windows.Forms.ComboBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dropObjects = new System.Windows.Forms.ComboBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dropParamPath = new System.Windows.Forms.ComboBox();
-            this.dropTrackLane = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.btnTrackApply = new System.Windows.Forms.Button();
-            this.numericUpDown_LeafLength = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
-            this.panelLeaf.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            this.toolTip1 = new ToolTip(this.components);
+            this.trackZoomVert = new TrackBar();
+            this.trackZoom = new TrackBar();
+            this.btnRawImport = new Button();
+            this.labelCollapsePanel2 = new Label();
+            this.imageList1 = new ImageList(this.components);
+            this.contextMenuFav = new ContextMenuStrip(this.components);
+            this.toolStripFavAdd = new ToolStripMenuItem();
+            this.vScrollBarTrackEditor = new VScrollBar();
+            this.panelZoom = new Panel();
+            this.labelScrollH = new Label();
+            this.labelScrollV = new Label();
+            this.trackEditor = new DataGridView();
+            this.LeafEnabled = new DataGridViewTextBoxColumn();
+            this.LeafAudio = new DataGridViewTextBoxColumn();
+            this.LeafMultilane = new DataGridViewTextBoxColumn();
+            this.leafToolStrip = new ToolStrip();
+            this.btnTrackAdd = new ToolStripButton();
+            this.btnTrackDelete = new ToolStripButton();
+            this.btnTrackUp = new ToolStripButton();
+            this.btnTrackDown = new ToolStripButton();
+            this.btnTrackCopy = new ToolStripButton();
+            this.btnTrackPaste = new ToolStripButton();
+            this.btnTrackClear = new ToolStripButton();
+            this.btnLeafClean = new ToolStripButton();
+            this.btnTrackPlayback = new ToolStripButton();
+            this.btnLeafRandom = new ToolStripButton();
+            this.toolStripSeparator1 = new ToolStripSeparator();
+            this.toolStripSeparator2 = new ToolStripSeparator();
+            this.leaftoolsToolStrip = new ToolStrip();
+            this.btnLeafColors = new ToolStripButton();
+            this.btnLeafInterpLinear = new ToolStripSplitButton();
+            this.contextMenuInterps = new ContextMenuStrip(this.components);
+            this.linearToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator4 = new ToolStripSeparator();
+            this.sineEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.quadraticToolStripMenuItem1 = new ToolStripMenuItem();
+            this.cubicEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticEaseInToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator3 = new ToolStripSeparator();
+            this.sineEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quadraticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.cubicEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticEaseOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator5 = new ToolStripSeparator();
+            this.sineEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quadraticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.cubicEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quarticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.quinticEaseInOutToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator8 = new ToolStripSeparator();
+            this.exampleswebLinkToolStripMenuItem = new ToolStripMenuItem();
+            this.btnLeafSplit = new ToolStripButton();
+            this.btnLeafRandomValues = new ToolStripButton();
+            this.btnLeafZoom = new ToolStripButton();
+            this.btnLeafAutoPlace = new ToolStripButton();
+            this.treeObjects = new TreeViewEx();
+            this.txtSearch = new TextBox();
+            this.propertyGridLeaf = new PropertyGrid();
+            this.splitContainerLeafSide = new SplitContainer();
+            this.splitContainerTopbar = new SplitContainer();
+            this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.contextMenuFavRemove = new ContextMenuStrip(this.components);
+            this.toolStripFavRemove = new ToolStripMenuItem();
+            this.contextMenuFavClear = new ContextMenuStrip(this.components);
+            this.toolStripFavClear = new ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.panelObjects = new Panel();
+            ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
+            this.contextMenuFav.SuspendLayout();
             this.panelZoom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackEditor).BeginInit();
             this.leafToolStrip.SuspendLayout();
-            this.panelRawData.SuspendLayout();
             this.leaftoolsToolStrip.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick1)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).BeginInit();
+            this.contextMenuInterps.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerLeafSide).BeginInit();
+            this.splitContainerLeafSide.Panel1.SuspendLayout();
+            this.splitContainerLeafSide.Panel2.SuspendLayout();
+            this.splitContainerLeafSide.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).BeginInit();
+            this.splitContainerTopbar.Panel2.SuspendLayout();
+            this.splitContainerTopbar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
+            this.contextMenuFavRemove.SuspendLayout();
+            this.contextMenuFavClear.SuspendLayout();
+            this.panelObjects.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackZoomVert
             // 
             this.trackZoomVert.AutoSize = false;
-            this.trackZoomVert.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoomVert.Location = new System.Drawing.Point(39, 17);
-            this.trackZoomVert.Margin = new System.Windows.Forms.Padding(0);
+            this.trackZoomVert.Cursor = Cursors.Hand;
+            this.trackZoomVert.Location = new Point(44, 20);
+            this.trackZoomVert.Margin = new Padding(0);
             this.trackZoomVert.Maximum = 100;
             this.trackZoomVert.Minimum = 1;
             this.trackZoomVert.Name = "trackZoomVert";
-            this.trackZoomVert.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackZoomVert.Size = new System.Drawing.Size(19, 100);
+            this.trackZoomVert.Orientation = Orientation.Vertical;
+            this.trackZoomVert.Size = new Size(22, 115);
             this.trackZoomVert.TabIndex = 43;
-            this.trackZoomVert.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackZoomVert.TickStyle = TickStyle.None;
             this.toolTip1.SetToolTip(this.trackZoomVert, "Row zoom/height");
             this.trackZoomVert.Value = 20;
+            this.trackZoomVert.ValueChanged += this.trackZoomVert_Scroll;
             // 
             // trackZoom
             // 
             this.trackZoom.AutoSize = false;
-            this.trackZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.trackZoom.Location = new System.Drawing.Point(-3, 3);
-            this.trackZoom.Margin = new System.Windows.Forms.Padding(0);
+            this.trackZoom.Cursor = Cursors.Hand;
+            this.trackZoom.Location = new Point(-4, 3);
+            this.trackZoom.Margin = new Padding(0);
             this.trackZoom.Maximum = 100;
             this.trackZoom.Minimum = 1;
             this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(100, 19);
+            this.trackZoom.Size = new Size(117, 22);
             this.trackZoom.TabIndex = 41;
-            this.trackZoom.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackZoom.TickStyle = TickStyle.None;
             this.toolTip1.SetToolTip(this.trackZoom, "Cell zoom/width");
             this.trackZoom.Value = 40;
+            this.trackZoom.ValueChanged += this.trackZoom_Scroll;
             // 
-            // lblRawData
+            // btnRawImport
             // 
-            this.lblRawData.AutoSize = true;
-            this.lblRawData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRawData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblRawData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRawData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblRawData.Location = new System.Drawing.Point(0, -1);
-            this.lblRawData.MinimumSize = new System.Drawing.Size(20, 20);
-            this.lblRawData.Name = "lblRawData";
-            this.lblRawData.Size = new System.Drawing.Size(20, 20);
-            this.lblRawData.TabIndex = 139;
-            this.lblRawData.Text = "▼";
-            this.lblRawData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.lblRawData, "Show/Hide raw data panel");
+            this.btnRawImport.BackColor = Color.DarkGreen;
+            this.btnRawImport.Cursor = Cursors.Hand;
+            this.btnRawImport.Dock = DockStyle.Left;
+            this.btnRawImport.FlatStyle = FlatStyle.Flat;
+            this.btnRawImport.Image = (Image)resources.GetObject("btnRawImport.Image");
+            this.btnRawImport.ImageAlign = ContentAlignment.TopCenter;
+            this.btnRawImport.Location = new Point(0, 0);
+            this.btnRawImport.Margin = new Padding(0);
+            this.btnRawImport.Name = "btnRawImport";
+            this.btnRawImport.Size = new Size(54, 87);
+            this.btnRawImport.TabIndex = 44;
+            this.btnRawImport.Text = "Import Raw";
+            this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.btnRawImport.UseVisualStyleBackColor = false;
+            this.btnRawImport.Click += this.btnRawImport_Click;
             // 
-            // label60
+            // labelCollapsePanel2
             // 
-            this.label60.AutoSize = true;
-            this.label60.BackColor = System.Drawing.Color.Transparent;
-            this.label60.Cursor = System.Windows.Forms.Cursors.Help;
-            this.label60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label60.Location = new System.Drawing.Point(131, 2);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(15, 16);
-            this.label60.TabIndex = 96;
-            this.label60.Text = "?";
-            this.toolTip1.SetToolTip(this.label60, "These values are accessible through keybinds.\r\nChange the keybinds in EDIT > Pref" +
-        "erences.");
+            this.labelCollapsePanel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            this.labelCollapsePanel2.BackColor = Color.Gray;
+            this.labelCollapsePanel2.BorderStyle = BorderStyle.FixedSingle;
+            this.labelCollapsePanel2.Cursor = Cursors.Hand;
+            this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
+            this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.labelCollapsePanel2.ForeColor = Color.White;
+            this.labelCollapsePanel2.Location = new Point(0, 357);
+            this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
+            this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
+            this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
+            this.labelCollapsePanel2.Name = "labelCollapsePanel2";
+            this.labelCollapsePanel2.Size = new Size(16, 16);
+            this.labelCollapsePanel2.TabIndex = 145;
+            this.labelCollapsePanel2.Text = "v";
+            this.toolTip1.SetToolTip(this.labelCollapsePanel2, "Hide/Reveal bottom panel");
+            this.labelCollapsePanel2.Click += this.labelCollapsePanel2_Click;
             // 
-            // label17
+            // imageList1
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(20, 46);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(88, 15);
-            this.label17.TabIndex = 59;
-            this.label17.Text = "Highlight value";
-            this.toolTip1.SetToolTip(this.label17, "Applies the highlight color when cell value\r\nis above this value.");
+            this.imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            this.imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            this.imageList1.TransparentColor = Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "category");
+            this.imageList1.Images.SetKeyName(1, "none");
+            this.imageList1.Images.SetKeyName(2, "samp");
+            this.imageList1.Images.SetKeyName(3, "fav");
+            this.imageList1.Images.SetKeyName(4, "play");
+            this.imageList1.Images.SetKeyName(5, "BARS - MULTI.png");
+            this.imageList1.Images.SetKeyName(6, "BARS.png");
+            this.imageList1.Images.SetKeyName(7, "BOSS EFFECTS.png");
+            this.imageList1.Images.SetKeyName(8, "BOSS SHIELDS.png");
+            this.imageList1.Images.SetKeyName(9, "CAMERA.png");
+            this.imageList1.Images.SetKeyName(10, "CONTROLLER.png");
+            this.imageList1.Images.SetKeyName(11, "DECORATIVE MILLIPEDES.png");
+            this.imageList1.Images.SetKeyName(12, "DISSONANT_BURSTS.png");
+            this.imageList1.Images.SetKeyName(13, "EXPERIMENTAL.png");
+            this.imageList1.Images.SetKeyName(14, "FX.png");
+            this.imageList1.Images.SetKeyName(15, "GAMMA.png");
+            this.imageList1.Images.SetKeyName(16, "INTROFLOW.png");
+            this.imageList1.Images.SetKeyName(17, "JUMPSSPIKES.png");
+            this.imageList1.Images.SetKeyName(18, "LOOP TRACK VOLUME.png");
+            this.imageList1.Images.SetKeyName(19, "MILLIPEDES.png");
+            this.imageList1.Images.SetKeyName(20, "PLAY SAMPLE.png");
+            this.imageList1.Images.SetKeyName(21, "POST PROCESSING.png");
+            this.imageList1.Images.SetKeyName(22, "RAIL COLORS.png");
+            this.imageList1.Images.SetKeyName(23, "RINGS.png");
+            this.imageList1.Images.SetKeyName(24, "SENTRY.png");
+            this.imageList1.Images.SetKeyName(25, "SKYBOX_COLORS.png");
+            this.imageList1.Images.SetKeyName(26, "SMOKE FX.png");
+            this.imageList1.Images.SetKeyName(27, "TENTACLES.png");
+            this.imageList1.Images.SetKeyName(28, "THUMPS.png");
+            this.imageList1.Images.SetKeyName(29, "TRACK EFFECTS.png");
+            this.imageList1.Images.SetKeyName(30, "TRACK FX.png");
+            this.imageList1.Images.SetKeyName(31, "WIN & MISC.png");
             // 
-            // label7
+            // contextMenuFav
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(27, 70);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 15);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Default";
-            this.toolTip1.SetToolTip(this.label7, "If no value is set on a beat, the game will use this default.");
+            this.contextMenuFav.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuFav.Items.AddRange(new ToolStripItem[] { this.toolStripFavAdd });
+            this.contextMenuFav.Name = "workingfolderRightClick";
+            this.contextMenuFav.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuFav.Size = new Size(162, 26);
             // 
-            // label46
+            // toolStripFavAdd
             // 
-            this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.ForeColor = System.Drawing.Color.White;
-            this.label46.Location = new System.Drawing.Point(8, 93);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(65, 13);
-            this.label46.TabIndex = 106;
-            this.label46.Text = "Interpolation";
-            this.toolTip1.SetToolTip(this.label46, resources.GetString("label46.ToolTip"));
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(41, 47);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 15);
-            this.label8.TabIndex = 36;
-            this.label8.Text = "Step";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(42, 24);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 15);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "Trait";
-            this.toolTip1.SetToolTip(this.label9, "The data type of the object. Recommended to not edit.");
-            // 
-            // panelLeaf
-            // 
-            this.panelLeaf.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.panelLeaf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLeaf.Controls.Add(this.panelZoom);
-            this.panelLeaf.Controls.Add(this.vScrollBarTrackEditor);
-            this.panelLeaf.Controls.Add(this.trackEditor);
-            this.panelLeaf.Controls.Add(this.leafToolStrip);
-            this.panelLeaf.Controls.Add(this.label5);
-            this.panelLeaf.Controls.Add(this.panelRawData);
-            this.panelLeaf.Controls.Add(this.leaftoolsToolStrip);
-            this.panelLeaf.Controls.Add(this.panel6);
-            this.panelLeaf.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLeaf.Location = new System.Drawing.Point(0, 0);
-            this.panelLeaf.MinimumSize = new System.Drawing.Size(60, 60);
-            this.panelLeaf.Name = "panelLeaf";
-            this.panelLeaf.Size = new System.Drawing.Size(800, 450);
-            this.panelLeaf.TabIndex = 46;
-            this.panelLeaf.Tag = "editorpanel";
-            // 
-            // panelZoom
-            // 
-            this.panelZoom.BackColor = System.Drawing.Color.Black;
-            this.panelZoom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelZoom.Controls.Add(this.label10);
-            this.panelZoom.Controls.Add(this.label57);
-            this.panelZoom.Controls.Add(this.trackZoomVert);
-            this.panelZoom.Controls.Add(this.trackZoom);
-            this.panelZoom.Location = new System.Drawing.Point(477, 29);
-            this.panelZoom.Name = "panelZoom";
-            this.panelZoom.Size = new System.Drawing.Size(98, 116);
-            this.panelZoom.TabIndex = 43;
-            this.panelZoom.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(-1, 14);
-            this.label10.Name = "label10";
-            this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label10.Size = new System.Drawing.Size(36, 45);
-            this.label10.TabIndex = 67;
-            this.label10.Text = "Ctrl+\r\nscroll\r\n←→";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.ForeColor = System.Drawing.Color.White;
-            this.label57.Location = new System.Drawing.Point(53, 48);
-            this.label57.Name = "label57";
-            this.label57.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label57.Size = new System.Drawing.Size(38, 60);
-            this.label57.TabIndex = 68;
-            this.label57.Text = "↑\r\n↓\r\nShift+\r\nscroll";
-            this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolStripFavAdd.ForeColor = Color.White;
+            this.toolStripFavAdd.Image = Properties.Resources.icon_fav;
+            this.toolStripFavAdd.Name = "toolStripFavAdd";
+            this.toolStripFavAdd.Size = new Size(161, 22);
+            this.toolStripFavAdd.Text = "Add To Favorites";
+            this.toolStripFavAdd.Click += this.toolStripFavAdd_Click;
             // 
             // vScrollBarTrackEditor
             // 
-            this.vScrollBarTrackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.vScrollBarTrackEditor.Location = new System.Drawing.Point(231, 52);
+            this.vScrollBarTrackEditor.Dock = DockStyle.Left;
+            this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new System.Drawing.Size(15, 323);
+            this.vScrollBarTrackEditor.Size = new Size(15, 342);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             // 
+            // panelZoom
+            // 
+            this.panelZoom.BackColor = Color.Black;
+            this.panelZoom.BorderStyle = BorderStyle.Fixed3D;
+            this.panelZoom.Controls.Add(this.labelScrollH);
+            this.panelZoom.Controls.Add(this.labelScrollV);
+            this.panelZoom.Controls.Add(this.trackZoomVert);
+            this.panelZoom.Controls.Add(this.trackZoom);
+            this.panelZoom.Location = new Point(176, 25);
+            this.panelZoom.Margin = new Padding(4, 3, 4, 3);
+            this.panelZoom.Name = "panelZoom";
+            this.panelZoom.Size = new Size(114, 133);
+            this.panelZoom.TabIndex = 43;
+            this.panelZoom.Visible = false;
+            // 
+            // labelScrollH
+            // 
+            this.labelScrollH.AutoSize = true;
+            this.labelScrollH.BackColor = Color.Black;
+            this.labelScrollH.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.labelScrollH.ForeColor = Color.White;
+            this.labelScrollH.Location = new Point(-1, 19);
+            this.labelScrollH.Margin = new Padding(4, 0, 4, 0);
+            this.labelScrollH.Name = "labelScrollH";
+            this.labelScrollH.RightToLeft = RightToLeft.No;
+            this.labelScrollH.Size = new Size(36, 45);
+            this.labelScrollH.TabIndex = 67;
+            this.labelScrollH.Text = "Ctrl+\r\nscroll\r\n←→";
+            this.labelScrollH.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelScrollV
+            // 
+            this.labelScrollV.AutoSize = true;
+            this.labelScrollV.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.labelScrollV.ForeColor = Color.White;
+            this.labelScrollV.Location = new Point(62, 55);
+            this.labelScrollV.Margin = new Padding(4, 0, 4, 0);
+            this.labelScrollV.Name = "labelScrollV";
+            this.labelScrollV.RightToLeft = RightToLeft.No;
+            this.labelScrollV.Size = new Size(38, 60);
+            this.labelScrollV.TabIndex = 68;
+            this.labelScrollV.Text = "↑\r\n↓\r\nShift+\r\nscroll";
+            this.labelScrollV.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // trackEditor
             // 
+            this.trackEditor.AllowDrop = true;
             this.trackEditor.AllowUserToAddRows = false;
             this.trackEditor.AllowUserToDeleteRows = false;
             this.trackEditor.AllowUserToResizeColumns = false;
             this.trackEditor.AllowUserToResizeRows = false;
-            this.trackEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackEditor.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.trackEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.trackEditor.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.trackEditor.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
+            this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
-            this.trackEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.trackEditor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column0});
-            this.trackEditor.Cursor = System.Windows.Forms.Cursors.Arrow;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Format = "0.###";
-            dataGridViewCellStyle6.NullValue = null;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle6;
+            this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Format = "0.###";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle2;
+            this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
-            this.trackEditor.GridColor = System.Drawing.Color.Black;
-            this.trackEditor.Location = new System.Drawing.Point(230, 29);
+            this.trackEditor.GridColor = Color.Black;
+            this.trackEditor.Location = new Point(39, 30);
+            this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
-            this.trackEditor.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.trackEditor.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.trackEditor.RowTemplate.Height = 20;
-            this.trackEditor.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.trackEditor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.trackEditor.ScrollBars = ScrollBars.Horizontal;
+            this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new System.Drawing.Size(564, 346);
+            this.trackEditor.Size = new Size(491, 342);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
+            this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
+            this.trackEditor.CellBeginEdit += this.trackEditor_CellBeginEdit;
+            this.trackEditor.CellEndEdit += this.trackEditor_CellEndEdit;
+            this.trackEditor.CellFormatting += this.trackEditor_CellFormatting;
+            this.trackEditor.CellMouseClick += this.trackEditor_CellMouseClick;
+            this.trackEditor.CellMouseDown += this.trackEditor_CellMouseDown;
+            this.trackEditor.CellMouseEnter += this.trackEditor_CellMouseEnter;
+            this.trackEditor.CellMouseLeave += this.trackEditor_CellMouseLeave;
+            this.trackEditor.CellMouseMove += this.trackEditor_CellMouseMove;
+            this.trackEditor.CellMouseUp += this.trackEditor_CellMouseUp;
+            this.trackEditor.CellPainting += this.trackEditor_CellPainting;
+            this.trackEditor.CellParsing += this.trackEditor_CellParsing;
+            this.trackEditor.ColumnAdded += this.trackEditor_ColumnAdded;
+            this.trackEditor.DataError += this.trackEditor_DataError;
+            this.trackEditor.EditingControlShowing += this.trackEditor_EditingControlShowing;
+            this.trackEditor.RowEnter += this.trackEditor_RowEnter;
+            this.trackEditor.RowHeaderMouseClick += this.trackEditor_RowHeaderMouseClick;
+            this.trackEditor.RowPrePaint += this.trackEditor_RowPrePaint;
+            this.trackEditor.RowsAdded += this.trackEditor_RowsAdded;
+            this.trackEditor.SelectionChanged += this.trackEditor_SelectionChanged;
+            this.trackEditor.Click += this.trackEditor_Click;
+            this.trackEditor.DragDrop += this.trackEditor_DragDrop;
+            this.trackEditor.DragEnter += this.trackEditor_DragEnter;
+            this.trackEditor.DragOver += this.trackEditor_DragOver;
+            this.trackEditor.KeyDown += this.trackEditor_KeyDown;
+            this.trackEditor.KeyPress += this.trackEditor_KeyPress;
+            this.trackEditor.KeyUp += this.trackEditor_KeyUp;
+            this.trackEditor.MouseDown += this.trackEditor_MouseDown;
+            this.trackEditor.MouseMove += this.trackEditor_MouseMove;
+            this.trackEditor.PreviewKeyDown += this.AllowArrowMovement;
+            this.trackEditor.Resize += this.trackEditor_Resize;
             // 
-            // Column0
+            // LeafEnabled
             // 
-            this.Column0.HeaderText = "0";
-            this.Column0.Name = "Column0";
+            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafEnabled.Frozen = true;
+            this.LeafEnabled.HeaderText = "";
+            this.LeafEnabled.MinimumWidth = 25;
+            this.LeafEnabled.Name = "LeafEnabled";
+            this.LeafEnabled.ReadOnly = true;
+            this.LeafEnabled.Resizable = DataGridViewTriState.False;
+            this.LeafEnabled.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.LeafEnabled.ToolTipText = "Enable/Disable All";
+            this.LeafEnabled.Width = 25;
+            // 
+            // LeafAudio
+            // 
+            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafAudio.Frozen = true;
+            this.LeafAudio.HeaderText = "";
+            this.LeafAudio.MinimumWidth = 25;
+            this.LeafAudio.Name = "LeafAudio";
+            this.LeafAudio.ReadOnly = true;
+            this.LeafAudio.Resizable = DataGridViewTriState.False;
+            this.LeafAudio.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.LeafAudio.ToolTipText = "Mute/Unmute All";
+            this.LeafAudio.Width = 25;
+            // 
+            // LeafMultilane
+            // 
+            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafMultilane.Frozen = true;
+            this.LeafMultilane.HeaderText = "";
+            this.LeafMultilane.MinimumWidth = 29;
+            this.LeafMultilane.Name = "LeafMultilane";
+            this.LeafMultilane.ReadOnly = true;
+            this.LeafMultilane.Resizable = DataGridViewTriState.False;
+            this.LeafMultilane.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.LeafMultilane.ToolTipText = "Expand/Collapse all lanes";
+            this.LeafMultilane.Width = 29;
             // 
             // leafToolStrip
             // 
             this.leafToolStrip.AutoSize = false;
-            this.leafToolStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.leafToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.leafToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.leafToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.leafToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.leafToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnTrackAdd,
-            this.btnTrackDelete,
-            this.btnTrackUp,
-            this.btnTrackDown,
-            this.btnTrackCopy,
-            this.btnTrackPaste,
-            this.btnTrackClear,
-            this.btnTrackPlayback,
-            this.btnTrackColorExport,
-            this.btnTrackColorImport,
-            this.btnLeafRandom});
-            this.leafToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.leafToolStrip.Location = new System.Drawing.Point(204, 29);
+            this.leafToolStrip.BackColor = Color.FromArgb(10, 10, 10);
+            this.leafToolStrip.Dock = DockStyle.Left;
+            this.leafToolStrip.GripMargin = new Padding(0);
+            this.leafToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            this.leafToolStrip.ImageScalingSize = new Size(20, 20);
+            this.leafToolStrip.Items.AddRange(new ToolStripItem[] { this.btnTrackAdd, this.btnTrackDelete, this.btnTrackUp, this.btnTrackDown, this.btnTrackCopy, this.btnTrackPaste, this.btnTrackClear, this.btnLeafClean, this.btnTrackPlayback, this.btnLeafRandom, this.toolStripSeparator1, this.toolStripSeparator2 });
+            this.leafToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.leafToolStrip.Location = new Point(0, 30);
             this.leafToolStrip.Name = "leafToolStrip";
-            this.leafToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.leafToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new System.Drawing.Size(25, 323);
+            this.leafToolStrip.Padding = new Padding(0);
+            this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
+            this.leafToolStrip.Size = new Size(24, 342);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
             // btnTrackAdd
             // 
-            this.btnTrackAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrackAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackAdd.ForeColor = System.Drawing.Color.White;
-            this.btnTrackAdd.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_plus;
-            this.btnTrackAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackAdd.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackAdd.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnTrackAdd.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.btnTrackAdd.ForeColor = Color.White;
+            this.btnTrackAdd.Image = Properties.Resources.icon_editdetails;
+            this.btnTrackAdd.ImageTransparentColor = Color.Magenta;
+            this.btnTrackAdd.Margin = new Padding(0);
             this.btnTrackAdd.Name = "btnTrackAdd";
-            this.btnTrackAdd.Size = new System.Drawing.Size(24, 24);
-            this.btnTrackAdd.ToolTipText = "Add track";
+            this.btnTrackAdd.Size = new Size(23, 24);
+            this.btnTrackAdd.ToolTipText = "Change the current sequencer track object\r\ninto the current selected object in the list.\r\nThis affects all lanes of the object.";
+            this.btnTrackAdd.Click += this.btnTrackAdd_Click;
             // 
             // btnTrackDelete
             // 
-            this.btnTrackDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackDelete.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackDelete.Enabled = false;
-            this.btnTrackDelete.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_remove2;
-            this.btnTrackDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackDelete.Image = (Image)resources.GetObject("btnTrackDelete.Image");
+            this.btnTrackDelete.ImageTransparentColor = Color.Magenta;
+            this.btnTrackDelete.Margin = new Padding(0);
             this.btnTrackDelete.Name = "btnTrackDelete";
-            this.btnTrackDelete.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackDelete.Size = new Size(23, 24);
             this.btnTrackDelete.ToolTipText = "Delete selected track";
+            this.btnTrackDelete.Click += this.btnTrackDelete_Click;
             // 
             // btnTrackUp
             // 
-            this.btnTrackUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackUp.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackUp.Enabled = false;
-            this.btnTrackUp.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowup2;
-            this.btnTrackUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackUp.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackUp.Image = (Image)resources.GetObject("btnTrackUp.Image");
+            this.btnTrackUp.ImageTransparentColor = Color.Magenta;
+            this.btnTrackUp.Margin = new Padding(0);
             this.btnTrackUp.Name = "btnTrackUp";
-            this.btnTrackUp.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackUp.Size = new Size(23, 24);
             this.btnTrackUp.ToolTipText = "Move selected tracks up";
+            this.btnTrackUp.Click += this.btnTrackUp_Click;
             // 
             // btnTrackDown
             // 
-            this.btnTrackDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackDown.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackDown.Enabled = false;
-            this.btnTrackDown.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_arrowdown2;
-            this.btnTrackDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackDown.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackDown.Image = (Image)resources.GetObject("btnTrackDown.Image");
+            this.btnTrackDown.ImageTransparentColor = Color.Magenta;
+            this.btnTrackDown.Margin = new Padding(0);
             this.btnTrackDown.Name = "btnTrackDown";
-            this.btnTrackDown.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackDown.Size = new Size(23, 24);
             this.btnTrackDown.ToolTipText = "Move selected tracks down";
+            this.btnTrackDown.Click += this.btnTrackDown_Click;
             // 
             // btnTrackCopy
             // 
-            this.btnTrackCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackCopy.Enabled = false;
-            this.btnTrackCopy.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_copy2;
-            this.btnTrackCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackCopy.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTrackCopy.Image = (Image)resources.GetObject("btnTrackCopy.Image");
+            this.btnTrackCopy.ImageTransparentColor = Color.Magenta;
+            this.btnTrackCopy.Margin = new Padding(0);
             this.btnTrackCopy.Name = "btnTrackCopy";
-            this.btnTrackCopy.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackCopy.Size = new Size(23, 24);
             this.btnTrackCopy.ToolTipText = "Copy selected track";
+            this.btnTrackCopy.Click += this.btnTrackCopy_Click;
             // 
             // btnTrackPaste
             // 
-            this.btnTrackPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackPaste.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackPaste.Enabled = false;
-            this.btnTrackPaste.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_paste2;
-            this.btnTrackPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackPaste.Image = (Image)resources.GetObject("btnTrackPaste.Image");
+            this.btnTrackPaste.ImageTransparentColor = Color.Magenta;
             this.btnTrackPaste.Name = "btnTrackPaste";
-            this.btnTrackPaste.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackPaste.Size = new Size(23, 24);
             this.btnTrackPaste.ToolTipText = "Paste the copied track";
+            this.btnTrackPaste.Click += this.btnTrackPaste_Click;
             // 
             // btnTrackClear
             // 
-            this.btnTrackClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnTrackClear.DisplayStyle = ToolStripItemDisplayStyle.Image;
             this.btnTrackClear.Enabled = false;
-            this.btnTrackClear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_erase;
-            this.btnTrackClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackClear.Image = (Image)resources.GetObject("btnTrackClear.Image");
+            this.btnTrackClear.ImageTransparentColor = Color.Magenta;
             this.btnTrackClear.Name = "btnTrackClear";
-            this.btnTrackClear.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackClear.Size = new Size(23, 24);
             this.btnTrackClear.ToolTipText = "Clear all values on selected track";
+            this.btnTrackClear.Click += this.btnTrackClear_Click;
+            // 
+            // btnLeafClean
+            // 
+            this.btnLeafClean.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafClean.Image = Properties.Resources.icon_clean;
+            this.btnLeafClean.ImageTransparentColor = Color.Magenta;
+            this.btnLeafClean.Name = "btnLeafClean";
+            this.btnLeafClean.Size = new Size(23, 24);
+            this.btnLeafClean.ToolTipText = "Removes all empty objects, excluding ones\r\nwith not original default values.";
+            this.btnLeafClean.Click += this.btnLeafClean_Click;
             // 
             // btnTrackPlayback
             // 
-            this.btnTrackPlayback.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrackPlayback.Enabled = false;
-            this.btnTrackPlayback.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_play2;
-            this.btnTrackPlayback.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnTrackPlayback.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnTrackPlayback.Image = (Image)resources.GetObject("btnTrackPlayback.Image");
+            this.btnTrackPlayback.ImageTransparentColor = Color.Magenta;
             this.btnTrackPlayback.Name = "btnTrackPlayback";
-            this.btnTrackPlayback.Size = new System.Drawing.Size(24, 24);
+            this.btnTrackPlayback.Size = new Size(23, 24);
             this.btnTrackPlayback.ToolTipText = resources.GetString("btnTrackPlayback.ToolTipText");
-            // 
-            // btnTrackColorExport
-            // 
-            this.btnTrackColorExport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnTrackColorExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrackColorExport.Enabled = false;
-            this.btnTrackColorExport.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_export;
-            this.btnTrackColorExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackColorExport.Name = "btnTrackColorExport";
-            this.btnTrackColorExport.Size = new System.Drawing.Size(24, 24);
-            this.btnTrackColorExport.ToolTipText = "Export a color profile";
-            // 
-            // btnTrackColorImport
-            // 
-            this.btnTrackColorImport.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnTrackColorImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnTrackColorImport.Enabled = false;
-            this.btnTrackColorImport.Image = ((System.Drawing.Image)(resources.GetObject("btnTrackColorImport.Image")));
-            this.btnTrackColorImport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnTrackColorImport.Name = "btnTrackColorImport";
-            this.btnTrackColorImport.Size = new System.Drawing.Size(24, 24);
-            this.btnTrackColorImport.ToolTipText = "Import a color profile and apply to selected track";
+            this.btnTrackPlayback.Click += this.btnTrackPlayback_Click;
             // 
             // btnLeafRandom
             // 
-            this.btnLeafRandom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafRandom.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_random;
-            this.btnLeafRandom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafRandom.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafRandom.Image = (Image)resources.GetObject("btnLeafRandom.Image");
+            this.btnLeafRandom.ImageTransparentColor = Color.Magenta;
             this.btnLeafRandom.Name = "btnLeafRandom";
-            this.btnLeafRandom.Size = new System.Drawing.Size(24, 24);
+            this.btnLeafRandom.Size = new Size(23, 24);
             this.btnLeafRandom.ToolTipText = "Click to add a random object + values to the leaf";
+            this.btnLeafRandom.Click += this.btnLeafRandom_Click;
             // 
-            // label5
+            // toolStripSeparator1
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(231, 16);
-            this.label5.MinimumSize = new System.Drawing.Size(100, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 13);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Tracks Editor";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new Size(23, 6);
             // 
-            // panelRawData
+            // toolStripSeparator2
             // 
-            this.panelRawData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelRawData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelRawData.Controls.Add(this.lblRawData);
-            this.panelRawData.Controls.Add(this.btnRawImport);
-            this.panelRawData.Controls.Add(this.richRawTrackData);
-            this.panelRawData.Location = new System.Drawing.Point(230, 378);
-            this.panelRawData.Name = "panelRawData";
-            this.panelRawData.Size = new System.Drawing.Size(564, 62);
-            this.panelRawData.TabIndex = 139;
-            // 
-            // btnRawImport
-            // 
-            this.btnRawImport.BackColor = System.Drawing.Color.Gray;
-            this.btnRawImport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRawImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRawImport.Location = new System.Drawing.Point(22, 0);
-            this.btnRawImport.Margin = new System.Windows.Forms.Padding(0);
-            this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new System.Drawing.Size(78, 42);
-            this.btnRawImport.TabIndex = 44;
-            this.btnRawImport.Text = "Import Raw to Track";
-            this.btnRawImport.UseVisualStyleBackColor = false;
-            // 
-            // richRawTrackData
-            // 
-            this.richRawTrackData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richRawTrackData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.richRawTrackData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richRawTrackData.DetectUrls = false;
-            this.richRawTrackData.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richRawTrackData.ForeColor = System.Drawing.Color.White;
-            this.richRawTrackData.Location = new System.Drawing.Point(101, 0);
-            this.richRawTrackData.Name = "richRawTrackData";
-            this.richRawTrackData.Size = new System.Drawing.Size(461, 59);
-            this.richRawTrackData.TabIndex = 26;
-            this.richRawTrackData.Text = "raw track data";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new Size(23, 6);
             // 
             // leaftoolsToolStrip
             // 
-            this.leaftoolsToolStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.leaftoolsToolStrip.AutoSize = false;
-            this.leaftoolsToolStrip.BackColor = System.Drawing.Color.Black;
-            this.leaftoolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this.leaftoolsToolStrip.GripMargin = new System.Windows.Forms.Padding(0);
-            this.leaftoolsToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.leaftoolsToolStrip.ImageScalingSize = new System.Drawing.Size(25, 25);
-            this.leaftoolsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnLeafColors,
-            this.btnLEafInterpLinear,
-            this.btnLeafSplit,
-            this.btnLeafRandomValues,
-            this.toolStripLabel2,
-            this.dropTimeSig,
-            this.btnLeafZoom,
-            this.btnLeafAutoPlace});
-            this.leaftoolsToolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.leaftoolsToolStrip.Location = new System.Drawing.Point(335, 0);
+            this.leaftoolsToolStrip.BackColor = Color.Black;
+            this.leaftoolsToolStrip.GripMargin = new Padding(0);
+            this.leaftoolsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
+            this.leaftoolsToolStrip.ImageScalingSize = new Size(24, 24);
+            this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLeafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace });
+            this.leaftoolsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.leaftoolsToolStrip.Location = new Point(0, 0);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
-            this.leaftoolsToolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.leaftoolsToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.leaftoolsToolStrip.Size = new System.Drawing.Size(459, 30);
+            this.leaftoolsToolStrip.Padding = new Padding(0);
+            this.leaftoolsToolStrip.RenderMode = ToolStripRenderMode.System;
+            this.leaftoolsToolStrip.Size = new Size(500, 30);
             this.leaftoolsToolStrip.Stretch = true;
             this.leaftoolsToolStrip.TabIndex = 143;
             // 
             // btnLeafColors
             // 
-            this.btnLeafColors.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafColors.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_color_wheel;
-            this.btnLeafColors.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafColors.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafColors.Image = (Image)resources.GetObject("btnLeafColors.Image");
+            this.btnLeafColors.ImageTransparentColor = Color.Magenta;
             this.btnLeafColors.Name = "btnLeafColors";
-            this.btnLeafColors.Size = new System.Drawing.Size(29, 27);
+            this.btnLeafColors.Size = new Size(28, 27);
             this.btnLeafColors.ToolTipText = "Insert color value into selected cells";
+            this.btnLeafColors.Click += this.btnLeafColors_Click;
             // 
-            // btnLEafInterpLinear
+            // btnLeafInterpLinear
             // 
-            this.btnLEafInterpLinear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLEafInterpLinear.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_graph;
-            this.btnLEafInterpLinear.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLEafInterpLinear.Name = "btnLEafInterpLinear";
-            this.btnLEafInterpLinear.Size = new System.Drawing.Size(29, 27);
-            this.btnLEafInterpLinear.ToolTipText = "Smoothly interpolate between 2 selected values.\r\nAutomatically fills in values.";
+            this.btnLeafInterpLinear.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafInterpLinear.DropDown = this.contextMenuInterps;
+            this.btnLeafInterpLinear.Image = Properties.Resources.icon_graph;
+            this.btnLeafInterpLinear.ImageTransparentColor = Color.Magenta;
+            this.btnLeafInterpLinear.Name = "btnLeafInterpLinear";
+            this.btnLeafInterpLinear.Size = new Size(40, 27);
+            this.btnLeafInterpLinear.TextAlign = ContentAlignment.MiddleRight;
+            this.btnLeafInterpLinear.ToolTipText = "Interpolate values between 2 selected cells in the same row.\r\nUse the drop down to select different easing styles.\r\n=======\r\nLast Used: <none>";
+            this.btnLeafInterpLinear.ButtonClick += this.btnLeafInterpLinear_ButtonClick;
+            // 
+            // contextMenuInterps
+            // 
+            this.contextMenuInterps.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuInterps.Items.AddRange(new ToolStripItem[] { this.linearToolStripMenuItem, this.toolStripSeparator4, this.sineEaseInToolStripMenuItem, this.quadraticToolStripMenuItem1, this.cubicEaseInToolStripMenuItem, this.quarticEaseInToolStripMenuItem, this.quinticEaseInToolStripMenuItem, this.toolStripSeparator3, this.sineEaseOutToolStripMenuItem, this.quadraticEaseOutToolStripMenuItem, this.cubicEaseOutToolStripMenuItem, this.quarticEaseOutToolStripMenuItem, this.quinticEaseOutToolStripMenuItem, this.toolStripSeparator5, this.sineEaseInOutToolStripMenuItem, this.quadraticEaseInOutToolStripMenuItem, this.cubicEaseInOutToolStripMenuItem, this.quarticEaseInOutToolStripMenuItem, this.quinticEaseInOutToolStripMenuItem, this.toolStripSeparator8, this.exampleswebLinkToolStripMenuItem });
+            this.contextMenuInterps.Name = "workingfolderRightClick";
+            this.contextMenuInterps.OwnerItem = this.btnLeafInterpLinear;
+            this.contextMenuInterps.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuInterps.Size = new Size(189, 402);
+            this.contextMenuInterps.Closing += this.contextMenuInterps_Closing;
+            this.contextMenuInterps.ItemClicked += this.contextMenuInterps_ItemClicked;
+            this.contextMenuInterps.MouseMove += this.contextMenuInterps_MouseMove;
+            // 
+            // linearToolStripMenuItem
+            // 
+            this.linearToolStripMenuItem.ForeColor = Color.LimeGreen;
+            this.linearToolStripMenuItem.Name = "linearToolStripMenuItem";
+            this.linearToolStripMenuItem.Size = new Size(188, 22);
+            this.linearToolStripMenuItem.Text = "Linear";
+            this.linearToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new Size(185, 6);
+            // 
+            // sineEaseInToolStripMenuItem
+            // 
+            this.sineEaseInToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseInToolStripMenuItem.Name = "sineEaseInToolStripMenuItem";
+            this.sineEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseInToolStripMenuItem.Text = "Sine Ease In";
+            this.sineEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quadraticToolStripMenuItem1
+            // 
+            this.quadraticToolStripMenuItem1.ForeColor = Color.MediumSlateBlue;
+            this.quadraticToolStripMenuItem1.Name = "quadraticToolStripMenuItem1";
+            this.quadraticToolStripMenuItem1.Size = new Size(188, 22);
+            this.quadraticToolStripMenuItem1.Text = "Quadratic Ease In";
+            this.quadraticToolStripMenuItem1.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // cubicEaseInToolStripMenuItem
+            // 
+            this.cubicEaseInToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseInToolStripMenuItem.Name = "cubicEaseInToolStripMenuItem";
+            this.cubicEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseInToolStripMenuItem.Text = "Cubic Ease In";
+            this.cubicEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quarticEaseInToolStripMenuItem
+            // 
+            this.quarticEaseInToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseInToolStripMenuItem.Name = "quarticEaseInToolStripMenuItem";
+            this.quarticEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseInToolStripMenuItem.Text = "Quartic Ease In";
+            this.quarticEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quinticEaseInToolStripMenuItem
+            // 
+            this.quinticEaseInToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseInToolStripMenuItem.Name = "quinticEaseInToolStripMenuItem";
+            this.quinticEaseInToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseInToolStripMenuItem.Text = "Quintic Ease In";
+            this.quinticEaseInToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new Size(185, 6);
+            // 
+            // sineEaseOutToolStripMenuItem
+            // 
+            this.sineEaseOutToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseOutToolStripMenuItem.Name = "sineEaseOutToolStripMenuItem";
+            this.sineEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseOutToolStripMenuItem.Text = "Sine Ease Out";
+            this.sineEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quadraticEaseOutToolStripMenuItem
+            // 
+            this.quadraticEaseOutToolStripMenuItem.ForeColor = Color.MediumSlateBlue;
+            this.quadraticEaseOutToolStripMenuItem.Name = "quadraticEaseOutToolStripMenuItem";
+            this.quadraticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quadraticEaseOutToolStripMenuItem.Text = "Quadratic Ease Out";
+            this.quadraticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // cubicEaseOutToolStripMenuItem
+            // 
+            this.cubicEaseOutToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseOutToolStripMenuItem.Name = "cubicEaseOutToolStripMenuItem";
+            this.cubicEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseOutToolStripMenuItem.Text = "Cubic Ease Out";
+            this.cubicEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quarticEaseOutToolStripMenuItem
+            // 
+            this.quarticEaseOutToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseOutToolStripMenuItem.Name = "quarticEaseOutToolStripMenuItem";
+            this.quarticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseOutToolStripMenuItem.Text = "Quartic Ease Out";
+            this.quarticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quinticEaseOutToolStripMenuItem
+            // 
+            this.quinticEaseOutToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseOutToolStripMenuItem.Name = "quinticEaseOutToolStripMenuItem";
+            this.quinticEaseOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseOutToolStripMenuItem.Text = "Quintic Ease Out";
+            this.quinticEaseOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new Size(185, 6);
+            // 
+            // sineEaseInOutToolStripMenuItem
+            // 
+            this.sineEaseInOutToolStripMenuItem.ForeColor = Color.Red;
+            this.sineEaseInOutToolStripMenuItem.Name = "sineEaseInOutToolStripMenuItem";
+            this.sineEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.sineEaseInOutToolStripMenuItem.Text = "Sine Ease In Out";
+            this.sineEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quadraticEaseInOutToolStripMenuItem
+            // 
+            this.quadraticEaseInOutToolStripMenuItem.ForeColor = Color.MediumSlateBlue;
+            this.quadraticEaseInOutToolStripMenuItem.Name = "quadraticEaseInOutToolStripMenuItem";
+            this.quadraticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quadraticEaseInOutToolStripMenuItem.Text = "Quadratic Ease In Out";
+            this.quadraticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // cubicEaseInOutToolStripMenuItem
+            // 
+            this.cubicEaseInOutToolStripMenuItem.ForeColor = Color.Orange;
+            this.cubicEaseInOutToolStripMenuItem.Name = "cubicEaseInOutToolStripMenuItem";
+            this.cubicEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.cubicEaseInOutToolStripMenuItem.Text = "Cubic Ease In Out";
+            this.cubicEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quarticEaseInOutToolStripMenuItem
+            // 
+            this.quarticEaseInOutToolStripMenuItem.ForeColor = Color.Turquoise;
+            this.quarticEaseInOutToolStripMenuItem.Name = "quarticEaseInOutToolStripMenuItem";
+            this.quarticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quarticEaseInOutToolStripMenuItem.Text = "Quartic Ease In Out";
+            this.quarticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // quinticEaseInOutToolStripMenuItem
+            // 
+            this.quinticEaseInOutToolStripMenuItem.ForeColor = Color.Yellow;
+            this.quinticEaseInOutToolStripMenuItem.Name = "quinticEaseInOutToolStripMenuItem";
+            this.quinticEaseInOutToolStripMenuItem.Size = new Size(188, 22);
+            this.quinticEaseInOutToolStripMenuItem.Text = "Quintic Ease In Out";
+            this.quinticEaseInOutToolStripMenuItem.MouseEnter += this.linearToolStripMenuItem_MouseEnter;
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new Size(185, 6);
+            // 
+            // exampleswebLinkToolStripMenuItem
+            // 
+            this.exampleswebLinkToolStripMenuItem.ForeColor = Color.White;
+            this.exampleswebLinkToolStripMenuItem.Name = "exampleswebLinkToolStripMenuItem";
+            this.exampleswebLinkToolStripMenuItem.Size = new Size(188, 22);
+            this.exampleswebLinkToolStripMenuItem.Text = "Examples (web link)";
+            this.exampleswebLinkToolStripMenuItem.Click += this.exampleswebLinkToolStripMenuItem_Click;
             // 
             // btnLeafSplit
             // 
-            this.btnLeafSplit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafSplit.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_divider;
-            this.btnLeafSplit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafSplit.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafSplit.Image = (Image)resources.GetObject("btnLeafSplit.Image");
+            this.btnLeafSplit.ImageTransparentColor = Color.Magenta;
             this.btnLeafSplit.Name = "btnLeafSplit";
-            this.btnLeafSplit.Size = new System.Drawing.Size(29, 27);
+            this.btnLeafSplit.Size = new Size(28, 27);
             this.btnLeafSplit.ToolTipText = "Split leaf at selected beat.\r\nCreates a new file.";
+            this.btnLeafSplit.Click += this.btnLeafSplit_Click;
             // 
             // btnLeafRandomValues
             // 
-            this.btnLeafRandomValues.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafRandomValues.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_randomize;
-            this.btnLeafRandomValues.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafRandomValues.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafRandomValues.Image = (Image)resources.GetObject("btnLeafRandomValues.Image");
+            this.btnLeafRandomValues.ImageTransparentColor = Color.Magenta;
             this.btnLeafRandomValues.Name = "btnLeafRandomValues";
-            this.btnLeafRandomValues.Size = new System.Drawing.Size(29, 27);
+            this.btnLeafRandomValues.Size = new Size(28, 27);
             this.btnLeafRandomValues.ToolTipText = "Clears the current track and sets random values.";
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.ForeColor = System.Drawing.Color.Gray;
-            this.toolStripLabel2.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(55, 28);
-            this.toolStripLabel2.Text = "Time Sig:";
-            this.toolStripLabel2.ToolTipText = "Purely visual for the editor. Does not change \r\nanything mechanically in game.";
-            // 
-            // dropTimeSig
-            // 
-            this.dropTimeSig.AutoSize = false;
-            this.dropTimeSig.BackColor = System.Drawing.Color.Black;
-            this.dropTimeSig.DropDownWidth = 30;
-            this.dropTimeSig.ForeColor = System.Drawing.Color.White;
-            this.dropTimeSig.Items.AddRange(new object[] {
-            "2/4",
-            "3/4",
-            "4/4",
-            "5/4",
-            "5/8",
-            "6/8",
-            "7/8",
-            "8/8",
-            "9/8"});
-            this.dropTimeSig.Margin = new System.Windows.Forms.Padding(-2, 2, 0, 0);
-            this.dropTimeSig.Name = "dropTimeSig";
-            this.dropTimeSig.Size = new System.Drawing.Size(45, 23);
-            this.dropTimeSig.Text = "4/4";
-            this.dropTimeSig.ToolTipText = "Purely visual for the editor. Does not change \r\nanything mechanically in game.";
+            this.btnLeafRandomValues.Click += this.btnLeafRandomValues_Click;
             // 
             // btnLeafZoom
             // 
-            this.btnLeafZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafZoom.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_zoom;
-            this.btnLeafZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafZoom.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafZoom.Image = (Image)resources.GetObject("btnLeafZoom.Image");
+            this.btnLeafZoom.ImageTransparentColor = Color.Magenta;
             this.btnLeafZoom.Name = "btnLeafZoom";
-            this.btnLeafZoom.Size = new System.Drawing.Size(29, 27);
+            this.btnLeafZoom.Size = new Size(28, 27);
             this.btnLeafZoom.ToolTipText = "Click to show zoom.\r\nCTRL+scroll = horizontal\r\nSHIFT+scroll = vertical";
+            this.btnLeafZoom.Click += this.btnLeafZoom_Click;
             // 
             // btnLeafAutoPlace
             // 
             this.btnLeafAutoPlace.CheckOnClick = true;
-            this.btnLeafAutoPlace.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLeafAutoPlace.Image = global::Thumper_Custom_Level_Editor.Properties.Resources.icon_onefinger;
-            this.btnLeafAutoPlace.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLeafAutoPlace.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafAutoPlace.Image = (Image)resources.GetObject("btnLeafAutoPlace.Image");
+            this.btnLeafAutoPlace.ImageTransparentColor = Color.Magenta;
             this.btnLeafAutoPlace.Name = "btnLeafAutoPlace";
-            this.btnLeafAutoPlace.Size = new System.Drawing.Size(29, 27);
-            this.btnLeafAutoPlace.ToolTipText = "Enable auto-insert on click\r\n(inserts \"1\" on kTraitBool and kTraitAction objects)" +
-    "";
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel6.AutoScroll = true;
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.label1);
-            this.panel6.Controls.Add(this.panel4);
-            this.panel6.Controls.Add(this.panel3);
-            this.panel6.Controls.Add(this.panel2);
-            this.panel6.Controls.Add(this.numericUpDown_LeafLength);
-            this.panel6.Location = new System.Drawing.Point(0, 0);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 445);
-            this.panel6.TabIndex = 148;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel7.AutoScroll = true;
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.NUDquick9);
-            this.panel7.Controls.Add(this.label69);
-            this.panel7.Controls.Add(this.NUDquick8);
-            this.panel7.Controls.Add(this.label64);
-            this.panel7.Controls.Add(this.NUDquick7);
-            this.panel7.Controls.Add(this.label65);
-            this.panel7.Controls.Add(this.NUDquick6);
-            this.panel7.Controls.Add(this.label66);
-            this.panel7.Controls.Add(this.NUDquick5);
-            this.panel7.Controls.Add(this.label67);
-            this.panel7.Controls.Add(this.NUDquick4);
-            this.panel7.Controls.Add(this.label62);
-            this.panel7.Controls.Add(this.NUDquick3);
-            this.panel7.Controls.Add(this.label63);
-            this.panel7.Controls.Add(this.NUDquick2);
-            this.panel7.Controls.Add(this.label61);
-            this.panel7.Controls.Add(this.NUDquick1);
-            this.panel7.Controls.Add(this.label60);
-            this.panel7.Controls.Add(this.label59);
-            this.panel7.Controls.Add(this.label58);
-            this.panel7.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel7.Location = new System.Drawing.Point(1, 371);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(180, 74);
-            this.panel7.TabIndex = 111;
-            // 
-            // NUDquick9
-            // 
-            this.NUDquick9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick9.DecimalPlaces = 3;
-            this.NUDquick9.ForeColor = System.Drawing.Color.White;
-            this.NUDquick9.Location = new System.Drawing.Point(55, 179);
-            this.NUDquick9.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick9.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick9.Name = "NUDquick9";
-            this.NUDquick9.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick9.TabIndex = 113;
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.ForeColor = System.Drawing.Color.White;
-            this.label69.Location = new System.Drawing.Point(6, 179);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(48, 15);
-            this.label69.TabIndex = 112;
-            this.label69.Text = "Value 9";
-            // 
-            // NUDquick8
-            // 
-            this.NUDquick8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick8.DecimalPlaces = 3;
-            this.NUDquick8.ForeColor = System.Drawing.Color.White;
-            this.NUDquick8.Location = new System.Drawing.Point(55, 159);
-            this.NUDquick8.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick8.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick8.Name = "NUDquick8";
-            this.NUDquick8.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick8.TabIndex = 111;
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label64.ForeColor = System.Drawing.Color.White;
-            this.label64.Location = new System.Drawing.Point(6, 159);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(48, 15);
-            this.label64.TabIndex = 110;
-            this.label64.Text = "Value 8";
-            // 
-            // NUDquick7
-            // 
-            this.NUDquick7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick7.DecimalPlaces = 3;
-            this.NUDquick7.ForeColor = System.Drawing.Color.White;
-            this.NUDquick7.Location = new System.Drawing.Point(55, 139);
-            this.NUDquick7.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick7.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick7.Name = "NUDquick7";
-            this.NUDquick7.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick7.TabIndex = 109;
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label65.ForeColor = System.Drawing.Color.White;
-            this.label65.Location = new System.Drawing.Point(6, 139);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(48, 15);
-            this.label65.TabIndex = 108;
-            this.label65.Text = "Value 7";
-            // 
-            // NUDquick6
-            // 
-            this.NUDquick6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick6.DecimalPlaces = 3;
-            this.NUDquick6.ForeColor = System.Drawing.Color.White;
-            this.NUDquick6.Location = new System.Drawing.Point(55, 119);
-            this.NUDquick6.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick6.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick6.Name = "NUDquick6";
-            this.NUDquick6.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick6.TabIndex = 107;
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label66.ForeColor = System.Drawing.Color.White;
-            this.label66.Location = new System.Drawing.Point(6, 119);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(48, 15);
-            this.label66.TabIndex = 106;
-            this.label66.Text = "Value 6";
-            // 
-            // NUDquick5
-            // 
-            this.NUDquick5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick5.DecimalPlaces = 3;
-            this.NUDquick5.ForeColor = System.Drawing.Color.White;
-            this.NUDquick5.Location = new System.Drawing.Point(55, 99);
-            this.NUDquick5.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick5.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick5.Name = "NUDquick5";
-            this.NUDquick5.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick5.TabIndex = 105;
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label67.ForeColor = System.Drawing.Color.White;
-            this.label67.Location = new System.Drawing.Point(6, 99);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(48, 15);
-            this.label67.TabIndex = 104;
-            this.label67.Text = "Value 5";
-            // 
-            // NUDquick4
-            // 
-            this.NUDquick4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick4.DecimalPlaces = 3;
-            this.NUDquick4.ForeColor = System.Drawing.Color.White;
-            this.NUDquick4.Location = new System.Drawing.Point(55, 79);
-            this.NUDquick4.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick4.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick4.Name = "NUDquick4";
-            this.NUDquick4.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick4.TabIndex = 103;
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.ForeColor = System.Drawing.Color.White;
-            this.label62.Location = new System.Drawing.Point(6, 79);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(48, 15);
-            this.label62.TabIndex = 102;
-            this.label62.Text = "Value 4";
-            // 
-            // NUDquick3
-            // 
-            this.NUDquick3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick3.DecimalPlaces = 3;
-            this.NUDquick3.ForeColor = System.Drawing.Color.White;
-            this.NUDquick3.Location = new System.Drawing.Point(55, 59);
-            this.NUDquick3.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick3.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick3.Name = "NUDquick3";
-            this.NUDquick3.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick3.TabIndex = 101;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label63.ForeColor = System.Drawing.Color.White;
-            this.label63.Location = new System.Drawing.Point(6, 59);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(48, 15);
-            this.label63.TabIndex = 100;
-            this.label63.Text = "Value 3";
-            // 
-            // NUDquick2
-            // 
-            this.NUDquick2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick2.DecimalPlaces = 3;
-            this.NUDquick2.ForeColor = System.Drawing.Color.White;
-            this.NUDquick2.Location = new System.Drawing.Point(55, 39);
-            this.NUDquick2.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick2.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick2.Name = "NUDquick2";
-            this.NUDquick2.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick2.TabIndex = 99;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label61.ForeColor = System.Drawing.Color.White;
-            this.label61.Location = new System.Drawing.Point(6, 39);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(48, 15);
-            this.label61.TabIndex = 98;
-            this.label61.Text = "Value 2";
-            // 
-            // NUDquick1
-            // 
-            this.NUDquick1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUDquick1.DecimalPlaces = 3;
-            this.NUDquick1.ForeColor = System.Drawing.Color.White;
-            this.NUDquick1.Location = new System.Drawing.Point(55, 19);
-            this.NUDquick1.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.NUDquick1.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.NUDquick1.Name = "NUDquick1";
-            this.NUDquick1.Size = new System.Drawing.Size(86, 20);
-            this.NUDquick1.TabIndex = 97;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.ForeColor = System.Drawing.Color.White;
-            this.label59.Location = new System.Drawing.Point(6, 19);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(48, 15);
-            this.label59.TabIndex = 62;
-            this.label59.Text = "Value 1";
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label58.ForeColor = System.Drawing.Color.Silver;
-            this.label58.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.label58.Location = new System.Drawing.Point(31, 3);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(104, 13);
-            this.label58.TabIndex = 61;
-            this.label58.Text = "══Quick Insert══";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(21, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 15);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Leaf Length";
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.label15);
-            this.panel4.Controls.Add(this.btnTrackColorDialog);
-            this.panel4.Controls.Add(this.label17);
-            this.panel4.Controls.Add(this.NUD_TrackHighlight);
-            this.panel4.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel4.Location = new System.Drawing.Point(1, 298);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(180, 75);
-            this.panel4.TabIndex = 110;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.Silver;
-            this.label18.Location = new System.Drawing.Point(18, 2);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(141, 13);
-            this.label18.TabIndex = 60;
-            this.label18.Text = "══Cell Visual Options══";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.White;
-            this.label15.Location = new System.Drawing.Point(20, 23);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(88, 15);
-            this.label15.TabIndex = 54;
-            this.label15.Text = "Highlight Color";
-            // 
-            // btnTrackColorDialog
-            // 
-            this.btnTrackColorDialog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnTrackColorDialog.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackColorDialog.Enabled = false;
-            this.btnTrackColorDialog.Location = new System.Drawing.Point(110, 20);
-            this.btnTrackColorDialog.Name = "btnTrackColorDialog";
-            this.btnTrackColorDialog.Size = new System.Drawing.Size(57, 23);
-            this.btnTrackColorDialog.TabIndex = 55;
-            this.btnTrackColorDialog.UseVisualStyleBackColor = false;
-            // 
-            // NUD_TrackHighlight
-            // 
-            this.NUD_TrackHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.NUD_TrackHighlight.DecimalPlaces = 2;
-            this.NUD_TrackHighlight.Enabled = false;
-            this.NUD_TrackHighlight.ForeColor = System.Drawing.Color.White;
-            this.NUD_TrackHighlight.Location = new System.Drawing.Point(110, 46);
-            this.NUD_TrackHighlight.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.NUD_TrackHighlight.Name = "NUD_TrackHighlight";
-            this.NUD_TrackHighlight.Size = new System.Drawing.Size(57, 20);
-            this.NUD_TrackHighlight.TabIndex = 62;
-            this.NUD_TrackHighlight.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.txtTrait);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.label46);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.dropLeafInterp);
-            this.panel3.Controls.Add(this.label9);
-            this.panel3.Controls.Add(this.txtDefault);
-            this.panel3.Controls.Add(this.dropLeafStep);
-            this.panel3.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel3.Location = new System.Drawing.Point(1, 175);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(180, 124);
-            this.panel3.TabIndex = 109;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Silver;
-            this.label3.Location = new System.Drawing.Point(23, 2);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 13);
-            this.label3.TabIndex = 108;
-            this.label3.Text = "══Object Properties══";
-            // 
-            // txtTrait
-            // 
-            this.txtTrait.AutoSize = true;
-            this.txtTrait.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtTrait.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.txtTrait.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTrait.ForeColor = System.Drawing.Color.White;
-            this.txtTrait.Location = new System.Drawing.Point(74, 23);
-            this.txtTrait.MinimumSize = new System.Drawing.Size(96, 20);
-            this.txtTrait.Name = "txtTrait";
-            this.txtTrait.Size = new System.Drawing.Size(96, 20);
-            this.txtTrait.TabIndex = 107;
-            this.txtTrait.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dropLeafInterp
-            // 
-            this.dropLeafInterp.BackColor = System.Drawing.Color.Black;
-            this.dropLeafInterp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropLeafInterp.Enabled = false;
-            this.dropLeafInterp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropLeafInterp.ForeColor = System.Drawing.Color.LawnGreen;
-            this.dropLeafInterp.FormattingEnabled = true;
-            this.dropLeafInterp.Items.AddRange(new object[] {
-            "Linear",
-            "Quadratic",
-            "Cubic",
-            "Quartic",
-            "Quintic",
-            "Sine",
-            "None",
-            "Step"});
-            this.dropLeafInterp.Location = new System.Drawing.Point(74, 90);
-            this.dropLeafInterp.Name = "dropLeafInterp";
-            this.dropLeafInterp.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropLeafInterp.Size = new System.Drawing.Size(96, 21);
-            this.dropLeafInterp.TabIndex = 105;
-            // 
-            // txtDefault
-            // 
-            this.txtDefault.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.txtDefault.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDefault.DecimalPlaces = 4;
-            this.txtDefault.Enabled = false;
-            this.txtDefault.ForeColor = System.Drawing.Color.White;
-            this.txtDefault.Location = new System.Drawing.Point(74, 68);
-            this.txtDefault.Maximum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            0});
-            this.txtDefault.Minimum = new decimal(new int[] {
-            720,
-            0,
-            0,
-            -2147483648});
-            this.txtDefault.Name = "txtDefault";
-            this.txtDefault.Size = new System.Drawing.Size(96, 20);
-            this.txtDefault.TabIndex = 64;
-            // 
-            // dropLeafStep
-            // 
-            this.dropLeafStep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropLeafStep.Enabled = false;
-            this.dropLeafStep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropLeafStep.ForeColor = System.Drawing.Color.White;
-            this.dropLeafStep.FormattingEnabled = true;
-            this.dropLeafStep.Items.AddRange(new object[] {
-            "True",
-            "False"});
-            this.dropLeafStep.Location = new System.Drawing.Point(74, 45);
-            this.dropLeafStep.Name = "dropLeafStep";
-            this.dropLeafStep.Size = new System.Drawing.Size(96, 21);
-            this.dropLeafStep.TabIndex = 94;
-            this.dropLeafStep.Text = "True";
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.dropObjects);
-            this.panel2.Controls.Add(this.label19);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.dropParamPath);
-            this.panel2.Controls.Add(this.dropTrackLane);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.btnTrackApply);
-            this.panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.panel2.Location = new System.Drawing.Point(1, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panel2.Size = new System.Drawing.Size(180, 151);
-            this.panel2.TabIndex = 108;
-            // 
-            // dropObjects
-            // 
-            this.dropObjects.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropObjects.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropObjects.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropObjects.Enabled = false;
-            this.dropObjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropObjects.ForeColor = System.Drawing.Color.White;
-            this.dropObjects.FormattingEnabled = true;
-            this.dropObjects.Location = new System.Drawing.Point(5, 33);
-            this.dropObjects.Name = "dropObjects";
-            this.dropObjects.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropObjects.Size = new System.Drawing.Size(163, 21);
-            this.dropObjects.TabIndex = 30;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.ForeColor = System.Drawing.Color.Silver;
-            this.label19.Location = new System.Drawing.Point(29, 1);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(115, 13);
-            this.label19.TabIndex = 61;
-            this.label19.Text = "══Track Objects══";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(1, 18);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 15);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Track Object";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(1, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(111, 15);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "Type (param_path)";
-            // 
-            // dropParamPath
-            // 
-            this.dropParamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropParamPath.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.dropParamPath.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropParamPath.DropDownWidth = 180;
-            this.dropParamPath.Enabled = false;
-            this.dropParamPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropParamPath.ForeColor = System.Drawing.Color.White;
-            this.dropParamPath.FormattingEnabled = true;
-            this.dropParamPath.Location = new System.Drawing.Point(5, 73);
-            this.dropParamPath.Name = "dropParamPath";
-            this.dropParamPath.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropParamPath.Size = new System.Drawing.Size(163, 21);
-            this.dropParamPath.TabIndex = 33;
-            // 
-            // dropTrackLane
-            // 
-            this.dropTrackLane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.dropTrackLane.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.dropTrackLane.DropDownWidth = 180;
-            this.dropTrackLane.Enabled = false;
-            this.dropTrackLane.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dropTrackLane.ForeColor = System.Drawing.Color.White;
-            this.dropTrackLane.FormattingEnabled = true;
-            this.dropTrackLane.Location = new System.Drawing.Point(74, 96);
-            this.dropTrackLane.Name = "dropTrackLane";
-            this.dropTrackLane.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dropTrackLane.Size = new System.Drawing.Size(94, 21);
-            this.dropTrackLane.TabIndex = 65;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(18, 99);
-            this.label11.Name = "label11";
-            this.label11.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label11.Size = new System.Drawing.Size(56, 15);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "Samples";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnTrackApply
-            // 
-            this.btnTrackApply.BackColor = System.Drawing.Color.Green;
-            this.btnTrackApply.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrackApply.Enabled = false;
-            this.btnTrackApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrackApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrackApply.ForeColor = System.Drawing.Color.White;
-            this.btnTrackApply.Location = new System.Drawing.Point(73, 118);
-            this.btnTrackApply.Name = "btnTrackApply";
-            this.btnTrackApply.Size = new System.Drawing.Size(96, 24);
-            this.btnTrackApply.TabIndex = 52;
-            this.btnTrackApply.Text = "Apply to Track";
-            this.btnTrackApply.UseVisualStyleBackColor = false;
-            // 
-            // numericUpDown_LeafLength
-            // 
-            this.numericUpDown_LeafLength.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.numericUpDown_LeafLength.ForeColor = System.Drawing.Color.White;
-            this.numericUpDown_LeafLength.Location = new System.Drawing.Point(93, 2);
-            this.numericUpDown_LeafLength.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.numericUpDown_LeafLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown_LeafLength.Name = "numericUpDown_LeafLength";
-            this.numericUpDown_LeafLength.Size = new System.Drawing.Size(72, 20);
-            this.numericUpDown_LeafLength.TabIndex = 23;
-            this.numericUpDown_LeafLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown_LeafLength.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.btnLeafAutoPlace.Size = new Size(28, 27);
+            this.btnLeafAutoPlace.ToolTipText = "Enable auto-insert on click\r\n(inserts \"1\" on kTraitBool and kTraitAction objects)";
+            // 
+            // treeObjects
+            // 
+            this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
+            this.treeObjects.Dock = DockStyle.Fill;
+            this.treeObjects.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.treeObjects.ForeColor = Color.White;
+            this.treeObjects.FullRowSelect = true;
+            this.treeObjects.HideSelection = false;
+            this.treeObjects.ImageKey = "other";
+            this.treeObjects.ImageList = this.imageList1;
+            this.treeObjects.ItemHeight = 16;
+            this.treeObjects.LineColor = Color.White;
+            this.treeObjects.Location = new Point(0, 23);
+            this.treeObjects.Margin = new Padding(4, 3, 4, 3);
+            this.treeObjects.Name = "treeObjects";
+            this.treeObjects.SelectedImageKey = "other";
+            this.treeObjects.ShowNodeToolTips = true;
+            this.treeObjects.ShowRootLines = false;
+            this.treeObjects.Size = new Size(239, 229);
+            this.treeObjects.TabIndex = 99;
+            this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
+            this.treeObjects.KeyDown += this.treeObjects_KeyDown;
+            this.treeObjects.KeyUp += this.treeObjects_KeyUp;
+            this.treeObjects.MouseDown += this.treeObjects_MouseDown;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BackColor = Color.FromArgb(56, 56, 56);
+            this.txtSearch.BorderStyle = BorderStyle.FixedSingle;
+            this.txtSearch.Dock = DockStyle.Top;
+            this.txtSearch.ForeColor = Color.White;
+            this.txtSearch.Location = new Point(0, 0);
+            this.txtSearch.Margin = new Padding(4, 3, 4, 3);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new Size(239, 23);
+            this.txtSearch.TabIndex = 98;
+            this.txtSearch.Text = "Search Objects (Ctrl+;)";
+            this.txtSearch.TextChanged += this.txtSearch_TextChanged;
+            this.txtSearch.Enter += this.txtSearch_Enter;
+            this.txtSearch.Leave += this.txtSearch_Leave;
+            // 
+            // propertyGridLeaf
+            // 
+            this.propertyGridLeaf.BackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.CategoryForeColor = Color.White;
+            this.propertyGridLeaf.CategorySplitterColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLeaf.DisabledItemForeColor = Color.FromArgb(127, 255, 255, 255);
+            this.propertyGridLeaf.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.propertyGridLeaf.HelpBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.HelpBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLeaf.HelpForeColor = Color.White;
+            this.propertyGridLeaf.LineColor = Color.FromArgb(46, 46, 46);
+            this.propertyGridLeaf.Location = new Point(53, 309);
+            this.propertyGridLeaf.Margin = new Padding(4, 3, 4, 3);
+            this.propertyGridLeaf.Name = "propertyGridLeaf";
+            this.propertyGridLeaf.PropertySort = PropertySort.Categorized;
+            this.propertyGridLeaf.RightToLeft = RightToLeft.No;
+            this.propertyGridLeaf.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
+            this.propertyGridLeaf.SelectedItemWithFocusForeColor = Color.White;
+            this.propertyGridLeaf.Size = new Size(250, 181);
+            this.propertyGridLeaf.TabIndex = 1;
+            this.propertyGridLeaf.ToolbarVisible = false;
+            this.propertyGridLeaf.ViewBackColor = Color.FromArgb(31, 31, 31);
+            this.propertyGridLeaf.ViewBorderColor = Color.FromArgb(61, 61, 61);
+            this.propertyGridLeaf.ViewForeColor = Color.White;
+            // 
+            // splitContainerLeafSide
+            // 
+            this.splitContainerLeafSide.BackColor = Color.Transparent;
+            this.splitContainerLeafSide.FixedPanel = FixedPanel.Panel2;
+            this.splitContainerLeafSide.Location = new Point(390, 3);
+            this.splitContainerLeafSide.Margin = new Padding(4, 3, 4, 3);
+            this.splitContainerLeafSide.Name = "splitContainerLeafSide";
+            this.splitContainerLeafSide.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainerLeafSide.Panel1
+            // 
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.labelCollapsePanel2);
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.panelZoom);
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.trackEditor);
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.vScrollBarTrackEditor);
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.leafToolStrip);
+            this.splitContainerLeafSide.Panel1.Controls.Add(this.splitContainerTopbar);
+            // 
+            // splitContainerLeafSide.Panel2
+            // 
+            this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
+            this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
+            this.splitContainerLeafSide.Size = new Size(530, 464);
+            this.splitContainerLeafSide.SplitterDistance = 372;
+            this.splitContainerLeafSide.SplitterWidth = 5;
+            this.splitContainerLeafSide.TabIndex = 120;
+            // 
+            // splitContainerTopbar
+            // 
+            this.splitContainerTopbar.BackColor = Color.Transparent;
+            this.splitContainerTopbar.Dock = DockStyle.Top;
+            this.splitContainerTopbar.FixedPanel = FixedPanel.Panel1;
+            this.splitContainerTopbar.IsSplitterFixed = true;
+            this.splitContainerTopbar.Location = new Point(0, 0);
+            this.splitContainerTopbar.Margin = new Padding(4, 3, 4, 3);
+            this.splitContainerTopbar.Name = "splitContainerTopbar";
+            this.splitContainerTopbar.Panel1MinSize = 24;
+            // 
+            // splitContainerTopbar.Panel2
+            // 
+            this.splitContainerTopbar.Panel2.Controls.Add(this.leaftoolsToolStrip);
+            this.splitContainerTopbar.Size = new Size(530, 30);
+            this.splitContainerTopbar.SplitterDistance = 25;
+            this.splitContainerTopbar.SplitterWidth = 5;
+            this.splitContainerTopbar.TabIndex = 144;
+            // 
+            // textEditor
+            // 
+            this.textEditor.AccessibleDescription = "Textbox control";
+            this.textEditor.AccessibleName = "Fast Colored Text Box";
+            this.textEditor.AccessibleRole = AccessibleRole.Text;
+            this.textEditor.AutoCompleteBracketsList = new char[]
+    {
+    '(',
+    ')',
+    '{',
+    '}',
+    '[',
+    ']',
+    '"',
+    '"',
+    '\'',
+    '\''
+    };
+            this.textEditor.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*(?<range>:)\\s*(?<range>[^;]+);";
+            this.textEditor.AutoScrollMinSize = new Size(0, 14);
+            this.textEditor.BackBrush = null;
+            this.textEditor.BackColor = Color.FromArgb(31, 31, 31);
+            this.textEditor.CharHeight = 14;
+            this.textEditor.CharWidth = 8;
+            this.textEditor.DefaultMarkerSize = 8;
+            this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
+            this.textEditor.Dock = DockStyle.Fill;
+            this.textEditor.FindForm = null;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
+            this.textEditor.ForeColor = Color.White;
+            this.textEditor.GoToForm = null;
+            this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
+            this.textEditor.IndentBackColor = Color.Black;
+            this.textEditor.IsReplaceMode = false;
+            this.textEditor.Location = new Point(54, 0);
+            this.textEditor.Name = "textEditor";
+            this.textEditor.Paddings = new Padding(0);
+            this.textEditor.ReplaceForm = null;
+            this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
+            this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
+            this.textEditor.Size = new Size(476, 87);
+            this.textEditor.TabIndex = 45;
+            this.textEditor.Text = "sequencer object data";
+            this.textEditor.ToolTipDelay = 100;
+            this.textEditor.WordWrap = true;
+            this.textEditor.Zoom = 100;
+            // 
+            // contextMenuFavRemove
+            // 
+            this.contextMenuFavRemove.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuFavRemove.Items.AddRange(new ToolStripItem[] { this.toolStripFavRemove });
+            this.contextMenuFavRemove.Name = "workingfolderRightClick";
+            this.contextMenuFavRemove.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuFavRemove.Size = new Size(199, 26);
+            // 
+            // toolStripFavRemove
+            // 
+            this.toolStripFavRemove.ForeColor = Color.White;
+            this.toolStripFavRemove.Image = Properties.Resources.icon_remove2;
+            this.toolStripFavRemove.Name = "toolStripFavRemove";
+            this.toolStripFavRemove.Size = new Size(198, 22);
+            this.toolStripFavRemove.Text = "Remove From Favorites";
+            this.toolStripFavRemove.Click += this.toolStripFavRemove_Click;
+            // 
+            // contextMenuFavClear
+            // 
+            this.contextMenuFavClear.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuFavClear.Items.AddRange(new ToolStripItem[] { this.toolStripFavClear });
+            this.contextMenuFavClear.Name = "workingfolderRightClick";
+            this.contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuFavClear.Size = new Size(152, 26);
+            // 
+            // toolStripFavClear
+            // 
+            this.toolStripFavClear.ForeColor = Color.White;
+            this.toolStripFavClear.Image = Properties.Resources.icon_remove2;
+            this.toolStripFavClear.Name = "toolStripFavClear";
+            this.toolStripFavClear.Size = new Size(151, 22);
+            this.toolStripFavClear.Text = "Clear Favorites";
+            this.toolStripFavClear.Click += this.toolStripFavClear_Click;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += this.timer1_Tick;
+            // 
+            // dockPanel1
+            // 
+            this.dockPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            this.dockPanel1.BackColor = Color.Black;
+            this.dockPanel1.DockBottomPortion = 0.1D;
+            this.dockPanel1.DockLeftPortion = 0.1D;
+            this.dockPanel1.DockRightPortion = 0.1D;
+            this.dockPanel1.DockTopPortion = 0.1D;
+            this.dockPanel1.Location = new Point(-4, -4);
+            this.dockPanel1.Name = "dockPanel1";
+            this.dockPanel1.Size = new Size(941, 527);
+            this.dockPanel1.TabIndex = 121;
+            this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
+            // 
+            // panelObjects
+            // 
+            this.panelObjects.Controls.Add(this.treeObjects);
+            this.panelObjects.Controls.Add(this.txtSearch);
+            this.panelObjects.Location = new Point(35, 28);
+            this.panelObjects.Name = "panelObjects";
+            this.panelObjects.Size = new Size(239, 252);
+            this.panelObjects.TabIndex = 122;
             // 
             // Form_LeafEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panelLeaf);
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.FromArgb(55, 55, 55);
+            this.ClientSize = new Size(933, 519);
+            this.Controls.Add(this.panelObjects);
+            this.Controls.Add(this.propertyGridLeaf);
+            this.Controls.Add(this.splitContainerLeafSide);
+            this.Controls.Add(this.dockPanel1);
             this.DoubleBuffered = true;
-            this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ForeColor = Color.White;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.Icon = (Icon)resources.GetObject("$this.Icon");
+            this.KeyPreview = true;
+            this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_LeafEditor";
             this.Text = "Leaf Editor";
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoomVert)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
-            this.panelLeaf.ResumeLayout(false);
-            this.panelLeaf.PerformLayout();
+            this.Shown += this.Form_LeafEditor_Shown;
+            ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackZoom).EndInit();
+            this.contextMenuFav.ResumeLayout(false);
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackEditor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.trackEditor).EndInit();
             this.leafToolStrip.ResumeLayout(false);
             this.leafToolStrip.PerformLayout();
-            this.panelRawData.ResumeLayout(false);
-            this.panelRawData.PerformLayout();
             this.leaftoolsToolStrip.ResumeLayout(false);
             this.leaftoolsToolStrip.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUDquick1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_TrackHighlight)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDefault)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_LeafLength)).EndInit();
+            this.contextMenuInterps.ResumeLayout(false);
+            this.splitContainerLeafSide.Panel1.ResumeLayout(false);
+            this.splitContainerLeafSide.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerLeafSide).EndInit();
+            this.splitContainerLeafSide.ResumeLayout(false);
+            this.splitContainerTopbar.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
+            this.splitContainerTopbar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
+            this.contextMenuFavRemove.ResumeLayout(false);
+            this.contextMenuFavClear.ResumeLayout(false);
+            this.panelObjects.ResumeLayout(false);
+            this.panelObjects.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panelLeaf;
         private System.Windows.Forms.Panel panelZoom;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label labelScrollH;
+        private System.Windows.Forms.Label labelScrollV;
         private System.Windows.Forms.TrackBar trackZoomVert;
         private System.Windows.Forms.TrackBar trackZoom;
         private System.Windows.Forms.VScrollBar vScrollBarTrackEditor;
-        private System.Windows.Forms.DataGridView trackEditor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.ToolStrip leafToolStrip;
         private System.Windows.Forms.ToolStripButton btnTrackAdd;
         private System.Windows.Forms.ToolStripButton btnTrackDelete;
@@ -1464,71 +1103,61 @@
         private System.Windows.Forms.ToolStripButton btnTrackPaste;
         private System.Windows.Forms.ToolStripButton btnTrackClear;
         private System.Windows.Forms.ToolStripButton btnTrackPlayback;
-        private System.Windows.Forms.ToolStripButton btnTrackColorExport;
-        private System.Windows.Forms.ToolStripButton btnTrackColorImport;
         private System.Windows.Forms.ToolStripButton btnLeafRandom;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panelRawData;
-        private System.Windows.Forms.Label lblRawData;
         private System.Windows.Forms.Button btnRawImport;
-        private System.Windows.Forms.RichTextBox richRawTrackData;
         private System.Windows.Forms.ToolStrip leaftoolsToolStrip;
         private System.Windows.Forms.ToolStripButton btnLeafColors;
-        private System.Windows.Forms.ToolStripButton btnLEafInterpLinear;
         private System.Windows.Forms.ToolStripButton btnLeafSplit;
         private System.Windows.Forms.ToolStripButton btnLeafRandomValues;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripComboBox dropTimeSig;
         private System.Windows.Forms.ToolStripButton btnLeafZoom;
         private System.Windows.Forms.ToolStripButton btnLeafAutoPlace;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.NumericUpDown NUDquick9;
-        private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.NumericUpDown NUDquick8;
-        private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.NumericUpDown NUDquick7;
-        private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.NumericUpDown NUDquick6;
-        private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.NumericUpDown NUDquick5;
-        private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.NumericUpDown NUDquick4;
-        private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.NumericUpDown NUDquick3;
-        private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.NumericUpDown NUDquick2;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.NumericUpDown NUDquick1;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button btnTrackColorDialog;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.NumericUpDown NUD_TrackHighlight;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label txtTrait;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox dropLeafInterp;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.NumericUpDown txtDefault;
-        private System.Windows.Forms.ComboBox dropLeafStep;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox dropObjects;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox dropParamPath;
-        private System.Windows.Forms.ComboBox dropTrackLane;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnTrackApply;
-        private System.Windows.Forms.NumericUpDown numericUpDown_LeafLength;
+        private ToolStrip gateToolStrip;
+        private SplitContainer splitContainerLeafSide;
+        private SplitContainer splitContainerTopbar;
+        public DataGridView trackEditor;
+        public PropertyGrid propertyGridLeaf;
+        private ImageList imageList1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSplitButton btnLeafInterpLinear;
+        private ContextMenuStrip contextMenuInterps;
+        private ContextMenuStrip contextMenuFav;
+        private ToolStripMenuItem toolStripFavAdd;
+        private ContextMenuStrip contextMenuFavRemove;
+        private ToolStripMenuItem toolStripFavRemove;
+        private ContextMenuStrip contextMenuFavClear;
+        private ToolStripMenuItem toolStripFavClear;
+        private ToolStripMenuItem linearToolStripMenuItem;
+        private ToolStripMenuItem quadraticToolStripMenuItem1;
+        private ToolStripMenuItem quadraticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quadraticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseInToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseOutToolStripMenuItem;
+        private ToolStripMenuItem cubicEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseInToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quarticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseInToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseOutToolStripMenuItem;
+        private ToolStripMenuItem quinticEaseInOutToolStripMenuItem;
+        private ToolStripMenuItem sineEaseInToolStripMenuItem;
+        private ToolStripMenuItem sineEaseOutToolStripMenuItem;
+        private ToolStripMenuItem sineEaseInOutToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripMenuItem exampleswebLinkToolStripMenuItem;
+        private DataGridViewTextBoxColumn LeafEnabled;
+        private DataGridViewTextBoxColumn LeafAudio;
+        private DataGridViewTextBoxColumn LeafMultilane;
+        private Label labelCollapsePanel2;
+        private System.Windows.Forms.Timer timer1;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private Panel panelObjects;
+        public TreeViewEx treeObjects;
+        public TextBox txtSearch;
+        public FastColoredTextBoxNS.FastColoredTextBox textEditor;
+        private ToolStripButton btnLeafClean;
     }
 }

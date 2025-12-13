@@ -1,20 +1,24 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Reflection;
-using System.Threading;
-using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Thumper_Custom_Level_Editor
 {
-    static class Program
+    internal static class Program
 	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main(string[] args)
+        public static TCLE tcle
+        {
+            get => _tcle;
+            set {
+                _tcle = value;
+            }
+        }
+        private static TCLE _tcle;
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main(string[] args)
         {
             if (args.Length <= 0)
                 args = new string[] { "" };
@@ -28,16 +32,23 @@ namespace Thumper_Custom_Level_Editor
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
-            Application.Run(new TCLE(args[0]));
+
+            tcle = new(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
+            ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
+            splash.Show();
+            tcle.Location = new Point(splash.Location.X, splash.Location.Y);
+            tcle.Size = splash.Size;
+
+            Application.Run(tcle);
         }
 
-        static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
             string name = args.Name[..args.Name.IndexOf(',')] + ".dll";
             System.Collections.Generic.IEnumerable<string> resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
 
-            if (resources.Count() > 0) {
+            if (resources.Any()) {
                 string resourceName = resources.First();
 
                 using Stream stream = thisAssembly.GetManifestResourceStream(resourceName);

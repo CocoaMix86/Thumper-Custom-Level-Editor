@@ -1,10 +1,8 @@
-﻿using System;
-using System.Reflection;
-using System.Windows.Forms;
+﻿using System.Reflection;
 
 namespace Thumper_Custom_Level_Editor
 {
-    partial class AboutThumperEditor : Form
+    internal partial class AboutThumperEditor : Form
 	{
 		public AboutThumperEditor()
 		{
@@ -19,28 +17,23 @@ namespace Thumper_Custom_Level_Editor
 
 		#region Assembly Attribute Accessors
 
-		public string AssemblyTitle
+		public static string AssemblyTitle
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
 				if (attributes.Length > 0) {
 					AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-					if (titleAttribute.Title != "") {
+					if (!string.IsNullOrEmpty(titleAttribute.Title)) {
 						return titleAttribute.Title;
 					}
 				}
-				return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+				return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
 			}
 		}
 
-		public string AssemblyVersion
-		{
-			get {
-				return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			}
-		}
+        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-		public string AssemblyDescription
+        public static string AssemblyDescription
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
@@ -48,7 +41,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyProduct
+		public static string AssemblyProduct
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
@@ -56,7 +49,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyCopyright
+		public static string AssemblyCopyright
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
@@ -64,7 +57,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-		public string AssemblyCompany
+		public static string AssemblyCompany
 		{
 			get {
 				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);

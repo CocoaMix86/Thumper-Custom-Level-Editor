@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel;
-using System.Windows.Forms;
-using System;
 
 namespace Thumper_Custom_Level_Editor
 {
     [DesignerCategory("Code")]
-    public class ToolStripEx : ToolStrip
+    internal partial class ToolStripEx : ToolStrip
     {
         private const int WM_MOUSEACTIVATE = 0x21;
 

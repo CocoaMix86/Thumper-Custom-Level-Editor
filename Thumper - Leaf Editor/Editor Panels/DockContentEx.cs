@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace Thumper_Custom_Level_Editor.Editor_Panels
+{
+    public class DockContentEx : DockContent
+    {
+        public DockContentEx()
+        {
+        }
+
+        protected override string GetPersistString()
+        {
+            return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // DockContentEx
+            // 
+            this.ClientSize = new Size(314, 261);
+            this.Name = "DockContentEx";
+            this.ResumeLayout(false);
+        }
+    }
+
+    public class CustomFloatWindow : FloatWindow
+    {
+        public CustomFloatWindow(DockPanel dockPanel, DockPane pane)
+            : base(dockPanel, pane)
+        {
+            FormBorderStyle = FormBorderStyle.Sizable;
+            this.Enter += Float_Enter;
+            this.GotFocus += Float_Enter;
+        }
+
+        public CustomFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
+            : base(dockPanel, pane, bounds)
+        {
+            FormBorderStyle = FormBorderStyle.Sizable;
+            this.Enter += Float_Enter;
+            this.GotFocus += Float_Enter;
+        }
+
+        public void Float_Enter(object sender, EventArgs e)
+        {
+            IDockContent focus = this.NestedPanes.Select(x => x.ActiveContent).FirstOrDefault();
+            if (focus != null)
+                TCLE.GlobalActiveDocument = focus;
+        }
+    }
+
+    public class CustomFloatWindowFactory : DockPanelExtender.IFloatWindowFactory
+    {
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
+        {
+            return new CustomFloatWindow(dockPanel, pane, bounds);
+        }
+
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
+        {
+            return new CustomFloatWindow(dockPanel, pane);
+        }
+    }
+}

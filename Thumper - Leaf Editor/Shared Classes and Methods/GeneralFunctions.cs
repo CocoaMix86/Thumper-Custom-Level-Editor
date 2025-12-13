@@ -1,24 +1,71 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Vorbis;
-using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
+﻿using Fmod5Sharp.FmodTypes;
+using Fmod5Sharp;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using System.Runtime.CompilerServices;
+using WeifenLuo.WinFormsUI.Docking;
+using Un4seen.Bass;
+using Un4seen.Bass.Misc;
+using Thumper_Custom_Level_Editor.Other_Forms;
+using NAudio.Wave;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class TCLE : Form
+    public partial class TCLE
     {
-        public static void InitializeTracks(DataGridView grid, bool columnstyle)
+        public static string AppReleaseNumber = "alpha57";
+        private DeserializeDockContent m_deserializeDockContent;
+        public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
+        public static decimal LeafQuickValue0 = 1.000m;
+        public static decimal LeafQuickValue1 = 1.000m;
+        public static decimal LeafQuickValue2 = 1.000m;
+        public static decimal LeafQuickValue3 = 1.000m;
+        public static decimal LeafQuickValue4 = 1.000m;
+        public static decimal LeafQuickValue5 = 1.000m;
+        public static decimal LeafQuickValue6 = 1.000m;
+        public static decimal LeafQuickValue7 = 1.000m;
+        public static decimal LeafQuickValue8 = 1.000m;
+        public static decimal LeafQuickValue9 = 1.000m;
+        public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
+        public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
+        public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
+        public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
+        public static Dictionary<int, int> Frequencys = new() {
+            { 1, 8000 },
+            { 2, 11_000 },
+            { 3, 11_025 },
+            { 4, 16_000 },
+            { 5, 22_050 },
+            { 6, 24_000 },
+            { 7, 32_000 },
+            { 8, 44_100 },
+            { 9, 48_000 },
+            { 10,96_000 }
+        };
+
+        private static void LoadQuickValues()
+        {
+            if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))
+                return;
+            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\settings\quickvalues.txt");
+
+            LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1.000m;
+            LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1.000m;
+            LeafQuickValue2 = decimal.TryParse(_load[2], out result) ? result : 1.000m;
+            LeafQuickValue3 = decimal.TryParse(_load[3], out result) ? result : 1.000m;
+            LeafQuickValue4 = decimal.TryParse(_load[4], out result) ? result : 1.000m;
+            LeafQuickValue5 = decimal.TryParse(_load[5], out result) ? result : 1.000m;
+            LeafQuickValue6 = decimal.TryParse(_load[6], out result) ? result : 1.000m;
+            LeafQuickValue7 = decimal.TryParse(_load[7], out result) ? result : 1.000m;
+            LeafQuickValue8 = decimal.TryParse(_load[8], out result) ? result : 1.000m;
+            LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1.000m;
+        }
+
+        public static void DoubleBufferDGV(DataGridView grid)
         {
             //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
             //used to significantly improve rendering performance
@@ -27,123 +74,104 @@ namespace Thumper_Custom_Level_Editor
                 PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
                 pi.SetValue(grid, true, null);
             }
-
-            if (columnstyle)
-                GenerateColumnStyle(grid, grid.ColumnCount);
         }
 
-        public static void GenerateColumnStyle(DataGridView grid, int _cells)
+        public static void GenerateColumnStyle(List<DataGridViewColumn> columns, int offset = 0)
         {
-            //stylize track grid/columns
-            for (int i = 0; i < _cells; i++) {
-                grid.Columns[i].Name = i.ToString();
-                grid.Columns[i].Resizable = DataGridViewTriState.False;
-                grid.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
-                grid.Columns[i].DividerWidth = 1;
-                grid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                grid.Columns[i].Frozen = false;
-                grid.Columns[i].MinimumWidth = 2;
-                grid.Columns[i].ReadOnly = false;
-                grid.Columns[i].ValueType = typeof(decimal?);
-                grid.Columns[i].DefaultCellStyle.Format = "0.###";
-                grid.Columns[i].FillWeight = 0.001F;
-                grid.Columns[i].DefaultCellStyle.Font = new Font("Consolas", 8);
+            foreach (DataGridViewColumn dgvc in columns) {
+                dgvc.Name = (dgvc.Index - offset).ToString();
+                dgvc.HeaderText = (dgvc.Index - offset).ToString();
+                dgvc.Resizable = DataGridViewTriState.False;
+                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgvc.DividerWidth = 0;
+                dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dgvc.Frozen = false;
+                dgvc.MinimumWidth = 2;
+                dgvc.ReadOnly = false;
+                dgvc.ValueType = typeof(decimal?);
+                dgvc.DefaultCellStyle.Format = "0.###";
+                dgvc.FillWeight = 0.001F;
+                dgvc.DefaultCellStyle.Font = new Font("Consolas", 8);
+                dgvc.ReadOnly = false;
+                dgvc.Width = Properties.Settings.Default.ZoomHoriz;
             }
         }
 
-        public HashSet<Object_Params> _objects = new();
-        string _errorlog = "";
-        public void ImportObjects()
+        public static HashSet<Object_Params> LeafObjects = new();
+        public static HashSet<Object_Params> ObjectFavorites = new();
+        public static string _errorlog = "";
+        public static void ImportObjects()
         {
-            _objects.Clear();
+            LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{AppLocation}\templates\track_objects2.2.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\track_objects2.2.txt", Properties.Resources.track_objects);
-            }
-            //import default colors per object
-            ImportDefaultColors();
-
-            ///import selectable objects from file and parse them into lists for manipulation
-            //splits input at "###". Each section is a collection of param_paths
-            List<string> import = (File.ReadAllText($@"{AppLocation}\templates\track_objects2.2.txt")).Replace("\r\n", "\n").Split(new string[] { "###\n" }, StringSplitOptions.None).ToList();
-            for (int x = 0; x < import.Count; x++) {
-                //split each section into individual lines
-                List<string> import2 = import[x].Split('\n').ToList();
-
-                for (int y = 1; y < import2.Count - 1; y++) {
-                    //split each line by ';'. Now each property is separated
-                    string[] import3 = import2[y].Split(';');
-                    try {
-                        Object_Params objpar = new() {
-                            category = import2[0],
-                            obj_name = import3[0],
-                            param_displayname = import3[1],
-                            param_path = import3[2],
-                            trait_type = import3[3],
-                            step = import3[4],
-                            def = import3[5],
-                            footer = import3[6].Replace("[", "").Replace("]", ""),
-                        };
-                        //finally, add complete object and values to list
-                        _objects.Add(objpar);
-                    }
-                    catch {
-                        _errorlog += "failed to import all properties of param_path " + import3[0] + " of object " + import2[0] + ".\n";
-                    }
+            if (!File.Exists($@"{AppLocation}\settings\track_objects_v4.txt")) {
+                using (StreamWriter sw = File.CreateText($@"{AppLocation}\settings\track_objects_v4.txt")) {
+                    sw.Write(Properties.Resources.trackobjects_v4);
                 }
             }
-            //show errors to user if any imports failed
-            if (_errorlog.Length > 1) {
-                MessageBox.Show(_errorlog);
-                _errorlog = "";
-            }
-            /*
-            //customize combobox to display the correct content
-            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
-            dropObjects.SelectedIndex = -1;
-            //dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-            dropParamPath.Enabled = false;
-            */
+            //import selectable objects from file and parse them into lists for manipulation
+            string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
+            LeafObjects = _importedObjects.Select(x => x.Split(';'))
+                                        .Select(x => new Object_Params {
+                                            category = x[0],
+                                            obj_name = x[1],
+                                            param_displayname = x[2],
+                                            param_path = x[3],
+                                            trait_type = x[4],
+                                            step = x[5] == "True",
+                                            def = x[6],
+                                            footer = x[7].Replace("[", "").Replace("]", ""),
+                                            defaultcolor = Color.Purple
+                                        }).ToHashSet();
+            //import default colors per object
+            ImportDefaultColors();
+            //import favorites
+            if (AppSettings.SequencerFavorites != null)
+                ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.param_displayname)).ToHashSet();
         }
 
-        private Dictionary<string, string> objectcolors = new();
-        public void ImportDefaultColors()
+        public static Dictionary<string, Bitmap> ColorIcons = new();
+        public static void ImportDefaultColors()
         {
-            objectcolors.Clear();
-            if (!File.Exists($@"{AppLocation}\templates\objects_defaultcolors2.2.txt")) {
-                File.WriteAllText($@"{AppLocation}\templates\objects_defaultcolors2.2.txt", Properties.Resources.objects_defaultcolors);
+            Dictionary<string, Color> ObjectColors = new();
+            if (!File.Exists($@"{AppLocation}\settings\objects_defaultcolors_v3.txt")) {
+                File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
             }
-            objectcolors = File.ReadAllLines($@"{AppLocation}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]);
+            ObjectColors = File.ReadAllLines($@"{AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
 
-            colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            //once all the colors are processed, assign them directly to the objects
+            foreach (Object_Params obj in LeafObjects) {
+                obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
+                Bitmap color = new(16, 16);
+                using (Graphics g = Graphics.FromImage(color)) {
+                    g.Clear(value);
+                }
+                ColorIcons.TryAdd(value.ToArgb().ToString(), color);
+            }
         }
 
         ///Color elements based on set properties
-        private void ColorFormElements()
+        public static void ColorFormElements(TCLE MainForm)
         {
-            /*
-            if (File.Exists($@"{AppLocation}\templates\UIcolorprefs.txt")) {
-                string[] colors = File.ReadAllLines($@"{AppLocation}\templates\UIcolorprefs.txt");
-                Properties.Settings.Default.custom_bgcolor = this.BackColor = Color.FromArgb(int.Parse(colors[0]));
-                Properties.Settings.Default.custom_menucolor = toolStripTitle.BackColor = Color.FromArgb(int.Parse(colors[1]));
-                Properties.Settings.Default.custom_mastercolor = panelMaster.BackColor = Color.FromArgb(int.Parse(colors[2]));
-                Properties.Settings.Default.custom_gatecolor = panelGate.BackColor = Color.FromArgb(int.Parse(colors[3]));
-                Properties.Settings.Default.custom_lvlcolor = panelLevel.BackColor = Color.FromArgb(int.Parse(colors[4]));
-                Properties.Settings.Default.custom_leafcolor = panelLeaf.BackColor = Color.FromArgb(int.Parse(colors[5]));
-                Properties.Settings.Default.custom_samplecolor = panelSample.BackColor = Color.FromArgb(int.Parse(colors[6]));
-                Properties.Settings.Default.custom_activecolor = Color.FromArgb(int.Parse(colors[7]));
-                Properties.Settings.Default.Save();
-            }
-            else {
-                this.BackColor = Properties.Settings.Default.custom_bgcolor;
-                toolStripTitle.BackColor = Properties.Settings.Default.custom_menucolor;
-                panelLeaf.BackColor = Properties.Settings.Default.custom_leafcolor;
-                panelLevel.BackColor = Properties.Settings.Default.custom_lvlcolor;
-                panelGate.BackColor = Properties.Settings.Default.custom_gatecolor;
-                panelMaster.BackColor = Properties.Settings.Default.custom_mastercolor;
-                panelSample.BackColor = Properties.Settings.Default.custom_samplecolor;
-            }
-            */
+            MainForm.toolStripTitle.BackColor = AppSettings.ColorMainMenuBar;
+            MainForm.panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
+            MainForm.dockMain.BackColor = AppSettings.ColorMainBG;
+
+            TCLE.Explorer?.ColorFormElements();
+
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+                leaf.ColorFormElements();
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+                lvl.ColorFormElements();
+            foreach (Form_GateEditor gate in TCLE.Documents.Where(x => x.GetType() == typeof(Form_GateEditor)))
+                gate.ColorFormElements();
+            foreach (Form_MasterEditor master in TCLE.Documents.Where(x => x.GetType() == typeof(Form_MasterEditor)))
+                master.ColorFormElements();
+            foreach (Form_SampleEditor sample in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor)))
+                sample.ColorFormElements();
+            foreach (Form_RawText raw in TCLE.Documents.Where(x => x.GetType() == typeof(Form_RawText)))
+                raw.ColorFormElements();
         }
 
         /// <summary>Blends the specified colors together.</summary>
@@ -154,72 +182,19 @@ namespace Thumper_Custom_Level_Editor
         /// <returns>The blended colors.</returns>
         public static Color Blend(Color color, Color backColor, double amount)
         {
-            byte r = (byte)(color.R * amount + backColor.R * (1 - amount));
-            byte g = (byte)(color.G * amount + backColor.G * (1 - amount));
-            byte b = (byte)(color.B * amount + backColor.B * (1 - amount));
+            byte r = (byte)((color.R * amount) + (backColor.R * (1 - amount)));
+            byte g = (byte)((color.G * amount) + (backColor.G * (1 - amount)));
+            byte b = (byte)((color.B * amount) + (backColor.B * (1 - amount)));
             return Color.FromArgb(r, g, b);
-        }
-
-        private void ClearPanels(string panel = "all")
-        {
-            /*
-            //clear lists used for storing level data
-            if (panel is "all" or "leaf") {
-                _loadedleaf = null;
-                PanelEnableState(panelLeaf, false);
-            }
-            if (panel is "all" or "lvl") {
-                _loadedlvl = null;
-                PanelEnableState(panelLevel, false);
-            }
-            if (panel is "all" or "gate") {
-                _loadedgate = null;
-                PanelEnableState(panelGate, false);
-            }
-            if (panel is "all" or "master") {
-                _loadedmaster = null;
-                PanelEnableState(panelMaster, false);
-            }
-            if (panel is "all" or "samp") {
-                _loadedsample = null;
-                PanelEnableState(panelSample, false);
-            }
-            */
-        }
-
-        public static void PlaySound(string audiofile)
-        {
-            if (Properties.Settings.Default.muteapplication)
-                return;
-            Stream stream = new MemoryStream((byte[])Properties.Resources.ResourceManager.GetObject(audiofile));
-            VorbisWaveReader vorbisStream = new(stream);
-            WaveOut waveOut = new();
-            waveOut.Init(vorbisStream);
-            waveOut.Volume = 1;
-            waveOut.Play();
-        }
-
-        /// Used to allow only numbers and a single decimal during input
-        public static void NumericInputSanitize(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-') {
-                e.Handled = true;
-            }
-
-            //only allow `-` at beginning
-            if (e.KeyChar == '-' && (sender as TextBox).SelectionStart != 0)
-                e.Handled = true;
-
-            // only allow one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1) {
-                e.Handled = true;
-            }
         }
 
         public static void Read_Config()
         {
-            CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false };
-            cfd_lvl.Title = "Select the folder where Thumper is installed (NOT the cache folder)";
+            CommonOpenFileDialog cfd_lvl = new() {
+                IsFolderPicker = true,
+                Multiselect = false,
+                Title = "Select the folder where Thumper is installed (NOT the cache folder)"
+            };
             //check if the game_dir has been set before. It'll be empty if starting for the first time
             if (Properties.Settings.Default.game_dir == "none")
                 cfd_lvl.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
@@ -233,47 +208,18 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.Save();
         }
 
-        private void UpdateLevelLists()
-        {
-            lvlsinworkfolder = Directory.GetFiles(workingfolder, "lvl_*.txt", SearchOption.AllDirectories).Select(x => Path.GetFileName(x).Replace("lvl_", "").Replace(".txt", ".lvl")).ToList() ?? new List<string>();
-            lvlsinworkfolder.Add("<none>");
-            lvlsinworkfolder.Sort();
-            /*
-            dropMasterCheck.SelectedIndexChanged -= dropMasterCheck_SelectedIndexChanged;
-            dropMasterIntro.SelectedIndexChanged -= dropMasterIntro_SelectedIndexChanged;
-            dropMasterLvlRest.SelectedIndexChanged -= dropMasterLvlRest_SelectedIndexChanged;
-            dropGatePre.SelectedIndexChanged -= dropGatePre_SelectedIndexChanged;
-            dropGatePost.SelectedIndexChanged -= dropGatePost_SelectedIndexChanged;
-            dropGateRestart.SelectedIndexChanged -= dropGateRestart_SelectedIndexChanged;
-            //add lvl list as datasources to dropdowns
-            dropMasterCheck.DataSource = lvlsinworkfolder.ToList();
-            dropMasterIntro.DataSource = lvlsinworkfolder.ToList();
-            dropMasterLvlRest.DataSource = lvlsinworkfolder.ToList();
-            dropGatePre.DataSource = lvlsinworkfolder.ToList();
-            dropGatePost.DataSource = lvlsinworkfolder.ToList();
-            dropGateRestart.DataSource = lvlsinworkfolder.ToList();
-            //
-            dropMasterCheck.SelectedIndexChanged += dropMasterCheck_SelectedIndexChanged;
-            dropMasterIntro.SelectedIndexChanged += dropMasterIntro_SelectedIndexChanged;
-            dropMasterLvlRest.SelectedIndexChanged += dropMasterLvlRest_SelectedIndexChanged;
-            dropGatePre.SelectedIndexChanged += dropGatePre_SelectedIndexChanged;
-            dropGatePost.SelectedIndexChanged += dropGatePost_SelectedIndexChanged;
-            dropGateRestart.SelectedIndexChanged += dropGateRestart_SelectedIndexChanged;
-            */
-        }
-
-        public string SearchReferences(dynamic _load, string filepath)
+        public static string SearchReferences(string searchreference)
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (string file in Directory.GetFiles(workingfolder).Where(x => Path.GetFileName(x).StartsWith("leaf_") || Path.GetFileName(x).StartsWith("lvl_") || Path.GetFileName(x).StartsWith("gate_") || Path.GetFileName(x).StartsWith("master_"))) {
+            foreach (FileInfo file in WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => ProjectExtensions.Contains(x.Extension))) {
                 //skip self to not include self
-                if (file == filepath)
+                if (file.Name == searchreference)
                     continue;
-                string text = ((JObject)LoadFileLock(file)).ToString(Formatting.None);
+                string text = ((JObject)LoadFileLock(file.FullName)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
-                if (text.Contains($"{_load["obj_name"]}")) {
-                    referencefiles += Path.GetFileNameWithoutExtension(file) + '\n';
+                if (text.Contains(searchreference)) {
+                    referencefiles += file.Name + '\n';
                 }
             }
 
@@ -284,18 +230,27 @@ namespace Thumper_Custom_Level_Editor
         {
             panelChangelog.Visible = true;
             panelChangelog.BringToFront();
-            lblChangelog.Text = Properties.Resources.changelog;
+            //lblChangelog.Text = Properties.Resources.changelog;
         }
         private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
 
-        public void PanelEnableState(Control panel, bool enablestate)
+        public void MenusVisible(bool visible)
         {
-            foreach (Control _c in panel.Controls.Cast<Control>().Where(x => x.GetType() != typeof(Label))) {
-                if (_c.Text != "titlebar")
-                    _c.Enabled = enablestate;
-            }
+            panelRecentFiles.Visible = !visible;
+            if (WorkingFolder == null)
+                visible = false;
+            panelToolStrips.Visible = visible;
+            dockMain.Visible = visible;
+            foreach (object? item in toolStripTitle.Items)
+                (item as ToolStripItem).Visible = visible;
+            toolstripFile.Visible = true;
+            toolstripHelp.Visible = true;
+            toolstripFormClose.Visible = true;
+            toolstripFormMinimize.Visible = true;
+            toolstripFormRestore.Visible = true;
+            toolstripFormIcon.Visible = true;
+            toolstripExitFullscreen.Visible = TCLE.Fullscreen;
         }
-
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
         public static decimal TruncateDecimal(decimal d, byte decimals)
@@ -312,52 +267,102 @@ namespace Thumper_Custom_Level_Editor
             return r;
         }
 
+        public static void ResizeHeaders(DataGridView dgv)
+        {
+            int biggestheader = 50;
+            //foreach (Sequencer_Object seq in SequencerObjects) {
+            foreach (DataGridViewRow dgvr in dgv.Rows) {
+            //measure header and see if it's the biggest
+            int tempsize = TextRenderer.MeasureText(dgvr.HeaderCell.Value.ToString(), dgvr.HeaderCell.Style.Font).Width;
+                if (tempsize > biggestheader)
+                    biggestheader = tempsize;
+            }
+            //set header width manually and allow resizing
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
+            dgv.RowHeadersWidth = biggestheader + 15;
+        }
+
         ///
         /// File Lock read/write methods
         /// 
+        public static void AddFileLock(FileInfo file)
+        {
+            if (file == null)
+                return;
+            if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
+                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite));
+            }
+        }
+
         public static void WriteFileLock(FileStream fs, JObject _save)
         {
             string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            using (StreamWriter sr = new StreamWriter(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
+            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
                 fs.SetLength(0);
                 sr.Write(tosave);
             }
         }
 
-        public static dynamic LoadFileLock(string _selectedfilename)
+        public static void WriteFileLock(FileStream fs, string _save)
         {
-            dynamic _load;
+            string tosave = _save;
+            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
+                fs.SetLength(0);
+                sr.Write(tosave);
+            }
+        }
+
+        public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
+        {
+            object _load;
             if (!File.Exists(_selectedfilename))
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new FileStream(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (StreamReader textReader = new StreamReader(fileStream)) {
-                try {
-                    _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
-                } catch (Exception) {
-                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
-                    _load = null;
+            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (StreamReader textReader = new(fileStream)) {
+                if (LoadText) {
+                    _load = textReader.ReadToEnd();
+                }
+                else {
+                    try {
+                        _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                    } catch (Exception) {
+                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
+                        _load = null;
+                    }
                 }
             }
 
             return _load;
         }
 
-        public void DeleteFileLock(string _selectedfilename, string filetype)
+        public static void DeleteFileLock(FileInfo filetodelete)
         {
-            if (lockedfiles.ContainsKey(_selectedfilename)) {
-                lockedfiles[_selectedfilename].Close();
-                lockedfiles.Remove(_selectedfilename);
-                ClearPanels(filetype);
+            if (lockedfiles.TryGetValue(filetodelete, out FileStream? value)) {
+                value.Close();
+                lockedfiles.Remove(filetodelete);
             }
-            File.Delete(_selectedfilename);
+            filetodelete.Delete();
+            TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+            TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
+            TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
         }
 
-        public void ClearFileLock()
+        public static void CloseFileLock(FileInfo filetoclose)
+        {
+            if (filetoclose == null)
+                return;
+            if (lockedfiles.TryGetValue(filetoclose, out FileStream? value)) {
+                value.Close();
+                lockedfiles.Remove(filetoclose);
+            }
+        }
+
+        public static void ClearFileLock()
         {
             //clear previously locked files
-            foreach (KeyValuePair<string, FileStream> i in lockedfiles) {
+            foreach (KeyValuePair<FileInfo, FileStream> i in lockedfiles) {
                 i.Value.Close();
             }
             lockedfiles.Clear();
@@ -367,21 +372,19 @@ namespace Thumper_Custom_Level_Editor
         /// 
 
 
-        public static string CopyToWorkingFolderCheck(string filepath, string workingfolder)
+        public static string CopyToWorkingFolderCheck(string filepath)
         {
-            if (workingfolder == null)
+            if (WorkingFolder == null)
                 return filepath;
 
             string dir = Path.GetDirectoryName(filepath);
             string file = Path.GetFileName(filepath);
-            if (dir != workingfolder) {
-                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?\nOr not, and open that level folder?\n\nYES = copy\nNO = open that level folder\nCANCEL = do nothing", "Confirm?", MessageBoxButtons.YesNoCancel);
+            if (dir != WorkingFolder.FullName) {
+                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
-                    if (!File.Exists($@"{workingfolder}\{file}")) File.Copy(filepath, $@"{workingfolder}\{file}");
-                    filepath = $@"{workingfolder}\{file}";
-                }
-                else if (result == DialogResult.No) {
-
+                    if (!File.Exists($@"{WorkingFolder}\{file}")) 
+                        File.Copy(filepath, $@"{WorkingFolder}\{file}");
+                    filepath = $@"{WorkingFolder}\{file}";
                 }
                 else
                     filepath = null;
@@ -390,26 +393,12 @@ namespace Thumper_Custom_Level_Editor
             return filepath;
         }
 
-        public static void HighlightMissingFile(DataGridView dgv, List<string> filelist)
-        {
-            foreach (DataGridViewRow dgvr in dgv.Rows) {
-                if (!File.Exists(filelist[dgvr.Index])) {
-                    dgvr.DefaultCellStyle.BackColor = Color.Maroon;
-                    dgvr.DefaultCellStyle.SelectionBackColor = Color.Gray;
-                }
-                else {
-                    dgvr.DefaultCellStyle.BackColor = Color.FromArgb(40, 40, 40);
-                    dgvr.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
-            }
-        }
-
         ///
         ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
         public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
         {
             // Get information about the source directory
-            var dir = new DirectoryInfo(sourceDir);
+            DirectoryInfo dir = new(sourceDir);
 
             // Check if the source directory exists
             if (!dir.Exists)
@@ -436,91 +425,397 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public List<SampleData> _lvlsamples = new();
-        public void LvlReloadSamples()
+        public static List<SampleData> ProjectSamples = new();
+        public static Dictionary<string, double> ProjectSampleRuntimes = new();
+        public static void ReloadProjectSamples()
         {
-            if (workingfolder == null)
+            if (WorkingFolder == null)
                 return;
-            _lvlsamples.Clear();
-            //find all samp_ files in the level folder
-            List<string> _sampfiles = Directory.GetFiles(workingfolder, "samp_*.txt").Where(x => !x.Contains("samp_default")).ToList();
+            ProjectSamples.Clear();
             //add default empty sample
-            _lvlsamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "" });
+            ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
+            string warning = "";
             //iterate over each file
-            foreach (string f in _sampfiles) {
-                //parse file to JSON
-                dynamic _in = TCLE.LoadFileLock(f);
-                //iterate over items:[] list to get each sample and add names to list
-                foreach (dynamic _samp in _in["items"]) {
-                    _lvlsamples.Add(new SampleData {
-                        obj_name = ((string)_samp["obj_name"]).Replace(".samp", ""),
-                        path = _samp["path"],
-                        volume = _samp["volume"],
-                        pitch = _samp["pitch"],
-                        pan = _samp["pan"],
-                        offset = _samp["offset"],
-                        channel_group = _samp["channel_group"]
-                    });
+            foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "?!?!default?!?!?!?.samp")) {
+                UpdateProjectSamplesFromFile(sampfile, false, false, out string _warning);
+                warning += _warning;
+            }
+            if (warning.Length > 2)
+                MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
+            ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
+            //
+            if (Properties.Settings.Default.RuntimeAsk) {
+                CheckboxDialog Ask = new();
+                if (Ask.ShowDialog() == DialogResult.Yes) {
+                    Properties.Settings.Default.RuntimeSkip = false;
+                    Properties.Settings.Default.RuntimeAsk = !Ask.checkAsk.Checked;
+                }
+                else {
+                    Properties.Settings.Default.RuntimeSkip = true;
+                    Properties.Settings.Default.RuntimeAsk = !Ask.checkAsk.Checked;
                 }
             }
-            _lvlsamples = _lvlsamples.OrderBy(w => w.obj_name).ToList();
-            /*
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DataSource = _lvlsamples.Select(x => x.obj_name).ToList();
-            //this is for adjusting the dropdown width so that the full item can display
-            int width = 0;
-            Graphics g = lvlLoopTracks.CreateGraphics();
-            Font font = lvlLoopTracks.DefaultCellStyle.Font;
-            foreach (SampleData s in _lvlsamples) {
-                int newWidth = (int)g.MeasureString(s.obj_name, font).Width;
-                if (width < newWidth) {
-                    width = newWidth;
-                }
+            if (!Properties.Settings.Default.RuntimeSkip) {
+                CalculateSampleRuntimes();
+                StopAudio();
             }
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[0]).DropDownWidth = width + 20;
-            */
+
+            UpdateEditorsWithSamples();
+            //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));
         }
 
-        public static int CalculateMasterRuntime(string workingfolder, Form_MasterEditor master)
+        public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, bool updateeditors, out string warning)
+        {
+            //remove samples that match the incoming sample file, so that they're rewritten
+            ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            //parse file to JSON
+            dynamic _in = TCLE.LoadFileLock(SampFile.FullName);
+            warning = "";
+            //skip if somehow empty
+            if (_in == null || !_in.ContainsKey("items"))
+                return;
+            //iterate over items:[] list to get each sample and add names to list
+            foreach (dynamic _samp in _in["items"]) {
+                if (ProjectSamples.Any(x => x.obj_name == (string)_samp["obj_name"])) {
+                    if (!preserveSamples)
+                        warning += $"{_samp["obj_name"]} in {SampFile.FullName}\n{_samp["obj_name"]} in {ProjectSamples.First(x => x.obj_name == (string)_samp["obj_name"]).File.FullName}\n";
+                    else
+                        continue;
+                }
+                ProjectSamples.Add(new SampleData {
+                    obj_name = ((string)_samp["obj_name"]),
+                    path = _samp["path"],
+                    volume = _samp["volume"],
+                    pitch = _samp["pitch"],
+                    pan = _samp["pan"],
+                    offset = _samp["offset"],
+                    channel_group = _samp["channel_group"],
+                    File = SampFile,
+                    time = 0
+                });
+            }
+
+            if (updateeditors)
+                UpdateEditorsWithSamples();
+        }
+
+        public static void RemoveProjectSamples(FileInfo SampFile)
+        {
+            TCLE.ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            UpdateEditorsWithSamples();
+        }
+
+        public static void UpdateEditorsWithSamples()
+        {
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
+            }
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+                //load loop track names and paths to lvlLoopTracks DGV
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
+            }
+        }
+
+        public static void CalculateSampleRuntimes()
+        {
+            foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
+                byte[] _bytes;
+                //get the hash of this filename. This will be used to locate the sample's .PC file
+                string _hashedname = TCLE.HashPCName($"A{samp.path}");
+                //check if sample is custom or not. This changes where we load audio from
+                string filetoread;
+                try {
+                    if (samp.path.Contains("custom"))
+                        filetoread = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc";
+                    else
+                        filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
+
+                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))) {
+                        reader.ReadUInt32(); //pc header
+                        reader.ReadUInt32(); //fsb5 header
+                        reader.ReadUInt32(); //version
+                        reader.ReadUInt32(); //# of tracks
+                        reader.ReadUInt32(); //size of sample header
+                        reader.ReadUInt32(); //size of header table
+                        reader.ReadUInt32(); //sample bytes
+                        reader.ReadUInt32(); //audio type
+                        reader.ReadUInt32(); //unknown
+                        reader.ReadUInt32(); //flags
+                        reader.ReadUInt64(); //hash1
+                        reader.ReadUInt64(); //hash2
+                        reader.ReadUInt64(); //hash3
+                        UInt64 metadata = reader.ReadUInt64(); //metadata
+
+                        UInt64 freqid = (metadata & 0b11110) >> 1;
+                        UInt64 samples = metadata >> 34;
+                        int freq = Frequencys[(int)freqid];
+                        samp.time = (double)(samples) / (double)freq;
+                    }
+                }
+                catch (Exception ex) {
+                    samp.time = 0;
+                }
+            }
+        }
+
+        public static void StopAudio()
+        {
+            Bass.BASS_Free();
+            alzheimer();
+            TCLE.PlayingChannels.Clear();
+            foreach (Form_SampleEditor samp in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
+                samp.sampleList.Refresh();
+            }
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+                lvl.lvlLoopTracks.Refresh();
+            }
+            // Initialize Sound library
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, TCLE.Instance.Handle);
+        }
+
+        public static string PCtoAudioFile(SampleData _samp)
+        {
+            if (_samp == null || _samp.obj_name == ".samp")
+                return null;
+            //check if the gamedir has been set so the method can find the .pc files
+            if (Properties.Settings.Default.game_dir == "none") {
+                TCLE.Read_Config();
+            }
+
+            byte[] _bytes;
+            //get the hash of this filename. This will be used to locate the sample's .PC file
+            string _hashedname = HashPCName($"A{_samp.path}");
+
+            //check if sample is custom or not. This changes where we load audio from
+            if (_samp.path.Contains("custom")) {
+                //attempt to locate file. But error and return safely if nothing found
+                try {
+                    using (var fileStream = File.OpenRead($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc")) {
+                        fileStream.Seek(4, SeekOrigin.Begin);
+                        _bytes = new byte[fileStream.Length - 4];
+                        fileStream.Read(_bytes, 0, _bytes.Length);
+                        //Do your thing
+                    }
+                    //_bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                }
+                catch {
+                    _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
+                    return null;
+                }
+            }
+            else {
+                try {
+                    _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
+                }
+                catch {
+                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
+                    return null;
+                }
+            }
+            if (_bytes.Length == 0) {
+                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample {_samp.obj_name}. You may need to re-import the file.";
+                return null;
+            }
+            //check if file has been converted already. Ready the path if true
+            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
+                _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
+                return _samp.TempFile;
+            }
+            ///_bytes = _bytes.Skip(4).ToArray();
+            // credit to https://github.com/SamboyCoding/Fmod5Sharp
+            FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
+            List<FmodSample> samples = bank.Samples;
+            /*byte 24 of FSB files contains the data type of the audio
+            PCM8 = 1,
+            PCM16 = 2,
+            PCM24 = 3,
+            PCM32 = 4,
+            PCMFLOAT = 5,
+            GCADPCM = 6,
+            IMAADPCM = 7,
+            VAG = 8,
+            HEVAG = 9,
+            XMA = 10,
+            MPEG = 11,
+            CELT = 12,
+            AT9 = 13,
+            XWMA = 14,
+            VORBIS = 15,*/
+            int type = _bytes[24];
+            byte[] dataBytes = null;
+            string fileExtension = "";
+            //PCM types
+            if (type is 1 or 2 or 3 or 4) {
+                try {
+                    //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
+                    dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
+                    fileExtension = "wav";
+                } catch (Exception) {
+                    _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
+                    return null;
+                }
+            }
+            //Vorbis (ogg)
+            else if (type is 15) {
+                samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);                
+            }
+
+            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+            using (var stream = File.Open(finalfilename, FileMode.Create)) {
+                using (BinaryWriter bw = new(stream)) {
+                    bw.Write(dataBytes);
+                }
+            }
+            //File.WriteAllBytes(finalfilename, dataBytes);
+            _samp.TempFile = finalfilename;
+            return _samp.TempFile;
+        }
+
+        public static byte[] RebuildWav(FmodSample sample, FmodAudioType type)
+        {
+            int width = type switch {
+                FmodAudioType.PCM8 => 1,
+                FmodAudioType.PCM16 => 2,
+                FmodAudioType.PCM24 => 3,
+                FmodAudioType.PCM32 => 4,
+                _ => 0
+                //_ => throw new($"FmodPcmRebuilder does not support encoding of type {type}"),
+            };
+
+            int numChannels = sample.Metadata.IsStereo ? 2 : 1;
+            WaveFormat format = WaveFormat.CreateCustomFormat(
+                WaveFormatEncoding.Pcm,
+                sample.Metadata.Frequency,
+                numChannels,
+                sample.Metadata.Frequency * numChannels * width,
+                numChannels * width,
+                width * 8
+            );
+            using MemoryStream stream = new();
+            using WaveFileWriter writer = new(stream, format);
+
+            writer.Write(sample.SampleBytes, 0, sample.SampleBytes.Length);
+
+            return stream.GetBuffer();
+        }
+
+        public static uint Hash32(string s)
+        {
+            //this hashes stuff. Don't know why it does it this why.
+            //this is ripped directly from the game's code
+            uint h = 0x811c9dc5;
+            foreach (char c in s)
+                h = ((h ^ c) * 0x1000193) & 0xffffffff;
+            h = (h * 0x2001) & 0xffffffff;
+            h = (h ^ (h >> 0x7)) & 0xffffffff;
+            h = (h * 0x9) & 0xffffffff;
+            h = (h ^ (h >> 0x11)) & 0xffffffff;
+            h = (h * 0x21) & 0xffffffff;
+
+            return h;
+        }
+
+        public static string HashPCName(string StringToHash)
+        {
+            string _hashedname = "";
+            byte[] hashbytes = BitConverter.GetBytes(Hash32(StringToHash));
+            Array.Reverse(hashbytes);
+            foreach (byte b in hashbytes)
+                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
+            //if the hashed name starts with a '0', remove it
+            if (_hashedname[0] == '0')
+                _hashedname = _hashedname[1..];
+            return _hashedname;
+        }
+
+        public static int ByteSearch(byte[] src, byte[] pattern)
+        {
+            int maxFirstCharSlot = src.Length - pattern.Length + 1;
+            for (int i = 0; i < maxFirstCharSlot; i++) {
+                if (src[i] != pattern[0]) // compare only first byte
+                    continue;
+
+                // found a match on first byte, now try to match rest of the pattern
+                for (int j = pattern.Length - 1; j >= 1; j--) {
+                    if (src[i + j] != pattern[j]) break;
+                    if (j == 1) return i;
+                }
+            }
+            return -1;
+        }
+
+        public static int CalculateSublevelRuntime(MasterLvlData _masterlvl)
+        {
+            int _beatcount = 0;
+            if (_masterlvl.type == "lvl") {
+                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.name}"));
+                if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
+                else return -1;
+            }
+            //this section handles gate
+            else {
+                int gatebeats = CalculateGateRuntimeFromFile(_masterlvl.name);
+                if (gatebeats == -1)
+                    return -1;
+                else
+                    _beatcount += gatebeats;
+            }
+            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.rest}"));
+            if (lvlrest != null) _beatcount += CalculateLvlRuntime(lvlrest.FullName);
+
+            return _beatcount;
+        }
+
+        public static int CalculateGateRuntimeFromFile(string gatename)
         {
             dynamic _load;
             int _beatcount = 0;
-            //loop through all entries in the master to get beat counts
-            foreach (MasterLvlData _masterlvl in master._masterlvls) {
-                //this section handles lvl
-                if (_masterlvl.type == "lvl") {
-                    string file = Directory.GetFiles(workingfolder, $"lvl_{_masterlvl.name}.txt", SearchOption.AllDirectories).First();
-                    //load the lvl and then loop through its leafs to get beat counts
-                    _beatcount += LoadLvlGetBeatCounts(file);
-                }
-                //this section handles gate
-                else {
-                    //load the gate to then loop through all lvls in it
-                    _load = TCLE.LoadFileLock($"{workingfolder}\\gate_{_masterlvl.name}.txt");
-                    if (_load == null)
-                        continue;
-                    foreach (dynamic _lvl in _load["boss_patterns"]) {
-                        //load the lvl and then loop through its leafs to get beat counts
-                        int idx = ((string)_lvl["lvl_name"]).LastIndexOf('.');
-                        _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{((string)_lvl["lvl_name"])[..idx]}.txt");
+            List<int> bucketscounted = new();
+            bool israndom;
+            //load the gate to then loop through all lvls in it
+            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{gatename}"));
+            if (gate != null) {
+                _load = TCLE.LoadFileLock(gate.FullName);
+                //if gate not found, _load is null. Return -1 to denote this
+                if (_load == null)
+                    return -1;
+                //check if random is enabled on this gate
+                israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
+                //loop through each lvl in gate
+                foreach (dynamic _lvl in _load["boss_patterns"]) {
+                    //attempt to load lvl
+                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
+                    if (lvl != null) {
+                        //if random is enabled, count only the first entry in each bucket
+                        if (israndom) {
+                            if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
+                                bucketscounted.Add((int)_lvl["bucket_num"]);
+                                _beatcount += CalculateLvlRuntime(lvl.FullName);
+                            }
+                        }
+                        //otherwise count each lvl
+                        else
+                            _beatcount += CalculateLvlRuntime(lvl.FullName);
                     }
                 }
-
-                if (_masterlvl.rest is not "" and not "<none>" and not null)
-                    _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(_masterlvl.rest)}.txt");
+                //need to also count pre and post lvl
+                FileInfo prelvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["pre_lvl_name"]}"));
+                if (prelvl != null) {
+                    _beatcount += CalculateLvlRuntime(prelvl.FullName);
+                }
+                FileInfo postlvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["post_lvl_name"]}"));
+                if (postlvl != null) {
+                    _beatcount += CalculateLvlRuntime(postlvl.FullName);
+                }
             }
-            if (master._properties.introlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.introlvl)}.txt");
-            if (master._properties.checkpointlvl != "<none>")
-                _beatcount += LoadLvlGetBeatCounts($"{workingfolder}\\lvl_{Path.GetFileNameWithoutExtension(master._properties.checkpointlvl)}.txt");
+            else
+                return -1;
 
-            ///lblMAsterRuntimeBeats.Text = $"Beats: {_beatcount}";
-
-            ///Calculate min/sec based on beats and BPM
-            ///lblMasterRuntime.Text = $"Time: {TimeSpan.FromMinutes(_beatcount / (double)_properties.bpm).ToString("hh':'mm':'ss'.'fff")}";
             return _beatcount;
-
         }
-        private static int LoadLvlGetBeatCounts(string path)
+        public static int CalculateLvlRuntime(string path)
         {
             int _beatcount = 0;
 
@@ -529,7 +824,10 @@ namespace Thumper_Custom_Level_Editor
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
-                _beatcount += (int)leaf["beat_cnt"];
+                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(leaf["leaf_name"])}"));
+                if (_leaf != null && _leaf.Exists)
+                    _beatcount += (int)TCLE.LoadFileLock(_leaf.FullName)["beat_cnt"];
+                ///_beatcount += (int)leaf["beat_cnt"];
             }
             //every lvl has an approach beats to consider too
             //_beatcount += (int)_load["approach_beats"];
@@ -537,13 +835,426 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
-        public static void OpenFile(string filepath)
+        public static DockContent OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
         {
-            dynamic _load = LoadFileLock(filepath);
-            string _type = _load["obj_type"];
-            if (_type == "SequinMaster") {
-                Form_MasterEditor master = new();
+            if (filepath == null)
+                return null;
+            //if item is an image, open in image viewer instead of a DockContent
+            if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
+                Image theimage = null;
+                using (FileStream fs = new(filepath.FullName, FileMode.Open)) {
+                    theimage = Image.FromStream(fs);
+                }
+                ImageViewer image = new(theimage) { Text = filepath.Name};
+                image.Show();
+                return null;
+            }
+            //if item is not an editor type, open raw
+            if (!ProjectExtensions.Contains(filepath.Extension.ToLower())) {
+                openraw = true;
+            }
+
+            object _load = LoadFileLock(filepath.FullName, openraw);
+            if (_load == null)
+                return null;
+            //if there are no workspaces, add one
+            if (!ReturnContent) {
+                if (!Workspaces.Any()) {
+                    Form_WorkSpace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
+                    workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
+                }
+                //find if the document is loaded already in a tab
+                //if so, make it activate
+                IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
+                if (workspacehastab != null) {
+                    workspacehastab.DockHandler.Activate();
+                    (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
+                    return null;
+                }
+
+                IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+                foreach (Form_WorkSpace ws in workspacewithfloats) {
+                    IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
+                    if (activate != null) {
+                        activate.DockHandler.Activate();
+                        return null;
+                    }
+                }
+                //open document in raw viewer if that option was selected
+                if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
+                    Form_RawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                    if (ReturnContent)
+                        return rawtext;
+                    rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
+                    return null;
+                }
+            }
+            //otherwise, open a standard editor for the document type
+            string filetype = filepath.Extension;
+            //this finds a pane in the active workspace that has matching extensions already open on it
+            DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
+
+            DockContent OpenFile = new();
+            if (filetype == ".master") {
+                OpenFile = new Form_MasterEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            else if (filetype == ".lvl") {
+                OpenFile = new Form_LvlEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            else if (filetype == ".gate") {
+                OpenFile = new Form_GateEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            else if (filetype == ".leaf") {
+                OpenFile = new Form_LeafEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            else if (filetype == ".samp") {
+                OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            if (ReturnContent)
+                return OpenFile;
+            if (OpenHere != null) OpenFile.Show(OpenHere, null);
+            else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
+            return null;
+        }
+
+        public static void CloseFile(FileInfo filepath)
+        {
+            //check tabs in non float
+            IDockContent workspacehastab = TCLE.Workspaces.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents).FirstOrDefault(y => y.DockHandler.TabText.StartsWith(filepath.Name));
+            if (workspacehastab != null) {
+                (workspacehastab as DockContent).DockHandler.Dispose();
+            }
+            //check tabs in floats
+            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            foreach (Form_WorkSpace ws in workspacewithfloats) {
+                IDockContent toclose = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).FirstOrDefault(z => z.DockHandler.TabText.StartsWith(filepath.Name));
+                if (toclose != null) {
+                    (toclose as DockContent).DockHandler.Dispose();
+                }
             }
         }
+
+        public static void ReloadLvlsInProject()
+        {
+            if (WorkingFolder == null)
+                return;
+            lvlsinworkfolder.Clear();
+            foreach (FileInfo file in WorkingFolder.GetFiles("*.lvl", SearchOption.AllDirectories)) {
+                dynamic loadfile = LoadFileLock(file.FullName);
+                if (loadfile == null) continue;
+                if ((string)loadfile["obj_type"] == "SequinLevel") {
+                    lvlsinworkfolder.Add((string)loadfile["obj_name"]);
+                }
+            }
+            lvlsinworkfolder.Add("<none>");
+            lvlsinworkfolder.Sort();
+        }
+
+        public static void FindReloadRaw(string documentname)
+        {
+            //find if any raw text docs matching documentname are open and update them
+            foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
+                (document as Form_RawText).Reload();
+            }
+        }
+
+        public static void FindEditorRunMethod(Type editor, string method)
+        {
+            foreach (IDockContent document in TCLE.Documents.Where(x => x.GetType() == editor)) {
+                document.GetType().GetMethod(method).Invoke(document, null);
+            }
+        }
+
+        public static bool AnyUnsaved(Form_WorkSpace work = null, Type type = null)
+        {
+            //Different save check method depending on what files are to be closed
+
+            //closing an entire workspace
+            if (work != null) {
+                //closing a specific file type
+                if (type != null) {
+                    foreach (IDockContent document in work.dockMain.Documents.Where(x => x.GetType() == type)) {
+                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                        if (!save)
+                            return true;
+                    }
+                }
+                //closing all in workspace
+                else {
+                    foreach (IDockContent document in work.dockMain.Documents) {
+                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                        if (!save)
+                            return true;
+                    }
+                }
+            }
+            //closing everything
+            else {
+                foreach (IDockContent document in TCLE.Documents) {
+                    bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
+                    if (!save)
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        public static int mod(int x, int m)
+        {
+            int r = x % m;
+            return r < 0 ? r + m : r;
+        }
+
+        public void ConvertProjectToNew()
+        {
+            FileInfo LevelDetails;
+            FileInfo ConfigFile;
+            using OpenFileDialog ofd = new();
+            ofd.Title = "Find a LEVEL DETAILS.txt file";
+            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt"; 
+            ofd.FilterIndex = 1;
+            ofd.InitialDirectory = Application.StartupPath;
+            if (ofd.ShowDialog() == DialogResult.OK) {
+                LevelDetails = new FileInfo(ofd.FileName);
+                if (!LevelDetails.Name.Equals("LEVEL DETAILS.TXT", StringComparison.OrdinalIgnoreCase)) {
+                    MessageBox.Show("That's not the level details file");
+                    return;
+                }
+            }
+            else
+                return;
+
+            if (MessageBox.Show("This will convert the project to the new TCLE 3.0 format. This change CANNOT be undone.\nPlease make a backup of your project before continuing.", "WARNING", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                return;
+
+            int countleaf = LevelDetails.Directory.GetFiles("leaf_*.txt", SearchOption.AllDirectories).Length;
+            int countlvl = LevelDetails.Directory.GetFiles("lvl_*.txt", SearchOption.AllDirectories).Length;
+            int countgate = LevelDetails.Directory.GetFiles("gate_*.txt", SearchOption.AllDirectories).Length;
+            int countsamp = LevelDetails.Directory.GetFiles("samp_*.txt", SearchOption.AllDirectories).Length;
+            int countmaster = LevelDetails.Directory.GetFiles("master_*.txt", SearchOption.AllDirectories).Length;
+            bool sort = MessageBox.Show($"Sort files into subfolders?\n{countleaf} leaf files\n{countlvl} lvl files\n{countgate} gate files\n{countsamp} samp files\n{countmaster} master files", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
+
+            //load the properties of the TCL and create projectProperties
+            dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
+            dynamic ProjectConfig = LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
+            ProjectProperties Convert = new() {
+                projectname = (string)ProjectJson["level_name"] ?? "New Project",
+                difficulty = (string)ProjectJson["difficulty"] ?? "D0",
+                description = (string)ProjectJson["description"] ?? "Please add a description",
+                authornames = (string)ProjectJson["author"] ?? "a person",
+                bpm = (decimal?)ProjectConfig["bpm"] ?? 400m
+            };
+            //load colors, with failover to White
+            try {
+                Convert.bpm = (decimal?)ProjectConfig["bpm"] ?? 400m;
+                dynamic railcolor = ProjectConfig["rails_color"];
+                Convert.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                dynamic railglowcolor = ProjectConfig["rails_glow_color"];
+                Convert.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                dynamic pathcolor = ProjectConfig["path_color"];
+                Convert.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+            } catch (Exception) {
+                Convert.rail = Color.White;
+                Convert.railglow = Color.White;
+                Convert.path = Color.White;
+            }
+
+            foreach (FileInfo file in LevelDetails.Directory.GetFiles("*", SearchOption.AllDirectories)) {
+                if (file.Name.Equals("LEVEL DETAILS.TXT", StringComparison.OrdinalIgnoreCase) || file.Name.StartsWith("config_", StringComparison.OrdinalIgnoreCase)) {
+                    file.Delete();
+                    continue;
+                }
+                else if (file.Directory.Name.ToLower() is "extras")
+                    continue;
+                if (file.Extension == ".pc" && file.Directory.Name != "extras") {
+                    if (!Directory.Exists($@"{file.DirectoryName}\extras"))
+                        Directory.CreateDirectory($@"{file.DirectoryName}\extras");
+                    file.MoveTo($@"{file.DirectoryName}\extras\{file.Name}");
+                }
+                string[] splitextension = file.Name.Replace(".txt", "").Split('_', 2);
+                if (sort) {
+                    try {
+                        Directory.CreateDirectory($@"{file.DirectoryName}\{splitextension[0]}");
+                    } catch { continue; }
+                }
+
+                FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
+                File.Move(file.FullName, newfile.FullName);
+                //resave leafs and lvls to properly convert the datapoints
+                if (newfile.Extension == ".leaf") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_LeafEditor _leaf = new(_load, newfile, true);
+                    _leaf.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
+                else if (newfile.Extension == ".lvl") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_LvlEditor _lvl = new(_load, newfile, true);
+                    _lvl.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
+                else if (newfile.Extension == ".master") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_MasterEditor _master = new(_load, newfile, true);
+                    _master.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
+                else if (newfile.Extension == ".samp") {
+                    dynamic _load = LoadFileLock(newfile.FullName);
+                    Form_SampleEditor _samp = new(_load, newfile, true);
+                    _samp.SaveCheckAndWrite(true, "");
+                    CloseFileLock(newfile);
+                }
+            }
+            //build the JSON to write to file
+            JObject _saveJSON = BuildSave(Convert);
+            //write JSON to file
+            File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            //locate pyramid_outro
+            FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
+            if (pyramid != null)
+                File.WriteAllText($@"{pyramid.FullName}", Properties.Resources.leaf_pyramid_outro);
+            else
+                File.WriteAllText($@"{LevelDetails.DirectoryName}\pyramid_outro.leaf", Properties.Resources.leaf_pyramid_outro);
+
+            OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
+        }
+
+        public static List<string> LevelSections;
+        public static JObject BuildSave(ProjectProperties _properties)
+        {
+            JObject _save = new() {
+                { "level_name", _properties.projectname },
+                { "difficulty", _properties.difficulty },
+                { "description", _properties.description },
+                { "author", _properties.authornames },
+                { "bpm", _properties.bpm },
+                { "level_sections", new JArray() {LevelSections} },
+                { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
+                { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
+                { "path_color", new JArray() { (float)_properties.path.R / 255, (float)_properties.path.G / 255, (float)_properties.path.B / 255, 1 }},
+                { "joy_color", new JArray() { 1f, 1f, 1f, 1f } }
+            };
+            return _save;
+        }
+
+
+        public static void PlaySound(string audiofile)
+        {
+            if (Properties.Settings.Default.muteapplication)
+                return;
+            if (rng.Next(0, 1001) == 1000) {
+                MemoryStream tempstream = new();
+                byte[] duckbytes = Properties.Resources.duck;
+                PlaySampleOneOff("duck", duckbytes, out _);
+            }
+            else
+                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out _);
+            TCLE.alzheimer();
+        }
+        public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
+        public static int LastChannel;
+        public static float initialfreq;
+        public static SYNCPROC EndingProc = new(OnEnding);
+        public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
+        {
+            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
+                string SampleToPlay = TCLE.PCtoAudioFile(_samp);
+                if (String.IsNullOrEmpty(SampleToPlay)) {
+                    SampChannel = 0;
+                    return false;
+                }
+
+                //initialize the player and load the sample
+                SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
+                _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
+                //pitch shift and pan
+                Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_VOL, (float)Properties.Settings.Default.VolKey99 / 100f);
+                Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
+                if (_samp.wave == null) {
+                    _samp.CalculateRuntime(SampChannel, false);
+                    _samp.UpdateRuntime();
+                }
+                //play the sample
+                if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
+                    PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                Tuple<DataGridView, string, int> ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
+                SampChannel = ItemToRemove.Item3;
+                Bass.BASS_ChannelStop(ItemToRemove.Item3);
+                Bass.BASS_ChannelFree(ItemToRemove.Item3);
+                PlayingChannels.Remove(ItemToRemove);
+                return false;
+            }
+        }
+        public static int PlaySampleOneOff(string samplename, byte[] stream, out int SampChannel)
+        {
+            //initialize the player and load the sample
+            SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
+            SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
+            _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
+            //play the sample
+            if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
+                return SampChannel;
+            }
+            else {
+                return SampChannel = 0;
+            }
+        }
+
+        private static void OnEnding(int handle, int channel, int data, IntPtr user)
+        {
+            bool free1 = Bass.BASS_ChannelStop(channel);
+            bool free2 = Bass.BASS_ChannelFree(channel);
+            Tuple<DataGridView, string, int>? ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
+            if (ItemToRemove != null) {
+                ItemToRemove.Item1.InvalidateColumn(0);
+                PlayingChannels.Remove(ItemToRemove);
+                if (TCLE.PlayingChannels.Count > 0)
+                    LastChannel = PlayingChannels.Last().Item3;
+            }
+            TCLE.alzheimer();
+        }
+
+        public static void GenerateSampWave(SampleData samp, int channel)
+        {
+            WaveForm wave = new(samp.TempFile) {
+                DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono
+            };
+            //math to figure out how long the sample is, in seconds and dimensions
+            long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
+            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);/* - ((double)samp.offset / 1000d)) / (double)samp.pitch;*/
+            //render wave
+            wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
+            samp.wave = wave;
+        }
     }
+
+    public static class StringExtensions
+    {
+        public static string FirstCharToUpper(this string input) =>
+            input switch {
+                null => throw new ArgumentNullException(nameof(input)),
+                "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+                _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1))
+            };
+        
+        public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
+        {
+            if (extensions == null)
+                throw new ArgumentNullException("extensions");
+            IEnumerable<FileInfo> files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories);
+            return files.Where(f => extensions.Contains(f.Extension));
+        }
+    }
+
 }

@@ -1,123 +1,37 @@
 ﻿using Cyotek.Windows.Forms;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class CustomizeWorkspace : Form
     {
-        ColorPickerDialog colorDialogNew = new ColorPickerDialog() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
-        string AppLoc = Path.GetDirectoryName(Application.ExecutablePath);
-        public HashSet<Object_Params> _objects = new();
-        private Dictionary<string, string> objectcolors = new();
-        private List<Keys> mandatorykeys = new() { Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10, Keys.F11, Keys.F12, Keys.Shift|Keys.Control|Keys.Alt, Keys.Alt, Keys.Control, Keys.Control|Keys.Alt, Keys.Control|Keys.Shift, Keys.Alt|Keys.Shift };
-        private TCLE _mainform { get; set; }
-
-        public CustomizeWorkspace(HashSet<Object_Params> thelist, TCLE form)
+        #region Variables
+        private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        private Dictionary<string, Keys> keybindfromfile = new();
+        #endregion
+        #region Form Construction and initialization
+        public CustomizeWorkspace()
         {
             InitializeComponent();
-            _mainform = form;
-            _objects = thelist;
-            this.BackColor = Properties.Settings.Default.custom_bgcolor;
-            //set button back colors to the set settings
-            btnBGColor.BackColor = Properties.Settings.Default.custom_bgcolor;
-            btnMenuColor.BackColor = Properties.Settings.Default.custom_menucolor;
-            btnMasterColor.BackColor = Properties.Settings.Default.custom_mastercolor;
-            btnGateColor.BackColor = Properties.Settings.Default.custom_gatecolor;
-            btnLvlColor.BackColor = Properties.Settings.Default.custom_lvlcolor;
-            btnLeafColor.BackColor = Properties.Settings.Default.custom_leafcolor;
-            btnSampleColor.BackColor = Properties.Settings.Default.custom_samplecolor;
-            btnActiveColor.BackColor = Properties.Settings.Default.custom_activecolor;
-            checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
-            //
             toolstripCustomize.Renderer = new ToolStripOverride();
+            //load custom colors from previous
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-            //
-            Dictionary<string, string> import = File.Exists($@"{AppLoc}\templates\objects_defaultcolors2.2.txt") ? File.ReadAllLines($@"{AppLoc}\templates\objects_defaultcolors2.2.txt").ToDictionary(g => g.Split(';')[0], g => g.Split(';')[1]): null;
-            foreach (Object_Params _obj in _objects) {
-                objectcolors.Add(_obj.param_displayname, import.TryGetValue(_obj.param_displayname, out string value) ? value : "-8355585");
-            }
-            //
-            dropObjects.DataSource = _objects.Select(x => x.category).Distinct().ToList();
-            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-
-            //locate keybinds file. If not exist, create it from internal resource
-            if (!File.Exists($@"{AppLoc}\templates\keybinds.txt"))
-                File.WriteAllText($@"{AppLoc}\templates\keybinds.txt", Properties.Resources.defaultkeybinds);
+            //set propertygrid to the color settings
+            propertyGridUIColors.SelectedObject = TCLE.settingsUITheme;
+            //setup Sequencer colors
+            foreach (KeyValuePair<string, Bitmap> bmp in TCLE.ColorIcons)
+                imageList1.Images.Add(bmp.Key, bmp.Value);
+            BuildObjectTree();
+            //set mute
+            checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //read keybinds to a dictionary for easier lookup
-            keybindfromfile = File.ReadAllLines($@"{AppLoc}\templates\keybinds.txt").ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-            keybindfromfile = keybindfromfile.Concat(defaultkeybinds.Where(x => !keybindfromfile.Keys.Contains(x.Key))).ToDictionary(x => x.Key, x => x.Value);
-            LoadKeyBindInfo(keybindfromfile);
-        }
-
-        private void btnSetColor(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            Button btn = (Button)sender;
-            colorDialogNew.Color = btn.BackColor;
-            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
-                btn.BackColor = colorDialogNew.Color;
+            if (Properties.Settings.Default.UserKeybinds == "-") {
+                keybindfromfile = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             }
+            else
+                keybindfromfile = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
         }
-
-        private void btnCustomizeApply_Click(object sender, EventArgs e)
-        {
-            //colors
-            File.WriteAllLines($@"{AppLoc}\templates\objects_defaultcolors.txt", objectcolors.Select(x => $"{x.Key};{x.Value}"));
-            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
-            //set and save properties
-            Properties.Settings.Default.custom_bgcolor = btnBGColor.BackColor;
-            Properties.Settings.Default.custom_menucolor = btnMenuColor.BackColor;
-            Properties.Settings.Default.custom_mastercolor = btnMasterColor.BackColor;
-            Properties.Settings.Default.custom_gatecolor = btnGateColor.BackColor;
-            Properties.Settings.Default.custom_lvlcolor = btnLvlColor.BackColor;
-            Properties.Settings.Default.custom_leafcolor = btnLeafColor.BackColor;
-            Properties.Settings.Default.custom_samplecolor = btnSampleColor.BackColor;
-            Properties.Settings.Default.custom_activecolor = btnActiveColor.BackColor;
-            Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
-
-            File.WriteAllText($@"{AppLoc}\templates\UIcolorprefs.txt", $"{btnBGColor.BackColor.ToArgb()}\n{btnMenuColor.BackColor.ToArgb()}\n{btnMasterColor.BackColor.ToArgb()}\n{btnGateColor.BackColor.ToArgb()}\n{btnLvlColor.BackColor.ToArgb()}\n{btnLeafColor.BackColor.ToArgb()}\n{btnSampleColor.BackColor.ToArgb()}\n{btnActiveColor.BackColor.ToArgb()}");
-
-            File.WriteAllLines($@"{AppLoc}\templates\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void dropObjects_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dropParamPath.DataSource = _objects.Where(obj => obj.category == dropObjects.Text).Select(obj => obj.param_displayname).ToList();
-        }
-
-        private void dropParamPath_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            btnObjectColor.BackColor = Color.FromArgb(int.Parse(objectcolors.TryGetValue(dropParamPath.Text, out string value) ? value : "-8355585"));
-        }
-
-        private void btnObjectColor_Click(object sender, EventArgs e)
-        {
-            TCLE.PlaySound("UIcoloropen");
-            Button btn = (Button)sender;
-            colorDialogNew.Color = btn.BackColor;
-            if (colorDialogNew.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
-                Color _c = colorDialogNew.Color;
-                btn.BackColor = colorDialogNew.Color;
-
-                if (!objectcolors.ContainsKey(dropParamPath.Text)) {
-                    objectcolors.Add(dropParamPath.Text, $"{_c.ToArgb()}");
-                }
-                else {
-                    objectcolors[dropParamPath.Text] = $"{_c.ToArgb()}";
-                }
-            }
-        }
-
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Set Border header  
@@ -129,133 +43,125 @@ namespace Thumper_Custom_Level_Editor
             //set  Tabcontrol border  
             Graphics g = e.Graphics;
             Pen p = new(Color.FromArgb(55, 55, 55), 10);
-            g.DrawRectangle(p, tabPage1.Bounds);
+            g.DrawRectangle(p, tabUIColors.Bounds);
         }
-
-        /// 
-        /// This is all for handling keybinds
-        ///
-        private Dictionary<string, Keys> defaultkeybinds = Properties.Resources.defaultkeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        Dictionary<string, Keys> keybindfromfile = new();
-        Keys lastpress;
-        Label currentlabel;
-        bool ignorekeys = true;
-        string keybindname;
-        private void LoadKeyBindInfo(Dictionary<string, Keys> loadthesekeys)
+        #endregion
+        #region Form Closing
+        private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
-            //loop through labels called "keybind" on form. Each has a TAG that is used to lookup its keybind from the dictionary
-            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Name.Contains("keybind"))) {
-                //the "14" is a leftpad empty space
-                List<string> mod = loadthesekeys[(string)_lbl.Tag].ToString().Split(new[] {", "}, StringSplitOptions.None).ToList();
-                mod.Reverse();
-                if (mod.Contains("Alt")) {
-                    mod.Remove("Alt");
-                    mod.Insert(0, "Alt");
-                }
-                if (mod.Contains("Control")) {
-                    mod.Remove("Control");
-                    mod.Insert(0, "Control");
-                }
-                _lbl.Text = $"{_lbl.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
+            //save colors to settings
+            TCLE.settingsUITheme.SaveSettings();
+            TCLE.ColorFormElements(TCLE.Instance);
+            //write sequencer colors to txt file
+            File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
+            Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            //save mute to settings
+            Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+            //write keybinds to txt file
+            ///File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            Properties.Settings.Default.UserKeybinds = string.Join('\n', keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            TCLE.Instance.SetKeyBinds();
+            //save properties
+            Properties.Settings.Default.Save();
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        #endregion
+        #region UI colors
+        private void btnSetColor(object sender, EventArgs e)
+        {
+            TCLE.PlaySound("UIcoloropen");
+            Button btn = (Button)sender;
+            colorDialog.Color = btn.BackColor;
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                btn.BackColor = colorDialog.Color;
             }
         }
-        private void keybindLabel_Click(object sender, EventArgs e)
+
+        private void btnObjectColor_Click(object sender, EventArgs e)
         {
-            ///all keybind labels call this function
-            //storw which label was clicked
-            currentlabel = sender as Label;
-            currentlabel.Focus();
-            keybindname = (string)currentlabel.Tag;
-            string[] lbltxt = currentlabel.Text.Split('.');
-            //set to false so the KeyDown event can start picking up our key presses
-            ignorekeys = false;
-            //make the keybind setting panel show up
-            panelSetKeybind.Visible = true;
-            labelKeybindName.Text = $"Set Keybind - {lbltxt[0].Trim()}";
-            labelKeys.Text = lbltxt.Last();
-        }
-        private void CustomizeWorkspace_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (ignorekeys)
-                return;
-            //check if keydown is the same as last pressed. Don't process if it is
-            if (e.KeyData != lastpress) {
-                lblInvalid.Visible = false;
-                //store last press for when user accepts changes
-                bool cantusethiskey = false;
-                lastpress = e.KeyData;
-                if (keybindfromfile.ContainsValue(lastpress) || (!mandatorykeys.Contains(e.KeyCode) && !mandatorykeys.Contains(e.Modifiers)) || (e.KeyCode is Keys.ControlKey or Keys.ShiftKey or Keys.Menu)) {
-                    cantusethiskey = true;
-                    lblInvalid.Visible = true;
-                }
-                //check if the new keypress exists as a keybind
-                //if it is, disable controls so it can't be set
-                labelKeys.ForeColor = cantusethiskey ? Color.Red : Color.White;
-                btnSetKeybind.Enabled = !cantusethiskey;
-                btnSetKeybind.BackColor = cantusethiskey ? Color.Gray : Color.Green;
-                List<string> mod = e.Modifiers.ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-                if (mod.Contains("Alt")) {
-                    mod.Remove("Alt");
-                    mod.Insert(0, "Alt");
-                }
-                if (mod.Last() == "Control" && mod.Count > 1) {
-                    mod.Remove("Control");
-                    mod.Insert(0, "Control");
-                }
-                labelKeys.Text = $"{string.Join(" + ", mod)} + {e.KeyCode}";
+            TCLE.PlaySound("UIcoloropen");
+            Button btn = (Button)sender;
+            colorDialog.Color = btn.BackColor;
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                btn.BackColor = colorDialog.Color;
             }
         }
-        private void btnSetKeybind_Click(object sender, EventArgs e)
+        #endregion
+        #region Audio
+        private void checkMuteApp_CheckedChanged(object sender, EventArgs e)
         {
-            //when user accepts keybind change, store lastpress into the keybind dictionary
-            //using the saved "keybindname" stored from the Click function
-            keybindfromfile[keybindname] = lastpress;
-            //update the keybind label
-            //the "14" is a leftpad empty space
-            List<string> mod = keybindfromfile[keybindname].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList();
-            mod.Reverse();
-            currentlabel.Text = $"{currentlabel.Text.Split('.')[0],17}" + $".....{String.Join(" + ", mod)}";
-            panelSetKeybind.Visible = false;
-            ignorekeys = true;
+            if (!checkMuteApp.Checked) {
+                TCLE.PlaySound("UIselect");
+            }
         }
-        private void txtKeybindSearch_Enter(object sender, EventArgs e)
+        #endregion
+        #region Keybinds
+        #endregion
+        #region Sequencer object colors
+        private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            txtKeybindSearch.Text = txtKeybindSearch.Text.Replace("search...", "");
+            BuildObjectTree();
         }
-        private void txtKeybindSearch_TextChanged(object sender, EventArgs e)
+
+        private void BuildObjectTree()
         {
-            foreach (Label _lbl in panel1.Controls.OfType<Label>())
-                _lbl.Visible = false;
-            //find all labels with text that matches the search. Since keybind name AND Keys are in the same string,
-            //the search can look up both at the same time
-            foreach (Label _lbl in panel1.Controls.OfType<Label>().Where(x => x.Text.ToLower().Contains(txtKeybindSearch.Text.ToLower())))
-                _lbl.Visible = true;
+            bool filtersearch = txtSearch.Text is not "" and not "Search Objects (Ctrl+;)";
+
+            treeObjects.Nodes.Clear();
+            //make each category of objects its own node
+            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
+                TreeNode _node = new() {
+                    Text = category.ToUpper(),
+                    ImageKey = "category",
+                    SelectedImageKey = "category"
+                };
+                //each object becomes its own node
+                foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
+                    TreeNode _param = new() {
+                        Text = obj.param_displayname,
+                        ImageKey = obj.defaultcolor.ToArgb().ToString(),
+                        SelectedImageKey = obj.defaultcolor.ToArgb().ToString()
+                    };
+                    if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
+                        _node.Nodes.Add(_param);
+                }
+
+                if ((filtersearch && _node.Nodes.Count != 0) || !filtersearch)
+                    treeObjects.Nodes.Add(_node);
+            }
+
+            if (filtersearch)
+                treeObjects.ExpandAll();
         }
-        private void btnKeybindReset_Click(object sender, EventArgs e)
+
+        private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to reset all keybinds to default?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
                 return;
-            LoadKeyBindInfo(defaultkeybinds);
-            keybindfromfile = defaultkeybinds;
+
+            TCLE.PlaySound("UIcoloropen");
+            colorDialog.Color = Color.FromArgb(int.Parse(e.Node.ImageKey));
+            if (colorDialog.ShowDialog() == DialogResult.OK) {
+                TCLE.PlaySound("UIcolorapply");
+                //create color and store it in the bitmap dictionary
+                Bitmap color = new(16, 16);
+                using (Graphics g = Graphics.FromImage(color)) {
+                    g.Clear(colorDialog.Color);
+                }
+                string colorname = colorDialog.Color.ToArgb().ToString();
+                TCLE.ColorIcons.TryAdd(colorname, color);
+                imageList1.Images.Add(colorname, color);
+                //apply color to object
+                Object_Params param = TCLE.LeafObjects.First(x => x.param_displayname == e.Node.Text);
+                param.defaultcolor = colorDialog.Color;
+                e.Node.ImageKey = colorname;
+                e.Node.SelectedImageKey = colorname;
+            }
         }
-        private void btnSingleReset_Click(object sender, EventArgs e)
-        {
-            CustomizeWorkspace_KeyDown(null, new KeyEventArgs(defaultkeybinds[keybindname]));
-        }
-        private void btnCloseKeybind_Click(object sender, EventArgs e)
-        {
-            ignorekeys = true;
-            panelSetKeybind.Visible = false;
-            btnSetKeybind.Enabled = false;
-            btnSetKeybind.BackColor = Color.Gray;
-            lastpress = Keys.None;
-        }
-
-        /// 
-        /// This is all for handling keybinds
-        /// 
-
-
-
+        #endregion
     }
 }

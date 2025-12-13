@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,306 +20,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1430, 555")]
-        public global::System.Drawing.Size leafeditorsize {
-            get {
-                return ((global::System.Drawing.Size)(this["leafeditorsize"]));
-            }
-            set {
-                this["leafeditorsize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("307, 418")]
-        public global::System.Drawing.Point leafeditorloc {
-            get {
-                return ((global::System.Drawing.Point)(this["leafeditorloc"]));
-            }
-            set {
-                this["leafeditorloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("997, 383")]
-        public global::System.Drawing.Size lvleditorsize {
-            get {
-                return ((global::System.Drawing.Size)(this["lvleditorsize"]));
-            }
-            set {
-                this["lvleditorsize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("864, 29")]
-        public global::System.Drawing.Point lvleditorloc {
-            get {
-                return ((global::System.Drawing.Point)(this["lvleditorloc"]));
-            }
-            set {
-                this["lvleditorloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("386, 383")]
-        public global::System.Drawing.Size gateeditorsize {
-            get {
-                return ((global::System.Drawing.Size)(this["gateeditorsize"]));
-            }
-            set {
-                this["gateeditorsize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("472, 29")]
-        public global::System.Drawing.Point gateeditorloc {
-            get {
-                return ((global::System.Drawing.Point)(this["gateeditorloc"]));
-            }
-            set {
-                this["gateeditorloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("462, 383")]
-        public global::System.Drawing.Size mastereditorsize {
-            get {
-                return ((global::System.Drawing.Size)(this["mastereditorsize"]));
-            }
-            set {
-                this["mastereditorsize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4, 29")]
-        public global::System.Drawing.Point mastereditorloc {
-            get {
-                return ((global::System.Drawing.Point)(this["mastereditorloc"]));
-            }
-            set {
-                this["mastereditorloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("297, 444")]
-        public global::System.Drawing.Size foldersize {
-            get {
-                return ((global::System.Drawing.Size)(this["foldersize"]));
-            }
-            set {
-                this["foldersize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4, 418")]
-        public global::System.Drawing.Point folderloc {
-            get {
-                return ((global::System.Drawing.Point)(this["folderloc"]));
-            }
-            set {
-                this["folderloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("450, 380")]
-        public global::System.Drawing.Size sampleeditorsize {
-            get {
-                return ((global::System.Drawing.Size)(this["sampleeditorsize"]));
-            }
-            set {
-                this["sampleeditorsize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("370, 100")]
-        public global::System.Drawing.Point sampleeditorloc {
-            get {
-                return ((global::System.Drawing.Point)(this["sampleeditorloc"]));
-            }
-            set {
-                this["sampleeditorloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("64, 0, 0")]
-        public global::System.Drawing.Color custom_bgcolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_bgcolor"]));
-            }
-            set {
-                this["custom_bgcolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("80, 0, 0")]
-        public global::System.Drawing.Color custom_menucolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_menucolor"]));
-            }
-            set {
-                this["custom_menucolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
-        public global::System.Drawing.Color custom_mastercolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_mastercolor"]));
-            }
-            set {
-                this["custom_mastercolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool leafeditorvisible {
-            get {
-                return ((bool)(this["leafeditorvisible"]));
-            }
-            set {
-                this["leafeditorvisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool lvleditorvisible {
-            get {
-                return ((bool)(this["lvleditorvisible"]));
-            }
-            set {
-                this["lvleditorvisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool gateeditorvisible {
-            get {
-                return ((bool)(this["gateeditorvisible"]));
-            }
-            set {
-                this["gateeditorvisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool mastereditorvisible {
-            get {
-                return ((bool)(this["mastereditorvisible"]));
-            }
-            set {
-                this["mastereditorvisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool workingfoldervisible {
-            get {
-                return ((bool)(this["workingfoldervisible"]));
-            }
-            set {
-                this["workingfoldervisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool sampleeditorvisible {
-            get {
-                return ((bool)(this["sampleeditorvisible"]));
-            }
-            set {
-                this["sampleeditorvisible"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
-        public global::System.Drawing.Color custom_gatecolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_gatecolor"]));
-            }
-            set {
-                this["custom_gatecolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
-        public global::System.Drawing.Color custom_lvlcolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_lvlcolor"]));
-            }
-            set {
-                this["custom_lvlcolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
-        public global::System.Drawing.Color custom_leafcolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_leafcolor"]));
-            }
-            set {
-                this["custom_leafcolor"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
-        public global::System.Drawing.Color custom_samplecolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_samplecolor"]));
-            }
-            set {
-                this["custom_samplecolor"] = value;
             }
         }
         
@@ -356,150 +56,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
             }
             set {
                 this["beebleloc"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock1 {
-            get {
-                return ((string)(this["dock1"]));
-            }
-            set {
-                this["dock1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock2 {
-            get {
-                return ((string)(this["dock2"]));
-            }
-            set {
-                this["dock2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock3 {
-            get {
-                return ((string)(this["dock3"]));
-            }
-            set {
-                this["dock3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock4 {
-            get {
-                return ((string)(this["dock4"]));
-            }
-            set {
-                this["dock4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock5 {
-            get {
-                return ((string)(this["dock5"]));
-            }
-            set {
-                this["dock5"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("empty")]
-        public string dock6 {
-            get {
-                return ((string)(this["dock6"]));
-            }
-            set {
-                this["dock6"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public int splitterHorz1 {
-            get {
-                return ((int)(this["splitterHorz1"]));
-            }
-            set {
-                this["splitterHorz1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public int splitterVert1 {
-            get {
-                return ((int)(this["splitterVert1"]));
-            }
-            set {
-                this["splitterVert1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public int splitterVert2 {
-            get {
-                return ((int)(this["splitterVert2"]));
-            }
-            set {
-                this["splitterVert2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int splitterVert3 {
-            get {
-                return ((int)(this["splitterVert3"]));
-            }
-            set {
-                this["splitterVert3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int splitterVert4 {
-            get {
-                return ((int)(this["splitterVert4"]));
-            }
-            set {
-                this["splitterVert4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CornflowerBlue")]
-        public global::System.Drawing.Color custom_activecolor {
-            get {
-                return ((global::System.Drawing.Color)(this["custom_activecolor"]));
-            }
-            set {
-                this["custom_activecolor"] = value;
             }
         }
         
@@ -622,13 +178,792 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("e")]
-        public string Setting {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowCategory {
             get {
-                return ((string)(this["Setting"]));
+                return ((bool)(this["LeafOptionShowCategory"]));
             }
             set {
-                this["Setting"] = value;
+                this["LeafOptionShowCategory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowGrid {
+            get {
+                return ((bool)(this["LeafOptionShowGrid"]));
+            }
+            set {
+                this["LeafOptionShowGrid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionConnectBars {
+            get {
+                return ((bool)(this["LeafOptionConnectBars"]));
+            }
+            set {
+                this["LeafOptionConnectBars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafOptionShowLane {
+            get {
+                return ((bool)(this["LeafOptionShowLane"]));
+            }
+            set {
+                this["LeafOptionShowLane"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionEaseDots {
+            get {
+                return ((bool)(this["LeafOptionEaseDots"]));
+            }
+            set {
+                this["LeafOptionEaseDots"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionThinBars {
+            get {
+                return ((bool)(this["LeafOptionThinBars"]));
+            }
+            set {
+                this["LeafOptionThinBars"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionShowWave {
+            get {
+                return ((bool)(this["LeafOptionShowWave"]));
+            }
+            set {
+                this["LeafOptionShowWave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80, 0, 0")]
+        public global::System.Drawing.Color ColorMainMenuBar {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainMenuBar"]));
+            }
+            set {
+                this["ColorMainMenuBar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorMainSubMenubar {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainSubMenubar"]));
+            }
+            set {
+                this["ColorMainSubMenubar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorMainBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMainBG"]));
+            }
+            set {
+                this["ColorMainBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLeafBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafBG"]));
+            }
+            set {
+                this["ColorLeafBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLeafSeqBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafSeqBG"]));
+            }
+            set {
+                this["ColorLeafSeqBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLeafTimeSig1 {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafTimeSig1"]));
+            }
+            set {
+                this["ColorLeafTimeSig1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("45, 45, 45")]
+        public global::System.Drawing.Color ColorLeafTimeSig2 {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafTimeSig2"]));
+            }
+            set {
+                this["ColorLeafTimeSig2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorLeafRawBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafRawBG"]));
+            }
+            set {
+                this["ColorLeafRawBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorLeafRawText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafRawText"]));
+            }
+            set {
+                this["ColorLeafRawText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlBG"]));
+            }
+            set {
+                this["ColorLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlLeafBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlLeafBG"]));
+            }
+            set {
+                this["ColorLvlLeafBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlTunnelBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlTunnelBG"]));
+            }
+            set {
+                this["ColorLvlTunnelBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorLvlLoopsBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLvlLoopsBG"]));
+            }
+            set {
+                this["ColorLvlLoopsBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorGateBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorGateBG"]));
+            }
+            set {
+                this["ColorGateBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorGateLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorGateLvlBG"]));
+            }
+            set {
+                this["ColorGateLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorMasterBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMasterBG"]));
+            }
+            set {
+                this["ColorMasterBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorMasterLvlBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorMasterLvlBG"]));
+            }
+            set {
+                this["ColorMasterLvlBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("55, 55, 55")]
+        public global::System.Drawing.Color ColorSampleBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorSampleBG"]));
+            }
+            set {
+                this["ColorSampleBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10, 10, 10")]
+        public global::System.Drawing.Color ColorSampleListBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorSampleListBG"]));
+            }
+            set {
+                this["ColorSampleListBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ColorWaveformBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorWaveformBG"]));
+            }
+            set {
+                this["ColorWaveformBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorProjectExplorerBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjectExplorerBG"]));
+            }
+            set {
+                this["ColorProjectExplorerBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("31, 31, 31")]
+        public global::System.Drawing.Color ColorRawBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorRawBG"]));
+            }
+            set {
+                this["ColorRawBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorRawText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorRawText"]));
+            }
+            set {
+                this["ColorRawText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string UserKeybinds {
+            get {
+                return ((string)(this["UserKeybinds"]));
+            }
+            set {
+                this["UserKeybinds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("56, 56, 56")]
+        public global::System.Drawing.Color ColorProjExpHighlight {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjExpHighlight"]));
+            }
+            set {
+                this["ColorProjExpHighlight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorProjExpText {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorProjExpText"]));
+            }
+            set {
+                this["ColorProjExpText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        public int ZoomHoriz {
+            get {
+                return ((int)(this["ZoomHoriz"]));
+            }
+            set {
+                this["ZoomHoriz"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ZoomVert {
+            get {
+                return ((int)(this["ZoomVert"]));
+            }
+            set {
+                this["ZoomVert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RuntimeAsk {
+            get {
+                return ((bool)(this["RuntimeAsk"]));
+            }
+            set {
+                this["RuntimeAsk"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RuntimeSkip {
+            get {
+                return ((bool)(this["RuntimeSkip"]));
+            }
+            set {
+                this["RuntimeSkip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafHideRaw {
+            get {
+                return ((bool)(this["LeafHideRaw"]));
+            }
+            set {
+                this["LeafHideRaw"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey1 {
+            get {
+                return ((int)(this["VolKey1"]));
+            }
+            set {
+                this["VolKey1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey2 {
+            get {
+                return ((int)(this["VolKey2"]));
+            }
+            set {
+                this["VolKey2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey3 {
+            get {
+                return ((int)(this["VolKey3"]));
+            }
+            set {
+                this["VolKey3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey4 {
+            get {
+                return ((int)(this["VolKey4"]));
+            }
+            set {
+                this["VolKey4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey5 {
+            get {
+                return ((int)(this["VolKey5"]));
+            }
+            set {
+                this["VolKey5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey6 {
+            get {
+                return ((int)(this["VolKey6"]));
+            }
+            set {
+                this["VolKey6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey7 {
+            get {
+                return ((int)(this["VolKey7"]));
+            }
+            set {
+                this["VolKey7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey8 {
+            get {
+                return ((int)(this["VolKey8"]));
+            }
+            set {
+                this["VolKey8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey9 {
+            get {
+                return ((int)(this["VolKey9"]));
+            }
+            set {
+                this["VolKey9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey10 {
+            get {
+                return ((int)(this["VolKey10"]));
+            }
+            set {
+                this["VolKey10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey11 {
+            get {
+                return ((int)(this["VolKey11"]));
+            }
+            set {
+                this["VolKey11"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey12 {
+            get {
+                return ((int)(this["VolKey12"]));
+            }
+            set {
+                this["VolKey12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey13 {
+            get {
+                return ((int)(this["VolKey13"]));
+            }
+            set {
+                this["VolKey13"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey14 {
+            get {
+                return ((int)(this["VolKey14"]));
+            }
+            set {
+                this["VolKey14"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey15 {
+            get {
+                return ((int)(this["VolKey15"]));
+            }
+            set {
+                this["VolKey15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey16 {
+            get {
+                return ((int)(this["VolKey16"]));
+            }
+            set {
+                this["VolKey16"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey17 {
+            get {
+                return ((int)(this["VolKey17"]));
+            }
+            set {
+                this["VolKey17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey18 {
+            get {
+                return ((int)(this["VolKey18"]));
+            }
+            set {
+                this["VolKey18"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey19 {
+            get {
+                return ((int)(this["VolKey19"]));
+            }
+            set {
+                this["VolKey19"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey20 {
+            get {
+                return ((int)(this["VolKey20"]));
+            }
+            set {
+                this["VolKey20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey100 {
+            get {
+                return ((int)(this["VolKey100"]));
+            }
+            set {
+                this["VolKey100"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int VolKey99 {
+            get {
+                return ((int)(this["VolKey99"]));
+            }
+            set {
+                this["VolKey99"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<string> SequencerFavorites {
+            get {
+                return ((global::System.Collections.Generic.List<string>)(this["SequencerFavorites"]));
+            }
+            set {
+                this["SequencerFavorites"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int VolKey21 {
+            get {
+                return ((int)(this["VolKey21"]));
+            }
+            set {
+                this["VolKey21"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PreviewTunnel {
+            get {
+                return ((bool)(this["PreviewTunnel"]));
+            }
+            set {
+                this["PreviewTunnel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ChunkShowName {
+            get {
+                return ((bool)(this["ChunkShowName"]));
+            }
+            set {
+                this["ChunkShowName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ChunkShowBeats {
+            get {
+                return ((bool)(this["ChunkShowBeats"]));
+            }
+            set {
+                this["ChunkShowBeats"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ChunkShowTime {
+            get {
+                return ((bool)(this["ChunkShowTime"]));
+            }
+            set {
+                this["ChunkShowTime"] = value;
             }
         }
     }

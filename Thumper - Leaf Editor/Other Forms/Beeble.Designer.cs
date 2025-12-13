@@ -29,38 +29,52 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerBeeble = new System.Windows.Forms.Timer(this.components);
+            this.pictureBeeble = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).BeginInit();
             this.SuspendLayout();
             // 
             // timerBeeble
             // 
             this.timerBeeble.Interval = 300;
-            this.timerBeeble.Tick += new System.EventHandler(this.timerBeeble_Tick);
+            this.timerBeeble.Tick += this.timerBeeble_Tick;
+            // 
+            // pictureBeeble
+            // 
+            this.pictureBeeble.Dock = DockStyle.Fill;
+            this.pictureBeeble.Image = Properties.Resources.beeble;
+            this.pictureBeeble.Location = new Point(0, 0);
+            this.pictureBeeble.Name = "pictureBeeble";
+            this.pictureBeeble.Size = new Size(134, 104);
+            this.pictureBeeble.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pictureBeeble.TabIndex = 0;
+            this.pictureBeeble.TabStop = false;
+            this.pictureBeeble.MouseDown += this.Beeble_MouseDown;
             // 
             // Beeble
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::Thumper_Custom_Level_Editor.Properties.Resources.beeble;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(113, 94);
+            this.AutoScaleDimensions = new SizeF(7F, 15F);
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.BackColor = Color.White;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.ClientSize = new Size(134, 104);
             this.ControlBox = false;
+            this.Controls.Add(this.pictureBeeble);
             this.DoubleBuffered = true;
+            this.Margin = new Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(50, 50);
+            this.MinimumSize = new Size(1, 1);
             this.Name = "Beeble";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.TopMost = true;
-            this.Load += new System.EventHandler(this.Beeble_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Beeble_MouseDown);
+            this.MouseDown += this.Beeble_MouseDown;
+            ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
 
         private System.Windows.Forms.Timer timerBeeble;
+        private PictureBox pictureBeeble;
     }
 }

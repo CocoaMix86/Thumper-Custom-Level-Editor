@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-
-namespace Thumper_Custom_Level_Editor
+﻿namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     { 
@@ -14,10 +8,10 @@ namespace Thumper_Custom_Level_Editor
             panelRecentFiles.Visible = true;
             panelRecentFiles.BringToFront();
             foreach (string level in recentfiles) {
-                dgvRecentFiles.Rows.Add("", Path.GetFileName(level), level);
+                FileInfo tcl = new(level);
+                dgvRecentFiles.Rows.Add("", tcl.Name, level);
             }
             dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
         private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -29,8 +23,8 @@ namespace Thumper_Custom_Level_Editor
                 //get dimensions
                 int w = Properties.Resources.icon_openedfolders.Width;
                 int h = Properties.Resources.icon_openedfolders.Height;
-                int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
                 //paint the image
                 e.Graphics.DrawImage(Properties.Resources.icon_openedfolders, new Rectangle(x, y, w, h));
                 e.Handled = true;
@@ -41,8 +35,8 @@ namespace Thumper_Custom_Level_Editor
                 //get dimensions
                 int w = Properties.Resources.icon_remove2.Width;
                 int h = Properties.Resources.icon_remove2.Height;
-                int x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
-                int y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+                int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
+                int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
                 //paint the image
                 e.Graphics.DrawImage(Properties.Resources.icon_remove2, new Rectangle(x, y, w, h));
                 e.Handled = true;
@@ -50,24 +44,23 @@ namespace Thumper_Custom_Level_Editor
         }
         private void dgvRecentFiles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0)
+            if (e.RowIndex == -1)
                 return;
-            string level = dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString();
+            FileInfo level = new(dgvRecentFiles.Rows[e.RowIndex].Cells[2].Value.ToString());
             //handle column 0 clicks only as that's where the button is
             if (e.ColumnIndex == 0) {
-                if (workingfolder == level) {
+                if (WorkingFolder?.FullName == level.DirectoryName) {
                     panelRecentFiles.Visible = false;
                     return;
                 }
-                if (!Directory.Exists(level)) {
-                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level}\n\nDo you want to remove this entry?", "Level load error", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (!level.Exists) {
+                    if (MessageBox.Show($"Recent Level selected no longer exists at that location\n{level.FullName}\n\nDo you want to remove this entry?", "Level Custom Thumper Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         RemoveRecentLevel(e.RowIndex);
                     return;
                 }
-                //set working folder to the path
-                workingfolder = level;
                 panelRecentFiles.Visible = false;
                 PlaySound("UIfolderclose");
+                OpenProject(level);
             }
             //if remove column button clicked, run this
             if (e.ColumnIndex == 3) {
@@ -77,7 +70,7 @@ namespace Thumper_Custom_Level_Editor
         private void btnRecentClose_Click(object sender, EventArgs e)
         {
             PlaySound("UIfolderclose");
-            panelRecentFiles.Visible = false;
+            MenusVisible(true);
         }
 
         private void panelRecentClick(object sender, EventArgs e)
