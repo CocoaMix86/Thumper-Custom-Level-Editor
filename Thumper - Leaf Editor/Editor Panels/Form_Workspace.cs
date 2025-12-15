@@ -138,6 +138,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void Form_WorkSpace_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //check for unsaved files
+            if (TCLE.AnyUnsaved()) {
+                if (MessageBox.Show("Some files in this workspace are unsaved. Do you still want to close this?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    e.Cancel = true;
+                    return;
+                }
+            }
             //When workspace closes, close the file lock on all the files inside it
             foreach (IDockContent doc in this.dockMain.Documents) {
                 FileInfo filetoclose = null;

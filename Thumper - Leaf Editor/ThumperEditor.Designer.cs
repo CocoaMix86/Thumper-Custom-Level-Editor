@@ -265,7 +265,7 @@
             this.panelRecentFiles.BorderStyle = BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new Point(463, 189);
+            this.panelRecentFiles.Location = new Point(16, 62);
             this.panelRecentFiles.MinimumSize = new Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
             this.panelRecentFiles.Size = new Size(569, 247);
@@ -1385,6 +1385,7 @@
             // toolstripHelpChangelog
             // 
             this.toolstripHelpChangelog.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripHelpChangelog.Enabled = false;
             this.toolstripHelpChangelog.ForeColor = Color.White;
             this.toolstripHelpChangelog.Image = Properties.Resources.icon_copy2;
             this.toolstripHelpChangelog.Name = "toolstripHelpChangelog";

@@ -182,6 +182,36 @@ namespace Thumper_Custom_Level_Editor
             this.imageList1.TransparentColor = Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "category");
             this.imageList1.Images.SetKeyName(1, "none");
+            this.imageList1.Images.SetKeyName(2, "samp");
+            this.imageList1.Images.SetKeyName(3, "fav");
+            this.imageList1.Images.SetKeyName(4, "play");
+            this.imageList1.Images.SetKeyName(5, "BARS - MULTI");
+            this.imageList1.Images.SetKeyName(6, "BARS");
+            this.imageList1.Images.SetKeyName(7, "BOSS EFFECTS");
+            this.imageList1.Images.SetKeyName(8, "BOSS SHIELDS");
+            this.imageList1.Images.SetKeyName(9, "CAMERA");
+            this.imageList1.Images.SetKeyName(10, "CONTROLLER");
+            this.imageList1.Images.SetKeyName(11, "DECORATIVE MILLIPEDES");
+            this.imageList1.Images.SetKeyName(12, "DISSONANT_BURSTS");
+            this.imageList1.Images.SetKeyName(13, "EXPERIMENTAL");
+            this.imageList1.Images.SetKeyName(14, "FX");
+            this.imageList1.Images.SetKeyName(15, "GAMMA");
+            this.imageList1.Images.SetKeyName(16, "INTROFLOW");
+            this.imageList1.Images.SetKeyName(17, "JUMPSSPIKES");
+            this.imageList1.Images.SetKeyName(18, "LOOP TRACK VOLUME");
+            this.imageList1.Images.SetKeyName(19, "MILLIPEDES");
+            this.imageList1.Images.SetKeyName(20, "PLAY SAMPLE");
+            this.imageList1.Images.SetKeyName(21, "POST PROCESSING");
+            this.imageList1.Images.SetKeyName(22, "RAIL COLORS");
+            this.imageList1.Images.SetKeyName(23, "RINGS");
+            this.imageList1.Images.SetKeyName(24, "SENTRY");
+            this.imageList1.Images.SetKeyName(25, "SKYBOX_COLORS");
+            this.imageList1.Images.SetKeyName(26, "SMOKE FX");
+            this.imageList1.Images.SetKeyName(27, "TENTACLES");
+            this.imageList1.Images.SetKeyName(28, "THUMPS");
+            this.imageList1.Images.SetKeyName(29, "TRACK EFFECTS");
+            this.imageList1.Images.SetKeyName(30, "TRACK FX");
+            this.imageList1.Images.SetKeyName(31, "WIN & MISC");
             // 
             // txtSearch
             // 
@@ -302,9 +332,9 @@ namespace Thumper_Custom_Level_Editor
         private TabPage tabSeq;
         private TreeViewEx treeObjects;
         private TextBox txtSearch;
-        private ImageList imageList1;
         public PropertyGrid propertyGridUIColors;
         private TabPage tabPage1;
         public PropertyGrid propertyGridKeyBinds;
+        private ImageList imageList1;
     }
 }

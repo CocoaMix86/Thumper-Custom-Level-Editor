@@ -1,5 +1,6 @@
 ﻿using Cyotek.Windows.Forms;
 using System.Collections.Generic;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -52,15 +53,23 @@ namespace Thumper_Custom_Level_Editor
             //save colors to settings
             TCLE.settingsUITheme.SaveSettings();
             TCLE.ColorFormElements(TCLE.Instance);
+
             //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.param_displayname};{x.defaultcolor.ToArgb()}"));
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
+            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
+            }
+
             //save mute to settings
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+
             //write keybinds to txt file
             ///File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
             Properties.Settings.Default.UserKeybinds = string.Join('\n', keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
             TCLE.Instance.SetKeyBinds();
+
             //save properties
             Properties.Settings.Default.Save();
 
@@ -116,8 +125,8 @@ namespace Thumper_Custom_Level_Editor
             foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
                 TreeNode _node = new() {
                     Text = category.ToUpper(),
-                    ImageKey = "category",
-                    SelectedImageKey = "category"
+                    ImageKey = category.ToUpper(),
+                    SelectedImageKey = category.ToUpper()
                 };
                 //each object becomes its own node
                 foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
