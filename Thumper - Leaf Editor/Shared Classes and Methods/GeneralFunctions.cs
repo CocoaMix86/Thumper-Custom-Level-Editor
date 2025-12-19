@@ -835,6 +835,12 @@ namespace Thumper_Custom_Level_Editor
             return _beatcount;
         }
 
+        //check if at least 1 master file exists
+        public static bool CheckForMaster()
+        {
+            return ProjectExplorer.Files.Any(x => x.Extension is ".master");
+        }
+
         public static DockContent OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
         {
             if (filepath == null)

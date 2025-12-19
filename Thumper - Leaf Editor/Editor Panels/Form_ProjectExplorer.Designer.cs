@@ -31,7 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProjectExplorer));
             this.toolTip1 = new ToolTip(this.components);
             this.treeView1 = new TreeViewEx();
+            this.contextMenuAddFile = new ContextMenuStrip(this.components);
+            this.existingItemToolStripMenuItem = new ToolStripMenuItem();
+            this.folderToolStripMenuItem = new ToolStripMenuItem();
+            this.toolStripSeparator7 = new ToolStripSeparator();
+            this.toolstripProjectAddLeaf = new ToolStripMenuItem();
+            this.toolstripProjectAddLvl = new ToolStripMenuItem();
+            this.toolstripProjectAddGate = new ToolStripMenuItem();
+            this.toolstripProjectAddMaster = new ToolStripMenuItem();
+            this.toolstripProjectAddSample = new ToolStripMenuItem();
             this.imageList1 = new ImageList(this.components);
+            this.contextMenuProject = new ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new ToolStripMenuItem();
+            this.toolStripSeparator8 = new ToolStripSeparator();
+            this.toolstripProjectPaste = new ToolStripMenuItem();
+            this.toolStripSeparator9 = new ToolStripSeparator();
+            this.toolStripMenuItem12 = new ToolStripMenuItem();
+            this.toolStripMenuItem13 = new ToolStripMenuItem();
             this.txtSearch = new TextBox();
             this.toolstripExplorer = new ToolStrip();
             this.btnFilter = new ToolStripSplitButton();
@@ -56,6 +72,7 @@
             this.toolStripSeparator10 = new ToolStripSeparator();
             this.toolstripFileCut = new ToolStripMenuItem();
             this.toolstripFileCopy = new ToolStripMenuItem();
+            this.toolstripFileDuplicate = new ToolStripMenuItem();
             this.toolstripFileDelete = new ToolStripMenuItem();
             this.toolstripFileRename = new ToolStripMenuItem();
             this.toolStripSeparator4 = new ToolStripSeparator();
@@ -63,15 +80,6 @@
             this.openContainingFolderToolStripMenuItem = new ToolStripMenuItem();
             this.contextMenuFolderClick = new ContextMenuStrip(this.components);
             this.toolstripFolderNew = new ToolStripMenuItem();
-            this.contextMenuAddFile = new ContextMenuStrip(this.components);
-            this.existingItemToolStripMenuItem = new ToolStripMenuItem();
-            this.folderToolStripMenuItem = new ToolStripMenuItem();
-            this.toolStripSeparator7 = new ToolStripSeparator();
-            this.toolstripProjectAddLeaf = new ToolStripMenuItem();
-            this.toolstripProjectAddLvl = new ToolStripMenuItem();
-            this.toolstripProjectAddGate = new ToolStripMenuItem();
-            this.toolstripProjectAddMaster = new ToolStripMenuItem();
-            this.toolstripProjectAddSample = new ToolStripMenuItem();
             this.toolStripSeparator5 = new ToolStripSeparator();
             this.toolstripFolderCut = new ToolStripMenuItem();
             this.toolstripFolderCopy = new ToolStripMenuItem();
@@ -81,25 +89,17 @@
             this.toolStripSeparator6 = new ToolStripSeparator();
             this.toolstripFolderCopyPath = new ToolStripMenuItem();
             this.toolstripFolderExplorer = new ToolStripMenuItem();
-            this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.contextMenuMulti = new ContextMenuStrip(this.components);
             this.toolStripMultiCut = new ToolStripMenuItem();
             this.toolStripMultiCopy = new ToolStripMenuItem();
             this.toolStripMultiDelete = new ToolStripMenuItem();
-            this.contextMenuProject = new ContextMenuStrip(this.components);
-            this.toolStripSeparator8 = new ToolStripSeparator();
-            this.toolstripProjectPaste = new ToolStripMenuItem();
-            this.toolStripSeparator9 = new ToolStripSeparator();
-            this.toolStripMenuItem12 = new ToolStripMenuItem();
-            this.toolStripMenuItem13 = new ToolStripMenuItem();
-            this.toolstripFileDuplicate = new ToolStripMenuItem();
+            this.contextMenuAddFile.SuspendLayout();
+            this.contextMenuProject.SuspendLayout();
             this.toolstripExplorer.SuspendLayout();
             this.contextMenuFilters.SuspendLayout();
             this.contextMenuFileClick.SuspendLayout();
             this.contextMenuFolderClick.SuspendLayout();
-            this.contextMenuAddFile.SuspendLayout();
             this.contextMenuMulti.SuspendLayout();
-            this.contextMenuProject.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -107,6 +107,7 @@
             this.treeView1.AllowDrop = true;
             this.treeView1.BackColor = Color.FromArgb(31, 31, 31);
             this.treeView1.BorderStyle = BorderStyle.None;
+            this.treeView1.ContextMenuStrip = this.contextMenuAddFile;
             this.treeView1.Dock = DockStyle.Fill;
             this.treeView1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.treeView1.ForeColor = Color.White;
@@ -138,6 +139,87 @@
             this.treeView1.MouseDown += this.treeView1_MouseDown;
             this.treeView1.MouseUp += this.treeView1_MouseUp;
             // 
+            // contextMenuAddFile
+            // 
+            this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolstripProjectAddLeaf, this.toolstripProjectAddLvl, this.toolstripProjectAddGate, this.toolstripProjectAddMaster, this.toolstripProjectAddSample });
+            this.contextMenuAddFile.Name = "workingfolderRightClick";
+            this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuAddFile.Size = new Size(181, 186);
+            // 
+            // existingItemToolStripMenuItem
+            // 
+            this.existingItemToolStripMenuItem.ForeColor = Color.White;
+            this.existingItemToolStripMenuItem.Name = "existingItemToolStripMenuItem";
+            this.existingItemToolStripMenuItem.Size = new Size(180, 22);
+            this.existingItemToolStripMenuItem.Text = "Existing Item...";
+            this.existingItemToolStripMenuItem.Click += this.existingItemToolStripMenuItem_Click;
+            // 
+            // folderToolStripMenuItem
+            // 
+            this.folderToolStripMenuItem.BackColor = Color.FromArgb(46, 46, 46);
+            this.folderToolStripMenuItem.ForeColor = Color.White;
+            this.folderToolStripMenuItem.Image = Properties.Resources.icon_folder;
+            this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
+            this.folderToolStripMenuItem.Size = new Size(180, 22);
+            this.folderToolStripMenuItem.Text = "New Folder";
+            this.folderToolStripMenuItem.Click += this.folderToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new Size(177, 6);
+            // 
+            // toolstripProjectAddLeaf
+            // 
+            this.toolstripProjectAddLeaf.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectAddLeaf.ForeColor = Color.PaleGreen;
+            this.toolstripProjectAddLeaf.Image = Properties.Resources.editor_leaf;
+            this.toolstripProjectAddLeaf.Name = "toolstripProjectAddLeaf";
+            this.toolstripProjectAddLeaf.Size = new Size(180, 22);
+            this.toolstripProjectAddLeaf.Text = "New Leaf";
+            this.toolstripProjectAddLeaf.Click += this.toolstripProjectAddLeaf_Click;
+            // 
+            // toolstripProjectAddLvl
+            // 
+            this.toolstripProjectAddLvl.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectAddLvl.ForeColor = Color.Green;
+            this.toolstripProjectAddLvl.Image = Properties.Resources.editor_lvl;
+            this.toolstripProjectAddLvl.Name = "toolstripProjectAddLvl";
+            this.toolstripProjectAddLvl.Size = new Size(180, 22);
+            this.toolstripProjectAddLvl.Text = "New Lvl";
+            this.toolstripProjectAddLvl.Click += this.toolstripProjectAddLvl_Click;
+            // 
+            // toolstripProjectAddGate
+            // 
+            this.toolstripProjectAddGate.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectAddGate.ForeColor = Color.Orange;
+            this.toolstripProjectAddGate.Image = Properties.Resources.editor_gate;
+            this.toolstripProjectAddGate.Name = "toolstripProjectAddGate";
+            this.toolstripProjectAddGate.Size = new Size(180, 22);
+            this.toolstripProjectAddGate.Text = "New Gate";
+            this.toolstripProjectAddGate.Click += this.toolstripProjectAddGate_Click;
+            // 
+            // toolstripProjectAddMaster
+            // 
+            this.toolstripProjectAddMaster.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectAddMaster.ForeColor = Color.FromArgb(150, 150, 255);
+            this.toolstripProjectAddMaster.Image = Properties.Resources.editor_master;
+            this.toolstripProjectAddMaster.Name = "toolstripProjectAddMaster";
+            this.toolstripProjectAddMaster.Size = new Size(180, 22);
+            this.toolstripProjectAddMaster.Text = "New Master";
+            this.toolstripProjectAddMaster.Click += this.toolstripProjectAddMaster_Click;
+            // 
+            // toolstripProjectAddSample
+            // 
+            this.toolstripProjectAddSample.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectAddSample.ForeColor = Color.Turquoise;
+            this.toolstripProjectAddSample.Image = Properties.Resources.editor_sample;
+            this.toolstripProjectAddSample.Name = "toolstripProjectAddSample";
+            this.toolstripProjectAddSample.Size = new Size(180, 22);
+            this.toolstripProjectAddSample.Text = "New Sample";
+            this.toolstripProjectAddSample.Click += this.toolstripProjectAddSample_Click;
+            // 
             // imageList1
             // 
             this.imageList1.ColorDepth = ColorDepth.Depth32Bit;
@@ -153,6 +235,67 @@
             this.imageList1.Images.SetKeyName(7, ".gate");
             this.imageList1.Images.SetKeyName(8, ".samp");
             this.imageList1.Images.SetKeyName(9, "image");
+            // 
+            // contextMenuProject
+            // 
+            this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1, this.toolStripSeparator8, this.toolstripProjectPaste, this.toolStripSeparator9, this.toolStripMenuItem12, this.toolStripMenuItem13 });
+            this.contextMenuProject.Name = "contextMenuFolderClick";
+            this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuProject.Size = new Size(163, 104);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
+            this.toolStripMenuItem1.ForeColor = Color.White;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new Size(162, 22);
+            this.toolStripMenuItem1.Text = "Add";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new Size(159, 6);
+            // 
+            // toolstripProjectPaste
+            // 
+            this.toolstripProjectPaste.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolstripProjectPaste.Enabled = false;
+            this.toolstripProjectPaste.ForeColor = Color.White;
+            this.toolstripProjectPaste.Image = Properties.Resources.icon_paste2;
+            this.toolstripProjectPaste.Name = "toolstripProjectPaste";
+            this.toolstripProjectPaste.ShortcutKeys = Keys.Control | Keys.V;
+            this.toolstripProjectPaste.Size = new Size(162, 22);
+            this.toolstripProjectPaste.Text = "Paste";
+            this.toolstripProjectPaste.Click += this.toolstripFolderPaste_Click;
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new Size(159, 6);
+            // 
+            // toolStripMenuItem12
+            // 
+            this.toolStripMenuItem12.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem12.ForeColor = Color.White;
+            this.toolStripMenuItem12.Image = Properties.Resources.icon_copy2;
+            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
+            this.toolStripMenuItem12.Size = new Size(162, 22);
+            this.toolStripMenuItem12.Text = "Copy File Path";
+            this.toolStripMenuItem12.Click += this.copyFilePathToolStripMenuItem1_Click;
+            // 
+            // toolStripMenuItem13
+            // 
+            this.toolStripMenuItem13.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem13.ForeColor = Color.White;
+            this.toolStripMenuItem13.Image = Properties.Resources.icon_explorer;
+            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            this.toolStripMenuItem13.Size = new Size(162, 22);
+            this.toolStripMenuItem13.Text = "Open In Explorer";
+            this.toolStripMenuItem13.Click += this.toolstripFolderExplorer_Click;
             // 
             // txtSearch
             // 
@@ -204,6 +347,7 @@
             this.contextMenuFilters.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuFilters.Items.AddRange(new ToolStripItem[] { this.filterLeaf, this.filterLvl, this.filterGate, this.filterMaster, this.filterSample });
             this.contextMenuFilters.Name = "workingfolderRightClick";
+            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new Size(114, 114);
             this.contextMenuFilters.Closing += this.contextMenuFilters_Closing;
@@ -325,7 +469,7 @@
             this.contextMenuFileClick.Items.AddRange(new ToolStripItem[] { this.toolstripFileOpen, this.toolstripFileRaw, this.toolstripFileExternal, this.toolStripSeparator3, this.toolstripFileSearch, this.toolStripSeparator10, this.toolstripFileCut, this.toolstripFileCopy, this.toolstripFileDuplicate, this.toolstripFileDelete, this.toolstripFileRename, this.toolStripSeparator4, this.toolstripFileCopyPath, this.openContainingFolderToolStripMenuItem });
             this.contextMenuFileClick.Name = "contextMenuFileClick";
             this.contextMenuFileClick.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFileClick.Size = new Size(202, 286);
+            this.contextMenuFileClick.Size = new Size(202, 264);
             this.contextMenuFileClick.Opening += this.contextMenuFileClick_Opening;
             // 
             // toolstripFileOpen
@@ -400,6 +544,15 @@
             this.toolstripFileCopy.Text = "Copy";
             this.toolstripFileCopy.Click += this.toolstripFileCopy_Click;
             // 
+            // toolstripFileDuplicate
+            // 
+            this.toolstripFileDuplicate.ForeColor = Color.White;
+            this.toolstripFileDuplicate.Image = Properties.Resources.icon_copy2;
+            this.toolstripFileDuplicate.Name = "toolstripFileDuplicate";
+            this.toolstripFileDuplicate.Size = new Size(201, 22);
+            this.toolstripFileDuplicate.Text = "Duplicate";
+            this.toolstripFileDuplicate.Click += this.toolstripFileDuplicate_Click;
+            // 
             // toolstripFileDelete
             // 
             this.toolstripFileDelete.BackColor = Color.FromArgb(46, 46, 46);
@@ -465,88 +618,6 @@
             this.toolstripFolderNew.Name = "toolstripFolderNew";
             this.toolstripFolderNew.Size = new Size(162, 22);
             this.toolstripFolderNew.Text = "Add";
-            // 
-            // contextMenuAddFile
-            // 
-            this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolstripProjectAddLeaf, this.toolstripProjectAddLvl, this.toolstripProjectAddGate, this.toolstripProjectAddMaster, this.toolstripProjectAddSample });
-            this.contextMenuAddFile.Name = "workingfolderRightClick";
-            this.contextMenuAddFile.OwnerItem = this.toolStripMenuItem1;
-            this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuAddFile.Size = new Size(152, 164);
-            // 
-            // existingItemToolStripMenuItem
-            // 
-            this.existingItemToolStripMenuItem.ForeColor = Color.White;
-            this.existingItemToolStripMenuItem.Name = "existingItemToolStripMenuItem";
-            this.existingItemToolStripMenuItem.Size = new Size(151, 22);
-            this.existingItemToolStripMenuItem.Text = "Existing Item...";
-            this.existingItemToolStripMenuItem.Click += this.existingItemToolStripMenuItem_Click;
-            // 
-            // folderToolStripMenuItem
-            // 
-            this.folderToolStripMenuItem.BackColor = Color.FromArgb(46, 46, 46);
-            this.folderToolStripMenuItem.ForeColor = Color.White;
-            this.folderToolStripMenuItem.Image = Properties.Resources.icon_folder;
-            this.folderToolStripMenuItem.Name = "folderToolStripMenuItem";
-            this.folderToolStripMenuItem.Size = new Size(151, 22);
-            this.folderToolStripMenuItem.Text = "New Folder";
-            this.folderToolStripMenuItem.Click += this.folderToolStripMenuItem_Click;
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new Size(148, 6);
-            // 
-            // toolstripProjectAddLeaf
-            // 
-            this.toolstripProjectAddLeaf.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectAddLeaf.ForeColor = Color.PaleGreen;
-            this.toolstripProjectAddLeaf.Image = Properties.Resources.editor_leaf;
-            this.toolstripProjectAddLeaf.Name = "toolstripProjectAddLeaf";
-            this.toolstripProjectAddLeaf.Size = new Size(151, 22);
-            this.toolstripProjectAddLeaf.Text = "Leaf";
-            this.toolstripProjectAddLeaf.Click += this.toolstripProjectAddLeaf_Click;
-            // 
-            // toolstripProjectAddLvl
-            // 
-            this.toolstripProjectAddLvl.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectAddLvl.ForeColor = Color.Green;
-            this.toolstripProjectAddLvl.Image = Properties.Resources.editor_lvl;
-            this.toolstripProjectAddLvl.Name = "toolstripProjectAddLvl";
-            this.toolstripProjectAddLvl.Size = new Size(151, 22);
-            this.toolstripProjectAddLvl.Text = "Lvl";
-            this.toolstripProjectAddLvl.Click += this.toolstripProjectAddLvl_Click;
-            // 
-            // toolstripProjectAddGate
-            // 
-            this.toolstripProjectAddGate.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectAddGate.ForeColor = Color.Orange;
-            this.toolstripProjectAddGate.Image = Properties.Resources.editor_gate;
-            this.toolstripProjectAddGate.Name = "toolstripProjectAddGate";
-            this.toolstripProjectAddGate.Size = new Size(151, 22);
-            this.toolstripProjectAddGate.Text = "Gate";
-            this.toolstripProjectAddGate.Click += this.toolstripProjectAddGate_Click;
-            // 
-            // toolstripProjectAddMaster
-            // 
-            this.toolstripProjectAddMaster.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectAddMaster.ForeColor = Color.FromArgb(150, 150, 255);
-            this.toolstripProjectAddMaster.Image = Properties.Resources.editor_master;
-            this.toolstripProjectAddMaster.Name = "toolstripProjectAddMaster";
-            this.toolstripProjectAddMaster.Size = new Size(151, 22);
-            this.toolstripProjectAddMaster.Text = "Master";
-            this.toolstripProjectAddMaster.Click += this.toolstripProjectAddMaster_Click;
-            // 
-            // toolstripProjectAddSample
-            // 
-            this.toolstripProjectAddSample.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectAddSample.ForeColor = Color.Turquoise;
-            this.toolstripProjectAddSample.Image = Properties.Resources.editor_sample;
-            this.toolstripProjectAddSample.Name = "toolstripProjectAddSample";
-            this.toolstripProjectAddSample.Size = new Size(151, 22);
-            this.toolstripProjectAddSample.Text = "Sample";
-            this.toolstripProjectAddSample.Click += this.toolstripProjectAddSample_Click;
             // 
             // toolStripSeparator5
             // 
@@ -636,15 +707,6 @@
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += this.toolstripFolderExplorer_Click;
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem1.DropDown = this.contextMenuAddFile;
-            this.toolStripMenuItem1.ForeColor = Color.White;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(162, 22);
-            this.toolStripMenuItem1.Text = "Add";
-            // 
             // contextMenuMulti
             // 
             this.contextMenuMulti.BackColor = Color.FromArgb(46, 46, 46);
@@ -686,67 +748,6 @@
             this.toolStripMultiDelete.Text = "Delete";
             this.toolStripMultiDelete.Click += this.toolstripFileDelete_Click;
             // 
-            // contextMenuProject
-            // 
-            this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem1, this.toolStripSeparator8, this.toolstripProjectPaste, this.toolStripSeparator9, this.toolStripMenuItem12, this.toolStripMenuItem13 });
-            this.contextMenuProject.Name = "contextMenuFolderClick";
-            this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(163, 104);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new Size(159, 6);
-            // 
-            // toolstripProjectPaste
-            // 
-            this.toolstripProjectPaste.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripProjectPaste.Enabled = false;
-            this.toolstripProjectPaste.ForeColor = Color.White;
-            this.toolstripProjectPaste.Image = Properties.Resources.icon_paste2;
-            this.toolstripProjectPaste.Name = "toolstripProjectPaste";
-            this.toolstripProjectPaste.ShortcutKeys = Keys.Control | Keys.V;
-            this.toolstripProjectPaste.Size = new Size(162, 22);
-            this.toolstripProjectPaste.Text = "Paste";
-            this.toolstripProjectPaste.Click += this.toolstripFolderPaste_Click;
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new Size(159, 6);
-            // 
-            // toolStripMenuItem12
-            // 
-            this.toolStripMenuItem12.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem12.ForeColor = Color.White;
-            this.toolStripMenuItem12.Image = Properties.Resources.icon_copy2;
-            this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new Size(162, 22);
-            this.toolStripMenuItem12.Text = "Copy File Path";
-            this.toolStripMenuItem12.Click += this.copyFilePathToolStripMenuItem1_Click;
-            // 
-            // toolStripMenuItem13
-            // 
-            this.toolStripMenuItem13.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem13.ForeColor = Color.White;
-            this.toolStripMenuItem13.Image = Properties.Resources.icon_explorer;
-            this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new Size(162, 22);
-            this.toolStripMenuItem13.Text = "Open In Explorer";
-            this.toolStripMenuItem13.Click += this.toolstripFolderExplorer_Click;
-            // 
-            // toolstripFileDuplicate
-            // 
-            this.toolstripFileDuplicate.ForeColor = Color.White;
-            this.toolstripFileDuplicate.Image = Properties.Resources.icon_copy2;
-            this.toolstripFileDuplicate.Name = "toolstripFileDuplicate";
-            this.toolstripFileDuplicate.Size = new Size(201, 22);
-            this.toolstripFileDuplicate.Text = "Duplicate";
-            this.toolstripFileDuplicate.Click += this.toolstripFileDuplicate_Click;
-            // 
             // Form_ProjectExplorer
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -763,14 +764,14 @@
             this.Margin = new Padding(4, 3, 4, 3);
             this.Name = "Form_ProjectExplorer";
             this.Text = "Project Explorer";
+            this.contextMenuAddFile.ResumeLayout(false);
+            this.contextMenuProject.ResumeLayout(false);
             this.toolstripExplorer.ResumeLayout(false);
             this.toolstripExplorer.PerformLayout();
             this.contextMenuFilters.ResumeLayout(false);
             this.contextMenuFileClick.ResumeLayout(false);
             this.contextMenuFolderClick.ResumeLayout(false);
-            this.contextMenuAddFile.ResumeLayout(false);
             this.contextMenuMulti.ResumeLayout(false);
-            this.contextMenuProject.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }

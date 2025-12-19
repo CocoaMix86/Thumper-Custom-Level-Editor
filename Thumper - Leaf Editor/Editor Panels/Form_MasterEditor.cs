@@ -1112,11 +1112,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
 
-            MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
+            //MasterLvls.CollectionChanged -= masterlvls_CollectionChanged;
             foreach (MasterLvlData mld in TCLE.ClipboardMaster)
                 MasterLvls.Insert(_in, mld.Clone());
-            MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
-            masterlvls_CollectionChanged(null, null);
+            //MasterLvls.CollectionChanged += masterlvls_CollectionChanged;
+            //masterlvls_CollectionChanged(null, null);
 
             SaveCheckAndWrite(false, "Paste Lvl");
             TCLE.PlaySound("UIkpaste");

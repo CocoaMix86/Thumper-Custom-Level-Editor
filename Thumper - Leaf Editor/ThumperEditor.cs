@@ -909,6 +909,10 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectMaster_Click(object sender, EventArgs e)
         {
+            if (TCLE.CheckForMaster()) {
+                if (MessageBox.Show("This project already has a master file. It is not recommended to have more than 1 as it can mess up the mod loader.\nDo you still wish to continue?", "Bad Idea", MessageBoxButtons.YesNo) == DialogResult.No)
+                    return;
+            }
             OpenFile(new Form_MasterEditor().SaveAs(true));
         }
 
