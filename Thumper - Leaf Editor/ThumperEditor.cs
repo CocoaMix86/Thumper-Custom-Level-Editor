@@ -587,7 +587,7 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllText($@"{AppLocation}\templates\singletrack.leaf", Properties.Resources.leaf_singletrack);
             File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
             File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText($@"{AppLocation}\settings\track_objects_v3.txt", Properties.Resources.track_objects);
+            File.WriteAllText($@"{AppLocation}\settings\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
             File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
         }
 
