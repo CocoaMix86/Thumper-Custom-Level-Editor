@@ -337,7 +337,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
                 using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.OpenOrCreate))) {
                     //write pc file header
-                    sw.Write(Form_SampleEditor.PCfileheader, 0, Form_SampleEditor.PCfileheader.Length);
+                    sw.Write(Form_SampleEditor.PCfileheader);
                     //
                     sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
                     sw.Write((UInt32)1); //version
