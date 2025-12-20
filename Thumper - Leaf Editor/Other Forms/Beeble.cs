@@ -6,6 +6,7 @@ namespace Thumper_Custom_Level_Editor
     {
         private static List<Image> beebleimages = new() { Properties.Resources.beeblehappy, Properties.Resources.beebleconfuse, Properties.Resources.beeblecool, Properties.Resources.beeblederp, Properties.Resources.beeblelaugh, Properties.Resources.beeblestare, Properties.Resources.beeblethink, Properties.Resources.beebletiny, Properties.Resources.beeblelove, Properties.Resources.beeblespin, Properties.Resources.beebleflesh, Properties.Resources.beebleuwu, Properties.Resources.beeblehop };
         private Random rng = new();
+        public bool IsClone = false;
         private static Image BeebleDanceGif = Properties.Resources.beeblehop;
 
         public Beeble()
@@ -41,6 +42,13 @@ namespace Thumper_Custom_Level_Editor
 
         private void Beeble_MouseDown(object sender, MouseEventArgs e)
         {
+            //get rid of clone beebles by right-clicking on them
+            if (e.Button == MouseButtons.Right && this.IsClone) {
+                TCLE.ExistingBeebles.Remove(this);
+                this.Close();
+                return;
+            }
+
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
             this.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
             MakeFace();
@@ -51,9 +59,9 @@ namespace Thumper_Custom_Level_Editor
             }
 
             //spawn new beeble randomly
-            if (rng.Next(0, 50) != 0)
+            if (rng.Next(0, 80) != 0)
                 return;
-            Beeble newbeeb = new() { Visible = true, Owner = TCLE.Instance };
+            Beeble newbeeb = new() { Visible = true, Owner = TCLE.Instance, IsClone = true };
             TCLE.ExistingBeebles.Add(newbeeb);
             newbeeb.Show();
         }
