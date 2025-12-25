@@ -11,6 +11,7 @@ using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using NAudio.Wave;
+using Windows.Networking.Sockets;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -123,6 +124,18 @@ namespace Thumper_Custom_Level_Editor
                                             footer = x[7].Replace("[", "").Replace("]", ""),
                                             defaultcolor = Color.Purple
                                         }).ToHashSet();
+
+            LeafObjects.Add(new Object_Params {
+                category = "",
+                obj_name = "_TuningLayerX",
+                param_displayname = "⮝ Tuning Layer X",
+                param_path = "⮝ Tuning Layer X",
+                trait_type = "",
+                step = false,
+                def = "0",
+                footer = "",
+                defaultcolor = Color.FromArgb(40, 40, 40)
+            });
             //import default colors per object
             ImportDefaultColors();
             //import favorites

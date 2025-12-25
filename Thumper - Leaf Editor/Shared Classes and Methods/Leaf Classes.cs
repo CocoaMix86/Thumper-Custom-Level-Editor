@@ -101,7 +101,9 @@ namespace Thumper_Custom_Level_Editor
         }
         private bool ExpandLanes;
         public string friendly_lane { get; set; }
-        public bool HasShownError = false;
+        public bool HasShownError { get; set; }
+        public bool HasTuningLayer { get; set; }
+        public Bitmap TuningLayer { get; set; }
 
         public Sequencer_Object(LeafProperties Parent)
         {
@@ -213,11 +215,18 @@ namespace Thumper_Custom_Level_Editor
                 if (value != null) {
                 }
                 Value = value;
-
+                //check if the beat being set is within the leaf's beatcount.
+                //also check if Owner and the editing row exists.
+                //and one final check to see if the value is the same. If it's the same, don't bother setting it.
                 if (this.beat < Owner.parent.beats && Owner != null && Owner.editor_row != null) {
                     if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
                         Owner.editor_row.Cells[beat + 3].Value = Value;
                         Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+                    }
+                    //if value changing on a tuning layer, recalc the values
+                    if (Owner.obj_name == "_TuningLayerX") {
+                        Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
+                        Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
                     }
 
                     Owner.isdefault = false;
@@ -229,12 +238,37 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Interp")]
         [TypeConverter(typeof(LeafInterpolations))]
-        public string interpolation { get; set; } = "Linear";
+        public string interpolation { 
+            get => Interp;
+            set {
+                Interp = value;
+                if (Owner.parent.parent.EditorIsLoading)
+                    return;
+                if (Owner.obj_name == "_TuningLayerX") {
+                    Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
+                    Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
+                }
+            } 
+        }
+        private string Interp = "Linear";
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Easing")]
         [TypeConverter(typeof(LeafEasings))]
-        public string ease { get; set; } = "Ease In Out";
+        public string ease
+        {
+            get => Ease;
+            set {
+                Ease = value;
+                if (Owner.parent.parent.EditorIsLoading)
+                    return;
+                if (Owner.obj_name == "_TuningLayerX") {
+                    Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
+                    Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
+                }
+            }
+        }
+        private string Ease = "Ease In Out";
 
         public void UpdateCell()
         {

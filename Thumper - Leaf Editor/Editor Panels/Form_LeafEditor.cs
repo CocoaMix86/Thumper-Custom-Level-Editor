@@ -2,8 +2,12 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.Intrinsics.Arm;
+using System.Xml.Linq;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -390,6 +394,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private Pen PenRed = new(new SolidBrush(Color.Red), 3);
         private Pen PenGreen = new(new SolidBrush(Color.Green), 3);
         private Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
+        private Pen PenViolet2 = new(new SolidBrush(Color.Violet), 1);
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -399,6 +404,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     CellPaintFancy(e);
                     CellPaintIcons(e);
+                }
+                else {
+                    if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell)
+                        e.Graphics.DrawLine(PenViolet2, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
                 }
                 return;
             }
@@ -496,7 +505,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                 }
             }
-            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                 e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds);
             else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(Math.Floor((decimal)SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value)))), e.CellBounds);
@@ -563,6 +572,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         int h = 16;
         private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
+            if (e.RowIndex != -1 && SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX")
+                return;
             //get dimensions
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
@@ -602,11 +613,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         SolidBrush CellPaintingBlack = new(Color.Black);
         SolidBrush CellPaintingWhite = new(Color.White);
         SolidBrush CellPaintingColor = new(Color.Black);
+        SolidBrush BrushPurple = new(Color.Purple);
+        SolidBrush BrushGold = new(Color.Gold);
+        Pen PenPaintingBlack = new(Color.Black, 3);
+        Pen PenPaintingWhite = new(Color.White, 3);
+        Pen PenLineGray = new(Color.FromArgb(80,80,80), 1);
+        Font TuningFont = new("Consolas", 8);
         private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
             Rectangle bounds = e.CellBounds;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             if (e.ColumnIndex is -1) {
                 e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
@@ -614,6 +632,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 bounds.Y += 2;
                 bounds.Width -= 4;
                 bounds.Height -= 4;
+                if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
+                    bounds.X += 20;
+                    bounds.Width -= 20;
+                }
                 //if row has a selected cell, highlight it
                 if (SelectedRows.Contains(e.RowIndex)) {
                     e.Graphics.FillRoundedRectangle(CellPaintingWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
@@ -668,6 +690,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             string message = null;
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
                 RowPrePainting = true;
@@ -814,6 +837,132 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPostPrePainting = false;
             }
+            //HANDLE TUNINGLAYER GRAPHS
+            else if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
+                RowPrePainting = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowPrePainting = false;
+
+                if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null)) {
+                    goto paintheader;
+                }
+                Sequencer_Object seqref = SequencerObjects[e.RowIndex];
+                List<SeqDataPoint> _datapoints = seqref.data_points.Where(x => x.value != null).ToList();
+                if (_datapoints.Count < 1)
+                    goto paintheader;
+                //setup variables to reference later when needed
+                int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3) + 4;
+                int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
+                int cellwidth = trackZoom.Value;
+                float max = (float)_datapoints.Max(x => x.value);
+                float min = (float)_datapoints.Min(x => x.value);
+                if (max == min) {
+                    max++; min--;
+                }
+                int startX = ((_datapoints[0].beat - columnindex) * cellwidth) + offsetportion;
+                int length = cellwidth * (_datapoints[^1].beat - _datapoints[0].beat + 1);
+                int endX = ((_datapoints[^1].beat - columnindex + 1) * cellwidth) + offsetportion;
+                PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)p.value))).ToArray();
+                //
+                e.Graphics.FillRoundedRectangle(CellPaintingWhite, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
+                e.Graphics.FillRoundedRectangle(CellPaintingBlack, new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
+                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Top + 7, endX - 3, e.RowBounds.Top + 7);
+                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Bottom - 7, endX - 3, e.RowBounds.Bottom - 7);
+                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Top + e.RowBounds.Height / 2, endX - 3, e.RowBounds.Top + e.RowBounds.Height / 2);
+                e.Graphics.DrawString($"{max}", TuningFont, CellPaintingWhite, startX + 3, e.RowBounds.Top + 8);
+                e.Graphics.DrawString($"{min}", TuningFont, CellPaintingWhite, startX + 3, e.RowBounds.Bottom - 15);
+                PointF midpoint = new();
+                PointF midpoint2 = new();
+                //
+                for (int x = 0; x < _datapoints.Count; x++) {
+                    if (x == _datapoints.Count - 1) {
+                        e.Graphics.FillRectangle(BrushPurple, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
+                        continue;
+                    }
+                    float distance = _drawingpoints[x + 1].X - _drawingpoints[x].X;
+                    switch ($"{_datapoints[x].interpolation} {_datapoints[x].ease}") {
+                        case "Step Ease In":
+                        case "Step Ease Out":
+                        case "Step Ease In Out":
+                            e.Graphics.DrawLine(PenPaintingWhite, _drawingpoints[x], new(_drawingpoints[x + 1].X, _drawingpoints[x].Y));
+                            e.Graphics.DrawLine(PenPaintingWhite, new(_drawingpoints[x + 1].X, _drawingpoints[x].Y), _drawingpoints[x + 1]);
+                            break;
+                        case "Linear Ease In":
+                        case "Linear Ease Out":
+                        case "Linear Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X, _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x + 1].X, _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quadratic Ease In":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.11f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x].Y);
+                            break;
+                        case "Quadratic Ease Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x + 1].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.89f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quadratic Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.45f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.55f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Cubic Ease In":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.32f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.67f), _drawingpoints[x].Y);
+                            break;
+                        case "Cubic Ease Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.33f), _drawingpoints[x + 1].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.68f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Cubic Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.65f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.35f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quartic Ease In":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.75f), _drawingpoints[x].Y);
+                            break;
+                        case "Quartic Ease Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.25f), _drawingpoints[x + 1].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quartic Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.76f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.24f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quintic Ease In":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.64f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.78f), _drawingpoints[x].Y);
+                            break;
+                        case "Quintic Ease Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.22f), _drawingpoints[x + 1].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.36f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Quintic Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.83f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.17f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Sine Ease In":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.12f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.39f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Sine Ease Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.61f), _drawingpoints[x + 1].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.88f), _drawingpoints[x + 1].Y);
+                            break;
+                        case "Sine Ease In Out":
+                            midpoint = new PointF(_drawingpoints[x].X + (distance * 0.37f), _drawingpoints[x].Y);
+                            midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.63f), _drawingpoints[x + 1].Y);
+                            break;
+                    }
+                    if (!_datapoints[x].interpolation.Contains("step", StringComparison.OrdinalIgnoreCase))
+                        e.Graphics.DrawBezier(PenPaintingWhite, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
+                    e.Graphics.FillRectangle(BrushPurple, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
+                }
+                //
+                RowPostPrePainting = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowPostPrePainting = false;
+            }
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
@@ -955,6 +1104,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (IsInterpolating || ispasting)
                 return;
             try {
+                List<Sequencer_Object> _tuninglayers = new();
                 bool changes = false;
                 object _val = null;
                 if (setnull)
@@ -1002,6 +1152,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             changes = true;
                         }
                     }
+
+                    if (SequencerObjects[_cell.RowIndex].obj_name == "_TuningLayerX" && !_tuninglayers.Contains(SequencerObjects[_cell.RowIndex])) {
+                        _tuninglayers.Add(SequencerObjects[_cell.RowIndex]);
+                    }
                     ///else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
 
                     ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
@@ -1009,6 +1163,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 if (changes) {
                     SaveCheckAndWrite(false, "Cell Value(s) Updated");
+                    foreach (var obj in _tuninglayers)
+                        CalculateTuningLayers(LeafProperties, obj);
                 }
             } catch { }
             ShowRawTrackData(SequencerObjects[rowindex]);
@@ -1180,7 +1336,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                     LogUndo = false;
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) RightclickChanges = true;
+                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) { 
+                        RightclickChanges = true;
+                        if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
+                            CalculateTuningLayers(LeafProperties, SequencerObjects[e.RowIndex]);
+                            trackEditor.InvalidateRow(e.RowIndex);
+                        }
+                    }
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                     //}
@@ -1412,6 +1574,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
+
             if (ModifierKeys is Keys.Shift) {
                 foreach (DataGridViewCell dgvc in trackEditor.Rows[e.RowIndex].Cells)
                     dgvc.Selected = true;
@@ -1419,7 +1582,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex < FrozenColumnOffset ? FrozenColumnOffset : trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
                 trackEditor.Invalidate();
+
+                if (e.Button == MouseButtons.Right) {
+                    contextMenuObj.Show(MousePosition.X, MousePosition.Y);
+                    return;
+                }
             }
+        }
+
+        private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].trait_type == "kTraitFloat";
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -2611,6 +2784,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _s.friendly_param = _s.param_path;
                     _s.obj_name.Replace(".wav", ".samp");
                 }
+                else if (_s.obj_name == "_TuningLayerX") {
+                    _s.friendly_param = _s.param_path;
+                    _s.category = "";
+                    if (Seq_Objs[^1].obj_name != "_TuningLayerX") Seq_Objs[^1].HasTuningLayer = true;
+                }
                 //otherwise, search _objects for the friendly names for display purposes
                 else {
                     try {
@@ -2696,6 +2874,44 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RowReadOnly(!seq.enabled, seq);
             }
             TCLE.ResizeHeaders(trackEditor);
+        }
+
+
+        private void toolstripObjTune_Click(object sender, EventArgs e)
+        {
+            AddSequencerLayer(trackEditor.CurrentRow.Index);
+        }
+        public void AddSequencerLayer(int index)
+        {
+            Sequencer_Object seq = new(leafProperties) {
+                obj_name = "_TuningLayerX",
+                category = "",
+                param_path = "⮝ Tuning Layer X",
+                friendly_param = "⮝ Tuning Layer X",
+                defaultvalue = 0,
+                step = false,
+                trait_type = "",
+                highlight_color = Color.FromArgb(40, 40, 40),
+                highlight_value = 0,
+                footer = "",
+                enabled = true,
+                param_path_lane = "none",
+                friendly_lane = "none",
+                editor_row = new DataGridViewRow()
+            };
+
+            int audiochannels = SequencerObjects.Count(x => x.obj_name == "_TuningLayerX");
+            seq.param_path = seq.param_path.Replace("X", $"{audiochannels}");
+            seq.friendly_param = seq.friendly_param.Replace("X", $"{audiochannels}");
+
+            seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
+            SequencerObjects.Insert(index + 1, seq);
+            SequencerObjects[index].HasTuningLayer = true;
+            trackEditor.Rows.Insert(index + 1, seq.editor_row);
+            ChangeTrackName(seq, "");
+            TrackUpdateHighlighting(seq);
+            SaveCheckAndWrite(false, "Add Object");
+            TCLE.PlaySound("UIobjectadd");
         }
 
         public void Reload()
@@ -2939,6 +3155,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
                 seq.editor_row.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
+            else if (seq.obj_name == "_TuningLayerX")
+                seq.editor_row.HeaderCell.Value = $"  {seq.param_path}";
             else
                 seq.editor_row.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
         }
@@ -3327,6 +3545,169 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects[indexofcenter + 2].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
             }
             isfinding = false;
+        }
+
+        public static void CalculateTuningLayers(LeafProperties _properties, Sequencer_Object seq)
+        {
+            if (_properties.parent.EditorIsLoading)
+                return;
+            int count = 1;
+            List<Sequencer_Object> TuningLayers = new();
+            while (_properties.seq_objs[_properties.seq_objs.IndexOf(seq) - count].obj_name == "_TuningLayerX") {
+                count++;
+            }
+            Sequencer_Object Main = _properties.seq_objs[_properties.seq_objs.IndexOf(seq) - count];
+            count = 1;
+            while (_properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count].obj_name == "_TuningLayerX") {
+                TuningLayers.Add(_properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count]);
+                count++;
+            }
+
+            Sequencer_Object _temp2 = new(_properties);
+
+            foreach (Sequencer_Object _layer in TuningLayers) {
+                Sequencer_Object _temp = new(_properties);
+                SeqDataPoint[] _datapoints = _layer.data_points.Where(x => x.value != null).ToArray();
+
+                for (int n = 0; n < _datapoints.Length - 1; n++) {
+                    //sort cells so they are in order according to column index
+                    List<SeqDataPoint> InterpCells = new() { _datapoints[n], _datapoints[n + 1] };
+                    InterpCells.Sort((cell1, cell2) => cell1.beat.CompareTo(cell2.beat));
+                    //get start and end values, and how many beats separate them
+                    double _start = (double)InterpCells[0].value;
+                    double _end = (double)InterpCells[1].value;
+                    double max = Math.Max(_start, _end);
+                    double min = Math.Min(_start, _end);
+                    int _beats = InterpCells[1].beat - InterpCells[0].beat + 1;
+                    //initialize array = to beats, fill with linear values between 0 and 1
+                    //these will be transformed by the formulas below
+                    double[] interp = new double[_beats];
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = (double)(x) / (double)(interp.Length - 1);
+                    }
+                    //change interpolation formula based on settings on the datapoint
+                    switch ($"{InterpCells[0].interpolation} {InterpCells[0].ease}") {
+                        case "Linear Ease In":
+                        case "Linear Ease Out":
+                        case "Linear Ease In Out":
+                            break;
+                        case "Step Ease In":
+                        case "Step Ease Out":
+                        case "Step Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 0;
+                            }
+                            interp[^1] = 1;
+                            break;
+                        case "Quadratic Ease In":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] * interp[x];
+                            }
+                            break;
+                        case "Quadratic Ease Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
+                            }
+                            break;
+                        case "Quadratic Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
+                            }
+                            break;
+                        case "Cubic Ease In":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] * interp[x] * interp[x];
+                            }
+                            break;
+                        case "Cubic Ease Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 1 - Math.Pow(1 - interp[x], 3);
+                            }
+                            break;
+                        case "Cubic Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
+                            }
+                            break;
+                        case "Quartic Ease In":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
+                            }
+                            break;
+                        case "Quartic Ease Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 1 - Math.Pow(1 - interp[x], 4);
+                            }
+                            break;
+                        case "Quartic Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
+                            }
+                            break;
+                        case "Quintic Ease In":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
+                            }
+                            break;
+                        case "Quintic Ease Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 1 - Math.Pow(1 - interp[x], 5);
+                            }
+                            break;
+                        case "Quintic Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
+                            }
+                            break;
+                        case "Sine Ease In":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
+                            }
+                            break;
+                        case "Sine Ease Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
+                            }
+                            break;
+                        case "Sine Ease In Out":
+                            for (int x = 0; x < interp.Length; x++) {
+                                interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
+                            }
+                            break;
+                    }
+                    //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                    if (_start == max) {
+                        for (int x = 0; x < interp.Length; x++)
+                            interp[x] = 1 - interp[x];
+                    }
+                    //convert interp[] range of 0 to 1 into range between selected beats
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+                    }
+                    //write the datapoints to the object
+                    for (int x = 0; x < _beats; x++) {
+                        _temp.data_points[InterpCells[0].beat + x].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                    }
+                }
+
+                for (int m = 0; m < _temp2.data_points.Count; m++) {
+                    if (_temp2.data_points[m].value == null) _temp2.data_points[m].value = 0;
+                    _temp2.data_points[m].value += _temp.data_points[m].value ?? 0;
+                }
+            }
+
+            _properties.parent.LogUndo = false;
+            for (int m = 0; m < Main.data_points.Count; m++) {
+                Main.data_points[m].value = _temp2.data_points[m].value ?? 0;
+            }
+            _properties.parent.LogUndo = true;
+
+        }
+
+        public static float ConvertRange(float originalStart, float originalEnd, float newStart, float newEnd, float value) // value to convert
+        {
+            float scale = (float)(newEnd - newStart) / (originalEnd - originalStart);
+            return (newStart + ((value - originalStart) * scale));
         }
         #endregion
 
