@@ -242,5 +242,20 @@
     <Setting Name="LeafOptionVerticalCells" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ColorTuningBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ColorTuningLine" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="ColorTuningPoint" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">255, 0, 128</Value>
+    </Setting>
+    <Setting Name="ColorTuningMaxMin" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">80, 80, 80</Value>
+    </Setting>
+    <Setting Name="ColorTuningFont" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

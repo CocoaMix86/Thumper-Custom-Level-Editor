@@ -31,6 +31,11 @@ namespace Thumper_Custom_Level_Editor
             projectexplorertext = Properties.Settings.Default.ColorProjExpText;
             rawbg = Properties.Settings.Default.ColorRawBG;
             rawtext = Properties.Settings.Default.ColorRawText;
+            tuningbg = Properties.Settings.Default.ColorTuningBG;
+            tuningline = Properties.Settings.Default.ColorTuningLine;
+            tuningpoint = Properties.Settings.Default.ColorTuningPoint;
+            tuningmaxmin = Properties.Settings.Default.ColorTuningMaxMin;
+            tuningfont = Properties.Settings.Default.ColorTuningFont;
         }
 
         public void SaveSettings()
@@ -60,6 +65,11 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.ColorProjExpText = projectexplorertext;
             Properties.Settings.Default.ColorRawBG = rawbg;
             Properties.Settings.Default.ColorRawText = rawtext;
+            Properties.Settings.Default.ColorTuningBG = tuningbg;
+            Properties.Settings.Default.ColorTuningLine = tuningline;
+            Properties.Settings.Default.ColorTuningPoint = tuningpoint;
+            Properties.Settings.Default.ColorTuningMaxMin = tuningmaxmin;
+            Properties.Settings.Default.ColorTuningFont = tuningfont;
         }
 
         ///
@@ -170,5 +180,26 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Text")]
         public Color rawtext { get; set; }
         ///
+        ///
+        [CategoryAttribute("Tuning Layers")]
+        [DisplayName("Background")]
+        public Color tuningbg { get; set; }
+
+        [CategoryAttribute("Tuning Layers")]
+        [DisplayName("Graph Line")]
+        public Color tuningline { get; set; }
+
+        [CategoryAttribute("Tuning Layers")]
+        [DisplayName("Points")]
+        public Color tuningpoint { get; set; }
+
+        [CategoryAttribute("Tuning Layers")]
+        [DisplayName("Points")]
+        public Color tuningmaxmin { get; set; }
+
+        [CategoryAttribute("Tuning Layers")]
+        [DisplayName("Points")]
+        public Color tuningfont { get; set; }
+
     }
 }

@@ -236,8 +236,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private IDockContent GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
-            //if (persistString == typeof(DockContent).ToString())
-            //    return null;
             if (persistString is "Properties")
                 return contentPropertyGrid;
             if (persistString is "Objects")
@@ -402,7 +400,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (RowPostPrePainting) {
                 if (e.ColumnIndex < FrozenColumnOffset) {
-                    //e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     CellPaintFancy(e);
                     CellPaintIcons(e);
                 }
@@ -473,7 +470,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             e.Graphics.FillPolygon(BrushCorn, new[] { p1, p2, p3 });
                         else
                             e.Graphics.FillPolygon(PlaybackLoop ? BrushGreen : BrushRed, new[] { p1, p2, p3 });
-                        //e.Graphics.FillRectangle(BrushCorn, e.CellBounds);
                     }
                     if (PlaybackEnd != -2 && e.ColumnIndex == PlaybackEnd + FrozenColumnOffset && e.ColumnIndex == trackEditor.ColumnCount - 1) {
                         Point p1 = new(e.CellBounds.Right + -6, e.CellBounds.Top);
@@ -486,8 +482,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             //paint notifier circles for changed interp and ease
-            ///if (e.RowIndex != -1 && e.ColumnIndex >= FrozenColumnOffset) {
-            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected /*|| ((SequencerObjects[e.RowIndex].category == "PLAY SAMPLE") && Properties.Settings.Default.LeafOptionShowWave)*/) {
+            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
 
             }
             else if (SequencerObjects[e.RowIndex].editor_row.ReadOnly) {
@@ -534,7 +529,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf.Name && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - (Playback.GlobalCurrentOffset / 100)) {
                 e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
-                //e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Top), new Point(e.CellBounds.Left + e.CellBounds.Width / 2, e.CellBounds.Bottom));
             }
 
             //check if previous cell is the same value. If so, hide it
@@ -579,9 +573,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                 }
             }
-
-            //if (e.ColumnIndex is 0 or 1 or 2)
-            //CellPaintIcons(e);
         }
 
         int w = 16;
@@ -629,18 +620,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         SolidBrush CellPaintingBlack = new(Color.Black);
         SolidBrush CellPaintingWhite = new(Color.White);
         SolidBrush CellPaintingColor = new(Color.Black);
-        SolidBrush BrushPurple = new(Color.Purple);
-        SolidBrush BrushGold = new(Color.Gold);
-        Pen PenPaintingBlack = new(Color.Black, 3);
-        Pen PenPaintingWhite = new(Color.White, 3);
-        Pen PenLineGray = new(Color.FromArgb(80,80,80), 1);
         Font TuningFont = new("Consolas", 8);
+        ///Paints rounded rectangles for the frozen columns
         private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
         {
+            //skip header row
             if (e.RowIndex == -1)
                 return;
             Rectangle bounds = e.CellBounds;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //column -1 is row headers
             if (e.ColumnIndex is -1) {
                 e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
@@ -648,6 +637,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 bounds.Y += 2;
                 bounds.Width -= 4;
                 bounds.Height -= 4;
+                //Tuning Layers get an indent
                 if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
                     bounds.X += 20;
                     bounds.Width -= 20;
@@ -660,6 +650,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
             }
+            //colums 0 and 1 are Enable and Mute
             else if (e.ColumnIndex is 0 or 1) {
                 bounds.X += 1;
                 bounds.Y += 1;
@@ -668,6 +659,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
             }
+            //column 2 is lanes buttons
+            //special painting has to be done to make the button appear connected across 5 rows.
             else if (e.ColumnIndex is 2) {
                 e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
                 bounds.X += 1;
@@ -692,7 +685,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
             }
-            //e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.Border);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -703,11 +695,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private bool RowPrePainting;
         private bool RowPostPrePainting;
+        private string RowPrePaintError;
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
+            //setting handled True prevents the app from performing any drawing automatically.
+            //I get to handle it all, in the order I need
             e.Handled = true;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            string message = null;
+            RowPrePaintError = null;
+            #region PLAY SAMPLE WAVEFORMS
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
@@ -723,7 +719,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
                 if (samp == null) {
                     if (!SequencerObjects[e.RowIndex].HasShownError) {
-                        message = $@"{SequencerObjects[e.RowIndex].obj_name} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
+                        RowPrePaintError = $@"{SequencerObjects[e.RowIndex].obj_name} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
                         SequencerObjects[e.RowIndex].HasShownError = true;
                     }
                     goto paintheader;
@@ -762,11 +758,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPostPrePainting = false;
                 if (samp.message != null) {
-                    message = samp.message;
+                    RowPrePaintError = samp.message;
                     samp.message = null;
                 }
             }
-            //HANDLE OBJECTS THAT LAST LONGER THAN 1 BEAT
+            #endregion
+            #region OBJECTS THAT LAST LONGER THAN 1 BEAT
             else if (SequencerObjects[e.RowIndex].friendly_param.Contains('[')) {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
@@ -853,7 +850,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPostPrePainting = false;
             }
-            //HANDLE TUNINGLAYER GRAPHS
+            #endregion
+            # region TUNINGLAYER GRAPHS
             else if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
                 RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
@@ -881,18 +879,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)p.value))).ToArray();
                 //
                 e.Graphics.FillRoundedRectangle(CellPaintingWhite, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
-                e.Graphics.FillRoundedRectangle(CellPaintingBlack, new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
-                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Top + 7, endX - 3, e.RowBounds.Top + 7);
-                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Bottom - 7, endX - 3, e.RowBounds.Bottom - 7);
-                e.Graphics.DrawLine(PenLineGray, startX + 3, e.RowBounds.Top + e.RowBounds.Height / 2, endX - 3, e.RowBounds.Top + e.RowBounds.Height / 2);
-                e.Graphics.DrawString($"{max}", TuningFont, CellPaintingWhite, startX + 3, e.RowBounds.Top + 8);
-                e.Graphics.DrawString($"{min}", TuningFont, CellPaintingWhite, startX + 3, e.RowBounds.Bottom - 15);
+                e.Graphics.FillRoundedRectangle(new SolidBrush(Properties.Settings.Default.ColorTuningBG), new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
+                e.Graphics.DrawLine(new(Properties.Settings.Default.ColorTuningMaxMin, 1), startX + 3, e.RowBounds.Top + 7, endX - 3, e.RowBounds.Top + 7);
+                e.Graphics.DrawLine(new(Properties.Settings.Default.ColorTuningMaxMin, 1), startX + 3, e.RowBounds.Bottom - 7, endX - 3, e.RowBounds.Bottom - 7);
+                e.Graphics.DrawLine(new(Properties.Settings.Default.ColorTuningMaxMin, 1), startX + 3, e.RowBounds.Top + e.RowBounds.Height / 2, endX - 3, e.RowBounds.Top + e.RowBounds.Height / 2);
+                e.Graphics.DrawString($"{max}", TuningFont, new SolidBrush(Properties.Settings.Default.ColorTuningFont), startX + 3, e.RowBounds.Top + 8);
+                e.Graphics.DrawString($"{min}", TuningFont, new SolidBrush(Properties.Settings.Default.ColorTuningFont), startX + 3, e.RowBounds.Bottom - 15);
                 PointF midpoint = new();
                 PointF midpoint2 = new();
+                Pen TuningLine = new(Properties.Settings.Default.ColorTuningLine, 3);
+                SolidBrush TuningPoint = new SolidBrush(Properties.Settings.Default.ColorTuningPoint);
                 //
                 for (int x = 0; x < _datapoints.Count; x++) {
                     if (x == _datapoints.Count - 1) {
-                        e.Graphics.FillRectangle(BrushPurple, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
+                        e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
                         continue;
                     }
                     float distance = _drawingpoints[x + 1].X - _drawingpoints[x].X;
@@ -900,8 +900,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         case "Step Ease In":
                         case "Step Ease Out":
                         case "Step Ease In Out":
-                            e.Graphics.DrawLine(PenPaintingWhite, _drawingpoints[x], new(_drawingpoints[x + 1].X, _drawingpoints[x].Y));
-                            e.Graphics.DrawLine(PenPaintingWhite, new(_drawingpoints[x + 1].X, _drawingpoints[x].Y), _drawingpoints[x + 1]);
+                            e.Graphics.DrawLine(TuningLine, _drawingpoints[x], new(_drawingpoints[x + 1].X, _drawingpoints[x].Y));
+                            e.Graphics.DrawLine(TuningLine, new(_drawingpoints[x + 1].X, _drawingpoints[x].Y), _drawingpoints[x + 1]);
                             break;
                         case "Linear Ease In":
                         case "Linear Ease Out":
@@ -971,23 +971,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             break;
                     }
                     if (!_datapoints[x].interpolation.Contains("step", StringComparison.OrdinalIgnoreCase))
-                        e.Graphics.DrawBezier(PenPaintingWhite, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
-                    e.Graphics.FillRectangle(BrushPurple, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
+                        e.Graphics.DrawBezier(TuningLine, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
+                    e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
                 }
                 //
                 RowPostPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPostPrePainting = false;
             }
+            #endregion
+            #region Paint Anything Else
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
+            #endregion
         paintheader:
             RowPrePainting = true;
             e.PaintHeader(true);
             RowPrePainting = false;
-            if (message != null) {
-                MessageBox.Show(message, "Lumper Eustum Tevel Cditor");
+            if (RowPrePaintError != null) {
+                MessageBox.Show(RowPrePaintError, "Lumper Eustum Tevel Cditor");
             }
         }
 

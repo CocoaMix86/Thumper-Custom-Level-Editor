@@ -978,5 +978,65 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionVerticalCells"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ColorTuningBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTuningBG"]));
+            }
+            set {
+                this["ColorTuningBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorTuningLine {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTuningLine"]));
+            }
+            set {
+                this["ColorTuningLine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("255, 0, 128")]
+        public global::System.Drawing.Color ColorTuningPoint {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTuningPoint"]));
+            }
+            set {
+                this["ColorTuningPoint"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80, 80, 80")]
+        public global::System.Drawing.Color ColorTuningMaxMin {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTuningMaxMin"]));
+            }
+            set {
+                this["ColorTuningMaxMin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color ColorTuningFont {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorTuningFont"]));
+            }
+            set {
+                this["ColorTuningFont"] = value;
+            }
+        }
     }
 }
