@@ -194,11 +194,11 @@ namespace Thumper_Custom_Level_Editor
         public Color tuningpoint { get; set; }
 
         [CategoryAttribute("Tuning Layers")]
-        [DisplayName("Points")]
+        [DisplayName("Max and Min Lines")]
         public Color tuningmaxmin { get; set; }
 
         [CategoryAttribute("Tuning Layers")]
-        [DisplayName("Points")]
+        [DisplayName("Text")]
         public Color tuningfont { get; set; }
 
     }
