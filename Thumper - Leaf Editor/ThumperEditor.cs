@@ -748,6 +748,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private void leafoptionVerticalCells_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionVerticalCells = leafoptionVerticalCells.Checked;
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.trackEditor.Refresh();
+            }
+        }
+
         private void toolstripViewExplorer_Click(object sender, EventArgs e)
         {
             if (Explorer.IsDisposed) {

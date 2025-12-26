@@ -203,6 +203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool PlaybackLoop;
         private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+        private StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft)};
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
@@ -550,15 +551,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         e.CellStyle.ForeColor = Color.Black;
                     string cellText = e.Value.ToString();
-                    for (int fontSize = 1; fontSize < 25; fontSize++) {
-                        Font font = new("Consolas", fontSize);
-                        Size textSize = TextRenderer.MeasureText(cellText, font);
-                        if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
-                            if (fontSize - 1 != 0)
-                                font = new Font("Consolas", fontSize - 1);
-                            e.CellStyle.Font = font;
-                            e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
-                            break;
+                    if (Properties.Settings.Default.LeafOptionVerticalCells) {
+                        for (int fontSize = 1; fontSize < 25; fontSize++) {
+                            Font font = new("Consolas", fontSize);
+                            Size textSize = TextRenderer.MeasureText(cellText, font);
+                            if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
+                                if (fontSize - 1 != 0)
+                                    font = new Font("Consolas", fontSize - 1);
+                                e.CellStyle.Font = font;
+                                e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        for (int fontSize = 1; fontSize < 25; fontSize++) {
+                            Font font = new("Consolas", fontSize);
+                            Size textSize = TextRenderer.MeasureText(cellText, font);
+                            if (textSize.Width > e.CellBounds.Height + 2 || textSize.Height > e.CellBounds.Width || fontSize == 24) {
+                                if (fontSize - 1 != 0)
+                                    font = new Font("Consolas", fontSize - 1);
+                                e.CellStyle.Font = font;
+                                e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
+                                break;
+                            }
                         }
                     }
                 }
@@ -2322,6 +2338,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             double _end = (double)((decimal?)InterpCells[1].Value ?? (decimal)interpobject.defaultvalue);
             double max = Math.Max(_start, _end);
             double min = Math.Min(_start, _end);
+            double max2 = 0, max3 = 0, min2 = 0, min3 = 0;
+            Color startcolor = new();
+            Color endcolor = new();
+            if (interpobject.trait_type == "kTraitColor") {
+                startcolor = Color.FromArgb((int)_start);
+                endcolor = Color.FromArgb((int)_end);
+                max = Math.Max(Color.FromArgb((int)_start).R, Color.FromArgb((int)_end).R);
+                max2 = Math.Max(Color.FromArgb((int)_start).G, Color.FromArgb((int)_end).G);
+                max3 = Math.Max(Color.FromArgb((int)_start).B, Color.FromArgb((int)_end).B);
+                min = Math.Min(Color.FromArgb((int)_start).R, Color.FromArgb((int)_end).R);
+                min2 = Math.Min(Color.FromArgb((int)_start).G, Color.FromArgb((int)_end).G);
+                min3 = Math.Min(Color.FromArgb((int)_start).B, Color.FromArgb((int)_end).B);
+            }
             int _beats = InterpCells[1].ColumnIndex - InterpCells[0].ColumnIndex + 1;
             //initialize array = to beats, fill with linear values between 0 and 1
             //these will be transformed by the formulas below
@@ -2412,22 +2441,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
-            //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
-            if (_start == max) {
-                for (int x = 0; x < interp.Length; x++)
-                    interp[x] = 1 - interp[x];
+            if (interpobject.trait_type == "kTraitColor") {
+                double valR, valG, valB = 0;
+                //convert interp[] range of 0 to 1 into range between selected beats
+                for (int x = 0; x < interp.Length; x++) {
+                    valR = ((max == startcolor.R ? 1 - interp[x] : interp[x]) / 1) * (max - min) + min;
+                    valG = ((max2 == startcolor.G ? 1 - interp[x] : interp[x]) / 1) * (max2 - min2) + min2;
+                    valB = ((max3 == startcolor.B ? 1 - interp[x] : interp[x]) / 1) * (max3 - min3) + min3;
+                    interp[x] = Color.FromArgb((int)valR, (int)valG, (int)valB).ToArgb();
+                }
             }
-
-            //convert interp[] range of 0 to 1 into range between selected beats
-            for (int x = 0; x < interp.Length; x++) {
-                interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+            else {
+                //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                if (_start == max) {
+                    for (int x = 0; x < interp.Length; x++)
+                        interp[x] = 1 - interp[x];
+                }
+                //convert interp[] range of 0 to 1 into range between selected beats
+                for (int x = 0; x < interp.Length; x++) {
+                    interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+                }
             }
             //assign new values back to the data points
             IsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
-                //if interpolating for Color, remove the decimals
-                if (interpobject.trait_type == "kTraitColor")
-                    interp[x] = Math.Truncate(interp[x]);
                 interpobject.data_points[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
             }
             IsInterpolating = false;
