@@ -383,17 +383,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
 
-        private SolidBrush BrushGray = new(Color.Gray);
-        private SolidBrush BrushRed = new(Color.Red);
-        private SolidBrush BrushGreen = new(Color.Green);
-        private SolidBrush BrushBlue = new(Color.Blue);
-        private SolidBrush BrushBlack = new(Color.Black);
-        private SolidBrush BrushCorn = new(Color.CornflowerBlue);
-        private Pen PenCorn = new(new SolidBrush(Color.CornflowerBlue), 3);
-        private Pen PenRed = new(new SolidBrush(Color.Red), 3);
-        private Pen PenGreen = new(new SolidBrush(Color.Green), 3);
-        private Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
-        private Pen PenViolet2 = new(new SolidBrush(Color.Violet), 1);
+        private static SolidBrush BrushGray = new(Color.Gray);
+        private static SolidBrush BrushRed = new(Color.Red);
+        private static SolidBrush BrushGreen = new(Color.Green);
+        private static SolidBrush BrushBlue = new(Color.Blue);
+        private static SolidBrush BrushBlack = new(Color.Black);
+        private static SolidBrush BrushCorn = new(Color.CornflowerBlue);
+        private static SolidBrush BrushWhite = new(Color.White);
+        private static SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
+        private static SolidBrush CellPaintingColor = new(Color.Black);
+        private static Pen PenCorn = new(BrushCorn, 3);
+        private static Pen PenRed = new(BrushRed, 3);
+        private static Pen PenGreen = new(BrushGreen, 3);
+        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
+        private static Pen PenViolet2 = new(new SolidBrush(Color.Violet), 1);
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -616,10 +619,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
-        SolidBrush CellPaintingBlack = new(Color.Black);
-        SolidBrush CellPaintingWhite = new(Color.White);
-        SolidBrush CellPaintingColor = new(Color.Black);
         Font TuningFont = new("Consolas", 8);
         ///Paints rounded rectangles for the frozen columns
         private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
@@ -631,7 +630,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             //column -1 is row headers
             if (e.ColumnIndex is -1) {
-                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRectangle(BrushBlack, e.CellBounds);
                 CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
                 bounds.X += 2;
                 bounds.Y += 2;
@@ -644,7 +643,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //if row has a selected cell, highlight it
                 if (SelectedRows.Contains(e.RowIndex)) {
-                    e.Graphics.FillRoundedRectangle(CellPaintingWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
+                    e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
                     CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.8);
                 }
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
@@ -656,13 +655,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 bounds.Y += 1;
                 bounds.Width -= 2;
                 bounds.Height -= 2;
-                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRectangle(BrushBlack, e.CellBounds);
                 e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
             }
             //column 2 is lanes buttons
             //special painting has to be done to make the button appear connected across 5 rows.
             else if (e.ColumnIndex is 2) {
-                e.Graphics.FillRectangle(CellPaintingBlack, e.CellBounds);
+                e.Graphics.FillRectangle(BrushBlack, e.CellBounds);
                 bounds.X += 1;
                 bounds.Y += 1;
                 bounds.Width -= 6;
@@ -878,7 +877,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int endX = ((_datapoints[^1].beat - columnindex + 1) * cellwidth) + offsetportion;
                 PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)p.value))).ToArray();
                 //
-                e.Graphics.FillRoundedRectangle(CellPaintingWhite, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
+                e.Graphics.FillRoundedRectangle(BrushWhite, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
                 e.Graphics.FillRoundedRectangle(new SolidBrush(Properties.Settings.Default.ColorTuningBG), new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
                 e.Graphics.DrawLine(new(Properties.Settings.Default.ColorTuningMaxMin, 1), startX + 3, e.RowBounds.Top + 7, endX - 3, e.RowBounds.Top + 7);
                 e.Graphics.DrawLine(new(Properties.Settings.Default.ColorTuningMaxMin, 1), startX + 3, e.RowBounds.Bottom - 7, endX - 3, e.RowBounds.Bottom - 7);
