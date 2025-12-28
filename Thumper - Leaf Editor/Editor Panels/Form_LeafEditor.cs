@@ -2,12 +2,8 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.Intrinsics.Arm;
-using System.Xml.Linq;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -146,9 +142,56 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
+        //Static
+        private static int FrozenColumnOffset = 3;
+        private static int IconWidth = 16;
+        private static int IconHeight = 16;
+        private static SolidBrush BrushGray = new(Color.Gray);
+        private static SolidBrush BrushRed = new(Color.Red);
+        private static SolidBrush BrushGreen = new(Color.Green);
+        private static SolidBrush BrushBlue = new(Color.Blue);
+        private static SolidBrush BrushBlack = new(Color.Black);
+        private static SolidBrush BrushCorn = new(Color.CornflowerBlue);
+        private static SolidBrush BrushWhite = new(Color.White);
+        private static SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
+        private static SolidBrush CellPaintingColor = new(Color.Black);
+        private static Pen PenCorn = new(BrushCorn, 3);
+        private static Pen PenRed = new(BrushRed, 3);
+        private static Pen PenGreen = new(BrushGreen, 3);
+        private static Pen PenVioletThick = new(new SolidBrush(Color.Violet), 3);
+        private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 1);
+        private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+        private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
+        //
+        //Local basic vars
         public bool EditorIsSaved = true;
         public bool EditorIsLoading;
         private bool SaveOnlyNoLoad;
+        private bool EditorIsRandomizing;
+        private bool EditorIsMoving;
+        private bool EditorIsFinding;
+        private bool EditorIsPasting;
+        private bool EditorIsInterpolating;
+        private bool LogUndo = true;
+        private bool GlobalMute;
+        private bool GlobalDisable;
+        private bool GlobalExpand;
+        private bool ZoomHasChanged;
+        private bool ResetRowAfterEdit;
+        private bool RightclickDown;
+        private bool RightclickChanges;
+        private bool PlaybackLoop;
+        private bool RowPrePainting;
+        private bool RowPostPrePainting;
+        private int CurrentRow;
+        private int MouseCurrentColumn;
+        private int LastRowEdit;
+        private int LastColumnEdit;
+        private int PlaybackStart = -2;
+        private int PlaybackEnd = -2;
+        private string RowPrePaintError;
+        //
+        //Local custom class vars
         public FileInfo loadedleaf
         {
             get => LoadedLeaf;
@@ -179,31 +222,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private LeafProperties LeafProperties;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         public LvlProperties LvlSequencer;
-        private dynamic leafjson;
-        private int CurrentRow;
-        private int MouseCurrentColumn;
-        private int LastRowEdit;
-        private int LastColumnEdit;
-        private static int FrozenColumnOffset = 3;
-        private bool randomizing;
-        private bool ismoving;
-        private bool isfinding;
-        private bool ispasting;
-        private bool LogUndo = true;
-        private bool GlobalMute;
-        private bool GlobalDisable;
-        private bool GlobalExpand;
-        private bool IsInterpolating;
-        private bool ZoomHasChanged;
-        private bool ResetRowAfterEdit;
-        private bool RightclickDown;
-        private bool RightclickChanges;
-        private int PlaybackStart = -2;
-        private int PlaybackEnd = -2;
-        private bool PlaybackLoop;
-        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
-        private StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-        private StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft)};
+        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }        
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
@@ -232,6 +251,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
+        #endregion
 
         private IDockContent GetContentFromPersistString(string persistString)
         {
@@ -245,7 +265,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             throw new NotImplementedException();
         }
-        #endregion
 
         #region EventHandlers
         #region Scrollbars and Zoom
@@ -382,21 +401,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.FirstDisplayedScrollingRowIndex = e.NewValue;
         }
         #endregion
-
-        private static SolidBrush BrushGray = new(Color.Gray);
-        private static SolidBrush BrushRed = new(Color.Red);
-        private static SolidBrush BrushGreen = new(Color.Green);
-        private static SolidBrush BrushBlue = new(Color.Blue);
-        private static SolidBrush BrushBlack = new(Color.Black);
-        private static SolidBrush BrushCorn = new(Color.CornflowerBlue);
-        private static SolidBrush BrushWhite = new(Color.White);
-        private static SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
-        private static SolidBrush CellPaintingColor = new(Color.Black);
-        private static Pen PenCorn = new(BrushCorn, 3);
-        private static Pen PenRed = new(BrushRed, 3);
-        private static Pen PenGreen = new(BrushGreen, 3);
-        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
-        private static Pen PenViolet2 = new(new SolidBrush(Color.Violet), 1);
+        #region Trackeditor Painting
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
@@ -408,7 +413,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell)
-                        e.Graphics.DrawLine(PenViolet2, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
+                        e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
                 }
                 return;
             }
@@ -531,7 +536,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
             if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf.Name && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - (Playback.GlobalCurrentOffset / 100)) {
-                e.Graphics.DrawLine(PenViolet, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
+                e.Graphics.DrawLine(PenVioletThick, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
             }
 
             //check if previous cell is the same value. If so, hide it
@@ -578,42 +583,40 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        int w = 16;
-        int h = 16;
         private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex != -1 && SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX")
                 return;
             //get dimensions
-            int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
-            int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - IconWidth) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - IconHeight) / 2);
             //paint the image
             //Object Toggle
             if (e.ColumnIndex == 0) {
                 if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
                 }
                 else {
-                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
             //Audio Mute/Unmute
             else if (e.ColumnIndex == 1) {
                 if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
                 }
                 else {
-                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
             //Lane Expand
             else if (e.ColumnIndex == 2) {
                 if (e.RowIndex == -1)
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
                 else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, w, h));
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
                     trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 }
             }
@@ -641,7 +644,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     bounds.X += 20;
                     bounds.Width -= 20;
                 }
-                //if row has a selected cell, highlight it
+                //if row has a selected cell, highlight it, using a brighter color and white outline
                 if (SelectedRows.Contains(e.RowIndex)) {
                     e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
                     CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.8);
@@ -692,9 +695,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             base.OnPaint(e);
         }
-        private bool RowPrePainting;
-        private bool RowPostPrePainting;
-        private string RowPrePaintError;
+
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             //setting handled True prevents the app from performing any drawing automatically.
@@ -992,6 +993,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show(RowPrePaintError, "Lumper Eustum Tevel Cditor");
             }
         }
+        #endregion
 
         private void trackEditor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
@@ -1026,7 +1028,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (isfinding)
+            if (EditorIsFinding)
                 return;
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
@@ -1100,7 +1102,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (ismoving || isfinding)
+            if (EditorIsMoving || EditorIsFinding)
                 return;
             CurrentRow = e.RowIndex;
             ShowRawTrackData(SequencerObjects[e.RowIndex]);
@@ -1119,22 +1121,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
         {
-            if (IsInterpolating || ispasting)
+            //If certain actions going on, don't bother running this method.
+            if (EditorIsInterpolating || EditorIsPasting || EditorIsRandomizing)
                 return;
             try {
-                List<Sequencer_Object> _tuninglayers = new();
                 bool changes = false;
                 object _val = null;
-                if (setnull)
-                    _val = null;
-                else if (Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
+                if (!setnull && Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
-                //iterate over each cell in the selection
+                //Get the list of cells to be edited. This is determined by if they are selected.
                 List<DataGridViewCell> CellsToChange = new();
                 if (trackEditor[columnindex, rowindex].Selected)
                     CellsToChange = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
                 else
                     CellsToChange.Add(trackEditor[columnindex, rowindex]);
+                //iterate over each cell in the selection
                 foreach (DataGridViewCell _cell in CellsToChange) {
                     object _tempval = _val;
 
@@ -1149,6 +1150,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     else {
                         //check if value to be set works with the objects type
+                        //If not, sanitize it, forcing it to be within proper bounds for the type.
                         if (SequencerObjects[_cell.RowIndex].trait_type == "kTraitBool") {
                             if ((decimal)_tempval is not 1 or 0)
                                 _tempval = 1m;
@@ -1170,10 +1172,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             changes = true;
                         }
                     }
-
-                    if (SequencerObjects[_cell.RowIndex].obj_name == "_TuningLayerX" && !_tuninglayers.Contains(SequencerObjects[_cell.RowIndex])) {
-                        _tuninglayers.Add(SequencerObjects[_cell.RowIndex]);
-                    }
                     ///else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
 
                     ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
@@ -1181,10 +1179,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //sets flag that leaf has unsaved changes
                 if (changes) {
                     SaveCheckAndWrite(false, "Cell Value(s) Updated");
-                    foreach (var obj in _tuninglayers)
-                        CalculateTuningLayers(LeafProperties, obj);
                 }
             } catch { }
+
             ShowRawTrackData(SequencerObjects[rowindex]);
         }
 
@@ -1418,8 +1415,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private int LastRow;
-        private int LastCol;
         private void trackEditor_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (Playback.IsPlaying)
@@ -1431,8 +1426,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Color color = trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor;
             trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
             trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = color;
-            LastRow = e.RowIndex;
-            LastCol = e.ColumnIndex;
         }
 
         private void trackEditor_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
@@ -2148,7 +2141,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _index += 1;
                     break;
             }
-            ispasting = true;
+            EditorIsPasting = true;
             //add copied Sequencer_Object to main _tracks list
             foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
                 DataGridViewRow dgvr = new();
@@ -2171,7 +2164,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _index++;
             }
 
-            ispasting = false;
+            EditorIsPasting = false;
             TCLE.PlaySound("UIkpaste");
             LogUndo = true;
             SaveCheckAndWrite(false, "Paste Objects");
@@ -2465,11 +2458,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //assign new values back to the data points
-            IsInterpolating = true;
+            EditorIsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
                 interpobject.data_points[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
             }
-            IsInterpolating = false;
+            EditorIsInterpolating = false;
             //recolor cells after populating
             TrackUpdateHighlighting(interpobject);
             ShowRawTrackData(interpobject);
@@ -2566,16 +2559,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIrefresh");
         }
 
-        private void btnRevertLeaf_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            SaveCheckAndWrite(true, "");
-            //SaveCheckAndWrite(true, "Revert to last save", "Revert");
-            LoadLeaf(leafjson, LoadedLeaf);
-            TCLE.PlaySound("UIrevertnew");
-        }
-
         private void btnLeafAutoPlace_Click(object sender, EventArgs e)
         {
             TCLE.PlaySound("UIselect");
@@ -2583,7 +2566,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLeafRandom_Click(object sender, EventArgs e)
         {
-            randomizing = true;
+            EditorIsRandomizing = true;
             //I pick category first rather than any object, as this gives Play Sample a higher chance of being picked
             //And all the tentacles a lower chance
             List<string> categories = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
@@ -2643,7 +2626,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.Invalidate();
             TCLE.PlaySound("UIaddrandom");
-            randomizing = false;
+            EditorIsRandomizing = false;
             SaveCheckAndWrite(false, "Added Random Object");
         }
 
@@ -2659,7 +2642,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 .Where(x => x.friendly_lane is "none" or "lane center");
 
             if (MessageBox.Show("Assign random values to the current selected Objects?", "TELdCiethovrueulsmtpoemr", MessageBoxButtons.YesNo) == DialogResult.Yes) {
-                randomizing = true;
+                EditorIsRandomizing = true;
                 foreach (Sequencer_Object seq in SelectedSeq) {
                     do {
                         if (seq.friendly_lane == "lane center") {
@@ -2677,7 +2660,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Invalidate();
 
                 TCLE.PlaySound("UIaddrandom");
-                randomizing = false;
+                EditorIsRandomizing = false;
                 SaveCheckAndWrite(false, "Set Random Values");
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
             }
@@ -3376,15 +3359,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        private void ResetLeaf()
-        {
-            leafjson = null;
-            SequencerObjects.Clear();
-            trackEditor.Rows.Clear();
-            this.Text = "Leaf Editor";
-            SaveCheckAndWrite(true, "");
-        }
-
         #region Cut Copy Paste
         public void Copy()
         {
@@ -3459,7 +3433,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Pasted cells");
             */
 
-            ispasting = true;
+            EditorIsPasting = true;
             LogUndo = false;
             int pastingrow = trackEditor.CurrentCell.RowIndex;
             if (SequencerObjects[pastingrow].friendly_lane == "lane center" && SequencerObjects[pastingrow].expandlanes == false && TCLE.ClipboardDataPoints.Count >= 5)
@@ -3478,7 +3452,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects[sdp.index + rowoffset].data_points[sdp.beat + coloffset] = clone;
                 clone.UpdateCell();
             }
-            ispasting = false;
+            EditorIsPasting = false;
             LogUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");
             trackEditor.Invalidate();
@@ -3546,7 +3520,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
-                dgvc.Value = _out;
+                //dgvc.Value = _out;
                 seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { Owner = seq, Beat = dgvc.ColumnIndex - FrozenColumnOffset, value = (decimal?)_out, ease = "Ease In Out", interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
@@ -3554,12 +3528,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void FindMissingLaneObjects(Sequencer_Object seq)
         {
-            if (ismoving)
+            if (EditorIsMoving)
                 return;
             //don't need to find lanes for non-multi-lanes
             if (seq.friendly_lane == "none")
                 return;
-            isfinding = true;
+            EditorIsFinding = true;
             int indexofcenter = SequencerObjects.IndexOf(seq);
             if (indexofcenter - 1 < 0 || (SequencerObjects[indexofcenter - 1].obj_name != seq.obj_name || SequencerObjects[indexofcenter - 1].param_path != seq.param_path)) {
                 trackEditor.Rows.Insert(indexofcenter, 1);
@@ -3583,7 +3557,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects.Insert(indexofcenter + 2, seq.CloneAsDefault("z02", "lane right 2", trackEditor.Rows[indexofcenter + 2]));
                 SequencerObjects[indexofcenter + 2].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
             }
-            isfinding = false;
+            EditorIsFinding = false;
         }
 
         public static void CalculateTuningLayers(LeafProperties _properties, Sequencer_Object seq)
@@ -3767,11 +3741,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (RowsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
                     RowsToMove = ReturnLanesFromName(SequencerObjects[rowIndexFromMouseDown], SequencerObjects[rowIndexFromMouseDown].friendly_lane);
                     CenterLane = RowsToMove.Length == 5 ? RowsToMove[2] : RowsToMove[0];
-                    ismoving = true;
+                    EditorIsMoving = true;
                     // Proceed with the drag and drop, passing in the list item.                    
                     _ = trackEditor.DoDragDrop(CenterLane.editor_row, DragDropEffects.Move);
                     RowsToMove = null;
-                    ismoving = false;
+                    EditorIsMoving = false;
                 }
             }
         }
