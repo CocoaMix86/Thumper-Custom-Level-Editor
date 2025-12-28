@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (Playback.Generating) {
                 LoadLeafSimple(load, filepath);
-                LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
+                LoadSequencer(load["seq_objs"], LeafProperties);
                 return;
             }
 
@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null) {
                 LoadLeaf(load, filepath);
                 //each object in the seq_objs[] list becomes a track
-                LeafProperties.seq_objs = LoadSequencer(load["seq_objs"], LeafProperties);
+                LoadSequencer(load["seq_objs"], LeafProperties);
                 if (!SaveOnlyNoLoad) {
                     LoadTracksFromSequencer(LeafProperties.seq_objs);
                     LoadEnd();
@@ -48,7 +48,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.Generating) {
                 LvlSequencer = toload;
                 LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
-                LeafProperties.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
                 return;
             }
 
@@ -61,12 +61,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LvlSequencer = toload;
                 LoadLeaf(null, LvlSequencer.FilePath, LvlSequencer);
                 if (!SaveOnlyNoLoad) {
-                    LeafProperties.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
                     LoadTracksFromSequencer(LeafProperties.seq_objs);
                     LoadEnd();
                 }
                 else
-                    LvlSequencer.seq_objs = LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                   LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
             }
         }
         private void RenderForm()
@@ -164,9 +164,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
         //
         //Local basic vars
+        private bool SaveOnlyNoLoad;
         public bool EditorIsSaved = true;
         public bool EditorIsLoading;
-        private bool SaveOnlyNoLoad;
         private bool EditorIsRandomizing;
         private bool EditorIsMoving;
         private bool EditorIsFinding;
@@ -405,12 +405,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
-
+            //we enter this specifically after all the other row prepainting is done, so this ends up on top.
             if (RowPostPrePainting) {
+                //paint the frozen column squares and their icons
                 if (e.ColumnIndex < FrozenColumnOffset) {
                     CellPaintFancy(e);
                     CellPaintIcons(e);
                 }
+                //draw a vertical line inside tuning layer row to show where selected cell is.
                 else {
                     if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell)
                         e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
@@ -449,7 +451,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (!Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
                     e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
                 }
-
+                //draw thick border top and bottom for the outer lane rows to make it more obvious they are grouped.
                 if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 2") {
                     e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.InsetDouble;
                     e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Outset;
@@ -462,6 +464,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground);
+            //if we're in the frozen columns or header row (-1), return after this block as there's no other special drawing to be done
             if (e.ColumnIndex < FrozenColumnOffset) {
                 CellPaintFancy(e);
                 CellPaintIcons(e);
@@ -470,6 +473,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 if (e.RowIndex == -1) {
                     e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+                    //Drawing the playback heads, start and end point triangles that exist in the header row
                     if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
                         Point p1 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
                         Point p2 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
@@ -489,13 +493,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            //paint notifier circles for changed interp and ease
+            //if cell is selected, skip all the fancy painting
             if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
 
             }
+            //grey out the track if disabled
             else if (SequencerObjects[e.RowIndex].editor_row.ReadOnly) {
                 e.Graphics.FillRectangle(BrushGray, e.CellBounds);
             }
+            //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
             else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
                 if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
@@ -509,11 +515,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                 }
             }
+            //paint the whole cell with the highlighting color
             else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
                 e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds);
+            //if a color object, convert the cell value to ARGB and use that
             else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(Math.Floor((decimal)SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value)))), e.CellBounds);
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
 
+            //paint notifier circles for changed interp and ease
             if (Properties.Settings.Default.LeafOptionEaseDots) {
                 if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
                     e.Graphics.FillEllipse(BrushBlack, e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
@@ -524,7 +533,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.FillEllipse(BrushBlue, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
             }
-            ///}
 
             e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground));
             e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
@@ -539,24 +547,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.DrawLine(PenVioletThick, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
             }
 
-            //check if previous cell is the same value. If so, hide it
-            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null/* && e.ColumnIndex != -1 && e.RowIndex != -1*/) {
-                //
+            //This block handles font scaling to draw the value in the cell bigger/smaller
+            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null) {
+                //skips a bunch of objects since they display their values differently
                 if (SequencerObjects[e.RowIndex].category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) ;
                 else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor") ;
                 else if ((Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false)) ;
                 else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex >= FrozenColumnOffset && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) ;
                 else {
                     Color _c = SequencerObjects[e.RowIndex].highlight_color;
+                    //Tests highlight color contrast. If low, text color is set to white.
                     if (_c.R < 150 && _c.G < 150 && _c.B < 150)
                         e.CellStyle.ForeColor = Color.White;
                     else
                         e.CellStyle.ForeColor = Color.Black;
                     string cellText = e.Value.ToString();
+                    //if using vertical text, string width needs to be tested against cell height instead of width
+                    //hence why this is in 2 blocks that do almost identical things
                     if (Properties.Settings.Default.LeafOptionVerticalCells) {
                         for (int fontSize = 1; fontSize < 25; fontSize++) {
                             Font font = new("Consolas", fontSize);
                             Size textSize = TextRenderer.MeasureText(cellText, font);
+                            //if font is within cell bounds, try font size +1. Or cap it at 24.
                             if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
                                 if (fontSize - 1 != 0)
                                     font = new Font("Consolas", fontSize - 1);
@@ -2776,7 +2788,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TrackTimeSigHighlighting();
         }
 
-        public static ObservableCollection<Sequencer_Object> LoadSequencer(dynamic seqJSON, LeafProperties parent)
+        public static void LoadSequencer(dynamic seqJSON, LeafProperties parent)
         {
             ObservableCollection<Sequencer_Object> Seq_Objs = new();
             bool loadfail = false;
@@ -2882,7 +2894,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (loadfail) {
                 MessageBox.Show($"Could not find obj_name or param_path for these items:\n{loadfailmessage}");
             }
-            return Seq_Objs;
+            //return Seq_Objs;
+            parent.seq_objs = Seq_Objs;
         }
 
         public void LoadTracksFromSequencer(ObservableCollection<Sequencer_Object> Seq_Objs)
@@ -2935,7 +2948,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
         }
-
+        /*
         public void Reload()
         {
             dynamic _load = TCLE.LoadFileLock(LoadedLeaf.FullName);
@@ -2964,13 +2977,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafProperties.seq_objs = LoadSequencer(_load["seq_objs"], LeafProperties);
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
-        }
+        }*/
 
-        public List<SaveState> GetUndoList()
-        {
-            return UndoList;
-        }
-
+        public List<SaveState> GetUndoList() => UndoList;
         public void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
@@ -2980,7 +2989,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.expandlanes == true).ToList();
             //
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
-            LeafProperties.seq_objs = LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
+            LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
             UndoList.RemoveRange(0, undolistindex);
