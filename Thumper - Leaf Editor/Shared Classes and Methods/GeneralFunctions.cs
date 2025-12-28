@@ -17,9 +17,10 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     {
-        public static string AppReleaseNumber = "alpha58";
-        private DeserializeDockContent m_deserializeDockContent;
-        public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
+        #region Variable
+        //Static
+        public static string AppReleaseNumber = "alpha61";
+        public static string _errorlog = "";
         public static decimal LeafQuickValue0 = 1.000m;
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
@@ -30,12 +31,13 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue7 = 1.000m;
         public static decimal LeafQuickValue8 = 1.000m;
         public static decimal LeafQuickValue9 = 1.000m;
-        public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
-        public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
-        public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
-        public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-        public static Dictionary<int, int> Frequencys = new() {
+        public static HashSet<Object_Params> LeafObjects = new();
+        public static HashSet<Object_Params> ObjectFavorites = new();
+        public static Dictionary<string, Bitmap> ColorIcons = new();
+        public static List<SampleData> ProjectSamples = new();
+        public static Dictionary<string, double> ProjectSampleRuntimes = new();
+        public static Dictionary<int, int> Frequencies = new() {
             { 1, 8000 },
             { 2, 11_000 },
             { 3, 11_025 },
@@ -47,6 +49,19 @@ namespace Thumper_Custom_Level_Editor
             { 9, 48_000 },
             { 10,96_000 }
         };
+        //Static Readonly
+        public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
+        public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
+        public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
+        public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
+        //
+        //Local basic vars
+        //
+        //Local custom class vars
+        private DeserializeDockContent m_deserializeDockContent;
+        //
+        #endregion
 
         private static void LoadQuickValues()
         {
@@ -98,9 +113,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static HashSet<Object_Params> LeafObjects = new();
-        public static HashSet<Object_Params> ObjectFavorites = new();
-        public static string _errorlog = "";
         public static void ImportObjects()
         {
             LeafObjects.Clear();
@@ -143,7 +155,6 @@ namespace Thumper_Custom_Level_Editor
                 ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.param_displayname)).ToHashSet();
         }
 
-        public static Dictionary<string, Bitmap> ColorIcons = new();
         public static void ImportDefaultColors()
         {
             Dictionary<string, Color> ObjectColors = new();
@@ -438,8 +449,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static List<SampleData> ProjectSamples = new();
-        public static Dictionary<string, double> ProjectSampleRuntimes = new();
         public static void ReloadProjectSamples()
         {
             if (WorkingFolder == null)
@@ -563,7 +572,7 @@ namespace Thumper_Custom_Level_Editor
 
                         UInt64 freqid = (metadata & 0b11110) >> 1;
                         UInt64 samples = metadata >> 34;
-                        int freq = Frequencys[(int)freqid];
+                        int freq = Frequencies[(int)freqid];
                         samp.time = (double)(samples) / (double)freq;
                     }
                 }
@@ -958,12 +967,9 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 return;
             lvlsinworkfolder.Clear();
-            foreach (FileInfo file in WorkingFolder.GetFiles("*.lvl", SearchOption.AllDirectories)) {
-                dynamic loadfile = LoadFileLock(file.FullName);
-                if (loadfile == null) continue;
-                if ((string)loadfile["obj_type"] == "SequinLevel") {
-                    lvlsinworkfolder.Add((string)loadfile["obj_name"]);
-                }
+            foreach (var file in ProjectExplorer.Files) {
+                if (file.Extension == ".lvl")
+                    lvlsinworkfolder.Add(file.Name);
             }
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
@@ -1018,6 +1024,7 @@ namespace Thumper_Custom_Level_Editor
             return false;
         }
 
+        /// This also works for negative numbers
         public static int mod(int x, int m)
         {
             int r = x % m;
@@ -1139,7 +1146,6 @@ namespace Thumper_Custom_Level_Editor
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
         }
 
-        public static List<string> LevelSections;
         public static JObject BuildSave(ProjectProperties _properties)
         {
             JObject _save = new() {
@@ -1148,7 +1154,7 @@ namespace Thumper_Custom_Level_Editor
                 { "description", _properties.description },
                 { "author", _properties.authornames },
                 { "bpm", _properties.bpm },
-                { "level_sections", new JArray() {LevelSections} },
+                { "level_sections", new JArray() {_properties.LevelSections} },
                 { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
                 { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
                 { "path_color", new JArray() { (float)_properties.path.R / 255, (float)_properties.path.G / 255, (float)_properties.path.B / 255, 1 }},

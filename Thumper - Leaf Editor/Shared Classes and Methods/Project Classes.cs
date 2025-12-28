@@ -117,6 +117,9 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Path Color")]
         [Description("Affects the rail color on the title screen.")]
         public Color path { get; set; }
+
+        [Browsable(false)]
+        public List<string> LevelSections = new();
     }
 
     public class DifficultyOptions : StringConverter

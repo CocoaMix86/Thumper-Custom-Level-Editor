@@ -65,9 +65,10 @@ namespace Thumper_Custom_Level_Editor
             TCLE.ExistingBeebles.Add(newbeeb);
             newbeeb.Show();
         }
+
         public void MakeFace()
         {
-            int i = new Random().Next(0, 1001);
+            int i = rng.Next(0, 1001);
             if (i == 1000) {
                 pictureBeeble.Image = Properties.Resources.beeblegold;
                 TCLE.PlaySound("UIbeetleclickGOLD");

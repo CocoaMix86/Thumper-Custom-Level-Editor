@@ -30,7 +30,6 @@ namespace Thumper_Custom_Level_Editor
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public static Dictionary<string, Keys> Keybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
         public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public static Beeble MainBeeble = new() { Visible = false };
         public static ProjectProperties projectProperties
         {
             get => ProjectProperties;
@@ -48,6 +47,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<GateLvlData> ClipboardGate = new();
         public static List<string> ClipboardPaths = new();
         //
+        public static Beeble MainBeeble = new() { Visible = false };
         public static List<Beeble> ExistingBeebles = new();
         #endregion
 
@@ -324,6 +324,11 @@ namespace Thumper_Custom_Level_Editor
 
             if (this.WindowState == FormWindowState.Normal)
                 toolstripFormRestore.Image = Properties.Resources.icon_maximize;
+        }
+
+        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e)
+        {
+            pictureTunnelViewer.Visible = false;
         }
         #endregion
         #region Form Key Press
@@ -1056,6 +1061,12 @@ namespace Thumper_Custom_Level_Editor
                 PCtoAudioFile(samp);
             }
         }
+
+        private void exportProjectAsFinishedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProject _Export = new();
+            _Export.ShowDialog();
+        }
         #endregion
 
         #region Toolstrip Toolbar
@@ -1205,17 +1216,6 @@ namespace Thumper_Custom_Level_Editor
             GC.Collect();
             GC.WaitForPendingFinalizers();
             _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
-        }
-
-        private void pictureTunnelViewer_MouseEnter(object sender, EventArgs e)
-        {
-            pictureTunnelViewer.Visible = false;
-        }
-
-        private void exportProjectAsFinishedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportProject _Export = new();
-            _Export.ShowDialog();
         }
     }
 }
