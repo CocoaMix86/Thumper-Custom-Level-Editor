@@ -1061,12 +1061,6 @@ namespace Thumper_Custom_Level_Editor
                 PCtoAudioFile(samp);
             }
         }
-
-        private void exportProjectAsFinishedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ExportProject _Export = new();
-            _Export.ShowDialog();
-        }
         #endregion
 
         #region Toolstrip Toolbar

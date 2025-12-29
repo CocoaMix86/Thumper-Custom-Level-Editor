@@ -30,7 +30,7 @@ namespace Thumper_Custom_Level_Editor
         public string param_path_lane { get; set; }
         public string trait_type { get; set; }
         public List<SeqDataPoint> data_points { get; set; }
-        public bool step { get; set; }
+        public bool step { get; set; } = true;
         public float defaultvalue
         {
             get => DefVal;
@@ -79,7 +79,7 @@ namespace Thumper_Custom_Level_Editor
                 Enabled = value;
             }
         }
-        private bool Enabled;
+        private bool Enabled = true;
         public bool isdefault { get; set; }
 
         public Bitmap WaveBitmap;
