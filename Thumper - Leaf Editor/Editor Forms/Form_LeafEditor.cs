@@ -66,7 +66,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     LoadEnd();
                 }
                 else
-                   LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
             }
         }
         private void RenderForm()
@@ -105,6 +105,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 60;
             splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
+            //
+            btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
         }
 
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
@@ -222,7 +224,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private LeafProperties LeafProperties;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         public LvlProperties LvlSequencer;
-        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }        
+        private ObservableCollection<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         public List<SaveState> UndoList = new();
         private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
@@ -996,7 +998,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
-            #endregion
+        #endregion
         paintheader:
             RowPrePainting = true;
             e.PaintHeader(true);
@@ -1363,7 +1365,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                     LogUndo = false;
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) { 
+                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
                         RightclickChanges = true;
                         if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
                             CalculateTuningLayers(LeafProperties, SequencerObjects[e.RowIndex]);
@@ -2574,6 +2576,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafAutoPlace_Click(object sender, EventArgs e)
         {
             TCLE.PlaySound("UIselect");
+            Properties.Settings.Default.LeafOptionAutoPlace = btnLeafAutoPlace.Checked;
+            Properties.Settings.Default.Save();
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                leaf.btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
+            }
         }
 
         private void btnLeafRandom_Click(object sender, EventArgs e)

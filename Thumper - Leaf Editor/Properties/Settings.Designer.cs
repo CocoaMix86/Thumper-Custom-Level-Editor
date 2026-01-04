@@ -1038,5 +1038,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["ColorTuningFont"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafOptionAutoPlace {
+            get {
+                return ((bool)(this["LeafOptionAutoPlace"]));
+            }
+            set {
+                this["LeafOptionAutoPlace"] = value;
+            }
+        }
     }
 }
