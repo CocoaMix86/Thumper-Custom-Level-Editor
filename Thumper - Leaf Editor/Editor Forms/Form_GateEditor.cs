@@ -730,12 +730,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false)
+        public FileInfo SaveAs(bool isnew = false, string startpath = null)
         {
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName;
+            sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 loadedgate = new FileInfo(sfd.FileName);
 

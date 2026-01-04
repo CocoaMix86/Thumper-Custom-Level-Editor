@@ -722,19 +722,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(new Form_LeafEditor().SaveAs(true));
+            string path = null;
+            if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
+                path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
+
+            TCLE.OpenFile(new Form_LeafEditor().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddLvl_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(new Form_LvlEditor().SaveAs(true));
+            string path = null;
+            if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
+                path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
+
+            TCLE.OpenFile(new Form_LvlEditor().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddGate_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(new Form_GateEditor().SaveAs(true));
+            string path = null;
+            if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
+                path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
+
+            TCLE.OpenFile(new Form_GateEditor().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
@@ -744,13 +756,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("This project already has a master file. It is not recommended to have more than 1 as it can mess up the mod loader.\nDo you still wish to continue?", "Bad Idea", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
-            TCLE.OpenFile(new Form_MasterEditor().SaveAs(true));
+            string path = null;
+            if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
+                path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
+
+            TCLE.OpenFile(new Form_MasterEditor().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddSample_Click(object sender, EventArgs e)
         {
-            TCLE.OpenFile(new Form_SampleEditor().SaveAs(true));
+            string path = null;
+            if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
+                path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
+
+            TCLE.OpenFile(new Form_SampleEditor().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 

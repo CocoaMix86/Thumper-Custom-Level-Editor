@@ -144,6 +144,7 @@
             this.contextMenuAddFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuAddFile.Items.AddRange(new ToolStripItem[] { this.existingItemToolStripMenuItem, this.folderToolStripMenuItem, this.toolStripSeparator7, this.toolstripProjectAddLeaf, this.toolstripProjectAddLvl, this.toolstripProjectAddGate, this.toolstripProjectAddMaster, this.toolstripProjectAddSample });
             this.contextMenuAddFile.Name = "workingfolderRightClick";
+            this.contextMenuAddFile.OwnerItem = this.toolstripFolderNew;
             this.contextMenuAddFile.RenderMode = ToolStripRenderMode.System;
             this.contextMenuAddFile.Size = new Size(181, 186);
             // 
@@ -347,7 +348,6 @@
             this.contextMenuFilters.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuFilters.Items.AddRange(new ToolStripItem[] { this.filterLeaf, this.filterLvl, this.filterGate, this.filterMaster, this.filterSample });
             this.contextMenuFilters.Name = "workingfolderRightClick";
-            this.contextMenuFilters.OwnerItem = this.btnFilter;
             this.contextMenuFilters.RenderMode = ToolStripRenderMode.System;
             this.contextMenuFilters.Size = new Size(114, 114);
             this.contextMenuFilters.Closing += this.contextMenuFilters_Closing;
@@ -607,7 +607,7 @@
             this.contextMenuFolderClick.Items.AddRange(new ToolStripItem[] { this.toolstripFolderNew, this.toolStripSeparator5, this.toolstripFolderCut, this.toolstripFolderCopy, this.toolstripFolderPaste, this.toolstripFolderDelete, this.toolstripFolderRename, this.toolStripSeparator6, this.toolstripFolderCopyPath, this.toolstripFolderExplorer });
             this.contextMenuFolderClick.Name = "contextMenuFolderClick";
             this.contextMenuFolderClick.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFolderClick.Size = new Size(163, 192);
+            this.contextMenuFolderClick.Size = new Size(181, 214);
             this.contextMenuFolderClick.Opening += this.contextMenuFolderClick_Opening;
             // 
             // toolstripFolderNew
@@ -616,14 +616,14 @@
             this.toolstripFolderNew.DropDown = this.contextMenuAddFile;
             this.toolstripFolderNew.ForeColor = Color.White;
             this.toolstripFolderNew.Name = "toolstripFolderNew";
-            this.toolstripFolderNew.Size = new Size(162, 22);
+            this.toolstripFolderNew.Size = new Size(180, 22);
             this.toolstripFolderNew.Text = "Add";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new Size(159, 6);
+            this.toolStripSeparator5.Size = new Size(177, 6);
             // 
             // toolstripFolderCut
             // 
@@ -632,7 +632,7 @@
             this.toolstripFolderCut.Image = Properties.Resources.icon_cut;
             this.toolstripFolderCut.Name = "toolstripFolderCut";
             this.toolstripFolderCut.ShortcutKeys = Keys.Control | Keys.X;
-            this.toolstripFolderCut.Size = new Size(162, 22);
+            this.toolstripFolderCut.Size = new Size(180, 22);
             this.toolstripFolderCut.Text = "Cut";
             this.toolstripFolderCut.Click += this.toolstripFileCopy_Click;
             // 
@@ -643,7 +643,7 @@
             this.toolstripFolderCopy.Image = Properties.Resources.icon_copy2;
             this.toolstripFolderCopy.Name = "toolstripFolderCopy";
             this.toolstripFolderCopy.ShortcutKeys = Keys.Control | Keys.C;
-            this.toolstripFolderCopy.Size = new Size(162, 22);
+            this.toolstripFolderCopy.Size = new Size(180, 22);
             this.toolstripFolderCopy.Text = "Copy";
             this.toolstripFolderCopy.Click += this.toolstripFileCopy_Click;
             // 
@@ -655,7 +655,7 @@
             this.toolstripFolderPaste.Image = Properties.Resources.icon_paste2;
             this.toolstripFolderPaste.Name = "toolstripFolderPaste";
             this.toolstripFolderPaste.ShortcutKeys = Keys.Control | Keys.V;
-            this.toolstripFolderPaste.Size = new Size(162, 22);
+            this.toolstripFolderPaste.Size = new Size(180, 22);
             this.toolstripFolderPaste.Text = "Paste";
             this.toolstripFolderPaste.Click += this.toolstripFolderPaste_Click;
             // 
@@ -666,7 +666,7 @@
             this.toolstripFolderDelete.Image = Properties.Resources.icon_remove2;
             this.toolstripFolderDelete.Name = "toolstripFolderDelete";
             this.toolstripFolderDelete.ShortcutKeys = Keys.Delete;
-            this.toolstripFolderDelete.Size = new Size(162, 22);
+            this.toolstripFolderDelete.Size = new Size(180, 22);
             this.toolstripFolderDelete.Text = "Delete";
             this.toolstripFolderDelete.Click += this.toolstripFileDelete_Click;
             // 
@@ -677,7 +677,7 @@
             this.toolstripFolderRename.Image = Properties.Resources.icon_editdetails;
             this.toolstripFolderRename.Name = "toolstripFolderRename";
             this.toolstripFolderRename.ShortcutKeys = Keys.F2;
-            this.toolstripFolderRename.Size = new Size(162, 22);
+            this.toolstripFolderRename.Size = new Size(180, 22);
             this.toolstripFolderRename.Text = "Rename";
             this.toolstripFolderRename.Click += this.toolstripFileRename_Click;
             // 
@@ -685,7 +685,7 @@
             // 
             this.toolStripSeparator6.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new Size(159, 6);
+            this.toolStripSeparator6.Size = new Size(177, 6);
             // 
             // toolstripFolderCopyPath
             // 
@@ -693,7 +693,7 @@
             this.toolstripFolderCopyPath.ForeColor = Color.White;
             this.toolstripFolderCopyPath.Image = Properties.Resources.icon_copy2;
             this.toolstripFolderCopyPath.Name = "toolstripFolderCopyPath";
-            this.toolstripFolderCopyPath.Size = new Size(162, 22);
+            this.toolstripFolderCopyPath.Size = new Size(180, 22);
             this.toolstripFolderCopyPath.Text = "Copy File Path";
             this.toolstripFolderCopyPath.Click += this.toolstripFolderCopyPath_Click;
             // 
@@ -703,7 +703,7 @@
             this.toolstripFolderExplorer.ForeColor = Color.White;
             this.toolstripFolderExplorer.Image = Properties.Resources.icon_explorer;
             this.toolstripFolderExplorer.Name = "toolstripFolderExplorer";
-            this.toolstripFolderExplorer.Size = new Size(162, 22);
+            this.toolstripFolderExplorer.Size = new Size(180, 22);
             this.toolstripFolderExplorer.Text = "Open In Explorer";
             this.toolstripFolderExplorer.Click += this.toolstripFolderExplorer_Click;
             // 
