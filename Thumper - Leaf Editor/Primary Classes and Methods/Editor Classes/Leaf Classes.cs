@@ -290,6 +290,13 @@ namespace Thumper_Custom_Level_Editor
             return sdp;
         }
 
+        public SeqDataPoint Clone(Sequencer_Object newparent)
+        {
+            SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
+            sdp.Owner = newparent;
+            return sdp;
+        }
+
         public SeqDataPoint CloneWithOwner(Sequencer_Object Owner, int newbeat)
         {
             SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();

@@ -2174,7 +2174,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 clone.expandlanes = GlobalExpand;
                 //need to remove beats beyond the beat count
                 for (int x = LeafProperties.beats; x < 255; x++) {
-                    clone.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out" };
+                    clone.data_points[x] = _newtrack.data_points[x].Clone(clone);
                 }
                 SequencerObjects.Insert(_index, clone);
                 trackEditor.Rows.Insert(_index, clone.editor_row);
