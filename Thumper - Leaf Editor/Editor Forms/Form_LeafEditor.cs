@@ -1211,6 +1211,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool changes = false;
             if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
                 SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
+                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].ease = "Ease In Out";
                 changes = true;
             }
 
