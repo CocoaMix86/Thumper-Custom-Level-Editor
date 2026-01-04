@@ -399,7 +399,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
         {
-            if (trackEditor.FirstDisplayedScrollingRowIndex != -1)
+            if (trackEditor.FirstDisplayedScrollingRowIndex != -1 && trackEditor.Rows[e.NewValue].Visible == true)
                 trackEditor.FirstDisplayedScrollingRowIndex = e.NewValue;
         }
         #endregion
