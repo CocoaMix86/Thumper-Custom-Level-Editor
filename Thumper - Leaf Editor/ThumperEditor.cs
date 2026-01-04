@@ -460,7 +460,8 @@ namespace Thumper_Custom_Level_Editor
             //in that case, return before doing anything
             try {
                 lockedfiles.Add(TCL, new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                ClearFileLock();
+                CloseFileLock(TCL);
+                //ClearFileLock();
             } catch (Exception) {
                 MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
                 return;
