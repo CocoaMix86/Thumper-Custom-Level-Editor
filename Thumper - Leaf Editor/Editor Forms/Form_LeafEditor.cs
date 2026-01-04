@@ -474,7 +474,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 if (e.RowIndex == -1) {
-                    e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+                    //draw header text vertical or horizontal
+                    if (Properties.Settings.Default.LeafOptionVerticalCells)
+                        e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);                    
+                    else 
+                        e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
+                    
+                    //e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                     //Drawing the playback heads, start and end point triangles that exist in the header row
                     if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
                         Point p1 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
