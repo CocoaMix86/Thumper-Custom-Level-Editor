@@ -613,13 +613,8 @@ namespace Thumper_Custom_Level_Editor
             if (_samp.path.Contains("custom")) {
                 //attempt to locate file. But error and return safely if nothing found
                 try {
-                    using (var fileStream = File.OpenRead($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc")) {
-                        fileStream.Seek(4, SeekOrigin.Begin);
-                        _bytes = new byte[fileStream.Length - 4];
-                        fileStream.Read(_bytes, 0, _bytes.Length);
-                        //Do your thing
-                    }
-                    //_bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
+                    _bytes = _bytes.Skip(4).ToArray();
                 }
                 catch {
                     _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
@@ -629,6 +624,7 @@ namespace Thumper_Custom_Level_Editor
             else {
                 try {
                     _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
+                    _bytes = _bytes.Skip(4).ToArray();
                 }
                 catch {
                     _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
@@ -644,7 +640,7 @@ namespace Thumper_Custom_Level_Editor
                 _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
                 return _samp.TempFile;
             }
-            ///_bytes = _bytes.Skip(4).ToArray();
+            ///
             // credit to https://github.com/SamboyCoding/Fmod5Sharp
             FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
             List<FmodSample> samples = bank.Samples;
