@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -1496,19 +1497,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
 
+                    LogUndo = false;
                     trackEditor.ClearSelection();
                     //iterate over each in the selection
                     foreach (DataGridViewCell dgvc in dgvcc) {
                         //check if at left/right edges
                         if ((leftright && dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection > -1) || (!leftright && dgvc.RowIndex + indexdirection < trackEditor.RowCount && dgvc.RowIndex + indexdirection > -1)) {
                             shifted = true;
-                            trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
+                            //trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
+                            SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)].data_points[dgvc.ColumnIndex + (leftright ? indexdirection : 0) - FrozenColumnOffset].value = (decimal?)dgvc.Value;
                             //select the newly moved cell
                             trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Selected = true;
-                            ///TrackUpdateHighlightingSingleCell(trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)], SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)]);
                             //clear the current cell since it moved
-                            dgvc.Value = null;
-                            ///TrackUpdateHighlightingSingleCell(dgvc, SequencerObjects[dgvc.RowIndex]);
+                            //dgvc.Value = null;
+                            SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset].value = null;
                         }
                         else {
                             foreach (DataGridViewCell dgvcell in dgvcc)
@@ -1516,6 +1518,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             break;
                         }
                     }
+                    LogUndo = true;
                     if (shifted)
                         SaveCheckAndWrite(false, "Shift Cell Values");
                     //SaveCheckAndWrite(false, $"Shifted selected cells {(e.KeyCode == Keys.Left ? "left" : "right")}", $"");
