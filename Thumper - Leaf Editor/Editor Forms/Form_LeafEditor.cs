@@ -1608,6 +1608,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Clicking row headers to select the row
         private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            int lastpos = trackEditor.FirstDisplayedScrollingColumnIndex;
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
 
@@ -1624,6 +1625,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
             }
+            trackEditor.FirstDisplayedScrollingColumnIndex = lastpos;
         }
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -3598,7 +3600,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             Sequencer_Object Main = _properties.seq_objs[_properties.seq_objs.IndexOf(seq) - count];
             count = 1;
-            while (_properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count].obj_name == "_TuningLayerX") {
+            while (_properties.seq_objs.IndexOf(Main) + count < _properties.seq_objs.Count && _properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count].obj_name == "_TuningLayerX") {
                 TuningLayers.Add(_properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count]);
                 count++;
             }

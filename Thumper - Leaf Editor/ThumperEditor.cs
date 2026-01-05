@@ -571,7 +571,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileSaveAs_Click(object sender, EventArgs e)
         {
-            GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false });
+            GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false, null });
         }
 
         private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
