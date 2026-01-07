@@ -1044,7 +1044,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            trackEditor[e.ColumnIndex, e.RowIndex].Value = _tempval;
+            //trackEditor[e.ColumnIndex, e.RowIndex].Value = _tempval;
         }
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -1148,7 +1148,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 bool changes = false;
                 object _val = null;
-                if (!setnull && Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
+                if (!setnull && Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString().ReplaceLastOccurrence(",", "."), out decimal _valtoset))
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
                 //Get the list of cells to be edited. This is determined by if they are selected.
                 List<DataGridViewCell> CellsToChange = new();
@@ -1404,6 +1404,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SaveCheckAndWrite(false, "Delete Cell Values via right-click");
                 }
                 RightclickChanges = false;
+                trackEditor.InvalidateRow(e.RowIndex);
             }
         }
 
@@ -1578,6 +1579,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ZoomHasChanged = false;
                 foreach (Sequencer_Object seq in SequencerObjects)
                     seq.WaveBitmap = null;
+                trackEditor.Invalidate();
             }
         }
 
