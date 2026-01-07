@@ -578,7 +578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             Font font = new("Consolas", fontSize);
                             Size textSize = TextRenderer.MeasureText(cellText, font);
                             //if font is within cell bounds, try font size +1. Or cap it at 24.
-                            if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
+                            if (textSize.Width > e.CellBounds.Height + 2 || textSize.Height > e.CellBounds.Width || fontSize == 24) {
                                 if (fontSize - 1 != 0)
                                     font = new Font("Consolas", fontSize - 1);
                                 e.CellStyle.Font = font;
@@ -591,7 +591,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         for (int fontSize = 1; fontSize < 25; fontSize++) {
                             Font font = new("Consolas", fontSize);
                             Size textSize = TextRenderer.MeasureText(cellText, font);
-                            if (textSize.Width > e.CellBounds.Height + 2 || textSize.Height > e.CellBounds.Width || fontSize == 24) {
+                            if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
                                 if (fontSize - 1 != 0)
                                     font = new Font("Consolas", fontSize - 1);
                                 e.CellStyle.Font = font;
@@ -1148,7 +1148,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 bool changes = false;
                 object _val = null;
-                if (!setnull && Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString().ReplaceLastOccurrence(",", "."), out decimal _valtoset))
+                if (!setnull && Decimal.TryParse(trackEditor[columnindex, rowindex].EditedFormattedValue?.ToString(), out decimal _valtoset))
                     _val = TCLE.TruncateDecimal(_valtoset, 3);
                 //Get the list of cells to be edited. This is determined by if they are selected.
                 List<DataGridViewCell> CellsToChange = new();
