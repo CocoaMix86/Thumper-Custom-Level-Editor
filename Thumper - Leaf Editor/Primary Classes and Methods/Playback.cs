@@ -177,9 +177,16 @@ namespace Thumper_Custom_Level_Editor
                             CallKey = 1;
                             break;
                         case "grindable_multi.spn":
-                            Key = 19;
-                            Call = 8;
-                            CallKey = 1;
+                            if (Seq.friendly_param == "thump and bar") {
+                                Key = 8;
+                                Call = 8;
+                                CallKey = 18;
+                            }
+                            else {
+                                Key = 19;
+                                Call = 8;
+                                CallKey = 1;
+                            }
                             break;
                         case "ducker.spn":
                             Key = 20;
@@ -240,7 +247,7 @@ namespace Thumper_Custom_Level_Editor
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "thump and bar") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 8, 8, 18, Seq.mute);
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
                                     }
                                 }
                             }
@@ -262,6 +269,9 @@ namespace Thumper_Custom_Level_Editor
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
                                         AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                    }
+                                    else if (Seq.friendly_param == "thump and bar") {
+                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
                                     }
                                 }
                             }

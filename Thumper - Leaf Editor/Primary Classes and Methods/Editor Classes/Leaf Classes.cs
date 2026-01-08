@@ -74,6 +74,8 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Enabled;
             set {
+                if (this.obj_name == "_TuningLayerX")
+                    value = true;
                 if (value != Enabled)
                     WaveBitmap = null;
                 Enabled = value;

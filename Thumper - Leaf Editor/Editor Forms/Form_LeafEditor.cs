@@ -1255,7 +1255,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GlobalDisable = !GlobalDisable;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.enabled = !GlobalDisable;
-                    RowReadOnly(GlobalDisable, seq);
+                    RowReadOnly(!seq.enabled, seq);
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
