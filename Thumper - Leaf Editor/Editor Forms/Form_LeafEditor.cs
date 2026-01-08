@@ -3153,7 +3153,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //clear out data that exists beyond the beatcount
             foreach (Sequencer_Object seq in SequencerObjects) {
                 for (int x = LeafProperties.beats; x < 255; x++) {
-                    seq.data_points[x] = new() { Beat = x, interpolation = "Linear", ease = "Ease In Out", Owner = seq };
+                    seq.data_points[x] = new() { Owner = seq, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                 }
             }
             //set cell zoom
