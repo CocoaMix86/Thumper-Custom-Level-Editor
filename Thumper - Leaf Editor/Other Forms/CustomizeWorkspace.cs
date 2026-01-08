@@ -32,18 +32,41 @@ namespace Thumper_Custom_Level_Editor
                 keybindfromfile = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
         }
+
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            // Set Border header  
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(55, 55, 55)), e.Bounds);
-            Rectangle paddedBounds = e.Bounds;
-            paddedBounds.Inflate(-2, -2);
-            e.Graphics.DrawString(tabControl1.TabPages[e.Index].Text, this.Font, SystemBrushes.HighlightText, paddedBounds);
+            //Get the working area of the TabControl main control
+            Rectangle rec = tabControl1.ClientRectangle;
+            //Create a StringFormat object to set the layout of the label text
+            StringFormat StrFormat = new StringFormat() {
+                LineAlignment = StringAlignment.Center,
+                Alignment = StringAlignment.Center
+            };
+            //Draw the background of the main control
+            e.Graphics.FillRectangle(Brushes.Black, rec);
 
-            //set  Tabcontrol border  
-            Graphics g = e.Graphics;
-            Pen p = new(Color.FromArgb(55, 55, 55), 10);
-            g.DrawRectangle(p, tabUIColors.Bounds);
+            //Draw label style
+            Font fntTab = e.Font;
+            Brush bshBack = new SolidBrush(Color.FromArgb(30, 30, 30));
+            Brush bshBack2 = new SolidBrush(Color.FromArgb(55, 55, 55));
+
+            for (int i = 0; i < tabControl1.TabPages.Count; i++) {
+                bool bSelected = (tabControl1.SelectedIndex == i);
+                Rectangle recBounds = tabControl1.GetTabRect(i);
+                RectangleF tabTextArea = (RectangleF)tabControl1.GetTabRect(i);
+                if (bSelected) {
+                    recBounds.Inflate(-2, -2);
+                    e.Graphics.FillRoundedRectangle(bshBack2, recBounds, 10);
+                    recBounds.X += 8;
+                    e.Graphics.FillRectangle(bshBack2, recBounds);
+                    e.Graphics.DrawString(tabControl1.TabPages[i].Text, fntTab, Brushes.White, tabTextArea, StrFormat);
+                }
+                else {
+                    recBounds.Inflate(-2, -2);
+                    e.Graphics.FillRoundedRectangle(bshBack, recBounds, 10);
+                    e.Graphics.DrawString(tabControl1.TabPages[i].Text, fntTab, Brushes.White, tabTextArea, StrFormat);
+                }
+            }
         }
         #endregion
         #region Form Closing

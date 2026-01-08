@@ -65,9 +65,9 @@ namespace Thumper_Custom_Level_Editor
             this.toolstripCustomize.Dock = DockStyle.Bottom;
             this.toolstripCustomize.GripStyle = ToolStripGripStyle.Hidden;
             this.toolstripCustomize.Items.AddRange(new ToolStripItem[] { this.btnCustomizeApply });
-            this.toolstripCustomize.Location = new Point(0, 345);
+            this.toolstripCustomize.Location = new Point(0, 526);
             this.toolstripCustomize.Name = "toolstripCustomize";
-            this.toolstripCustomize.Size = new Size(367, 25);
+            this.toolstripCustomize.Size = new Size(496, 25);
             this.toolstripCustomize.TabIndex = 106;
             this.toolstripCustomize.Text = "toolStrip1";
             // 
@@ -79,7 +79,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomizeApply.ForeColor = SystemColors.ControlText;
             this.btnCustomizeApply.Image = (Image)resources.GetObject("btnCustomizeApply.Image");
             this.btnCustomizeApply.ImageTransparentColor = Color.Magenta;
-            this.btnCustomizeApply.Margin = new Padding(140, 1, 0, 2);
+            this.btnCustomizeApply.Margin = new Padding(196, 1, 0, 2);
             this.btnCustomizeApply.Name = "btnCustomizeApply";
             this.btnCustomizeApply.Size = new Size(91, 22);
             this.btnCustomizeApply.Text = "Apply Changes";
@@ -87,17 +87,22 @@ namespace Thumper_Custom_Level_Editor
             // 
             // tabControl1
             // 
+            this.tabControl1.Alignment = TabAlignment.Left;
             this.tabControl1.Controls.Add(this.tabUIColors);
             this.tabControl1.Controls.Add(this.tabSeq);
             this.tabControl1.Controls.Add(this.tabAudio);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = DockStyle.Fill;
+            this.tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.tabControl1.HotTrack = true;
+            this.tabControl1.ItemSize = new Size(30, 120);
             this.tabControl1.Location = new Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new Size(367, 345);
+            this.tabControl1.Size = new Size(496, 526);
+            this.tabControl1.SizeMode = TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 107;
             this.tabControl1.DrawItem += this.tabControl1_DrawItem;
             // 
@@ -106,10 +111,10 @@ namespace Thumper_Custom_Level_Editor
             this.tabUIColors.BackColor = Color.FromArgb(55, 55, 55);
             this.tabUIColors.Controls.Add(this.propertyGridUIColors);
             this.tabUIColors.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.tabUIColors.Location = new Point(4, 22);
+            this.tabUIColors.Location = new Point(124, 4);
             this.tabUIColors.Name = "tabUIColors";
             this.tabUIColors.Padding = new Padding(3);
-            this.tabUIColors.Size = new Size(359, 319);
+            this.tabUIColors.Size = new Size(368, 518);
             this.tabUIColors.TabIndex = 0;
             this.tabUIColors.Text = "UI Theme";
             // 
@@ -133,7 +138,7 @@ namespace Thumper_Custom_Level_Editor
             this.propertyGridUIColors.RightToLeft = RightToLeft.No;
             this.propertyGridUIColors.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridUIColors.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridUIColors.Size = new Size(353, 313);
+            this.propertyGridUIColors.Size = new Size(362, 512);
             this.propertyGridUIColors.TabIndex = 122;
             this.propertyGridUIColors.ToolbarVisible = false;
             this.propertyGridUIColors.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -146,9 +151,9 @@ namespace Thumper_Custom_Level_Editor
             this.tabSeq.Controls.Add(this.treeObjects);
             this.tabSeq.Controls.Add(this.txtSearch);
             this.tabSeq.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.tabSeq.Location = new Point(4, 22);
+            this.tabSeq.Location = new Point(124, 4);
             this.tabSeq.Name = "tabSeq";
-            this.tabSeq.Size = new Size(359, 319);
+            this.tabSeq.Size = new Size(368, 337);
             this.tabSeq.TabIndex = 3;
             this.tabSeq.Text = "Sequencer Colors";
             // 
@@ -171,7 +176,7 @@ namespace Thumper_Custom_Level_Editor
             this.treeObjects.SelectedImageKey = "other";
             this.treeObjects.ShowNodeToolTips = true;
             this.treeObjects.ShowRootLines = false;
-            this.treeObjects.Size = new Size(359, 297);
+            this.treeObjects.Size = new Size(368, 315);
             this.treeObjects.TabIndex = 101;
             this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
             // 
@@ -222,7 +227,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtSearch.Location = new Point(0, 0);
             this.txtSearch.Margin = new Padding(4, 3, 4, 3);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new Size(359, 22);
+            this.txtSearch.Size = new Size(368, 22);
             this.txtSearch.TabIndex = 100;
             this.txtSearch.Text = "Search Objects (Ctrl+;)";
             this.txtSearch.TextChanged += this.txtSearch_TextChanged;
@@ -232,10 +237,10 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.BackColor = Color.FromArgb(55, 55, 55);
             this.tabAudio.Controls.Add(this.checkMuteApp);
             this.tabAudio.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            this.tabAudio.Location = new Point(4, 22);
+            this.tabAudio.Location = new Point(124, 4);
             this.tabAudio.Name = "tabAudio";
             this.tabAudio.Padding = new Padding(3);
-            this.tabAudio.Size = new Size(359, 319);
+            this.tabAudio.Size = new Size(368, 337);
             this.tabAudio.TabIndex = 1;
             this.tabAudio.Text = "Audio";
             // 
@@ -256,10 +261,10 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.tabPage1.BackColor = Color.FromArgb(55, 55, 55);
             this.tabPage1.Controls.Add(this.propertyGridKeyBinds);
-            this.tabPage1.Location = new Point(4, 22);
+            this.tabPage1.Location = new Point(124, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new Padding(3);
-            this.tabPage1.Size = new Size(359, 319);
+            this.tabPage1.Size = new Size(368, 337);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Key Binds";
             // 
@@ -283,7 +288,7 @@ namespace Thumper_Custom_Level_Editor
             this.propertyGridKeyBinds.RightToLeft = RightToLeft.No;
             this.propertyGridKeyBinds.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridKeyBinds.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridKeyBinds.Size = new Size(353, 313);
+            this.propertyGridKeyBinds.Size = new Size(362, 331);
             this.propertyGridKeyBinds.TabIndex = 123;
             this.propertyGridKeyBinds.ToolbarVisible = false;
             this.propertyGridKeyBinds.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -295,7 +300,7 @@ namespace Thumper_Custom_Level_Editor
             this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
-            this.ClientSize = new Size(367, 370);
+            this.ClientSize = new Size(496, 551);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolstripCustomize);
             this.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);

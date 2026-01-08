@@ -153,6 +153,10 @@ namespace Thumper_Custom_Level_Editor
             //
             MainBeeble.Size = AppSettings.beeblesize;
             MainBeeble.Location = AppSettings.beebleloc;
+
+            CustomizeWorkspace _c = new();
+            _c.BringToFront();
+            _c.Show();
         }
 
         private static void JumpListUpdate()
@@ -571,6 +575,8 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileSaveAs_Click(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument == null)
+                return;
             GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false, null });
         }
 
@@ -1067,12 +1073,16 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Toolbar
         private void toolstripMainSave_Click(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument == null)
+                return;
             GlobalActiveDocument.GetType().GetMethod("Save").Invoke(GlobalActiveDocument, new object[] { true });
             //FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
         }
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
+            if (GlobalActiveDocument == null)
+                return;
             foreach (Form_WorkSpace workspace in Workspaces) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
                     document.GetType().GetMethod("Save").Invoke(document, new object[] { false });
