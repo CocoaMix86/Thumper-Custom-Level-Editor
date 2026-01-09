@@ -3426,43 +3426,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (textEditor.Focused)
                 return;
-            /*
-            //get content on clipboard to string and then split it to rows
-            string s = TCLE.ClipBoardDataPoints.GetText().Replace("\r\n", "\n");
-            string[][] copiedcells = s.Split('\n').Select(x => x.Split('\t')).ToArray();
-            //set ints so we don't have to always call rowindex, columnindex
-            int pastingrow = trackEditor.CurrentCell.RowIndex;
-            int pastingcol = trackEditor.CurrentCell.ColumnIndex;
-            int offset = 0;
-            ispasting = true;
-            LogUndo = false;
-            for (int rowindex = 0; rowindex < copiedcells.Length; rowindex++) {
-                if (pastingrow + rowindex + offset >= trackEditor.RowCount)
-                    break;
-                //if paste will go outside grid bounds, skip
-                while (trackEditor.Rows[pastingrow + rowindex + offset].Visible == false) {
-                    offset += 1;
-                    if (pastingrow + rowindex + offset >= trackEditor.RowCount)
-                        goto exit;
-                }
-                for (int cellindex = 0; cellindex < copiedcells[rowindex].Length; cellindex++) {
-                    //if paste will go outside grid bounds, skip
-                    if (pastingcol + cellindex >= trackEditor.ColumnCount)
-                        break;
-                    //don't paste if cell is blank
-                    if (string.IsNullOrEmpty(copiedcells[rowindex][cellindex]))
-                        continue;
-                    //trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset].Value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    SequencerObjects[pastingrow + rowindex + offset].data_points[pastingcol + cellindex - FrozenColumnOffset].value = decimal.Parse(copiedcells[rowindex][cellindex]);
-                    ///TrackUpdateHighlightingSingleCell(trackEditor[pastingcol + cellindex, pastingrow + rowindex + offset], SequencerObjects[pastingrow + rowindex + offset]);
-                }
-                trackEditor.InvalidateRow(pastingrow + rowindex + offset);
-            }
-        exit:
-            ispasting = false;
-            LogUndo = true;
-            SaveCheckAndWrite(false, "Pasted cells");
-            */
 
             EditorIsPasting = true;
             LogUndo = false;
@@ -3472,6 +3435,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int pastingcol = trackEditor.CurrentCell.ColumnIndex - FrozenColumnOffset;
             int rowoffset = pastingrow - TCLE.ClipboardDataPoints.First().index;
             int coloffset = pastingcol - TCLE.ClipboardDataPoints.First().beat;
+
+            List<Sequencer_Object> pastedrows = new();
+
             foreach (SeqDataPoint sdp in TCLE.ClipboardDataPoints) {
                 //if copied beat is pasted outside rowcount, break, because all beats after it will also be outside the bounds
                 if (sdp.index + rowoffset >= SequencerObjects.Count)
@@ -3481,8 +3447,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     continue;
                 SeqDataPoint clone = sdp.CloneWithOwner(SequencerObjects[sdp.index + rowoffset], sdp.beat + coloffset);
                 SequencerObjects[sdp.index + rowoffset].data_points[sdp.beat + coloffset] = clone;
+                if (!pastedrows.Contains(SequencerObjects[sdp.index + rowoffset]))
+                    pastedrows.Add(SequencerObjects[sdp.index + rowoffset]);
                 clone.UpdateCell();
             }
+
+            foreach (Sequencer_Object _seq in pastedrows) {
+                CalculateTuningLayers(LeafProperties, _seq);
+            }
+
             EditorIsPasting = false;
             LogUndo = true;
             SaveCheckAndWrite(false, "Pasted cells");
