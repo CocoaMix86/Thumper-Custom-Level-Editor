@@ -91,9 +91,10 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void GenerateColumnStyle(List<DataGridViewColumn> columns, int offset = 0)
+        public static void GenerateColumnStyle(IEnumerable<DataGridViewColumn> columns, int offset = 0)
         {
             foreach (DataGridViewColumn dgvc in columns) {
+                dgvc.CellTemplate = new SeqDataPoint();
                 dgvc.Name = (dgvc.Index - offset).ToString();
                 dgvc.HeaderText = (dgvc.Index - offset).ToString();
                 dgvc.Resizable = DataGridViewTriState.False;

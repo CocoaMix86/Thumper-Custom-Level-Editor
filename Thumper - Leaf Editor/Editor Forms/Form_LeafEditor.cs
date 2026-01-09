@@ -1496,6 +1496,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //this processing order is important so cells dont overwrite each other when moving
                     IOrderedEnumerable<DataGridViewCell> dgvcc;
                     if (indexdirection == -1)
+                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex).SelectMany(x => )
                         dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);
                     else
                         dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
@@ -3146,7 +3147,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
-                TCLE.GenerateColumnStyle(trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset).ToList(), FrozenColumnOffset);
+                TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
             else
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;

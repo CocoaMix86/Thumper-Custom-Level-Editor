@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
@@ -21,7 +22,7 @@ namespace Thumper_Custom_Level_Editor
         public Color defaultcolor { get; set; }
     }
 
-    public class Sequencer_Object
+    public class Sequencer_Object : DataGridViewRow
     {
         public LeafProperties parent;
 
@@ -189,7 +190,15 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class SeqDataPoint
+    public class SequencerColumn : DataGridViewColumn
+    {
+        public SequencerColumn()
+        {
+            this.CellTemplate = new SeqDataPoint();
+        }
+    }
+
+    public class SeqDataPoint : DataGridViewCell
     {
         public void Reset()
         {
