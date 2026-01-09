@@ -991,7 +991,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.63f), _drawingpoints[x + 1].Y);
                             break;
                     }
-                    if (!_datapoints[x].interpolation.Contains("step", StringComparison.OrdinalIgnoreCase))
+                    if (!_datapoints[x].interpolation.Contains("step", StringComparison.OrdinalIgnoreCase) && _datapoints[x].interpolation != "None")
                         e.Graphics.DrawBezier(TuningLine, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
                     e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
                 }
