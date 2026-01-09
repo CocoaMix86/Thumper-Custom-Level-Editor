@@ -507,37 +507,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             }
             //grey out the track if disabled
-            else if (SequencerObjects[e.RowIndex].editor_row.ReadOnly) {
+            else if (SequencerObjects[e.RowIndex].ReadOnly) {
                 e.Graphics.FillRectangle(BrushGray, e.CellBounds);
             }
             //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
             else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
-                if (SequencerObjects[e.RowIndex - 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                if (SequencerObjects[e.RowIndex - 2][e.ColumnIndex - FrozenColumnOffset].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex - 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                if (SequencerObjects[e.RowIndex - 1][e.ColumnIndex - FrozenColumnOffset].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + e.CellBounds.Height / 5, e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 2), e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex + 1].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+                if (SequencerObjects[e.RowIndex + 1][e.ColumnIndex - FrozenColumnOffset].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex + 2].data_points[e.ColumnIndex - FrozenColumnOffset].value != null) {
+                if (SequencerObjects[e.RowIndex + 2][e.ColumnIndex - FrozenColumnOffset].Value != null) {
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                 }
             }
             //paint the whole cell with the highlighting color
-            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
                 e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds);
             //if a color object, convert the cell value to ARGB and use that
-            else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
 
             //paint notifier circles for changed interp and ease
             if (Properties.Settings.Default.LeafOptionEaseDots) {
-                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].interpolation != "Linear") {
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Interpolation != "Linear") {
                     e.Graphics.FillEllipse(BrushBlack, e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(BrushRed, e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
                 }
-                if (SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset].ease != "Ease In Out") {
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Ease != "Ease In Out") {
                     e.Graphics.FillEllipse(BrushBlack, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(BrushBlue, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
@@ -730,7 +730,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPrePainting = false;
 
-                if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null)) {
+                if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
                     goto paintheader;
                 }
                 //setup variables to reference later when needed
@@ -754,7 +754,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //CalculateRuntime can fail. In that case, skip drawing the waveform
                 if (samp.wave != null) {
                     int cellwidth = trackZoom.Value;
-                    samp.wave.ColorBackground = seqref.editor_row.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.highlight_color;
+                    samp.wave.ColorBackground = seqref.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.highlight_color;
                     //if object has no drawn wave, create it. Wave is null whenever cell sizes change
                     if (seqref.WaveBitmap == null) {
                         Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
@@ -767,7 +767,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         seqref.WaveBitmap = WaveToDraw;
                     }
                     //once the bitmap is created, now we can do some funky stuff
-                    foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
@@ -801,11 +801,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
                 int cellwidth = trackZoom.Value;
                 Color alpha = seqref.highlight_color;
-                alpha = seqref.editor_row.ReadOnly ? Color.Gray : Color.FromArgb(100, alpha.R, alpha.G, alpha.B);
+                alpha = seqref.ReadOnly ? Color.Gray : Color.FromArgb(100, alpha.R, alpha.G, alpha.B);
                 //
                 if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
                     int trailstop = 0;
-                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         if (sdp.beat < trailstop)
@@ -815,7 +815,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trailstop = sdp.beat + beats;
                     }
                     trailstop = 0;
-                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 1].data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 1].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat < trailstop)
@@ -825,7 +825,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trailstop = sdp.beat + beats;
                     }
                     trailstop = 0;
-                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex].data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat < trailstop)
@@ -835,7 +835,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trailstop = sdp.beat + beats;
                     }
                     trailstop = 0;
-                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 1].data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 1].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat < trailstop)
@@ -845,7 +845,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trailstop = sdp.beat + beats;
                     }
                     trailstop = 0;
-                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 2].data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 2].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat < trailstop)
@@ -857,7 +857,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     int trailstop = 0;
-                    foreach (SeqDataPoint sdp in seqref.data_points.Where(x => x.value != null)) {
+                    foreach (SeqDataPoint sdp in seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         //don't draw trail if it already has has happened from a previous one
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
                         if (sdp.beat < trailstop)
@@ -878,26 +878,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 RowPrePainting = false;
 
-                if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null)) {
+                if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
                     goto paintheader;
                 }
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
-                List<SeqDataPoint> _datapoints = seqref.data_points.Where(x => x.value != null).ToList();
+                List<SeqDataPoint> _datapoints = seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToList();
                 if (_datapoints.Count < 1)
                     goto paintheader;
                 //setup variables to reference later when needed
                 int offsetportion = (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3) + 4;
                 int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
                 int cellwidth = trackZoom.Value;
-                float max = (float)_datapoints.Max(x => x.value);
-                float min = (float)_datapoints.Min(x => x.value);
+                float max = (float)_datapoints.Max(x => x.Value);
+                float min = (float)_datapoints.Min(x => x.Value);
                 if (max == min) {
                     max++; min--;
                 }
                 int startX = ((_datapoints[0].beat - columnindex) * cellwidth) + offsetportion;
                 int length = cellwidth * (_datapoints[^1].beat - _datapoints[0].beat + 1);
                 int endX = ((_datapoints[^1].beat - columnindex + 1) * cellwidth) + offsetportion;
-                PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)p.value))).ToArray();
+                PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)p.Value))).ToArray();
                 //
                 e.Graphics.FillRoundedRectangle(BrushWhite, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
                 e.Graphics.FillRoundedRectangle(new SolidBrush(Properties.Settings.Default.ColorTuningBG), new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
@@ -917,7 +917,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         continue;
                     }
                     float distance = _drawingpoints[x + 1].X - _drawingpoints[x].X;
-                    switch ($"{_datapoints[x].interpolation} {_datapoints[x].ease}") {
+                    switch ($"{_datapoints[x].Interpolation} {_datapoints[x].Ease}") {
                         case "Step Ease In":
                         case "Step Ease Out":
                         case "Step Ease In Out":
@@ -991,7 +991,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.63f), _drawingpoints[x + 1].Y);
                             break;
                     }
-                    if (!_datapoints[x].interpolation.Contains("step", StringComparison.OrdinalIgnoreCase) && _datapoints[x].interpolation != "None")
+                    if (!_datapoints[x].Interpolation.Contains("step", StringComparison.OrdinalIgnoreCase) && _datapoints[x].Interpolation != "None")
                         e.Graphics.DrawBezier(TuningLine, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
                     e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
                 }
@@ -1096,7 +1096,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //check if index out of bounds
                 if (dgvc.ColumnIndex - FrozenColumnOffset < 0)
                     continue;
-                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset]);
+                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex - FrozenColumnOffset]);
             }
             LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
             TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
@@ -1189,11 +1189,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //if cell does not have the value, set it
                         if (_cell.Value != _tempval) {
                             _cell.Value = _tempval;
-                            SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = (decimal?)_tempval;
+                            SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value = (decimal?)_tempval;
                             changes = true;
                         }
                     }
-                    ///else if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != _tempval)
+                    ///else if (SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value != _tempval)
 
                     ///TrackUpdateHighlightingSingleCell(_cell, SequencerObjects[_cell.RowIndex]);
                 }
@@ -1209,28 +1209,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool CellValueNull(DataGridViewCell _cell)
         {
             bool changes = false;
-            if (SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
-                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].interpolation = "Linear";
-                SequencerObjects[_cell.RowIndex].data_points[_cell.ColumnIndex - FrozenColumnOffset].ease = "Ease In Out";
+            if (SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Ease = "Ease In Out";
                 changes = true;
             }
 
             if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
-                if (SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex - 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
+                if (SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
+                    SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
                     changes = true;
                 }
-                if (SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex - 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
+                if (SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
+                    SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
                     changes = true;
                 }
-                if (SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex + 1].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
+                if (SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
+                    SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
                     changes = true;
                 }
-                if (SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value != null) {
-                    SequencerObjects[_cell.RowIndex + 2].data_points[_cell.ColumnIndex - FrozenColumnOffset].value = null;
+                if (SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
+                    SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
                     changes = true;
                 }
             }
@@ -1337,10 +1337,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         return;
                     FindMissingLaneObjects(seq);
                     seq.expandlanes = !seq.expandlanes;
-                    SequencerObjects[seq.editor_row.Index - 2].expandlanes = seq.expandlanes;
-                    SequencerObjects[seq.editor_row.Index - 1].expandlanes = seq.expandlanes;
-                    SequencerObjects[seq.editor_row.Index + 1].expandlanes = seq.expandlanes;
-                    SequencerObjects[seq.editor_row.Index + 2].expandlanes = seq.expandlanes;
+                    SequencerObjects[seq.Index - 2].expandlanes = seq.expandlanes;
+                    SequencerObjects[seq.Index - 1].expandlanes = seq.expandlanes;
+                    SequencerObjects[seq.Index + 1].expandlanes = seq.expandlanes;
+                    SequencerObjects[seq.Index + 2].expandlanes = seq.expandlanes;
                     TCLE.PlaySound("UIselect");
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
@@ -1356,7 +1356,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (e.ColumnIndex >= FrozenColumnOffset) {
-                //leafProperties.selecteddatapoint = SequencerObjects[e.RowIndex].data_points[e.ColumnIndex - FrozenColumnOffset];
+                //leafProperties.selecteddatapoint = SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset];
                 //propertyGridLeaf.Refresh();
             }
         }
@@ -1496,7 +1496,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //this processing order is important so cells dont overwrite each other when moving
                     IOrderedEnumerable<DataGridViewCell> dgvcc;
                     if (indexdirection == -1)
-                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex).SelectMany(x => )
                         dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);
                     else
                         dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
@@ -1509,12 +1508,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         if ((leftright && dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection > -1) || (!leftright && dgvc.RowIndex + indexdirection < trackEditor.RowCount && dgvc.RowIndex + indexdirection > -1)) {
                             shifted = true;
                             //trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
-                            SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)].data_points[dgvc.ColumnIndex + (leftright ? indexdirection : 0) - FrozenColumnOffset].value = (decimal?)dgvc.Value;
+                            SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)][dgvc.ColumnIndex + (leftright ? indexdirection : 0) - FrozenColumnOffset].Value = (decimal?)dgvc.Value;
                             //select the newly moved cell
                             trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Selected = true;
                             //clear the current cell since it moved
                             //dgvc.Value = null;
-                            SequencerObjects[dgvc.RowIndex].data_points[dgvc.ColumnIndex - FrozenColumnOffset].value = null;
+                            SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex - FrozenColumnOffset].Value = null;
                         }
                         else {
                             foreach (DataGridViewCell dgvcell in dgvcc)
@@ -1697,7 +1696,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
 
-            Sequencer_Object seq = new(leafProperties) {
+            Sequencer_Object seq = new() {
+                parent = leafProperties,
                 obj_name = objmatch.category == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
                 category = objmatch.category,
                 param_path = objmatch.param_path.Split('.')[0],
@@ -1711,7 +1711,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 enabled = true,
                 param_path_lane = objmatch.param_path.EndsWith(".ent") ? "ent" : "none",
                 friendly_lane = objmatch.param_path.EndsWith(".ent") ? "lane center" : "none",
-                editor_row = new DataGridViewRow()
+                //editor_row = new DataGridViewRow()
             };
             if (seq.obj_name == "leafname")
                 seq.obj_name = LeafProperties.FilePath.Name;
@@ -1722,7 +1722,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
             SequencerObjects.Add(seq);
-            trackEditor.Rows.Add(seq.editor_row);
+            trackEditor.Rows.Add(seq);
             ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
             FindMissingLaneObjects(seq);
@@ -1902,7 +1902,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TrackUpdateHighlighting(Lanes[x]);
             }
             FindMissingLaneObjects(SequencerObjects[CurrentRow]);
-            trackEditor.InvalidateRow(_currentseq.editor_row.Index);
+            trackEditor.InvalidateRow(_currentseq.Index);
 
             SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
@@ -1921,7 +1921,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if object is multilane, delete its other lanes too
                 Sequencer_Object[] Lanes = ReturnLanesFromName(selectedrows[0], selectedrows[0].friendly_lane);
                 for (int x = 0; x < Lanes.Length; x++) {
-                    trackEditor.Rows.Remove(Lanes[x].editor_row);
+                    trackEditor.Rows.Remove(Lanes[x]);
                     SequencerObjects.Remove(Lanes[x]);
                     //this is especially useful regarding multilanes. If the multilanes were selected in selectedrows, they'll be deleted before the next loop.
                     //by removing them from selectedrows, then the for loop objindex wont index to them
@@ -1943,49 +1943,49 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
                 .Distinct()
-                .OrderBy(cell => cell.editor_row.Index);
+                .OrderBy(cell => cell.Index);
             List<Sequencer_Object> RowsToMove = new();
             foreach (Sequencer_Object row in selectedrows) {
                 if (!RowsToMove.Contains(row))
                     RowsToMove.AddRange(ReturnLanesFromName(row, row.friendly_lane));
             }
             //if already at the top, do not move up
-            if (RowsToMove.FirstOrDefault().editor_row.Index == 0)
+            if (RowsToMove.FirstOrDefault().Index == 0)
                 return;
 
             IEnumerable<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>();
 
             for (int x = 0; x < RowsToMove.Count; x++) {
-                int currentindex = RowsToMove[x].editor_row.Index;
+                int currentindex = RowsToMove[x].Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjAbove = SequencerObjects[RowsToMove[x].editor_row.Index - 1];
+                Sequencer_Object ObjAbove = SequencerObjects[RowsToMove[x].Index - 1];
                 int Lanes = ObjAbove.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
                 trackEditor.SuspendLayout();
-                trackEditor.Rows.Remove(RowsToMove[x].editor_row);
+                trackEditor.Rows.Remove(RowsToMove[x]);
                 SequencerObjects.Remove(RowsToMove[x]);
                 if (RowsToMove[x].friendly_lane != "none") {
-                    trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 1]);
                     SequencerObjects.Remove(RowsToMove[x + 1]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 2]);
                     SequencerObjects.Remove(RowsToMove[x + 2]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 3].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 3]);
                     SequencerObjects.Remove(RowsToMove[x + 3]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 4].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 4]);
                     SequencerObjects.Remove(RowsToMove[x + 4]);
                 }
                 //reinsert object and row at appropriate index
                 SequencerObjects.Insert(currentindex - Lanes, RowsToMove[x]);
-                trackEditor.Rows.Insert(currentindex - Lanes, RowsToMove[x].editor_row);
+                trackEditor.Rows.Insert(currentindex - Lanes, RowsToMove[x]);
                 if (RowsToMove[x].friendly_lane != "none") {
                     SequencerObjects.Insert(currentindex - Lanes + 1, RowsToMove[x + 1]);
-                    trackEditor.Rows.Insert(currentindex - Lanes + 1, RowsToMove[x + 1].editor_row);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 1, RowsToMove[x + 1]);
                     SequencerObjects.Insert(currentindex - Lanes + 2, RowsToMove[x + 2]);
-                    trackEditor.Rows.Insert(currentindex - Lanes + 2, RowsToMove[x + 2].editor_row);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 2, RowsToMove[x + 2]);
                     SequencerObjects.Insert(currentindex - Lanes + 3, RowsToMove[x + 3]);
-                    trackEditor.Rows.Insert(currentindex - Lanes + 3, RowsToMove[x + 3].editor_row);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 3, RowsToMove[x + 3]);
                     SequencerObjects.Insert(currentindex - Lanes + 4, RowsToMove[x + 4]);
-                    trackEditor.Rows.Insert(currentindex - Lanes + 4, RowsToMove[x + 4].editor_row);
+                    trackEditor.Rows.Insert(currentindex - Lanes + 4, RowsToMove[x + 4]);
                     x += 4;
                 }
             }
@@ -2005,37 +2005,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             switch (lane) {
                 case "lane left 2":
                     Lanes[0] = row;
-                    Lanes[1] = SequencerObjects[row.editor_row.Index + 1];
-                    Lanes[2] = SequencerObjects[row.editor_row.Index + 2];
-                    Lanes[3] = SequencerObjects[row.editor_row.Index + 3];
-                    Lanes[4] = SequencerObjects[row.editor_row.Index + 4];
+                    Lanes[1] = SequencerObjects[row.Index + 1];
+                    Lanes[2] = SequencerObjects[row.Index + 2];
+                    Lanes[3] = SequencerObjects[row.Index + 3];
+                    Lanes[4] = SequencerObjects[row.Index + 4];
                     break;
                 case "lane left 1":
-                    Lanes[0] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[0] = SequencerObjects[row.Index - 1];
                     Lanes[1] = row;
-                    Lanes[2] = SequencerObjects[row.editor_row.Index + 1];
-                    Lanes[3] = SequencerObjects[row.editor_row.Index + 2];
-                    Lanes[4] = SequencerObjects[row.editor_row.Index + 3];
+                    Lanes[2] = SequencerObjects[row.Index + 1];
+                    Lanes[3] = SequencerObjects[row.Index + 2];
+                    Lanes[4] = SequencerObjects[row.Index + 3];
                     break;
                 case "lane center":
-                    Lanes[0] = SequencerObjects[row.editor_row.Index - 2];
-                    Lanes[1] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[0] = SequencerObjects[row.Index - 2];
+                    Lanes[1] = SequencerObjects[row.Index - 1];
                     Lanes[2] = row;
-                    Lanes[3] = SequencerObjects[row.editor_row.Index + 1];
-                    Lanes[4] = SequencerObjects[row.editor_row.Index + 2];
+                    Lanes[3] = SequencerObjects[row.Index + 1];
+                    Lanes[4] = SequencerObjects[row.Index + 2];
                     break;
                 case "lane right 1":
-                    Lanes[0] = SequencerObjects[row.editor_row.Index - 3];
-                    Lanes[1] = SequencerObjects[row.editor_row.Index - 2];
-                    Lanes[2] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[0] = SequencerObjects[row.Index - 3];
+                    Lanes[1] = SequencerObjects[row.Index - 2];
+                    Lanes[2] = SequencerObjects[row.Index - 1];
                     Lanes[3] = row;
-                    Lanes[4] = SequencerObjects[row.editor_row.Index + 1];
+                    Lanes[4] = SequencerObjects[row.Index + 1];
                     break;
                 case "lane right 2":
-                    Lanes[0] = SequencerObjects[row.editor_row.Index - 4];
-                    Lanes[1] = SequencerObjects[row.editor_row.Index - 3];
-                    Lanes[2] = SequencerObjects[row.editor_row.Index - 2];
-                    Lanes[3] = SequencerObjects[row.editor_row.Index - 1];
+                    Lanes[0] = SequencerObjects[row.Index - 4];
+                    Lanes[1] = SequencerObjects[row.Index - 3];
+                    Lanes[2] = SequencerObjects[row.Index - 2];
+                    Lanes[3] = SequencerObjects[row.Index - 1];
                     Lanes[4] = row;
                     break;
                 case "none":
@@ -2054,7 +2054,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IEnumerable<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => SequencerObjects[cell.RowIndex])
                 .Distinct()
-                .OrderByDescending(cell => cell.editor_row.Index);
+                .OrderByDescending(cell => cell.Index);
             List<Sequencer_Object> RowsToMove = new();
             foreach (Sequencer_Object row in selectedrows) {
                 if (!RowsToMove.Contains(row))
@@ -2062,42 +2062,42 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             ///RowsToMove = RowsToMove.OrderByDescending(cell => cell.editor_row.Index).ToList();
             //if already at the bottom, do not move down
-            if (RowsToMove[0].editor_row.Index >= trackEditor.Rows.Count - 1)
+            if (RowsToMove[0].Index >= trackEditor.Rows.Count - 1)
                 return;
 
             List<DataGridViewCell> selectedcells = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
 
             for (int x = 0; x < RowsToMove.Count; x++) {
-                int currentindex = RowsToMove[x].editor_row.Index;
+                int currentindex = RowsToMove[x].Index;
                 //get the object above, and any lanes with it. We will need to move above all of them.
-                Sequencer_Object ObjBelow = SequencerObjects[RowsToMove[x].editor_row.Index + 1];
+                Sequencer_Object ObjBelow = SequencerObjects[RowsToMove[x].Index + 1];
                 int Lanes = ObjBelow.friendly_lane != "none" ? 5 : 1;
                 //remove the row and object
-                trackEditor.Rows.Remove(RowsToMove[x].editor_row);
+                trackEditor.Rows.Remove(RowsToMove[x]);
                 SequencerObjects.Remove(RowsToMove[x]);
                 if (RowsToMove[x].friendly_lane != "none") {
-                    trackEditor.Rows.Remove(RowsToMove[x + 1].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 1]);
                     SequencerObjects.Remove(RowsToMove[x + 1]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 2].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 2]);
                     SequencerObjects.Remove(RowsToMove[x + 2]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 3].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 3]);
                     SequencerObjects.Remove(RowsToMove[x + 3]);
-                    trackEditor.Rows.Remove(RowsToMove[x + 4].editor_row);
+                    trackEditor.Rows.Remove(RowsToMove[x + 4]);
                     SequencerObjects.Remove(RowsToMove[x + 4]);
                 }
                 //reinsert object and row at appropriate index
-                int objbelowindex = ObjBelow.editor_row.Index;
+                int objbelowindex = ObjBelow.Index;
                 SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x]);
-                trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x].editor_row);
+                trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x]);
                 if (RowsToMove[x].friendly_lane != "none") {
                     SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 1]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 1].editor_row);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 1]);
                     SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 2]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 2].editor_row);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 2]);
                     SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 3]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 3].editor_row);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 3]);
                     SequencerObjects.Insert(objbelowindex + Lanes, RowsToMove[x + 4]);
-                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 4].editor_row);
+                    trackEditor.Rows.Insert(objbelowindex + Lanes, RowsToMove[x + 4]);
                     x += 4;
                 }
             }
@@ -2177,14 +2177,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 DataGridViewRow dgvr = new();
                 Sequencer_Object clone = _newtrack.Clone();
                 clone.parent = leafProperties;
-                clone.editor_row = dgvr;
+                clone = dgvr;
                 clone.expandlanes = GlobalExpand;
                 //need to remove beats beyond the beat count
                 for (int x = LeafProperties.beats; x < 255; x++) {
-                    clone.data_points[x] = _newtrack.data_points[x].Clone(clone);
+                    clone[x] = _newtrack[x].Clone(clone);
                 }
                 SequencerObjects.Insert(_index, clone);
-                trackEditor.Rows.Insert(_index, clone.editor_row);
+                trackEditor.Rows.Insert(_index, clone);
                 try {
                     //set the headercell names
                     ///ChangeTrackName(clone, Properties.Settings.Default.LeafOptionShowCategory ? $"[{clone.category}] " : "");
@@ -2221,7 +2221,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[index + 1].ClearDataPoints();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                     SequencerObjects[index + 2].ClearDataPoints();// = new() { value = null, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
                 }
-                trackEditor.InvalidateRow(seq.editor_row.Index);
+                trackEditor.InvalidateRow(seq.Index);
             }
 
             LogUndo = true;
@@ -2264,7 +2264,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             foreach (Sequencer_Object seq in todelete) {
-                trackEditor.Rows.Remove(seq.editor_row);
+                trackEditor.Rows.Remove(seq);
                 SequencerObjects.Remove(seq);
             }
 
@@ -2275,7 +2275,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static bool CheckObjectIfEmpty(Sequencer_Object seq)
         {
             bool dodelete = true;
-            if (seq.data_points.Any(x => x.value != null))
+            if (seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value != null))
                 dodelete = false;
 
             Object_Params baseobj = TCLE.LeafObjects.FirstOrDefault(x => x.param_path == seq.param_path && x.category == seq.category);
@@ -2490,7 +2490,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //assign new values back to the data points
             EditorIsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
-                interpobject.data_points[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                interpobject[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
             }
             EditorIsInterpolating = false;
             //recolor cells after populating
@@ -2559,15 +2559,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     seq.obj_name = LeafSplitAfter.loadedleaf.Name;
                 //shift data points backwards so they align at beat 0
                 for (int x = splitindex; x < LeafSplitAfter.LeafProperties.beats; x++) {
-                    seq.data_points[x - splitindex] = new SeqDataPoint() {
-                        Owner = seq,
-                        Beat = seq.data_points[x].beat - splitindex,
-                        value = seq.data_points[x].value,
-                        ease = seq.data_points[x].ease,
-                        interpolation = seq.data_points[x].interpolation,
+                    seq[x - splitindex] = new SeqDataPoint() {
+                        ParentSeqObj = seq,
+                        Beat = seq[x].beat - splitindex,
+                        value = seq[x].Value,
+                        Ease = seq[x].Ease,
+                        Interpolation = seq[x].Interpolation,
                     };
                     //after copying, set the value to null since this datapoint is "leaving"
-                    seq.data_points[x].value = null;
+                    seq[x].Value = null;
                 }
             }
             //reduce split leafs beat count and save
@@ -2613,7 +2613,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SequencerObjects.Any(x => x.category == category && x.param_path == obj.param_path))
                 goto beginrando;
 
-            Sequencer_Object seq = new(leafProperties) {
+            Sequencer_Object seq = new() {
+                parent = leafProperties,
                 obj_name = category == "PLAY SAMPLE" ? TCLE.ProjectSamples[TCLE.rng.Next(0, TCLE.ProjectSamples.Count)].obj_name : obj.obj_name,
                 category = obj.category,
                 param_path = obj.param_path.Split('.')[0],
@@ -2627,7 +2628,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 enabled = true,
                 param_path_lane = obj.param_path.EndsWith(".ent") ? "ent" : "none",
                 friendly_lane = obj.param_path.EndsWith(".ent") ? "lane center" : "none",
-                editor_row = new DataGridViewRow(),
+                //editor_row = new DataGridViewRow(),
                 expandlanes = Properties.Settings.Default.LeafOptionShowLane
             };
             if (seq.obj_name == "leafname")
@@ -2638,12 +2639,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.friendly_param = seq.friendly_param.Replace("x", $"{audiochannels}");
             }
             SequencerObjects.Add(seq);
-            trackEditor.Rows.Add(seq.editor_row);
+            trackEditor.Rows.Add(seq);
             ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
             TrackUpdateHighlighting(seq);
             FindMissingLaneObjects(seq);
             //measure header and see if it's the biggest
-            int tempsize = TextRenderer.MeasureText(seq.editor_row.HeaderCell.Value.ToString(), seq.editor_row.HeaderCell.Style.Font).Width;
+            int tempsize = TextRenderer.MeasureText(seq.HeaderCell.Value.ToString(), seq.HeaderCell.Style.Font).Width;
             if (tempsize > trackEditor.RowHeadersWidth)
                 trackEditor.RowHeadersWidth = tempsize;
             //fill cells with random values
@@ -2657,7 +2658,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else
                     RandomizeRowValues(seq);
-            } while (!seq.data_points.Any(x => x.value is not null));
+            } while (!seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value is not null));
 
             trackEditor.Invalidate();
             TCLE.PlaySound("UIaddrandom");
@@ -2681,15 +2682,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (Sequencer_Object seq in SelectedSeq) {
                     do {
                         if (seq.friendly_lane == "lane center") {
-                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index - 2]);
-                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index - 1]);
+                            RandomizeRowValues(SequencerObjects[seq.Index - 2]);
+                            RandomizeRowValues(SequencerObjects[seq.Index - 1]);
                             RandomizeRowValues(seq);
-                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index + 1]);
-                            RandomizeRowValues(SequencerObjects[seq.editor_row.Index + 2]);
+                            RandomizeRowValues(SequencerObjects[seq.Index + 1]);
+                            RandomizeRowValues(SequencerObjects[seq.Index + 2]);
                         }
                         else
                             RandomizeRowValues(seq);
-                    } while (!seq.editor_row.Cells.Cast<DataGridViewCell>().Any(x => x.Value != null));
+                    } while (!seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value != null));
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
                 trackEditor.Invalidate();
@@ -2819,7 +2820,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
-                Sequencer_Object _s = new(parent) {
+                Sequencer_Object _s = new() {
+                    parent = parent,
                     obj_name = ((string)seq_obj["obj_name"]),
                     trait_type = seq_obj["trait_type"],
                     step = (string)seq_obj["step"] == "True",
@@ -2865,25 +2867,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (dynamic dp in seq_obj["data_points"]) {
                     if (dp is JObject data_point) {
                         SeqDataPoint data = new() {
-                            Owner = _s,
+                            ParentSeqObj = _s,
                             Beat = (int)data_point["beat"],
                             value = (decimal)data_point["value"],
-                            interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                            ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
+                            Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
+                            Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
                         };
                         if (data.beat >= parent.Beats)
                             continue;
-                        _s.data_points[data.beat] = data;
+                        _s[data.beat] = data;
                     }
                     else {
                         SeqDataPoint data = new() {
-                            Owner = _s,
+                            ParentSeqObj = _s,
                             Beat = int.Parse(((JProperty)dp).Name),
                             value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3),
-                            interpolation = "Linear",
-                            ease = TCLE.Easings["kEaseInOut"]
+                            Interpolation = "Linear",
+                            Ease = TCLE.Easings["kEaseInOut"]
                         };
-                        _s.data_points[data.beat] = data;
+                        _s[data.beat] = data;
                     }
                 }
                 //if object is multilane, we will add all 5 lanes at once, as defaults
@@ -2927,7 +2929,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Clear();
             trackEditor.RowHeadersVisible = true;
             foreach (Sequencer_Object seq in Seq_Objs) {
-                trackEditor.Rows.Add(seq.editor_row);
+                trackEditor.Rows.Add(seq);
                 TrackRawImport(seq, seq.data_points, LeafProperties);
                 RowReadOnly(!seq.enabled, seq);
             }
@@ -2941,7 +2943,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void AddSequencerLayer(int index)
         {
-            Sequencer_Object seq = new(leafProperties) {
+            Sequencer_Object seq = new() {
+                parent = leafProperties,
                 obj_name = "_TuningLayerX",
                 category = "",
                 param_path = "⮝ Tuning Layer X",
@@ -2954,8 +2957,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 footer = "",
                 enabled = true,
                 param_path_lane = "none",
-                friendly_lane = "none",
-                editor_row = new DataGridViewRow()
+                friendly_lane = "none"
             };
 
             int audiochannels = SequencerObjects.Count(x => x.obj_name == "_TuningLayerX");
@@ -2965,42 +2967,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
             SequencerObjects.Insert(index + 1, seq);
             SequencerObjects[index].HasTuningLayer = true;
-            trackEditor.Rows.Insert(index + 1, seq.editor_row);
+            trackEditor.Rows.Insert(index + 1, seq);
             ChangeTrackName(seq, "");
             TrackUpdateHighlighting(seq);
             SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
         }
-        /*
-        public void Reload()
-        {
-            dynamic _load = TCLE.LoadFileLock(LoadedLeaf.FullName);
-            LvlProperties lvlProperties = null;
-            if (LoadedLeaf.Extension == ".lvl") {
-                lvlProperties = new(new Form_LvlEditor(), LoadedLeaf) {
-                    LeafReload = true,
-                    approachbeats = (int)_load["approach_beats"],
-                    volume = (decimal)_load["volume"],
-                    allowinput = (string)_load["input_allowed"] == "True",
-                    tutorialtype = (string)_load["tutorial_type"],
-                    seqJSON = _load["seq_objs"]
-                };
-                foreach (dynamic leaf in _load["leaf_seq"]) {
-                    lvlProperties.lvlleafs.Add(new LvlLeafData() {
-                        leafname = (string)leaf["leaf_name"],
-                        beats = (int)leaf["beat_cnt"],
-                        paths = leaf["sub_paths"].ToObject<List<string>>(),
-                        id = TCLE.rng.Next(0, 1000000)
-                    });
-                }
-            }
-
-            LoadLeaf(_load, LoadedLeaf, lvlProperties);
-            //each object in the seq_objs[] list becomes a track
-            LeafProperties.seq_objs = LoadSequencer(_load["seq_objs"], LeafProperties);
-            LoadTracksFromSequencer(LeafProperties.seq_objs);
-            LoadEnd();
-        }*/
 
         public List<SaveState> GetUndoList() => UndoList;
         public void PerformUndo(int undolistindex)
@@ -3152,11 +3124,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
             //clear out data that exists beyond the beatcount
-            foreach (Sequencer_Object seq in SequencerObjects) {
-                for (int x = LeafProperties.beats; x < 255; x++) {
-                    seq.data_points[x] = new() { Owner = seq, Beat = x, interpolation = "Linear", ease = "Ease In Out" };
-                }
-            }
+            ///foreach (Sequencer_Object seq in SequencerObjects) {
+            ///    for (int x = LeafProperties.beats; x < 255; x++) {
+            ///        seq[x] = new() { ParentSeqObj = seq, Beat = x, Interpolation = "Linear", Ease = "Ease In Out" };
+            ///    }
+            ///}
             //set cell zoom
             trackZoom_Scroll(null, null);
             //make sure new cells follow the time sig
@@ -3169,12 +3141,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Import raw text from rich text box to selected row
         public static void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points, LeafProperties _properties)
         {
-            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.value is not null && x.beat < _properties.beats).ToList();
+            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.Value is not null && x.beat < _properties.beats).ToList();
             //iterate over each data point, and fill cells
             foreach (SeqDataPoint data_point in DataNotNull) {
                 try {
-                    seq.editor_row.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
-                    //seq.data_points[data_point.beat].value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
+                    seq.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.Value.ToString()), 3);
+                    //seq[data_point.beat].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                 } catch (Exception ex) {
                     MessageBox.Show($"Failed to entirely parse raw text.\n\n{ex}", "Thumper Custom Level Editor");
                     break;
@@ -3191,8 +3163,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
-                    //seq.data_points[int.Parse(data_point.Name)].value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    seq[int.Parse(data_point.Name)].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    //seq[int.Parse(data_point.Name)].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
                 } catch (ArgumentOutOfRangeException) {
                     break;
                 }
@@ -3208,16 +3180,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string ShowLane = (seq.expandlanes && seq.friendly_lane != "none") ? $"{seq.friendly_param}, {seq.friendly_lane}" : seq.friendly_param;
             if (seq.category == "PLAY SAMPLE")
                 //show the sample name instead
-                seq.editor_row.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
+                seq.HeaderCell.Value = $"{ShowCategory}{seq.obj_name}";
             else if (seq.obj_name == "_TuningLayerX")
-                seq.editor_row.HeaderCell.Value = $"  {seq.param_path}";
+                seq.HeaderCell.Value = $"  {seq.param_path}";
             else
-                seq.editor_row.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
+                seq.HeaderCell.Value = $"{ShowCategory}{ShowLane}";
         }
 
         public void ShowRawTrackData(Sequencer_Object seq)
         {
-            string allcellvalues = String.Join(",", seq.data_points.Where(x => x.value is not null).Select(x => $"{x.beat}:{x.value}"));
+            string allcellvalues = String.Join(",", seq.Cells.Cast<SeqDataPoint>().Where(x => x.Value is not null).Select(x => $"{x.beat}:{x.Value}"));
             textEditor.Text = allcellvalues;
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
@@ -3273,12 +3245,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void TrackUpdateHighlighting(Sequencer_Object seq)
         {
             Color background = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
-            seq.editor_row.HeaderCell.Style.BackColor = background;
+            seq.HeaderCell.Style.BackColor = background;
 
-            if (seq.editor_row.Cells.Count >= 3) {
-                seq.editor_row.Cells[0].Style.BackColor = background;
-                seq.editor_row.Cells[1].Style.BackColor = background;
-                seq.editor_row.Cells[2].Style.BackColor = background;
+            if (seq.Cells.Count >= 3) {
+                seq.Cells[0].Style.BackColor = background;
+                seq.Cells[1].Style.BackColor = background;
+                seq.Cells[2].Style.BackColor = background;
             }
         }
         /*
@@ -3309,15 +3281,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static void RowReadOnly(bool isreadonly, Sequencer_Object seq)
         {
             if (isreadonly) {
-                seq.editor_row.ReadOnly = true;
-                foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                seq.ReadOnly = true;
+                foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style.BackColor = Color.Gray;
                     dgvc.Style.SelectionBackColor = Color.Gray;
                 }
             }
             else {
-                seq.editor_row.ReadOnly = false;
-                foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                seq.ReadOnly = false;
+                foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style = null;
                 }
                 TrackUpdateHighlighting(seq);
@@ -3366,8 +3338,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", datapoint.value },
-                        { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
-                        { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
+                        { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
                     datapoints.Add(d);
@@ -3410,7 +3382,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             _selected = lanecells.Concat(_selected).OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex);
-            TCLE.ClipboardDataPoints = _selected.Select(x => SequencerObjects[x.RowIndex].data_points[x.ColumnIndex - FrozenColumnOffset].Clone()).ToList();
+            TCLE.ClipboardDataPoints = _selected.Select(x => SequencerObjects[x.RowIndex][x.ColumnIndex - FrozenColumnOffset].Clone()).ToList();
             TCLE.PlaySound("UIkcopy");
         }
 
@@ -3447,7 +3419,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (sdp.beat + coloffset >= leafProperties.beats)
                     continue;
                 SeqDataPoint clone = sdp.CloneWithOwner(SequencerObjects[sdp.index + rowoffset], sdp.beat + coloffset);
-                SequencerObjects[sdp.index + rowoffset].data_points[sdp.beat + coloffset] = clone;
+                SequencerObjects[sdp.index + rowoffset][sdp.beat + coloffset] = clone;
                 if (!pastedrows.Contains(SequencerObjects[sdp.index + rowoffset]))
                     pastedrows.Add(SequencerObjects[sdp.index + rowoffset]);
                 clone.UpdateCell();
@@ -3500,7 +3472,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     randomtype = 6;
             }
-            foreach (DataGridViewCell dgvc in seq.editor_row.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+            foreach (DataGridViewCell dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                 switch (randomtype) {
                     case 2:
                         valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
@@ -3526,7 +3498,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 //dgvc.Value = _out;
-                seq.data_points[dgvc.ColumnIndex - FrozenColumnOffset] = new() { Owner = seq, Beat = dgvc.ColumnIndex - FrozenColumnOffset, value = (decimal?)_out, ease = "Ease In Out", interpolation = "Linear" };
+                seq[dgvc.ColumnIndex - FrozenColumnOffset] = new() { ParentSeqObj = seq, Value = (decimal?)_out, Ease = "Ease In Out", Interpolation = "Linear" };
             }
             TrackUpdateHighlighting(seq);
         }
@@ -3581,19 +3553,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 count++;
             }
 
-            Sequencer_Object _temp2 = new(_properties);
+            Sequencer_Object _temp2 = new() { parent = _properties };
 
             foreach (Sequencer_Object _layer in TuningLayers) {
-                Sequencer_Object _temp = new(_properties);
-                SeqDataPoint[] _datapoints = _layer.data_points.Where(x => x.value != null).ToArray();
+                Sequencer_Object _temp = new() { parent = _properties };
+                SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
                 for (int n = 0; n < _datapoints.Length - 1; n++) {
                     //sort cells so they are in order according to column index
                     List<SeqDataPoint> InterpCells = new() { _datapoints[n], _datapoints[n + 1] };
                     InterpCells.Sort((cell1, cell2) => cell1.beat.CompareTo(cell2.beat));
                     //get start and end values, and how many beats separate them
-                    double _start = (double)InterpCells[0].value;
-                    double _end = (double)InterpCells[1].value;
+                    double _start = (double)InterpCells[0].Value;
+                    double _end = (double)InterpCells[1].Value;
                     double max = Math.Max(_start, _end);
                     double min = Math.Min(_start, _end);
                     int _beats = InterpCells[1].beat - InterpCells[0].beat + 1;
@@ -3604,7 +3576,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         interp[x] = (double)(x) / (double)(interp.Length - 1);
                     }
                     //change interpolation formula based on settings on the datapoint
-                    switch ($"{InterpCells[0].interpolation} {InterpCells[0].ease}") {
+                    switch ($"{InterpCells[0].Interpolation} {InterpCells[0].Ease}") {
                         case "Linear Ease In":
                         case "Linear Ease Out":
                         case "Linear Ease In Out":
@@ -3704,19 +3676,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     //write the datapoints to the object
                     for (int x = 0; x < _beats; x++) {
-                        _temp.data_points[InterpCells[0].beat + x].value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                        _temp[InterpCells[0].beat + x].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
                     }
                 }
 
-                for (int m = 0; m < _temp2.data_points.Count; m++) {
-                    if (_temp2.data_points[m].value == null) _temp2.data_points[m].value = 0;
-                    _temp2.data_points[m].value += _temp.data_points[m].value ?? 0;
+                for (int m = 0; m < _temp2.Cells.Count; m++) {
+                    if (_temp2[m].Value == null)
+                        _temp2[m].Value = 0;
+                    _temp2[m].Value = (decimal?)_temp2[m].Value + ((decimal?)_temp[m].Value ?? 0);
                 }
             }
 
             _properties.parent.LogUndo = false;
-            for (int m = 0; m < Main.data_points.Count; m++) {
-                Main.data_points[m].value = _temp2.data_points[m].value ?? 0;
+            for (int m = 0; m < Main.Cells.Count; m++) {
+                Main[m].Value = _temp2[m].Value ?? 0;
             }
             _properties.parent.LogUndo = true;
 
@@ -3748,7 +3721,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     CenterLane = RowsToMove.Length == 5 ? RowsToMove[2] : RowsToMove[0];
                     EditorIsMoving = true;
                     // Proceed with the drag and drop, passing in the list item.                    
-                    _ = trackEditor.DoDragDrop(CenterLane.editor_row, DragDropEffects.Move);
+                    _ = trackEditor.DoDragDrop(CenterLane, DragDropEffects.Move);
                     RowsToMove = null;
                     EditorIsMoving = false;
                 }
@@ -3814,22 +3787,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             //check if target location exists inside the lane selection
             if (RowsToMove.Length == 5 &&
-                ((RowsToMove[0].friendly_lane == "lane right 2" && targetRow >= RowsToMove[4].editor_row.Index && targetRow <= RowsToMove[0].editor_row.Index) ||
-                (RowsToMove[0].friendly_lane == "lane left 2" && targetRow >= RowsToMove[0].editor_row.Index && targetRow <= RowsToMove[4].editor_row.Index)))
+                ((RowsToMove[0].friendly_lane == "lane right 2" && targetRow >= RowsToMove[4].Index && targetRow <= RowsToMove[0].Index) ||
+                (RowsToMove[0].friendly_lane == "lane left 2" && targetRow >= RowsToMove[0].Index && targetRow <= RowsToMove[4].Index)))
                 return;
 
             if (SequencerObjects[targetRow].friendly_lane != "none" && SequencerObjects[targetRow].expandlanes) {
                 return;
             }
 
-            if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane left 2" && targetRow < RowsToMove[0].editor_row.Index)
+            if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane left 2" && targetRow < RowsToMove[0].Index)
                 RowsToMove = RowsToMove.Reverse().ToArray();
-            else if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane right 2" && targetRow > RowsToMove[0].editor_row.Index)
+            else if (RowsToMove.Length == 5 && RowsToMove[0].friendly_lane == "lane right 2" && targetRow > RowsToMove[0].Index)
                 RowsToMove = RowsToMove.Reverse().ToArray();
 
-            if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow > RowsToMove[0].editor_row.Index)
+            if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow > RowsToMove[0].Index)
                 targetRow += 2;
-            else if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow < RowsToMove[0].editor_row.Index)
+            else if (SequencerObjects[targetRow].friendly_lane == "lane center" && targetRow < RowsToMove[0].Index)
                 targetRow -= 2;
 
 
@@ -3843,10 +3816,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Rows.Insert(targetRow, CenterLane.editor_row);
                 */
                 foreach (Sequencer_Object seq in RowsToMove) {
-                    trackEditor.Rows.Remove(seq.editor_row);
+                    trackEditor.Rows.Remove(seq);
                     SequencerObjects.Remove(seq);
                     SequencerObjects.Insert(targetRow, seq);
-                    trackEditor.Rows.Insert(targetRow, seq.editor_row);
+                    trackEditor.Rows.Insert(targetRow, seq);
                 }
 
                 trackEditor.ResumeLayout();

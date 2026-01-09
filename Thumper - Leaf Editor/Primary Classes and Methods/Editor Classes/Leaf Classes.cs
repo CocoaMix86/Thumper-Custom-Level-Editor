@@ -1,11 +1,14 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing.Design;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using System.Collections;
+using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -30,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
         public string param_path { get; set; }
         public string param_path_lane { get; set; }
         public string trait_type { get; set; }
-        public List<SeqDataPoint> data_points { get; set; }
+        //public List<SeqDataPoint> data_points[int index] { get => this.Cells; set; }
         public bool step { get; set; } = true;
         public float defaultvalue
         {
@@ -57,7 +60,6 @@ namespace Thumper_Custom_Level_Editor
         }
         private float DefVal;
         public string footer { get; set; }
-
         public string category { get; set; }
         public string friendly_param { get; set; }
         public Color highlight_color
@@ -88,16 +90,14 @@ namespace Thumper_Custom_Level_Editor
         public Bitmap WaveBitmap;
         public int id { get; set; }
         public bool mute { get; set; }
-        public DataGridViewRow editor_row { get; set; }
+        ///public DataGridViewRow editor_row { get; set; }
         public bool expandlanes
         {
             get => ExpandLanes;
             set {
                 ExpandLanes = value;
-                if (this.editor_row == null)
-                    return;
                 if (this.friendly_lane is not "lane center" and not "none")
-                    editor_row.Visible = value;
+                    this.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, Properties.Settings.Default.LeafOptionShowCategory ? $"[{this.category}] " : "");
                 Form_LeafEditor.TrackUpdateHighlighting(this);
             }
@@ -108,22 +108,23 @@ namespace Thumper_Custom_Level_Editor
         public bool HasTuningLayer { get; set; }
         public Bitmap TuningLayer { get; set; }
 
-        public Sequencer_Object(LeafProperties Parent)
+        public Sequencer_Object()
         {
-            parent = Parent;
             ClearDataPoints();
         }
 
-        public Sequencer_Object(Sequencer_Object ToClone)
+        public SeqDataPoint this[int index]
         {
-            data_points = new SeqDataPoint[ToClone.data_points.Count].ToList();
-            for (int x = 0; x < this.data_points.Count; x++) {
-                this.data_points[x] = ToClone.data_points[x].CloneWithOwner(this, ToClone.data_points[x].beat);
+            get => this.Cells[index] as SeqDataPoint;
+            set {
+                this.Cells[index] = value;
             }
         }
 
         public void ClearDataPoints()
         {
+            this.Cells.Clear();
+            /*
             int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
             data_points = new SeqDataPoint[maxbeats].ToList();
             for (int x = 0; x < maxbeats; x++)
@@ -133,12 +134,14 @@ namespace Thumper_Custom_Level_Editor
             if (editor_row != null)
                 for (int x = 0; x < editor_row.Cells.Count; x++)
                     editor_row.Cells[x].Value = null;
+            */
         }
 
         public Sequencer_Object Clone()
         {
             //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
-            Sequencer_Object clone = new(this) {
+            Sequencer_Object clone = new() {
+                parent = null,
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
@@ -157,15 +160,31 @@ namespace Thumper_Custom_Level_Editor
                 param_path_lane = this.param_path_lane,
                 friendly_lane = this.friendly_lane,
                 expandlanes = false,
-                editor_row = null
+                //editor_row = null
             };
-            clone.parent = null;
+            clone.CloneCells(this);
             return clone;
+        }
+
+        private void CloneCells(DataGridViewRow rowTemplate)
+        {
+            int cellsCount = rowTemplate.Cells.Count;
+            if (cellsCount > 0) {
+                SeqDataPoint[] cells = new SeqDataPoint[cellsCount];
+                for (int i = 0; i < cellsCount; i++) {
+                    SeqDataPoint dataGridViewCell = rowTemplate.Cells[i] as SeqDataPoint;
+                    SeqDataPoint dgvcNew = (SeqDataPoint)dataGridViewCell.Clone();
+                    cells[i] = dgvcNew;
+                }
+
+                Cells.AddRange(cells);
+            }
         }
 
         public Sequencer_Object CloneAsDefault(string lane, string friendlylane, DataGridViewRow dgvr)
         {
-            Sequencer_Object clone = new(this.parent) {
+            Sequencer_Object clone = new() {
+                parent = this.parent,
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
@@ -183,12 +202,12 @@ namespace Thumper_Custom_Level_Editor
                 id = TCLE.rng.Next(),
                 param_path_lane = lane,
                 friendly_lane = friendlylane,
-                editor_row = dgvr,
+                //editor_row = dgvr,
                 expandlanes = false,
             };
             return clone;
         }
-    }
+    }    
 
     public class SequencerColumn : DataGridViewColumn
     {
@@ -202,117 +221,111 @@ namespace Thumper_Custom_Level_Editor
     {
         public void Reset()
         {
-            this.interpolation = "Linear";
-            this.ease = "Ease In Out";
-            this.value = null;
+            this.Interpolation = "Linear";
+            this.Ease = "Ease In Out";
+            this.Value = null;
         }
 
         [Browsable(false)]
-        public Sequencer_Object Owner { get; set; }
-        [Browsable(false)]
-        public int index { get; set; }
+        public Sequencer_Object ParentSeqObj { get; set; }
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Beat #")]
-        public int beat { get => Beat; }
-        [Browsable(false)]
-        public int Beat;
+        public int beat { get => this.ColumnIndex; }
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Value")]
-        public decimal? value
+        private new object Value
         {
             get => (decimal?)Value;
             set {
                 if (value != null) {
                 }
-                Value = value;
+                _value = value;
                 //check if the beat being set is within the leaf's beatcount.
                 //also check if Owner and the editing row exists.
                 //and one final check to see if the value is the same. If it's the same, don't bother setting it.
-                if (this.beat < Owner.parent.beats && Owner != null && Owner.editor_row != null) {
-                    if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
-                        Owner.editor_row.Cells[beat + 3].Value = Value;
-                        Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+                if (ParentSeqObj != null && this.beat < ParentSeqObj.parent.beats) {
+                    if ((decimal?)ParentSeqObj.Cells[beat + 3].Value != (decimal?)Value) {
+                        ParentSeqObj.Cells[beat + 3].Value = Value;
+                        ParentSeqObj.parent.parent.CellValueChanged(ParentSeqObj.Index, beat + 3);
                     }
                     //if value changing on a tuning layer, recalc the values
-                    if (Owner.obj_name == "_TuningLayerX") {
-                        Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
-                        Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
+                    if (ParentSeqObj.obj_name == "_TuningLayerX") {
+                        Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);
+                        ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                     }
 
-                    Owner.isdefault = false;
+                    ParentSeqObj.isdefault = false;
                 }
             }
         }
-        private object Value = null;
+        private object _value;
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Interp")]
         [TypeConverter(typeof(LeafInterpolations))]
-        public string interpolation { 
-            get => Interp;
+        public string Interpolation { 
+            get => _interp;
             set {
-                Interp = value;
-                if (Owner.parent.parent.EditorIsLoading)
+                _interp = value;
+                if (ParentSeqObj.parent.parent.EditorIsLoading)
                     return;
-                if (Owner.obj_name == "_TuningLayerX") {
-                    Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
-                    Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
+                if (ParentSeqObj.obj_name == "_TuningLayerX") {
+                    Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);
+                    ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
             } 
         }
-        private string Interp = "Linear";
+        private string _interp = "Linear";
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Easing")]
         [TypeConverter(typeof(LeafEasings))]
-        public string ease
+        public string Ease
         {
-            get => Ease;
+            get => _ease;
             set {
-                Ease = value;
-                if (Owner.parent.parent.EditorIsLoading)
+                _ease = value;
+                if (ParentSeqObj.parent.parent.EditorIsLoading)
                     return;
-                if (Owner.obj_name == "_TuningLayerX") {
-                    Form_LeafEditor.CalculateTuningLayers(Owner.parent, Owner);
-                    Owner.parent.parent.trackEditor.InvalidateRow(Owner.editor_row.Index);
+                if (ParentSeqObj.obj_name == "_TuningLayerX") {
+                    Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);
+                    ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
             }
         }
-        private string Ease = "Ease In Out";
+        private string _ease = "Ease In Out";
 
         public void UpdateCell()
         {
-            if (this.beat < Owner.parent.beats && Owner != null && Owner.editor_row != null) {
-                if ((decimal?)Owner.editor_row.Cells[beat + 3].Value != (decimal?)Value) {
-                    Owner.editor_row.Cells[beat + 3].Value = Value;
-                    Owner.parent.parent.CellValueChanged(Owner.editor_row.Index, beat + 3);
+            if (ParentSeqObj != null && this.beat < ParentSeqObj.parent.beats && ParentSeqObj != null) {
+                if ((decimal?)ParentSeqObj.Cells[beat + 3].Value != (decimal?)Value) {
+                    ParentSeqObj.Cells[beat + 3].Value = Value;
+                    ParentSeqObj.parent.parent.CellValueChanged(ParentSeqObj.Index, beat + 3);
                 }
 
-                Owner.isdefault = false;
+                ParentSeqObj.isdefault = false;
             }
         }
 
         public SeqDataPoint Clone()
         {
             SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
-            sdp.index = Owner.parent.seq_objs.IndexOf(Owner);
-            sdp.Owner = null;
+            sdp.ParentSeqObj = null;
             return sdp;
         }
 
         public SeqDataPoint Clone(Sequencer_Object newparent)
         {
             SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
-            sdp.Owner = newparent;
+            sdp.ParentSeqObj = newparent;
             return sdp;
         }
 
         public SeqDataPoint CloneWithOwner(Sequencer_Object Owner, int newbeat)
         {
             SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
-            sdp.Beat = newbeat;
-            sdp.Owner = Owner;
+            sdp.ParentSeqObj = Owner;
             return sdp;
         }
     }
@@ -342,7 +355,7 @@ namespace Thumper_Custom_Level_Editor
         {
             parent = Parent;
             Beats = _beats;
-            selectedobj = new(this);
+            selectedobj = new() { parent = this };
         }
 
         [CategoryAttribute("General")]

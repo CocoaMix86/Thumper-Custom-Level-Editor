@@ -1312,8 +1312,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     JObject d = new() {
                         { "beat", datapoint.beat },
                         { "value", decimal.Parse(datapoint.value.ToString()) },
-                        { "interp", $"kTraitInterp{datapoint.interpolation ?? "Linear"}" },
-                        { "ease", $"k{datapoint.ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
+                        { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
                     datapoints.Add(d);

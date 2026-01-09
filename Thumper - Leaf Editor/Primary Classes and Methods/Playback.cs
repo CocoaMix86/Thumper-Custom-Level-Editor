@@ -231,23 +231,23 @@ namespace Thumper_Custom_Level_Editor
                     //instead, check for any beat set to 0.
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq.data_points[beat].value == null || (Seq.data_points[beat].value != null && (decimal)Seq.data_points[beat].value != 0)) {
-                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
+                            if (Seq[beat].value == null || (Seq[beat].value != null && (decimal)Seq[beat].value != 0)) {
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
                                     if (Seq.friendly_param == "bar[double]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "bar[triple]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "bar[quad]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "thump and bar") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
                                     }
                                 }
                             }
@@ -255,23 +255,23 @@ namespace Thumper_Custom_Level_Editor
                     }
                     else {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq.data_points[beat].value != null) {
-                                AddNoteToChannel(Seq.data_points[beat].beat, Key, Call, CallKey, Seq.mute);
+                            if (Seq[beat].value != null) {
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
                                     if (Seq.friendly_param == "bar[double]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "bar[triple]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "bar[quad]") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
                                     }
                                     else if (Seq.friendly_param == "thump and bar") {
-                                        AddNoteToChannel(Seq.data_points[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
                                     }
                                 }
                             }
@@ -537,46 +537,46 @@ namespace Thumper_Custom_Level_Editor
             SeqDataPoint lastprocessed = null;
             for (int x = 0; x < LeafLastBeat; x++)
             {
-                lastprocessed = Seq.data_points[x];
+                lastprocessed = Seq[x];
                 //account for default value being +-15
-                decimal valuetotest = Seq.data_points[x].value == null ? (decimal)Seq.defaultvalue : (decimal)Seq.data_points[x].value;
+                decimal valuetotest = Seq[x].value == null ? (decimal)Seq.defaultvalue : (decimal)Seq[x].value;
                 if (valuetotest >= 15) {
                     if (IsTurning == -1) {
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 10);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 10);
                         IsTurning = 1;
                     }
                     else if (IsTurning == 1) {
                         IsTurning = 2;
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 11);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 11);
                     }
                     else if (IsTurning == 2) {
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
+                        AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
                     }
                     else if (IsTurning == 0)
                         IsTurning = 1;
                 }
                 else if (valuetotest <= -15) {
                     if (IsTurning == 1) {
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 12);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 12);
                         IsTurning = -1;
                     }
                     else if (IsTurning == -1) {
                         IsTurning = -2;
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 11);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 11);
                     }
                     else if (IsTurning == -2) {
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
+                        AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
                     }
                     else if (IsTurning == 0)
                         IsTurning = -1;
                 }
                 else {
                     if (IsTurning == -1)
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 10);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 10);
                     else if (IsTurning == 1)
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 13, 8, 12);
+                        AddNoteToChannel(Seq[x].beat - 1, 13, 8, 12);
                     else if (IsTurning is 2 or -2)
-                        AddNoteToChannel(Seq.data_points[x].beat - 1, 22, 0, 0, true);
+                        AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
                     IsTurning = 0;
                 }
             }
@@ -593,17 +593,17 @@ namespace Thumper_Custom_Level_Editor
         {
             for (int x = 1; x < LeafLastBeat; x++)
             {
-                decimal? value = (decimal?)Seq.data_points[x].value;
+                decimal? value = (decimal?)Seq[x].value;
                 if (Seq.defaultvalue == 0) {
                     if (value is 0 or null) {
-                        if ((decimal?)Seq.data_points[x - 1].value == 1)
-                            AddNoteToChannel(Seq.data_points[x].beat - 1, -1, 8, 21);
+                        if ((decimal?)Seq[x - 1].value == 1)
+                            AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
                 }
                 else if (Seq.defaultvalue == 1) {
                     if (value is 0) {
-                        if ((decimal?)Seq.data_points[x - 1].value is 1 or null)
-                            AddNoteToChannel(Seq.data_points[x].beat - 1, -1, 8, 21);
+                        if ((decimal?)Seq[x - 1].value is 1 or null)
+                            AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
                 }
             }
