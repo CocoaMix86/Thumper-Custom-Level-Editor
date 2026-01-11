@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing.Design;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using System.Collections;
-using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -34,7 +30,6 @@ namespace Thumper_Custom_Level_Editor
         public string param_path_lane => this.param_path.Contains('.') ? this.param_path.Split('.')[1] : "none";
         public string friendly_lane => TCLE.TrackLaneFriendly[this.param_path_lane];
         public string trait_type { get; set; }
-        //public List<SeqDataPoint> data_points[int index] { get => this.Cells; set; }
         public bool step { get; set; } = true;
         public float defaultvalue
         {
@@ -91,7 +86,6 @@ namespace Thumper_Custom_Level_Editor
         public Bitmap WaveBitmap;
         public int id { get; set; }
         public bool mute { get; set; }
-        ///public DataGridViewRow editor_row { get; set; }
         public bool expandlanes
         {
             get => ExpandLanes;
@@ -100,13 +94,28 @@ namespace Thumper_Custom_Level_Editor
                 if (this.friendly_lane is not "lane center" and not "none")
                     this.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, this.category);
-                Form_LeafEditor.TrackUpdateHighlighting(this);
+                Form_LeafEditor.UpdateRowHeaderColor(this);
             }
         }
         private bool ExpandLanes;
         public bool HasShownError { get; set; }
         public bool HasTuningLayer { get; set; }
         public Bitmap TuningLayer { get; set; }
+        public int CenterLaneOffset { 
+            get {
+                switch (param_path_lane) {
+                    case "a02":
+                        return 2;
+                    case "a01":
+                        return 1;
+                    case "z01":
+                        return -1;
+                    case "z02":
+                        return -2;
+                }
+                return 0;
+            } 
+        }
 
         public Sequencer_Object()
         {
@@ -115,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
 
         public SeqDataPoint this[int index]
         {
-            get => this.Cells[index] as SeqDataPoint;
+            get => (SeqDataPoint)this.Cells[index];
             set {
                 this.Cells[index] = value;
             }
@@ -226,16 +235,14 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object ParentSeqObj => (Sequencer_Object)this.OwningRow;
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Beat #")]
-        public int beat { get => this.ColumnIndex; }
-
+        public int beat { get => this.ColumnIndex - 3; }
+        /*
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Value")]
-        private new object Value
+        public object Value
         {
-            get => (decimal?)Value;
+            get => _value;
             set {
-                if (value != null) {
-                }
                 _value = value;
                 if (ParentSeqObj == null)
                     return;
@@ -248,7 +255,40 @@ namespace Thumper_Custom_Level_Editor
                 ParentSeqObj.isdefault = false;
             }
         }
-        private object _value;
+        private object _value;*/
+        protected override bool SetValue(int rowIndex, object value)
+        {
+            //sanitize inputs based on the trait type
+            //skipping header row
+            if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
+                if (ParentSeqObj.trait_type == "kTraitBool") {
+                    if ((decimal?)value is not 1 or 0)
+                        value = 1m;
+                }
+                else if (ParentSeqObj.trait_type == "kTraitColor") {
+                    value = TCLE.TruncateDecimal((decimal?)value, 0);
+                }
+                else if (ParentSeqObj.trait_type == "kTraitAction") {
+                    if ((decimal?)value is not 1 or 0)
+                        value = 1m;
+                }
+                else if (ParentSeqObj.trait_type == "kTraitInt") {
+                    value = TCLE.TruncateDecimal((decimal?)value, 0);
+                }
+            }
+
+            bool _set = base.SetValue(rowIndex, value);
+
+            if (rowIndex is -1 || this.OwningRow.Index is -1)
+                return _set;
+            //if value changing on a tuning layer, recalc the values
+            if (((Sequencer_Object)this.OwningRow).obj_name == "_TuningLayerX") {
+                Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);
+                ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
+            }
+            ParentSeqObj.isdefault = false;
+            return _set;
+        }
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Interp")]
@@ -284,18 +324,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private string _ease = "Ease In Out";
-
-        public void UpdateCell()
-        {
-            if (ParentSeqObj != null && this.beat < ParentSeqObj.parent.beats && ParentSeqObj != null) {
-                if ((decimal?)ParentSeqObj.Cells[beat + 3].Value != (decimal?)Value) {
-                    ParentSeqObj.Cells[beat + 3].Value = Value;
-                    ParentSeqObj.parent.parent.CellValueChanged(ParentSeqObj.Index, beat + 3);
-                }
-
-                ParentSeqObj.isdefault = false;
-            }
-        }
 
         public SeqDataPoint Clone()
         {
@@ -449,7 +477,7 @@ namespace Thumper_Custom_Level_Editor
             get => selectedobj.highlight_color;
             set { 
                 selectedobj.highlight_color = value;
-                Form_LeafEditor.TrackUpdateHighlighting(selectedobj);
+                Form_LeafEditor.UpdateRowHeaderColor(selectedobj);
             }
         }
 
@@ -461,7 +489,6 @@ namespace Thumper_Custom_Level_Editor
             get => selectedobj.highlight_value;
             set {
                 selectedobj.highlight_value = value;
-                Form_LeafEditor.TrackUpdateHighlighting(selectedobj);
             }
         }
 

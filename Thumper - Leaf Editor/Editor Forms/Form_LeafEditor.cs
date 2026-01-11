@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
-using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -176,6 +174,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool EditorIsFinding;
         private bool EditorIsPasting;
         private bool EditorIsInterpolating;
+        private bool EditorIsTuning;
+        private bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
         private bool LogUndo = true;
         private bool GlobalMute;
         private bool GlobalDisable;
@@ -513,32 +513,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
             else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
-                if (SequencerObjects[e.RowIndex - 2][e.ColumnIndex - FrozenColumnOffset].Value != null)
+                if (SequencerObjects[e.RowIndex - 2][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex - 1][e.ColumnIndex - FrozenColumnOffset].Value != null)
+                if (SequencerObjects[e.RowIndex - 1][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + e.CellBounds.Height / 5, e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 2), e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex + 1][e.ColumnIndex - FrozenColumnOffset].Value != null)
+                if (SequencerObjects[e.RowIndex + 1][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
-                if (SequencerObjects[e.RowIndex + 2][e.ColumnIndex - FrozenColumnOffset].Value != null) {
+                if (SequencerObjects[e.RowIndex + 2][e.ColumnIndex].Value != null) {
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                 }
             }
             //paint the whole cell with the highlighting color
-            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                 e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds);
             //if a color object, convert the cell value to ARGB and use that
-            else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
 
             //paint notifier circles for changed interp and ease
             if (Properties.Settings.Default.LeafOptionEaseDots) {
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Interpolation != "Linear") {
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Interpolation != "Linear") {
                     e.Graphics.FillEllipse(BrushBlack, e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(BrushRed, e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
                 }
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex - FrozenColumnOffset].Ease != "Ease In Out") {
+                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Ease != "Ease In Out") {
                     e.Graphics.FillEllipse(BrushBlack, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(BrushBlue, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
@@ -1026,31 +1026,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            object _tempval = trackEditor[e.ColumnIndex, e.RowIndex].Value;
-            //check if value to be set works with the objects type
-            if (_tempval != null) {
-                if (SequencerObjects[e.RowIndex].trait_type == "kTraitBool") {
-                    if ((decimal)_tempval is not 1 or 0)
-                        _tempval = 1m;
-                }
-                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitColor") {
-                    _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
-                }
-                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitAction") {
-                    if ((decimal)_tempval is not 1)
-                        _tempval = 1m;
-                }
-                else if (SequencerObjects[e.RowIndex].trait_type == "kTraitInt") {
-                    _tempval = TCLE.TruncateDecimal((decimal)_tempval, 0);
-                }
-            }
-
-            //trackEditor[e.ColumnIndex, e.RowIndex].Value = _tempval;
+            //I think this doesn't have a purpose anymore
         }
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (EditorIsFinding)
+            if (EditorIsFinding || EditorIsTuning)
                 return;
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
@@ -1097,8 +1078,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //check if index out of bounds
                 if (dgvc.ColumnIndex - FrozenColumnOffset < 0)
                     continue;
-                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex - FrozenColumnOffset]);
+                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex]);
             }
+            //update the properties panel to show the selected object
             LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
             TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
             TCLE.dockProjectProperties.propertyGridProject.Refresh();
@@ -1109,7 +1091,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             DataGridViewTextBoxEditingControl tb = (DataGridViewTextBoxEditingControl)e.Control;
-            //tb.KeyPress += new KeyPressEventHandler(cellEditingKeyPress);
+            //setup keypress events for the cells in editing mode.
             tb.PreviewKeyDown += new PreviewKeyDownEventHandler(cellEditingKeyPress);
             e.Control.PreviewKeyDown += new PreviewKeyDownEventHandler(cellEditingKeyPress);
         }
@@ -1138,12 +1120,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
             if (trackEditor.IsCurrentCellInEditMode) {
-                CellValueChanged(e.RowIndex, e.ColumnIndex);
+                CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
         }
-        public void CellValueChanged(int rowindex, int columnindex, bool setnull = false)
+        public void CellValueChanged(DataGridViewCell StartCell, bool setnull = false)
         {
             //If certain actions going on, don't bother running this method.
+            if (EditorIsProcessing) return;
+            EditorIsLoading = true;
+            
+            bool _changes = false;
+            object _val = null;
+            if (!setnull && Decimal.TryParse(StartCell.EditedFormattedValue?.ToString(), out decimal _valtoset))
+                _val = TCLE.TruncateDecimal(_valtoset, 3);
+
+            List<DataGridViewCell> CellsToChange = new();
+            if (StartCell.Selected)
+                CellsToChange = trackEditor.SelectedCells.Cast<DataGridViewCell>().ToList();
+            else
+                CellsToChange.Add(StartCell);
+
+            foreach (DataGridViewCell _cell in CellsToChange) {
+                _cell.Value = _val;
+            }
+
+            EditorIsLoading = false;
+
+            /*
             if (EditorIsInterpolating || EditorIsPasting || EditorIsRandomizing)
                 return;
             try {
@@ -1205,38 +1208,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } catch { }
 
             ShowRawTrackData(SequencerObjects[rowindex]);
+            */
         }
 
-        private bool CellValueNull(DataGridViewCell _cell)
+        private void CellValueNull(DataGridViewCell _cell)
         {
-            bool changes = false;
-            if (SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Interpolation = "Linear";
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex - FrozenColumnOffset].Ease = "Ease In Out";
-                changes = true;
-            }
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Value = null;
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Ease = "Ease In Out";
 
             if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
-                if (SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
-                    SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
-                    changes = true;
-                }
-                if (SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
-                    SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
-                    changes = true;
-                }
-                if (SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
-                    SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
-                    changes = true;
-                }
-                if (SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex - FrozenColumnOffset].Value != null) {
-                    SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex - FrozenColumnOffset].Value = null;
-                    changes = true;
-                }
+                SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex].Value = null;
+                SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex].Ease = "Ease In Out";
+                SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex].Value = null;
+                SequencerObjects[_cell.RowIndex - 1][_cell.ColumnIndex].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex].Ease = "Ease In Out";
+                SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex].Value = null;
+                SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex + 1][_cell.ColumnIndex].Ease = "Ease In Out";
+                SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex].Value = null;
+                SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex].Interpolation = "Linear";
+                SequencerObjects[_cell.RowIndex + 2][_cell.ColumnIndex].Ease = "Ease In Out";
             }
-
-            return changes;
         }
 
         private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1256,7 +1250,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GlobalDisable = !GlobalDisable;
                 foreach (Sequencer_Object seq in SequencerObjects) {
                     seq.enabled = !GlobalDisable;
-                    RowReadOnly(!seq.enabled, seq);
+                    RowReadOnly(seq, !seq.enabled);
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
@@ -1319,13 +1313,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 return;
             }
-            //test for clicks in frozen columns 0 or 1
+            //test for clicks in frozen columns
             //unselect the cells afterwards to imitate button click
             else if (e.ColumnIndex is 0 or 1 or 2) {
                 Sequencer_Object seq = SequencerObjects[e.RowIndex];
                 if (e.ColumnIndex is 0) {
                     seq.enabled = !seq.enabled;
-                    RowReadOnly(!seq.enabled, seq);
+                    RowReadOnly(seq, !seq.enabled);
                     TCLE.PlaySound("UIselect");
                 }
                 if (e.ColumnIndex is 1) {
@@ -1352,7 +1346,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (SequencerObjects[e.RowIndex].trait_type is "kTraitBool" or "kTraitAction")
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
                         dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
-                        CellValueChanged(e.RowIndex, e.ColumnIndex);
                     }
             }
 
@@ -1375,13 +1368,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                     LogUndo = false;
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex])) {
-                        RightclickChanges = true;
-                        if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
-                            CalculateTuningLayers(LeafProperties, SequencerObjects[e.RowIndex]);
-                            trackEditor.InvalidateRow(e.RowIndex);
-                        }
-                    }
+                    CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);             
+                    RightclickChanges = true;
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                     //}
@@ -1390,7 +1378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
                         return;
                     LogUndo = false;
-                    CellValueChanged(e.RowIndex, e.ColumnIndex, true);
+                    trackEditor[e.ColumnIndex, e.RowIndex].Value = null;
                     LogUndo = true;
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
@@ -1422,21 +1410,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (Control.MouseButtons == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                     LogUndo = false;
-                    if (CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]))
-                        RightclickChanges = true;
+                    CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
+                    RightclickChanges = true;
                     LogUndo = true;
-                    //}
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     LogUndo = false;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    CellValueChanged(e.RowIndex, e.ColumnIndex, true);
+                    CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
                     LogUndo = true;
                 }
-                //ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
         }
 
@@ -1468,7 +1453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyChar == (char)Keys.Back) {
                 LogUndo = false;
-                CellValueChanged(trackEditor.SelectedCells[^1].RowIndex, trackEditor.SelectedCells[^1].ColumnIndex, true);
+                CellValueChanged(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             }
@@ -1478,7 +1463,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
                 LogUndo = false;
-                CellValueChanged(trackEditor.SelectedCells[^1].RowIndex, trackEditor.SelectedCells[^1].ColumnIndex, true);
+                CellValueChanged(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             }
@@ -1534,43 +1519,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 0"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue0;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 1"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue1;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 2"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue2;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 3"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue3;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 4"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue4;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 5"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue5;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 6"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue6;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 7"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue7;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 8"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue8;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 9"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValue9;
-                CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
         }
 
@@ -1723,7 +1708,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq);
             ChangeTrackName(seq, seq.category);
-            TrackUpdateHighlighting(seq);
+            UpdateRowHeaderColor(seq);
             FindMissingLaneObjects(seq);
             SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
@@ -1888,7 +1873,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (Lanes[x].obj_name == "leafname")
                     Lanes[x].obj_name = LeafProperties.FilePath.Name;
                 ChangeTrackName(Lanes[x], Lanes[x].category);
-                TrackUpdateHighlighting(Lanes[x]);
+                UpdateRowHeaderColor(Lanes[x]);
             }
             FindMissingLaneObjects(SequencerObjects[CurrentRow]);
             trackEditor.InvalidateRow(_currentseq.Index);
@@ -2278,7 +2263,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             try {
                 TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
-                TrackUpdateHighlighting(SequencerObjects[CurrentRow]);
                 TCLE.PlaySound("UIkpaste");
             } catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
@@ -2475,11 +2459,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //assign new values back to the data points
             EditorIsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
-                interpobject[InterpCells[0].ColumnIndex + x - FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                interpobject[InterpCells[0].ColumnIndex + x].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
             }
             EditorIsInterpolating = false;
-            //recolor cells after populating
-            TrackUpdateHighlighting(interpobject);
+            //
             ShowRawTrackData(interpobject);
             TCLE.PlaySound("UIinterpolate");
             SaveCheckAndWrite(false, "Interpolated");
@@ -2499,7 +2482,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
                 TCLE.PlaySound("UIcolorapply");
                 trackEditor.SelectedCells[0].Value = (decimal)TCLE.colorDialogNew.Color.ToArgb();
-                CellValueChanged(trackEditor.SelectedCells[0].RowIndex, trackEditor.SelectedCells[0].ColumnIndex);
+                CellValueChanged(trackEditor[trackEditor.SelectedCells[0].ColumnIndex, trackEditor.SelectedCells[0].RowIndex]);
             }
         }
 
@@ -2622,7 +2605,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SequencerObjects.Add(seq);
             trackEditor.Rows.Add(seq);
             ChangeTrackName(seq, seq.category);
-            TrackUpdateHighlighting(seq);
+            UpdateRowHeaderColor(seq);
             FindMissingLaneObjects(seq);
             //measure header and see if it's the biggest
             int tempsize = TextRenderer.MeasureText(seq.HeaderCell.Value.ToString(), seq.HeaderCell.Style.Font).Width;
@@ -2848,9 +2831,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
                             Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
                         };
-                        if (data.beat >= parent.Beats)
+                        if ((int)data_point["beat"] >= parent.Beats)
                             continue;
-                        _s[(int)data_point["beat"]] = data;
+                        _s[(int)data_point["beat"] + FrozenColumnOffset] = data;
                     }
                     else {
                         SeqDataPoint data = new() {
@@ -2885,7 +2868,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //finally, add the completed seq_obj to tracks
                     Seq_Objs.Add(_s);
                 }
-                ChangeTrackName(_s);
+                ChangeTrackName(_s, _s.category);
+                RowReadOnly(_s, _s.enabled);
             }
 
             //return Seq_Objs;
@@ -2900,7 +2884,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (Sequencer_Object seq in Seq_Objs) {
                 trackEditor.Rows.Add(seq);
                 //TrackRawImport(seq, seq.Cells.Cast<SeqDataPoint>().ToList(), LeafProperties);
-                RowReadOnly(!seq.enabled, seq);
+                RowReadOnly(seq, !seq.enabled);
             }
             TCLE.ResizeHeaders(trackEditor);
         }
@@ -2936,7 +2920,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SequencerObjects[index].HasTuningLayer = true;
             trackEditor.Rows.Insert(index + 1, seq);
             ChangeTrackName(seq, "");
-            TrackUpdateHighlighting(seq);
+            UpdateRowHeaderColor(seq);
             SaveCheckAndWrite(false, "Add Object");
             TCLE.PlaySound("UIobjectadd");
         }
@@ -2991,7 +2975,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 loadedleaf = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
                 if (LeafProperties == null) {
-                    leafProperties = new(this, loadedleaf, 32) {
+                    leafProperties = new(this, loadedleaf, isnew ? 32 : leafProperties.beats) {
                         timesignature = "4/4"
                     };
                 } //else
@@ -3072,7 +3056,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }*/
                 }
 
-                //find if any raw text docs are open of this gate and update them
+                //find if any raw text docs are open of this leaf and update them
                 TCLE.FindReloadRaw(LoadedLeaf.Name);
                 LeafProperties.BeatsChangedSinceSave = false;
             }
@@ -3090,19 +3074,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
-            //clear out data that exists beyond the beatcount
-            ///foreach (Sequencer_Object seq in SequencerObjects) {
-            ///    for (int x = LeafProperties.beats; x < 255; x++) {
-            ///        seq[x] = new() { ParentSeqObj = seq, Beat = x, Interpolation = "Linear", Ease = "Ease In Out" };
-            ///    }
-            ///}
             //set cell zoom
             trackZoom_Scroll(null, null);
             //make sure new cells follow the time sig
             TrackTimeSigHighlighting();
             //sets flag that leaf has unsaved changes
             SaveCheckAndWrite(false, $"Leaf length changed {data} -> {LeafProperties.beats}");
-            //SaveCheckAndWrite(false, "Leaf length", $"{data} -> {_beats}");
         }
 
         ///Import raw text from rich text box to selected row
@@ -3119,8 +3096,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
                 }
             }
-
-            TrackUpdateHighlighting(seq);
         }
         public static void TrackRawImport(Sequencer_Object seq, JObject _rawdata)
         {
@@ -3136,8 +3111,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
                 }
             }
-
-            TrackUpdateHighlighting(seq);
         }
 
         ///Updates row headers to be the Object and Param_Path
@@ -3209,21 +3182,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///Updates cell highlighting in the DGV
-        public static void TrackUpdateHighlighting(Sequencer_Object seq)
+        public static void UpdateRowHeaderColor(Sequencer_Object seq)
         {
             Color background = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
             seq.HeaderCell.Style.BackColor = background;
-
-            if (seq.Cells.Count >= 3) {
-                seq.Cells[0].Style.BackColor = background;
-                seq.Cells[1].Style.BackColor = background;
-                seq.Cells[2].Style.BackColor = background;
-            }
         }
 
-        private static void RowReadOnly(bool isreadonly, Sequencer_Object seq)
+        private static void RowReadOnly(Sequencer_Object seq, bool setreadonly)
         {
-            if (isreadonly) {
+            if (setreadonly) {
                 seq.ReadOnly = true;
                 foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style.BackColor = Color.Gray;
@@ -3235,7 +3202,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                     dgvc.Style = null;
                 }
-                TrackUpdateHighlighting(seq);
             }
         }
 
@@ -3335,7 +3301,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Copy();
             LogUndo = false;
-            CellValueChanged(trackEditor.CurrentCell.RowIndex, trackEditor.CurrentCell.ColumnIndex, true);
+            CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex], true);
             LogUndo = true;
             SaveCheckAndWrite(false, "Cut cells");
         }
@@ -3367,7 +3333,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects[sdp.RowIndex + rowoffset][sdp.beat + coloffset] = clone;
                 if (!pastedrows.Contains(SequencerObjects[sdp.RowIndex + rowoffset]))
                     pastedrows.Add(SequencerObjects[sdp.RowIndex + rowoffset]);
-                clone.UpdateCell();
             }
 
             foreach (Sequencer_Object _seq in pastedrows) {
@@ -3387,7 +3352,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int rngchance;
             int rnglimit;
             int randomtype = 0;
-            decimal valueiftrue = 0;
+            decimal? valueiftrue = 0;
 
             if ((seq.trait_type is "kTraitBool" or "kTraitAction") || (seq.param_path is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                 valueiftrue = 1;
@@ -3417,7 +3382,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     randomtype = 6;
             }
-            foreach (DataGridViewCell dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+            foreach (SeqDataPoint dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                 switch (randomtype) {
                     case 2:
                         valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
@@ -3443,11 +3408,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 //dgvc.Value = _out;
-                seq[dgvc.ColumnIndex - FrozenColumnOffset].Value = (decimal?)_out;// new() { ParentSeqObj = seq, Value = (decimal?)_out, Ease = "Ease In Out", Interpolation = "Linear" };
-                seq[dgvc.ColumnIndex - FrozenColumnOffset].Ease = "Ease In Out";
-                seq[dgvc.ColumnIndex - FrozenColumnOffset].Interpolation = "Linear";
+                dgvc.Value = (decimal?)_out;// new() { ParentSeqObj = seq, Value = (decimal?)_out, Ease = "Ease In Out", Interpolation = "Linear" };
+                dgvc.Ease = "Ease In Out";
+                dgvc.Interpolation = "Linear";
             }
-            TrackUpdateHighlighting(seq);
         }
 
         private void FindMissingLaneObjects(Sequencer_Object seq)
@@ -3486,24 +3450,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void CalculateTuningLayers(LeafProperties _properties, Sequencer_Object seq)
         {
-            if (_properties.parent.EditorIsLoading || (_properties.seq_objs.IndexOf(seq) == 0 && seq.obj_name == "_TuningLayerX"))
+            if (_properties.parent.EditorIsLoading || (seq.Index == 0 && seq.obj_name == "_TuningLayerX"))
                 return;
             int count = 1;
             List<Sequencer_Object> TuningLayers = new();
-            while (_properties.seq_objs[_properties.seq_objs.IndexOf(seq) - count].obj_name == "_TuningLayerX") {
+            while (_properties.seq_objs[seq.Index - count].obj_name == "_TuningLayerX") {
                 count++;
             }
-            Sequencer_Object Main = _properties.seq_objs[_properties.seq_objs.IndexOf(seq) - count];
+            Sequencer_Object Main = _properties.seq_objs[seq.Index - count];
             count = 1;
-            while (_properties.seq_objs.IndexOf(Main) + count < _properties.seq_objs.Count && _properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count].obj_name == "_TuningLayerX") {
-                TuningLayers.Add(_properties.seq_objs[_properties.seq_objs.IndexOf(Main) + count]);
+            while (Main.Index + count < _properties.seq_objs.Count && _properties.seq_objs[Main.Index + count].obj_name == "_TuningLayerX") {
+                TuningLayers.Add(_properties.seq_objs[Main.Index + count]);
                 count++;
             }
 
+            _properties.parent.LogUndo = false;
+            _properties.parent.EditorIsTuning = true;
             Sequencer_Object _temp2 = new() { parent = _properties };
+            _properties.parent.trackEditor.Rows.Add(_temp2);
 
             foreach (Sequencer_Object _layer in TuningLayers) {
                 Sequencer_Object _temp = new() { parent = _properties };
+                _properties.parent.trackEditor.Rows.Add(_temp);
                 SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
                 for (int n = 0; n < _datapoints.Length - 1; n++) {
@@ -3511,8 +3479,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     List<SeqDataPoint> InterpCells = new() { _datapoints[n], _datapoints[n + 1] };
                     InterpCells.Sort((cell1, cell2) => cell1.beat.CompareTo(cell2.beat));
                     //get start and end values, and how many beats separate them
-                    double _start = (double)InterpCells[0].Value;
-                    double _end = (double)InterpCells[1].Value;
+                    double _start = (double)(decimal)InterpCells[0].Value;
+                    double _end = (double)(decimal)InterpCells[1].Value;
                     double max = Math.Max(_start, _end);
                     double min = Math.Min(_start, _end);
                     int _beats = InterpCells[1].beat - InterpCells[0].beat + 1;
@@ -3621,25 +3589,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     for (int x = 0; x < interp.Length; x++) {
                         interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
                     }
-                    //write the datapoints to the object
+                    //write the datapoints to a temp object to store them
                     for (int x = 0; x < _beats; x++) {
-                        _temp[InterpCells[0].beat + x].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                        _temp[InterpCells[0].beat + x + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
                     }
                 }
-
-                for (int m = 0; m < _temp2.Cells.Count; m++) {
+                //transfer temp data points to another temp as the first one will be cleared
+                //this second one with sum together the tuning layers
+                for (int m = FrozenColumnOffset; m < _temp2.Cells.Count; m++) {
                     if (_temp2[m].Value == null)
-                        _temp2[m].Value = 0;
-                    _temp2[m].Value = (decimal?)_temp2[m].Value + ((decimal?)_temp[m].Value ?? 0);
+                        _temp2[m].Value = 0m;
+                    _temp2[m].Value = (decimal)_temp2[m].Value + (decimal)(_temp[m].Value ?? 0m);
                 }
+                _properties.parent.trackEditor.Rows.Remove(_temp);
             }
-
-            _properties.parent.LogUndo = false;
-            for (int m = 0; m < Main.Cells.Count; m++) {
-                Main[m].Value = _temp2[m].Value ?? 0;
+            //write temp2 to the real object
+            for (int m = FrozenColumnOffset; m < Main.Cells.Count; m++) {
+                Main[m].Value = (decimal)(_temp2[m].Value ?? 0m);
             }
+            _properties.parent.trackEditor.Rows.Remove(_temp2);
             _properties.parent.LogUndo = true;
-
+            _properties.parent.EditorIsTuning = false;
         }
 
         public static float ConvertRange(float originalStart, float originalEnd, float newStart, float newEnd, float value) // value to convert

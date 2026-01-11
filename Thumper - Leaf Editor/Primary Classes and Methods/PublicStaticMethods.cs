@@ -277,9 +277,11 @@ namespace Thumper_Custom_Level_Editor
         }
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
-        public static decimal TruncateDecimal(decimal d, byte decimals)
+        public static decimal? TruncateDecimal(decimal? d, byte decimals)
         {
-            decimal r = Math.Round(d, decimals);
+            if (d == null)
+                return null;
+            decimal r = Math.Round((decimal)d, decimals);
 
             if (d > 0 && r > d) {
                 return r - new decimal(1, 0, 0, false, decimals);
