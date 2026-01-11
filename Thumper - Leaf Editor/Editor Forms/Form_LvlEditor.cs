@@ -1308,10 +1308,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
                 s.Add("trait_type", seq_obj.trait_type);
                 JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.data_points.Where(x => x != null && x.value is not null)) {
+                foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>().Where(x => x != null && x.Value is not null)) {
                     JObject d = new() {
                         { "beat", datapoint.beat },
-                        { "value", decimal.Parse(datapoint.value.ToString()) },
+                        { "value", (decimal)datapoint.Value },
                         { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
                         { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };

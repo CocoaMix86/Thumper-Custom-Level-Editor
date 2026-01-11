@@ -46,9 +46,6 @@
             this.labelScrollH = new Label();
             this.labelScrollV = new Label();
             this.trackEditor = new DataGridView();
-            this.LeafEnabled = new DataGridViewTextBoxColumn();
-            this.LeafAudio = new DataGridViewTextBoxColumn();
-            this.LeafMultilane = new DataGridViewTextBoxColumn();
             this.leafToolStrip = new ToolStrip();
             this.btnTrackAdd = new ToolStripButton();
             this.btnTrackDelete = new ToolStripButton();
@@ -59,9 +56,9 @@
             this.btnTrackClear = new ToolStripButton();
             this.btnLeafClean = new ToolStripButton();
             this.btnTrackPlayback = new ToolStripButton();
-            this.btnLeafRandom = new ToolStripButton();
-            this.toolStripSeparator1 = new ToolStripSeparator();
             this.toolStripSeparator2 = new ToolStripSeparator();
+            this.toolStripSeparator1 = new ToolStripSeparator();
+            this.btnLeafRandom = new ToolStripButton();
             this.leaftoolsToolStrip = new ToolStrip();
             this.btnLeafColors = new ToolStripButton();
             this.btnLeafInterpLinear = new ToolStripSplitButton();
@@ -106,6 +103,9 @@
             this.panelObjects = new Panel();
             this.contextMenuObj = new ContextMenuStrip(this.components);
             this.toolstripObjTune = new ToolStripMenuItem();
+            this.LeafEnabled = new SequencerColumn();
+            this.LeafAudio = new SequencerColumn();
+            this.LeafMultilane = new SequencerColumn();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -172,7 +172,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 96);
+            this.btnRawImport.Size = new Size(54, 97);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -188,7 +188,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 348);
+            this.labelCollapsePanel2.Location = new Point(0, 347);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -259,7 +259,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 333);
+            this.vScrollBarTrackEditor.Size = new Size(15, 332);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -360,7 +360,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 333);
+            this.trackEditor.Size = new Size(491, 332);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -395,45 +395,6 @@
             this.trackEditor.PreviewKeyDown += this.AllowArrowMovement;
             this.trackEditor.Resize += this.trackEditor_Resize;
             // 
-            // LeafEnabled
-            // 
-            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.LeafEnabled.Frozen = true;
-            this.LeafEnabled.HeaderText = "";
-            this.LeafEnabled.MinimumWidth = 25;
-            this.LeafEnabled.Name = "LeafEnabled";
-            this.LeafEnabled.ReadOnly = true;
-            this.LeafEnabled.Resizable = DataGridViewTriState.False;
-            this.LeafEnabled.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.LeafEnabled.ToolTipText = "Enable/Disable All";
-            this.LeafEnabled.Width = 25;
-            // 
-            // LeafAudio
-            // 
-            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.LeafAudio.Frozen = true;
-            this.LeafAudio.HeaderText = "";
-            this.LeafAudio.MinimumWidth = 25;
-            this.LeafAudio.Name = "LeafAudio";
-            this.LeafAudio.ReadOnly = true;
-            this.LeafAudio.Resizable = DataGridViewTriState.False;
-            this.LeafAudio.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.LeafAudio.ToolTipText = "Mute/Unmute All";
-            this.LeafAudio.Width = 25;
-            // 
-            // LeafMultilane
-            // 
-            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.LeafMultilane.Frozen = true;
-            this.LeafMultilane.HeaderText = "";
-            this.LeafMultilane.MinimumWidth = 29;
-            this.LeafMultilane.Name = "LeafMultilane";
-            this.LeafMultilane.ReadOnly = true;
-            this.LeafMultilane.Resizable = DataGridViewTriState.False;
-            this.LeafMultilane.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.LeafMultilane.ToolTipText = "Expand/Collapse all lanes";
-            this.LeafMultilane.Width = 29;
-            // 
             // leafToolStrip
             // 
             this.leafToolStrip.AutoSize = false;
@@ -448,7 +409,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 333);
+            this.leafToolStrip.Size = new Size(24, 332);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -555,6 +516,16 @@
             this.btnTrackPlayback.ToolTipText = resources.GetString("btnTrackPlayback.ToolTipText");
             this.btnTrackPlayback.Click += this.btnTrackPlayback_Click;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new Size(23, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new Size(23, 6);
+            // 
             // btnLeafRandom
             // 
             this.btnLeafRandom.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -564,16 +535,6 @@
             this.btnLeafRandom.Size = new Size(23, 24);
             this.btnLeafRandom.ToolTipText = "Click to add a random object + values to the leaf";
             this.btnLeafRandom.Click += this.btnLeafRandom_Click;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new Size(23, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new Size(23, 6);
             // 
             // leaftoolsToolStrip
             // 
@@ -912,7 +873,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 363;
+            this.splitContainerLeafSide.SplitterDistance = 362;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -963,6 +924,7 @@
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -974,7 +936,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 96);
+            this.textEditor.Size = new Size(476, 97);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1061,6 +1023,42 @@
             this.toolstripObjTune.Text = "Add Tuning Layer";
             this.toolstripObjTune.ToolTipText = "This option only available for FLOAT objects";
             this.toolstripObjTune.Click += this.toolstripObjTune_Click;
+            // 
+            // LeafEnabled
+            // 
+            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafEnabled.Frozen = true;
+            this.LeafEnabled.HeaderText = "";
+            this.LeafEnabled.MinimumWidth = 25;
+            this.LeafEnabled.Name = "LeafEnabled";
+            this.LeafEnabled.ReadOnly = true;
+            this.LeafEnabled.Resizable = DataGridViewTriState.False;
+            this.LeafEnabled.ToolTipText = "Enable/Disable All";
+            this.LeafEnabled.Width = 25;
+            // 
+            // LeafAudio
+            // 
+            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafAudio.Frozen = true;
+            this.LeafAudio.HeaderText = "";
+            this.LeafAudio.MinimumWidth = 25;
+            this.LeafAudio.Name = "LeafAudio";
+            this.LeafAudio.ReadOnly = true;
+            this.LeafAudio.Resizable = DataGridViewTriState.False;
+            this.LeafAudio.ToolTipText = "Mute/Unmute All";
+            this.LeafAudio.Width = 25;
+            // 
+            // LeafMultilane
+            // 
+            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.LeafMultilane.Frozen = true;
+            this.LeafMultilane.HeaderText = "";
+            this.LeafMultilane.MinimumWidth = 29;
+            this.LeafMultilane.Name = "LeafMultilane";
+            this.LeafMultilane.ReadOnly = true;
+            this.LeafMultilane.Resizable = DataGridViewTriState.False;
+            this.LeafMultilane.ToolTipText = "Expand/Collapse all lanes";
+            this.LeafMultilane.Width = 29;
             // 
             // Form_LeafEditor
             // 
@@ -1170,9 +1168,6 @@
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem exampleswebLinkToolStripMenuItem;
-        private DataGridViewTextBoxColumn LeafEnabled;
-        private DataGridViewTextBoxColumn LeafAudio;
-        private DataGridViewTextBoxColumn LeafMultilane;
         private Label labelCollapsePanel2;
         private System.Windows.Forms.Timer timer1;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
@@ -1183,5 +1178,8 @@
         private ToolStripButton btnLeafClean;
         private ContextMenuStrip contextMenuObj;
         private ToolStripMenuItem toolstripObjTune;
+        private SequencerColumn LeafEnabled;
+        private SequencerColumn LeafAudio;
+        private SequencerColumn LeafMultilane;
     }
 }

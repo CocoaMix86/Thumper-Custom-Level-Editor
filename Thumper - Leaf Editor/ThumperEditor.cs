@@ -700,7 +700,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.LeafOptionShowCategory = leafoptionShowCategory.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 foreach (Sequencer_Object seq in leaf.leafProperties.seq_objs) {
-                    Form_LeafEditor.ChangeTrackName(seq, Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.category}] " : "");
+                    Form_LeafEditor.ChangeTrackName(seq, seq.category);
                 }
                 TCLE.ResizeHeaders(leaf.trackEditor);
             }

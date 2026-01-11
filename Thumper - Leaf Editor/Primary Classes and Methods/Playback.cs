@@ -231,7 +231,7 @@ namespace Thumper_Custom_Level_Editor
                     //instead, check for any beat set to 0.
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq[beat].value == null || (Seq[beat].value != null && (decimal)Seq[beat].value != 0)) {
+                            if (Seq[beat].Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
                                     if (Seq.friendly_param == "bar[double]") {
@@ -255,7 +255,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                     else {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq[beat].value != null) {
+                            if (Seq[beat].Value != null) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
                                     if (Seq.friendly_param == "bar[double]") {
@@ -539,7 +539,7 @@ namespace Thumper_Custom_Level_Editor
             {
                 lastprocessed = Seq[x];
                 //account for default value being +-15
-                decimal valuetotest = Seq[x].value == null ? (decimal)Seq.defaultvalue : (decimal)Seq[x].value;
+                decimal valuetotest = Seq[x].Value == null ? (decimal)Seq.defaultvalue : (decimal)Seq[x].Value;
                 if (valuetotest >= 15) {
                     if (IsTurning == -1) {
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 10);
@@ -593,16 +593,16 @@ namespace Thumper_Custom_Level_Editor
         {
             for (int x = 1; x < LeafLastBeat; x++)
             {
-                decimal? value = (decimal?)Seq[x].value;
+                decimal? value = (decimal?)Seq[x].Value;
                 if (Seq.defaultvalue == 0) {
                     if (value is 0 or null) {
-                        if ((decimal?)Seq[x - 1].value == 1)
+                        if ((decimal?)Seq[x - 1].Value == 1)
                             AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
                 }
                 else if (Seq.defaultvalue == 1) {
                     if (value is 0) {
-                        if ((decimal?)Seq[x - 1].value is 1 or null)
+                        if ((decimal?)Seq[x - 1].Value is 1 or null)
                             AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
                 }
@@ -638,7 +638,7 @@ namespace Thumper_Custom_Level_Editor
                         break;
                 }
 
-                foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
+                foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
                     //find events that fall inside the sentry activation time
                     foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > ((sdp.beat + BeatOffset) *100)+400 && x.tick <= (sdp.beat + length + BeatOffset) *100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
@@ -666,10 +666,10 @@ namespace Thumper_Custom_Level_Editor
             if (Seq == null)
                 return;
 
-            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
-                SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
+            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
+                SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.Value), 0, (sdp.beat + CallOffset) * 100, 0));
                 //log 2 speed value to get octaves, times 12 for semitones
-                double semitones = Math.Log2((double)(decimal)sdp.value) * 12;
+                double semitones = Math.Log2((double)(decimal)sdp.Value) * 12;
                 //each semitone takes 136.5 units on the pitchwheel
                 double pitchadjust = semitones * 136.5;
                 foreach (List<BASS_MIDI_EVENT> listevents in GlobalSampleEvents) {
@@ -681,7 +681,7 @@ namespace Thumper_Custom_Level_Editor
                         continue;
                     SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), x, ((sdp.beat + CallOffset) * 100) - 1, 0));
                 }
-                //SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_SPEED, (int)(10_000 * (decimal)sdp.value), 0, (sdp.beat + CallOffset) * 100, 0));
+                //SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_SPEED, (int)(10_000 * (decimal)sdp.Value), 0, (sdp.beat + CallOffset) * 100, 0));
             }
         }
 
@@ -698,7 +698,7 @@ namespace Thumper_Custom_Level_Editor
             if (velocity > 127)
                 velocity = 127;
             //write each data point as a sample event
-            foreach (SeqDataPoint sdp in Seq.data_points.Where(x => x.beat < LeafLastBeat && x.value != null)) {
+            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
                 GlobalSampleEvents[GlobalSamplesToPlay.IndexOf(Seq.obj_name)].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(GlobalSamplesToPlay.IndexOf(Seq.obj_name) + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
             }
         }
