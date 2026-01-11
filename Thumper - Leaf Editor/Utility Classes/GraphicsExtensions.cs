@@ -36,26 +36,14 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static void DrawRoundedRectangle(this Graphics graphics, Pen pen, Rectangle bounds, int cornerRadius)
-        {
-            /*
-            if (graphics == null)
-                throw new ArgumentNullException(nameof(graphics));
-            if (pen == null)
-                throw new ArgumentNullException(nameof(pen));
-
-            using (GraphicsPath path = RoundedRect(bounds, cornerRadius)) {
+        {            
+            using (GraphicsPath path = CreateRoundedRectangle(bounds, cornerRadius)) {
                 graphics.DrawPath(pen, path);
-            }
-            */
+            }            
         }
 
         public static void FillRoundedRectangle(this Graphics graphics, Brush brush, Rectangle bounds, int cornerRadius)
         {
-            if (graphics == null)
-                throw new ArgumentNullException(nameof(graphics));
-            if (brush == null)
-                throw new ArgumentNullException(nameof(brush));
-
             using (GraphicsPath path = CreateRoundedRectangle(bounds, cornerRadius)) {
                 graphics.FillPath(brush, path);
             }

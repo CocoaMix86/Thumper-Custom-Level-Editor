@@ -277,6 +277,9 @@ namespace Thumper_Custom_Level_Editor
 
             if (rowIndex is -1 || this.OwningRow.Index is -1)
                 return _set;
+
+            if (((Sequencer_Object)this.OwningRow).category == "PLAY SAMPLE")
+                ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             //if value changing on a tuning layer, recalc the values
             if (((Sequencer_Object)this.OwningRow).obj_name == "_TuningLayerX") {
                 Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);

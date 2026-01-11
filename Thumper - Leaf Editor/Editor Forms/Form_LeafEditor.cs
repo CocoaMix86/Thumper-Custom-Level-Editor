@@ -773,8 +773,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
-                        e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height), 10);
+                        //e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height), 10);
                         e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion + 3, e.RowBounds.Top + 3, (int)Math.Floor(cellwidth * samp.beats) - 6, e.RowBounds.Height - 6);
+                        e.Graphics.DrawRoundedRectangle(PenWhite, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion + 2, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats) - 4, e.RowBounds.Height - 4), 10);
                     }
                 }
             skipwaveform:;
