@@ -73,8 +73,6 @@ namespace Thumper_Custom_Level_Editor
         {
             get => Enabled;
             set {
-                if (this.obj_name == "_TuningLayerX")
-                    value = true;
                 if (value != Enabled)
                     WaveBitmap = null;
                 Enabled = value;
@@ -94,12 +92,10 @@ namespace Thumper_Custom_Level_Editor
                 if (this.friendly_lane is not "lane center" and not "none")
                     this.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, this.category);
-                Form_LeafEditor.UpdateRowHeaderColor(this);
             }
         }
         private bool ExpandLanes;
         public bool HasShownError { get; set; }
-        public bool HasTuningLayer { get; set; }
         public Bitmap TuningLayer { get; set; }
         public int CenterLaneOffset { 
             get {
@@ -262,14 +258,14 @@ namespace Thumper_Custom_Level_Editor
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
                 if (ParentSeqObj.trait_type == "kTraitBool") {
-                    if ((decimal?)value is not 1 or 0)
+                    if ((decimal?)value is not null or 1 or 0)
                         value = 1m;
                 }
                 else if (ParentSeqObj.trait_type == "kTraitColor") {
                     value = TCLE.TruncateDecimal((decimal?)value, 0);
                 }
                 else if (ParentSeqObj.trait_type == "kTraitAction") {
-                    if ((decimal?)value is not 1 or 0)
+                    if ((decimal?)value is not null or 1 or 0)
                         value = 1m;
                 }
                 else if (ParentSeqObj.trait_type == "kTraitInt") {

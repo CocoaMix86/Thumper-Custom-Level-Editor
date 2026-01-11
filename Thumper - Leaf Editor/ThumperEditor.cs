@@ -153,10 +153,6 @@ namespace Thumper_Custom_Level_Editor
             //
             MainBeeble.Size = AppSettings.beeblesize;
             MainBeeble.Location = AppSettings.beebleloc;
-
-            CustomizeWorkspace _c = new();
-            _c.BringToFront();
-            _c.Show();
         }
 
         private static void JumpListUpdate()

@@ -162,6 +162,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static Pen PenGreen = new(BrushGreen, 3);
         private static Pen PenVioletThick = new(new SolidBrush(Color.Violet), 3);
         private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 1);
+        private static Pen PenWhite = new(new SolidBrush(Color.White), 3);
         private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
         //
@@ -526,7 +527,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //paint the whole cell with the highlighting color
-            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
+            else if (SequencerObjects[e.RowIndex].trait_type is not "kTraitColor" && SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE" && SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                 e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds);
             //if a color object, convert the cell value to ARGB and use that
             else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor" && SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
@@ -607,7 +608,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
         {
-            if (e.RowIndex != -1 && SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX")
+            if (e.RowIndex != -1 && SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
                 return;
             //get dimensions
             int x = e.CellBounds.Left + ((e.CellBounds.Width - IconWidth) / 2);
@@ -761,10 +762,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
                         if (WaveToDraw == null)
                             goto skipwaveform;
-                        using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
+                        /*using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
                             graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
                             graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
-                        }
+                        }*/
                         seqref.WaveBitmap = WaveToDraw;
                     }
                     //once the bitmap is created, now we can do some funky stuff
@@ -772,7 +773,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
-                        e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4);
+                        e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height), 10);
+                        e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion + 3, e.RowBounds.Top + 3, (int)Math.Floor(cellwidth * samp.beats) - 6, e.RowBounds.Height - 6);
                     }
                 }
             skipwaveform:;
@@ -883,6 +885,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     goto paintheader;
                 }
                 Sequencer_Object seqref = SequencerObjects[e.RowIndex];
+                //skip drawing graphs if object disabled
+                if (!seqref.enabled)
+                    goto paintheader;
                 List<SeqDataPoint> _datapoints = seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToList();
                 if (_datapoints.Count < 1)
                     goto paintheader;
@@ -1006,7 +1011,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
-        #endregion
+            #endregion
         paintheader:
             RowPrePainting = true;
             e.PaintHeader(true);
@@ -1031,7 +1036,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (EditorIsFinding || EditorIsTuning)
+            if (EditorIsProcessing)
                 return;
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
@@ -1052,7 +1057,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_SelectionChanged(object sender, EventArgs e)
         {
             //do nothing if the selection is inside the frozen columns
-            if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex - FrozenColumnOffset < 0)
+            if (trackEditor.SelectedCells.Count == 0 || trackEditor.SelectedCells[^1].ColumnIndex < FrozenColumnOffset)
                 return;
             if (ResetRowAfterEdit && trackEditor.CurrentCell.ColumnIndex == LastColumnEdit) {
                 ResetRowAfterEdit = false;
@@ -1070,13 +1075,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
-            trackEditor.Invalidate();
             //get all selected cells and display them grouped together in the propertygrid
             //this allows for mass editing
             SelectedDPs.Clear();
             foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
                 //check if index out of bounds
-                if (dgvc.ColumnIndex - FrozenColumnOffset < 0)
+                if (dgvc.ColumnIndex < FrozenColumnOffset)
                     continue;
                 SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex]);
             }
@@ -1100,8 +1104,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyCode == Keys.Enter)
                 ResetRowAfterEdit = true;
-            if (trackEditor.CurrentCell.RowIndex == trackEditor.RowCount - 1)
-                trackEditor_SelectionChanged(null, null);
+            //if (trackEditor.CurrentCell.RowIndex == trackEditor.RowCount - 1)
+                //trackEditor_SelectionChanged(null, null);
         }
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -1141,11 +1145,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 CellsToChange.Add(StartCell);
 
             foreach (DataGridViewCell _cell in CellsToChange) {
+                //skip readonly and hidden cells
+                if (_cell.ReadOnly || !_cell.OwningRow.Visible)
+                    continue;
+
                 _cell.Value = _val;
             }
 
             EditorIsLoading = false;
-
+            SaveCheckAndWrite(false, "Cell Value(s) Updated");
+            ShowRawTrackData(SequencerObjects[StartCell.RowIndex]);
             /*
             if (EditorIsInterpolating || EditorIsPasting || EditorIsRandomizing)
                 return;
@@ -1366,20 +1375,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Button == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
-                    //if (trackEditor[e.ColumnIndex, e.RowIndex].Value != null) {
                     LogUndo = false;
                     CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);             
                     RightclickChanges = true;
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
-                    //}
                 }
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected) {
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null && dgv.SelectedCells.Count == 1)
                         return;
                     LogUndo = false;
-                    trackEditor[e.ColumnIndex, e.RowIndex].Value = null;
+                    dgv[e.ColumnIndex, e.RowIndex].Value = null;
+                    CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
                     LogUndo = true;
+                    trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                 }
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
             }
@@ -2798,16 +2807,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _s.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == _s.friendly_param)?.defaultcolor ?? Color.Purple);
                 parent.parent.trackEditor.Rows.Add(_s);
 
+                //if object is a layer volume, we "reset" its index to x so it can be renumbered in case its out of order.
                 if (_s.param_path.StartsWith("layer_volume"))
                     _s.param_path = "layer_volume,x";
-
-                //if object is a .samp, set the friendly_param and friendly_type since they don't exist in _objects
+                //if the object is a tuning layer, handle it here
                 if (_s.obj_name == "_TuningLayerX") {
                     _s.friendly_param = _s.param_path;
                     _s.category = "";
-                    if (Seq_Objs[^1].obj_name != "_TuningLayerX") Seq_Objs[^1].HasTuningLayer = true;
                 }
-                //otherwise, search _objects for the friendly names for display purposes
+                //if object is a .samp, set category and friendly_param since they don't exist in LeafObjects
+                else if (_s.obj_name.EndsWith(".samp") && _s.param_path == "play") {
+                    _s.category = "PLAY SAMPLE";
+                    _s.friendly_param = "play";
+                }
+                //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
                         string reg_param = $"{_s.param_path}{(_s.param_path_lane != "none" ? ".ent" : "")}";
@@ -2822,11 +2835,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         }
                     } catch (Exception) { }
                 }
-
+                //import data points to the row cells. There are 2 methods here for backwards compat
                 foreach (dynamic dp in seq_obj["data_points"]) {
+                    //modern data point. The save data includes interp and ease
                     if (dp is JObject data_point) {
                         SeqDataPoint data = new() {
-                            //Beat = (int)data_point["beat"],
                             Value = (decimal)data_point["value"],
                             Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
                             Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
@@ -2835,6 +2848,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             continue;
                         _s[(int)data_point["beat"] + FrozenColumnOffset] = data;
                     }
+                    //old data point. The save includes Value only.
                     else {
                         SeqDataPoint data = new() {
                             //Beat = int.Parse(((JProperty)dp).Name),
@@ -2842,6 +2856,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             Interpolation = "Linear",
                             Ease = TCLE.Easings["kEaseInOut"]
                         };
+                        if (int.Parse(((JProperty)dp).Name) >= parent.Beats)
+                            continue;
                         _s[data.beat + FrozenColumnOffset] = data;
                     }
                 }
@@ -2917,7 +2933,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
             SequencerObjects.Insert(index + 1, seq);
-            SequencerObjects[index].HasTuningLayer = true;
             trackEditor.Rows.Insert(index + 1, seq);
             ChangeTrackName(seq, "");
             UpdateRowHeaderColor(seq);
