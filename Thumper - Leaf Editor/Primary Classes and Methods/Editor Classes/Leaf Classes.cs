@@ -30,7 +30,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object()
         {
-            ClearDataPoints();
+
         }
 
         public SeqDataPoint this[int index]
@@ -143,18 +143,11 @@ namespace Thumper_Custom_Level_Editor
 
         public void ClearDataPoints()
         {
-            this.Cells.Clear();
-            /*
-            int maxbeats = parent.SequencerType == ".leaf" ? 255 : parent.beats;
-            data_points = new SeqDataPoint[maxbeats].ToList();
-            for (int x = 0; x < maxbeats; x++)
-            {
-                data_points[x] = new() { Owner = this, Beat = x };
+            foreach (SeqDataPoint sdp in this.Cells) {
+                sdp.Value = null;
+                sdp.Ease = "Ease In Out";
+                sdp.Interpolation = "Linear";
             }
-            if (editor_row != null)
-                for (int x = 0; x < editor_row.Cells.Count; x++)
-                    editor_row.Cells[x].Value = null;
-            */
         }
 
         public Sequencer_Object Clone()
@@ -288,6 +281,8 @@ namespace Thumper_Custom_Level_Editor
 
             if (rowIndex is -1 || this.OwningRow.Index is -1)
                 return _set;
+
+            this.OwningRow.DataGridView.InvalidateRow(this.RowIndex);
 
             if (((Sequencer_Object)this.OwningRow).category == "PLAY SAMPLE")
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);

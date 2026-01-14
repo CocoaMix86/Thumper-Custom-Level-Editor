@@ -362,6 +362,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //handle horizontal scroll
                 if (MouseCurrentColumn != -1) {
                     trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + (e.Delta * -1) < 0 ? 0 : trackEditor.HorizontalScrollingOffset + (e.Delta * -1);
+                    trackEditor.Invalidate();
                 }
                 //handle vertical scroll
                 else {
@@ -2518,7 +2519,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            sfd.InitialDirectory = LoadedLeaf.DirectoryName ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 SplitFile = new FileInfo(sfd.FileName);
             }
@@ -2529,7 +2530,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafSplitAfter.loadedleaf = SplitFile;
             //after setting the loadedleaf like that, it will kick this leafs file out of locked files. So we have to readd it
             TCLE.AddFileLock(LoadedLeaf);
-            //go over each sequencer object, and shift data points backwards so they align at beat 0
+            //remove columns from the beginning to shoft all cells backwards until they get to beat 0
+            for (int x = 0; x < splitindex; x++) {
+                LeafSplitAfter.trackEditor.Columns.RemoveAt(0);
+            }
+            /*
             foreach (Sequencer_Object seq in LeafSplitAfter.SequencerObjects) {
                 //some objects need the leaf name. Change them to the new leaf's name
                 if (seq.obj_name.Contains(".leaf"))
@@ -2544,10 +2549,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //after copying, set the value to null since this datapoint is "leaving"
                     seq[x].Value = null;
                 }
-            }
+            }*/
             //reduce split leafs beat count and save
             LeafSplitAfter.LeafProperties.beats = LeafProperties.beats - splitindex;
             LeafSplitAfter.SaveCheckAndWrite(true, "");
+            LeafSplitAfter.Dispose();
 
             //reduce beat count of the leaf that was just split and save it
             LeafProperties.beats = splitindex;
