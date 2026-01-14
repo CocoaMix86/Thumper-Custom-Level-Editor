@@ -61,14 +61,14 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public dynamic seqJSON;
         [Browsable(false)]
-        public ObservableCollection<Sequencer_Object> seq_objs {
+        public List<Sequencer_Object> seq_objs {
             get => _SeqObjs;
             set {
                 _SeqObjs = value;
                 parent.SaveCheckAndWrite(true, "Sequencer saved", false);
             }
         }
-        private ObservableCollection<Sequencer_Object> _SeqObjs;
+        private List<Sequencer_Object> _SeqObjs;
         [Browsable(false)]
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]

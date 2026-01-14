@@ -573,6 +573,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
+            TCLE.SaveTCL();
             GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false, null });
         }
 
@@ -1071,6 +1072,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
+            TCLE.SaveTCL();
             GlobalActiveDocument.GetType().GetMethod("Save").Invoke(GlobalActiveDocument, new object[] { true });
             //FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
         }
@@ -1079,6 +1081,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
+            TCLE.SaveTCL();
             foreach (Form_WorkSpace workspace in Workspaces) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
                     document.GetType().GetMethod("Save").Invoke(document, new object[] { false });

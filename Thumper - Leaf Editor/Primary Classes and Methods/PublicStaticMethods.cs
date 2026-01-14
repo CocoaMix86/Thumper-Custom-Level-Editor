@@ -1161,6 +1161,13 @@ namespace Thumper_Custom_Level_Editor
             return _save;
         }
 
+        public static void SaveTCL()
+        {
+            JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
+            //write JSON to file
+            File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+        }
+
 
         public static void PlaySound(string audiofile)
         {

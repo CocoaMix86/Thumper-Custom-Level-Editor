@@ -23,10 +23,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (this.TabText != "Project Properties")
                 return;
-            //build the JSON to write to file
-            JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
-            //write JSON to file
-            File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            TCLE.SaveTCL();
         }
     }
 }
