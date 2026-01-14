@@ -298,8 +298,8 @@ namespace Thumper_Custom_Level_Editor
             int biggestheader = 50;
             //foreach (Sequencer_Object seq in SequencerObjects) {
             foreach (DataGridViewRow dgvr in dgv.Rows) {
-            //measure header and see if it's the biggest
-            int tempsize = TextRenderer.MeasureText(dgvr.HeaderCell.Value.ToString(), dgvr.HeaderCell.Style.Font).Width;
+                //measure header and see if it's the biggest
+                int tempsize = TextRenderer.MeasureText(dgvr.HeaderCell.Value?.ToString(), dgvr.HeaderCell.Style.Font).Width;
                 if (tempsize > biggestheader)
                     biggestheader = tempsize;
             }

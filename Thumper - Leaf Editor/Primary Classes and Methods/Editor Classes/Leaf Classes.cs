@@ -28,7 +28,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public LeafProperties ParentLeaf;
 
-        public Sequencer_Object(string test)
+        public Sequencer_Object()
         {
             ClearDataPoints();
         }
@@ -165,7 +165,6 @@ namespace Thumper_Custom_Level_Editor
                 obj_name = this.obj_name,
                 param_path = this.param_path,
                 trait_type = this.trait_type,
-                //skip data points
                 step = this.step,
                 defaultvalue = this.defaultvalue,
                 footer = this.footer,
@@ -177,8 +176,7 @@ namespace Thumper_Custom_Level_Editor
                 isdefault = false,
                 mute = false,
                 id = TCLE.rng.Next(),
-                expandlanes = false,
-                //editor_row = null
+                expandlanes = false
             };
             clone.CloneCells(this);
             return clone;
@@ -191,7 +189,7 @@ namespace Thumper_Custom_Level_Editor
                 SeqDataPoint[] cells = new SeqDataPoint[cellsCount];
                 for (int i = 0; i < cellsCount; i++) {
                     SeqDataPoint dataGridViewCell = rowTemplate.Cells[i] as SeqDataPoint;
-                    SeqDataPoint dgvcNew = (SeqDataPoint)dataGridViewCell.Clone();
+                    SeqDataPoint dgvcNew = dataGridViewCell.Clone();
                     cells[i] = dgvcNew;
                 }
 
@@ -359,8 +357,6 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public DataGridView trackEditor => ParentEditor.trackEditor;
         [Browsable(false)]
-        public JObject revertPoint { get; set; }
-        [Browsable(false)]
         public List<Sequencer_Object> seq_objs {
             get => _SeqObjs;
             set {
@@ -486,7 +482,6 @@ namespace Thumper_Custom_Level_Editor
             get => selectedobj.highlight_color;
             set { 
                 selectedobj.highlight_color = value;
-                Form_LeafEditor.UpdateRowHeaderColor(selectedobj);
             }
         }
 

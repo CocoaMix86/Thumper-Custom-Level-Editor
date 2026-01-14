@@ -1340,7 +1340,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //if ShowLanes, don't alter lane visibility
                     if (Properties.Settings.Default.LeafOptionShowLane)
                         return;
-                    FindMissingLaneObjects(seq);
+                    //FindMissingLaneObjects(seq);
                     seq.expandlanes = !seq.expandlanes;
                     SequencerObjects[seq.Index - 2].expandlanes = seq.expandlanes;
                     SequencerObjects[seq.Index - 1].expandlanes = seq.expandlanes;
@@ -1868,7 +1868,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("Due to reasons, you cannot change a multi-lane object into a non-multi-lane object. Please just add a new object.", "Thumper Custom Level Editor");
                 return;
             }
-            Sequencer_Object[] Lanes = SequencerObjects.Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
+            Sequencer_Object[] Lanes = SequencerObjects.GetRange(_currentseq.Index + _currentseq.LaneOffsetFromTop, (_currentseq.friendly_lane != "none" ? 5 : 1)).ToArray();// Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
             for (int x = 0; x < Lanes.Length; x++) {
                 Lanes[x].obj_name = objmatch.category == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
                 Lanes[x].category = objmatch.category;
@@ -1881,7 +1881,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Lanes[x].obj_name = LeafProperties.FilePath.Name;
                 ChangeTrackName(Lanes[x], Lanes[x].category);
             }
-            FindMissingLaneObjects(SequencerObjects[CurrentRow]);
+            //
+            if (Lanes.Length == 1 && Lanes[0].friendly_lane != "none")
+                LoadMultiLanes(Lanes[0], SequencerObjects);
+            //FindMissingLaneObjects(SequencerObjects[CurrentRow]);
             trackEditor.InvalidateRow(_currentseq.Index);
 
             SaveCheckAndWrite(false, "Add Object");
@@ -2157,15 +2160,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object clone = _newtrack.Clone();
                 clone.ParentLeaf = leafProperties;
                 clone.expandlanes = GlobalExpand;
-                //need to remove beats beyond the beat count
-                for (int x = LeafProperties.beats; x < 255; x++) {
-                    clone[x] = _newtrack[x].Clone();
-                }
                 SequencerObjects.Insert(_index, clone);
                 trackEditor.Rows.Insert(_index, clone);
+                //need to remove beats beyond the beat count
+                //for (int x = LeafProperties.beats; x < 255; x++) {
+                    //clone[x] = _newtrack[x].Clone();
+                //}
                 try {
                     //pass _griddata per row to be imported to the DGV
-                    TrackRawImport(clone, _newtrack.Cells.Cast<SeqDataPoint>().ToList(), LeafProperties);
+                    //TrackRawImport(clone, _newtrack.Cells.Cast<SeqDataPoint>().ToList(), LeafProperties);
                 } catch (Exception) { }
                 _index++;
             }
@@ -2775,6 +2778,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
             trackZoom_Scroll(null, null);
+            foreach (Sequencer_Object seq in SequencerObjects) {
+                //update visual row properties
+                ChangeTrackName(seq, seq.category);
+            }
 
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
@@ -2839,7 +2846,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (ObjectToImport.friendly_lane is not "none") {
                     LoadMultiLanes(ObjectToImport, LoadedObjects);
                     ObjectToImport.expandlanes = Properties.Settings.Default.LeafOptionShowLane;
-                    ParentLeaf.trackEditor.Rows.Add(ObjectToImport);
+                    //ParentLeaf.trackEditor.Rows.Add(ObjectToImport);
                 }
                 else {
                     ObjectToImport.expandlanes = true;
@@ -2848,8 +2855,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj);
-                //update visual row properties
-                ChangeTrackName(ObjectToImport, ObjectToImport.category);
                 RowReadOnly(ObjectToImport, ObjectToImport.enabled);
             }
 
@@ -2893,17 +2898,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             if (lookup == null) {
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]);
+                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]);
+                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]);
+                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]);
+                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]);
+                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+
+                lookup = LoadedObjects.FirstOrDefault(x => x.obj_name == ObjectToImport.obj_name && x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             }
-            lookup = LoadedObjects.FirstOrDefault(x => x.obj_name == ObjectToImport.obj_name && x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             int index = LoadedObjects.IndexOf(lookup);
             LoadedObjects[index] = ObjectToImport;
             ObjectToImport.ParentLeaf.trackEditor.Rows.RemoveAt(index);
@@ -3049,7 +3055,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
-                leafProperties.revertPoint = _saveJSON;
+                //leafProperties.revertPoint = _saveJSON;
                 //If leaf, build the JSON to write to file
                 if (LoadedLeaf.Extension == ".leaf") {
                     //write JSON to file
@@ -3437,7 +3443,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Interpolation = "Linear";
             }
         }
-
+        /*
         private void FindMissingLaneObjects(Sequencer_Object seq)
         {
             if (EditorIsMoving)
@@ -3469,7 +3475,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             EditorIsFinding = false;
-        }
+        }*/
 
         public static void CalculateTuningLayers(LeafProperties _properties, Sequencer_Object seq)
         {
