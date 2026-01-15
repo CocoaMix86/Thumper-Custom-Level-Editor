@@ -413,8 +413,8 @@
             this.toolStripLabel3.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic);
             this.toolStripLabel3.ForeColor = Color.Fuchsia;
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new Size(81, 19);
-            this.toolStripLabel3.Text = "Recent Levels";
+            this.toolStripLabel3.Size = new Size(138, 19);
+            this.toolStripLabel3.Text = "Recent Opened Projects";
             // 
             // btnRecentClose
             // 
@@ -796,7 +796,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 126);
+            this.contextmenuEdit.Size = new Size(218, 148);
             // 
             // toolstripEditUndo
             // 
@@ -871,7 +871,6 @@
             // toolstripEdit
             // 
             this.toolstripEdit.DropDown = this.contextmenuEdit;
-            this.toolstripEdit.Enabled = false;
             this.toolstripEdit.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.toolstripEdit.ForeColor = Color.White;
             this.toolstripEdit.Margin = new Padding(0, 5, 0, 5);

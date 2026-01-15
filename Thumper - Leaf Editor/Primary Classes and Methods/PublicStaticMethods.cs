@@ -268,6 +268,7 @@ namespace Thumper_Custom_Level_Editor
             foreach (object? item in toolStripTitle.Items)
                 (item as ToolStripItem).Visible = visible;
             toolstripFile.Visible = true;
+            toolstripEdit.Visible = true;
             toolstripHelp.Visible = true;
             toolstripFormClose.Visible = true;
             toolstripFormMinimize.Visible = true;

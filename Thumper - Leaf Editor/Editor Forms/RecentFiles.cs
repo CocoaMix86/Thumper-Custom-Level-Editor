@@ -33,7 +33,7 @@
             }
             
             if (e.ColumnIndex == 2) {
-                e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+                e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Single;
                 e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             }
             //button is in column 3, so that's where to draw the image
