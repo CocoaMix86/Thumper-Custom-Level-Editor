@@ -41,10 +41,10 @@
             this.toolTip1 = new ToolTip(this.components);
             this.panelRecentFiles = new Panel();
             this.dgvRecentFiles = new DataGridView();
-            this.dataGridViewImageColumn1 = new DataGridViewButtonColumn();
+            this.dataGridViewImageColumn1 = new DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            this.closerecent = new DataGridViewButtonColumn();
+            this.closerecent = new DataGridViewTextBoxColumn();
             this.toolstripRecentFiles = new ToolStrip();
             this.toolStripLabel3 = new ToolStripLabel();
             this.btnRecentClose = new ToolStripButton();
@@ -267,7 +267,7 @@
             this.panelRecentFiles.Location = new Point(16, 62);
             this.panelRecentFiles.MinimumSize = new Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new Size(569, 247);
+            this.panelRecentFiles.Size = new Size(569, 394);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -284,9 +284,9 @@
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.Silver;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRecentFiles.ColumnHeadersHeight = 20;
@@ -318,35 +318,40 @@
             this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvRecentFiles.RowTemplate.Height = 20;
+            this.dgvRecentFiles.RowTemplate.Height = 30;
             this.dgvRecentFiles.RowTemplate.Resizable = DataGridViewTriState.False;
-            this.dgvRecentFiles.Size = new Size(567, 223);
+            this.dgvRecentFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRecentFiles.Size = new Size(567, 370);
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += this.dgvRecentFiles_CellClick;
+            this.dgvRecentFiles.CellMouseDoubleClick += this.dgvRecentFiles_CellMouseDoubleClick;
             this.dgvRecentFiles.CellPainting += this.dgvRecentFiles_CellPainting;
+            this.dgvRecentFiles.RowPrePaint += this.dgvRecentFiles_RowPrePaint;
             this.dgvRecentFiles.Click += this.panelRecentClick;
             // 
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle2.ForeColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(55, 55, 55);
             this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewImageColumn1.FlatStyle = FlatStyle.Flat;
             this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.MinimumWidth = 10;
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.ReadOnly = true;
             this.dataGridViewImageColumn1.Resizable = DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewImageColumn1.ToolTipText = "Click to load level";
-            this.dataGridViewImageColumn1.Width = 5;
+            this.dataGridViewImageColumn1.Width = 10;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
             this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
@@ -359,7 +364,9 @@
             // dataGridViewTextBoxColumn2
             // 
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new Font("Arial Narrow", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.Font = new Font("Arial Narrow", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.Black;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
             this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
@@ -370,19 +377,19 @@
             // closerecent
             // 
             this.closerecent.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle5.ForeColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(55, 55, 55);
             dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(55, 55, 55);
             this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
-            this.closerecent.FlatStyle = FlatStyle.Flat;
             this.closerecent.HeaderText = "";
+            this.closerecent.MinimumWidth = 16;
             this.closerecent.Name = "closerecent";
             this.closerecent.ReadOnly = true;
             this.closerecent.Resizable = DataGridViewTriState.False;
+            this.closerecent.SortMode = DataGridViewColumnSortMode.NotSortable;
             this.closerecent.ToolTipText = "Click to remove entry";
-            this.closerecent.Width = 5;
+            this.closerecent.Width = 16;
             // 
             // toolstripRecentFiles
             // 
@@ -696,15 +703,16 @@
             this.contextMenuRecentProjects.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuRecentProjects.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem2 });
             this.contextMenuRecentProjects.Name = "contextmenuHelp";
+            this.contextMenuRecentProjects.OwnerItem = this.toolstripFileRecent;
             this.contextMenuRecentProjects.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuRecentProjects.Size = new Size(181, 48);
+            this.contextMenuRecentProjects.Size = new Size(81, 26);
             this.contextMenuRecentProjects.Opening += this.contextMenuRecentProjects_Opening;
             this.contextMenuRecentProjects.ItemClicked += this.contextMenuRecentProjects_ItemClicked;
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new Size(180, 22);
+            this.toolStripMenuItem2.Size = new Size(80, 22);
             this.toolStripMenuItem2.Text = "e";
             // 
             // toolStripMenuItem63
@@ -2119,10 +2127,6 @@
         private System.Windows.Forms.ToolStripButton lblChangelogClose;
         private System.Windows.Forms.Label lblChangelog;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.DataGridViewButtonColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewButtonColumn closerecent;
         private Thumper_Custom_Level_Editor.ToolStripEx toolStripTitle;
         private System.Windows.Forms.ToolStripMenuItem toolstripFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripEdit;
@@ -2279,6 +2283,10 @@
         private ToolStripMenuItem toolstripFileClearTemp;
         private ToolStripMenuItem toolstripFileRestart;
         private ToolStripMenuItem leafoptionVerticalCells;
+        private DataGridViewTextBoxColumn dataGridViewImageColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn closerecent;
     }
 }
 

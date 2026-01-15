@@ -133,6 +133,7 @@
             this.btnExternal.TabIndex = 163;
             this.btnExternal.Text = "Add Other...";
             this.btnExternal.UseVisualStyleBackColor = false;
+            this.btnExternal.Click += this.btnExternal_Click;
             // 
             // DragDropItemList
             // 
