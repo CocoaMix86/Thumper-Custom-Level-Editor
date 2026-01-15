@@ -255,7 +255,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                     else {
                         for (int beat = 0; beat < LeafLastBeat; beat++) {
-                            if (Seq[beat].Value != null) {
+                            if (Seq[beat].Value != null && (decimal?)Seq[beat].Value != 0) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
                                     if (Seq.friendly_param == "bar[double]") {
