@@ -128,6 +128,9 @@ namespace Thumper_Custom_Level_Editor
 
             //Build subtree for each folder inside this folder
             foreach (DirectoryInfo subdir in directoryInfo.GetDirectories()) {
+                //skip aurora folder. TCLE does not need the files in it
+                if (subdir.Name == "aurora")
+                    continue;
                 BuildTree(subdir, folder.Nodes);
             }
 
