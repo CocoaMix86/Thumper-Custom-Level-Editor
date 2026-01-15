@@ -2158,19 +2158,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsPasting = true;
             //add copied Sequencer_Object to main _tracks list
             foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
-                Sequencer_Object clone = _newtrack.Clone();
+                Sequencer_Object clone = _newtrack.Clone(LeafProperties.beats);
                 clone.ParentLeaf = leafProperties;
                 clone.expandlanes = GlobalExpand;
                 SequencerObjects.Insert(_index, clone);
                 trackEditor.Rows.Insert(_index, clone);
-                //need to remove beats beyond the beat count
-                //for (int x = LeafProperties.beats; x < 255; x++) {
-                    //clone[x] = _newtrack[x].Clone();
-                //}
-                try {
-                    //pass _griddata per row to be imported to the DGV
-                    //TrackRawImport(clone, _newtrack.Cells.Cast<SeqDataPoint>().ToList(), LeafProperties);
-                } catch (Exception) { }
                 _index++;
             }
 

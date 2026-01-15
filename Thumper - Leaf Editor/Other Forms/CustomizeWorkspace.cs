@@ -7,7 +7,8 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
-        private Dictionary<string, Keys> keybindfromfile = new();
+        private Dictionary<string, Keys> DictKeybind = new();
+        private Dictionary<string, Keys> DictRandomization = new();
         #endregion
         #region Form Construction and initialization
         public CustomizeWorkspace()
@@ -26,11 +27,12 @@ namespace Thumper_Custom_Level_Editor
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
             //read keybinds to a dictionary for easier lookup
             if (Properties.Settings.Default.UserKeybinds == "-") {
-                keybindfromfile = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+                DictKeybind = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
             }
             else
-                keybindfromfile = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-            propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(keybindfromfile);
+                DictKeybind = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            propertyGridKeyBinds.SelectedObject = new DictionaryPropertyGridAdapter(DictKeybind);
+            //randomization values
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
@@ -89,7 +91,7 @@ namespace Thumper_Custom_Level_Editor
 
             //write keybinds to txt file
             ///File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
-            Properties.Settings.Default.UserKeybinds = string.Join('\n', keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
+            Properties.Settings.Default.UserKeybinds = string.Join('\n', DictKeybind.Select(x => $"{x.Key};{x.Value}"));
             TCLE.Instance.SetKeyBinds();
 
             //save properties

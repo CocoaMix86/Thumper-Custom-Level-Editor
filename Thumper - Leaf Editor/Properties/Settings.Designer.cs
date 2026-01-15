@@ -1050,5 +1050,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionAutoPlace"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-")]
+        public string UserRandomValues {
+            get {
+                return ((string)(this["UserRandomValues"]));
+            }
+            set {
+                this["UserRandomValues"] = value;
+            }
+        }
     }
 }

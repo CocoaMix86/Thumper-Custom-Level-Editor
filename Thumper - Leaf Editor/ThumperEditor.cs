@@ -6,6 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass; 
 using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Other_Forms;
+using System.Linq;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -19,7 +20,7 @@ namespace Thumper_Custom_Level_Editor
         public static DockPanel DockMain => Instance.dockMain;
         public static Form_WorkSpace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
-        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents);
+        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents.Concat((x as Form_WorkSpace).dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents)));
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         private static Properties.Settings AppSettings = Properties.Settings.Default;

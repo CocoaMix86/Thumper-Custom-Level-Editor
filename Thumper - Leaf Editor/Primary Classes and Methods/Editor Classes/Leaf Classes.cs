@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public Sequencer_Object Clone()
+        public Sequencer_Object Clone(int CellsToClone = -1)
         {
             //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
             Sequencer_Object clone = new() {
@@ -171,13 +171,13 @@ namespace Thumper_Custom_Level_Editor
                 id = TCLE.rng.Next(),
                 expandlanes = false
             };
-            clone.CloneCells(this);
+            clone.CloneCells(this, CellsToClone);
             return clone;
         }
 
-        private void CloneCells(DataGridViewRow rowTemplate)
+        private void CloneCells(DataGridViewRow rowTemplate, int CellsToClone)
         {
-            int cellsCount = rowTemplate.Cells.Count;
+            int cellsCount = CellsToClone == -1 ? rowTemplate.Cells.Count : CellsToClone;
             if (cellsCount > 0) {
                 SeqDataPoint[] cells = new SeqDataPoint[cellsCount];
                 for (int i = 0; i < cellsCount; i++) {

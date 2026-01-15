@@ -153,7 +153,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabSeq.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.tabSeq.Location = new Point(124, 4);
             this.tabSeq.Name = "tabSeq";
-            this.tabSeq.Size = new Size(368, 337);
+            this.tabSeq.Size = new Size(368, 518);
             this.tabSeq.TabIndex = 3;
             this.tabSeq.Text = "Sequencer Colors";
             // 
@@ -176,7 +176,7 @@ namespace Thumper_Custom_Level_Editor
             this.treeObjects.SelectedImageKey = "other";
             this.treeObjects.ShowNodeToolTips = true;
             this.treeObjects.ShowRootLines = false;
-            this.treeObjects.Size = new Size(368, 315);
+            this.treeObjects.Size = new Size(368, 496);
             this.treeObjects.TabIndex = 101;
             this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
             // 
@@ -240,7 +240,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.Location = new Point(124, 4);
             this.tabAudio.Name = "tabAudio";
             this.tabAudio.Padding = new Padding(3);
-            this.tabAudio.Size = new Size(368, 337);
+            this.tabAudio.Size = new Size(368, 518);
             this.tabAudio.TabIndex = 1;
             this.tabAudio.Text = "Audio";
             // 
@@ -264,7 +264,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Location = new Point(124, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new Padding(3);
-            this.tabPage1.Size = new Size(368, 337);
+            this.tabPage1.Size = new Size(368, 518);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Key Binds";
             // 
@@ -288,7 +288,7 @@ namespace Thumper_Custom_Level_Editor
             this.propertyGridKeyBinds.RightToLeft = RightToLeft.No;
             this.propertyGridKeyBinds.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridKeyBinds.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridKeyBinds.Size = new Size(362, 331);
+            this.propertyGridKeyBinds.Size = new Size(362, 512);
             this.propertyGridKeyBinds.TabIndex = 123;
             this.propertyGridKeyBinds.ToolbarVisible = false;
             this.propertyGridKeyBinds.ViewBackColor = Color.FromArgb(31, 31, 31);
