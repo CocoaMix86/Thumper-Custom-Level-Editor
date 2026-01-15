@@ -178,6 +178,8 @@ namespace Thumper_Custom_Level_Editor
         private void CloneCells(DataGridViewRow rowTemplate, int CellsToClone)
         {
             int cellsCount = CellsToClone == -1 ? rowTemplate.Cells.Count : CellsToClone;
+            if (cellsCount > rowTemplate.Cells.Count)
+                cellsCount = rowTemplate.Cells.Count;
             if (cellsCount > 0) {
                 SeqDataPoint[] cells = new SeqDataPoint[cellsCount];
                 for (int i = 0; i < cellsCount; i++) {
