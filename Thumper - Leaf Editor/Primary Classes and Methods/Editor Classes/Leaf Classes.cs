@@ -492,12 +492,6 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [CategoryAttribute("Values (use hotkeys)")]
-        [DisplayName("Quick 0")]
-        [Description("Use hotkey to insert this value into selected cells.")]
-        [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
-
-        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 1")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
@@ -550,6 +544,12 @@ namespace Thumper_Custom_Level_Editor
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
         public decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
+
+        [CategoryAttribute("Values (use hotkeys)")]
+        [DisplayName("Quick 0")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
+        public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
     }
 
     public class LeafTimeSignatures : StringConverter
