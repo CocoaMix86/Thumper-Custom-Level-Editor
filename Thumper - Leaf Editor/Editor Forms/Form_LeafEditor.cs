@@ -1112,7 +1112,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (EditorIsMoving || EditorIsFinding)
+            if (EditorIsProcessing)
                 return;
             CurrentRow = e.RowIndex;
             ShowRawTrackData(SequencerObjects[e.RowIndex]);
@@ -1491,26 +1491,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     bool shifted = false;
                     //sort cells in selection based on column. depends on direction, reverse collection.
                     //this processing order is important so cells dont overwrite each other when moving
-                    IOrderedEnumerable<DataGridViewCell> dgvcc;
+                    IOrderedEnumerable<SeqDataPoint> dgvcc;
                     if (indexdirection == -1)
-                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);
+                        dgvcc = trackEditor.SelectedCells.Cast<SeqDataPoint>().OrderBy(c => leftright ? c.ColumnIndex : c.RowIndex);
                     else
-                        dgvcc = trackEditor.SelectedCells.Cast<DataGridViewCell>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
+                        dgvcc = trackEditor.SelectedCells.Cast<SeqDataPoint>().OrderByDescending(c => leftright ? c.ColumnIndex : c.RowIndex);
 
                     LogUndo = false;
                     trackEditor.ClearSelection();
                     //iterate over each in the selection
-                    foreach (DataGridViewCell dgvc in dgvcc) {
+                    foreach (SeqDataPoint dgvc in dgvcc) {
                         //check if at left/right edges
-                        if ((leftright && dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection > -1) || (!leftright && dgvc.RowIndex + indexdirection < trackEditor.RowCount && dgvc.RowIndex + indexdirection > -1)) {
+                        if ((leftright && dgvc.ColumnIndex + indexdirection < trackEditor.ColumnCount && dgvc.ColumnIndex + indexdirection >= FrozenColumnOffset) || (!leftright && dgvc.RowIndex + indexdirection < trackEditor.RowCount && dgvc.RowIndex + indexdirection > -1)) {
                             shifted = true;
-                            //trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Value = dgvc.Value;
-                            SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)][dgvc.ColumnIndex + (leftright ? indexdirection : 0) - FrozenColumnOffset].Value = (decimal?)dgvc.Value;
+                            //clone selected cell to new location
+                            SequencerObjects[dgvc.RowIndex + (!leftright ? indexdirection : 0)][dgvc.ColumnIndex + (leftright ? indexdirection : 0)] = dgvc.Clone();
                             //select the newly moved cell
                             trackEditor[dgvc.ColumnIndex + (leftright ? indexdirection : 0), dgvc.RowIndex + (!leftright ? indexdirection : 0)].Selected = true;
                             //clear the current cell since it moved
-                            //dgvc.Value = null;
-                            SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex - FrozenColumnOffset].Value = null;
+                            SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex].Value = null;
+                            SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex].Interpolation = "Linear";
+                            SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex].Ease = "Ease In Out";
                         }
                         else {
                             foreach (DataGridViewCell dgvcell in dgvcc)

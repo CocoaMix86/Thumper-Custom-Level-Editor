@@ -244,6 +244,14 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Form Moving and Control buttons
+        private void toolStripTitle_DoubleClick(object sender, EventArgs e)
+        {
+            toolstripFormRestore.PerformClick();
+        }
+        private void toolStripTitle_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            toolstripFormRestore.PerformClick();
+        }
         private void toolstripFormRestore_Click(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal) {

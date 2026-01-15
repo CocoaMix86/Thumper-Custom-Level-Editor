@@ -796,7 +796,7 @@
             this.contextmenuEdit.Name = "contextmenuEdit";
             this.contextmenuEdit.OwnerItem = this.toolstripEdit;
             this.contextmenuEdit.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuEdit.Size = new Size(218, 148);
+            this.contextmenuEdit.Size = new Size(218, 126);
             // 
             // toolstripEditUndo
             // 
@@ -1513,6 +1513,8 @@
             this.toolStripTitle.Size = new Size(984, 31);
             this.toolStripTitle.TabIndex = 150;
             this.toolStripTitle.Text = "toolStripTitle";
+            this.toolStripTitle.DoubleClick += this.toolStripTitle_DoubleClick;
+            this.toolStripTitle.MouseDoubleClick += this.toolStripTitle_MouseDoubleClick;
             this.toolStripTitle.MouseDown += this.toolStripTitle_MouseDown;
             // 
             // toolstripFormIcon
