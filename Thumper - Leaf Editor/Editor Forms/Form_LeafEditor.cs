@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using ICSharpCode.TextEditor.Document;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows.Documents;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -480,10 +482,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.RowIndex == -1) {
                     //draw header text vertical or horizontal
                     if (Properties.Settings.Default.LeafOptionVerticalCells)
-                        e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);                    
-                    else 
+                        e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
+                    else
                         e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
-                    
+
                     //e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
                     //Drawing the playback heads, start and end point triangles that exist in the header row
                     if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
@@ -1013,7 +1015,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
             }
-            #endregion
+        #endregion
         paintheader:
             RowPrePainting = true;
             e.PaintHeader(true);
@@ -1107,7 +1109,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.KeyCode == Keys.Enter)
                 ResetRowAfterEdit = true;
             //if (trackEditor.CurrentCell.RowIndex == trackEditor.RowCount - 1)
-                //trackEditor_SelectionChanged(null, null);
+            //trackEditor_SelectionChanged(null, null);
         }
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -1134,7 +1136,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //If certain actions going on, don't bother running this method.
             if (EditorIsProcessing) return;
             EditorIsLoading = true;
-            
+
             bool _changes = false;
             object _val = null;
             if (!setnull && Decimal.TryParse(StartCell.EditedFormattedValue?.ToString(), out decimal _valtoset))
@@ -1224,9 +1226,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void CellValueNull(DataGridViewCell _cell)
         {
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Value = null;
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Interpolation = "Linear";
-                SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Ease = "Ease In Out";
+            SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Value = null;
+            SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Interpolation = "Linear";
+            SequencerObjects[_cell.RowIndex][_cell.ColumnIndex].Ease = "Ease In Out";
 
             if (SequencerObjects[_cell.RowIndex].expandlanes == false && SequencerObjects[_cell.RowIndex].friendly_lane == "lane center") {
                 SequencerObjects[_cell.RowIndex - 2][_cell.ColumnIndex].Value = null;
@@ -1378,7 +1380,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     LogUndo = false;
-                    CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);             
+                    CellValueNull(trackEditor[e.ColumnIndex, e.RowIndex]);
                     RightclickChanges = true;
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
@@ -2961,6 +2963,35 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.PlaySound("UIobjectadd");
         }
 
+        private void toolstripObjConvert_Click(object sender, EventArgs e)
+        {
+            Sequencer_Object seq = SequencerObjects[trackEditor.CurrentRow.Index].Clone();
+            seq.obj_name = "_TuningLayerX";
+            seq.category = "";
+            seq.param_path = "⮝ Tuning Layer X";
+            seq.friendly_param = "⮝ Tuning Layer X";
+            seq.defaultvalue = 0;
+            seq.step = false;
+            seq.trait_type = "";
+            seq.highlight_color = Color.FromArgb(40, 40, 40);
+            seq.highlight_value = 0;
+            seq.footer = "";
+            seq.enabled = true;
+
+            int tuninglayers = SequencerObjects.Count(x => x.obj_name == "_TuningLayerX");
+            seq.param_path = seq.param_path.Replace("X", $"{tuninglayers}");
+            seq.friendly_param = seq.friendly_param.Replace("X", $"{tuninglayers}");
+
+            SequencerObjects.Insert(trackEditor.CurrentRow.Index + 1, seq);
+            trackEditor.Rows.Insert(trackEditor.CurrentRow.Index + 1, seq);
+
+            ChangeTrackName(seq, "");
+            TCLE.PlaySound("UIinterpolatewindow");
+
+            CalculateTuningLayers(leafProperties, seq);
+            SaveCheckAndWrite(false, "Converted object to tuning layer");
+        }
+
         public List<SaveState> GetUndoList() => UndoList;
         public void PerformUndo(int undolistindex)
         {
@@ -3282,7 +3313,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
                     };
 
-                    datapoints.Add(d);                    
+                    datapoints.Add(d);
                 }
                 s.Add("data_points", datapoints);
                 //add the rest of the keys to this seq_obj
@@ -3726,6 +3757,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void trackEditor_DragOver(object sender, DragEventArgs e)
         {
+            if (RowsToMove == null)
+                return;
             e.Effect = DragDropEffects.Move;
             // Retrieve the client coordinates of the drop location.
             Point targetPoint = trackEditor.PointToClient(new Point(e.X, e.Y));
