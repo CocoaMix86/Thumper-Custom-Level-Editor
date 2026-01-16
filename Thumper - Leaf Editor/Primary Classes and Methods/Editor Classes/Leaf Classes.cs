@@ -30,7 +30,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object()
         {
-
+            this.DividerHeight = 0;
         }
 
         public SeqDataPoint this[int index]
