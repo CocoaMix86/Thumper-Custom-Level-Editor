@@ -401,6 +401,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Handled = true;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             //we enter this specifically after all the other row prepainting is done, so this ends up on top.
             if (RowPostPrePainting) {
                 //paint the frozen column squares and their icons
@@ -432,7 +433,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
 
-            CellPainting.DrawValues(e, trackEditor, SequencerObjects);
+            CellPainting.DrawColors(e, trackEditor, SequencerObjects);
             CellPainting.DrawInterpEase(e, SequencerObjects[e.RowIndex]);
             //specifically paint border seperately so it appears above everything and cleans up edges a bit.
             CellPainting.SetCellBorders(e, trackEditor);
@@ -441,6 +442,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Painting playback head and end
             CellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
+            if (SequencerObjects[e.RowIndex].friendly_param is "lane center" or "lane left 1" or "lane left 2" or "lane right 1" or "lane right 2")
+                CellPainting.DrawLaneEnds(e, SequencerObjects[e.RowIndex], SequencerObjects);
+            else if (SequencerObjects[e.RowIndex].friendly_param is "turn" or "turn_auto")
+                CellPainting.DrawTurnAngles(e, SequencerObjects[e.RowIndex]);
             CellPainting.DrawCellValues(e, trackEditor, SequencerObjects[e.RowIndex]);
         }
 
@@ -449,7 +454,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //setting handled True prevents the app from performing any drawing automatically.
             //I get to handle it all, in the order I need
             e.Handled = true;
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             RowPrePaintError = null;
             #region PLAY SAMPLE WAVEFORMS
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
@@ -811,7 +816,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.KeyCode == Keys.Enter)
                 ResetRowAfterEdit = true;
             //if (trackEditor.CurrentCell.RowIndex == trackEditor.RowCount - 1)
-            //trackEditor_SelectionChanged(null, null);
+            //trackEditor_SelectionChanged(null, null);  
         }
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)

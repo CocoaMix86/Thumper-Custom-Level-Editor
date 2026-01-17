@@ -258,6 +258,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private object _value;*/
+        public decimal InGameValue => this.Value != null ? (decimal)this.Value : (decimal)ParentSeqObj.defaultvalue;
         protected override bool SetValue(int rowIndex, object value)
         {
             //sanitize inputs based on the trait type

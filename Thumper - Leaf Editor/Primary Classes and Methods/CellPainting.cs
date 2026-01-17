@@ -1,4 +1,5 @@
-﻿using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using System.Drawing.Drawing2D;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
@@ -13,6 +14,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         private static Pen PenVioletThick = new(Brushes.Violet, 3);
         private static Pen PenWhite3 = new(Brushes.White, 3);
         private static Pen PenWhite2 = new(Brushes.White, 2);
+        private static Pen PenGreen6 = new(Brushes.Green, 6);
+        private static Pen PenBlack6 = new(Brushes.Black, 6);
+        private static Pen PenRed6 = new(Brushes.Red, 6);
         private static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
         private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
@@ -73,7 +77,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }*/
         }
 
-        public static void DrawValues(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        public static void DrawColors(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
         {
             //if cell is selected, skip all the fancy painting
             if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
@@ -105,7 +109,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
             //paint the whole cell with the highlighting color
             else if (SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE") {
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
+                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)SequencerObjects[e.RowIndex].defaultvalue)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
             }
         }
@@ -304,6 +308,141 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
                 else
                     e.Graphics.FillRoundedRectangle(trackEditor[e.ColumnIndex, e.RowIndex] == HoverCell ? CellPaintingPenBright : CellPaintingPen, bounds, 4);
+            }
+        }
+
+        public static void DrawLaneEnds(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq, List<Sequencer_Object> SequencerObjects)
+        {
+            if (seq.friendly_param == "lane center") {
+                if (seq[e.ColumnIndex].InGameValue == 1) {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+                        }
+                    }
+                }
+                else {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
+                        }
+                    }
+                }
+            }
+            else if (seq.friendly_param == "lane left 1") {
+                if (seq[e.ColumnIndex].InGameValue == 1) {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+                        }
+                    }
+                }
+                else {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
+                        }
+                    }
+                }
+            }
+            else if (seq.friendly_param == "lane left 2") {
+                if (seq[e.ColumnIndex].InGameValue == 1) {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+                        }
+                    }
+                }
+                else {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
+                        }
+                    }
+                }
+            }
+            else if (seq.friendly_param == "lane right 1") {
+                if (seq[e.ColumnIndex].InGameValue == 1) {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+                        }
+                    }
+                }
+                else {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
+                        }
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
+                        }
+                    }
+                }
+            }
+            else if (seq.friendly_param == "lane right 2") {
+                if (seq[e.ColumnIndex].InGameValue == 1) {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
+                        }
+                    }
+                }
+                else {
+                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
+                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
+                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
+        {
+            if (e.Value != null) {
+                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.4)), 8) { EndCap = LineCap.Triangle};
+                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
+
+                // Convert the angle from degrees to radians, as Math.Cos and Math.Sin use radians
+                double angleRadians = (double)(decimal)e.Value * (Math.PI / 180.0);
+                // Calculate the end point coordinates
+                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)(20 * Math.Cos(angleRadians));
+                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 2)) - (float)(20 * Math.Sin(angleRadians));
+
+                ArrowPen.CustomEndCap = new AdjustableArrowCap(2, 1);
+                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2), endX, endY);
             }
         }
     }
