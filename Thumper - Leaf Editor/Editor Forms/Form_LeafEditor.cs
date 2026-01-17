@@ -149,17 +149,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         //Static
         public static int FrozenColumnOffset = 3;
-        private static int IconWidth = 16;
-        private static int IconHeight = 16;
-        private static SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
-        private static SolidBrush CellPaintingPenBright = new(Color.FromArgb(100, 100, 100));
-        private static SolidBrush CellPaintingColor = new(Color.Black);
         //private static Pen PenCorn = new(BrushCorn, 3);
         //private static Pen PenRed = new(BrushRed, 3);
         //private static Pen PenGreen = new(BrushGreen, 3);
         //private static Pen PenVioletThick = new(new SolidBrush(Color.Violet), 3);
         private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 1);
         private static Pen PenWhite = new(new SolidBrush(Color.White), 3);
+        private static Font TuningFont = new("Consolas", 8);
         //
         //Local basic vars
         private bool SaveOnlyNoLoad;
@@ -173,15 +169,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool EditorIsTuning;
         private bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
         private bool LogUndo = true;
-        private bool GlobalMute;
-        private bool GlobalDisable;
-        private bool GlobalExpand;
+        public bool GlobalMute;
+        public bool GlobalDisable;
+        public bool GlobalExpand;
         private bool ZoomHasChanged;
         private bool ResetRowAfterEdit;
         private bool RightclickDown;
         private bool RightclickChanges;
         private bool PlaybackLoop;
-        private bool RowPrePainting;
+        //private bool RowPrePainting;
         private bool RowPostPrePainting;
         private int CurrentRow;
         private int MouseCurrentColumn;
@@ -190,7 +186,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int PlaybackStart = -2;
         private int PlaybackEnd = -2;
         private string RowPrePaintError;
-        private DataGridViewCell HoverCell;
         //
         //Local custom class vars
         public FileInfo loadedleaf
@@ -225,7 +220,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public LvlProperties LvlSequencer;
         private List<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         public List<SaveState> UndoList = new();
-        private List<int> SelectedRows = new();
         private List<SeqDataPoint> SelectedDPs = new();
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
@@ -411,8 +405,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (RowPostPrePainting) {
                 //paint the frozen column squares and their icons
                 if (e.ColumnIndex < FrozenColumnOffset) {
-                    CellPaintFancy(e);
-                    CellPaintIcons(e);
+                    CellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
+                    CellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
                 }
                 //draw a vertical line inside tuning layer row to show where selected cell is.
                 else {
@@ -422,147 +416,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
 
-            //e.Paint(e.CellBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.ContentBackground);
             e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height));
-            //if we're in the frozen columns or header row (-1), return after this block as there's no other special drawing to be done
-            if (e.ColumnIndex < FrozenColumnOffset) {
-                CellPaintFancy(e);
-                CellPaintIcons(e);
-                return;
-            }
             if (e.RowIndex == -1) {
                 //draw column headers (beat #s)
-                CellPainting.DrawCellValues(e, trackEditor, SequencerObjects);
+                CellPainting.DrawCellValues(e, trackEditor);
+                CellPainting.CellPaintIcons(e, this);
                 //Drawing the playback heads, start and end point triangles that exist in the header row
                 CellPainting.DrawPlaybackHeaders(e, PlaybackStart, PlaybackEnd, PlaybackLoop);
                 return;
             }
+            //if we're in the frozen columns or header row (-1), return after this block as there's no other special drawing to be done
+            if (e.ColumnIndex < FrozenColumnOffset) {
+                CellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
+                CellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
+                return;
+            }
 
             CellPainting.DrawValues(e, trackEditor, SequencerObjects);
-            CellPainting.DrawInterpEase(e, SequencerObjects);
+            CellPainting.DrawInterpEase(e, SequencerObjects[e.RowIndex]);
             //specifically paint border seperately so it appears above everything and cleans up edges a bit.
-            CellPainting.SetCellBorders(e, trackEditor, SequencerObjects);
-            e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.ContentBackground));
-            e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+            CellPainting.SetCellBorders(e, trackEditor);
+            //e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.ContentBackground));
+            //e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             //Painting playback head and end
             CellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
-            CellPainting.DrawCellValues(e, trackEditor, SequencerObjects);
+            CellPainting.DrawCellValues(e, trackEditor, SequencerObjects[e.RowIndex]);
         }
 
-        private void CellPaintIcons(DataGridViewCellPaintingEventArgs e)
-        {
-            if (e.RowIndex != -1 && SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
-                return;
-            //get dimensions
-            int x = e.CellBounds.Left + ((e.CellBounds.Width - IconWidth) / 2);
-            int y = e.CellBounds.Top + ((e.CellBounds.Height - IconHeight) / 2);
-            //paint the image
-            //Object Toggle
-            if (e.ColumnIndex == 0) {
-                if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
-                }
-                else {
-                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
-                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
-            }
-            //Audio Mute/Unmute
-            else if (e.ColumnIndex == 1) {
-                if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
-                }
-                else {
-                    e.Graphics.DrawImage(SequencerObjects[e.RowIndex].mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
-                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
-            }
-            //Lane Expand
-            else if (e.ColumnIndex == 2) {
-                if (e.RowIndex == -1)
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
-                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane center") {
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
-                    trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
-            }
-        }
-
-        Font TuningFont = new("Consolas", 8);
-        ///Paints rounded rectangles for the frozen columns
-        private void CellPaintFancy(DataGridViewCellPaintingEventArgs e)
-        {
-            //skip header row
-            if (e.RowIndex == -1)
-                return;
-            Rectangle bounds = e.CellBounds;
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            //column -1 is row headers
-            if (e.ColumnIndex is -1) {
-                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-                CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.4);
-                bounds.X += 2;
-                bounds.Y += 2;
-                bounds.Width -= 4;
-                bounds.Height -= 4;
-                //Tuning Layers get an indent
-                if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
-                    bounds.X += 20;
-                    bounds.Width -= 20;
-                }
-                //if row has a selected cell, highlight it, using a brighter color and white outline
-                if (SelectedRows.Contains(e.RowIndex)) {
-                    e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
-                    CellPaintingColor.Color = TCLE.Blend(SequencerObjects[e.RowIndex].highlight_color, Color.Black, 0.8);
-                }
-                e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
-                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
-            }
-            //colums 0 and 1 are Enable and Mute
-            else if (e.ColumnIndex is 0 or 1) {
-                bounds.X += 1;
-                bounds.Y += 1;
-                bounds.Width -= 2;
-                bounds.Height -= 2;
-                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-                e.Graphics.FillRoundedRectangle(trackEditor[e.ColumnIndex, e.RowIndex] == HoverCell ? CellPaintingPenBright : CellPaintingPen, bounds, 4);
-            }
-            //column 2 is lanes buttons
-            //special painting has to be done to make the button appear connected across 5 rows.
-            else if (e.ColumnIndex is 2) {
-                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-                bounds.X += 1;
-                bounds.Y += 1;
-                bounds.Width -= 6;
-                bounds.Height -= 2;
-                if (SequencerObjects[e.RowIndex].friendly_lane == "lane left 2") {
-                    bounds.Height += 4;
-                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
-                }
-                else if (SequencerObjects[e.RowIndex].friendly_lane == "lane right 2") {
-                    bounds.Y -= 2;
-                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
-                    //this rectangle is needed to square off the top of the above rounded rectangle
-                    e.Graphics.FillRectangle(CellPaintingPen, new Rectangle(bounds.X, bounds.Y, bounds.Width, 5));
-                }
-                else if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 1" or "lane right 1" || (SequencerObjects[e.RowIndex].expandlanes && SequencerObjects[e.RowIndex].friendly_lane is "lane center")) {
-                    bounds.Height += 3;
-                    bounds.Y -= 3;
-                    e.Graphics.FillRectangle(CellPaintingPen, bounds);
-                }
-                else
-                    e.Graphics.FillRoundedRectangle(trackEditor[e.ColumnIndex, e.RowIndex] == HoverCell ? CellPaintingPenBright : CellPaintingPen, bounds, 4);
-            }
-        }
-        /*
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            if (RowPrePainting)
-                return;
-            base.OnPaint(e);
-        }
-        */
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             //setting handled True prevents the app from performing any drawing automatically.
@@ -572,9 +453,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RowPrePaintError = null;
             #region PLAY SAMPLE WAVEFORMS
             if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
-                RowPrePainting = true;
+                //RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
-                RowPrePainting = false;
+                //RowPrePainting = false;
 
                 if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
                     goto paintheader;
@@ -593,9 +474,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //export pc file to playable file
                 if (samp.wave == null) {
-                    RowPrePainting = true;
+                    //RowPrePainting = true;
                     samp.CalculateRuntime();
-                    RowPrePainting = false;
+                    //RowPrePainting = false;
                 }
                 //CalculateRuntime can fail. In that case, skip drawing the waveform
                 if (samp.wave != null) {
@@ -634,9 +515,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             #endregion
             #region OBJECTS THAT LAST LONGER THAN 1 BEAT
             else if (SequencerObjects[e.RowIndex].friendly_param.Contains('[')) {
-                RowPrePainting = true;
+                //RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
-                RowPrePainting = false;
+                //RowPrePainting = false;
 
                 ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
                 ///    goto paintheader;
@@ -722,9 +603,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             #endregion
             # region TUNINGLAYER GRAPHS
             else if (SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX") {
-                RowPrePainting = true;
+                //RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
-                RowPrePainting = false;
+                //RowPrePainting = false;
 
                 if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
                     goto paintheader;
@@ -858,9 +739,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         #endregion
         paintheader:
-            RowPrePainting = true;
+            //RowPrePainting = true;
             e.PaintHeader(true);
-            RowPrePainting = false;
+            //RowPrePainting = false;
             if (RowPrePaintError != null) {
                 MessageBox.Show(RowPrePaintError, "Lumper Eustum Tevel Cditor");
             }
@@ -917,25 +798,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackDelete.Enabled = enable;
             btnTrackClear.Enabled = enable;
             //
-            SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+            CellPainting.SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
-            //get all selected cells and display them grouped together in the propertygrid
-            //this allows for mass editing
-            trackEditor.Invalidate();
-            SelectedDPs.Clear();
-            foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
-                //check if index out of bounds
-                if (dgvc.ColumnIndex < FrozenColumnOffset)
-                    continue;
-                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex]);
-            }
-            //update the properties panel to show the selected object
-            LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
-            TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
-            TCLE.dockProjectProperties.propertyGridProject.Refresh();
-            propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
-            propertyGridLeaf.Refresh();
         }
 
         private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -956,7 +821,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Row changed
         private void trackEditor_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (EditorIsProcessing)
+            if (EditorIsProcessing || Control.MouseButtons == MouseButtons.Left)
                 return;
             CurrentRow = e.RowIndex;
             ShowRawTrackData(SequencerObjects[e.RowIndex]);
@@ -1185,7 +1050,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SaveCheckAndWrite(false, "Delete Cell Values via right-click");
                 }
                 RightclickChanges = false;
-                trackEditor.InvalidateRow(e.RowIndex);
+                if (e.RowIndex != -1)
+                    trackEditor.InvalidateRow(e.RowIndex);
+            }
+            else if (e.Button == MouseButtons.Left) {
+                //get all selected cells and display them grouped together in the propertygrid
+                //this allows for mass editing
+                trackEditor.Invalidate();
+                SelectedDPs.Clear();
+                if (trackEditor.SelectedCells.Count == 0)
+                    return;
+                foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
+                    //check if index out of bounds
+                    if (dgvc.ColumnIndex < FrozenColumnOffset)
+                        continue;
+                    SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex]);
+                }
+                //update the properties panel to show the selected object
+                LeafProperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
+                TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
+                TCLE.dockProjectProperties.propertyGridProject.Refresh();
+                propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
+                propertyGridLeaf.Refresh();
             }
         }
 
@@ -1193,18 +1079,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             MouseCurrentColumn = e.ColumnIndex;
             if (e.ColumnIndex == -1 || e.RowIndex == -1) {
-                HoverCell = null;
+                CellPainting.HoverCell = null;
                 return;
             }
-            HoverCell = trackEditor[e.ColumnIndex, e.RowIndex];
+            CellPainting.HoverCell = trackEditor[e.ColumnIndex, e.RowIndex];
             if (e.ColumnIndex < FrozenColumnOffset)
-                trackEditor.InvalidateCell(HoverCell);
+                trackEditor.InvalidateCell(CellPainting.HoverCell);
 
             DataGridView dgv = sender as DataGridView;
-            if (e.ColumnIndex is 0 or 1 or 2) {
-                dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
-            }
-            else if (Control.MouseButtons == MouseButtons.Right) {
+            if (Control.MouseButtons == MouseButtons.Right) {
                 RightclickDown = true;
                 if (dgv[e.ColumnIndex, e.RowIndex].Selected == false) {
                     LogUndo = false;
@@ -1224,25 +1107,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Playback.IsPlaying)
-                return;
-            if (e.ColumnIndex < 3 || e.RowIndex == -1)
-                return;
-            if (SequencerObjects[e.RowIndex].category != "PLAY SAMPLE")
-                return;
-            Color color = trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor;
-            trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.FromArgb(174, 161, 255);
-            trackEditor[e.ColumnIndex, e.RowIndex].Style.BackColor = color;
         }
 
         private void trackEditor_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == -1 || e.RowIndex == -1)
                 return;
-
-            DataGridView dgv = sender as DataGridView;
-            if (e.ColumnIndex is 0 or 1 or 2) {
-                dgv[e.ColumnIndex, e.RowIndex].Style.BackColor = trackEditor.Rows[e.RowIndex].HeaderCell.Style.BackColor;
+            if (e.ColumnIndex < FrozenColumnOffset) {
+                trackEditor.InvalidateCell(e.ColumnIndex, e.RowIndex);
             }
         }
         //Keypress Backspace - clear selected cells

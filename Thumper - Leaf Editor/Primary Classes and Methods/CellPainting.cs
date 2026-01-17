@@ -1,64 +1,61 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
     public static class CellPainting
     {
         public static int FrozenColumnOffset => Form_LeafEditor.FrozenColumnOffset;
+        private static int IconWidth = 16;
+        private static int IconHeight = 16;
         private static Pen PenCorn = new(Brushes.CornflowerBlue, 3);
         private static Pen PenRed = new(Brushes.Red, 3);
         private static Pen PenGreen = new(Brushes.Green, 3);
         private static Pen PenVioletThick = new(Brushes.Violet, 3);
+        private static Pen PenWhite3 = new(Brushes.White, 3);
+        private static Pen PenWhite2 = new(Brushes.White, 2);
+        private static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
         private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
 
-        public static void SetCellBorders(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        public static void SetCellBorders(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor)
         {
             ///If showing grid AND connected bars
             if (Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
-                e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
                 //if previous cell value is different than this cell, put in a divider
                 //otherwise remove left border to "merge" cells
-                if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
+                if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                }
                 else if (e.Value != null)
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Single;
+                    e.Graphics.DrawLine(PenWhite2, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+                else
+                    e.Graphics.DrawLine(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
             }
             ///If showing grid and NOT connected bats
             else if (Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
-                e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
-                e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Single;
+                e.Graphics.DrawLine(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
             }
             ///If NOT showing grid AND connected bars
             else if (!Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
-                e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
-                if (e.Value != null && e.Value.ToString() != trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.Outset;
-                else
-                    e.AdvancedBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+                //if previous cell value is different than this cell, put in a divider
+                //otherwise remove left border to "merge" cells
+                if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
+                }
+                else if (e.Value != null)
+                    e.Graphics.DrawLine(PenWhite2, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
             }
             ///If NOT showing grid and NOT connected bars
             else if (!Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
-                e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+                //paint nothing
             }
 
-            e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.Outset;
-            //draw thick border top and bottom for the outer lane rows to make it more obvious they are grouped.
-            if (SequencerObjects[e.RowIndex].friendly_lane is "lane left 2") {
-                e.AdvancedBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-            }
-            else if (SequencerObjects[e.RowIndex].friendly_lane is "lane right 2") {
-                e.AdvancedBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-            }
+            e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Top, e.CellBounds.Right + 4, e.CellBounds.Top);
+            e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Bottom, e.CellBounds.Right + 4, e.CellBounds.Bottom);
         }
         
         public static void DrawPlaybackHeaders(DataGridViewCellPaintingEventArgs e, int PlaybackStart, int PlaybackEnd, bool PlaybackLoop)
         {
+            if (e.ColumnIndex < FrozenColumnOffset)
+                return;
             if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
                 Point p1 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
                 Point p2 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
@@ -80,10 +77,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             //if cell is selected, skip all the fancy painting
             if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
+                e.Graphics.FillRectangle(Brushes.LightSkyBlue, e.CellBounds);
                 return;
             }
             //grey out the track if disabled
-            else if (SequencerObjects[e.RowIndex].ReadOnly) {
+            if (SequencerObjects[e.RowIndex].ReadOnly) {
                 e.Graphics.FillRectangle(Brushes.Gray, e.CellBounds);
             }
             //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
@@ -108,19 +106,19 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //paint the whole cell with the highlighting color
             else if (SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE") {
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left - 2, e.CellBounds.Top, e.CellBounds.Width + 4, e.CellBounds.Height);
+                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
             }
         }
 
-        public static void DrawInterpEase(DataGridViewCellPaintingEventArgs e, List<Sequencer_Object> SequencerObjects)
+        public static void DrawInterpEase(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             //paint notifier circles for changed interp and ease
             if (Properties.Settings.Default.LeafOptionEaseDots) {
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Interpolation != "Linear") {
+                if (seq[e.ColumnIndex].Interpolation != "Linear") {
                     e.Graphics.FillEllipse(Brushes.Black, e.CellBounds.Right - (e.CellBounds.Width / 2) - 6, e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(Brushes.Red, e.CellBounds.Right - (e.CellBounds.Width / 2) - 5, e.CellBounds.Top - 1, 5, 5);
                 }
-                if (SequencerObjects[e.RowIndex][e.ColumnIndex].Ease != "Ease In Out") {
+                if (seq[e.ColumnIndex].Ease != "Ease In Out") {
                     e.Graphics.FillEllipse(Brushes.Black, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 7, 7);
                     e.Graphics.FillEllipse(Brushes.Blue, e.CellBounds.Right - (e.CellBounds.Width / 2), e.CellBounds.Top - 1, 5, 5);
                 }
@@ -142,22 +140,22 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void DrawCellValues(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        public static void DrawCellValues(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, Sequencer_Object seq = null)
         {
             if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null) {
                 //skips a bunch of objects since they display their values differently
                 if (e.RowIndex == -1)
                     goto skipchecks;
-                if (SequencerObjects[e.RowIndex].category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+                if (seq.category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                     return;
-                else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor")
+                else if (seq.trait_type is "kTraitColor")
                     return;
-                else if ((Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false))
+                else if ((Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false))
                     return;
                 else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex >= FrozenColumnOffset && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
                     return;
 
-                Color _c = SequencerObjects[e.RowIndex].highlight_color;
+                Color _c = seq.highlight_color;
                 //Tests highlight color contrast. If low, text color is set to white.
                 if (_c.R < 150 && _c.G < 150 && _c.B < 150)
                     e.CellStyle.ForeColor = Color.White;
@@ -195,6 +193,117 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     }
                 }
 
+            }
+        }
+
+        public static void CellPaintIcons(DataGridViewCellPaintingEventArgs e, Form_LeafEditor Leaf, Sequencer_Object seq = null)
+        {
+            if (e.RowIndex != -1 && seq.obj_name == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
+                return;
+            //get dimensions
+            int x = e.CellBounds.Left + ((e.CellBounds.Width - IconWidth) / 2);
+            int y = e.CellBounds.Top + ((e.CellBounds.Height - IconHeight) / 2);
+            //paint the image
+            //Object Toggle
+            if (e.ColumnIndex == 0) {
+                if (e.RowIndex == -1) {
+                    e.Graphics.DrawImage(Leaf.GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
+                }
+                else {
+                    e.Graphics.DrawImage(seq.enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
+                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                }
+            }
+            //Audio Mute/Unmute
+            else if (e.ColumnIndex == 1) {
+                if (e.RowIndex == -1) {
+                    e.Graphics.DrawImage(Leaf.GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                }
+                else {
+                    e.Graphics.DrawImage(seq.mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                }
+            }
+            //Lane Expand
+            else if (e.ColumnIndex == 2) {
+                if (e.RowIndex == -1)
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                else if (seq.friendly_lane == "lane center") {
+                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                }
+            }
+        }
+
+        private static SolidBrush CellPaintingPen = new(Color.FromArgb(60, 60, 60));
+        private static SolidBrush CellPaintingPenBright = new(Color.FromArgb(100, 100, 100));
+        private static SolidBrush CellPaintingColor = new(Color.Black);
+        public static DataGridViewCell HoverCell { get; set; }
+        public static List<int> SelectedRows = new();
+        ///Paints rounded rectangles for the frozen columns
+        public static void CellPaintFancy(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, Sequencer_Object seq = null)
+        {
+            e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
+            //skip header row
+            if (e.RowIndex == -1)
+                return;
+            Rectangle bounds = e.CellBounds;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //column -1 is row headers
+            if (e.ColumnIndex is -1) {
+                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
+                CellPaintingColor.Color = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
+                bounds.X += 2;
+                bounds.Y += 2;
+                bounds.Width -= 4;
+                bounds.Height -= 4;
+                //Tuning Layers get an indent
+                if (seq.obj_name == "_TuningLayerX") {
+                    bounds.X += 20;
+                    bounds.Width -= 20;
+                }
+                //if row has a selected cell, highlight it, using a brighter color and white outline
+                if (SelectedRows.Contains(e.RowIndex)) {
+                    e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
+                    CellPaintingColor.Color = TCLE.Blend(seq.highlight_color, Color.Black, 0.8);
+                }
+                e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
+                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+            }
+            //colums 0 and 1 are Enable and Mute
+            else if (e.ColumnIndex is 0 or 1) {
+                bounds.X += 1;
+                bounds.Y += 1;
+                bounds.Width -= 2;
+                bounds.Height -= 2;
+                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
+                e.Graphics.FillRoundedRectangle(trackEditor[e.ColumnIndex, e.RowIndex] == HoverCell ? CellPaintingPenBright : CellPaintingPen, bounds, 4);
+            }
+            //column 2 is lanes buttons
+            //special painting has to be done to make the button appear connected across 5 rows.
+            else if (e.ColumnIndex is 2) {
+                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
+                bounds.X += 1;
+                bounds.Y += 1;
+                bounds.Width -= 6;
+                bounds.Height -= 2;
+                if (seq.friendly_lane == "lane left 2") {
+                    bounds.Height += 4;
+                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                }
+                else if (seq.friendly_lane == "lane right 2") {
+                    bounds.Y -= 2;
+                    e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
+                    //this rectangle is needed to square off the top of the above rounded rectangle
+                    e.Graphics.FillRectangle(CellPaintingPen, new Rectangle(bounds.X, bounds.Y, bounds.Width, 5));
+                }
+                else if (seq.friendly_lane is "lane left 1" or "lane right 1" || (seq.expandlanes && seq.friendly_lane is "lane center")) {
+                    bounds.Height += 3;
+                    bounds.Y -= 3;
+                    e.Graphics.FillRectangle(CellPaintingPen, bounds);
+                }
+                else
+                    e.Graphics.FillRoundedRectangle(trackEditor[e.ColumnIndex, e.RowIndex] == HoverCell ? CellPaintingPenBright : CellPaintingPen, bounds, 4);
             }
         }
     }

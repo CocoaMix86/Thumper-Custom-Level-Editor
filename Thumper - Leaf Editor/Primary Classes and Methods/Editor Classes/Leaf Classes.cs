@@ -31,6 +31,7 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object()
         {
             this.DividerHeight = 0;
+            this.HeaderCell.Style.BackColor = Color.Black;
         }
 
         public SeqDataPoint this[int index]
@@ -80,7 +81,6 @@ namespace Thumper_Custom_Level_Editor
             set {
                 HighCol = value;
                 HighlightBrush = new(value);
-                this.HeaderCell.Style.BackColor = TCLE.Blend(this.HighCol, Color.Black, 0.4);
             }
         }
         private Color HighCol;
