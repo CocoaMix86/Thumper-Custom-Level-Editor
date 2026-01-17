@@ -243,7 +243,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         ///Paints rounded rectangles for the frozen columns
         public static void CellPaintFancy(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, Sequencer_Object seq = null)
         {
-            e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
             //skip header row
             if (e.RowIndex == -1)
                 return;
@@ -272,6 +271,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
             //colums 0 and 1 are Enable and Mute
             else if (e.ColumnIndex is 0 or 1) {
+                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
                 bounds.X += 1;
                 bounds.Y += 1;
                 bounds.Width -= 2;
@@ -282,7 +282,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //column 2 is lanes buttons
             //special painting has to be done to make the button appear connected across 5 rows.
             else if (e.ColumnIndex is 2) {
-                e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
+                e.Graphics.FillRectangle(Brushes.Black, new(e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width - 2, e.CellBounds.Height));
                 bounds.X += 1;
                 bounds.Y += 1;
                 bounds.Width -= 6;

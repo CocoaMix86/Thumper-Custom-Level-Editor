@@ -487,10 +487,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Bitmap WaveToDraw = samp.wave.CreateBitmap((int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height - 4, -1, -1, true);
                         if (WaveToDraw == null)
                             goto skipwaveform;
-                        /*using (Graphics graphics = Graphics.FromImage(WaveToDraw)) {
-                            graphics.DrawLine(new Pen(Color.Black, 5), 0, 0, 0, WaveToDraw.Height);
-                            graphics.DrawLine(new Pen(Color.Black, 5), WaveToDraw.Width, 0, WaveToDraw.Width, WaveToDraw.Height);
-                        }*/
                         seqref.WaveBitmap = WaveToDraw;
                     }
                     //once the bitmap is created, now we can do some funky stuff
@@ -498,7 +494,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
-                        //e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, (int)Math.Floor(cellwidth * samp.beats), e.RowBounds.Height), 10);
                         e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion + 3, e.RowBounds.Top + 3, (int)Math.Floor(cellwidth * samp.beats) - 6, e.RowBounds.Height - 6);
                         e.Graphics.DrawRoundedRectangle(PenWhite, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion + 2, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats) - 4, e.RowBounds.Height - 4), 10);
                     }
@@ -1276,6 +1271,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 trackEditor.CurrentCell = trackEditor[trackEditor.CurrentCell.ColumnIndex < FrozenColumnOffset ? FrozenColumnOffset : trackEditor.CurrentCell.ColumnIndex, e.RowIndex];
+                trackEditor.FirstDisplayedScrollingColumnIndex = lastpos;
                 trackEditor.Invalidate();
 
                 if (e.Button == MouseButtons.Right) {
@@ -1283,7 +1279,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
             }
-            trackEditor.FirstDisplayedScrollingColumnIndex = lastpos;
         }
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
