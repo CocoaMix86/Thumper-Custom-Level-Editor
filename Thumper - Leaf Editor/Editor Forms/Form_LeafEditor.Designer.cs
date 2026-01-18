@@ -29,13 +29,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -49,6 +49,9 @@
             this.labelScrollH = new Label();
             this.labelScrollV = new Label();
             this.trackEditor = new DataGridView();
+            this.LeafEnabled = new SequencerColumn();
+            this.LeafAudio = new SequencerColumn();
+            this.LeafMultilane = new SequencerColumn();
             this.leafToolStrip = new ToolStrip();
             this.btnTrackAdd = new ToolStripButton();
             this.btnTrackDelete = new ToolStripButton();
@@ -91,6 +94,7 @@
             this.btnLeafRandomValues = new ToolStripButton();
             this.btnLeafZoom = new ToolStripButton();
             this.btnLeafAutoPlace = new ToolStripButton();
+            this.btnLeafViewOptions = new ToolStripDropDownButton();
             this.treeObjects = new TreeViewEx();
             this.txtSearch = new TextBox();
             this.propertyGridLeaf = new PropertyGrid();
@@ -107,9 +111,6 @@
             this.contextMenuObj = new ContextMenuStrip(this.components);
             this.toolstripObjTune = new ToolStripMenuItem();
             this.toolstripObjConvert = new ToolStripMenuItem();
-            this.LeafEnabled = new SequencerColumn();
-            this.LeafAudio = new SequencerColumn();
-            this.LeafMultilane = new SequencerColumn();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -176,7 +177,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 105);
+            this.btnRawImport.Size = new Size(54, 107);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -192,7 +193,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 339);
+            this.labelCollapsePanel2.Location = new Point(0, 337);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -263,7 +264,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 324);
+            this.vScrollBarTrackEditor.Size = new Size(15, 322);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -320,27 +321,27 @@
             this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle8.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle5.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            dataGridViewCellStyle5.Format = "0.###";
-            dataGridViewCellStyle5.NullValue = null;
-            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle12.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle12.ForeColor = Color.White;
+            dataGridViewCellStyle12.Format = "0.###";
+            dataGridViewCellStyle12.NullValue = null;
+            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle12;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -348,24 +349,24 @@
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle6.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle13.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle14;
             this.trackEditor.RowTemplate.DividerHeight = 50;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 324);
+            this.trackEditor.Size = new Size(491, 322);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -400,6 +401,51 @@
             this.trackEditor.PreviewKeyDown += this.AllowArrowMovement;
             this.trackEditor.Resize += this.trackEditor_Resize;
             // 
+            // LeafEnabled
+            // 
+            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle9.BackColor = Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = Color.Black;
+            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle9;
+            this.LeafEnabled.Frozen = true;
+            this.LeafEnabled.HeaderText = "";
+            this.LeafEnabled.MinimumWidth = 25;
+            this.LeafEnabled.Name = "LeafEnabled";
+            this.LeafEnabled.ReadOnly = true;
+            this.LeafEnabled.Resizable = DataGridViewTriState.False;
+            this.LeafEnabled.ToolTipText = "Enable/Disable All";
+            this.LeafEnabled.Width = 25;
+            // 
+            // LeafAudio
+            // 
+            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle10.BackColor = Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = Color.Black;
+            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle10;
+            this.LeafAudio.Frozen = true;
+            this.LeafAudio.HeaderText = "";
+            this.LeafAudio.MinimumWidth = 25;
+            this.LeafAudio.Name = "LeafAudio";
+            this.LeafAudio.ReadOnly = true;
+            this.LeafAudio.Resizable = DataGridViewTriState.False;
+            this.LeafAudio.ToolTipText = "Mute/Unmute All";
+            this.LeafAudio.Width = 25;
+            // 
+            // LeafMultilane
+            // 
+            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            dataGridViewCellStyle11.BackColor = Color.Black;
+            dataGridViewCellStyle11.SelectionBackColor = Color.Black;
+            this.LeafMultilane.DefaultCellStyle = dataGridViewCellStyle11;
+            this.LeafMultilane.Frozen = true;
+            this.LeafMultilane.HeaderText = "";
+            this.LeafMultilane.MinimumWidth = 29;
+            this.LeafMultilane.Name = "LeafMultilane";
+            this.LeafMultilane.ReadOnly = true;
+            this.LeafMultilane.Resizable = DataGridViewTriState.False;
+            this.LeafMultilane.ToolTipText = "Expand/Collapse all lanes";
+            this.LeafMultilane.Width = 29;
+            // 
             // leafToolStrip
             // 
             this.leafToolStrip.AutoSize = false;
@@ -414,7 +460,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 324);
+            this.leafToolStrip.Size = new Size(24, 322);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -548,7 +594,7 @@
             this.leaftoolsToolStrip.GripMargin = new Padding(0);
             this.leaftoolsToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.leaftoolsToolStrip.ImageScalingSize = new Size(24, 24);
-            this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLeafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace });
+            this.leaftoolsToolStrip.Items.AddRange(new ToolStripItem[] { this.btnLeafColors, this.btnLeafInterpLinear, this.btnLeafSplit, this.btnLeafRandomValues, this.btnLeafZoom, this.btnLeafAutoPlace, this.btnLeafViewOptions });
             this.leaftoolsToolStrip.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.leaftoolsToolStrip.Location = new Point(0, 0);
             this.leaftoolsToolStrip.Name = "leaftoolsToolStrip";
@@ -789,6 +835,15 @@
             this.btnLeafAutoPlace.ToolTipText = "Enable auto-insert on click\r\n(inserts \"1\" on kTraitBool and kTraitAction objects)";
             this.btnLeafAutoPlace.Click += this.btnLeafAutoPlace_Click;
             // 
+            // btnLeafViewOptions
+            // 
+            this.btnLeafViewOptions.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnLeafViewOptions.Image = Properties.Resources.icon_view;
+            this.btnLeafViewOptions.ImageTransparentColor = Color.Magenta;
+            this.btnLeafViewOptions.Name = "btnLeafViewOptions";
+            this.btnLeafViewOptions.Size = new Size(37, 27);
+            this.btnLeafViewOptions.ToolTipText = "Options to change the visuals";
+            // 
             // treeObjects
             // 
             this.treeObjects.BackColor = Color.FromArgb(31, 31, 31);
@@ -878,7 +933,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 354;
+            this.splitContainerLeafSide.SplitterDistance = 352;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -941,7 +996,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 105);
+            this.textEditor.Size = new Size(476, 107);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1036,51 +1091,6 @@
             this.toolstripObjConvert.Size = new Size(237, 22);
             this.toolstripObjConvert.Text = "Convert Values to Tuning Layer";
             this.toolstripObjConvert.Click += this.toolstripObjConvert_Click;
-            // 
-            // LeafEnabled
-            // 
-            this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.BackColor = Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = Color.Black;
-            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle2;
-            this.LeafEnabled.Frozen = true;
-            this.LeafEnabled.HeaderText = "";
-            this.LeafEnabled.MinimumWidth = 25;
-            this.LeafEnabled.Name = "LeafEnabled";
-            this.LeafEnabled.ReadOnly = true;
-            this.LeafEnabled.Resizable = DataGridViewTriState.False;
-            this.LeafEnabled.ToolTipText = "Enable/Disable All";
-            this.LeafEnabled.Width = 25;
-            // 
-            // LeafAudio
-            // 
-            this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.Black;
-            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle3;
-            this.LeafAudio.Frozen = true;
-            this.LeafAudio.HeaderText = "";
-            this.LeafAudio.MinimumWidth = 25;
-            this.LeafAudio.Name = "LeafAudio";
-            this.LeafAudio.ReadOnly = true;
-            this.LeafAudio.Resizable = DataGridViewTriState.False;
-            this.LeafAudio.ToolTipText = "Mute/Unmute All";
-            this.LeafAudio.Width = 25;
-            // 
-            // LeafMultilane
-            // 
-            this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle4.BackColor = Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = Color.Black;
-            this.LeafMultilane.DefaultCellStyle = dataGridViewCellStyle4;
-            this.LeafMultilane.Frozen = true;
-            this.LeafMultilane.HeaderText = "";
-            this.LeafMultilane.MinimumWidth = 29;
-            this.LeafMultilane.Name = "LeafMultilane";
-            this.LeafMultilane.ReadOnly = true;
-            this.LeafMultilane.Resizable = DataGridViewTriState.False;
-            this.LeafMultilane.ToolTipText = "Expand/Collapse all lanes";
-            this.LeafMultilane.Width = 29;
             // 
             // Form_LeafEditor
             // 
@@ -1204,5 +1214,6 @@
         private SequencerColumn LeafEnabled;
         private SequencerColumn LeafAudio;
         private SequencerColumn LeafMultilane;
+        private ToolStripDropDownButton btnLeafViewOptions;
     }
 }

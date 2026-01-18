@@ -110,6 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
+            btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
         }
 
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
@@ -457,7 +458,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             RowPrePaintError = null;
             #region PLAY SAMPLE WAVEFORMS
-            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && TCLE.Instance.leafoptionShowWave.Checked) {
+            if (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) {
                 //RowPrePainting = true;
                 e.PaintCells(e.RowBounds, e.PaintParts);
                 //RowPrePainting = false;

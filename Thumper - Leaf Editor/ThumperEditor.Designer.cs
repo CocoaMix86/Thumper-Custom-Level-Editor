@@ -28,13 +28,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TCLE));
             this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.colorDialog1 = new ColorDialog();
@@ -119,9 +119,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -168,14 +168,6 @@
             this.toolStripMenuItem3 = new ToolStripMenuItem();
             this.contextmenuView = new ContextMenuStrip(this.components);
             this.toolStripMenuItem11 = new ToolStripMenuItem();
-            this.leafoptionShowCategory = new ToolStripMenuItem();
-            this.leafoptionShowGrid = new ToolStripMenuItem();
-            this.leafoptionConnectBars = new ToolStripMenuItem();
-            this.leafoptionShowLanes = new ToolStripMenuItem();
-            this.leafoptionEaseDots = new ToolStripMenuItem();
-            this.leafoptionThinValues = new ToolStripMenuItem();
-            this.leafoptionShowWave = new ToolStripMenuItem();
-            this.leafoptionVerticalCells = new ToolStripMenuItem();
             this.toolStripSeparator19 = new ToolStripSeparator();
             this.toolstripViewExplorer = new ToolStripMenuItem();
             this.toolstripViewProperties = new ToolStripMenuItem();
@@ -211,6 +203,15 @@
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
             this.pictureEasing = new Label();
+            this.contextMenuLeafOptions = new ContextMenuStrip(this.components);
+            this.leafoptionShowCategory = new ToolStripMenuItem();
+            this.leafoptionShowGrid = new ToolStripMenuItem();
+            this.leafoptionConnectBars = new ToolStripMenuItem();
+            this.leafoptionShowLanes = new ToolStripMenuItem();
+            this.leafoptionEaseDots = new ToolStripMenuItem();
+            this.leafoptionThinValues = new ToolStripMenuItem();
+            this.leafoptionShowWave = new ToolStripMenuItem();
+            this.leafoptionVerticalCells = new ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -234,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).BeginInit();
             this.contextmenuTabClick.SuspendLayout();
             this.contextmenuMoveWorkspace.SuspendLayout();
+            this.contextMenuLeafOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -281,26 +283,26 @@
             this.dgvRecentFiles.BorderStyle = BorderStyle.None;
             this.dgvRecentFiles.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             this.dgvRecentFiles.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle8.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle8.SelectionForeColor = Color.White;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvRecentFiles.ColumnHeadersHeight = 20;
             this.dgvRecentFiles.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvRecentFiles.Columns.AddRange(new DataGridViewColumn[] { this.dataGridViewImageColumn1, this.dataGridViewTextBoxColumn1, this.dataGridViewTextBoxColumn2, this.closerecent });
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle6.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.White;
-            dataGridViewCellStyle6.NullValue = null;
-            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle13.Font = new Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle13.ForeColor = Color.White;
+            dataGridViewCellStyle13.NullValue = null;
+            dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvRecentFiles.Dock = DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = Color.Black;
@@ -309,13 +311,13 @@
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
             this.dgvRecentFiles.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
-            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle14.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+            this.dgvRecentFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvRecentFiles.RowHeadersVisible = false;
             this.dgvRecentFiles.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvRecentFiles.RowTemplate.Height = 30;
@@ -332,11 +334,11 @@
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(55, 55, 55);
-            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle9.ForeColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle9.SelectionForeColor = Color.FromArgb(55, 55, 55);
+            this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewImageColumn1.HeaderText = "";
             this.dataGridViewImageColumn1.MinimumWidth = 10;
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
@@ -349,10 +351,10 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.Black;
+            dataGridViewCellStyle10.SelectionForeColor = Color.Black;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn1.FillWeight = 30F;
             this.dataGridViewTextBoxColumn1.HeaderText = "Level";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
@@ -363,11 +365,11 @@
             // 
             // dataGridViewTextBoxColumn2
             // 
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.Font = new Font("Arial Narrow", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.Black;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.Font = new Font("Arial Narrow", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle11.ForeColor = Color.Black;
+            dataGridViewCellStyle11.SelectionForeColor = Color.Black;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn2.FillWeight = 20F;
             this.dataGridViewTextBoxColumn2.HeaderText = "Path";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
@@ -377,11 +379,11 @@
             // closerecent
             // 
             this.closerecent.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle5.ForeColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(55, 55, 55);
-            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(55, 55, 55);
-            this.closerecent.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.BackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle12.ForeColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(55, 55, 55);
+            dataGridViewCellStyle12.SelectionForeColor = Color.FromArgb(55, 55, 55);
+            this.closerecent.DefaultCellStyle = dataGridViewCellStyle12;
             this.closerecent.HeaderText = "";
             this.closerecent.MinimumWidth = 16;
             this.closerecent.Name = "closerecent";
@@ -703,7 +705,6 @@
             this.contextMenuRecentProjects.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuRecentProjects.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem2 });
             this.contextMenuRecentProjects.Name = "contextmenuHelp";
-            this.contextMenuRecentProjects.OwnerItem = this.toolstripFileRecent;
             this.contextMenuRecentProjects.RenderMode = ToolStripRenderMode.System;
             this.contextMenuRecentProjects.Size = new Size(81, 26);
             this.contextMenuRecentProjects.Opening += this.contextMenuRecentProjects_Opening;
@@ -884,7 +885,6 @@
             this.contextMenuProject.BackColor = Color.FromArgb(46, 46, 46);
             this.contextMenuProject.Items.AddRange(new ToolStripItem[] { this.toolstripProjectLeaf, this.toolstripProjectLvl, this.toolstripProjectGate, this.toolstripProjectMaster, this.toolstripProjectSample, this.toolStripSeparator7, this.toolstripProjectExisting, this.toolstripProjectRegen, this.toolStripSeparator8, this.addSamplePackToolStripMenuItem1, this.toolstripProjectPreload });
             this.contextMenuProject.Name = "workingfolderRightClick";
-            this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
             this.contextMenuProject.Size = new Size(267, 214);
             // 
@@ -979,9 +979,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1103,6 +1102,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1124,20 +1131,11 @@
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // contextmenuWindow
             // 
             this.contextmenuWindow.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuWindow.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem4, this.toolstripWindowCloseEditors, this.toolStripMenuItem7, this.toolstripWindowCloseFiletype, this.toolstripWindowFloat, this.toolstripWindowFloatAll, this.toolstripWindowDock, this.toolStripSeparator11, this.toolstripWindowCloseAll, this.toolStripSeparator12, this.toolstripWindowWorkspace });
             this.contextmenuWindow.Name = "contextmenuEdit";
-            this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
             this.contextmenuWindow.Size = new Size(294, 214);
             // 
@@ -1251,7 +1249,6 @@
             this.contextmenuHelp.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuHelp.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem13, this.toolstripHelpGameDir, this.toolStripSeparator16, this.toolstripHelpAbout, this.toolstripHelpDiscord, this.toolstripHelpGithub, this.toolstripHelpChangelog, this.toolstripHelpKofi });
             this.contextmenuHelp.Name = "contextmenuHelp";
-            this.contextmenuHelp.OwnerItem = this.toolstripHelp;
             this.contextmenuHelp.RenderMode = ToolStripRenderMode.System;
             this.contextmenuHelp.Size = new Size(201, 164);
             // 
@@ -1592,107 +1589,16 @@
             this.contextmenuView.Name = "contextmenuEdit";
             this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuView.Size = new Size(215, 104);
+            this.contextmenuView.Size = new Size(215, 126);
             // 
             // toolStripMenuItem11
             // 
-            this.toolStripMenuItem11.DropDownItems.AddRange(new ToolStripItem[] { this.leafoptionShowCategory, this.leafoptionShowGrid, this.leafoptionConnectBars, this.leafoptionShowLanes, this.leafoptionEaseDots, this.leafoptionThinValues, this.leafoptionShowWave, this.leafoptionVerticalCells });
+            this.toolStripMenuItem11.DropDown = this.contextMenuLeafOptions;
             this.toolStripMenuItem11.ForeColor = Color.White;
             this.toolStripMenuItem11.Image = Properties.Resources.editor_leaf;
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
             this.toolStripMenuItem11.Size = new Size(214, 22);
             this.toolStripMenuItem11.Text = "Leaf Editor Options             ";
-            // 
-            // leafoptionShowCategory
-            // 
-            this.leafoptionShowCategory.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionShowCategory.Checked = true;
-            this.leafoptionShowCategory.CheckOnClick = true;
-            this.leafoptionShowCategory.CheckState = CheckState.Checked;
-            this.leafoptionShowCategory.ForeColor = Color.White;
-            this.leafoptionShowCategory.Name = "leafoptionShowCategory";
-            this.leafoptionShowCategory.Size = new Size(254, 22);
-            this.leafoptionShowCategory.Text = "Show Category";
-            this.leafoptionShowCategory.CheckedChanged += this.leafoptionShowCategory_CheckedChanged;
-            // 
-            // leafoptionShowGrid
-            // 
-            this.leafoptionShowGrid.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionShowGrid.Checked = true;
-            this.leafoptionShowGrid.CheckOnClick = true;
-            this.leafoptionShowGrid.CheckState = CheckState.Checked;
-            this.leafoptionShowGrid.ForeColor = Color.White;
-            this.leafoptionShowGrid.Name = "leafoptionShowGrid";
-            this.leafoptionShowGrid.Size = new Size(254, 22);
-            this.leafoptionShowGrid.Text = "Show Grid";
-            this.leafoptionShowGrid.CheckedChanged += this.leafoptionShowGrid_CheckedChanged;
-            // 
-            // leafoptionConnectBars
-            // 
-            this.leafoptionConnectBars.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionConnectBars.Checked = true;
-            this.leafoptionConnectBars.CheckOnClick = true;
-            this.leafoptionConnectBars.CheckState = CheckState.Checked;
-            this.leafoptionConnectBars.ForeColor = Color.White;
-            this.leafoptionConnectBars.Name = "leafoptionConnectBars";
-            this.leafoptionConnectBars.Size = new Size(254, 22);
-            this.leafoptionConnectBars.Text = "Connected Bars";
-            this.leafoptionConnectBars.CheckedChanged += this.leafoptionConnectBars_CheckedChanged;
-            // 
-            // leafoptionShowLanes
-            // 
-            this.leafoptionShowLanes.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionShowLanes.CheckOnClick = true;
-            this.leafoptionShowLanes.ForeColor = Color.White;
-            this.leafoptionShowLanes.Name = "leafoptionShowLanes";
-            this.leafoptionShowLanes.Size = new Size(254, 22);
-            this.leafoptionShowLanes.Text = "Always Show Lanes";
-            this.leafoptionShowLanes.CheckedChanged += this.leafoptionShowLanes_CheckedChanged;
-            // 
-            // leafoptionEaseDots
-            // 
-            this.leafoptionEaseDots.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionEaseDots.Checked = true;
-            this.leafoptionEaseDots.CheckOnClick = true;
-            this.leafoptionEaseDots.CheckState = CheckState.Checked;
-            this.leafoptionEaseDots.ForeColor = Color.White;
-            this.leafoptionEaseDots.Name = "leafoptionEaseDots";
-            this.leafoptionEaseDots.Size = new Size(254, 22);
-            this.leafoptionEaseDots.Text = "Easing and Interplation Dots";
-            this.leafoptionEaseDots.CheckedChanged += this.leafoptionEaseDots_CheckedChanged;
-            // 
-            // leafoptionThinValues
-            // 
-            this.leafoptionThinValues.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionThinValues.Checked = true;
-            this.leafoptionThinValues.CheckOnClick = true;
-            this.leafoptionThinValues.CheckState = CheckState.Checked;
-            this.leafoptionThinValues.ForeColor = Color.White;
-            this.leafoptionThinValues.Name = "leafoptionThinValues";
-            this.leafoptionThinValues.Size = new Size(254, 22);
-            this.leafoptionThinValues.Text = "Show Values on Lanes as Thin Bars";
-            this.leafoptionThinValues.CheckedChanged += this.leafoptionThinValues_CheckedChanged;
-            // 
-            // leafoptionShowWave
-            // 
-            this.leafoptionShowWave.BackColor = Color.FromArgb(46, 46, 46);
-            this.leafoptionShowWave.Checked = true;
-            this.leafoptionShowWave.CheckOnClick = true;
-            this.leafoptionShowWave.CheckState = CheckState.Checked;
-            this.leafoptionShowWave.ForeColor = Color.White;
-            this.leafoptionShowWave.Name = "leafoptionShowWave";
-            this.leafoptionShowWave.Size = new Size(254, 22);
-            this.leafoptionShowWave.Text = "Show Waveforms";
-            this.leafoptionShowWave.CheckedChanged += this.leafoptionShowWave_CheckedChanged;
-            // 
-            // leafoptionVerticalCells
-            // 
-            this.leafoptionVerticalCells.CheckOnClick = true;
-            this.leafoptionVerticalCells.ForeColor = Color.White;
-            this.leafoptionVerticalCells.Name = "leafoptionVerticalCells";
-            this.leafoptionVerticalCells.Size = new Size(254, 22);
-            this.leafoptionVerticalCells.Text = "Vertical Numbers in Cells";
-            this.leafoptionVerticalCells.CheckedChanged += this.leafoptionVerticalCells_CheckedChanged;
             // 
             // toolStripSeparator19
             // 
@@ -2020,7 +1926,6 @@
             this.contextmenuMoveWorkspace.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuMoveWorkspace.Items.AddRange(new ToolStripItem[] { this.eToolStripMenuItem });
             this.contextmenuMoveWorkspace.Name = "contextmenuHelp";
-            this.contextmenuMoveWorkspace.OwnerItem = this.moveToWorkspaceToolStripMenuItem;
             this.contextmenuMoveWorkspace.RenderMode = ToolStripRenderMode.System;
             this.contextmenuMoveWorkspace.Size = new Size(81, 26);
             this.contextmenuMoveWorkspace.Opening += this.contextmenuMoveWorkspace_Opening;
@@ -2045,6 +1950,106 @@
             this.pictureEasing.Size = new Size(115, 85);
             this.pictureEasing.TabIndex = 156;
             this.pictureEasing.Visible = false;
+            // 
+            // contextMenuLeafOptions
+            // 
+            this.contextMenuLeafOptions.BackColor = Color.FromArgb(46, 46, 46);
+            this.contextMenuLeafOptions.Items.AddRange(new ToolStripItem[] { this.leafoptionShowCategory, this.leafoptionShowGrid, this.leafoptionConnectBars, this.leafoptionShowLanes, this.leafoptionEaseDots, this.leafoptionThinValues, this.leafoptionShowWave, this.leafoptionVerticalCells });
+            this.contextMenuLeafOptions.Name = "contextmenuHelp";
+            this.contextMenuLeafOptions.OwnerItem = this.toolStripMenuItem11;
+            this.contextMenuLeafOptions.RenderMode = ToolStripRenderMode.System;
+            this.contextMenuLeafOptions.Size = new Size(255, 202);
+            // 
+            // leafoptionShowCategory
+            // 
+            this.leafoptionShowCategory.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowCategory.Checked = true;
+            this.leafoptionShowCategory.CheckOnClick = true;
+            this.leafoptionShowCategory.CheckState = CheckState.Checked;
+            this.leafoptionShowCategory.ForeColor = Color.White;
+            this.leafoptionShowCategory.Name = "leafoptionShowCategory";
+            this.leafoptionShowCategory.Size = new Size(254, 22);
+            this.leafoptionShowCategory.Text = "Show Category";
+            this.leafoptionShowCategory.CheckedChanged += this.leafoptionShowCategory_CheckedChanged;
+            // 
+            // leafoptionShowGrid
+            // 
+            this.leafoptionShowGrid.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowGrid.Checked = true;
+            this.leafoptionShowGrid.CheckOnClick = true;
+            this.leafoptionShowGrid.CheckState = CheckState.Checked;
+            this.leafoptionShowGrid.ForeColor = Color.White;
+            this.leafoptionShowGrid.Name = "leafoptionShowGrid";
+            this.leafoptionShowGrid.Size = new Size(254, 22);
+            this.leafoptionShowGrid.Text = "Show Grid";
+            this.leafoptionShowGrid.CheckedChanged += this.leafoptionShowGrid_CheckedChanged;
+            // 
+            // leafoptionConnectBars
+            // 
+            this.leafoptionConnectBars.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionConnectBars.Checked = true;
+            this.leafoptionConnectBars.CheckOnClick = true;
+            this.leafoptionConnectBars.CheckState = CheckState.Checked;
+            this.leafoptionConnectBars.ForeColor = Color.White;
+            this.leafoptionConnectBars.Name = "leafoptionConnectBars";
+            this.leafoptionConnectBars.Size = new Size(254, 22);
+            this.leafoptionConnectBars.Text = "Connected Bars";
+            this.leafoptionConnectBars.CheckedChanged += this.leafoptionConnectBars_CheckedChanged;
+            // 
+            // leafoptionShowLanes
+            // 
+            this.leafoptionShowLanes.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowLanes.CheckOnClick = true;
+            this.leafoptionShowLanes.ForeColor = Color.White;
+            this.leafoptionShowLanes.Name = "leafoptionShowLanes";
+            this.leafoptionShowLanes.Size = new Size(254, 22);
+            this.leafoptionShowLanes.Text = "Always Show Lanes";
+            this.leafoptionShowLanes.CheckedChanged += this.leafoptionShowLanes_CheckedChanged;
+            // 
+            // leafoptionEaseDots
+            // 
+            this.leafoptionEaseDots.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionEaseDots.Checked = true;
+            this.leafoptionEaseDots.CheckOnClick = true;
+            this.leafoptionEaseDots.CheckState = CheckState.Checked;
+            this.leafoptionEaseDots.ForeColor = Color.White;
+            this.leafoptionEaseDots.Name = "leafoptionEaseDots";
+            this.leafoptionEaseDots.Size = new Size(254, 22);
+            this.leafoptionEaseDots.Text = "Easing and Interplation Dots";
+            this.leafoptionEaseDots.CheckedChanged += this.leafoptionEaseDots_CheckedChanged;
+            // 
+            // leafoptionThinValues
+            // 
+            this.leafoptionThinValues.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionThinValues.Checked = true;
+            this.leafoptionThinValues.CheckOnClick = true;
+            this.leafoptionThinValues.CheckState = CheckState.Checked;
+            this.leafoptionThinValues.ForeColor = Color.White;
+            this.leafoptionThinValues.Name = "leafoptionThinValues";
+            this.leafoptionThinValues.Size = new Size(254, 22);
+            this.leafoptionThinValues.Text = "Show Values on Lanes as Thin Bars";
+            this.leafoptionThinValues.CheckedChanged += this.leafoptionThinValues_CheckedChanged;
+            // 
+            // leafoptionShowWave
+            // 
+            this.leafoptionShowWave.BackColor = Color.FromArgb(46, 46, 46);
+            this.leafoptionShowWave.Checked = true;
+            this.leafoptionShowWave.CheckOnClick = true;
+            this.leafoptionShowWave.CheckState = CheckState.Checked;
+            this.leafoptionShowWave.ForeColor = Color.White;
+            this.leafoptionShowWave.Name = "leafoptionShowWave";
+            this.leafoptionShowWave.Size = new Size(254, 22);
+            this.leafoptionShowWave.Text = "Show Waveforms";
+            this.leafoptionShowWave.CheckedChanged += this.leafoptionShowWave_CheckedChanged;
+            // 
+            // leafoptionVerticalCells
+            // 
+            this.leafoptionVerticalCells.CheckOnClick = true;
+            this.leafoptionVerticalCells.ForeColor = Color.White;
+            this.leafoptionVerticalCells.Name = "leafoptionVerticalCells";
+            this.leafoptionVerticalCells.Size = new Size(254, 22);
+            this.leafoptionVerticalCells.Text = "Vertical Numbers in Cells";
+            this.leafoptionVerticalCells.CheckedChanged += this.leafoptionVerticalCells_CheckedChanged;
             // 
             // TCLE
             // 
@@ -2106,6 +2111,7 @@
             ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).EndInit();
             this.contextmenuTabClick.ResumeLayout(false);
             this.contextmenuMoveWorkspace.ResumeLayout(false);
+            this.contextMenuLeafOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -2248,12 +2254,6 @@
         private ToolStripMenuItem toolStripMenuItem3;
         private ContextMenuStrip contextmenuView;
         private ToolStripMenuItem toolStripMenuItem11;
-        public ToolStripMenuItem leafoptionShowCategory;
-        public ToolStripMenuItem leafoptionShowGrid;
-        public ToolStripMenuItem leafoptionConnectBars;
-        public ToolStripMenuItem leafoptionShowLanes;
-        public ToolStripMenuItem leafoptionEaseDots;
-        public ToolStripMenuItem leafoptionThinValues;
         private ToolStripMenuItem showGridToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator18;
         private ToolStripMenuItem toolstripViewFullscreen;
@@ -2263,7 +2263,6 @@
         private ToolStripButton toolstripExitFullscreen;
         private ToolStripMenuItem toolstripProjectPreload;
         private ToolStripButton toolstripStopAudio;
-        public ToolStripMenuItem leafoptionShowWave;
         private ToolStripSeparator toolStripSeparator20;
         private ToolStripSeparator toolStripSeparator21;
         private ToolStripMenuItem toolStripMenuItem4;
@@ -2283,11 +2282,19 @@
         public Label pictureEasing;
         private ToolStripMenuItem toolstripFileClearTemp;
         private ToolStripMenuItem toolstripFileRestart;
-        private ToolStripMenuItem leafoptionVerticalCells;
         private DataGridViewTextBoxColumn dataGridViewImageColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn closerecent;
+        public ContextMenuStrip contextMenuLeafOptions;
+        public ToolStripMenuItem leafoptionShowCategory;
+        public ToolStripMenuItem leafoptionShowGrid;
+        public ToolStripMenuItem leafoptionConnectBars;
+        public ToolStripMenuItem leafoptionShowLanes;
+        public ToolStripMenuItem leafoptionEaseDots;
+        public ToolStripMenuItem leafoptionThinValues;
+        public ToolStripMenuItem leafoptionShowWave;
+        private ToolStripMenuItem leafoptionVerticalCells;
     }
 }
 

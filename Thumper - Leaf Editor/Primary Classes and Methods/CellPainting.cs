@@ -171,8 +171,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 if (Properties.Settings.Default.LeafOptionVerticalCells) {
                     Font font = new(TCLE.ImportedFonts.Families[0], 10);
                     SizeF RealSize = e.Graphics.MeasureString(cellText, font);
-                    float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
-                    float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
+                    float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Width;
+                    float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Height;
                     float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
                     e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
                 }
