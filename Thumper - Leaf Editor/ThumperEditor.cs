@@ -7,6 +7,7 @@ using Un4seen.Bass;
 using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using System.Linq;
+using System.Drawing.Text;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -40,6 +41,7 @@ namespace Thumper_Custom_Level_Editor
         public static SettingsUITheme settingsUITheme = new();
         public static bool Fullscreen;
         public static string DragSource = "none";
+        public static PrivateFontCollection ImportedFonts = new PrivateFontCollection();
         //Public accessible clipboards
         public static List<Sequencer_Object> ClipboardSequencer = new();
         public static List<SeqDataPoint> ClipboardDataPoints;
@@ -47,7 +49,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<LvlLeafData> ClipboardLvl = new();
         public static List<GateLvlData> ClipboardGate = new();
         public static List<string> ClipboardPaths = new();
-        //
+        //Beeble things
         public static Beeble MainBeeble = new() { Visible = false };
         public static List<Beeble> ExistingBeebles = new();
         #endregion
@@ -112,6 +114,10 @@ namespace Thumper_Custom_Level_Editor
             if (!Directory.Exists($@"{AppLocation}\settings")) {
                 Directory.CreateDirectory($@"{AppLocation}\settings");
             }
+            //load fonts
+            if (!File.Exists($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf"))
+                File.WriteAllBytes($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
+            ImportedFonts.AddFontFile($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf");
             //call methods to initialize various aspects of the editors
             ImportObjects();
             ColorFormElements(TCLE.Instance);

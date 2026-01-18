@@ -144,9 +144,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void DrawCellValues(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, Sequencer_Object seq = null)
+        public static void DrawText(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq = null)
         {
-            if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != 0 && e.Value != null) {
+            if (e.Value is not null and not "") {
                 //skips a bunch of objects since they display their values differently
                 if (e.RowIndex == -1)
                     goto skipchecks;
@@ -156,12 +156,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     return;
                 else if ((Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false))
                     return;
-                else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex >= FrozenColumnOffset && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString())
+                else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex > FrozenColumnOffset && (decimal?)e.Value == (decimal?)seq[e.ColumnIndex - 1].Value)
                     return;
 
-                Color _c = seq.highlight_color;
                 //Tests highlight color contrast. If low, text color is set to white.
-                if (_c.R < 150 && _c.G < 150 && _c.B < 150)
+                if (seq.highlight_color.R < 150 && seq.highlight_color.G < 150 && seq.highlight_color.B < 150)
                     e.CellStyle.ForeColor = Color.White;
                 else
                     e.CellStyle.ForeColor = Color.Black;
@@ -170,31 +169,20 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 //if using vertical text, string width needs to be tested against cell height instead of width
                 //hence why this is in 2 blocks that do almost identical things
                 if (Properties.Settings.Default.LeafOptionVerticalCells) {
-                    for (int fontSize = 1; fontSize < 25; fontSize++) {
-                        Font font = new("Consolas", fontSize);
-                        Size textSize = TextRenderer.MeasureText(cellText, font);
-                        //if font is within cell bounds, try font size +1. Or cap it at 24.
-                        if (textSize.Width > e.CellBounds.Height + 2 || textSize.Height > e.CellBounds.Width || fontSize == 24) {
-                            if (fontSize - 1 != 0)
-                                font = new Font("Consolas", fontSize - 1);
-                            e.CellStyle.Font = font;
-                            e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
-                            break;
-                        }
-                    }
+                    Font font = new(TCLE.ImportedFonts.Families[0], 10);
+                    SizeF RealSize = e.Graphics.MeasureString(cellText, font);
+                    float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
+                    float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
+                    float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                    e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
                 }
                 else {
-                    for (int fontSize = 1; fontSize < 25; fontSize++) {
-                        Font font = new("Consolas", fontSize);
-                        Size textSize = TextRenderer.MeasureText(cellText, font);
-                        if (textSize.Width > e.CellBounds.Width + 2 || textSize.Height > e.CellBounds.Height || fontSize == 24) {
-                            if (fontSize - 1 != 0)
-                                font = new Font("Consolas", fontSize - 1);
-                            e.CellStyle.Font = font;
-                            e.Graphics.DrawString(cellText, font, new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
-                            break;
-                        }
-                    }
+                    Font font = new(TCLE.ImportedFonts.Families[0], 10);
+                    SizeF RealSize = e.Graphics.MeasureString(cellText, font);
+                    float HeightScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
+                    float WidthScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
+                    float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                    e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
                 }
 
             }
@@ -433,13 +421,13 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             if (e.Value != null) {
                 Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.4)), 8) { EndCap = LineCap.Triangle};
-                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
+                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
                 // Convert the angle from degrees to radians, as Math.Cos and Math.Sin use radians
                 double angleRadians = (double)(decimal)e.Value * (Math.PI / 180.0);
                 // Calculate the end point coordinates
-                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)(20 * Math.Cos(angleRadians));
-                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 2)) - (float)(20 * Math.Sin(angleRadians));
+                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 2)) * Math.Sin(angleRadians));
+                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 2)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 2)) * Math.Cos(angleRadians));
 
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(2, 1);
                 e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2), endX, endY);

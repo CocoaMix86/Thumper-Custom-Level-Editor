@@ -420,7 +420,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height));
             if (e.RowIndex == -1) {
                 //draw column headers (beat #s)
-                CellPainting.DrawCellValues(e, trackEditor);
+                CellPainting.DrawText(e);
                 CellPainting.CellPaintIcons(e, this);
                 //Drawing the playback heads, start and end point triangles that exist in the header row
                 CellPainting.DrawPlaybackHeaders(e, PlaybackStart, PlaybackEnd, PlaybackLoop);
@@ -446,7 +446,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 CellPainting.DrawLaneEnds(e, SequencerObjects[e.RowIndex], SequencerObjects);
             else if (SequencerObjects[e.RowIndex].friendly_param is "turn" or "turn_auto")
                 CellPainting.DrawTurnAngles(e, SequencerObjects[e.RowIndex]);
-            CellPainting.DrawCellValues(e, trackEditor, SequencerObjects[e.RowIndex]);
+            CellPainting.DrawText(e, SequencerObjects[e.RowIndex]);
         }
 
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

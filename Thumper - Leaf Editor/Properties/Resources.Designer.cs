@@ -1523,6 +1523,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] JetBrainsMono_Medium {
+            get {
+                object obj = ResourceManager.GetObject("JetBrainsMono_Medium", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string leaf_multitrack {
