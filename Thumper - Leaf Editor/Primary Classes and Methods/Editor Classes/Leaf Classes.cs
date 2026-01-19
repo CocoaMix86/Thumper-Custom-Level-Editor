@@ -36,7 +36,11 @@ namespace Thumper_Custom_Level_Editor
 
         public SeqDataPoint this[int index]
         {
-            get => (SeqDataPoint)this.Cells[index];
+            get {
+                if (index == -1)
+                    return null;
+                return (SeqDataPoint)this.Cells[index];
+            }
             set {
                 this.Cells[index] = value;
             }

@@ -3,7 +3,7 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
-    public static class CellPainting
+    public static class LeafCellPainting
     {
         public static int FrozenColumnOffset => Form_LeafEditor.FrozenColumnOffset;
         private static int IconWidth = 16;
