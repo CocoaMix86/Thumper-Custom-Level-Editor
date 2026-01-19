@@ -171,7 +171,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool EditorIsPasting;
         private bool EditorIsInterpolating;
         private bool EditorIsTuning;
-        private bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
+        public bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
         private bool LogUndo = true;
         public bool GlobalMute;
         public bool GlobalDisable;
@@ -2754,6 +2754,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         savestate = _saveJSON
                     });
                 }
+                LeafMasterView.MasterViewBegin(pictureMasterView.CreateGraphics(), SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";

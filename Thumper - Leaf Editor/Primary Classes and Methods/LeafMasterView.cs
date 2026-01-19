@@ -18,6 +18,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static int Height = 20;
         public static int Gap = 3;
         public static int Middle;
+        //
+        public static List<Sequencer_Object> Lanes = new();
         //Lane colors
         public static Color ColorLane = Color.FromArgb(37, 19, 27);
         public static SolidBrush BrushLane = new(ColorLane);
@@ -31,6 +33,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void MasterViewBegin(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf, int CellWidth, int CellHeight)
         {
+            if (Leaf.ParentEditor.EditorIsProcessing)
+                return;
             //clear the screen
             g.Clear(Color.Black);
             //initialize variables needed
@@ -38,6 +42,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //Height = CellHeight;
             Middle = (int)(g.VisibleClipBounds.Height / 2) - (CellHeight / 2);
             GetRailColors(SequencerObjects, Leaf);
+            GetLanes(SequencerObjects);
             //Begin drawing
             //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
@@ -59,16 +64,43 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
         }
+        public static void GetLanes(List<Sequencer_Object> SequencerObjects)
+        {
+            Lanes = new() { 
+                SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2"), 
+                SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1"), 
+                SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center"), 
+                SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1"), 
+                SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2") 
+            };
+        }
 
         public static void DrawLanes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            int offset = 0;
+            for (int beat = 0; beat < Leaf.beats; beat++) {
+                if (Lanes[2] == null || Lanes[2][beat].InGameValue == 1) {
+                    DrawRails(g, Lanes[2], SequencerObjects, beat, Middle);
+                }
+                if (Lanes[1]?[beat].InGameValue == 1) {
+                    DrawRails(g, Lanes[1], SequencerObjects, beat, Middle - Height - Gap);
+                }
+                if (Lanes[0]?[beat].InGameValue == 1) {
+                    DrawRails(g, Lanes[0], SequencerObjects, beat, Middle - Height*2 - Gap*2);
+                }
+                if (Lanes[3]?[beat].InGameValue == 1) {
+                    DrawRails(g, Lanes[3], SequencerObjects, beat, Middle + Height + Gap);
+                }
+                if (Lanes[4]?[beat].InGameValue == 1) {
+                    DrawRails(g, Lanes[4], SequencerObjects, beat, Middle + Height*2 + Gap*2);
+                }
+            }
             //Check if Center Lane exists. If it does, follow the set values
             //Otherwise, every value is 1
-            if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center") is Sequencer_Object seq) {
+            /*
+            if (Lanes[2] != null) {
                 for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (seq[beat].InGameValue == 1) {
-                        DrawRails(g, seq, SequencerObjects, beat, Middle);
+                    if (Lanes[2][beat].InGameValue == 1) {
+                        DrawRails(g, Lanes[2], SequencerObjects, beat, Middle);
                     }
                 }
             }
@@ -78,37 +110,38 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
             offset = Height + Gap;
-            if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1") is Sequencer_Object seq2) {
+            if (Lanes[1] != null) {
                 for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (seq2[beat].InGameValue == 1) {
-                        DrawRails(g, seq2, SequencerObjects, beat, Middle - offset);
+                    if (Lanes[1][beat].InGameValue == 1) {
+                        DrawRails(g, Lanes[1], SequencerObjects, beat, Middle - offset);
                     }
                 }
             }
             offset += Height + Gap;
-            if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2") is Sequencer_Object seq3) {
+            if (Lanes[0] != null) {
                 for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (seq3[beat].InGameValue == 1) {
-                        DrawRails(g, seq3, SequencerObjects, beat, Middle - offset);
+                    if (Lanes[0][beat].InGameValue == 1) {
+                        DrawRails(g, Lanes[0], SequencerObjects, beat, Middle - offset);
                     }
                 }
             }
             offset = 0 - (Height + Gap);
-            if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1") is Sequencer_Object seq4) {
+            if (Lanes[3] != null) {
                 for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (seq4[beat].InGameValue == 1) {
-                        DrawRails(g, seq4, SequencerObjects, beat, Middle - offset);
+                    if (Lanes[3][beat].InGameValue == 1) {
+                        DrawRails(g, Lanes[3], SequencerObjects, beat, Middle - offset);
                     }
                 }
             }
             offset -= (Height + Gap);
-            if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2") is Sequencer_Object seq5) {
+            if (Lanes[4] != null) {
                 for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (seq5[beat].InGameValue == 1) {
-                        DrawRails(g, seq5, SequencerObjects, beat, Middle - offset);
+                    if (Lanes[4][beat].InGameValue == 1) {
+                        DrawRails(g, Lanes[4], SequencerObjects, beat, Middle - offset);
                     }
                 }
             }
+            */
         }
         public static void DrawRails(Graphics g, Sequencer_Object seq, List<Sequencer_Object> SequencerObjects, int beat, int offset)
         {
@@ -314,7 +347,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
         }
-
         public static void DrawThumpIcon(Graphics g, int beat, int offset)
         {
             g.FillRectangle(BrushThumpOutter, new Rectangle((beat * Width) + (Width / 3), offset + 2, Width - ((Width / 3)*2), Height - 4));
