@@ -21,10 +21,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         //
         public static List<Sequencer_Object> Lanes = new();
         //Lane colors
-        public static Color ColorLane = Color.FromArgb(37, 19, 27);
-        public static SolidBrush BrushLane = new(ColorLane);
+        public static SolidBrush BrushLane = new(Color.FromArgb(27, 19, 27));
         public static Color ColorDefaultRail = Color.FromArgb(147, 255, 80);
         public static Pen PenRailDefault = new(ColorDefaultRail, 2);
+        public static SolidBrush LaneOuter = new(Color.FromArgb(148, 184, 202));
+        public static SolidBrush TrackOuter = new(Color.FromArgb(48, 48, 48));
         //Thump colors
         public static SolidBrush BrushThumpInner = new(Color.White);
         public static SolidBrush BrushThumpOutter = new(Color.FromArgb(148, 129, 239));
@@ -94,135 +95,63 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     DrawRails(g, Lanes[4], SequencerObjects, beat, Middle + Height*2 + Gap*2);
                 }
             }
-            //Check if Center Lane exists. If it does, follow the set values
-            //Otherwise, every value is 1
-            /*
-            if (Lanes[2] != null) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (Lanes[2][beat].InGameValue == 1) {
-                        DrawRails(g, Lanes[2], SequencerObjects, beat, Middle);
-                    }
-                }
-            }
-            else {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    DrawRails(g, null, SequencerObjects, beat, Middle);
-                }
-            }
-            offset = Height + Gap;
-            if (Lanes[1] != null) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (Lanes[1][beat].InGameValue == 1) {
-                        DrawRails(g, Lanes[1], SequencerObjects, beat, Middle - offset);
-                    }
-                }
-            }
-            offset += Height + Gap;
-            if (Lanes[0] != null) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (Lanes[0][beat].InGameValue == 1) {
-                        DrawRails(g, Lanes[0], SequencerObjects, beat, Middle - offset);
-                    }
-                }
-            }
-            offset = 0 - (Height + Gap);
-            if (Lanes[3] != null) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (Lanes[3][beat].InGameValue == 1) {
-                        DrawRails(g, Lanes[3], SequencerObjects, beat, Middle - offset);
-                    }
-                }
-            }
-            offset -= (Height + Gap);
-            if (Lanes[4] != null) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
-                    if (Lanes[4][beat].InGameValue == 1) {
-                        DrawRails(g, Lanes[4], SequencerObjects, beat, Middle - offset);
-                    }
-                }
-            }
-            */
         }
         public static void DrawRails(Graphics g, Sequencer_Object seq, List<Sequencer_Object> SequencerObjects, int beat, int offset)
         {
+            bool check = false;
             if (seq == null) {
                 DrawRailNormal(g, beat, offset);
             }
 
-            else if (seq.friendly_param == "lane center") {
-                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[beat].InGameValue == 1)
-                        DrawRailOpenLeft(g, beat, offset);
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[beat].InGameValue == 1)
-                        DrawRailOpenRight(g, beat, offset);                    
-                }
-                else if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[beat].InGameValue == 1)
-                        DrawRailCloseLeft(g, beat, offset);                    
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[beat].InGameValue == 1)
-                        DrawRailCloseRight(g, beat, offset);                    
-                }
-                else
-                    DrawRailNormal(g, beat, offset);
-            }
-
-            else if (seq.friendly_param == "lane left 1") {
-                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[beat].InGameValue == 1)
-                        DrawRailOpenLeft(g, beat, offset);
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[beat].InGameValue == 1)
-                        DrawRailOpenRight(g, beat, offset);
-                }
-                else if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[beat].InGameValue == 1)
-                        DrawRailCloseLeft(g, beat, offset);
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[beat].InGameValue == 1)
-                        DrawRailCloseRight(g, beat, offset);
-                }
-                else
-                    DrawRailNormal(g, beat, offset);
-            }
-
             else if (seq.friendly_param == "lane left 2") {
-                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[beat].InGameValue == 1)
-                        DrawRailOpenRight(g, beat, offset);
+                check = false;
+                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0 && Lanes[1]?[beat].InGameValue == 1){
+                    DrawRailOpenRight(g, beat, offset);
+                    check = true;
                 }
-                else if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[beat].InGameValue == 1)
-                        DrawRailCloseRight(g, beat, offset);
+                if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0 && Lanes[1]?[beat].InGameValue == 1){
+                    DrawRailCloseRight(g, beat, offset);
+                    check = true;
                 }
-                else
+                if (!check)
                     DrawRailNormal(g, beat, offset);
             }
-
-            else if (seq.friendly_param == "lane right 1") {
-                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[beat].InGameValue == 1)
-                        DrawRailOpenLeft(g, beat, offset);
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[beat].InGameValue == 1)
-                        DrawRailOpenRight(g, beat, offset);
-                }
-                else if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[beat].InGameValue == 1)
-                        DrawRailCloseLeft(g, beat, offset);
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[beat].InGameValue == 1)
-                        DrawRailCloseRight(g, beat, offset);
-                }
-                else
-                    DrawRailNormal(g, beat, offset);
-            }
-
             else if (seq.friendly_param == "lane right 2") {
+                check = false;
+                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1){
+                    DrawRailOpenLeft(g, beat, offset);
+                    check = true;
+                }
+                if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1){
+                    DrawRailCloseLeft(g, beat, offset);
+                    check = true;
+                }
+                if (!check)
+                    DrawRailNormal(g, beat, offset);
+            }
+            else {
+                check = false;
                 if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[beat].InGameValue == 1)
+                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1){
                         DrawRailOpenLeft(g, beat, offset);
+                        check = true;
+                    }
+                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1){
+                        DrawRailOpenRight(g, beat, offset);
+                        check = true;
+                    }
                 }
-                else if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[beat].InGameValue == 1)
+                if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
+                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1){
                         DrawRailCloseLeft(g, beat, offset);
+                        check = true;
+                    }
+                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1){
+                        DrawRailCloseRight(g, beat, offset);
+                        check = true;
+                    }
                 }
-                else
+                if (!check)
                     DrawRailNormal(g, beat, offset);
             }
         }
@@ -301,7 +230,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             LinearGradientBrush lgb = new(new Rectangle(beat * Width, offset, Width, Height), Color.Black, Color.Black, 90);
             ColorBlend cblend = new(3) {
-                Colors = new Color[3] { Color.FromArgb(40, PenRailColors[beat].Color), Color.Transparent, Color.FromArgb(40, PenRailColors[beat].Color) },
+                Colors = new Color[3] { Color.FromArgb(50, PenRailColors[beat].Color), Color.Transparent, Color.FromArgb(50, PenRailColors[beat].Color) },
                 Positions = new float[3] { 0f, 0.5f, 1f }
             };
             lgb.InterpolationColors = cblend;
