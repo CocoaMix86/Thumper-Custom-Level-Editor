@@ -1,6 +1,4 @@
-﻿using NAudio.Wave;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Un4seen.Bass;
@@ -908,8 +906,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
                 }
                 if (!SaveOnlyNoLoad) {
-                    dynamic _saveTCL = TCLE.BuildSave(TCLE.ProjectProperties);
-                    File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveTCL, Formatting.Indented));
+                    TCLE.SaveTCL();
                 }
                 //
                 if (playsound) TCLE.PlaySound("UIsave");

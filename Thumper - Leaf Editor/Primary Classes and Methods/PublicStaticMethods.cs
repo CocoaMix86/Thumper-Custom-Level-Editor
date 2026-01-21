@@ -1162,11 +1162,16 @@ namespace Thumper_Custom_Level_Editor
             return _save;
         }
 
+        public static DateTime lastsave = new(0);
         public static void SaveTCL()
         {
+            if (DateTime.Now < lastsave.AddSeconds(5))
+                return;
             JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
             //write JSON to file
             File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+
+            lastsave = DateTime.Now;
         }
 
 

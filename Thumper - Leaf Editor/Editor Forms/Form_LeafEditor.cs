@@ -42,7 +42,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     EditorIsLoading = false;
                 }
+                if (!SaveOnlyNoLoad) {
+                    TCLE.SaveTCL();
+                }
             }
+            LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
         }
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload, bool saveonlynoload = false)

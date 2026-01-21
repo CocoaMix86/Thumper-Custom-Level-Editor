@@ -1,5 +1,4 @@
-﻿using ABI.Windows.ApplicationModel.Activation;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Un4seen.Bass;
@@ -54,6 +53,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading;
+        private bool SaveOnlyNoLoad;
         private bool LogUndo = true;
         private bool IsAddingItems;
         public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random));
@@ -790,6 +790,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.FindReloadRaw(LoadedGate.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
                 if (playsound) TCLE.PlaySound("UIsave");
+
+                if (!SaveOnlyNoLoad) {
+                    TCLE.SaveTCL();
+                }
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Un4seen.Bass;
@@ -1221,6 +1220,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
                 if (playsound) TCLE.PlaySound("UIsave");
+
+                if (!SaveOnlyNoLoad) {
+                    TCLE.SaveTCL();
+                }
             }
         }
 

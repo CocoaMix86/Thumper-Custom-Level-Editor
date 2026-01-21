@@ -707,6 +707,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, true, out string _);
                 if (playsound) TCLE.PlaySound("UIsave");
             }
+            if (!SaveOnlyNoLoad) {
+                TCLE.SaveTCL();
+            }
         }
 
         public static JObject BuildSave(SampleProperties _properties)
