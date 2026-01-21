@@ -170,9 +170,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         }
         public static void DrawRailNormal(Graphics g, int beat, int offset, Sequencer_Object seq)
         {
-            if (seq.friendly_param == "lane left 2" || Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 0)
+            if (seq != null && (seq.friendly_param == "lane left 2" || Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 0))
                 DrawLaneBorder(g, new(beat * Width, offset - 4), new((beat * Width) + Width, offset - 4));
-            if (seq.friendly_param == "lane right 2" || Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 0)
+            if (seq != null && (seq.friendly_param == "lane right 2" || Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 0))
                 DrawLaneBorder(g, new(beat * Width, offset + Height + 3), new((beat * Width) + Width, offset + Height + 3));
 
             g.FillRectangle(BrushLane, new Rectangle(beat * Width, offset, Width, Height));
