@@ -14,41 +14,48 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
     public static class LeafMasterView
     {
+        public static Bitmap LeafDrawing;
+        //
         public static int Width = 40;
         public static int Height = 20;
-        public static int Gap = 3;
+        public static int Gap = 1;
         public static int Middle;
         //
         public static List<Sequencer_Object> Lanes = new();
         //Lane colors
+        //public static SolidBrush BrushLane = new(Color.Red);
         public static SolidBrush BrushLane = new(Color.FromArgb(27, 19, 27));
         public static Color ColorDefaultRail = Color.FromArgb(147, 255, 80);
         public static Pen PenRailDefault = new(ColorDefaultRail, 2);
         public static SolidBrush LaneOuter = new(Color.FromArgb(148, 184, 202));
-        public static SolidBrush TrackOuter = new(Color.FromArgb(48, 48, 48));
+        public static Pen PenLaneOuter = new(LaneOuter, 1);
+        public static SolidBrush TrackOuter = new(Color.FromArgb(49, 63, 86));
+        public static Pen PenTrackOuter = new(TrackOuter, 3);
         //Thump colors
         public static SolidBrush BrushThumpInner = new(Color.White);
         public static SolidBrush BrushThumpOutter = new(Color.FromArgb(148, 129, 239));
         //
         public static List<Pen> PenRailColors;
 
-        public static void MasterViewBegin(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf, int CellWidth, int CellHeight)
+        public static void MasterViewBegin(PictureBox pic, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf, int CellWidth, int CellHeight)
         {
             if (Leaf.ParentEditor.EditorIsProcessing)
                 return;
-            //clear the screen
-            g.Clear(Color.Black);
-            //initialize variables needed
-            //Width = CellWidth;
-            //Height = CellHeight;
-            Middle = (int)(g.VisibleClipBounds.Height / 2) - (CellHeight / 2);
-            GetRailColors(SequencerObjects, Leaf);
-            GetLanes(SequencerObjects);
-            //Begin drawing
-            //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
-            DrawLanes(g, SequencerObjects, Leaf);
-            DrawThumps(g, SequencerObjects, Leaf);
+            pic.Size = new(Width * Leaf.beats, (Height + Gap) * 7);
+            LeafDrawing = new(pic.Width, pic.Height);
+            Middle = (pic.Height / 2) - (CellHeight / 2);
+            using (Graphics g = Graphics.FromImage(LeafDrawing)) {
+                //initialize variables needed
+                GetRailColors(SequencerObjects, Leaf);
+                GetLanes(SequencerObjects);
+                //Begin drawing
+                g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
+                DrawLanes(g, SequencerObjects, Leaf);
+                DrawThumps(g, SequencerObjects, Leaf);
+            }
+
+            pic.Image = LeafDrawing;
+            //return LeafDrawing;
         }
 
         public static void GetRailColors(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -100,133 +107,112 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             bool check = false;
             if (seq == null) {
-                DrawRailNormal(g, beat, offset);
+                DrawRailNormal(g, beat, offset, seq);
             }
 
             else if (seq.friendly_param == "lane left 2") {
                 check = false;
                 if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0 && Lanes[1]?[beat].InGameValue == 1){
-                    DrawRailOpenRight(g, beat, offset);
+                    //DrawRailOpenRight(g, beat, offset);
+                    DrawRailEnds(g, beat, offset, true, false, seq);
                     check = true;
                 }
                 if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0 && Lanes[1]?[beat].InGameValue == 1){
-                    DrawRailCloseRight(g, beat, offset);
+                    //DrawRailCloseRight(g, beat, offset);
+                    DrawRailEnds(g, beat, offset, true, true, seq);
                     check = true;
                 }
                 if (!check)
-                    DrawRailNormal(g, beat, offset);
+                    DrawRailNormal(g, beat, offset, seq);
             }
             else if (seq.friendly_param == "lane right 2") {
                 check = false;
-                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1){
-                    DrawRailOpenLeft(g, beat, offset);
+                if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1) {
+                    DrawRailEnds(g, beat, offset, false, false, seq);
                     check = true;
                 }
-                if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1){
-                    DrawRailCloseLeft(g, beat, offset);
+                if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0 && Lanes[3]?[beat].InGameValue == 1) {
+                    DrawRailEnds(g, beat, offset, false, true, seq);
                     check = true;
                 }
                 if (!check)
-                    DrawRailNormal(g, beat, offset);
+                    DrawRailNormal(g, beat, offset, seq);
             }
             else {
                 check = false;
                 if (seq[beat].InGameValue == 1 && seq[beat - 1]?.InGameValue == 0) {
-                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1){
-                        DrawRailOpenLeft(g, beat, offset);
+                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1) {
+                        DrawRailEnds(g, beat, offset, false, false, seq);
                         check = true;
                     }
-                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1){
-                        DrawRailOpenRight(g, beat, offset);
+                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1) {
+                        DrawRailEnds(g, beat, offset, true, false, seq);
                         check = true;
                     }
                 }
                 if (seq[beat].InGameValue == 1 && seq[beat + 1]?.InGameValue == 0) {
-                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1){
-                        DrawRailCloseLeft(g, beat, offset);
+                    if (Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 1) {
+                        DrawRailEnds(g, beat, offset, false, true, seq);
                         check = true;
                     }
-                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1){
-                        DrawRailCloseRight(g, beat, offset);
+                    if (Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 1) {
+                        DrawRailEnds(g, beat, offset, true, true, seq);
                         check = true;
                     }
                 }
                 if (!check)
-                    DrawRailNormal(g, beat, offset);
+                    DrawRailNormal(g, beat, offset, seq);
             }
         }
-        public static void DrawRailNormal(Graphics g, int beat, int offset)
+        public static void DrawLaneBorder(Graphics g, Point p1, Point p2)
         {
+            //g.DrawLine(PenTrackOuter, p1, p2);
+        }
+        public static void DrawRailNormal(Graphics g, int beat, int offset, Sequencer_Object seq)
+        {
+            if (seq.friendly_param == "lane left 2" || Lanes[Lanes.IndexOf(seq) - 1]?[beat].InGameValue == 0)
+                DrawLaneBorder(g, new(beat * Width, offset - 4), new((beat * Width) + Width, offset - 4));
+            if (seq.friendly_param == "lane right 2" || Lanes[Lanes.IndexOf(seq) + 1]?[beat].InGameValue == 0)
+                DrawLaneBorder(g, new(beat * Width, offset + Height + 3), new((beat * Width) + Width, offset + Height + 3));
+
             g.FillRectangle(BrushLane, new Rectangle(beat * Width, offset, Width, Height));
-            g.DrawLine(PenRailColors[beat], beat * Width, offset, (beat * Width) + Width, offset);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset + Height, (beat * Width) + Width, offset + Height);
-
-            LinearGradientBrush lgb = new(new Rectangle(beat * Width, offset, Width, Height), Color.Black, Color.Black, 90);
-            ColorBlend cblend = new(3) {
-                Colors = new Color[3] { Color.FromArgb(40, PenRailColors[beat].Color), Color.Transparent, Color.FromArgb(40, PenRailColors[beat].Color) },
-                Positions = new float[3] { 0f, 0.5f, 1f }
-            };
-            lgb.InterpolationColors = cblend;
-
-            g.FillRectangle(lgb, new Rectangle(beat * Width, offset, Width, Height));
+            g.FillRectangle(PenRailColors[beat].Brush, beat * Width, offset, Width, 2);
+            g.FillRectangle(PenRailColors[beat].Brush, beat * Width, offset + Height - 2, Width, 2);
+            //
+            DrawRailGlow(g, beat, offset, null, true);
+            //
+            //g.DrawLine(PenLaneOuter, beat * Width, offset - 2, (beat * Width) + Width, offset - 2);
+            //g.DrawLine(PenLaneOuter, beat * Width, offset + Height + 1, (beat * Width) + Width, offset + Height + 1);
         }
-        public static void DrawRailOpenLeft(Graphics g, int beat, int offset)
+        public static void DrawRailEnds(Graphics g, int beat, int offset, bool right, bool close, Sequencer_Object seq)
         {
-            Point p1 = new(beat * Width, offset);
-            Point p2 = new((beat * Width) + Width, offset);
-            Point p3 = new((beat * Width) + Width, offset + Height);
-            Point p4 = new((beat * Width) + (Width / 2), offset + Height);
+            //bottom right
+            Point p1 = new(beat * Width + Width - (!right && close ? Width / 2 : 0), offset + Height - 1);
+            //bottom left
+            Point p2 = new(beat * Width + (!right && !close ? Width / 2 : 0), offset + Height - 1);
+            //top left
+            Point p3 = new(beat * Width + (right && !close ? Width / 2 : 0), offset + 1);
+            //top right
+            Point p4 = new(beat * Width + Width - (right && close ? Width / 2 : 0), offset + 1);
             g.FillPolygon(BrushLane, new[] { p1, p2, p3, p4 });
 
-            g.DrawLine(PenRailColors[beat], beat * Width, offset, beat * Width + (Width / 2), offset + Height);
-            g.DrawLine(PenRailColors[beat], (beat * Width) + (Width / 2), offset + Height, (beat * Width) + Width, offset + Height);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset, (beat * Width) + Width, offset);
-
+            if (close) {
+                //draw rail color
+                g.DrawLine(PenRailColors[beat], p1, p2);
+                g.DrawLine(PenRailColors[beat], p3, p4);
+                g.DrawLine(PenRailColors[beat], p1, p4);
+                //draw lane border
+                //g.DrawLine(PenLaneOuter, new(p1.X + 2, p1.Y - 2), new(p4.X + 2, p4.Y - 2));
+                //g.DrawLine(PenLaneOuter, new(p4.X + 2, p4.Y - 2), new(p3.X + 2, p3.Y - 2));
+            }
+            else {
+                g.DrawLine(PenRailColors[beat], p1, p2);
+                g.DrawLine(PenRailColors[beat], p3, p4);
+                g.DrawLine(PenRailColors[beat], p2, p3);
+            }
             DrawRailGlow(g, beat, offset, new[] { p1, p2, p3, p4 });
-        }
-        public static void DrawRailOpenRight(Graphics g, int beat, int offset)
-        {
-            Point p1 = new(beat * Width, offset + Height);
-            Point p2 = new((beat * Width) + (Width / 2), offset);
-            Point p3 = new((beat * Width) + Width, offset);
-            Point p4 = new((beat * Width) + Width, offset + Height);
-            g.FillPolygon(BrushLane, new[] { p1, p2, p3, p4 });
-
-            g.DrawLine(PenRailColors[beat], beat * Width, offset + Height, beat * Width + (Width / 2), offset);
-            g.DrawLine(PenRailColors[beat], (beat * Width) + (Width / 2), offset, (beat * Width) + Width, offset);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset + Height, (beat * Width) + Width, offset + Height);
-
-            DrawRailGlow(g, beat, offset, new[] { p1, p2, p3, p4 });
-        }
-        public static void DrawRailCloseLeft(Graphics g, int beat, int offset)
-        {
-            Point p1 = new(beat * Width, offset);
-            Point p2 = new((beat * Width) + Width, offset);
-            Point p3 = new((beat * Width) + (Width / 2), offset + Height);
-            Point p4 = new((beat * Width), offset + Height);
-            g.FillPolygon(BrushLane, new[] { p1, p2, p3, p4 });
-
-            g.DrawLine(PenRailColors[beat], beat * Width + (Width / 2), offset + Height, (beat * Width) + Width, offset);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset, (beat * Width) + Width, offset);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset + Height, (beat * Width) + (Width / 2), offset + Height);
-
-            DrawRailGlow(g, beat, offset, new[] { p1, p2, p3, p4 });
-        }
-        public static void DrawRailCloseRight(Graphics g, int beat, int offset)
-        {
-            Point p1 = new(beat * Width, offset);
-            Point p2 = new((beat * Width) + (Width / 2), offset);
-            Point p3 = new((beat * Width) + Width, offset + Height);
-            Point p4 = new((beat * Width), offset + Height);
-            g.FillPolygon(BrushLane, new[] { p1, p2, p3, p4 });
-
-            g.DrawLine(PenRailColors[beat], beat * Width + (Width / 2), offset, (beat * Width) + Width, offset + Height);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset, (beat * Width) + (Width / 2), offset);
-            g.DrawLine(PenRailColors[beat], beat * Width, offset + Height, (beat * Width) + Width, offset + Height);
-
-            DrawRailGlow(g, beat, offset, new[] { p1, p2, p3, p4 });
-        }
-        public static void DrawRailGlow(Graphics g, int beat, int offset, Point[] points)
+        }        
+        public static void DrawRailGlow(Graphics g, int beat, int offset, Point[] points, bool normal = false)
         {
             LinearGradientBrush lgb = new(new Rectangle(beat * Width, offset, Width, Height), Color.Black, Color.Black, 90);
             ColorBlend cblend = new(3) {
@@ -235,7 +221,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             };
             lgb.InterpolationColors = cblend;
 
-            g.FillPolygon(lgb, points);
+            if (normal)
+                g.FillRectangle(lgb, new Rectangle(beat * Width, offset, Width, Height));
+            else
+                g.FillPolygon(lgb, points);
         }
 
         public static void DrawThumps(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)

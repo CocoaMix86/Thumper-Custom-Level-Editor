@@ -2754,7 +2754,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         savestate = _saveJSON
                     });
                 }
-                LeafMasterView.MasterViewBegin(pictureMasterView.CreateGraphics(), SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+                LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
@@ -3541,7 +3541,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void pictureMasterView_Paint(object sender, PaintEventArgs e)
         {
-            LeafMasterView.MasterViewBegin(pictureMasterView.CreateGraphics(), SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+            //pictureMasterView.Image = LeafMasterView.MasterViewBegin(SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
         }
     }
 }

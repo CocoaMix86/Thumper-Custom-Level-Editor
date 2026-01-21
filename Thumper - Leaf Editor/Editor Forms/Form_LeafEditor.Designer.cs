@@ -111,7 +111,8 @@
             this.contextMenuObj = new ContextMenuStrip(this.components);
             this.toolstripObjTune = new ToolStripMenuItem();
             this.toolstripObjConvert = new ToolStripMenuItem();
-            this.pictureMasterView = new PictureBox();
+            this.pictureMasterView = new Panel();
+            this.pictureTrack = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -132,7 +133,8 @@
             this.contextMenuFavClear.SuspendLayout();
             this.panelObjects.SuspendLayout();
             this.contextMenuObj.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.pictureMasterView).BeginInit();
+            this.pictureMasterView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.pictureTrack).BeginInit();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -179,7 +181,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 110);
+            this.btnRawImport.Size = new Size(54, 116);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -195,7 +197,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 334);
+            this.labelCollapsePanel2.Location = new Point(0, 328);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -266,7 +268,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 319);
+            this.vScrollBarTrackEditor.Size = new Size(15, 313);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -368,7 +370,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 319);
+            this.trackEditor.Size = new Size(491, 313);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -462,7 +464,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 319);
+            this.leafToolStrip.Size = new Size(24, 313);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -935,7 +937,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 349;
+            this.splitContainerLeafSide.SplitterDistance = 343;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -997,7 +999,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 110);
+            this.textEditor.Size = new Size(476, 116);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1095,15 +1097,27 @@
             // 
             // pictureMasterView
             // 
+            this.pictureMasterView.AutoScroll = true;
             this.pictureMasterView.BackColor = Color.Black;
             this.pictureMasterView.BackgroundImageLayout = ImageLayout.None;
-            this.pictureMasterView.Location = new Point(238, 209);
-            this.pictureMasterView.Margin = new Padding(4, 3, 4, 3);
+            this.pictureMasterView.Controls.Add(this.pictureTrack);
+            this.pictureMasterView.Location = new Point(336, 179);
             this.pictureMasterView.Name = "pictureMasterView";
-            this.pictureMasterView.Size = new Size(456, 100);
-            this.pictureMasterView.TabIndex = 152;
-            this.pictureMasterView.TabStop = false;
-            this.pictureMasterView.Paint += this.pictureMasterView_Paint;
+            this.pictureMasterView.Size = new Size(510, 150);
+            this.pictureMasterView.TabIndex = 153;
+            // 
+            // pictureTrack
+            // 
+            this.pictureTrack.BackColor = Color.Black;
+            this.pictureTrack.BackgroundImageLayout = ImageLayout.None;
+            this.pictureTrack.BorderStyle = BorderStyle.FixedSingle;
+            this.pictureTrack.Image = Properties.Resources.pixel;
+            this.pictureTrack.Location = new Point(0, 0);
+            this.pictureTrack.Margin = new Padding(4, 3, 4, 3);
+            this.pictureTrack.Name = "pictureTrack";
+            this.pictureTrack.Size = new Size(456, 100);
+            this.pictureTrack.TabIndex = 152;
+            this.pictureTrack.TabStop = false;
             // 
             // Form_LeafEditor
             // 
@@ -1149,7 +1163,8 @@
             this.panelObjects.ResumeLayout(false);
             this.panelObjects.PerformLayout();
             this.contextMenuObj.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.pictureMasterView).EndInit();
+            this.pictureMasterView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)this.pictureTrack).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -1230,6 +1245,7 @@
         private SequencerColumn LeafAudio;
         private SequencerColumn LeafMultilane;
         private ToolStripDropDownButton btnLeafViewOptions;
-        public PictureBox pictureMasterView;
+        public Panel pictureMasterView;
+        private PictureBox pictureTrack;
     }
 }

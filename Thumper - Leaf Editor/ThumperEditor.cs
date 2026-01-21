@@ -565,7 +565,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private static int WorkspaceCount = 1;
         private IDockContent GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
