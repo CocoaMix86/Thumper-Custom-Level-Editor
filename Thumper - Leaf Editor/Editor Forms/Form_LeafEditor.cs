@@ -45,8 +45,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!SaveOnlyNoLoad) {
                     TCLE.SaveTCL();
                 }
+                LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
             }
-            LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
         }
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload, bool saveonlynoload = false)
@@ -2980,7 +2980,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("trait_type", seq_obj.trait_type);
                 //
                 JArray datapoints = new();
-                for (int _in = 0; _in < _properties.beats; _in++) {
+                for (int _in = FrozenColumnOffset; _in < _properties.beats + FrozenColumnOffset; _in++) {
                     if (seq_obj[_in]?.Value == null)
                         continue;
                     JObject d = new() {

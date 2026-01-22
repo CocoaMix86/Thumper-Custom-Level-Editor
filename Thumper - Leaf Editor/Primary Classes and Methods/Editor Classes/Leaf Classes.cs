@@ -1,13 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.Drawing.Design;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -38,6 +33,8 @@ namespace Thumper_Custom_Level_Editor
         {
             get {
                 if (index == -1)
+                    return null;
+                if (index >= this.Cells.Count)
                     return null;
                 return (SeqDataPoint)this.Cells[index];
             }
