@@ -217,7 +217,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }    
 
-    public class SequencerColumn : DataGridViewColumn
+    public class SequencerColumn : DataGridViewTextBoxColumn
     {
         public SequencerColumn()
         {
@@ -238,7 +238,11 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object ParentSeqObj => (Sequencer_Object)this.OwningRow;
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Beat #")]
-        public int beat { get => this.ColumnIndex - 3; }
+        public int beat { 
+            get {
+                return this.ColumnIndex - 3; 
+            } 
+        }
         /*
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Value")]
@@ -408,6 +412,7 @@ namespace Thumper_Custom_Level_Editor
         }
         [Browsable(false)]
         public int Beats;
+        public int BeatsAndFrozen => Beats + Form_LeafEditor.FrozenColumnOffset;
         public bool BeatsChangedSinceSave = false;
 
         [Category​Attribute("Editor")]

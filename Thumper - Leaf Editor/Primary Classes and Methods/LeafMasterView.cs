@@ -62,12 +62,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             PenRailColors = new();
             if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "rail_color") is Sequencer_Object seq) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     PenRailColors.Add(new(new SolidBrush(Color.FromArgb((int)seq[beat].InGameValue)), 2));
                 }
             }
             else {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     PenRailColors.Add(new(new SolidBrush(Color.FromArgb(147, 255, 80)), 2));
                 }
             }
@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawLanes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            for (int beat = 0; beat < Leaf.beats; beat++) {
+            for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                 if (Lanes[2] == null || Lanes[2][beat].InGameValue == 1) {
                     DrawRails(g, Lanes[2], SequencerObjects, beat, Middle);
                 }
@@ -230,35 +230,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static void DrawThumps(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
             if (SequencerObjects.FirstOrDefault(x => x.param_path == "thump_rails.ent") is Sequencer_Object seq) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawThumpIcon(g, beat, Middle);
                     }
                 }
             }
             if (SequencerObjects.FirstOrDefault(x => x.param_path == "thump_rails.a01") is Sequencer_Object seq2) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq2[beat].InGameValue == 1) {
                         DrawThumpIcon(g, beat, Middle - Height*2 - Gap*2);
                     }
                 }
             }
             if (SequencerObjects.FirstOrDefault(x => x.param_path == "thump_rails.a02") is Sequencer_Object seq3) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq3[beat].InGameValue == 1) {
                         DrawThumpIcon(g, beat, Middle - Height - Gap);
                     }
                 }
             }
             if (SequencerObjects.FirstOrDefault(x => x.param_path == "thump_rails.z01") is Sequencer_Object seq4) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq4[beat].InGameValue == 1) {
                         DrawThumpIcon(g, beat, Middle + Height + Gap);
                     }
                 }
             }
             if (SequencerObjects.FirstOrDefault(x => x.param_path == "thump_rails.z02") is Sequencer_Object seq5) {
-                for (int beat = 0; beat < Leaf.beats; beat++) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq5[beat].InGameValue == 1) {
                         DrawThumpIcon(g, beat, Middle + Height*2 + Gap*2);
                     }

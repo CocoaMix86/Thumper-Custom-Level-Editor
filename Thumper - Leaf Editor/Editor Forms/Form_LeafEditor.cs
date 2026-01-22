@@ -17,6 +17,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             if (Playback.Generating) {
+                InitializeComponent();
                 LoadLeafSimple(load, filepath);
                 LoadSequencer(load["seq_objs"], LeafProperties);
                 return;
@@ -54,6 +55,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveOnlyNoLoad = saveonlynoload;
             if (Playback.Generating) {
                 LvlSequencer = toload;
+                InitializeComponent();
                 LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
                 LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
                 return;
@@ -514,6 +516,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     //once the bitmap is created, now we can do some funky stuff
                     foreach (SeqDataPoint sdp in seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
+                        //skip drawing the waveform if its offscreen to the right
                         if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + samp.beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
@@ -2449,6 +2452,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     timesignature = "4/4"
                 };
             }
+            LeafLengthChanged();
         }
 
         public void LoadEnd()
@@ -2563,8 +2567,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     };
                     if (int.Parse(((JProperty)dp).Name) >= ObjectToImport.ParentLeaf.Beats)
                         continue;
-                    ObjectToImport[data.beat + FrozenColumnOffset] = data;
-                    ObjectToImport[data.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
+                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset] = data;
+                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
                 }
             }
         }
@@ -2642,6 +2646,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripObjConvert_Click(object sender, EventArgs e)
         {
             Sequencer_Object seq = SequencerObjects[trackEditor.CurrentRow.Index].Clone();
+            seq.ParentLeaf = LeafProperties;
             seq.obj_name = "_TuningLayerX";
             seq.category = "";
             seq.param_path = "⮝ Tuning Layer X";
@@ -2808,16 +2813,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF LENGTH
         public void LeafLengthChanged()
         {
-            if (LeafProperties == null || SaveOnlyNoLoad)
+            if (LeafProperties == null)
                 return;
             int data = trackEditor.ColumnCount - FrozenColumnOffset;
 
             if (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount) {
-                trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
+                while (LeafProperties.beats + FrozenColumnOffset > trackEditor.ColumnCount)
+                    trackEditor.Columns.Add(new SequencerColumn());
                 TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
-            else
+            else {
                 trackEditor.ColumnCount = LeafProperties.beats + FrozenColumnOffset;
+            }
+            if (SaveOnlyNoLoad)
+                return;
             //set cell zoom
             trackZoom_Scroll(null, null);
             //make sure new cells follow the time sig
@@ -3349,6 +3358,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _properties.ParentEditor.trackEditor.Rows.Remove(_temp2);
             _properties.ParentEditor.LogUndo = true;
             _properties.ParentEditor.EditorIsTuning = false;
+
+            _properties.ParentEditor.SaveCheckAndWrite(false, "Interpolated values from tuning layer");
         }
 
         public static float ConvertRange(float originalStart, float originalEnd, float newStart, float newEnd, float value) // value to convert
