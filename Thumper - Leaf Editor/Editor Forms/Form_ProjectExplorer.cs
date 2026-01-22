@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
-using System.IO.Packaging;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
