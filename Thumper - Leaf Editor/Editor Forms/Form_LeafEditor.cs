@@ -2805,6 +2805,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }*/
                 }
 
+                if (!SaveOnlyNoLoad) {
+                    TCLE.SaveTCL();
+                }
+
                 //find if any raw text docs are open of this leaf and update them
                 TCLE.FindReloadRaw(LoadedLeaf.Name);
                 LeafProperties.BeatsChangedSinceSave = false;
@@ -3557,6 +3561,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void pictureMasterView_Paint(object sender, PaintEventArgs e)
         {
             //pictureMasterView.Image = LeafMasterView.MasterViewBegin(SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+        }
+
+        private void pictureMasterView_Resize(object sender, EventArgs e)
+        {
+            LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
         }
     }
 }

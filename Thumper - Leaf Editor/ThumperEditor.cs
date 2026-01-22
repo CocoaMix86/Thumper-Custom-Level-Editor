@@ -587,8 +587,8 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
-            TCLE.SaveTCL();
             GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false, null });
+            TCLE.SaveTCL();
         }
 
         private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
@@ -1086,22 +1086,22 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
-            TCLE.SaveTCL();
             GlobalActiveDocument.GetType().GetMethod("Save").Invoke(GlobalActiveDocument, new object[] { true });
             //FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
+            TCLE.SaveTCL();
         }
 
         private void toolstripMainSaveAll_Click(object sender, EventArgs e)
         {
             if (GlobalActiveDocument == null)
                 return;
-            TCLE.SaveTCL();
             foreach (Form_WorkSpace workspace in Workspaces) {
                 foreach (IDockContent document in workspace.dockMain.Documents) {
                     document.GetType().GetMethod("Save").Invoke(document, new object[] { false });
                     //FindEditorRunMethod(document.GetType(), "Save");
                 }
             }
+            TCLE.SaveTCL();
             TCLE.PlaySound("UIsave");
         }
         #endregion
