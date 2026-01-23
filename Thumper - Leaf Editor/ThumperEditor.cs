@@ -210,7 +210,12 @@ namespace Thumper_Custom_Level_Editor
 
         private void TCLE_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ImportedFonts.Dispose();
             alzheimer();
+            //
+            try {
+                Directory.Delete($@"{AppLocation}\temp\", true);
+            }catch (Exception) { }
         }
 
         public void SetKeyBinds()
