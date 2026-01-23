@@ -428,6 +428,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.ColumnIndex < FrozenColumnOffset) {
                     LeafCellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
                     LeafCellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
+                    LeafCellPainting.DrawSelection(e, trackEditor, SequencerObjects);
+                    if (Playback.IsPlaying)
+                        LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
                 }
                 //draw a vertical line inside tuning layer row to show where selected cell is.
                 else {
@@ -457,16 +460,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafCellPainting.DrawInterpEase(e, SequencerObjects[e.RowIndex]);
             //specifically paint border seperately so it appears above everything and cleans up edges a bit.
             LeafCellPainting.SetCellBorders(e, trackEditor);
-            //e.Paint(e.CellBounds, DataGridViewPaintParts.All & ~(DataGridViewPaintParts.ContentForeground | DataGridViewPaintParts.Border | DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground | DataGridViewPaintParts.ContentBackground));
-            //e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
             //Painting playback head and end
-            LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
+            if (Playback.IsPlaying)
+                LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
             if (SequencerObjects[e.RowIndex].friendly_param is "lane center" or "lane left 1" or "lane left 2" or "lane right 1" or "lane right 2")
                 LeafCellPainting.DrawLaneEnds(e, SequencerObjects[e.RowIndex], SequencerObjects);
             else if (SequencerObjects[e.RowIndex].friendly_param is "turn" or "turn_auto")
                 LeafCellPainting.DrawTurnAngles(e, SequencerObjects[e.RowIndex]);
             LeafCellPainting.DrawText(e, SequencerObjects[e.RowIndex]);
+            LeafCellPainting.DrawSelection(e, trackEditor, SequencerObjects);
         }
 
         private void trackEditor_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -959,7 +962,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.RowIndex == -1) {
                 if (e.Button == MouseButtons.Right) {
-                    if (PlaybackEnd == e.ColumnIndex - FrozenColumnOffset) {
+                    if (PlaybackEnd == e.ColumnIndex) {
                         if (PlaybackLoop) {
                             PlaybackLoop = false;
                             PlaybackEnd = -2;
@@ -971,19 +974,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         }
                     }
                     else {
-                        PlaybackEnd = e.ColumnIndex - FrozenColumnOffset;
+                        PlaybackEnd = e.ColumnIndex;
                         if (PlaybackEnd < PlaybackStart)
                             PlaybackEnd = PlaybackStart;
                         trackEditor.Invalidate();
                     }
                 }
                 else {
-                    if (PlaybackStart == e.ColumnIndex - FrozenColumnOffset) {
+                    if (PlaybackStart == e.ColumnIndex) {
                         PlaybackStart = -2;
                         trackEditor.Invalidate();
                     }
                     else {
-                        PlaybackStart = e.ColumnIndex - FrozenColumnOffset;
+                        PlaybackStart = e.ColumnIndex;
                         if (PlaybackEnd != -2 && PlaybackEnd <= PlaybackStart)
                             PlaybackEnd = PlaybackStart;
                         trackEditor.Invalidate();
@@ -2996,22 +2999,32 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 for (int _in = FrozenColumnOffset; _in < _properties.beats + FrozenColumnOffset; _in++) {
                     if (seq_obj[_in]?.Value == null)
                         continue;
-                    JObject d = new() {
-                        { "beat", seq_obj[_in].beat },
-                        { "value", (decimal)seq_obj[_in].Value },
-                        { "interp", $"kTraitInterp{seq_obj[_in].Interpolation ?? "Linear"}" },
-                        { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                    };
-
-                    datapoints.Add(d);
+                    if (seq_obj.trait_type == "kTraitFloat") {
+                        JObject d = new() {
+                            { "beat", seq_obj[_in].beat },
+                            { "value", (decimal)seq_obj[_in].Value },
+                            { "interp", $"kTraitInterp{seq_obj[_in].Interpolation ?? "Linear"}" },
+                            { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        };
+                        datapoints.Add(d);
+                    }
+                    else {
+                        JObject d = new() {
+                            { "beat", seq_obj[_in].beat },
+                            { "value", (int)(decimal)seq_obj[_in].Value },
+                            { "interp", $"kTraitInterp{seq_obj[_in].Interpolation ?? "Linear"}" },
+                            { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        };
+                        datapoints.Add(d);
+                    }
                 }
                 s.Add("data_points", datapoints);
                 //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step.ToString());
+                s.Add("step", seq_obj.step);
                 s.Add("default", seq_obj.defaultvalue);
                 s.Add("footer", seq_obj.footer);
                 s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                s.Add("enabled", seq_obj.enabled.ToString());
+                s.Add("enabled", seq_obj.enabled);
 
                 seq_objs.Add(s);
             }
@@ -3077,7 +3090,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (pastingrow + (sdp.OriginalRow - rowoffset) >= SequencerObjects.Count)
                     break;
                 //if copied beat is pasted beyond beatcount, skip it
-                if (pastingcol + (sdp.OriginalColumn - coloffset) >= leafProperties.beats)
+                if (pastingcol + (sdp.OriginalColumn - coloffset) >= leafProperties.beats + FrozenColumnOffset)
                     continue;
                 SeqDataPoint clone = sdp.Clone();
                 SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)][pastingcol + (sdp.OriginalColumn - coloffset)] = clone;
@@ -3482,12 +3495,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                 previousDragOver = targetRow;
                 trackEditor.SuspendLayout();
-                /*
-                trackEditor.Rows.Remove(CenterLane.editor_row);
-                SequencerObjects.Remove(CenterLane);
-                SequencerObjects.Insert(targetRow, CenterLane);
-                trackEditor.Rows.Insert(targetRow, CenterLane.editor_row);
-                */
                 foreach (Sequencer_Object seq in RowsToMove) {
                     trackEditor.Rows.Remove(seq);
                     SequencerObjects.Remove(seq);
@@ -3497,16 +3504,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 trackEditor.ResumeLayout();
             }
-            /*
-            //changing the hovered node backcolor to make it obvious where the destination will be
-            if (previousDragOver != targetRow && previousDragOver != -1) {
-                //trackEditor.Rows[previousDragOver].DefaultCellStyle = null;
-            }
-            if (targetRow != -1 && targetRow != previousDragOver) {
-                //trackEditor.Rows[targetRow].DefaultCellStyle.BackColor = Color.FromArgb(64, 53, 130);
-                previousDragOver = targetRow;
-            }
-            */
         }
 
         private void btnTrackPlayback_Click(object sender, EventArgs e)

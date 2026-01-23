@@ -230,7 +230,7 @@ namespace Thumper_Custom_Level_Editor
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
                     if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
-                        for (int beat = 0; beat < LeafLastBeat; beat++) {
+                        for (int beat = Form_LeafEditor.FrozenColumnOffset; beat < LeafLastBeat + Form_LeafEditor.FrozenColumnOffset; beat++) {
                             if (Seq[beat].Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
@@ -254,7 +254,7 @@ namespace Thumper_Custom_Level_Editor
                         }
                     }
                     else {
-                        for (int beat = 0; beat < LeafLastBeat; beat++) {
+                        for (int beat = Form_LeafEditor.FrozenColumnOffset; beat < LeafLastBeat + Form_LeafEditor.FrozenColumnOffset; beat++) {
                             if (Seq[beat].Value != null && (decimal?)Seq[beat].Value != 0) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
                                 if (Seq.obj_name == "grindable_multi.spn") {
@@ -306,14 +306,14 @@ namespace Thumper_Custom_Level_Editor
                 beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
             Form_LeafEditor lvlseq = new(Lvl);
-            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats, beatoffset - Lvl.approachbeats);
+            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                 if (leaftoplay == null)
                     continue;
-                Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats, beatoffset);
+                Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset);
                 beatoffset += leaf.beats;
                 leaftoplay.Dispose();
             }
@@ -535,7 +535,7 @@ namespace Thumper_Custom_Level_Editor
         {
             int IsTurning = 0;
             SeqDataPoint lastprocessed = null;
-            for (int x = 0; x < LeafLastBeat; x++)
+            for (int x = Form_LeafEditor.FrozenColumnOffset; x < LeafLastBeat + Form_LeafEditor.FrozenColumnOffset; x++)
             {
                 lastprocessed = Seq[x];
                 //account for default value being +-15

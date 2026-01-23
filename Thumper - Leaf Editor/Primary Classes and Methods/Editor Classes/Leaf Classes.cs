@@ -240,7 +240,7 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Beat #")]
         public int beat { 
             get {
-                return this.ColumnIndex - 3; 
+                return this.ColumnIndex - Form_LeafEditor.FrozenColumnOffset; 
             } 
         }
         /*
@@ -270,7 +270,7 @@ namespace Thumper_Custom_Level_Editor
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
                 if (ParentSeqObj.trait_type == "kTraitBool") {
-                    if ((decimal?)value is not null or 1 or 0)
+                    if ((decimal?)value is not null and not 1 and not 0)
                         value = 1m;
                 }
                 else if (ParentSeqObj.trait_type == "kTraitColor") {
@@ -412,7 +412,9 @@ namespace Thumper_Custom_Level_Editor
         }
         [Browsable(false)]
         public int Beats;
+        [Browsable(false)]
         public int BeatsAndFrozen => Beats + Form_LeafEditor.FrozenColumnOffset;
+        [Browsable(false)]
         public bool BeatsChangedSinceSave = false;
 
         [Category​Attribute("Editor")]

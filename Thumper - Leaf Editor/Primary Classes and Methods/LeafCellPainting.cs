@@ -18,6 +18,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         private static Pen PenBlack6 = new(Brushes.Black, 6);
         private static Pen PenRed6 = new(Brushes.Red, 6);
         private static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
+        private static SolidBrush SelectionColor = new SolidBrush(Color.FromArgb(180, Color.LightSkyBlue));
         private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
 
@@ -79,11 +80,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawColors(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
         {
-            //if cell is selected, skip all the fancy painting
-            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
-                e.Graphics.FillRectangle(Brushes.LightSkyBlue, e.CellBounds);
-                return;
-            }
             //grey out the track if disabled
             if (SequencerObjects[e.RowIndex].ReadOnly) {
                 e.Graphics.FillRectangle(Brushes.Gray, e.CellBounds);
@@ -109,8 +105,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
             //paint the whole cell with the highlighting color
             else if (SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE") {
-                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)SequencerObjects[e.RowIndex].defaultvalue)
+                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)SequencerObjects[e.RowIndex].highlight_value)
                     e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
+            }
+        }
+
+        public static void DrawSelection(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        {
+            //if cell is selected
+            if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
+                e.Graphics.FillRectangle(SelectionColor, e.CellBounds);
             }
         }
 
