@@ -2513,7 +2513,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     try {
                         string normalizeParam = $"{ObjectToImport.param_path.Replace(".a02", ".ent").Replace(".a01", ".ent").Replace(".z01", ".ent").Replace(".z02", ".ent")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == normalizeParam && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname"));
+                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == normalizeParam/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/);
                         ObjectToImport.friendly_param = objmatch?.param_displayname ?? "";
                         ObjectToImport.category = objmatch?.category ?? "";
                         //set audio channel numbers on load

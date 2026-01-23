@@ -175,18 +175,36 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 if (Properties.Settings.Default.LeafOptionVerticalCells) {
                     Font font = new(TCLE.ImportedFonts.Families[0], 10);
                     SizeF RealSize = e.Graphics.MeasureString(cellText, font);
-                    float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Width;
-                    float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Height;
-                    float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                    e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
+                    if (seq?.friendly_param is "turn" or "turn_auto") {
+                        Rectangle smallbounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
+                        float WidthScaleRatio = (smallbounds.Height + 4) / RealSize.Width;
+                        float HeightScaleRatio = (smallbounds.Width + 4) / RealSize.Height;
+                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), smallbounds, CellFormatVert);
+                    }
+                    else {
+                        float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Width;
+                        float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Height;
+                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
+                    }
                 }
                 else {
                     Font font = new(TCLE.ImportedFonts.Families[0], 10);
                     SizeF RealSize = e.Graphics.MeasureString(cellText, font);
-                    float HeightScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
-                    float WidthScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
-                    float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                    e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
+                    if (seq?.friendly_param is "turn" or "turn_auto") {
+                        Rectangle smallbounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
+                        float HeightScaleRatio = (smallbounds.Height + 4) / RealSize.Height;
+                        float WidthScaleRatio = (smallbounds.Width + 4) / RealSize.Width;
+                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), smallbounds, CellFormat);
+                    }
+                    else {
+                        float HeightScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
+                        float WidthScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
+                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
+                    }
                 }
 
             }
@@ -424,17 +442,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.4)), 8) { EndCap = LineCap.Triangle};
-                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
+                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle};
+                //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
                 // Convert the angle from degrees to radians, as Math.Cos and Math.Sin use radians
                 double angleRadians = (double)(decimal)e.Value * (Math.PI / 180.0);
                 // Calculate the end point coordinates
-                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 2)) * Math.Sin(angleRadians));
-                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 2)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 2)) * Math.Cos(angleRadians));
+                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Sin(angleRadians) * -1);
+                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 3)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Cos(angleRadians));
 
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(2, 1);
-                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2), endX, endY);
+                e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3), endX, endY);
             }
         }
     }
