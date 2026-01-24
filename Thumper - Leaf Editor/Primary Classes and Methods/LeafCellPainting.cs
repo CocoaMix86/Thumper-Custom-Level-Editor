@@ -106,7 +106,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //paint the whole cell with the highlighting color
             else if (SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE") {
                 if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)SequencerObjects[e.RowIndex].highlight_value)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
+                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             //if cell is selected
             if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {
-                e.Graphics.FillRectangle(SelectionColor, e.CellBounds);
+                e.Graphics.FillRectangle(SelectionColor, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
             }
         }
 
@@ -439,19 +439,40 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
+        public static Pen ArrowHighlight = new(Brushes.White, 5) { EndCap = LineCap.Triangle, CustomEndCap = new AdjustableArrowCap(3, 1) };
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle};
+                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
                 // Convert the angle from degrees to radians, as Math.Cos and Math.Sin use radians
                 double angleRadians = (double)(decimal)e.Value * (Math.PI / 180.0);
                 // Calculate the end point coordinates
-                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Sin(angleRadians) * -1);
-                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 3)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Cos(angleRadians));
+                float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Cos(angleRadians));
+                float endY = (e.CellBounds.Top + (e.CellBounds.Height / 3)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Sin(angleRadians));
 
-                ArrowPen.CustomEndCap = new AdjustableArrowCap(2, 1);
+                if ((decimal)e.Value > 0) {
+                    if (TCLE.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
+                }
+                else if ((decimal)e.Value < 0) {
+                    if (TCLE.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
+                    else if (TCLE.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                        e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
+                }
                 e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3), endX, endY);
             }
         }

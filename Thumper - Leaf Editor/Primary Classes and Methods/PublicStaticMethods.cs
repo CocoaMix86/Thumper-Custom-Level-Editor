@@ -1029,6 +1029,11 @@ namespace Thumper_Custom_Level_Editor
             int r = x % m;
             return r < 0 ? r + m : r;
         }
+        public static decimal mod(decimal x, int m)
+        {
+            decimal r = x % m;
+            return r < 0 ? r + m : r;
+        }
 
         public void ConvertProjectToNew()
         {
