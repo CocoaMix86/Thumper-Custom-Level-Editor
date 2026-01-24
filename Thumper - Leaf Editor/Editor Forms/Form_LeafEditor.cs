@@ -2179,6 +2179,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("Not allowed to split a lvl sequencer!", "Jumper Justum Jevel Jeditor");
                 return;
             }
+            if (!EditorIsSaved) {
+                MessageBox.Show("Not allowed to split a leaf with unsaved changes.", "Thump Cust Lev Edit");
+                return;
+            }
             //do nothing if no cells selected
             if (trackEditor.SelectedCells.Count == 0)
                 return;
