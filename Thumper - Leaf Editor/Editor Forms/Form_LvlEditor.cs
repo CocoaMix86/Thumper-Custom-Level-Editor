@@ -1308,27 +1308,37 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (seq_obj.param_path.StartsWith("0x"))
                     s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
                 else
-                    s.Add("param_path", $"{seq_obj.param_path}{(seq_obj.param_path_lane != "none" ? "." + seq_obj.param_path_lane : "")}");
+                    s.Add("param_path", $"{seq_obj.param_path}");
                 s.Add("trait_type", seq_obj.trait_type);
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>().Where(x => x != null && x.Value is not null)) {
-                    JObject d = new() {
-                        { "beat", datapoint.beat },
-                        { "value", (decimal)datapoint.Value },
-                        { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
-                        { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                    };
-
-                    datapoints.Add(d);
+                    if (seq_obj.trait_type == "kTraitFloat") {
+                        JObject d = new() {
+                            { "beat", datapoint.beat },
+                            { "value", (decimal)datapoint.Value },
+                            { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
+                            { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        };
+                        datapoints.Add(d);
+                    }
+                    else {
+                        JObject d = new() {
+                            { "beat", datapoint.beat },
+                            { "value", (int)(decimal)datapoint.Value },
+                            { "interp", $"kTraitInterp{datapoint.Interpolation ?? "Linear"}" },
+                            { "ease", $"k{datapoint.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                        };
+                        datapoints.Add(d);
+                    }
                 }
                 s.Add("data_points", datapoints);
                 ///end
                 //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step.ToString());
+                s.Add("step", seq_obj.step);
                 s.Add("default", seq_obj.defaultvalue);
                 s.Add("footer", seq_obj.footer);
                 s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                s.Add("enabled", seq_obj.enabled.ToString());
+                s.Add("enabled", seq_obj.enabled);
 
                 seq_objs.Add(s);
             }
@@ -1367,7 +1377,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("loops", loops);
             //final keys
             _save.Add("volume", _properties.volume);
-            _save.Add("input_allowed", _properties.allowinput.ToString());
+            _save.Add("input_allowed", _properties.allowinput);
             _save.Add("tutorial_type", _properties.tutorialtype);
             _save.Add("start_angle_fracs", new JArray() { 1, 1, 1 });
             ///end building JSON output

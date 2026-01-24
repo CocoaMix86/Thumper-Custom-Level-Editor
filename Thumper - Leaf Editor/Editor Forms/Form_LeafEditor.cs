@@ -120,6 +120,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
+            btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
+            btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
         }
 
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
@@ -1956,7 +1958,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private string InterpLastUsed;
+        private string InterpLastUsed { 
+            get {
+                return Properties.Settings.Default.LeafOptionInterp;
+            } 
+            set {
+                Properties.Settings.Default.LeafOptionInterp = value;
+                Properties.Settings.Default.Save();
+                foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+                    leaf.btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
+                    leaf.btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
+                }
+            } 
+        }
         private void btnLeafInterpLinear_ButtonClick(object sender, EventArgs e)
         {
             Interpolate(InterpLastUsed);
@@ -2582,7 +2596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects)
         {
-            Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.obj_name == ObjectToImport.obj_name && x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
+            Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             if (lookup == null) {
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));

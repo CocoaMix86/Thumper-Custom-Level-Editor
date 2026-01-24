@@ -996,11 +996,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 JObject s = new() {
                     { "lvl_name", (group.type == "lvl" ? group.name : "") },
                     { "gate_name", (group.type == "gate" ? group.name : "") },
-                    { "checkpoint", group.checkpoint.ToString() },
+                    { "checkpoint", group.checkpoint },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },
-                    { "play_plus", group.playplus.ToString() },
-                    { "isolate", group.isolate.ToString() }
+                    { "play_plus", group.playplus },
+                    { "isolate", group.isolate }
                 };
                 if (group.isolate == true)
                     isolate_tracks = true;
@@ -1011,7 +1011,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 groupings.Add(s);
             }
             _save.Add("groupings", groupings);
-            _save.Add("isolate_tracks", isolate_tracks.ToString());
+            _save.Add("isolate_tracks", isolate_tracks);
             _save.Add("checkpoint_lvl_name", _properties.checkpointlvl.Replace("<none>", ""));
             ///end build
             ///

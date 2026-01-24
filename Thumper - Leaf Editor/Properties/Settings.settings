@@ -263,5 +263,8 @@
     <Setting Name="UserRandomValues" Type="System.String" Scope="User">
       <Value Profile="(Default)">-</Value>
     </Setting>
+    <Setting Name="LeafOptionInterp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Linear</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

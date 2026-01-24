@@ -1062,5 +1062,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["UserRandomValues"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Linear")]
+        public string LeafOptionInterp {
+            get {
+                return ((string)(this["LeafOptionInterp"]));
+            }
+            set {
+                this["LeafOptionInterp"] = value;
+            }
+        }
     }
 }
