@@ -11,19 +11,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
     ///you're welcome
     ///Berry owes me a fursona
     ///
+    public class DrawData
+    {
+        public int x;
+        public int y;
+        public DrawData()
+        {
+
+        }
+    }
 
     public static class LeafMasterView
     {
+        #region Variables
         public static Bitmap LeafDrawing;
         //
         public static int Width = 40;
         public static int Height = 20;
         public static int Gap = 1;
         public static int Middle;
+        public static int MouseLocationX = 0;
+        public static int MouseLocationY = 0;
+        public static Dictionary<string, int> OffsetsDict;
         //
         public static List<Sequencer_Object> Lanes = new();
-        //Lane colors
-        //public static SolidBrush BrushLane = new(Color.Red);
+        //Selection Colors
+        public static SolidBrush PenHover = new SolidBrush(Color.FromArgb(100, Color.Orange));
+        public static SolidBrush PenSelected = new SolidBrush(Color.FromArgb(100, Color.SkyBlue));
+        public static List<DrawData> SelectedCells = new();
+        //Lane Colors
         public static SolidBrush BrushLane = new(Color.FromArgb(27, 19, 27));
         public static Color ColorDefaultRail = Color.FromArgb(147, 255, 80);
         public static Pen PenRailDefault = new(ColorDefaultRail, 2);
@@ -31,32 +47,40 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Pen PenLaneOuter = new(LaneOuter, 1);
         public static SolidBrush TrackOuter = new(Color.FromArgb(49, 63, 86));
         public static Pen PenTrackOuter = new(TrackOuter, 3);
-        //Thump colors
+        //Thump Colors
         public static SolidBrush BrushThumpInner = new(Color.White);
         public static SolidBrush BrushThumpOutter = new(Color.FromArgb(148, 129, 239));
+        //Bar Colors
+        public static Pen PenBarsPoint = new(new SolidBrush(Color.Orange), 3) { EndCap = LineCap.Triangle, StartCap = LineCap.Triangle };
+        public static Pen PenBarsFlat = new(new SolidBrush(Color.Orange), 3);
         //
         public static List<Pen> PenRailColors;
-
-        public static void MasterViewBegin(PictureBox pic, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf, int CellWidth, int CellHeight)
+        #endregion
+        #region Functions
+        public static void MasterViewBegin(PictureBox pic, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
             if (Leaf == null || Leaf.ParentEditor.EditorIsProcessing)
                 return;
-            pic.Size = new(Width * Leaf.beats, (Height + Gap) * 7);
+            //set size of picture to draw
+            pic.Size = new(Width * Leaf.beats, (Height * 5) + (Gap * 4) + 4);
             LeafDrawing = new(pic.Width, pic.Height);
-            Middle = (pic.Height / 2) - (CellHeight / 2);
+            //initialize variables needed
+            Middle = (pic.Height / 2) - (Height / 2);
+            OffsetsDict = new() { { "a01", -1 * ((Height * 2) + (Gap * 2)) }, { "a02", -1 * (Height + Gap) }, { "ent", 0 }, { "z01", Height + Gap }, { "z02", ((Height * 2) + (Gap * 2)) } };
+            GetRailColors(SequencerObjects, Leaf);
+            GetLanes(SequencerObjects);
+            //draw
             using (Graphics g = Graphics.FromImage(LeafDrawing)) {
-                //initialize variables needed
-                GetRailColors(SequencerObjects, Leaf);
-                GetLanes(SequencerObjects);
                 //Begin drawing
                 g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
                 DrawLanes(g, SequencerObjects, Leaf);
                 DrawThumps(g, SequencerObjects, Leaf);
+                DrawBars(g, SequencerObjects, Leaf);
+                g.ResetTransform();
+                DrawMouseHover(g);
             }
-
+            //set the finished imahge
             pic.Image = LeafDrawing;
-            pic.Location = new(0, (pic.Parent.Height / 2) - (pic.Height / 2));
-            //return LeafDrawing;
         }
 
         public static void GetRailColors(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -82,6 +106,15 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1"), 
                 SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2") 
             };
+        }
+
+        public static void DrawMouseHover(Graphics g)
+        {
+            foreach (DrawData dd in SelectedCells) {
+                g.FillRectangle(PenSelected, dd.x * Width, (dd.y * (Height + Gap)) + 2, Width, Height + Gap);
+            }
+            if (MouseLocationX != -1 && MouseLocationY != -1)
+                g.FillRectangle(PenHover, MouseLocationX - (MouseLocationX % Width), MouseLocationY - (MouseLocationY % (Height + Gap)) + 2, Width, Height + Gap);
         }
 
         public static void DrawLanes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -273,5 +306,70 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             g.FillRectangle(BrushThumpOutter, new Rectangle((beat * Width) + (Width / 3), offset + 2, Width - ((Width / 3)*2), Height - 4));
             g.FillRectangle(BrushThumpInner, new Rectangle((beat * Width) + (Width / 3) + 2, offset + 4, Width - ((Width / 3)*2) - 4, Height - 8));
         }
+
+        public static void DrawBars(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
+        {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("grindable_still"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("center_multi"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane], Middle + OffsetsDict[seq.param_path_lane] + Height);
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("left_multi"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + (Height / 2));
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("right_multi"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] + (Height / 2), Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("grindable_double"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + Width, Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("grindable_thirds"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2) + (Width / 3), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2) + (Width / 3 * 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                    }
+                }
+            }
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("grindable_quarters"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2) + (Width / 4), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2) + (Width / 4 * 2), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                        DrawBarIcons(g, beat, (beat * Width) + (Width / 2) + (Width / 4 * 3), Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
+                    }
+                }
+            }
+        }
+        public static void DrawBarIcons(Graphics g, int beat, int offsetx, int offsety, int offsety2)
+        {
+            //style 1 - all point //style 2 - top point //style 3 - bottom point //style 4 - no point
+            g.DrawLine(PenBarsPoint, offsetx, offsety, offsetx, offsety2);
+        }
+        #endregion
     }
 }

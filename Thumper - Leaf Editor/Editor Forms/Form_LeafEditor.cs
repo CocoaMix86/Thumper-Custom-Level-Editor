@@ -46,7 +46,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!SaveOnlyNoLoad) {
                     TCLE.SaveTCL();
                 }
-                LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+                LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
             }
         }
         ///Load LVL Sequencer
@@ -91,8 +91,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             panelObjects.Dock = DockStyle.Fill;
             contentPropertyGrid.Controls.Add(propertyGridLeaf);
             propertyGridLeaf.Dock = DockStyle.Fill;
-            contentMasterView.Controls.Add(pictureMasterView);
-            pictureMasterView.Dock = DockStyle.Fill;
+            contentMasterView.Controls.Add(panelMasterView);
+            panelMasterView.Dock = DockStyle.Fill;
             //
             try {
                 dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_leaf.config", m_deserializeDockContent);
@@ -327,6 +327,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.FirstDisplayedScrollingColumnIndex = display;
                 trackEditor.Scroll += trackEditor_Scroll;
             }
+            LeafMasterView.Width = trackZoom.Value;
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -1958,10 +1959,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private string InterpLastUsed { 
+        private string InterpLastUsed
+        {
             get {
                 return Properties.Settings.Default.LeafOptionInterp;
-            } 
+            }
             set {
                 Properties.Settings.Default.LeafOptionInterp = value;
                 Properties.Settings.Default.Save();
@@ -1969,7 +1971,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leaf.btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
                     leaf.btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
                 }
-            } 
+            }
         }
         private void btnLeafInterpLinear_ButtonClick(object sender, EventArgs e)
         {
@@ -2784,7 +2786,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         savestate = _saveJSON
                     });
                 }
-                LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+                LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
@@ -3580,7 +3582,48 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void pictureMasterView_Resize(object sender, EventArgs e)
         {
-            LeafMasterView.MasterViewBegin(pictureTrack, SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
+            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+        }
+
+        bool ClickReset;
+        private void pictureMasterView_MouseMove(object sender, MouseEventArgs e)
+        {
+            LeafMasterView.MouseLocationX = e.X;
+            LeafMasterView.MouseLocationY = e.Y;
+            if (e.Button == MouseButtons.Left) {
+                ClickReset = true;
+                if (!LeafMasterView.SelectedCells.Any(m => m.x == LeafMasterView.MouseLocationX / LeafMasterView.Width && m.y == LeafMasterView.MouseLocationY / LeafMasterView.Height))
+                    LeafMasterView.SelectedCells.Add(new() { x = LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height });
+            }
+            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+        }
+
+        private void pictureMasterView_MouseLeave(object sender, EventArgs e)
+        {
+            LeafMasterView.MouseLocationX = -1;
+            LeafMasterView.MouseLocationY = -1;
+            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+        }
+
+        private void pictureMasterView_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (ModifierKeys is Keys.Control) {
+                if (LeafMasterView.SelectedCells.FirstOrDefault(m => m.x == LeafMasterView.MouseLocationX / LeafMasterView.Width && m.y == LeafMasterView.MouseLocationY / LeafMasterView.Height) is DrawData dd) {
+                    LeafMasterView.SelectedCells.Remove(dd);
+                }
+                else
+                  LeafMasterView.SelectedCells.Add(new() { x= LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height});
+            }
+            else {
+                if (ClickReset) {
+                    ClickReset = false;
+                }
+                else {
+                    LeafMasterView.SelectedCells.Clear();
+                    LeafMasterView.SelectedCells.Add(new() { x = LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height });
+                }
+            }
+            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
         }
     }
 }
