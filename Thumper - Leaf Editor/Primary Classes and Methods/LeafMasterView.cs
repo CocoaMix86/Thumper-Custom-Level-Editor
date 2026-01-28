@@ -24,21 +24,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
     public static class LeafMasterView
     {
         #region Variables
-        public static Bitmap LeafDrawing;
+        public static Bitmap LayerTrack = new(1,1);
+        public static Bitmap Master = new(1, 1);
         //
         public static int Width = 40;
         public static int Height = 20;
         public static int Gap = 1;
         public static int Middle;
-        public static int MouseLocationX = 0;
-        public static int MouseLocationY = 0;
         public static Dictionary<string, int> OffsetsDict;
         //
         public static List<Sequencer_Object> Lanes = new();
-        //Selection Colors
-        public static SolidBrush PenHover = new SolidBrush(Color.FromArgb(100, Color.Orange));
-        public static SolidBrush PenSelected = new SolidBrush(Color.FromArgb(100, Color.SkyBlue));
-        public static List<DrawData> SelectedCells = new();
         //Lane Colors
         public static SolidBrush BrushLane = new(Color.FromArgb(27, 19, 27));
         public static Color ColorDefaultRail = Color.FromArgb(147, 255, 80);
@@ -57,30 +52,49 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static List<Pen> PenRailColors;
         #endregion
         #region Functions
-        public static void MasterViewBegin(PictureBox pic, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
+        public static void InitializeAndResize(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            if (Leaf == null || Leaf.ParentEditor.EditorIsProcessing)
+            if (Leaf == null || Leaf.ParentEditor.EditorIsProcessing || TCLE.IsClosing)
                 return;
             //set size of picture to draw
-            pic.Size = new(Width * Leaf.beats, (Height * 5) + (Gap * 4) + 4);
-            LeafDrawing = new(pic.Width, pic.Height);
+            Size pic = new(Width * Leaf.beats, (Height * 5) + (Gap * 4) + 4);
+            LayerTrack = new(pic.Width, pic.Height);
+            Master = new(pic.Width, pic.Height);
             //initialize variables needed
             Middle = (pic.Height / 2) - (Height / 2);
             OffsetsDict = new() { { "a01", -1 * ((Height * 2) + (Gap * 2)) }, { "a02", -1 * (Height + Gap) }, { "ent", 0 }, { "z01", Height + Gap }, { "z02", ((Height * 2) + (Gap * 2)) } };
+
+            Leaf.ParentEditor.dgvMasterView.ColumnCount = Leaf.beats;
+            foreach (DataGridViewColumn dgvc in Leaf.ParentEditor.dgvMasterView.Columns)
+                dgvc.Width = Width;
+            Leaf.ParentEditor.dgvMasterView.RowCount = 5;
+
+            DrawTrack(SequencerObjects, Leaf, false);
+            DrawMaster(Leaf);
+        }
+        public static void DrawTrack(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf, bool drawmaster = true)
+        {
             GetRailColors(SequencerObjects, Leaf);
             GetLanes(SequencerObjects);
             //draw
-            using (Graphics g = Graphics.FromImage(LeafDrawing)) {
-                //Begin drawing
+            using (Graphics g = Graphics.FromImage(LayerTrack)) {
+                g.Clear(Color.Transparent);
                 g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
                 DrawLanes(g, SequencerObjects, Leaf);
                 DrawThumps(g, SequencerObjects, Leaf);
                 DrawBars(g, SequencerObjects, Leaf);
-                g.ResetTransform();
-                DrawMouseHover(g);
+                g.ResetTransform();                
             }
-            //set the finished imahge
-            pic.Image = LeafDrawing;
+            if (drawmaster)
+                DrawMaster(Leaf);
+        }
+        public static void DrawMaster(LeafProperties Leaf)
+        {
+            using (Graphics g = Graphics.FromImage(Master)) {
+                g.Clear(Color.Black);
+                g.DrawImage(LayerTrack, 0, 0);
+            }
+            Leaf.ParentEditor.dgvMasterView.Invalidate();
         }
 
         public static void GetRailColors(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -106,15 +120,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1"), 
                 SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2") 
             };
-        }
-
-        public static void DrawMouseHover(Graphics g)
-        {
-            foreach (DrawData dd in SelectedCells) {
-                g.FillRectangle(PenSelected, dd.x * Width, (dd.y * (Height + Gap)) + 2, Width, Height + Gap);
-            }
-            if (MouseLocationX != -1 && MouseLocationY != -1)
-                g.FillRectangle(PenHover, MouseLocationX - (MouseLocationX % Width), MouseLocationY - (MouseLocationY % (Height + Gap)) + 2, Width, Height + Gap);
         }
 
         public static void DrawLanes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)

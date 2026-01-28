@@ -1,4 +1,6 @@
-﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
+﻿using Thumper_Custom_Level_Editor.Utility_Classes;
+
+namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     partial class Form_LeafEditor
     {
@@ -36,6 +38,10 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -112,7 +118,15 @@
             this.toolstripObjTune = new ToolStripMenuItem();
             this.toolstripObjConvert = new ToolStripMenuItem();
             this.panelMasterView = new Panel();
-            this.pictureMasterView = new PictureBox();
+            this.dgvMasterView = new DGVEx();
+            this.toolstripMasterView = new ToolStrip();
+            this.masterviewbtnSelect = new ToolStripButton();
+            this.masterviewbtnThumps = new ToolStripButton();
+            this.masterviewbtnBars = new ToolStripButton();
+            this.masterviewbtnMultiBars = new ToolStripButton();
+            this.masterviewbtnRings = new ToolStripButton();
+            this.masterviewbtnSpikes = new ToolStripButton();
+            this.masterviewbtnLanes = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -134,7 +148,8 @@
             this.panelObjects.SuspendLayout();
             this.contextMenuObj.SuspendLayout();
             this.panelMasterView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.pictureMasterView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.dgvMasterView).BeginInit();
+            this.toolstripMasterView.SuspendLayout();
             this.SuspendLayout();
             // 
             // trackZoomVert
@@ -181,7 +196,7 @@
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 125);
+            this.btnRawImport.Size = new Size(54, 147);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -197,7 +212,7 @@
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 319);
+            this.labelCollapsePanel2.Location = new Point(0, 297);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -268,7 +283,7 @@
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 304);
+            this.vScrollBarTrackEditor.Size = new Size(15, 282);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -370,7 +385,7 @@
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 304);
+            this.trackEditor.Size = new Size(491, 282);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -392,6 +407,7 @@
             this.trackEditor.RowHeaderMouseClick += this.trackEditor_RowHeaderMouseClick;
             this.trackEditor.RowPrePaint += this.trackEditor_RowPrePaint;
             this.trackEditor.RowsAdded += this.trackEditor_RowsAdded;
+            this.trackEditor.Scroll += this.trackEditor_Scroll_1;
             this.trackEditor.SelectionChanged += this.trackEditor_SelectionChanged;
             this.trackEditor.Click += this.trackEditor_Click;
             this.trackEditor.DragDrop += this.trackEditor_DragDrop;
@@ -464,7 +480,7 @@
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 304);
+            this.leafToolStrip.Size = new Size(24, 282);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -938,7 +954,7 @@
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 334;
+            this.splitContainerLeafSide.SplitterDistance = 312;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1001,7 +1017,7 @@
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 125);
+            this.textEditor.Size = new Size(476, 147);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1099,29 +1115,182 @@
             // 
             // panelMasterView
             // 
-            this.panelMasterView.AutoScroll = true;
             this.panelMasterView.BackColor = Color.Black;
             this.panelMasterView.BackgroundImageLayout = ImageLayout.None;
-            this.panelMasterView.Controls.Add(this.pictureMasterView);
-            this.panelMasterView.Location = new Point(336, 179);
+            this.panelMasterView.Controls.Add(this.dgvMasterView);
+            this.panelMasterView.Controls.Add(this.toolstripMasterView);
+            this.panelMasterView.Location = new Point(209, 295);
             this.panelMasterView.Name = "panelMasterView";
             this.panelMasterView.Size = new Size(510, 150);
             this.panelMasterView.TabIndex = 153;
-            this.panelMasterView.Resize += this.pictureMasterView_Resize;
             // 
-            // pictureMasterView
+            // dgvMasterView
             // 
-            this.pictureMasterView.BackColor = Color.Transparent;
-            this.pictureMasterView.BackgroundImageLayout = ImageLayout.None;
-            this.pictureMasterView.Location = new Point(0, 0);
-            this.pictureMasterView.Margin = new Padding(4, 3, 4, 3);
-            this.pictureMasterView.Name = "pictureMasterView";
-            this.pictureMasterView.Size = new Size(456, 100);
-            this.pictureMasterView.TabIndex = 152;
-            this.pictureMasterView.TabStop = false;
-            this.pictureMasterView.MouseClick += this.pictureMasterView_MouseClick;
-            this.pictureMasterView.MouseLeave += this.pictureMasterView_MouseLeave;
-            this.pictureMasterView.MouseMove += this.pictureMasterView_MouseMove;
+            this.dgvMasterView.AllowUserToAddRows = false;
+            this.dgvMasterView.AllowUserToDeleteRows = false;
+            this.dgvMasterView.AllowUserToResizeColumns = false;
+            this.dgvMasterView.AllowUserToResizeRows = false;
+            this.dgvMasterView.BackgroundColor = Color.FromArgb(10, 10, 10);
+            this.dgvMasterView.BorderStyle = BorderStyle.Fixed3D;
+            this.dgvMasterView.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dgvMasterView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle8.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            this.dgvMasterView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvMasterView.ColumnHeadersHeight = 20;
+            this.dgvMasterView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvMasterView.ColumnHeadersVisible = false;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle9.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.Format = "0.###";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            this.dgvMasterView.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvMasterView.Dock = DockStyle.Fill;
+            this.dgvMasterView.EnableHeadersVisualStyles = false;
+            this.dgvMasterView.GridColor = Color.Black;
+            this.dgvMasterView.Location = new Point(100, 0);
+            this.dgvMasterView.Margin = new Padding(4, 3, 4, 3);
+            this.dgvMasterView.Name = "dgvMasterView";
+            this.dgvMasterView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle10.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            this.dgvMasterView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvMasterView.RowHeadersVisible = false;
+            this.dgvMasterView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvMasterView.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            this.dgvMasterView.RowTemplate.Height = 21;
+            this.dgvMasterView.RowTemplate.Resizable = DataGridViewTriState.False;
+            this.dgvMasterView.ScrollBars = ScrollBars.Horizontal;
+            this.dgvMasterView.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            this.dgvMasterView.ShowCellErrors = false;
+            this.dgvMasterView.ShowRowErrors = false;
+            this.dgvMasterView.Size = new Size(410, 150);
+            this.dgvMasterView.TabIndex = 153;
+            this.dgvMasterView.Tag = "";
+            this.dgvMasterView.CellClick += this.dgvMasterView_CellClick;
+            this.dgvMasterView.CellMouseClick += this.dgvMasterView_CellMouseClick;
+            this.dgvMasterView.CellMouseDown += this.dgvMasterView_CellMouseDown;
+            this.dgvMasterView.CellMouseEnter += this.dgvMasterView_CellMouseEnter;
+            this.dgvMasterView.CellPainting += this.dgvMasterView_CellPainting;
+            this.dgvMasterView.ColumnAdded += this.dgvMasterView_ColumnAdded;
+            this.dgvMasterView.RowPostPaint += this.dgvMasterView_RowPostPaint;
+            this.dgvMasterView.RowPrePaint += this.dgvMasterView_RowPrePaint;
+            this.dgvMasterView.Scroll += this.dgvMasterView_Scroll;
+            this.dgvMasterView.SelectionChanged += this.dgvMasterView_SelectionChanged;
+            // 
+            // toolstripMasterView
+            // 
+            this.toolstripMasterView.AutoSize = false;
+            this.toolstripMasterView.BackColor = Color.FromArgb(31, 31, 31);
+            this.toolstripMasterView.Dock = DockStyle.Left;
+            this.toolstripMasterView.GripMargin = new Padding(0);
+            this.toolstripMasterView.GripStyle = ToolStripGripStyle.Hidden;
+            this.toolstripMasterView.ImageScalingSize = new Size(20, 20);
+            this.toolstripMasterView.Items.AddRange(new ToolStripItem[] { this.masterviewbtnSelect, this.masterviewbtnThumps, this.masterviewbtnBars, this.masterviewbtnMultiBars, this.masterviewbtnRings, this.masterviewbtnSpikes, this.masterviewbtnLanes });
+            this.toolstripMasterView.LayoutStyle = ToolStripLayoutStyle.Flow;
+            this.toolstripMasterView.Location = new Point(0, 0);
+            this.toolstripMasterView.Name = "toolstripMasterView";
+            this.toolstripMasterView.Padding = new Padding(0);
+            this.toolstripMasterView.RenderMode = ToolStripRenderMode.System;
+            this.toolstripMasterView.Size = new Size(100, 150);
+            this.toolstripMasterView.Stretch = true;
+            this.toolstripMasterView.TabIndex = 154;
+            this.toolstripMasterView.ItemClicked += this.toolstripMasterView_ItemClicked;
+            // 
+            // masterviewbtnSelect
+            // 
+            this.masterviewbtnSelect.Checked = true;
+            this.masterviewbtnSelect.CheckOnClick = true;
+            this.masterviewbtnSelect.CheckState = CheckState.Checked;
+            this.masterviewbtnSelect.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnSelect.Image = (Image)resources.GetObject("masterviewbtnSelect.Image");
+            this.masterviewbtnSelect.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnSelect.Name = "masterviewbtnSelect";
+            this.masterviewbtnSelect.Size = new Size(24, 24);
+            this.masterviewbtnSelect.Text = "toolStripButton1";
+            this.masterviewbtnSelect.ToolTipText = "Selection";
+            // 
+            // masterviewbtnThumps
+            // 
+            this.masterviewbtnThumps.CheckOnClick = true;
+            this.masterviewbtnThumps.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnThumps.Image = Properties.Resources.simpleedit_THUMPS;
+            this.masterviewbtnThumps.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnThumps.Name = "masterviewbtnThumps";
+            this.masterviewbtnThumps.Size = new Size(24, 24);
+            this.masterviewbtnThumps.Text = "toolStripButton2";
+            this.masterviewbtnThumps.ToolTipText = "Thumps";
+            // 
+            // masterviewbtnBars
+            // 
+            this.masterviewbtnBars.CheckOnClick = true;
+            this.masterviewbtnBars.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnBars.Image = Properties.Resources.simpleedit_BARS;
+            this.masterviewbtnBars.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnBars.Name = "masterviewbtnBars";
+            this.masterviewbtnBars.Size = new Size(24, 24);
+            this.masterviewbtnBars.Text = "toolStripButton3";
+            this.masterviewbtnBars.ToolTipText = "Single Bars";
+            // 
+            // masterviewbtnMultiBars
+            // 
+            this.masterviewbtnMultiBars.CheckOnClick = true;
+            this.masterviewbtnMultiBars.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnMultiBars.Image = Properties.Resources.simpleedit_BARSMULTI;
+            this.masterviewbtnMultiBars.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnMultiBars.Name = "masterviewbtnMultiBars";
+            this.masterviewbtnMultiBars.Size = new Size(24, 24);
+            this.masterviewbtnMultiBars.Text = "toolStripButton4";
+            this.masterviewbtnMultiBars.ToolTipText = "Multi Bars";
+            // 
+            // masterviewbtnRings
+            // 
+            this.masterviewbtnRings.CheckOnClick = true;
+            this.masterviewbtnRings.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnRings.Image = Properties.Resources.simpleedit_RINGS;
+            this.masterviewbtnRings.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnRings.Name = "masterviewbtnRings";
+            this.masterviewbtnRings.Size = new Size(24, 24);
+            this.masterviewbtnRings.Text = "toolStripButton5";
+            this.masterviewbtnRings.ToolTipText = "Rings";
+            // 
+            // masterviewbtnSpikes
+            // 
+            this.masterviewbtnSpikes.CheckOnClick = true;
+            this.masterviewbtnSpikes.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnSpikes.Image = Properties.Resources.simpleedit_JUMPSSPIKES;
+            this.masterviewbtnSpikes.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnSpikes.Name = "masterviewbtnSpikes";
+            this.masterviewbtnSpikes.Size = new Size(24, 24);
+            this.masterviewbtnSpikes.Text = "toolStripButton6";
+            this.masterviewbtnSpikes.ToolTipText = "Spikes";
+            // 
+            // masterviewbtnLanes
+            // 
+            this.masterviewbtnLanes.CheckOnClick = true;
+            this.masterviewbtnLanes.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnLanes.Image = Properties.Resources.simpleedit_LANES;
+            this.masterviewbtnLanes.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnLanes.Name = "masterviewbtnLanes";
+            this.masterviewbtnLanes.Size = new Size(24, 24);
+            this.masterviewbtnLanes.Text = "toolStripButton7";
+            this.masterviewbtnLanes.ToolTipText = "Lanes";
             // 
             // Form_LeafEditor
             // 
@@ -1168,7 +1337,9 @@
             this.panelObjects.PerformLayout();
             this.contextMenuObj.ResumeLayout(false);
             this.panelMasterView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)this.pictureMasterView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.dgvMasterView).EndInit();
+            this.toolstripMasterView.ResumeLayout(false);
+            this.toolstripMasterView.PerformLayout();
             this.ResumeLayout(false);
         }
 
@@ -1250,6 +1421,14 @@
         private SequencerColumn LeafMultilane;
         private ToolStripDropDownButton btnLeafViewOptions;
         public Panel panelMasterView;
-        private PictureBox pictureMasterView;
+        public DGVEx dgvMasterView;
+        private ToolStrip toolstripMasterView;
+        private ToolStripButton masterviewbtnSelect;
+        private ToolStripButton masterviewbtnThumps;
+        private ToolStripButton masterviewbtnBars;
+        private ToolStripButton masterviewbtnMultiBars;
+        private ToolStripButton masterviewbtnRings;
+        private ToolStripButton masterviewbtnSpikes;
+        private ToolStripButton masterviewbtnLanes;
     }
 }

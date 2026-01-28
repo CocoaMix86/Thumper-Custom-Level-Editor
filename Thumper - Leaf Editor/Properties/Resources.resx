@@ -1135,6 +1135,24 @@
   <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
+  <data name="simpleedit_BARS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_BARS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simpleedit_BARSMULTI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_BARSMULTI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simpleedit_JUMPSSPIKES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_JUMPSSPIKES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simpleedit_LANES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_LANES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simpleedit_RINGS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_RINGS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simpleedit_THUMPS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons\simpleedit_THUMPS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>

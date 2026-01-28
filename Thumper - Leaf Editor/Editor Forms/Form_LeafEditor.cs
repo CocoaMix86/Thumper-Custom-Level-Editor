@@ -1,12 +1,15 @@
-﻿using ICSharpCode.TextEditor.Document;
+﻿using ICSharpCode.TextEditor.Actions;
+using ICSharpCode.TextEditor.Document;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Windows.Devices.PointOfService.Provider;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -46,7 +49,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!SaveOnlyNoLoad) {
                     TCLE.SaveTCL();
                 }
-                LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+                LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
+                toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (75);
             }
         }
         ///Load LVL Sequencer
@@ -107,7 +111,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             leafToolStrip.Renderer = new ToolStripOverride();
             contextMenuInterps.Renderer = new ContextMenuColors();
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
+            dgvMasterView.MouseWheel += new MouseEventHandler(dgvMasterView_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor);
+            TCLE.DoubleBufferDGV(dgvMasterView);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             //
             treeObjects.Tag = txtSearch.Text;
@@ -299,6 +305,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.HorizontalScrollingOffset = e.OldValue;
                 trackEditor.Scroll += trackEditor_Scroll;
             }
+            dgvMasterView.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset;
         }
 
         private void btnLeafZoom_Click(object sender, EventArgs e)
@@ -328,6 +335,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Scroll += trackEditor_Scroll;
             }
             LeafMasterView.Width = trackZoom.Value;
+            LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
@@ -1322,6 +1330,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             _ = trackEditor.RowHeadersWidth;
             trackEditor_Resize(null, null);
+
+            toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3);
         }
 
         ///LEAF - NEW
@@ -2786,7 +2796,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         savestate = _saveJSON
                     });
                 }
-                LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+                LeafMasterView.DrawTrack(SequencerObjects, LeafProperties);
             }
             else {
                 this.Text = $"{LoadedLeaf.Name}{(LoadedLeaf.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
@@ -2854,6 +2864,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             if (SaveOnlyNoLoad)
                 return;
+            LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
             //set cell zoom
             trackZoom_Scroll(null, null);
             //make sure new cells follow the time sig
@@ -3575,55 +3586,118 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private void pictureMasterView_Paint(object sender, PaintEventArgs e)
+        private void dgvMasterView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            //pictureMasterView.Image = LeafMasterView.MasterViewBegin(SequencerObjects, LeafProperties, trackZoom.Value, trackZoomVert.Value);
-        }
-
-        private void pictureMasterView_Resize(object sender, EventArgs e)
-        {
-            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
-        }
-
-        bool ClickReset;
-        private void pictureMasterView_MouseMove(object sender, MouseEventArgs e)
-        {
-            LeafMasterView.MouseLocationX = e.X;
-            LeafMasterView.MouseLocationY = e.Y;
-            if (e.Button == MouseButtons.Left) {
-                ClickReset = true;
-                if (!LeafMasterView.SelectedCells.Any(m => m.x == LeafMasterView.MouseLocationX / LeafMasterView.Width && m.y == LeafMasterView.MouseLocationY / LeafMasterView.Height))
-                    LeafMasterView.SelectedCells.Add(new() { x = LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height });
+            e.Handled = true;
+            if (dgvMasterView[e.ColumnIndex, e.RowIndex].Selected) {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LightSkyBlue)), e.CellBounds);
             }
-            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
         }
 
-        private void pictureMasterView_MouseLeave(object sender, EventArgs e)
+        private void dgvMasterView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            LeafMasterView.MouseLocationX = -1;
-            LeafMasterView.MouseLocationY = -1;
-            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+            e.Handled = true;
+            e.PaintCells(e.RowBounds, e.PaintParts);
         }
 
-        private void pictureMasterView_MouseClick(object sender, MouseEventArgs e)
+        private void dgvMasterView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (ModifierKeys is Keys.Control) {
-                if (LeafMasterView.SelectedCells.FirstOrDefault(m => m.x == LeafMasterView.MouseLocationX / LeafMasterView.Width && m.y == LeafMasterView.MouseLocationY / LeafMasterView.Height) is DrawData dd) {
-                    LeafMasterView.SelectedCells.Remove(dd);
+        }
+
+        private void dgvMasterView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.Width = LeafMasterView.Width;
+            e.Column.FillWeight = 0.001f;
+        }
+
+        private void dgvMasterView_SelectionChanged(object sender, EventArgs e)
+        {
+            trackEditor.ClearSelection();
+            foreach (int column in dgvMasterView.SelectedCells.Cast<DataGridViewCell>().Select(x => x.ColumnIndex).Distinct()) {
+                foreach (DataGridViewRow dgvr in trackEditor.Rows) {
+                    dgvr.Cells[column + FrozenColumnOffset].Selected = true;
                 }
-                else
-                  LeafMasterView.SelectedCells.Add(new() { x= LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height});
             }
+        }
+        private void dgvMasterView_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            int horiz = trackZoom.Value;
+            int scrollLines = SystemInformation.MouseWheelScrollLines;
+            //handle horizontal scroll
+            if (ModifierKeys is not Keys.Control and not Keys.Shift) {
+                if (dgvMasterView.FirstDisplayedScrollingRowIndex == -1 || dgvMasterView.FirstDisplayedScrollingColumnIndex == -1)
+                    return;
+                //handle horizontal scroll
+                if (MouseCurrentColumn != -1) {
+                    dgvMasterView.HorizontalScrollingOffset = dgvMasterView.HorizontalScrollingOffset + (e.Delta * -1) < 0 ? 0 : dgvMasterView.HorizontalScrollingOffset + (e.Delta * -1);
+                    dgvMasterView.Invalidate();
+                }
+            }
+            //handle zoom scroll
             else {
-                if (ClickReset) {
-                    ClickReset = false;
+                if (ModifierKeys is Keys.Control && e.Delta < 0) {
+                    trackZoom.Value = Math.Max(1, horiz - scrollLines);
                 }
-                else {
-                    LeafMasterView.SelectedCells.Clear();
-                    LeafMasterView.SelectedCells.Add(new() { x = LeafMasterView.MouseLocationX / LeafMasterView.Width, y = LeafMasterView.MouseLocationY / LeafMasterView.Height });
+                else if (ModifierKeys is Keys.Control && e.Delta > 0) {
+                    trackZoom.Value = Math.Min(100, horiz + scrollLines);
                 }
             }
-            LeafMasterView.MasterViewBegin(pictureMasterView, SequencerObjects, LeafProperties);
+        }
+
+        private void dgvMasterView_Scroll(object sender, ScrollEventArgs e)
+        {
+            trackEditor.Scroll -= trackEditor_Scroll_1;
+            trackEditor.HorizontalScrollingOffset = dgvMasterView.HorizontalScrollingOffset;
+            trackEditor.Scroll += trackEditor_Scroll_1;
+        }
+
+        private void dgvMasterView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void dgvMasterView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+        }
+
+        private void dgvMasterView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            decimal? setvalue = e.Button == MouseButtons.Left ? 1m : null;
+            MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
+            SaveCheckAndWrite(false, "Set value");
+        }
+
+        private void trackEditor_Scroll_1(object sender, ScrollEventArgs e)
+        {
+            dgvMasterView.Scroll -= dgvMasterView_Scroll;
+            dgvMasterView.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset;
+            dgvMasterView.Scroll += dgvMasterView_Scroll;
+        }
+
+        private void toolstripMasterView_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            ToolStrip _ts = sender as ToolStrip;
+            foreach (ToolStripButton item in _ts.Items) {
+                item.Checked = false;
+            }
+        }
+
+        private void dgvMasterView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Control.MouseButtons == MouseButtons.None)
+                return;
+            decimal? setvalue = Control.MouseButtons == MouseButtons.Left ? 1m : null;
+            MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
+            SaveCheckAndWrite(false, "Set value");
+        }
+
+        private void MasterViewSetValue(int row, int column, decimal? setvalue)
+        {
+            if (masterviewbtnThumps.Checked) {
+                SequencerObjects[row][column + FrozenColumnOffset].Value = setvalue;
+            }
+            if (masterviewbtnLanes.Checked) {
+                SequencerObjects[row + 6][column + FrozenColumnOffset].Value = setvalue;
+            }
         }
     }
 }
