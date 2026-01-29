@@ -18,7 +18,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variable
         //Static
-        public static string AppReleaseNumber = "alpha63";
+        public static string AppReleaseNumber = "alpha65";
         public static string _errorlog = "";
         public static decimal LeafQuickValue0 = 1.000m;
         public static decimal LeafQuickValue1 = 1.000m;

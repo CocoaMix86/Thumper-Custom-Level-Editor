@@ -118,6 +118,105 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="basiceditor_bar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_bar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_bar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_bar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_bar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barcenter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_barcenter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barleft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_barleft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_barright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bossfx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_bossfx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_camera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_gamma" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_gamma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_lanecolor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_lanecolor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_lanes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_lanes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_mill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_mill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_sentry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_sentry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_shield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_skybox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_skybox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_spike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_spike2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_spike4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_spike6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_spike8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_tentacle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_tentacle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thump" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_thump.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_thumpbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpbonus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_thumpbonus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpboss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_thumpboss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpfast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_thumpfast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnl15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnl25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnr15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr25" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnr25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1134,24 +1233,6 @@
   </data>
   <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="simpleedit_BARS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_BARS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simpleedit_BARSMULTI" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_BARSMULTI.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simpleedit_JUMPSSPIKES" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_JUMPSSPIKES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simpleedit_LANES" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_LANES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simpleedit_RINGS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_RINGS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="simpleedit_THUMPS" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons\simpleedit_THUMPS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\text assets\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>

@@ -76,7 +76,7 @@
         }
         protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
         {
-            if (e.Item is ToolStripButton btn && btn.CheckOnClick && btn.Checked) {
+            if (e.Item is ToolStripButton btn && ((btn.CheckOnClick && btn.Checked)) | e.Item.BackColor == Color.FromArgb(46, 46, 46)) {
                 Rectangle bounds = new(Point.Empty, e.Item.Size);
                 bounds.Width--;
                 bounds.Height--;

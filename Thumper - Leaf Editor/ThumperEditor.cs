@@ -104,6 +104,11 @@ namespace Thumper_Custom_Level_Editor
             //
             AppSettings.Recentfiles ??= new List<string>();
             //
+            if (Properties.Settings.Default.version != TCLE.AppReleaseNumber) {
+                Properties.Settings.Default.version = TCLE.AppReleaseNumber;
+                Directory.Delete($@"{AppLocation}\temp", true);
+                Directory.Delete($@"{AppLocation}\settings", true);
+            }
             //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
                 toolstripFileTemplateRegen_Click(null, null);
@@ -128,13 +133,12 @@ namespace Thumper_Custom_Level_Editor
             //import last used custom colors
             colorDialog1.CustomColors = AppSettings.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //load recent levels or the level from input arg
-            List<string> levellist = AppSettings.Recentfiles ?? new List<string>();
             FileInfo LevelToLoad = new(string.IsNullOrEmpty(LevelFromArg) ? "e" : LevelFromArg);
-            if (levellist.Count > 0 && !LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase))
-                RecentFiles(levellist);
-            else if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
+            if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
                 OpenProject(LevelToLoad);
+                return;
             }
+            RecentFiles(AppSettings.Recentfiles ?? new List<string>());
         }
         #endregion
         #region Form Loading Closing
