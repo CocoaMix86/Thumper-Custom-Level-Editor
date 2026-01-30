@@ -79,6 +79,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
                 DrawLanes(g, SequencerObjects, Leaf);
                 DrawThumps(g, SequencerObjects, Leaf);
+                DrawSpikes(g, SequencerObjects, Leaf);
                 DrawBars(g, SequencerObjects, Leaf);
                 DrawRings(g, SequencerObjects, Leaf);
                 g.ResetTransform();                
@@ -277,6 +278,23 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             g.FillRectangle(BrushThumpOutter, new Rectangle((beat * Width) + (Width / 3), offset + 2, Width - ((Width / 3)*2), Height - 4));
             g.FillRectangle(BrushThumpInner, new Rectangle((beat * Width) + (Width / 3) + 2, offset + 4, Width - ((Width / 3)*2) - 4, Height - 8));
+        }
+
+        public static void DrawSpikes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
+        {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == "JUMPS/SPIKES")) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawSpikeIcons(g, beat, Middle + OffsetsDict[seq.param_path_lane]);
+                    }
+                }
+            }
+        }
+        public static void DrawSpikeIcons(Graphics g, int beat, int offset)
+        {
+            for (int drawwidth = 0; drawwidth < Width - 4; drawwidth += 16) {
+                g.DrawImage(Properties.Resources.SPIKES, beat * Width + drawwidth, offset);
+            }
         }
 
         public static void DrawBars(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)

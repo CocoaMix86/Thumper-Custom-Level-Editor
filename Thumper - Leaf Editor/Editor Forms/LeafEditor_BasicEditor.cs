@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LightSkyBlue)), e.CellBounds);
             }
             if (Properties.Settings.Default.LeafOptionShowGrid)
-                e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds);
+                e.Graphics.DrawRectangle(Pens.DarkGray, e.CellBounds);
         }
 
         private void dgvMasterView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -173,7 +173,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor.Rows.Add(_importseq);
                 }
                 ChangeTrackName(_importseq, _importseq.category);
-                TCLE.ResizeHeaders(trackEditor);
                 goto search;
             }
 
