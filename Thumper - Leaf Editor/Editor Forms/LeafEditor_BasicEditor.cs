@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region VARIABLES
         private static string[] LaneParams = new[] { "a01", "a02", "ent", "z01", "z02" };
         private static string[] LaneNames = new[] { "visibla01", "visibla02", "visible", "visiblz01", "visiblz02" };
-        private string ActiveParam;
+        private string ActiveParam = "select";
         private ToolStripItem ActiveObject;
         #endregion
         #region PAINTING
@@ -22,6 +22,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dgvMasterView[e.ColumnIndex, e.RowIndex].Selected) {
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LightSkyBlue)), e.CellBounds);
             }
+            if (Properties.Settings.Default.LeafOptionShowGrid)
+                e.Graphics.DrawRectangle(Pens.Gray, e.CellBounds);
         }
 
         private void dgvMasterView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -100,6 +102,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        private void basicEditorDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            ((ToolStripSplitButton)e.ClickedItem.OwnerItem).Image = e.ClickedItem.Image;
+            ActiveParam = (string)e.ClickedItem.Tag;
+        }
+
         private void dgvMasterView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
         }
@@ -112,7 +120,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             decimal? setvalue = e.Button == MouseButtons.Left ? 1m : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
-            SaveCheckAndWrite(false, "Set value");
         }
 
         private void dgvMasterView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -121,11 +128,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             decimal? setvalue = Control.MouseButtons == MouseButtons.Left ? 1m : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
-            SaveCheckAndWrite(false, "Set value");
         }
 
         private void MasterViewSetValue(int row, int column, decimal? setvalue)
         {
+            if (ActiveParam == "select")
+                return;
             Sequencer_Object _findseq = null;
             string _paramtofind = "";
         search:
@@ -134,8 +142,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == _paramtofind);
             }
             else {
-                _paramtofind = $"{ActiveParam}.ent";
-                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == $"{ActiveParam}.{LaneParams[row]}");
+                _paramtofind = $"{ActiveParam}";
+                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == $"{ActiveParam.Replace(".ent", "." + LaneParams[row])}");
             }            
 
             if (_findseq == null) {
@@ -177,6 +185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             _findseq[column + FrozenColumnOffset].Value = setvalue;
+            SaveCheckAndWrite(false, "Set value");
         }
         #endregion
     }

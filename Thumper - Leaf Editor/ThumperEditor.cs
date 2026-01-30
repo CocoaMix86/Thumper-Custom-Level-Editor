@@ -731,6 +731,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
+                leaf.dgvMasterView.Refresh();
             }
         }
 

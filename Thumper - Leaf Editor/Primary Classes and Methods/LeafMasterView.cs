@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
@@ -44,10 +39,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Pen PenTrackOuter = new(TrackOuter, 3);
         //Thump Colors
         public static SolidBrush BrushThumpInner = new(Color.White);
-        public static SolidBrush BrushThumpOutter = new(Color.FromArgb(148, 129, 239));
+        public static SolidBrush BrushThumpOutter = new(Color.FromArgb(145, 205, 242));
         //Bar Colors
         public static Pen PenBarsPoint = new(new SolidBrush(Color.Orange), 3) { EndCap = LineCap.Triangle, StartCap = LineCap.Triangle };
         public static Pen PenBarsFlat = new(new SolidBrush(Color.Orange), 3);
+        //Ring Colors
+        public static Pen PenRings = new(new SolidBrush(Color.SkyBlue), 3);
         //
         public static List<Pen> PenRailColors;
         #endregion
@@ -83,6 +80,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 DrawLanes(g, SequencerObjects, Leaf);
                 DrawThumps(g, SequencerObjects, Leaf);
                 DrawBars(g, SequencerObjects, Leaf);
+                DrawRings(g, SequencerObjects, Leaf);
                 g.ResetTransform();                
             }
             if (drawmaster)
@@ -266,42 +264,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawThumps(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-
-            }
-
-            if (SequencerObjects.FirstOrDefault(x => x.param_path is "thump_rails.ent" or "thump_boss_bonus.ent" or "thump_checkpoint.ent" or "thump_rails_fast_activat.ent") is Sequencer_Object seq) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("thump_rails") || x.param_path.StartsWith("thump_boss_bonus") || x.param_path.StartsWith("thump_checkpoint") || x.param_path.StartsWith("thump_rails_fast_activat") || x.param_path.StartsWith("grindable_with_thump")))
+            {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle);
-                    }
-                }
-            }
-            if (SequencerObjects.FirstOrDefault(x => x.param_path is "thump_rails.a01" or "thump_boss_bonus.a01" or "thump_checkpoint.a01" or "thump_rails_fast_activat.a01") is Sequencer_Object seq2) {
-                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    if (seq2[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle - Height*2 - Gap*2);
-                    }
-                }
-            }
-            if (SequencerObjects.FirstOrDefault(x => x.param_path is "thump_rails.a02" or "thump_boss_bonus.a02" or "thump_checkpoint.a02" or "thump_rails_fast_activat.a02") is Sequencer_Object seq3) {
-                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    if (seq3[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle - Height - Gap);
-                    }
-                }
-            }
-            if (SequencerObjects.FirstOrDefault(x => x.param_path is "thump_rails.z01" or "thump_boss_bonus.z01" or "thump_checkpoint.z01" or "thump_rails_fast_activat.z01") is Sequencer_Object seq4) {
-                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    if (seq4[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle + Height + Gap);
-                    }
-                }
-            }
-            if (SequencerObjects.FirstOrDefault(x => x.param_path is "thump_rails.z02" or "thump_boss_bonus.z02" or "thump_checkpoint.z02" or "thump_rails_fast_activat.z02") is Sequencer_Object seq5) {
-                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    if (seq5[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle + Height*2 + Gap*2);
+                        DrawThumpIcon(g, beat, Middle + OffsetsDict[seq.param_path_lane]);
                     }
                 }
             }
@@ -374,6 +341,21 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             //style 1 - all point //style 2 - top point //style 3 - bottom point //style 4 - no point
             g.DrawLine(PenBarsPoint, offsetx, offsety, offsetx, offsety2);
+        }
+
+        public static void DrawRings(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
+        {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path.StartsWith("ducker_crak"))) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue == 1) {
+                        DrawRingIcons(g, beat, Middle + OffsetsDict[seq.param_path_lane]);
+                    }
+                }
+            }
+        }
+        public static void DrawRingIcons(Graphics g, int beat, int offset)
+        {
+            g.DrawArc(PenRings, beat*Width + (Width / 2), offset, Width/3, Height, -94, 188);
         }
         #endregion
     }
