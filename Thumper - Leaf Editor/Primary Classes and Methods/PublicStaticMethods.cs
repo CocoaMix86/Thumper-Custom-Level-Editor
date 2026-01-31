@@ -261,6 +261,7 @@ namespace Thumper_Custom_Level_Editor
         public void MenusVisible(bool visible)
         {
             panelRecentFiles.Visible = !visible;
+            panelIntroTips.Visible = !visible;
             if (WorkingFolder == null)
                 visible = false;
             panelToolStrips.Visible = visible;

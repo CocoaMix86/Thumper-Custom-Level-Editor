@@ -119,9 +119,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -190,6 +190,9 @@
             this.toolStripSeparator22 = new ToolStripSeparator();
             this.btnVolumeMixer = new ToolStripButton();
             this.panelFill = new Panel();
+            this.panelIntroTips = new Panel();
+            this.label2 = new Label();
+            this.label1 = new Label();
             this.panelLoadingMessage = new Panel();
             this.lblLoadingGate = new Label();
             this.lblLoadingLeaf = new Label();
@@ -232,6 +235,7 @@
             this.contextmenuView.SuspendLayout();
             this.contextMenuLeafOptions.SuspendLayout();
             this.panelFill.SuspendLayout();
+            this.panelIntroTips.SuspendLayout();
             this.panelLoadingMessage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).BeginInit();
             this.contextmenuTabClick.SuspendLayout();
@@ -474,7 +478,7 @@
             this.panelChangelog.BorderStyle = BorderStyle.Fixed3D;
             this.panelChangelog.Controls.Add(this.panel8);
             this.panelChangelog.Controls.Add(this.toolStripChangelog);
-            this.panelChangelog.Location = new Point(679, 80);
+            this.panelChangelog.Location = new Point(605, 274);
             this.panelChangelog.Name = "panelChangelog";
             this.panelChangelog.Size = new Size(555, 535);
             this.panelChangelog.TabIndex = 139;
@@ -556,7 +560,7 @@
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(992, 452);
+            this.dockMain.Size = new Size(816, 143);
             this.dockMain.TabIndex = 147;
             this.dockMain.Visible = false;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
@@ -981,8 +985,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1104,14 +1109,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1132,6 +1129,14 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(57, 21);
             this.toolstripProject.Text = "&Project";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1811,6 +1816,7 @@
             // 
             this.panelFill.AutoScroll = true;
             this.panelFill.BackColor = Color.FromArgb(45, 45, 48);
+            this.panelFill.Controls.Add(this.panelIntroTips);
             this.panelFill.Controls.Add(this.pictureTunnelViewer);
             this.panelFill.Controls.Add(this.panelLoadingMessage);
             this.panelFill.Controls.Add(this.dockMain);
@@ -1819,6 +1825,43 @@
             this.panelFill.Name = "panelFill";
             this.panelFill.Size = new Size(984, 444);
             this.panelFill.TabIndex = 153;
+            // 
+            // panelIntroTips
+            // 
+            this.panelIntroTips.BackColor = Color.FromArgb(55, 55, 55);
+            this.panelIntroTips.BorderStyle = BorderStyle.FixedSingle;
+            this.panelIntroTips.Controls.Add(this.label2);
+            this.panelIntroTips.Controls.Add(this.label1);
+            this.panelIntroTips.Location = new Point(605, 7);
+            this.panelIntroTips.MinimumSize = new Size(60, 60);
+            this.panelIntroTips.Name = "panelIntroTips";
+            this.panelIntroTips.Size = new Size(350, 205);
+            this.panelIntroTips.TabIndex = 158;
+            this.panelIntroTips.Tag = "editorpanel";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = DockStyle.Fill;
+            this.label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.label2.ForeColor = Color.SkyBlue;
+            this.label2.Location = new Point(0, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new Size(337, 30);
+            this.label2.TabIndex = 143;
+            this.label2.Text = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor\r\n/wiki/TCLE-3.0#first-time-in-tcle";
+            this.label2.Click += this.label2_Click;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = DockStyle.Top;
+            this.label1.ForeColor = Color.White;
+            this.label1.Location = new Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new Size(334, 60);
+            this.label1.TabIndex = 142;
+            this.label1.Text = "Welcome to TCLE 3.0!\r\n\r\nIf you'd like to learn how the interface works, please check out\r\nthe documentation on the wiki here:\r\n";
             // 
             // panelLoadingMessage
             // 
@@ -2112,6 +2155,8 @@
             this.contextmenuView.ResumeLayout(false);
             this.contextMenuLeafOptions.ResumeLayout(false);
             this.panelFill.ResumeLayout(false);
+            this.panelIntroTips.ResumeLayout(false);
+            this.panelIntroTips.PerformLayout();
             this.panelLoadingMessage.ResumeLayout(false);
             this.panelLoadingMessage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.pictureBeeble).EndInit();
@@ -2300,6 +2345,9 @@
         public ToolStripMenuItem leafoptionThinValues;
         public ToolStripMenuItem leafoptionShowWave;
         private ToolStripMenuItem leafoptionVerticalCells;
+        private Panel panelIntroTips;
+        private Label label1;
+        private Label label2;
     }
 }
 

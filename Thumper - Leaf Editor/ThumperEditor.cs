@@ -219,7 +219,7 @@ namespace Thumper_Custom_Level_Editor
             //
             try {
                 Directory.Delete($@"{AppLocation}\temp\", true);
-            }catch (Exception) { }
+            } catch (Exception) { }
         }
 
         public void SetKeyBinds()
@@ -1245,5 +1245,7 @@ namespace Thumper_Custom_Level_Editor
             GC.WaitForPendingFinalizers();
             _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
+
+        private void label2_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/wiki/TCLE-3.0#first-time-in-tcle", UseShellExecute = true });
     }
 }

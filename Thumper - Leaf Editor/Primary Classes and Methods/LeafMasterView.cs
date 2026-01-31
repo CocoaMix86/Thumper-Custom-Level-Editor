@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Windows.Networking.NetworkOperators;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
@@ -285,14 +286,15 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == "JUMPS/SPIKES")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        DrawSpikeIcons(g, beat, Middle + OffsetsDict[seq.param_path_lane]);
+                        bool success = int.TryParse(seq.friendly_param.Split('[')[1].Split(' ')[0], out int beats);
+                        DrawSpikeIcons(g, beat, Middle + OffsetsDict[seq.param_path_lane], beats);
                     }
                 }
             }
         }
-        public static void DrawSpikeIcons(Graphics g, int beat, int offset)
+        public static void DrawSpikeIcons(Graphics g, int beat, int offset, int length)
         {
-            for (int drawwidth = 0; drawwidth < Width - 4; drawwidth += 16) {
+            for (int drawwidth = 0; drawwidth < (Width * length) - 4; drawwidth += 16) {
                 g.DrawImage(Properties.Resources.SPIKES, beat * Width + drawwidth, offset);
             }
         }
