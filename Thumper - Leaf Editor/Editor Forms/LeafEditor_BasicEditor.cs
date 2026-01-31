@@ -100,6 +100,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (ToolStripItem item in _ts.Items) {
                 item.BackColor = item == ActiveObject ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
             }
+            dgvMasterView.MultiSelect = ActiveParam == "select";
         }
 
         private void basicEditorDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -179,7 +180,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (setvalue == null) {
                 //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
                 //just so you don't have to switch your selection to a different object to delete it.
-                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == _findseq.category)) {
+                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == _findseq.category && x.friendly_lane == _findseq.friendly_lane)) {
                     if (seq.defaultvalue == 1 && setvalue == null) {
                         setvalue = 0;
                     }

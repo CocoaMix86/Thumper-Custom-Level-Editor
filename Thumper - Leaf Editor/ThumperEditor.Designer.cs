@@ -560,7 +560,7 @@
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(816, 143);
+            this.dockMain.Size = new Size(990, 450);
             this.dockMain.TabIndex = 147;
             this.dockMain.Visible = false;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;

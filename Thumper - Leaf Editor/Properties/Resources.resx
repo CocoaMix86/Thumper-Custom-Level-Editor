@@ -208,14 +208,17 @@
   <data name="basiceditor_turnl15" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons_basiceditor\basiceditor_turnl15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="basiceditor_turnl25" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons_basiceditor\basiceditor_turnl25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="basiceditor_turnl30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnl30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnl45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\image assets\icons_basiceditor\basiceditor_turnl90.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="basiceditor_turnr15" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\icons_basiceditor\basiceditor_turnr15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="basiceditor_turnr25" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\image assets\icons_basiceditor\basiceditor_turnr25.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image assets\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

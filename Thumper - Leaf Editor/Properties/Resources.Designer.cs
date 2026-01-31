@@ -363,9 +363,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap basiceditor_turnl25 {
+        internal static System.Drawing.Bitmap basiceditor_turnl30 {
             get {
-                object obj = ResourceManager.GetObject("basiceditor_turnl25", resourceCulture);
+                object obj = ResourceManager.GetObject("basiceditor_turnl30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnl45 {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnl45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnl90 {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnl90", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -376,16 +396,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static System.Drawing.Bitmap basiceditor_turnr15 {
             get {
                 object obj = ResourceManager.GetObject("basiceditor_turnr15", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap basiceditor_turnr25 {
-            get {
-                object obj = ResourceManager.GetObject("basiceditor_turnr25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
