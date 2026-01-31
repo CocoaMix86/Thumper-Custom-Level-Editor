@@ -472,8 +472,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //specifically paint border seperately so it appears above everything and cleans up edges a bit.
             LeafCellPainting.SetCellBorders(e, trackEditor);
             //Painting playback head and end
-            if (Playback.IsPlaying)
-                LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
+            LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
             if (SequencerObjects[e.RowIndex].friendly_param is "lane center" or "lane left 1" or "lane left 2" or "lane right 1" or "lane right 2")
                 LeafCellPainting.DrawLaneEnds(e, SequencerObjects[e.RowIndex], SequencerObjects);
@@ -3550,8 +3549,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("leaf");
-                Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd);
-                Playback.Play(PlaybackStart, LeafProperties.beats, PlaybackLoop);
+                Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd - FrozenColumnOffset);
+                Playback.Play(PlaybackStart, PlaybackEnd, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }

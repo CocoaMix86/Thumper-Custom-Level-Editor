@@ -843,7 +843,7 @@ namespace Thumper_Custom_Level_Editor
                 Bass.BASS_ChannelFlags(MidiStream, BASSFlag.BASS_SAMPLE_LOOP, BASSFlag.BASS_SAMPLE_LOOP);
                 IsLooping = true;
                 if (StartTime != -1)
-                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime + 9);
+                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime - 3 + 9);
                 else
                     LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime);
             }
@@ -858,8 +858,8 @@ namespace Thumper_Custom_Level_Editor
             //calculate where playback should start
             PlaybackBeat = -9;
             if (StartTime != -1) {
-                PlaybackBeat = (int)StartTime;
-                Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (StartTime + CallOffset));
+                PlaybackBeat = (int)StartTime - 3;
+                Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (PlaybackBeat + CallOffset));
                 Error = Bass.BASS_ErrorGetCode();
             }
             ApproachBeats = _ApproachBeats;

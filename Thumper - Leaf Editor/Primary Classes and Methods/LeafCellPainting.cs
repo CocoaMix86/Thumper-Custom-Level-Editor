@@ -61,11 +61,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         {
             if (e.ColumnIndex < FrozenColumnOffset)
                 return;
-            if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset || e.ColumnIndex - 1 == PlaybackEnd + FrozenColumnOffset) {
+            if (e.ColumnIndex == PlaybackStart || e.ColumnIndex - 1 == PlaybackEnd) {
                 Point p1 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ -6, e.CellBounds.Top);
                 Point p2 = new(e.CellBounds.Left + /*(e.CellBounds.Width / 2)*/ +6, e.CellBounds.Top);
                 Point p3 = new(e.CellBounds.Left /*+ (e.CellBounds.Width / 2)*/, e.CellBounds.Top + 10);
-                if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset)
+                if (e.ColumnIndex == PlaybackStart)
                     e.Graphics.FillPolygon(Brushes.CornflowerBlue, new[] { p1, p2, p3 });
                 else
                     e.Graphics.FillPolygon(PlaybackLoop ? Brushes.Green : Brushes.Red, new[] { p1, p2, p3 });
@@ -135,11 +135,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawPlaybackBars(DataGridViewCellPaintingEventArgs e, int PlaybackStart, int PlaybackEnd, bool PlaybackLoop, string LoadedLeaf)
         {
-            if (e.ColumnIndex == PlaybackStart + FrozenColumnOffset) {
+            if (e.ColumnIndex == PlaybackStart) {
                 e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left, e.CellBounds.Top), new Point(e.CellBounds.Left, e.CellBounds.Bottom));
             }
 
-            if (e.ColumnIndex == PlaybackEnd + FrozenColumnOffset) {
+            if (e.ColumnIndex == PlaybackEnd) {
                 e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
 
