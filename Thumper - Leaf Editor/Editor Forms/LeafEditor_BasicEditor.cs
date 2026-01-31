@@ -176,14 +176,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 goto search;
             }
 
-            if (_findseq.defaultvalue == 1 && setvalue == null) {
-                setvalue = 0;
-            }
-            if (_findseq.defaultvalue == 1 && setvalue == 1) {
-                setvalue = null;
-            }
+            if (setvalue == null) {
+                //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
+                //just so you don't have to switch your selection to a different object to delete it.
+                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == _findseq.category)) {
+                    if (seq.defaultvalue == 1 && setvalue == null) {
+                        setvalue = 0;
+                    }
+                    if (seq.defaultvalue == 1 && setvalue == 1) {
+                        setvalue = null;
+                    }
 
-            _findseq[column + FrozenColumnOffset].Value = setvalue;
+                    seq[column + FrozenColumnOffset].Value = setvalue;
+                }
+            }
+            else {
+                if (_findseq.defaultvalue == 1 && setvalue == 1) {
+                    setvalue = null;
+                }
+                _findseq[column + FrozenColumnOffset].Value = setvalue;
+            }
             SaveCheckAndWrite(false, "Set value");
         }
         #endregion

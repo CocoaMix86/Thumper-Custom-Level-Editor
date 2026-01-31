@@ -60,6 +60,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ProjectExplorer.FilterGate = filterGate.Checked;
             ProjectExplorer.FilterMaster = filterMaster.Checked;
             ProjectExplorer.FilterSamp = filterSample.Checked;
+            //if a filter is active, activate the button automatically
+            if (filterLeaf.Checked || filterLvl.Checked || filterGate.Checked || filterMaster.Checked || filterSample.Checked) {
+                ProjectExplorer.filterenabled = true;
+                //this style button doesn't have a Checked state, so we change its backcolor to show its enabled or not
+                btnFilter.BackColor = Color.FromArgb(46, 46, 46);
+            }
             ProjectExplorer.CreateTreeView();
         }
 
