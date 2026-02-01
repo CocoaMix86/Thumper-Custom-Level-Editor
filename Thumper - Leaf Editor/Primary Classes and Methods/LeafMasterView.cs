@@ -83,6 +83,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 DrawSpikes(g, SequencerObjects, Leaf);
                 DrawBars(g, SequencerObjects, Leaf);
                 DrawRings(g, SequencerObjects, Leaf);
+                DrawTurns(g, SequencerObjects, Leaf);
                 g.ResetTransform();                
             }
             if (drawmaster)
@@ -270,15 +271,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle + OffsetsDict[seq.param_path_lane]);
+                        DrawThumpIcon(g, beat, Middle + OffsetsDict[seq.param_path_lane], seq.param_path.StartsWith("thump_boss_bonus"));
+                        if (seq.param_path.StartsWith("grindable_with_thump"))
+                            DrawBarIcons(g, beat, (beat * Width) + Width, Middle + OffsetsDict[seq.param_path_lane] - 6, Middle + OffsetsDict[seq.param_path_lane] + Height + 5);
                     }
                 }
             }
         }
-        public static void DrawThumpIcon(Graphics g, int beat, int offset)
+        public static void DrawThumpIcon(Graphics g, int beat, int offset, bool boss)
         {
-            g.FillRectangle(BrushThumpOutter, new Rectangle((beat * Width) + (Width / 3), offset + 2, Width - ((Width / 3)*2), Height - 4));
-            g.FillRectangle(BrushThumpInner, new Rectangle((beat * Width) + (Width / 3) + 2, offset + 4, Width - ((Width / 3)*2) - 4, Height - 8));
+            g.FillRectangle(boss ? Brushes.Green : BrushThumpOutter, new Rectangle((beat * Width) + (Width / 3), offset + 2, Width - ((Width / 3)*2), Height - 4));
+            g.FillRectangle(BrushThumpInner, new Rectangle((beat * Width) + (Width / 3) + 4, offset + 6, Width - ((Width / 3)*2) - 8, Height - 12));
         }
 
         public static void DrawSpikes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -376,6 +379,47 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static void DrawRingIcons(Graphics g, int beat, int offset)
         {
             g.DrawArc(PenRings, beat*Width + (Width / 2), offset, Width/3, Height, -94, 188);
+        }
+
+        public static void DrawTurns(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
+        {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.param_path == "turn")) {
+                for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
+                    if (seq[beat].InGameValue != 0)
+                        DrawTurnWall(g, beat, (decimal)seq[beat].Value);
+                }
+            }
+        }
+        public static void DrawTurnWall(Graphics g, int beat, decimal value)
+        {
+            //turning left
+            if (value > 0) {
+                g.DrawImage(Properties.Resources.basiceditor_turnl, beat * Width + (Width / 2) - 8, Middle + 2);
+                int OffsetBottomLane = 0;
+                for (int x = 4; x >= 0; x--) {
+                    if (Lanes[x]?[beat]?.InGameValue == 1) {
+                        OffsetBottomLane = OffsetsDict.ElementAt(x).Value;
+                        break;
+                    }
+                }
+                g.FillRectangle(Brushes.Gray, beat * Width, Middle + OffsetBottomLane + Height, Width, 6);
+                g.FillRectangle(Brushes.OrangeRed, (beat * Width) + 2, Middle + OffsetBottomLane + Height, Width - 4, 3);
+                g.DrawString(value.ToString() + "°", Form_LeafEditor.TuningFont, Brushes.White, beat * Width + (Width/ 2) - 8, Middle + OffsetBottomLane + Height + 6);
+            }
+            //turning right
+            else {
+                g.DrawImage(Properties.Resources.basiceditor_turnr, beat * Width + (Width / 2) - 8, Middle + 2);
+                int OffsetTopLane = 0;
+                for (int x = 0; x < 5; x++) {
+                    if (Lanes[x]?[beat]?.InGameValue == 1) {
+                        OffsetTopLane = OffsetsDict.ElementAt(x).Value;
+                        break;
+                    }
+                }
+                g.FillRectangle(Brushes.Gray, beat * Width, Middle + OffsetTopLane - 6, Width, 6);
+                g.FillRectangle(Brushes.OrangeRed, (beat * Width) + 2, Middle + OffsetTopLane - 3, Width - 4, 3);
+                g.DrawString(value.ToString() + "°", Form_LeafEditor.TuningFont, Brushes.White, beat * Width + (Width / 2) - 8, Middle + OffsetTopLane - 16);
+            }
         }
         #endregion
     }

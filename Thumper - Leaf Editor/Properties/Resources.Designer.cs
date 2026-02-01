@@ -353,6 +353,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnl {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap basiceditor_turnl15 {
             get {
                 object obj = ResourceManager.GetObject("basiceditor_turnl15", resourceCulture);
@@ -393,9 +403,49 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnr {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap basiceditor_turnr15 {
             get {
                 object obj = ResourceManager.GetObject("basiceditor_turnr15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnr30 {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnr30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnr45 {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnr45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_turnr90 {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_turnr90", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

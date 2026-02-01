@@ -167,13 +167,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         //Static
         public static int FrozenColumnOffset = 3;
-        //private static Pen PenCorn = new(BrushCorn, 3);
-        //private static Pen PenRed = new(BrushRed, 3);
-        //private static Pen PenGreen = new(BrushGreen, 3);
-        //private static Pen PenVioletThick = new(new SolidBrush(Color.Violet), 3);
-        private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 1);
+        private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 2);
         private static Pen PenWhite = new(new SolidBrush(Color.White), 3);
-        private static Font TuningFont = new("Consolas", 8);
+        public static Font TuningFont = new("Consolas", 8);
         //
         //Local basic vars
         private bool SaveOnlyNoLoad;
@@ -195,14 +191,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool RightclickDown;
         private bool RightclickChanges;
         private bool PlaybackLoop;
-        //private bool RowPrePainting;
         private bool RowPostPrePainting;
         private int CurrentRow;
         private int MouseCurrentColumn;
         private int LastRowEdit;
         private int LastColumnEdit;
-        private int PlaybackStart = -2;
-        private int PlaybackEnd = -2;
+        private int PlaybackStart = -5;
+        private int PlaybackEnd = -5;
         private string RowPrePaintError;
         //
         //Local custom class vars
@@ -439,13 +434,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.ColumnIndex < FrozenColumnOffset) {
                     LeafCellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
                     LeafCellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
-                    LeafCellPainting.DrawSelection(e, trackEditor, SequencerObjects);
                     if (Playback.IsPlaying)
                         LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
                 }
                 //draw a vertical line inside tuning layer row to show where selected cell is.
                 else {
-                    if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell)
+                    LeafCellPainting.DrawSelection(e, trackEditor, SequencerObjects);
+                    if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell && (SequencerObjects[e.RowIndex].category == "PLAY SAMPLE" || SequencerObjects[e.RowIndex].obj_name == "_TuningLayerX"))
                         e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
                 }
                 return;
@@ -975,7 +970,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (PlaybackEnd == e.ColumnIndex) {
                         if (PlaybackLoop) {
                             PlaybackLoop = false;
-                            PlaybackEnd = -2;
+                            PlaybackEnd = -5;
                             trackEditor.Invalidate();
                         }
                         else {
@@ -992,7 +987,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     if (PlaybackStart == e.ColumnIndex) {
-                        PlaybackStart = -2;
+                        PlaybackStart = -5;
                         trackEditor.Invalidate();
                     }
                     else {

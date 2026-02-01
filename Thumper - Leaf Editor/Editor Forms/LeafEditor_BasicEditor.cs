@@ -12,8 +12,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region VARIABLES
         private static string[] LaneParams = new[] { "a01", "a02", "ent", "z01", "z02" };
         private static string[] LaneNames = new[] { "visibla01", "visibla02", "visible", "visiblz01", "visiblz02" };
-        private string ActiveParam = "select";
-        private ToolStripItem ActiveObject;
+        private string BasicEditorSelectedObject = "select";
+        private decimal? BasicEditorClickValue = 1m;
+        private ToolStripItem BasicEditorSelectedButton;
         #endregion
         #region PAINTING
         private void dgvMasterView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -95,18 +96,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripMasterView_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             ToolStrip _ts = sender as ToolStrip;
-            ActiveObject = e.ClickedItem;
-            ActiveParam = (string)e.ClickedItem.Tag;
+            BasicEditorSelectedButton = e.ClickedItem;
             foreach (ToolStripItem item in _ts.Items) {
-                item.BackColor = item == ActiveObject ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
+                item.BackColor = item == BasicEditorSelectedButton ? Color.FromArgb(46, 46, 46) : Color.FromArgb(35, 35, 35);
             }
-            dgvMasterView.MultiSelect = ActiveParam == "select";
+            BasicEditorUpdate((string)e.ClickedItem.Tag, e.ClickedItem.Text);
         }
 
         private void basicEditorDropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             ((ToolStripSplitButton)e.ClickedItem.OwnerItem).Image = e.ClickedItem.Image;
-            ActiveParam = (string)e.ClickedItem.Tag;
+            BasicEditorUpdate((string)e.ClickedItem.Tag, e.ClickedItem.Text);
+        }
+
+        private void BasicEditorUpdate(string _selectobject, string _itemtext)
+        {
+            BasicEditorSelectedObject = _selectobject;
+            dgvMasterView.MultiSelect = BasicEditorSelectedObject == "select";
+            if (BasicEditorSelectedObject == "turn")
+                BasicEditorClickValue = decimal.Parse(_itemtext[^5..^3]) * (_itemtext.Contains("right", StringComparison.OrdinalIgnoreCase) ? -1 : 1);
+            else
+                BasicEditorClickValue = 1m;
         }
 
         private void dgvMasterView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -119,7 +129,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dgvMasterView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            decimal? setvalue = e.Button == MouseButtons.Left ? 1m : null;
+            decimal? setvalue = e.Button == MouseButtons.Left ? BasicEditorClickValue : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
         }
 
@@ -127,24 +137,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (Control.MouseButtons == MouseButtons.None)
                 return;
-            decimal? setvalue = Control.MouseButtons == MouseButtons.Left ? 1m : null;
+            decimal? setvalue = Control.MouseButtons == MouseButtons.Left ? BasicEditorClickValue : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
         }
 
         private void MasterViewSetValue(int row, int column, decimal? setvalue)
         {
-            if (ActiveParam == "select")
+            if (BasicEditorSelectedObject == "select")
                 return;
             Sequencer_Object _findseq = null;
             string _paramtofind = "";
         search:
-            if (ActiveParam == "visible") {
+            if (BasicEditorSelectedObject == "visible") {
                 _paramtofind = LaneNames[row];
                 _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == _paramtofind);
             }
+            else if (BasicEditorSelectedObject == "turn") {
+                _paramtofind = "turn";
+                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == "turn");
+            }
             else {
-                _paramtofind = $"{ActiveParam}";
-                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == $"{ActiveParam.Replace(".ent", "." + LaneParams[row])}");
+                _paramtofind = $"{BasicEditorSelectedObject}";
+                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == $"{BasicEditorSelectedObject.Replace(".ent", "." + LaneParams[row])}");
             }            
 
             if (_findseq == null) {
@@ -177,7 +191,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 goto search;
             }
 
-            if (setvalue == null) {
+            if (setvalue == null && _findseq.category != "TRACK EFFECTS") {
                 //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
                 //just so you don't have to switch your selection to a different object to delete it.
                 foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == _findseq.category && x.friendly_lane == _findseq.friendly_lane)) {

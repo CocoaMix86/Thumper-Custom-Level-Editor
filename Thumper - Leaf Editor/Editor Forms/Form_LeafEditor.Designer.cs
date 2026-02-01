@@ -142,6 +142,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem16 = new ToolStripMenuItem();
             this.masterviewbtnRings = new ToolStripButton();
             this.masterviewbtnLanes = new ToolStripButton();
+            this.toolStripSplitButton4 = new ToolStripSplitButton();
+            this.toolStripMenuItem17 = new ToolStripMenuItem();
+            this.toolStripMenuItem18 = new ToolStripMenuItem();
+            this.toolStripMenuItem19 = new ToolStripMenuItem();
+            this.toolStripMenuItem20 = new ToolStripMenuItem();
+            this.toolStripMenuItem21 = new ToolStripMenuItem();
+            this.toolStripMenuItem22 = new ToolStripMenuItem();
+            this.toolStripMenuItem23 = new ToolStripMenuItem();
+            this.toolStripMenuItem24 = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -211,7 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 159);
+            this.btnRawImport.Size = new Size(54, 163);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -227,7 +236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 285);
+            this.labelCollapsePanel2.Location = new Point(0, 281);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -298,7 +307,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 270);
+            this.vScrollBarTrackEditor.Size = new Size(15, 266);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -400,7 +409,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 270);
+            this.trackEditor.Size = new Size(491, 266);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -495,7 +504,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 270);
+            this.leafToolStrip.Size = new Size(24, 266);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -969,7 +978,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 300;
+            this.splitContainerLeafSide.SplitterDistance = 296;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1032,7 +1041,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 159);
+            this.textEditor.Size = new Size(476, 163);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1217,7 +1226,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolstripMasterView.GripMargin = new Padding(0);
             this.toolstripMasterView.GripStyle = ToolStripGripStyle.Hidden;
             this.toolstripMasterView.ImageScalingSize = new Size(20, 20);
-            this.toolstripMasterView.Items.AddRange(new ToolStripItem[] { this.masterviewbtnSelect, this.toolStripSplitButton1, this.toolStripSplitButton2, this.toolStripSplitButton3, this.masterviewbtnRings, this.masterviewbtnLanes });
+            this.toolstripMasterView.Items.AddRange(new ToolStripItem[] { this.masterviewbtnSelect, this.masterviewbtnLanes, this.toolStripSplitButton4, this.toolStripSplitButton1, this.toolStripSplitButton2, this.masterviewbtnRings, this.toolStripSplitButton3 });
             this.toolstripMasterView.LayoutStyle = ToolStripLayoutStyle.Flow;
             this.toolstripMasterView.Location = new Point(0, 0);
             this.toolstripMasterView.Name = "toolstripMasterView";
@@ -1250,6 +1259,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripSplitButton1.Size = new Size(36, 24);
             this.toolStripSplitButton1.Tag = "thump_rails.ent";
             this.toolStripSplitButton1.Text = "1";
+            this.toolStripSplitButton1.ToolTipText = "Thumps";
             this.toolStripSplitButton1.DropDownItemClicked += this.basicEditorDropDownItemClicked;
             // 
             // toolStripMenuItem1
@@ -1258,7 +1268,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem1.ForeColor = Color.White;
             this.toolStripMenuItem1.Image = Properties.Resources.basiceditor_thump;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new Size(184, 26);
+            this.toolStripMenuItem1.Size = new Size(148, 22);
             this.toolStripMenuItem1.Tag = "thump_rails.ent";
             this.toolStripMenuItem1.Text = "Thump";
             // 
@@ -1268,7 +1278,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem2.ForeColor = Color.White;
             this.toolStripMenuItem2.Image = Properties.Resources.basiceditor_thumpfast;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new Size(184, 26);
+            this.toolStripMenuItem2.Size = new Size(148, 22);
             this.toolStripMenuItem2.Tag = "thump_rails_fast_activat.ent";
             this.toolStripMenuItem2.Text = "Fast Thump";
             // 
@@ -1278,7 +1288,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem3.ForeColor = Color.White;
             this.toolStripMenuItem3.Image = Properties.Resources.basiceditor_thumpbonus;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new Size(184, 26);
+            this.toolStripMenuItem3.Size = new Size(148, 22);
             this.toolStripMenuItem3.Tag = "thump_checkpoint.ent";
             this.toolStripMenuItem3.Text = "Bonus Thump";
             // 
@@ -1288,7 +1298,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem4.ForeColor = Color.White;
             this.toolStripMenuItem4.Image = Properties.Resources.basiceditor_thumpboss;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new Size(184, 26);
+            this.toolStripMenuItem4.Size = new Size(148, 22);
             this.toolStripMenuItem4.Tag = "thump_boss_bonus.ent";
             this.toolStripMenuItem4.Text = "Boss Thump";
             // 
@@ -1298,7 +1308,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem5.ForeColor = Color.White;
             this.toolStripMenuItem5.Image = Properties.Resources.basiceditor_thumpbar;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new Size(184, 26);
+            this.toolStripMenuItem5.Size = new Size(148, 22);
             this.toolStripMenuItem5.Tag = "grindable_with_thump.ent";
             this.toolStripMenuItem5.Text = "Thump && Bar";
             // 
@@ -1312,6 +1322,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripSplitButton2.Size = new Size(36, 24);
             this.toolStripSplitButton2.Tag = "grindable_still.ent";
             this.toolStripSplitButton2.Text = "1";
+            this.toolStripSplitButton2.ToolTipText = "Bars";
             this.toolStripSplitButton2.DropDownItemClicked += this.basicEditorDropDownItemClicked;
             // 
             // toolStripMenuItem6
@@ -1320,7 +1331,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem6.ForeColor = Color.White;
             this.toolStripMenuItem6.Image = Properties.Resources.basiceditor_bar1;
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new Size(184, 26);
+            this.toolStripMenuItem6.Size = new Size(132, 22);
             this.toolStripMenuItem6.Tag = "grindable_still.ent";
             this.toolStripMenuItem6.Text = "Full Bar";
             // 
@@ -1330,7 +1341,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem7.ForeColor = Color.White;
             this.toolStripMenuItem7.Image = Properties.Resources.basiceditor_barcenter;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new Size(184, 26);
+            this.toolStripMenuItem7.Size = new Size(132, 22);
             this.toolStripMenuItem7.Tag = "center_multi.ent";
             this.toolStripMenuItem7.Text = "Center Bar";
             // 
@@ -1340,7 +1351,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem8.ForeColor = Color.White;
             this.toolStripMenuItem8.Image = Properties.Resources.basiceditor_barleft;
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new Size(184, 26);
+            this.toolStripMenuItem8.Size = new Size(132, 22);
             this.toolStripMenuItem8.Tag = "left_multi.ent";
             this.toolStripMenuItem8.Text = "Left Bar";
             // 
@@ -1350,7 +1361,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem9.ForeColor = Color.White;
             this.toolStripMenuItem9.Image = Properties.Resources.basiceditor_barright;
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new Size(184, 26);
+            this.toolStripMenuItem9.Size = new Size(132, 22);
             this.toolStripMenuItem9.Tag = "right_multi.ent";
             this.toolStripMenuItem9.Text = "Right Bar";
             // 
@@ -1360,7 +1371,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem10.ForeColor = Color.White;
             this.toolStripMenuItem10.Image = Properties.Resources.basiceditor_bar2;
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new Size(184, 26);
+            this.toolStripMenuItem10.Size = new Size(132, 22);
             this.toolStripMenuItem10.Tag = "grindable_double.ent";
             this.toolStripMenuItem10.Text = "Double Bar";
             // 
@@ -1370,7 +1381,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem11.ForeColor = Color.White;
             this.toolStripMenuItem11.Image = Properties.Resources.basiceditor_bar3;
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new Size(184, 26);
+            this.toolStripMenuItem11.Size = new Size(132, 22);
             this.toolStripMenuItem11.Tag = "grindable_thirds.ent";
             this.toolStripMenuItem11.Text = "Triple Bar";
             // 
@@ -1380,7 +1391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem12.ForeColor = Color.White;
             this.toolStripMenuItem12.Image = Properties.Resources.basiceditor_bar4;
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new Size(184, 26);
+            this.toolStripMenuItem12.Size = new Size(132, 22);
             this.toolStripMenuItem12.Tag = "grindable_quarters.ent";
             this.toolStripMenuItem12.Text = "Quad Bar";
             // 
@@ -1403,7 +1414,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem13.ForeColor = Color.White;
             this.toolStripMenuItem13.Image = Properties.Resources.basiceditor_spike2;
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new Size(184, 26);
+            this.toolStripMenuItem13.Size = new Size(156, 22);
             this.toolStripMenuItem13.Tag = "jump_high_2.ent";
             this.toolStripMenuItem13.Text = "Spikes Length 2";
             // 
@@ -1413,7 +1424,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem14.ForeColor = Color.White;
             this.toolStripMenuItem14.Image = Properties.Resources.basiceditor_spike4;
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new Size(184, 26);
+            this.toolStripMenuItem14.Size = new Size(156, 22);
             this.toolStripMenuItem14.Tag = "jump_high_4.ent";
             this.toolStripMenuItem14.Text = "Spikes Length 4";
             // 
@@ -1423,7 +1434,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem15.ForeColor = Color.White;
             this.toolStripMenuItem15.Image = Properties.Resources.basiceditor_spike6;
             this.toolStripMenuItem15.Name = "toolStripMenuItem15";
-            this.toolStripMenuItem15.Size = new Size(184, 26);
+            this.toolStripMenuItem15.Size = new Size(156, 22);
             this.toolStripMenuItem15.Tag = "jump_high_6.ent";
             this.toolStripMenuItem15.Text = "Spikes Length 6";
             // 
@@ -1433,7 +1444,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem16.ForeColor = Color.White;
             this.toolStripMenuItem16.Image = Properties.Resources.basiceditor_spike8;
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new Size(184, 26);
+            this.toolStripMenuItem16.Size = new Size(156, 22);
             this.toolStripMenuItem16.Tag = "jump_high.ent";
             this.toolStripMenuItem16.Text = "Spikes Length 8";
             // 
@@ -1458,6 +1469,99 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.masterviewbtnLanes.Tag = "visible";
             this.masterviewbtnLanes.Text = "1";
             this.masterviewbtnLanes.ToolTipText = "Lanes";
+            // 
+            // toolStripSplitButton4
+            // 
+            this.toolStripSplitButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton4.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItem17, this.toolStripMenuItem18, this.toolStripMenuItem19, this.toolStripMenuItem20, this.toolStripMenuItem21, this.toolStripMenuItem22, this.toolStripMenuItem23, this.toolStripMenuItem24 });
+            this.toolStripSplitButton4.Image = Properties.Resources.basiceditor_turnl15;
+            this.toolStripSplitButton4.ImageTransparentColor = Color.Magenta;
+            this.toolStripSplitButton4.Name = "toolStripSplitButton4";
+            this.toolStripSplitButton4.Size = new Size(36, 24);
+            this.toolStripSplitButton4.Tag = "turn";
+            this.toolStripSplitButton4.Text = "Turn Left - 15deg";
+            this.toolStripSplitButton4.ToolTipText = "Turns";
+            this.toolStripSplitButton4.DropDownItemClicked += this.basicEditorDropDownItemClicked;
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem17.ForeColor = Color.White;
+            this.toolStripMenuItem17.Image = Properties.Resources.basiceditor_turnr15;
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new Size(184, 26);
+            this.toolStripMenuItem17.Tag = "turn";
+            this.toolStripMenuItem17.Text = "Turn Right - 15deg";
+            // 
+            // toolStripMenuItem18
+            // 
+            this.toolStripMenuItem18.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem18.ForeColor = Color.White;
+            this.toolStripMenuItem18.Image = Properties.Resources.basiceditor_turnr30;
+            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
+            this.toolStripMenuItem18.Size = new Size(184, 26);
+            this.toolStripMenuItem18.Tag = "turn";
+            this.toolStripMenuItem18.Text = "Turn Right - 30deg";
+            // 
+            // toolStripMenuItem19
+            // 
+            this.toolStripMenuItem19.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem19.ForeColor = Color.White;
+            this.toolStripMenuItem19.Image = Properties.Resources.basiceditor_turnr45;
+            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
+            this.toolStripMenuItem19.Size = new Size(184, 26);
+            this.toolStripMenuItem19.Tag = "turn";
+            this.toolStripMenuItem19.Text = "Turn Right - 45deg";
+            // 
+            // toolStripMenuItem20
+            // 
+            this.toolStripMenuItem20.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem20.ForeColor = Color.White;
+            this.toolStripMenuItem20.Image = Properties.Resources.basiceditor_turnr90;
+            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
+            this.toolStripMenuItem20.Size = new Size(184, 26);
+            this.toolStripMenuItem20.Tag = "turn";
+            this.toolStripMenuItem20.Text = "Turn Right - 90deg";
+            // 
+            // toolStripMenuItem21
+            // 
+            this.toolStripMenuItem21.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem21.ForeColor = Color.White;
+            this.toolStripMenuItem21.Image = Properties.Resources.basiceditor_turnl15;
+            this.toolStripMenuItem21.Name = "toolStripMenuItem21";
+            this.toolStripMenuItem21.Size = new Size(184, 26);
+            this.toolStripMenuItem21.Tag = "turn";
+            this.toolStripMenuItem21.Text = "Turn Left - 15deg";
+            // 
+            // toolStripMenuItem22
+            // 
+            this.toolStripMenuItem22.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem22.ForeColor = Color.White;
+            this.toolStripMenuItem22.Image = Properties.Resources.basiceditor_turnl30;
+            this.toolStripMenuItem22.Name = "toolStripMenuItem22";
+            this.toolStripMenuItem22.Size = new Size(184, 26);
+            this.toolStripMenuItem22.Tag = "turn";
+            this.toolStripMenuItem22.Text = "Turn Left - 30deg";
+            // 
+            // toolStripMenuItem23
+            // 
+            this.toolStripMenuItem23.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem23.ForeColor = Color.White;
+            this.toolStripMenuItem23.Image = Properties.Resources.basiceditor_turnl45;
+            this.toolStripMenuItem23.Name = "toolStripMenuItem23";
+            this.toolStripMenuItem23.Size = new Size(184, 26);
+            this.toolStripMenuItem23.Tag = "turn";
+            this.toolStripMenuItem23.Text = "Turn Left - 45deg";
+            // 
+            // toolStripMenuItem24
+            // 
+            this.toolStripMenuItem24.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem24.ForeColor = Color.White;
+            this.toolStripMenuItem24.Image = Properties.Resources.basiceditor_turnl90;
+            this.toolStripMenuItem24.Name = "toolStripMenuItem24";
+            this.toolStripMenuItem24.Size = new Size(184, 26);
+            this.toolStripMenuItem24.Tag = "turn";
+            this.toolStripMenuItem24.Text = "Turn Left - 90deg";
             // 
             // Form_LeafEditor
             // 
@@ -1612,5 +1716,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private ToolStripMenuItem toolStripMenuItem14;
         private ToolStripMenuItem toolStripMenuItem15;
         private ToolStripMenuItem toolStripMenuItem16;
+        private ToolStripSplitButton toolStripSplitButton4;
+        private ToolStripMenuItem toolStripMenuItem17;
+        private ToolStripMenuItem toolStripMenuItem18;
+        private ToolStripMenuItem toolStripMenuItem19;
+        private ToolStripMenuItem toolStripMenuItem20;
+        private ToolStripMenuItem toolStripMenuItem21;
+        private ToolStripMenuItem toolStripMenuItem22;
+        private ToolStripMenuItem toolStripMenuItem23;
+        private ToolStripMenuItem toolStripMenuItem24;
     }
 }
