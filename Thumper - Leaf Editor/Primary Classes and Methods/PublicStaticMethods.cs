@@ -20,7 +20,6 @@ namespace Thumper_Custom_Level_Editor
         //Static
         public static string AppReleaseNumber = "alpha65";
         public static string _errorlog = "";
-        public static decimal LeafQuickValue0 = 1.000m;
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
         public static decimal LeafQuickValue3 = 1.000m;
@@ -30,6 +29,7 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue7 = 1.000m;
         public static decimal LeafQuickValue8 = 1.000m;
         public static decimal LeafQuickValue9 = 1.000m;
+        public static decimal LeafQuickValue0 = 1.000m;
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public static HashSet<Object_Params> LeafObjects = new();
         public static HashSet<Object_Params> ObjectFavorites = new();
@@ -588,6 +588,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void StopAudio()
         {
+            Playback.StopPlayback();
             Bass.BASS_Free();
             alzheimer();
             TCLE.PlayingChannels.Clear();
