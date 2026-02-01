@@ -889,7 +889,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_cell.ReadOnly || !_cell.OwningRow.Visible)
                     continue;
 
-                _cell.Value = _val;
+                if (_val == null)
+                    CellValueNull(_cell);
+                else
+                    _cell.Value = _val;
             }
 
             EditorIsLoading = false;
@@ -1064,6 +1067,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     LogUndo = false;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
                     CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
+                    RightclickChanges = true;
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
                 }
@@ -2708,6 +2712,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool _trackNotSaved = EditorIsSaved;
             //track which objects are expanded
             List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.expandlanes == true).ToList();
+            List<Tuple<int, int>> _selection = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(x => new Tuple<int, int>(x.ColumnIndex, x.RowIndex)).ToList();
             //
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
             LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
@@ -2719,6 +2724,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (Sequencer_Object seq in SequencerObjects) {
                 if (_expanded.Any(x => x.obj_name == seq.obj_name && x.friendly_lane == seq.friendly_lane && x.friendly_param == seq.friendly_param))
                     seq.expandlanes = true;
+            }
+            //restore selection
+            foreach (Tuple<int, int> _cell in _selection) {
+                trackEditor[_cell.Item1, _cell.Item2].Selected = true;
             }
 
             if (!_trackNotSaved) {
