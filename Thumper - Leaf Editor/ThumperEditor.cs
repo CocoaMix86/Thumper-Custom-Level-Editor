@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using System.Linq;
 using System.Drawing.Text;
+using System.Security.Permissions;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -104,8 +105,8 @@ namespace Thumper_Custom_Level_Editor
             //
             AppSettings.Recentfiles ??= new List<string>();
             //
-            if (Properties.Settings.Default.version != TCLE.AppReleaseNumber) {
-                Properties.Settings.Default.version = TCLE.AppReleaseNumber;
+            if (Properties.Settings.Default.version != TCLE.VersionNumber) {
+                Properties.Settings.Default.version = TCLE.VersionNumber;
                 Directory.Delete($@"{AppLocation}\temp", true);
                 Directory.Delete($@"{AppLocation}\settings", true);
             }
@@ -1247,5 +1248,20 @@ namespace Thumper_Custom_Level_Editor
         }
 
         private void label2_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/wiki/TCLE-3.0#first-time-in-tcle", UseShellExecute = true });
+
+        protected override CreateParams CreateParams
+        {
+            get {
+                new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
+
+                // Extend the CreateParams property of the Button class.
+                CreateParams cp = base.CreateParams;
+                // Update the button Style.
+                cp.Style &= ~0xC00000; //WS_CAPTION;
+                cp.Caption = $"Thumper-CLE {TCLE.VersionNumber}";
+
+                return cp;
+            }
+        }
     }
 }
