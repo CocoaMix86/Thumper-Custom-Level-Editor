@@ -107,8 +107,7 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.ValueType = typeof(decimal?);
                 dgvc.DefaultCellStyle.Format = "0.###";
                 dgvc.FillWeight = 0.001F;
-                dgvc.DefaultCellStyle.Font = new Font("Consolas", 8);
-                dgvc.ReadOnly = false;
+                dgvc.DefaultCellStyle.Font = Form_LeafEditor.TuningFont;
                 dgvc.Width = Properties.Settings.Default.ZoomHoriz;
             }
         }
@@ -967,11 +966,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (WorkingFolder == null)
                 return;
-            lvlsinworkfolder.Clear();
-            foreach (var file in ProjectExplorer.Files) {
-                if (file.Extension == ".lvl")
-                    lvlsinworkfolder.Add(file.Name);
-            }
+            lvlsinworkfolder = ProjectExplorer.Files.Where(x => x.Extension == ".lvl").Select(x => x.Name).ToList();
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
         }
@@ -1283,14 +1278,7 @@ namespace Thumper_Custom_Level_Editor
     }
 
     public static class StringExtensions
-    {
-        public static string FirstCharToUpper(this string input) =>
-            input switch {
-                null => throw new ArgumentNullException(nameof(input)),
-                "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
-                _ => string.Concat(input[0].ToString().ToUpper(), input.AsSpan(1))
-            };
-        
+    {        
         public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
         {
             if (extensions == null)
@@ -1298,32 +1286,5 @@ namespace Thumper_Custom_Level_Editor
             IEnumerable<FileInfo> files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories);
             return files.Where(f => extensions.Contains(f.Extension));
         }
-
-        public static string ReplaceLastOccurrence(this string source, string find, string replace)
-        {
-            int place = source.LastIndexOf(find);
-
-            if (place == -1 || source.Contains('.'))
-                return source;
-
-            return source.Remove(place, find.Length).Insert(place, replace);
-        }
-    }
-
-    public static class ControlExtensions
-    {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern bool LockWindowUpdate(IntPtr hWndLock);
-
-        public static void Suspend(this Control control)
-        {
-            LockWindowUpdate(control.Handle);
-        }
-
-        public static void Resume(this Control control)
-        {
-            LockWindowUpdate(IntPtr.Zero);
-        }
-
     }
 }

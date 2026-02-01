@@ -898,7 +898,7 @@ namespace Thumper_Custom_Level_Editor
             Playback.IsPlaying = false;
             Bass.BASS_ChannelStop(Playback.MidiStream);
             _ = Bass.BASS_ErrorGetCode();
-            Playback.SyncTimer.Dispose();
+            Playback.SyncTimer?.Dispose();
             Playback.PlaybackTick = -1;
             //
             GlobalCurrentLeaf = "???";
