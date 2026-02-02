@@ -107,8 +107,10 @@ namespace Thumper_Custom_Level_Editor
             //
             if (Properties.Settings.Default.version != TCLE.VersionNumber) {
                 Properties.Settings.Default.version = TCLE.VersionNumber;
-                Directory.Delete($@"{AppLocation}\temp", true);
-                Directory.Delete($@"{AppLocation}\settings", true);
+                if (Directory.Exists($@"{AppLocation}\temp"))
+                    Directory.Delete($@"{AppLocation}\temp", true);
+                if (Directory.Exists($@"{AppLocation}\settings"))
+                    Directory.Delete($@"{AppLocation}\settings", true);
             }
             //Create directory for leaf templates and other default files
             if (!Directory.Exists($@"{AppLocation}\templates")) {
@@ -202,7 +204,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save sequencer favs
-            AppSettings.SequencerFavorites = TCLE.ObjectFavorites.Select(x => x.param_displayname).ToList();
+            AppSettings.SequencerFavorites = TCLE.ObjectFavorites.Select(x => x.param_path).ToList();
             //save panel sizes and locations
             AppSettings.beeblesize = MainBeeble.Size;
             AppSettings.beebleloc = MainBeeble.Location;

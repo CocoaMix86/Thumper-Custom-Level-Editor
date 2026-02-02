@@ -2,6 +2,7 @@
 using ICSharpCode.TextEditor.Document;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Documents;
@@ -1379,9 +1380,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
-            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == e.Node.Text);
+            Object_Params objmatch = TCLE.LeafObjects[(string)e.Node.Tag];
             if (e.Node.Text.EndsWith(".samp"))
-                objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.category == "PLAY SAMPLE");
+                objmatch = TCLE.LeafObjects["play"];
 
             if (objmatch == null)
                 return;
@@ -1504,9 +1505,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (treeObjects.SelectedNode.ImageKey != "none")
                 return;
-            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text && x.category.ToUpper() == treeObjects.SelectedNode.Parent.Text);
-            if (match != null && !TCLE.ObjectFavorites.Contains(match))
-                TCLE.ObjectFavorites.Add(match);
+            Object_Params match = TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag];
+            if (match != null && !TCLE.ObjectFavorites.ContainsValue(match))
+                TCLE.ObjectFavorites.Add(match.param_path, match);
             SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
             TCLE.PlaySound("UIselect");
@@ -1516,14 +1517,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             string find = treeObjects.SelectedNode.Text;
             if (treeObjects.SelectedNode.ImageKey == "fav") {
-                TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+                TCLE.ObjectFavorites.Remove((string)treeObjects.SelectedNode.Tag);
                 treeObjects.SelectedNode.SelectedImageKey = "none";
                 treeObjects.SelectedNode.ImageKey = "none";
                 treeObjects.SelectedNode.ContextMenuStrip = contextMenuFav;
                 SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             }
             else {
-                TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+                TCLE.ObjectFavorites.Remove((string)treeObjects.SelectedNode.Tag);
                 treeObjects.SelectedNode.Remove();
                 TreeNode node = SeqObjTreeBuilder.FindNode(find, treeObjects.Nodes);
                 if (node != null) {
@@ -1552,10 +1553,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (treeObjects.SelectedNode.Nodes.Count > 0 || trackEditor.SelectedCells.Count == 0)
                 return;
-            Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == treeObjects.SelectedNode.Text);
+            Object_Params objmatch = TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag];
             if (objmatch == null) {
                 if (treeObjects.SelectedNode.Text.EndsWith(".samp")) {
-                    objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.category == "PLAY SAMPLE");
+                    objmatch = TCLE.LeafObjects["play"];
                 }
                 else
                     return;
@@ -1946,7 +1947,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value != null))
                 dodelete = false;
 
-            Object_Params baseobj = TCLE.LeafObjects.FirstOrDefault(x => x.param_path == seq.param_path && x.category == seq.category);
+            Object_Params baseobj = null;
+            if (TCLE.LeafObjects.TryGetValue(seq.param_path, out Object_Params? value))
+                baseobj = value;
             if (baseobj != null) {
                 if (float.Parse(baseobj.def) != seq.defaultvalue)
                     dodelete = false;
@@ -2290,10 +2293,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsRandomizing = true;
             //I pick category first rather than any object, as this gives Play Sample a higher chance of being picked
             //And all the tentacles a lower chance
-            List<string> categories = TCLE.LeafObjects.Select(x => x.category).Distinct().ToList();
+            List<string> categories = TCLE.LeafObjects.Select(x => x.Value.category).Distinct().ToList();
         beginrando:
             string category = categories[TCLE.rng.Next(0, categories.Count)];
-            List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.category == category).ToList();
+            List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value).ToList();
             Object_Params obj = objects[TCLE.rng.Next(0, objects.Count)];
             //check if the object exists in the leaf already. If so, pick a new one
             if (SequencerObjects.Any(x => x.category == category && x.param_path == obj.param_path))
@@ -2522,7 +2525,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     enabled = ((string)seq_obj["enabled"] ?? "True") == "True",
                     isdefault = false
                 };
-                ObjectToImport.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : (TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == ObjectToImport.friendly_param)?.defaultcolor ?? Color.Purple);
 
                 //if object is a layer volume, we "reset" its index to x so it can be renumbered in case its out of order.
                 if (ObjectToImport.param_path.StartsWith("layer_volume"))
@@ -2541,9 +2543,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     try {
                         string normalizeParam = $"{ObjectToImport.param_path.Replace(".a02", ".ent").Replace(".a01", ".ent").Replace(".z01", ".ent").Replace(".z02", ".ent")}";
-                        Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(obj => obj.param_path == normalizeParam/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/);
+                        Object_Params objmatch = TCLE.LeafObjects[normalizeParam]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
                         ObjectToImport.friendly_param = objmatch?.param_displayname ?? "";
                         ObjectToImport.category = objmatch?.category ?? "";
+                        ObjectToImport.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : objmatch?.defaultcolor ?? Color.Purple;
                         //set audio channel numbers on load
                         if (ObjectToImport.category == "LOOP TRACK VOLUME") {
                             int audiochannels = LoadedObjects.Count(x => x.category == "LOOP TRACK VOLUME");

@@ -88,7 +88,7 @@ namespace Thumper_Custom_Level_Editor
             BuildTreeFavorites(_tree, txtSearch);
 
             //make each category of objects its own node
-            foreach (string category in TCLE.LeafObjects.Select(x => x.category).Distinct().Order()) {
+            foreach (string category in TCLE.LeafObjects.Select(x => x.Value.category).Distinct().Order()) {
                 TreeNode _node = new() {
                     Text = category.ToUpper(),
                     ImageKey = $"{category.ToUpper().Replace("/", "")}.png",
@@ -111,6 +111,7 @@ namespace Thumper_Custom_Level_Editor
                                 ImageKey = "none",
                                 SelectedImageKey = "none",
                                 ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
+                                Tag = "play"
                             };
                             sampfile.Nodes.Add(_param);
                         }
@@ -119,12 +120,13 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     //each object becomes its own node
-                    foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.category == category)) {
+                    foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value)) {
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
-                            ImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            SelectedImageKey = TCLE.ObjectFavorites.Contains(obj) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            ContextMenuStrip = TCLE.ObjectFavorites.Contains(obj) ? contextMenuFavRemove : contextMenuFav
+                            ImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
+                            SelectedImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
+                            ContextMenuStrip = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? contextMenuFavRemove : contextMenuFav,
+                            Tag = obj.param_path
                         };
                         _node.Nodes.Add(_param);
                     }
@@ -138,12 +140,13 @@ namespace Thumper_Custom_Level_Editor
             bool filtersearch = txtSearch is not "" and not "Search Objects (Ctrl+;)";
 
             _tree.Nodes[0].Nodes.Clear();
-            foreach (string obj in TCLE.ObjectFavorites.Select(x => x.param_displayname).Order()) {
+            foreach (Object_Params obj in TCLE.ObjectFavorites.Select(x => x.Value).Order()) {
                 TreeNode _param = new() {
-                    Text = obj,
+                    Text = obj.param_displayname,
                     ImageKey = "fav",
                     SelectedImageKey = "fav",
-                    ContextMenuStrip = contextMenuFavRemove
+                    ContextMenuStrip = contextMenuFavRemove,
+                    Tag = obj.param_path
                 };
                 if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
                     _tree.Nodes[0].Nodes.Add(_param);

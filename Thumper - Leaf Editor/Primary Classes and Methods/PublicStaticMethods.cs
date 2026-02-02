@@ -31,8 +31,8 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue9 = 1.000m;
         public static decimal LeafQuickValue0 = 1.000m;
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-        public static HashSet<Object_Params> LeafObjects = new();
-        public static HashSet<Object_Params> ObjectFavorites = new();
+        public static Dictionary<string, Object_Params> LeafObjects = new();
+        public static Dictionary<string, Object_Params> ObjectFavorites = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
         public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, double> ProjectSampleRuntimes = new();
@@ -124,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
             //import selectable objects from file and parse them into lists for manipulation
             string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
             LeafObjects = _importedObjects.Select(x => x.Split(';'))
-                                        .Select(x => new Object_Params {
+                                        .Select(x => new KeyValuePair<string, Object_Params>(x[3], new Object_Params {
                                             category = x[0],
                                             obj_name = x[1],
                                             param_displayname = x[2],
@@ -134,9 +134,9 @@ namespace Thumper_Custom_Level_Editor
                                             def = x[6],
                                             footer = x[7].Replace("[", "").Replace("]", ""),
                                             defaultcolor = Color.Purple
-                                        }).ToHashSet();
+                                        })).ToDictionary();
 
-            LeafObjects.Add(new Object_Params {
+            LeafObjects.Add("⮝ Tuning Layer X", new Object_Params {
                 category = "",
                 obj_name = "_TuningLayerX",
                 param_displayname = "⮝ Tuning Layer X",
