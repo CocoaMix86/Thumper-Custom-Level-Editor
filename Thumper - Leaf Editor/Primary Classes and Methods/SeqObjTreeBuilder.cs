@@ -1,4 +1,5 @@
-﻿using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using System.Collections.Generic;
+using Thumper_Custom_Level_Editor.Editor_Panels;
 
 namespace Thumper_Custom_Level_Editor 
 { 
@@ -227,9 +228,9 @@ namespace Thumper_Custom_Level_Editor
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             if (Source.SelectedNode.ImageKey == "fav")
                 return;
-            Object_Params match = TCLE.LeafObjects.FirstOrDefault(x => x.param_displayname == Source.SelectedNode.Text && x.category.ToUpper() == Source.SelectedNode.Parent.Text);
-            if (match != null && !TCLE.ObjectFavorites.Contains(match))
-                TCLE.ObjectFavorites.Add(match);
+            Object_Params match = TCLE.LeafObjects[(string)Source.SelectedNode.Tag];
+            if (match != null && !TCLE.ObjectFavorites.ContainsValue(match))
+                TCLE.ObjectFavorites.Add(match.param_path, match);
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIselect");
 
@@ -240,8 +241,7 @@ namespace Thumper_Custom_Level_Editor
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            string find = Source.SelectedNode.Text;
-            TCLE.ObjectFavorites.RemoveWhere(x => x.param_displayname == find);
+            TCLE.ObjectFavorites.Remove((string)Source.SelectedNode.Tag);
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIselect");
 

@@ -1380,13 +1380,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
+
             Object_Params objmatch = TCLE.LeafObjects[(string)e.Node.Tag];
             if (e.Node.Text.EndsWith(".samp"))
                 objmatch = TCLE.LeafObjects["play"];
-
             if (objmatch == null)
                 return;
-
 
             Sequencer_Object seq = new() {
                 ParentLeaf = leafProperties,
@@ -1394,7 +1393,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 category = objmatch.category,
                 param_path = objmatch.param_path,
                 friendly_param = objmatch.param_displayname,
-                defaultvalue = float.Parse(objmatch.def),
+                defaultvalue = objmatch.default_value,
                 step = objmatch.step,
                 trait_type = objmatch.trait_type,
                 highlight_color = objmatch.defaultcolor,
@@ -1951,7 +1950,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.LeafObjects.TryGetValue(seq.param_path, out Object_Params? value))
                 baseobj = value;
             if (baseobj != null) {
-                if (float.Parse(baseobj.def) != seq.defaultvalue)
+                if (baseobj.default_value != seq.defaultvalue)
                     dodelete = false;
             }
 
@@ -2308,7 +2307,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 category = obj.category,
                 param_path = obj.param_path,
                 friendly_param = obj.param_displayname,
-                defaultvalue = float.Parse(obj.def),
+                defaultvalue = obj.default_value,
                 step = obj.step,
                 trait_type = obj.trait_type,
                 highlight_color = obj.defaultcolor,

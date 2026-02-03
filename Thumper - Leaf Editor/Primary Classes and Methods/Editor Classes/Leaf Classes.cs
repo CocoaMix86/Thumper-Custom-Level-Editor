@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor
         public string param_path { get; set; }
         public string trait_type { get; set; }
         public bool step { get; set; }
-        public string def { get; set; }
+        public decimal default_value { get; set; }
         public string footer { get; set; }
         public Color defaultcolor { get; set; }
     }
@@ -50,30 +50,30 @@ namespace Thumper_Custom_Level_Editor
         public string friendly_lane => TCLE.TrackLaneFriendly[this.param_path_lane];
         public string trait_type { get; set; }
         public bool step { get; set; } = true;
-        public float defaultvalue
+        public decimal defaultvalue
         {
             get => DefVal;
             set {
                 //standardize values based on the type
                 if (this.trait_type == "kTraitBool") {
-                    if ((decimal)value is not 1 and not 0)
+                    if (value is not 1 and not 0)
                         value = 1;
                 }
                 else if (this.trait_type == "kTraitColor") {
-                    value = (float)Math.Truncate(value);
+                    value = Math.Truncate(value);
                 }
                 else if (this.trait_type == "kTraitAction") {
-                    if ((decimal)value is not 1 and not 0)
+                    if (value is not 1 and not 0)
                         value = 1;
                 }
                 else if (this.trait_type == "kTraitInt") {
-                    value = (float)Math.Truncate(value);
+                    value = Math.Truncate(value);
                 }
 
                 DefVal = value;
             }
         }
-        private float DefVal;
+        private decimal DefVal;
         public string footer { get; set; }
         public string category { get; set; }
         public string friendly_param { get; set; }
@@ -491,7 +491,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Default Value")]
         [Description("If Step TRUE, blank cells will use this value")]
-        public float defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
+        public decimal defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Color")]

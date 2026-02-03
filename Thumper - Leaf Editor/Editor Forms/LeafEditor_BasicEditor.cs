@@ -162,14 +162,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }            
 
             if (_findseq == null) {
-                Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.param_path == _paramtofind);
+                Object_Params objmatch = TCLE.LeafObjects[_paramtofind];
                 Sequencer_Object _importseq = new() {
                     ParentLeaf = leafProperties,
                     obj_name = objmatch.obj_name,
                     category = objmatch.category,
                     param_path = objmatch.param_path,
                     friendly_param = objmatch.param_displayname,
-                    defaultvalue = float.Parse(objmatch.def),
+                    defaultvalue = objmatch.default_value,
                     step = objmatch.step,
                     trait_type = objmatch.trait_type,
                     highlight_color = objmatch.defaultcolor,

@@ -204,7 +204,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save sequencer favs
-            AppSettings.SequencerFavorites = TCLE.ObjectFavorites.Select(x => x.param_path).ToList();
+            AppSettings.SequencerFavorites = TCLE.ObjectFavorites.Select(x => x.Value.param_path).ToList();
             //save panel sizes and locations
             AppSettings.beeblesize = MainBeeble.Size;
             AppSettings.beebleloc = MainBeeble.Location;

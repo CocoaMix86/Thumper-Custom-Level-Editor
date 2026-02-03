@@ -131,11 +131,11 @@ namespace Thumper_Custom_Level_Editor
                                             param_path = x[3],
                                             trait_type = x[4],
                                             step = x[5] == "True",
-                                            def = x[6],
+                                            default_value = decimal.TryParse(x[6], out decimal _result) ? _result : 0,
                                             footer = x[7].Replace("[", "").Replace("]", ""),
                                             defaultcolor = Color.Purple
                                         })).ToDictionary();
-
+            
             LeafObjects.Add("⮝ Tuning Layer X", new Object_Params {
                 category = "",
                 obj_name = "_TuningLayerX",
@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor
                 param_path = "⮝ Tuning Layer X",
                 trait_type = "",
                 step = false,
-                def = "0",
+                default_value = 0m,
                 footer = "",
                 defaultcolor = Color.FromArgb(40, 40, 40)
             });
@@ -151,7 +151,7 @@ namespace Thumper_Custom_Level_Editor
             ImportDefaultColors();
             //import favorites
             if (AppSettings.SequencerFavorites != null)
-                ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.param_displayname)).ToHashSet();
+                ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.Key)).ToDictionary();
         }
 
         public static void ImportDefaultColors()
@@ -164,7 +164,7 @@ namespace Thumper_Custom_Level_Editor
 
             ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //once all the colors are processed, assign them directly to the objects
-            foreach (Object_Params obj in LeafObjects) {
+            foreach (Object_Params obj in LeafObjects.Select(x => x.Value)) {
                 obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
                 Bitmap color = new(16, 16);
                 using (Graphics g = Graphics.FromImage(color)) {
