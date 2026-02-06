@@ -1,27 +1,17 @@
 ﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using Windows.Networking.NetworkOperators;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
     ///you're welcome
     ///Berry owes me a fursona
     ///
-    public class DrawData
-    {
-        public int x;
-        public int y;
-        public DrawData()
-        {
-
-        }
-    }
 
     public static class LeafMasterView
     {
         #region Variables
-        public static Bitmap LayerTrack = new(1,1);
-        public static Bitmap Master = new(1, 1);
+        public static Bitmap LayerTrack = new(1,1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+        public static Bitmap Master = new(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
         //
         public static int Width = 40;
         public static int Height = 20;
@@ -95,6 +85,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 g.Clear(Color.Black);
                 g.DrawImage(LayerTrack, 0, 0);
             }
+            Leaf.ParentEditor.dgvMasterView.MasterBG = Master;
             Leaf.ParentEditor.dgvMasterView.Invalidate();
         }
 

@@ -80,6 +80,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else
                     LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                if (!SaveOnlyNoLoad) {
+                    TCLE.SaveTCL();
+                }
+                LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
+                toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (75);
             }
         }
         private void RenderForm()

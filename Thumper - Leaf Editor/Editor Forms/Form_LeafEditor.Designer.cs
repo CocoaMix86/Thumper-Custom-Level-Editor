@@ -31,17 +31,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
-            DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle21 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle22 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
             this.toolTip1 = new ToolTip(this.components);
             this.trackZoomVert = new TrackBar();
             this.trackZoom = new TrackBar();
@@ -121,6 +121,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.dgvMasterView = new DGVEx();
             this.toolstripMasterView = new ToolStrip();
             this.masterviewbtnSelect = new ToolStripButton();
+            this.masterviewbtnLanes = new ToolStripButton();
+            this.toolStripSplitButton4 = new ToolStripSplitButton();
+            this.toolStripMenuItem17 = new ToolStripMenuItem();
+            this.toolStripMenuItem18 = new ToolStripMenuItem();
+            this.toolStripMenuItem19 = new ToolStripMenuItem();
+            this.toolStripMenuItem20 = new ToolStripMenuItem();
+            this.toolStripMenuItem21 = new ToolStripMenuItem();
+            this.toolStripMenuItem22 = new ToolStripMenuItem();
+            this.toolStripMenuItem23 = new ToolStripMenuItem();
+            this.toolStripMenuItem24 = new ToolStripMenuItem();
             this.toolStripSplitButton1 = new ToolStripSplitButton();
             this.toolStripMenuItem1 = new ToolStripMenuItem();
             this.toolStripMenuItem2 = new ToolStripMenuItem();
@@ -135,22 +145,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem10 = new ToolStripMenuItem();
             this.toolStripMenuItem11 = new ToolStripMenuItem();
             this.toolStripMenuItem12 = new ToolStripMenuItem();
+            this.masterviewbtnRings = new ToolStripButton();
             this.toolStripSplitButton3 = new ToolStripSplitButton();
             this.toolStripMenuItem13 = new ToolStripMenuItem();
             this.toolStripMenuItem14 = new ToolStripMenuItem();
             this.toolStripMenuItem15 = new ToolStripMenuItem();
             this.toolStripMenuItem16 = new ToolStripMenuItem();
-            this.masterviewbtnRings = new ToolStripButton();
-            this.masterviewbtnLanes = new ToolStripButton();
-            this.toolStripSplitButton4 = new ToolStripSplitButton();
-            this.toolStripMenuItem17 = new ToolStripMenuItem();
-            this.toolStripMenuItem18 = new ToolStripMenuItem();
-            this.toolStripMenuItem19 = new ToolStripMenuItem();
-            this.toolStripMenuItem20 = new ToolStripMenuItem();
-            this.toolStripMenuItem21 = new ToolStripMenuItem();
-            this.toolStripMenuItem22 = new ToolStripMenuItem();
-            this.toolStripMenuItem23 = new ToolStripMenuItem();
-            this.toolStripMenuItem24 = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
             this.contextMenuFav.SuspendLayout();
@@ -220,7 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 163);
+            this.btnRawImport.Size = new Size(54, 164);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -236,7 +236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 281);
+            this.labelCollapsePanel2.Location = new Point(0, 280);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -307,7 +307,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 266);
+            this.vScrollBarTrackEditor.Size = new Size(15, 265);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -364,27 +364,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.BackgroundColor = Color.FromArgb(10, 10, 10);
             this.trackEditor.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.trackEditor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle12.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle12.ForeColor = Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle1.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.trackEditor.ColumnHeadersHeight = 20;
             this.trackEditor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.trackEditor.Columns.AddRange(new DataGridViewColumn[] { this.LeafEnabled, this.LeafAudio, this.LeafMultilane });
-            dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle16.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle16.ForeColor = Color.White;
-            dataGridViewCellStyle16.Format = "0.###";
-            dataGridViewCellStyle16.NullValue = null;
-            dataGridViewCellStyle16.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = DataGridViewTriState.True;
-            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle5.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.Format = "0.###";
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            this.trackEditor.DefaultCellStyle = dataGridViewCellStyle5;
             this.trackEditor.Dock = DockStyle.Fill;
             this.trackEditor.EnableHeadersVisualStyles = false;
             this.trackEditor.GridColor = Color.Black;
@@ -392,24 +392,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle17.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle17.ForeColor = Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = DataGridViewTriState.False;
-            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle6.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            this.trackEditor.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.trackEditor.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.trackEditor.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.trackEditor.RowTemplate.DividerHeight = 50;
             this.trackEditor.RowTemplate.Height = 20;
             this.trackEditor.ScrollBars = ScrollBars.Horizontal;
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 266);
+            this.trackEditor.Size = new Size(491, 265);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -448,9 +448,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // LeafEnabled
             // 
             this.LeafEnabled.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle13.BackColor = Color.Black;
-            dataGridViewCellStyle13.SelectionBackColor = Color.Black;
-            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Black;
+            this.LeafEnabled.DefaultCellStyle = dataGridViewCellStyle2;
             this.LeafEnabled.Frozen = true;
             this.LeafEnabled.HeaderText = "";
             this.LeafEnabled.MinimumWidth = 25;
@@ -463,9 +463,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // LeafAudio
             // 
             this.LeafAudio.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle14.BackColor = Color.Black;
-            dataGridViewCellStyle14.SelectionBackColor = Color.Black;
-            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Black;
+            this.LeafAudio.DefaultCellStyle = dataGridViewCellStyle3;
             this.LeafAudio.Frozen = true;
             this.LeafAudio.HeaderText = "";
             this.LeafAudio.MinimumWidth = 25;
@@ -478,9 +478,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             // LeafMultilane
             // 
             this.LeafMultilane.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            dataGridViewCellStyle15.BackColor = Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = Color.Black;
-            this.LeafMultilane.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle4.BackColor = Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = Color.Black;
+            this.LeafMultilane.DefaultCellStyle = dataGridViewCellStyle4;
             this.LeafMultilane.Frozen = true;
             this.LeafMultilane.HeaderText = "";
             this.LeafMultilane.MinimumWidth = 29;
@@ -504,7 +504,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 266);
+            this.leafToolStrip.Size = new Size(24, 265);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -627,7 +627,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnLeafRandom.Image = (Image)resources.GetObject("btnLeafRandom.Image");
             this.btnLeafRandom.ImageTransparentColor = Color.Magenta;
             this.btnLeafRandom.Name = "btnLeafRandom";
-            this.btnLeafRandom.Size = new Size(23, 24);
+            this.btnLeafRandom.Size = new Size(24, 24);
             this.btnLeafRandom.ToolTipText = "Click to add a random object + values to the leaf";
             this.btnLeafRandom.Click += this.btnLeafRandom_Click;
             // 
@@ -978,7 +978,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 296;
+            this.splitContainerLeafSide.SplitterDistance = 295;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1029,7 +1029,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -1041,7 +1040,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 163);
+            this.textEditor.Size = new Size(476, 164);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1158,46 +1157,47 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.dgvMasterView.BorderStyle = BorderStyle.Fixed3D;
             this.dgvMasterView.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvMasterView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle19.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle19.ForeColor = Color.White;
-            dataGridViewCellStyle19.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = DataGridViewTriState.True;
-            this.dgvMasterView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle8.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle8.ForeColor = Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            this.dgvMasterView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvMasterView.ColumnHeadersHeight = 20;
             this.dgvMasterView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvMasterView.ColumnHeadersVisible = false;
-            dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = Color.FromArgb(40, 40, 40);
-            dataGridViewCellStyle20.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle20.ForeColor = Color.White;
-            dataGridViewCellStyle20.Format = "0.###";
-            dataGridViewCellStyle20.NullValue = null;
-            dataGridViewCellStyle20.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = DataGridViewTriState.True;
-            this.dgvMasterView.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle9.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = Color.White;
+            dataGridViewCellStyle9.Format = "0.###";
+            dataGridViewCellStyle9.NullValue = null;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            this.dgvMasterView.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvMasterView.Dock = DockStyle.Fill;
             this.dgvMasterView.EnableHeadersVisualStyles = false;
             this.dgvMasterView.GridColor = Color.Black;
             this.dgvMasterView.Location = new Point(100, 0);
             this.dgvMasterView.Margin = new Padding(4, 3, 4, 3);
+            this.dgvMasterView.MasterBG = null;
             this.dgvMasterView.Name = "dgvMasterView";
             this.dgvMasterView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle21.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle21.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle21.ForeColor = Color.White;
-            dataGridViewCellStyle21.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle21.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle21.WrapMode = DataGridViewTriState.False;
-            this.dgvMasterView.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle10.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle10.ForeColor = Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+            this.dgvMasterView.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvMasterView.RowHeadersVisible = false;
             this.dgvMasterView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle22.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.dgvMasterView.RowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.dgvMasterView.RowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvMasterView.RowTemplate.Height = 21;
             this.dgvMasterView.RowTemplate.Resizable = DataGridViewTriState.False;
             this.dgvMasterView.ScrollBars = ScrollBars.Horizontal;
@@ -1216,7 +1216,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.dgvMasterView.RowPostPaint += this.dgvMasterView_RowPostPaint;
             this.dgvMasterView.RowPrePaint += this.dgvMasterView_RowPrePaint;
             this.dgvMasterView.Scroll += this.dgvMasterView_Scroll;
-            this.dgvMasterView.SelectionChanged += this.dgvMasterView_SelectionChanged;
             // 
             // toolstripMasterView
             // 
@@ -1248,6 +1247,110 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.masterviewbtnSelect.Tag = "select";
             this.masterviewbtnSelect.Text = "toolStripButton1";
             this.masterviewbtnSelect.ToolTipText = "Selection";
+            // 
+            // masterviewbtnLanes
+            // 
+            this.masterviewbtnLanes.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnLanes.Image = Properties.Resources.basiceditor_lanes;
+            this.masterviewbtnLanes.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnLanes.Name = "masterviewbtnLanes";
+            this.masterviewbtnLanes.Size = new Size(24, 24);
+            this.masterviewbtnLanes.Tag = "visible";
+            this.masterviewbtnLanes.Text = "1";
+            this.masterviewbtnLanes.ToolTipText = "Lanes";
+            // 
+            // toolStripSplitButton4
+            // 
+            this.toolStripSplitButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton4.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItem17, this.toolStripMenuItem18, this.toolStripMenuItem19, this.toolStripMenuItem20, this.toolStripMenuItem21, this.toolStripMenuItem22, this.toolStripMenuItem23, this.toolStripMenuItem24 });
+            this.toolStripSplitButton4.Image = Properties.Resources.basiceditor_turnl15;
+            this.toolStripSplitButton4.ImageTransparentColor = Color.Magenta;
+            this.toolStripSplitButton4.Name = "toolStripSplitButton4";
+            this.toolStripSplitButton4.Size = new Size(36, 24);
+            this.toolStripSplitButton4.Tag = "turn";
+            this.toolStripSplitButton4.Text = "Turn Left - 15deg";
+            this.toolStripSplitButton4.ToolTipText = "Turns";
+            this.toolStripSplitButton4.DropDownItemClicked += this.basicEditorDropDownItemClicked;
+            // 
+            // toolStripMenuItem17
+            // 
+            this.toolStripMenuItem17.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem17.ForeColor = Color.White;
+            this.toolStripMenuItem17.Image = Properties.Resources.basiceditor_turnr15;
+            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
+            this.toolStripMenuItem17.Size = new Size(172, 22);
+            this.toolStripMenuItem17.Tag = "turn";
+            this.toolStripMenuItem17.Text = "Turn Right - 15deg";
+            // 
+            // toolStripMenuItem18
+            // 
+            this.toolStripMenuItem18.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem18.ForeColor = Color.White;
+            this.toolStripMenuItem18.Image = Properties.Resources.basiceditor_turnr30;
+            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
+            this.toolStripMenuItem18.Size = new Size(172, 22);
+            this.toolStripMenuItem18.Tag = "turn";
+            this.toolStripMenuItem18.Text = "Turn Right - 30deg";
+            // 
+            // toolStripMenuItem19
+            // 
+            this.toolStripMenuItem19.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem19.ForeColor = Color.White;
+            this.toolStripMenuItem19.Image = Properties.Resources.basiceditor_turnr45;
+            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
+            this.toolStripMenuItem19.Size = new Size(172, 22);
+            this.toolStripMenuItem19.Tag = "turn";
+            this.toolStripMenuItem19.Text = "Turn Right - 45deg";
+            // 
+            // toolStripMenuItem20
+            // 
+            this.toolStripMenuItem20.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem20.ForeColor = Color.White;
+            this.toolStripMenuItem20.Image = Properties.Resources.basiceditor_turnr90;
+            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
+            this.toolStripMenuItem20.Size = new Size(172, 22);
+            this.toolStripMenuItem20.Tag = "turn";
+            this.toolStripMenuItem20.Text = "Turn Right - 90deg";
+            // 
+            // toolStripMenuItem21
+            // 
+            this.toolStripMenuItem21.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem21.ForeColor = Color.White;
+            this.toolStripMenuItem21.Image = Properties.Resources.basiceditor_turnl15;
+            this.toolStripMenuItem21.Name = "toolStripMenuItem21";
+            this.toolStripMenuItem21.Size = new Size(172, 22);
+            this.toolStripMenuItem21.Tag = "turn";
+            this.toolStripMenuItem21.Text = "Turn Left - 15deg";
+            // 
+            // toolStripMenuItem22
+            // 
+            this.toolStripMenuItem22.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem22.ForeColor = Color.White;
+            this.toolStripMenuItem22.Image = Properties.Resources.basiceditor_turnl30;
+            this.toolStripMenuItem22.Name = "toolStripMenuItem22";
+            this.toolStripMenuItem22.Size = new Size(172, 22);
+            this.toolStripMenuItem22.Tag = "turn";
+            this.toolStripMenuItem22.Text = "Turn Left - 30deg";
+            // 
+            // toolStripMenuItem23
+            // 
+            this.toolStripMenuItem23.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem23.ForeColor = Color.White;
+            this.toolStripMenuItem23.Image = Properties.Resources.basiceditor_turnl45;
+            this.toolStripMenuItem23.Name = "toolStripMenuItem23";
+            this.toolStripMenuItem23.Size = new Size(172, 22);
+            this.toolStripMenuItem23.Tag = "turn";
+            this.toolStripMenuItem23.Text = "Turn Left - 45deg";
+            // 
+            // toolStripMenuItem24
+            // 
+            this.toolStripMenuItem24.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem24.ForeColor = Color.White;
+            this.toolStripMenuItem24.Image = Properties.Resources.basiceditor_turnl90;
+            this.toolStripMenuItem24.Name = "toolStripMenuItem24";
+            this.toolStripMenuItem24.Size = new Size(172, 22);
+            this.toolStripMenuItem24.Tag = "turn";
+            this.toolStripMenuItem24.Text = "Turn Left - 90deg";
             // 
             // toolStripSplitButton1
             // 
@@ -1395,6 +1498,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem12.Tag = "grindable_quarters.ent";
             this.toolStripMenuItem12.Text = "Quad Bar";
             // 
+            // masterviewbtnRings
+            // 
+            this.masterviewbtnRings.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.masterviewbtnRings.Image = Properties.Resources.basiceditor_ring;
+            this.masterviewbtnRings.ImageTransparentColor = Color.Magenta;
+            this.masterviewbtnRings.Name = "masterviewbtnRings";
+            this.masterviewbtnRings.Size = new Size(24, 24);
+            this.masterviewbtnRings.Tag = "ducker_crak.ent";
+            this.masterviewbtnRings.Text = "1";
+            this.masterviewbtnRings.ToolTipText = "Rings";
+            // 
             // toolStripSplitButton3
             // 
             this.toolStripSplitButton3.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -1447,121 +1561,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem16.Size = new Size(156, 22);
             this.toolStripMenuItem16.Tag = "jump_high.ent";
             this.toolStripMenuItem16.Text = "Spikes Length 8";
-            // 
-            // masterviewbtnRings
-            // 
-            this.masterviewbtnRings.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.masterviewbtnRings.Image = Properties.Resources.basiceditor_ring;
-            this.masterviewbtnRings.ImageTransparentColor = Color.Magenta;
-            this.masterviewbtnRings.Name = "masterviewbtnRings";
-            this.masterviewbtnRings.Size = new Size(24, 24);
-            this.masterviewbtnRings.Tag = "ducker_crak.ent";
-            this.masterviewbtnRings.Text = "1";
-            this.masterviewbtnRings.ToolTipText = "Rings";
-            // 
-            // masterviewbtnLanes
-            // 
-            this.masterviewbtnLanes.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.masterviewbtnLanes.Image = Properties.Resources.basiceditor_lanes;
-            this.masterviewbtnLanes.ImageTransparentColor = Color.Magenta;
-            this.masterviewbtnLanes.Name = "masterviewbtnLanes";
-            this.masterviewbtnLanes.Size = new Size(24, 24);
-            this.masterviewbtnLanes.Tag = "visible";
-            this.masterviewbtnLanes.Text = "1";
-            this.masterviewbtnLanes.ToolTipText = "Lanes";
-            // 
-            // toolStripSplitButton4
-            // 
-            this.toolStripSplitButton4.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton4.DropDownItems.AddRange(new ToolStripItem[] { this.toolStripMenuItem17, this.toolStripMenuItem18, this.toolStripMenuItem19, this.toolStripMenuItem20, this.toolStripMenuItem21, this.toolStripMenuItem22, this.toolStripMenuItem23, this.toolStripMenuItem24 });
-            this.toolStripSplitButton4.Image = Properties.Resources.basiceditor_turnl15;
-            this.toolStripSplitButton4.ImageTransparentColor = Color.Magenta;
-            this.toolStripSplitButton4.Name = "toolStripSplitButton4";
-            this.toolStripSplitButton4.Size = new Size(36, 24);
-            this.toolStripSplitButton4.Tag = "turn";
-            this.toolStripSplitButton4.Text = "Turn Left - 15deg";
-            this.toolStripSplitButton4.ToolTipText = "Turns";
-            this.toolStripSplitButton4.DropDownItemClicked += this.basicEditorDropDownItemClicked;
-            // 
-            // toolStripMenuItem17
-            // 
-            this.toolStripMenuItem17.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem17.ForeColor = Color.White;
-            this.toolStripMenuItem17.Image = Properties.Resources.basiceditor_turnr15;
-            this.toolStripMenuItem17.Name = "toolStripMenuItem17";
-            this.toolStripMenuItem17.Size = new Size(184, 26);
-            this.toolStripMenuItem17.Tag = "turn";
-            this.toolStripMenuItem17.Text = "Turn Right - 15deg";
-            // 
-            // toolStripMenuItem18
-            // 
-            this.toolStripMenuItem18.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem18.ForeColor = Color.White;
-            this.toolStripMenuItem18.Image = Properties.Resources.basiceditor_turnr30;
-            this.toolStripMenuItem18.Name = "toolStripMenuItem18";
-            this.toolStripMenuItem18.Size = new Size(184, 26);
-            this.toolStripMenuItem18.Tag = "turn";
-            this.toolStripMenuItem18.Text = "Turn Right - 30deg";
-            // 
-            // toolStripMenuItem19
-            // 
-            this.toolStripMenuItem19.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem19.ForeColor = Color.White;
-            this.toolStripMenuItem19.Image = Properties.Resources.basiceditor_turnr45;
-            this.toolStripMenuItem19.Name = "toolStripMenuItem19";
-            this.toolStripMenuItem19.Size = new Size(184, 26);
-            this.toolStripMenuItem19.Tag = "turn";
-            this.toolStripMenuItem19.Text = "Turn Right - 45deg";
-            // 
-            // toolStripMenuItem20
-            // 
-            this.toolStripMenuItem20.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem20.ForeColor = Color.White;
-            this.toolStripMenuItem20.Image = Properties.Resources.basiceditor_turnr90;
-            this.toolStripMenuItem20.Name = "toolStripMenuItem20";
-            this.toolStripMenuItem20.Size = new Size(184, 26);
-            this.toolStripMenuItem20.Tag = "turn";
-            this.toolStripMenuItem20.Text = "Turn Right - 90deg";
-            // 
-            // toolStripMenuItem21
-            // 
-            this.toolStripMenuItem21.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem21.ForeColor = Color.White;
-            this.toolStripMenuItem21.Image = Properties.Resources.basiceditor_turnl15;
-            this.toolStripMenuItem21.Name = "toolStripMenuItem21";
-            this.toolStripMenuItem21.Size = new Size(184, 26);
-            this.toolStripMenuItem21.Tag = "turn";
-            this.toolStripMenuItem21.Text = "Turn Left - 15deg";
-            // 
-            // toolStripMenuItem22
-            // 
-            this.toolStripMenuItem22.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem22.ForeColor = Color.White;
-            this.toolStripMenuItem22.Image = Properties.Resources.basiceditor_turnl30;
-            this.toolStripMenuItem22.Name = "toolStripMenuItem22";
-            this.toolStripMenuItem22.Size = new Size(184, 26);
-            this.toolStripMenuItem22.Tag = "turn";
-            this.toolStripMenuItem22.Text = "Turn Left - 30deg";
-            // 
-            // toolStripMenuItem23
-            // 
-            this.toolStripMenuItem23.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem23.ForeColor = Color.White;
-            this.toolStripMenuItem23.Image = Properties.Resources.basiceditor_turnl45;
-            this.toolStripMenuItem23.Name = "toolStripMenuItem23";
-            this.toolStripMenuItem23.Size = new Size(184, 26);
-            this.toolStripMenuItem23.Tag = "turn";
-            this.toolStripMenuItem23.Text = "Turn Left - 45deg";
-            // 
-            // toolStripMenuItem24
-            // 
-            this.toolStripMenuItem24.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolStripMenuItem24.ForeColor = Color.White;
-            this.toolStripMenuItem24.Image = Properties.Resources.basiceditor_turnl90;
-            this.toolStripMenuItem24.Name = "toolStripMenuItem24";
-            this.toolStripMenuItem24.Size = new Size(184, 26);
-            this.toolStripMenuItem24.Tag = "turn";
-            this.toolStripMenuItem24.Text = "Turn Left - 90deg";
             // 
             // Form_LeafEditor
             // 
