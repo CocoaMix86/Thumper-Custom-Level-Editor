@@ -996,7 +996,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     else {
                         PlaybackStart = e.ColumnIndex;
-                        if (PlaybackEnd != -2 && PlaybackEnd <= PlaybackStart)
+                        if (PlaybackEnd > -1 && PlaybackEnd <= PlaybackStart)
                             PlaybackEnd = PlaybackStart;
                         trackEditor.Invalidate();
                     }
@@ -3556,7 +3556,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd - FrozenColumnOffset);
-                Playback.Play(PlaybackStart, PlaybackEnd, PlaybackLoop);
+                Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : LeafProperties.beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -3568,18 +3568,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private int PreviousSetColumn = 3;
         private bool ForceStop;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
                 return;
-            if (Playback.IsPlaying && Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount) {
+            if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
                 trackEditor.Invalidate();
-                //trackEditor.InvalidateColumn(PreviousSetColumn);
-                //trackEditor.InvalidateColumn(PreviousSetColumn - 1);
-                //trackEditor.InvalidateColumn(Playback.PlaybackBeat + FrozenColumnOffset);
-                //PreviousSetColumn = Playback.PlaybackBeat + FrozenColumnOffset;
             }
             else {
                 if (PlaybackLoop && !ForceStop)
@@ -3588,7 +3583,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Enabled = false;
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 Playback.StopPlayback();
-                PreviousSetColumn = 3;
                 trackEditor.Invalidate();
             }
         }
