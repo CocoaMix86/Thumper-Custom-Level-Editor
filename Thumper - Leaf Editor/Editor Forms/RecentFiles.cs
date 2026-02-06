@@ -10,7 +10,11 @@
             foreach (string _projectpath in recentfiles) {
                 FileInfo tcl = new(_projectpath);
                 dynamic _tclinfo = TCLE.LoadFileLock(_projectpath);
-                dgvRecentFiles.Rows.Add((string)_tclinfo["difficulty"], tcl.Name.Replace(".TCL", "", StringComparison.OrdinalIgnoreCase), _projectpath);
+                if (_tclinfo is null) {
+                    dgvRecentFiles.Rows.Add("D0", Path.GetFileName(_projectpath), "some error occurred when trying to load the project details.");
+                }
+                else
+                    dgvRecentFiles.Rows.Add((string)_tclinfo["difficulty"], tcl.Name.Replace(".TCL", "", StringComparison.OrdinalIgnoreCase), _projectpath);
             }
             dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }

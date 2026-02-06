@@ -158,7 +158,7 @@ namespace Thumper_Custom_Level_Editor
                         Text = obj.param_displayname,
                         ImageKey = obj.defaultcolor.ToArgb().ToString(),
                         SelectedImageKey = obj.defaultcolor.ToArgb().ToString(),
-                        Tag = obj.param_path
+                        Tag = obj.obj_name + ";" + obj.param_path
                     };
                     if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
                         _node.Nodes.Add(_param);

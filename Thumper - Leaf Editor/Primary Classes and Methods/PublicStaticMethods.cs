@@ -124,7 +124,7 @@ namespace Thumper_Custom_Level_Editor
             //import selectable objects from file and parse them into lists for manipulation
             string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
             LeafObjects = _importedObjects.Select(x => x.Split(';'))
-                                        .Select(x => new KeyValuePair<string, Object_Params>(x[3], new Object_Params {
+                                        .Select(x => new KeyValuePair<string, Object_Params>(x[1]+";"+x[3], new Object_Params {
                                             category = x[0],
                                             obj_name = x[1],
                                             param_displayname = x[2],
@@ -136,7 +136,7 @@ namespace Thumper_Custom_Level_Editor
                                             defaultcolor = Color.Purple
                                         })).ToDictionary();
             
-            LeafObjects.Add("⮝ Tuning Layer X", new Object_Params {
+            LeafObjects.Add("_TuningLayerX;⮝ Tuning Layer X", new Object_Params {
                 category = "",
                 obj_name = "_TuningLayerX",
                 param_displayname = "⮝ Tuning Layer X",

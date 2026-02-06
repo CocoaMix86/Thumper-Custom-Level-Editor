@@ -112,7 +112,7 @@ namespace Thumper_Custom_Level_Editor
                                 ImageKey = "none",
                                 SelectedImageKey = "none",
                                 ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
-                                Tag = "play"
+                                Tag = "sample.samp;play"
                             };
                             sampfile.Nodes.Add(_param);
                         }
@@ -127,7 +127,7 @@ namespace Thumper_Custom_Level_Editor
                             ImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
                             SelectedImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
                             ContextMenuStrip = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? contextMenuFavRemove : contextMenuFav,
-                            Tag = obj.param_path
+                            Tag = obj.obj_name + ";" + obj.param_path
                         };
                         _node.Nodes.Add(_param);
                     }
@@ -147,7 +147,7 @@ namespace Thumper_Custom_Level_Editor
                     ImageKey = "fav",
                     SelectedImageKey = "fav",
                     ContextMenuStrip = contextMenuFavRemove,
-                    Tag = obj.param_path
+                    Tag = obj.obj_name + ";" + obj.param_path
                 };
                 if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
                     _tree.Nodes[0].Nodes.Add(_param);

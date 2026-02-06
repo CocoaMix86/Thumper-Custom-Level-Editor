@@ -1383,7 +1383,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             Object_Params objmatch = TCLE.LeafObjects[(string)e.Node.Tag];
             if (e.Node.Text.EndsWith(".samp"))
-                objmatch = TCLE.LeafObjects["play"];
+                objmatch = TCLE.LeafObjects["sample.samp;play"];
             if (objmatch == null)
                 return;
 
@@ -1555,7 +1555,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Object_Params objmatch = TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag];
             if (objmatch == null) {
                 if (treeObjects.SelectedNode.Text.EndsWith(".samp")) {
-                    objmatch = TCLE.LeafObjects["play"];
+                    objmatch = TCLE.LeafObjects["sample.samp;play"];
                 }
                 else
                     return;
@@ -1947,7 +1947,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dodelete = false;
 
             Object_Params baseobj = null;
-            if (TCLE.LeafObjects.TryGetValue(seq.param_path, out Object_Params? value))
+            if (TCLE.LeafObjects.TryGetValue($"{seq.obj_name};{seq.param_path.Replace(seq.param_path_lane, "ent")}", out Object_Params? value))
                 baseobj = value;
             if (baseobj != null) {
                 if (baseobj.default_value != seq.defaultvalue)
@@ -2541,8 +2541,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
-                        string normalizeParam = $"{ObjectToImport.param_path.Replace(".a02", ".ent").Replace(".a01", ".ent").Replace(".z01", ".ent").Replace(".z02", ".ent")}";
-                        Object_Params objmatch = TCLE.LeafObjects[normalizeParam]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
+                        string normalizeParam = $"{ObjectToImport.obj_name.Replace(ParentLeaf.ParentEditor.loadedleaf.Name, "leafname")};{ObjectToImport.param_path.Replace(ObjectToImport.param_path_lane, "ent")}";
+                        Object_Params objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
                         ObjectToImport.friendly_param = objmatch?.param_displayname ?? "";
                         ObjectToImport.category = objmatch?.category ?? "";
                         ObjectToImport.highlight_color = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : objmatch?.defaultcolor ?? Color.Purple;
