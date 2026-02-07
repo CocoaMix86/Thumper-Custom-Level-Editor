@@ -1074,5 +1074,29 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionInterp"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public global::System.Drawing.Color ColorLeafBasicBG {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafBasicBG"]));
+            }
+            set {
+                this["ColorLeafBasicBG"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("110, 110, 110")]
+        public global::System.Drawing.Color ColorLeafBasicGrid {
+            get {
+                return ((global::System.Drawing.Color)(this["ColorLeafBasicGrid"]));
+            }
+            set {
+                this["ColorLeafBasicGrid"] = value;
+            }
+        }
     }
 }

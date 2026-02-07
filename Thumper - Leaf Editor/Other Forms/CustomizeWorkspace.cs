@@ -80,6 +80,7 @@ namespace Thumper_Custom_Level_Editor
 
             //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.Value.param_displayname};{x.Value.defaultcolor.ToArgb()}"));
+            TCLE.ImportDefaultColors();
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {

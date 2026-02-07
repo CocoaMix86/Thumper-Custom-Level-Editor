@@ -709,10 +709,7 @@ namespace Thumper_Custom_Level_Editor
             CustomizeWorkspace custom = new() { Owner = this };
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
-                ColorFormElements(TCLE.Instance);
-                ImportDefaultColors();
-                SetKeyBinds();
-                AppSettings.Save();
+
             }
             custom.Dispose();
         }

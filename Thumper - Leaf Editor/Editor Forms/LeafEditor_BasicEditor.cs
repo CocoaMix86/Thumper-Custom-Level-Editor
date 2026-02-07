@@ -15,6 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string BasicEditorSelectedObject = "select";
         private decimal? BasicEditorClickValue = 1m;
         private ToolStripItem BasicEditorSelectedButton;
+        private static Pen BasicEditorPenGrid = new(Properties.Settings.Default.ColorLeafBasicGrid, 1);
         #endregion
         #region PAINTING
         private void dgvMasterView_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -24,7 +25,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, Color.LightSkyBlue)), e.CellBounds);
             }
             if (Properties.Settings.Default.LeafOptionShowGrid)
-                e.Graphics.DrawRectangle(Pens.DarkGray, e.CellBounds);
+                e.Graphics.DrawRectangle(BasicEditorPenGrid, e.CellBounds);
         }
 
         private void dgvMasterView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

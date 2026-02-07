@@ -94,12 +94,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             PenRailColors = new();
             if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "rail_color") is Sequencer_Object seq) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    PenRailColors.Add(new(new SolidBrush(Color.FromArgb((int)seq[beat].InGameValue)), 2));
+                    PenRailColors.Add(new(Color.FromArgb((int)seq[beat].InGameValue), 2));
                 }
             }
             else {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    PenRailColors.Add(new(new SolidBrush(Color.FromArgb(147, 255, 80)), 2));
+                    PenRailColors.Add(new(Color.FromArgb(147, 255, 80), 2));
                 }
             }
         }

@@ -266,5 +266,11 @@
     <Setting Name="LeafOptionInterp" Type="System.String" Scope="User">
       <Value Profile="(Default)">Linear</Value>
     </Setting>
+    <Setting Name="ColorLeafBasicBG" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="ColorLeafBasicGrid" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">110, 110, 110</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

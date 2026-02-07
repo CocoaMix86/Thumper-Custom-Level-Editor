@@ -15,5 +15,6 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
             base.PaintBackground(graphics, clipBounds, gridBounds);
             graphics.DrawImage(MasterBG, 0 - this.HorizontalScrollingOffset + 3, 0);
         }
+
     }
 }

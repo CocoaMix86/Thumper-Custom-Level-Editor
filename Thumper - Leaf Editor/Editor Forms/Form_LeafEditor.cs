@@ -159,6 +159,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.BackgroundColor = Properties.Settings.Default.ColorLeafSeqBG;
             textEditor.BackColor = Properties.Settings.Default.ColorLeafRawBG;
             textEditor.ForeColor = Properties.Settings.Default.ColorLeafRawText;
+            dgvMasterView.BackgroundColor = Properties.Settings.Default.ColorLeafBasicBG;
+            BasicEditorPenGrid.Color = Properties.Settings.Default.ColorLeafBasicGrid;
+            dgvMasterView.Invalidate();
 
             foreach (var _ColorIcon in TCLE.ColorIcons)
                 treeObjects.ImageList.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
@@ -772,6 +775,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             #region Paint Anything Else
             else {
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
+            }
+
+            if (Playback.IsPlaying && e.RowIndex == SequencerObjects.Last(x => x.Visible).Index) {
+                /*e.Graphics.DrawLine(LeafCellPainting.PenVioletThick,
+                    e.RowBounds.Left + ((Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset + 7) * trackZoom.Value) + (int)(trackZoom.Value * Playback.PlaybackSubBeat) - trackEditor.HorizontalScrollingOffset,
+                    -130,
+                    e.RowBounds.Left + ((Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset + 7) * trackZoom.Value) + (int)(trackZoom.Value * Playback.PlaybackSubBeat) - trackEditor.HorizontalScrollingOffset,
+                    e.RowBounds.Bottom);*/
+                RowPostPrePainting = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowPostPrePainting = false;
             }
         #endregion
         paintheader:
@@ -3558,7 +3572,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
-                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                //timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                timer1.Interval = 10;
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(LeafProperties, PlaybackEnd - FrozenColumnOffset);
@@ -3581,6 +3596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
                 trackEditor.Invalidate();
+                trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
             }
             else {
                 if (PlaybackLoop && !ForceStop)

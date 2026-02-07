@@ -36,6 +36,8 @@ namespace Thumper_Custom_Level_Editor
             tuningpoint = Properties.Settings.Default.ColorTuningPoint;
             tuningmaxmin = Properties.Settings.Default.ColorTuningMaxMin;
             tuningfont = Properties.Settings.Default.ColorTuningFont;
+            basiceditorbg = Properties.Settings.Default.ColorLeafBasicBG;
+            basiceditorgrid = Properties.Settings.Default.ColorLeafBasicGrid;
         }
 
         public void SaveSettings()
@@ -70,6 +72,8 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.ColorTuningPoint = tuningpoint;
             Properties.Settings.Default.ColorTuningMaxMin = tuningmaxmin;
             Properties.Settings.Default.ColorTuningFont = tuningfont;
+            Properties.Settings.Default.ColorLeafBasicBG = basiceditorbg;
+            Properties.Settings.Default.ColorLeafBasicGrid = basiceditorgrid;
         }
 
         ///
@@ -200,6 +204,15 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Tuning Layers")]
         [DisplayName("Text")]
         public Color tuningfont { get; set; }
+        ///
+        ///
+        [CategoryAttribute("Basic Editor")]
+        [DisplayName("Background")]
+        public Color basiceditorbg { get; set; }
 
+        [CategoryAttribute("Basic Editor")]
+        [DisplayName("Grid Color")]
+        public Color basiceditorgrid { get; set; }
+        ///
     }
 }

@@ -6,21 +6,21 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
     public static class LeafCellPainting
     {
         public static int FrozenColumnOffset => Form_LeafEditor.FrozenColumnOffset;
-        private static int IconWidth = 16;
-        private static int IconHeight = 16;
-        private static Pen PenCorn = new(Brushes.CornflowerBlue, 3);
-        private static Pen PenRed = new(Brushes.Red, 3);
-        private static Pen PenGreen = new(Brushes.Green, 3);
-        private static Pen PenVioletThick = new(Brushes.Violet, 3);
-        private static Pen PenWhite3 = new(Brushes.White, 3);
-        private static Pen PenWhite2 = new(Brushes.White, 2);
-        private static Pen PenGreen6 = new(Brushes.Green, 6);
-        private static Pen PenBlack6 = new(Brushes.Black, 6);
-        private static Pen PenRed6 = new(Brushes.Red, 6);
-        private static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
-        private static SolidBrush SelectionColor = new SolidBrush(Color.FromArgb(180, Color.LightSkyBlue));
-        private static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
-        private static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
+        public static int IconWidth = 16;
+        public static int IconHeight = 16;
+        public static Pen PenCorn = new(Brushes.CornflowerBlue, 3);
+        public static Pen PenRed = new(Brushes.Red, 3);
+        public static Pen PenGreen = new(Brushes.Green, 3);
+        public static Pen PenVioletThick = new(Brushes.Violet, 3);
+        public static Pen PenWhite3 = new(Brushes.White, 3);
+        public static Pen PenWhite2 = new(Brushes.White, 2);
+        public static Pen PenGreen6 = new(Brushes.Green, 6);
+        public static Pen PenBlack6 = new(Brushes.Black, 6);
+        public static Pen PenRed6 = new(Brushes.Red, 6);
+        public static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
+        public static SolidBrush SelectionColor = new SolidBrush(Color.FromArgb(180, Color.LightSkyBlue));
+        public static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+        public static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
 
         public static void SetCellBorders(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor)
         {
@@ -143,8 +143,14 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
 
-            if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - (Playback.GlobalCurrentOffset / 100)) {
-                e.Graphics.DrawLine(PenVioletThick, new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Top), new Point(e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), e.CellBounds.Bottom));
+            if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset)
+            {
+                e.Graphics.DrawLine(PenVioletThick, 
+                    e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), 
+                    -500, 
+                    e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), 
+                    e.CellBounds.Bottom);
+                
             }
         }
 

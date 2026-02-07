@@ -902,7 +902,11 @@ namespace Thumper_Custom_Level_Editor
             Playback.PlaybackTick = -1;
             //
             GlobalCurrentLeaf = "???";
+            GlobalCurrentLvl = "???";
+            GlobalCurrentGate = "???";
             GlobalCurrentOffset = -1;
+            GlobalCurrentOffsetLvl = -1;
+            GlobalCurrentOffsetGate = -1;
         }
 
         public static int BeatSubdivisions = 4;
@@ -917,7 +921,7 @@ namespace Thumper_Custom_Level_Editor
             PlaybackSubBeat = (PlaybackTick % 100) / 100;
 
             while (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
-                GlobalCurrentOffset = GlobalLeafQueue[0].Item2;
+                GlobalCurrentOffset = GlobalLeafQueue[0].Item2 / 100;
                 GlobalCurrentLeaf = GlobalLeafQueue[0].Item1;
                 GlobalLeafQueue.RemoveAt(0);
             }
