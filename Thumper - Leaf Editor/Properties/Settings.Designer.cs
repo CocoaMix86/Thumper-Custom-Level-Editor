@@ -1098,5 +1098,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["ColorLeafBasicGrid"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LeafOptionPlaybackScroll {
+            get {
+                return ((bool)(this["LeafOptionPlaybackScroll"]));
+            }
+            set {
+                this["LeafOptionPlaybackScroll"] = value;
+            }
+        }
     }
 }

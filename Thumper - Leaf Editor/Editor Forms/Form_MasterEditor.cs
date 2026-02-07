@@ -1171,7 +1171,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 if (_playingleafform is not null) {
                     _playingleafform.trackEditor.Invalidate();
-                    _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
+                        _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
                 }
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {

@@ -865,7 +865,8 @@ namespace Thumper_Custom_Level_Editor
             ApproachBeats = _ApproachBeats;
             //play the sequence
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat < 0)) {
-                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
+                //SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 10);
                 IsPlaying = true;
             }
             else

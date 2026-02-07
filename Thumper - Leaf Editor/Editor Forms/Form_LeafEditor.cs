@@ -3596,7 +3596,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
                 trackEditor.Invalidate();
-                trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
+                if (Properties.Settings.Default.LeafOptionPlaybackScroll)
+                    trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
             }
             else {
                 if (PlaybackLoop && !ForceStop)

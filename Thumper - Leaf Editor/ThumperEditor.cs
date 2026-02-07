@@ -790,6 +790,11 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private void leafoptionPlaybackScroll_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionPlaybackScroll = leafoptionPlaybackScroll.Checked;
+        }
+
         private void toolstripViewExplorer_Click(object sender, EventArgs e)
         {
             if (Explorer.IsDisposed) {

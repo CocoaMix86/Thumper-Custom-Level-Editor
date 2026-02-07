@@ -272,5 +272,8 @@
     <Setting Name="ColorLeafBasicGrid" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">110, 110, 110</Value>
     </Setting>
+    <Setting Name="LeafOptionPlaybackScroll" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
