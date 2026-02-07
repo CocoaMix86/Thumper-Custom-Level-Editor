@@ -3595,6 +3595,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.PlaybackBeat < 0)
                 return;
             if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
+                trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                 trackEditor.Invalidate();
                 if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                     trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
@@ -3606,6 +3607,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Enabled = false;
                 btnTrackPlayback.Image = Properties.Resources.icon_play2;
                 Playback.StopPlayback();
+                trackEditor.ResetPlayback();
                 trackEditor.Invalidate();
             }
         }

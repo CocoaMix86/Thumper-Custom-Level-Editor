@@ -1510,15 +1510,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the leaf that's playing
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
-                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) as Form_LeafEditor;
+                    _playingleafform?.trackEditor.ResetPlayback();
+                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
                     //switch to the leaf if it's open
-                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf));
-                    if (workspacehastab != null) {
-                        workspacehastab.DockHandler.Activate();
-                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
-                    }
+                    _playingleafform?.DockHandler?.Activate();
                 }
-                _playingleafform?.trackEditor.Invalidate();
+                if (_playingleafform is not null) {
+                    _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
+                    _playingleafform.trackEditor.Invalidate();
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
+                        _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                }
             }
             else {
                 ForceStop = false;

@@ -1089,25 +1089,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the leaf that's playing
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
+                    _playingleafform?.trackEditor.ResetPlayback();
                     _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) as Form_LeafEditor;
                     //switch to the leaf if it's open
-                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf));
-                    if (workspacehastab != null) {
-                        workspacehastab.DockHandler.Activate();
-                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playingleaf).DockHandler.Activate();
-                    }
+                    _playingleafform?.DockHandler?.Activate();
                 }
-                _playingleafform?.trackEditor.Invalidate();
+                if (_playingleafform is not null) {
+                    _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
+                    _playingleafform.trackEditor.Invalidate();
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
+                        _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                }
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLvl)) as Form_LvlEditor;
-                    //switch to the leaf if it's open
-                    IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl));
-                    if (workspacehastab != null) {
-                        workspacehastab.DockHandler.Activate();
-                        (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == _playinglvl).DockHandler.Activate();
-                    }
+                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinglvl)) as Form_LvlEditor;
+                    //switch to the lvl if it's open
+                    _playinglvlform?.DockHandler?.Activate();
                 }
                 _playinglvlform?.lvlLeafList.Invalidate();
             }

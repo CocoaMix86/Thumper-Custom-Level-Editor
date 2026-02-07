@@ -1165,11 +1165,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the leaf that's playing
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
+                    _playingleafform?.trackEditor.ResetPlayback();
                     _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
                 if (_playingleafform is not null) {
+                    _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                         _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);

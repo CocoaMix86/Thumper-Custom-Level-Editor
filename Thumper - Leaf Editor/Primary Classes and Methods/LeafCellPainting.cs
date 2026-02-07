@@ -142,7 +142,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             if (e.ColumnIndex == PlaybackEnd) {
                 e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
             }
-
+            /*
             if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset)
             {
                 e.Graphics.DrawLine(PenVioletThick, 
@@ -151,7 +151,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), 
                     e.CellBounds.Bottom);
                 
-            }
+            }*/
         }
 
         public static void DrawText(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq = null)
