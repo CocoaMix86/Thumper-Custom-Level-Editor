@@ -240,6 +240,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<Sequencer_Object> SequencerObjects { get => LeafProperties?.seq_objs; set => LeafProperties.seq_objs = value; }
         public List<SaveState> UndoList = new();
         private List<SeqDataPoint> SelectedDPs = new();
+        public List<int> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
             TabText = "Properties",
@@ -438,7 +439,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (RowPostPrePainting) {
                 //paint the frozen column squares and their icons
                 if (e.ColumnIndex < FrozenColumnOffset) {
-                    LeafCellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
+                    LeafCellPainting.CellPaintFancy(e, trackEditor, SelectedRows, SequencerObjects[e.RowIndex]);
                     LeafCellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
                     if (Playback.IsPlaying)
                         LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, LoadedLeaf.Name);
@@ -463,7 +464,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //if we're in the frozen columns or header row (-1), return after this block as there's no other special drawing to be done
             if (e.ColumnIndex < FrozenColumnOffset) {
-                LeafCellPainting.CellPaintFancy(e, trackEditor, SequencerObjects[e.RowIndex]);
+                LeafCellPainting.CellPaintFancy(e, trackEditor, SelectedRows, SequencerObjects[e.RowIndex]);
                 LeafCellPainting.CellPaintIcons(e, this, SequencerObjects[e.RowIndex]);
                 return;
             }
@@ -833,7 +834,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackDelete.Enabled = enable;
             btnTrackClear.Enabled = enable;
             //
-            LeafCellPainting.SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
+            SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
         }

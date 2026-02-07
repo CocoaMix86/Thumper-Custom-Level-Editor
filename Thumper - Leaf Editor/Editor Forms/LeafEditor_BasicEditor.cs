@@ -52,6 +52,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     dgvr.Cells[column + FrozenColumnOffset].Selected = true;
                 }
             }
+            trackEditor.Invalidate();
         }
         private void dgvMasterView_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -127,8 +128,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
         }
 
+        private bool RegisteredSelectionChanged = false;
         private void dgvMasterView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (!RegisteredSelectionChanged) {
+                dgvMasterView.SelectionChanged += dgvMasterView_SelectionChanged;
+                RegisteredSelectionChanged = true;
+            }
             decimal? setvalue = e.Button == MouseButtons.Left ? BasicEditorClickValue : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
         }

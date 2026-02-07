@@ -253,9 +253,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         private static SolidBrush CellPaintingPenBright = new(Color.FromArgb(100, 100, 100));
         private static SolidBrush CellPaintingColor = new(Color.Black);
         public static DataGridViewCell HoverCell { get; set; }
-        public static List<int> SelectedRows = new();
         ///Paints rounded rectangles for the frozen columns
-        public static void CellPaintFancy(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, Sequencer_Object seq = null)
+        public static void CellPaintFancy(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<int> SelectedRows, Sequencer_Object seq = null)
         {
             //skip header row
             if (e.RowIndex == -1)
