@@ -391,7 +391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.Location = new Point(39, 30);
             this.trackEditor.Margin = new Padding(4, 3, 4, 3);
             this.trackEditor.Name = "trackEditor";
-            this.trackEditor.PlaybackPosition = 0D;
+            this.trackEditor.PlaybackPosition = -1D;
             this.trackEditor.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.FromArgb(90, 90, 90);
@@ -1185,7 +1185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.dgvMasterView.GridColor = Color.Black;
             this.dgvMasterView.Location = new Point(100, 0);
             this.dgvMasterView.Margin = new Padding(4, 3, 4, 3);
-            this.dgvMasterView.MasterBG = null;
+            this.dgvMasterView.MasterBG = new(1, 1);
             this.dgvMasterView.Name = "dgvMasterView";
             this.dgvMasterView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;

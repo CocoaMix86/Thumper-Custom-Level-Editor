@@ -35,9 +35,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             LoadLeaf(load, filepath);
             LoadSequencer(load["seq_objs"], LeafProperties, trackEditor);
-            LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd(load);
-            TCLE.SaveTCL();
         }
         ///Load LVL Sequencer
         public Form_LeafEditor(LvlProperties toload, bool simpleload = false)
@@ -61,9 +59,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlSequencer = toload;
             LoadLeaf(null, LvlSequencer.FilePath, LvlSequencer);
             LoadSequencer(LvlSequencer.seqJSON, LeafProperties, trackEditor);
-            LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd(LvlSequencer.seqJSON);
-            TCLE.SaveTCL();
         }
 
         private void RenderForm()
@@ -71,6 +67,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SimpleLoad)
                 return;
 
+            this.SuspendLayout();
+            this.dockPanel1.SuspendLayout();
             dockPanel1.Theme = TCLE.DockTheme;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             contentMain.Controls.Add(splitContainerLeafSide);
@@ -113,6 +111,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
             btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
             btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
+            this.dockPanel1.ResumeLayout();
+            this.ResumeLayout();
         }
 
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
@@ -2493,13 +2493,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LoadEnd(dynamic savestate)
         {
-            //finsih up setting up the leaf editor. Enable some buttons, set zoom level, etc.
+            //finish up setting up the editor. Enable some buttons, set zoom level, etc.
             trackZoom_Scroll(null, null);
+            trackEditor.RowHeadersVisible = true;
+            TCLE.ResizeHeaders(trackEditor);
             foreach (Sequencer_Object seq in SequencerObjects) {
                 //update visual row properties
                 ChangeTrackName(seq, seq.category);
             }
+            TrackTimeSigHighlighting();
+            trackEditor.Invalidate();
 
+            //initialize undo base state to first load
             UndoList.Add(new SaveState() {
                 reason = "",
                 savestate = savestate
@@ -2507,11 +2512,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
-            EditorIsSaved = true;
             SaveCheckAndWrite(true, "", false);
-            TrackTimeSigHighlighting();
-            trackEditor.Invalidate();
-
             LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
             toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (75);
         }
@@ -2532,7 +2533,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     param_path = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
-                    enabled = ((string)seq_obj["enabled"] ?? "True") == "True",
+                    enabled = ((string)seq_obj["enabled"] ?? "True").Equals("true", StringComparison.OrdinalIgnoreCase),
                     isdefault = false
                 };
 
@@ -2579,11 +2580,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj);
-                RowReadOnly(ObjectToImport, ObjectToImport.enabled);
+                RowReadOnly(ObjectToImport, !ObjectToImport.enabled);
             }
 
-            //return Seq_Objs;
+            //this line exists to force the app to recognize the rows have proper indexes instead of -1
             string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
+            //return Seq_Objs;
             ParentLeaf.seq_objs = LoadedObjects;
         }
 
@@ -2641,6 +2643,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dgv.Rows.Insert(index, LoadedObjects[index]);
         }
 
+        /*
         public void LoadTracksFromSequencer(List<Sequencer_Object> Seq_Objs)
         {
             //clear the DGV and prep for new data
@@ -2652,7 +2655,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.ResizeHeaders(trackEditor);
         }
-
+        */
 
         private void toolstripObjTune_Click(object sender, EventArgs e)
         {
@@ -2729,7 +2732,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
             LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties, trackEditor);
-            LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridLeaf.Refresh();
@@ -2849,14 +2851,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //else if a different sequencer, pass data back and force save
                 else {
                     LvlSequencer.seq_objs = LeafProperties.seq_objs;
-                    /*
-                    if (TCLE.Documents.FirstOrDefault(x => x.GetType() == typeof(Form_LvlEditor) && (x as Form_LvlEditor).LoadedLvl.Name == LoadedLeaf.Name) is Form_LvlEditor Owner) {
-                        Owner.lvlProperties.seq_objs = LeafProperties.seq_objs;
-                        Owner.Save(false);
-                    }*/
                 }
 
-                if (!SimpleLoad) {
+                if (!EditorIsLoading && !SimpleLoad) {
                     TCLE.SaveTCL();
                 }
 

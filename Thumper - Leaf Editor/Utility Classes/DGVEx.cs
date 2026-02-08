@@ -6,10 +6,12 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
 {
     public class DGVEx : DataGridView
     {
-        public Bitmap MasterBG { get; set; }
+        public Bitmap MasterBG { 
+            get; 
+            set; }
         public DGVEx()
         {
-
+            MasterBG = new(1, 1);
         }
 
         protected override void PaintBackground(Graphics graphics, Rectangle clipBounds, Rectangle gridBounds)
