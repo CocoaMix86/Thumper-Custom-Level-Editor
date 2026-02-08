@@ -305,7 +305,7 @@ namespace Thumper_Custom_Level_Editor
             if (_BeatOffset == 0)
                 beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
-            Form_LeafEditor lvlseq = new(Lvl);
+            Form_LeafEditor lvlseq = new(Lvl, true);
             Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
             lvlseq.Dispose();
             //create playback for each leaf

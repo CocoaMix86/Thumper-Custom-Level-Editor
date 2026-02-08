@@ -933,7 +933,7 @@ namespace Thumper_Custom_Level_Editor
                 OpenFile = new Form_GateEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".leaf") {
-                OpenFile = new Form_LeafEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new Form_LeafEditor(_load, filepath, Playback.Generating) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filetype == ".samp") {
                 OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
