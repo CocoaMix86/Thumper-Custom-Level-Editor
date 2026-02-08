@@ -102,6 +102,7 @@ namespace Thumper_Custom_Level_Editor
             leafoptionThinValues.Checked = Properties.Settings.Default.LeafOptionThinBars;
             leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
             leafoptionVerticalCells.Checked = Properties.Settings.Default.LeafOptionVerticalCells;
+            leafoptionPlaybackScroll.Checked = Properties.Settings.Default.LeafOptionPlaybackScroll;
             //
             AppSettings.Recentfiles ??= new List<string>();
             //
