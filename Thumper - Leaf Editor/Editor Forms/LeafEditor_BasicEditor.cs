@@ -188,7 +188,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _importseq.obj_name = LeafProperties.FilePath.Name;
                 _importseq.expandlanes = _importseq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
                 if (_importseq.friendly_lane == "lane center") {
-                    LoadMultiLanes(_importseq, SequencerObjects);
+                    LoadMultiLanes(_importseq, SequencerObjects, trackEditor);
                 }
                 else {
                     SequencerObjects.Add(_importseq);

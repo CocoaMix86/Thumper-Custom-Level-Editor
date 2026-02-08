@@ -20,9 +20,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             if (Playback.Generating) {
-                InitializeComponent();
+                //InitializeComponent();
                 LoadLeafSimple(load, filepath);
-                LoadSequencer(load["seq_objs"], LeafProperties);
+                LoadSequencer(load["seq_objs"], LeafProperties, SimpleTrackEditor);
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null) {
                 LoadLeaf(load, filepath);
                 //each object in the seq_objs[] list becomes a track
-                LoadSequencer(load["seq_objs"], LeafProperties);
+                LoadSequencer(load["seq_objs"], LeafProperties, trackEditor);
                 if (!SaveOnlyNoLoad) {
                     LoadTracksFromSequencer(LeafProperties.seq_objs);
                     LoadEnd();
@@ -59,9 +59,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveOnlyNoLoad = saveonlynoload;
             if (Playback.Generating) {
                 LvlSequencer = toload;
-                InitializeComponent();
+                //InitializeComponent();
                 LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
-                LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                LoadSequencer(LvlSequencer.seqJSON, LeafProperties, SimpleTrackEditor);
                 return;
             }
 
@@ -74,12 +74,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LvlSequencer = toload;
                 LoadLeaf(null, LvlSequencer.FilePath, LvlSequencer);
                 if (!SaveOnlyNoLoad) {
-                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties, trackEditor);
                     LoadTracksFromSequencer(LeafProperties.seq_objs);
                     LoadEnd();
                 }
                 else
-                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties);
+                    LoadSequencer(LvlSequencer.seqJSON, LeafProperties, SimpleTrackEditor);
                 if (!SaveOnlyNoLoad) {
                     TCLE.SaveTCL();
                 }
@@ -1431,7 +1431,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
 
             if (seq.friendly_lane == "lane center") {
-                LoadMultiLanes(seq, SequencerObjects);
+                LoadMultiLanes(seq, SequencerObjects, trackEditor);
             }
             else {
                 SequencerObjects.Add(seq);
@@ -1600,7 +1600,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //
             if (Lanes.Length == 1 && Lanes[0].friendly_lane != "none")
-                LoadMultiLanes(Lanes[0], SequencerObjects);
+                LoadMultiLanes(Lanes[0], SequencerObjects, trackEditor);
             //FindMissingLaneObjects(SequencerObjects[CurrentRow]);
             trackEditor.InvalidateRow(_currentseq.Index);
 
@@ -2345,7 +2345,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (seq.friendly_lane == "lane center") {
-                LoadMultiLanes(seq, SequencerObjects);
+                LoadMultiLanes(seq, SequencerObjects, trackEditor);
             }
             else {
                 SequencerObjects.Add(seq);
@@ -2488,6 +2488,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafLengthChanged();
         }
 
+        public DataGridView SimpleTrackEditor = new();
         public void LoadLeafSimple(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
         {
             LoadedLeaf = filepath;
@@ -2505,7 +2506,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     timesignature = "4/4"
                 };
             }
-            LeafLengthChanged();
+
+            while (LeafProperties.BeatsAndFrozen > SimpleTrackEditor.ColumnCount)
+                SimpleTrackEditor.Columns.Add(new SequencerColumn());
+            //LeafLengthChanged();
         }
 
         public void LoadEnd()
@@ -2525,7 +2529,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Invalidate();
         }
 
-        public static void LoadSequencer(dynamic seqJSON, LeafProperties ParentLeaf)
+        public static void LoadSequencer(dynamic seqJSON, LeafProperties ParentLeaf, DataGridView dgv)
         {
             List<Sequencer_Object> LoadedObjects = new();
 
@@ -2578,14 +2582,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
                 if (ObjectToImport.friendly_lane is not "none") {
-                    LoadMultiLanes(ObjectToImport, LoadedObjects);
+                    LoadMultiLanes(ObjectToImport, LoadedObjects, dgv);
                     ObjectToImport.expandlanes = Properties.Settings.Default.LeafOptionShowLane;
-                    //ParentLeaf.trackEditor.Rows.Add(ObjectToImport);
                 }
                 else {
                     ObjectToImport.expandlanes = true;
                     LoadedObjects.Add(ObjectToImport);
-                    ParentLeaf.trackEditor.Rows.Add(ObjectToImport);
+                    dgv.Rows.Add(ObjectToImport);
                 }
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj);
@@ -2593,6 +2596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             //return Seq_Objs;
+            string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             ParentLeaf.seq_objs = LoadedObjects;
         }
 
@@ -2604,12 +2608,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dp is JObject data_point) {
                     SeqDataPoint data = new() {
                         Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                        Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"]
+                        Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"],
+                        Value = (decimal)data_point["value"]
                     };
                     if ((int)data_point["beat"] >= ObjectToImport.ParentLeaf.Beats)
                         continue;
                     ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset] = data;
-                    ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset].Value = (decimal)data_point["value"];
                 }
                 //old data point. The save includes Value only.
                 else {
@@ -2626,28 +2630,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public static void LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects)
+        public static void LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects, DataGridView dgv)
         {
             Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             if (lookup == null) {
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                ObjectToImport.ParentLeaf.trackEditor.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
 
                 lookup = LoadedObjects.FirstOrDefault(x => x.obj_name == ObjectToImport.obj_name && x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             }
             int index = LoadedObjects.IndexOf(lookup);
             LoadedObjects[index] = ObjectToImport;
-            ObjectToImport.ParentLeaf.trackEditor.Rows.RemoveAt(index);
-            ObjectToImport.ParentLeaf.trackEditor.Rows.Insert(index, LoadedObjects[index]);
+            dgv.Rows.RemoveAt(index);
+            dgv.Rows.Insert(index, LoadedObjects[index]);
         }
 
         public void LoadTracksFromSequencer(List<Sequencer_Object> Seq_Objs)
@@ -2737,7 +2741,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Tuple<int, int>> _selection = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(x => new Tuple<int, int>(x.ColumnIndex, x.RowIndex)).ToList();
             //
             LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? LoadedLeaf, LvlSequencer);
-            LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties);
+            LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties, trackEditor);
             LoadTracksFromSequencer(LeafProperties.seq_objs);
             LoadEnd();
             UndoList.RemoveRange(0, undolistindex);
@@ -3001,6 +3005,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private static void RowReadOnly(Sequencer_Object seq, bool setreadonly)
         {
+            if (Playback.Generating)
+                return;
             if (setreadonly) {
                 seq.ReadOnly = true;
                 foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {

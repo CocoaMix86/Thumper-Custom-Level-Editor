@@ -698,7 +698,7 @@ namespace Thumper_Custom_Level_Editor
             if (velocity > 127)
                 velocity = 127;
             //write each data point as a sample event
-            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
+            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null && x.beat < LeafLastBeat)) {
                 GlobalSampleEvents[GlobalSamplesToPlay.IndexOf(Seq.obj_name)].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(GlobalSamplesToPlay.IndexOf(Seq.obj_name) + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
             }
         }

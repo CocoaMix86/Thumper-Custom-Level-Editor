@@ -108,6 +108,8 @@ namespace Thumper_Custom_Level_Editor
             get => ExpandLanes;
             set {
                 ExpandLanes = value;
+                if (Playback.Generating)
+                    return;
                 if (this.friendly_lane is not "lane center" and not "none")
                     this.Visible = value;
                 Form_LeafEditor.ChangeTrackName(this, this.category);
