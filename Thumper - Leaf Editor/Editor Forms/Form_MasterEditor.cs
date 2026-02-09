@@ -729,9 +729,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //setup new master properties
             masterLvlList.Rows.Clear();
             MasterProperties = new(this, filepath) {
-                skybox = string.IsNullOrEmpty(_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
-                introlvl = string.IsNullOrEmpty(_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
-                checkpointlvl = string.IsNullOrEmpty(_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
+                skybox = string.IsNullOrEmpty((string)_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
+                introlvl = string.IsNullOrEmpty((string)_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = string.IsNullOrEmpty((string)_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
             this.Text = $"{MasterProperties.LoadedMaster.Name}";
             //calc intro lvl
