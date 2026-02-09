@@ -306,14 +306,14 @@ namespace Thumper_Custom_Level_Editor
                 beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
             Form_LeafEditor lvlseq = new(Lvl, true);
-            Playback.CreatePlaybackFromLeaf(lvlseq.leafProperties, lvlseq.leafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
+            Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                 if (leaftoplay == null)
                     continue;
-                Playback.CreatePlaybackFromLeaf(leaftoplay.leafProperties, leaftoplay.leafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset);
+                Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset);
                 beatoffset += leaf.beats;
                 leaftoplay.Dispose();
             }

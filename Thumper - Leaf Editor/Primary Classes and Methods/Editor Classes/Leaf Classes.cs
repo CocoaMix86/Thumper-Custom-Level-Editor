@@ -391,6 +391,7 @@ namespace Thumper_Custom_Level_Editor
         public LeafProperties(Form_LeafEditor Parent, FileInfo path)
         {
             ParentEditor = Parent;
+            LoadedLeaf = path;
             selectedobj = new() { ParentLeaf = this };
         }
 

@@ -86,23 +86,41 @@ namespace Thumper_Custom_Level_Editor
     public class MasterProperties
     {
         [Browsable(false)]
-        public Form_MasterEditor parent;
+        public Form_MasterEditor ParentEditor;
         [Browsable(false)]
         public ObservableCollection<MasterLvlData> masterlvls;
 
         public MasterProperties(Form_MasterEditor Parent, FileInfo path)
         {
-            parent = Parent;
-            FilePath = path;
+            ParentEditor = Parent;
+            LoadedMaster = path;
             masterlvls = new();
-            masterlvls.CollectionChanged += parent.masterlvls_CollectionChanged;
+            masterlvls.CollectionChanged += ParentEditor.masterlvls_CollectionChanged;
         }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => FilePath.FullName;
-        private FileInfo FilePath;
+        public string filepath => LoadedMaster.FullName;
+        [Browsable(false)]
+        public FileInfo LoadedMaster
+        {
+            get { return _loadedmaster; }
+            set {
+                if (_loadedmaster != value) {
+                    TCLE.CloseFileLock(_loadedmaster);
+                    _loadedmaster = value;
+                    if (!_loadedmaster.Exists) {
+                        using (StreamWriter sw = _loadedmaster.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
+                    }
+                    TCLE.AddFileLock(_loadedmaster);
+                }
+            }
+        }
+        private FileInfo _loadedmaster;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]

@@ -27,7 +27,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
 
                 TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
-                foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
+                foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
                     TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
                 }
             }
@@ -63,38 +63,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool GlobalPlayPlus;
         private bool GlobalIsolate;
         private bool LogUndo = true;
-        public FileInfo loadedmaster
-        {
-            get { return LoadedMaster; }
-            set {
-                if (LoadedMaster != value) {
-                    TCLE.CloseFileLock(LoadedMaster);
-                    LoadedMaster = value;
-                    if (!LoadedMaster.Exists) {
-                        using (StreamWriter sw = LoadedMaster.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(LoadedMaster);
-                }
-            }
-        }
-        private FileInfo LoadedMaster;
-        public ObservableCollection<MasterLvlData> MasterLvls { get { return masterproperties.masterlvls; } set { masterproperties.masterlvls = value; } }
-        public MasterProperties masterproperties
-        {
-            get => MasterProperties;
-            set {
-                MasterProperties = value;
-                SaveCheckAndWrite(false, "UUUUUUuuuuuuuuuhhhhhhhhhhhhHHHHHHH");
-            }
-        }
+        public ObservableCollection<MasterLvlData> MasterLvls => MasterProperties.masterlvls;
         public MasterProperties MasterProperties;
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
-            TabText = "Properties",
+            TabText = "Sublevel Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
             BackColor = Color.Black,
@@ -591,14 +565,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void btnMasterLvlAdd_Click(object sender, EventArgs e)
         {
-            /*using OpenFileDialog ofd = new();
-            ofd.Filter = "Thumper Lvl/Gate File|*.lvl;*.gate";
-            ofd.Title = "Load a Thumper Lvl/Gate file";
-            ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                AddFiletoMaster(ofd.FileName);
-            }*/
             if (TCLE.DragDropItems.Items is not "lvlgate" || !TCLE.DragDropItems.Visible) {
                 TCLE.DragDropItems.Items = "lvlgate";
                 TCLE.DragDropItems.Show();
@@ -633,30 +599,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             TCLE.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
-            if (index is -1) {
-                MasterLvls.Add(new MasterLvlData() {
-                    type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
-                    name = (string)_load["obj_name"],
-                    playplus = true,
-                    checkpoint = true,
-                    checkpoint_leader = "<none>",
-                    rest = "<none>",
-                    gatesectiontype = "",
-                    id = TCLE.rng.Next(0, 1000000)
-                });
-            }
-            else {
-                MasterLvls.Insert(index, new MasterLvlData() {
-                    type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
-                    name = (string)_load["obj_name"],
-                    playplus = true,
-                    checkpoint = true,
-                    checkpoint_leader = "<none>",
-                    rest = "<none>",
-                    gatesectiontype = "",
-                    id = TCLE.rng.Next(0, 1000000)
-                });
-            }
+            MasterLvlData _import = new() {
+                type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
+                name = (string)_load["obj_name"],
+                playplus = true,
+                checkpoint = true,
+                checkpoint_leader = "<none>",
+                rest = "<none>",
+                gatesectiontype = "",
+                id = TCLE.rng.Next(0, 1000000)
+            };
+            if (index is -1) 
+                MasterLvls.Add(_import);            
+            else 
+                MasterLvls.Insert(index, _import);
+            
             if (!IsAddingItems)
                 propertyGridMaster.Refresh();
             SaveCheckAndWrite(false, "Add New Lvl");
@@ -768,18 +725,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a master file!");
                 return;
             }
-            loadedmaster = filepath;
-            //set some visual elements
-            this.Text = $"{loadedmaster.Name}";
             EditorLoading = true;
 
             //setup new master properties
             masterLvlList.Rows.Clear();
-            masterproperties = new(this, filepath) {
+            MasterProperties = new(this, filepath) {
                 skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
                 introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
+            this.Text = $"{MasterProperties.LoadedMaster.Name}";
             //calc intro lvl
             MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
@@ -805,14 +760,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = true;
         }
 
-        public void Reload()
-        {
-            dynamic _load = TCLE.LoadFileLock(LoadedMaster.FullName);
-            LoadMaster(_load, LoadedMaster);
-            RecalculateRuntime();
-            masterLvlList.Invalidate();
-        }
-
         public List<SaveState> UndoList = new();
         public List<SaveState> GetUndoList()
         {
@@ -824,7 +771,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadMaster(UndoList[undolistindex].savestate, LoadedMaster);
+            LoadMaster(UndoList[undolistindex].savestate, MasterProperties.LoadedMaster);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridMaster.Refresh();
 
@@ -839,7 +786,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save(bool playsound = true)
         {
             //if LoadedMaster is somehow not set, force Save As instead
-            if (LoadedMaster == null)
+            if (MasterProperties.LoadedMaster == null)
                 SaveAs();
             else
                 SaveCheckAndWrite(true, "", playsound);
@@ -853,9 +800,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedmaster = new FileInfo(sfd.FileName);
+                MasterProperties.LoadedMaster = new FileInfo(sfd.FileName);
 
-                masterproperties ??= new(this, loadedmaster) {
+                MasterProperties ??= new(this, MasterProperties.LoadedMaster) {
                     skybox = "<none>",
                     introlvl = "<none>",
                     checkpointlvl = "<none>"
@@ -863,11 +810,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 SaveCheckAndWrite(true, "", true);
                 if (isnew)
-                    TCLE.CloseFileLock(loadedmaster);
+                    TCLE.CloseFileLock(MasterProperties.LoadedMaster);
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
-            return loadedmaster;
+            return MasterProperties.LoadedMaster;
         }
 
         public bool IsSaved()
@@ -887,7 +834,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedMaster.Name + "*";
+                this.Text = MasterProperties.LoadedMaster.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
                     reason = Reason,
@@ -895,14 +842,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                this.Text = LoadedMaster.Name;
+                this.Text = MasterProperties.LoadedMaster.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedMaster], _saveJSON);
+                TCLE.WriteFileLock(TCLE.lockedfiles[MasterProperties.LoadedMaster], _saveJSON);
                 //find if any raw text docs are open of this gate and update them
-                TCLE.FindReloadRaw(LoadedMaster.Name);
+                TCLE.FindReloadRaw(MasterProperties.LoadedMaster.Name);
                 //update level sections
                 TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
-                foreach (MasterLvlData mld in MasterProperties.masterlvls.Where(x => x.checkpoint)) {
+                foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
                     TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
                 }
                 if (!SaveOnlyNoLoad) {
@@ -1014,70 +961,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _save.Add("isolate_tracks", isolate_tracks);
             _save.Add("checkpoint_lvl_name", _properties.checkpointlvl.Replace("<none>", ""));
             ///end build
-            ///
-            /*
-            ///begin building Config JSON object
-            JObject _config = new() {
-                { "obj_type", "LevelLib" },
-                { "bpm", BPM }
-            };
-            //for each lvl in Master that has checkpoint:True, Config requires a "SECTION_LINEAR"
-            JArray level_sections = new();
-            for (int x = 0; x < checkpoints; x++)
-                level_sections.Add("SECTION_LINEAR");
-            _config.Add("level_sections", level_sections);
-            //
-            //add rail color
-            JArray rails_color = new() {
-                Decimal.Round((decimal)_properties.rail.R / 255, 3),
-                Decimal.Round((decimal)_properties.rail.G / 255, 3),
-                Decimal.Round((decimal)_properties.rail.B / 255, 3),
-                Decimal.Round((decimal)_properties.rail.A / 255, 3)
-            };
-            _config.Add("rails_color", rails_color);
-            //
-            //add rail glow color
-            JArray rails_glow_color = new() {
-                Decimal.Round((decimal)_properties.railglow.R / 255, 3),
-                Decimal.Round((decimal)_properties.railglow.G / 255, 3),
-                Decimal.Round((decimal)_properties.railglow.B / 255, 3),
-                Decimal.Round((decimal)_properties.railglow.A / 255, 3)
-            };
-            _config.Add("rails_glow_color", rails_glow_color);
-            //
-            //add path color
-            JArray path_color = new() {
-                Decimal.Round((decimal)_properties.path.R / 255, 3),
-                Decimal.Round((decimal)_properties.path.G / 255, 3),
-                Decimal.Round((decimal)_properties.path.B / 255, 3),
-                Decimal.Round((decimal)_properties.path.A / 255, 3)
-            };
-            _config.Add("path_color", path_color);
-            //
-            //add joy color
-            JArray joy_color = new(new object[] { 1, 1, 1, 1 });
-            _config.Add("joy_color", joy_color);
-            //
-            ///end build
-
-            ///Delete extra config_ files in the folder, then write Config to file
-            string[] _files = Directory.GetFiles(Path.GetDirectoryName(LoadedMaster), "config_*.txt");
-            foreach (string s in _files)
-                File.Delete(s);
-            File.WriteAllText($@"{TCLE.WorkingFolder}\config_{TCLE.projectjson["level_name"]}.txt", JsonConvert.SerializeObject(_config, Formatting.Indented));
-            */
             ///only need to return _save, since _config is written already
             return _save;
-        }
-
-        private void ResetMaster()
-        {
-            //reset things to default values
-            MasterLvls.Clear();
-            this.Text = "Master Editor";
-            masterproperties.skybox = "";
-            //set saved flag to true, because nothing is loaded
-            SaveCheckAndWrite(true, "");
         }
 
         public void Cut()

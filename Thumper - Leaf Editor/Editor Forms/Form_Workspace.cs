@@ -95,7 +95,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             FileInfo filetoclose = null;
             if (!TCLE.Instance.Disposing) {
                 if (DocClosing.GetType() == typeof(Form_MasterEditor))
-                    filetoclose = (DocClosing as Form_MasterEditor).loadedmaster;
+                    filetoclose = (DocClosing as Form_MasterEditor).MasterProperties.LoadedMaster;
                 else if (DocClosing.GetType() == typeof(Form_GateEditor))
                     filetoclose = (DocClosing as Form_GateEditor).loadedgate;
                 else if (DocClosing.GetType() == typeof(Form_LvlEditor))
@@ -103,7 +103,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (DocClosing.GetType() == typeof(Form_SampleEditor))
                     filetoclose = (DocClosing as Form_SampleEditor).loadedsample;
                 else if (DocClosing.GetType() == typeof(Form_LeafEditor))
-                    filetoclose = (DocClosing as Form_LeafEditor).leafProperties.LoadedLeaf;
+                    filetoclose = (DocClosing as Form_LeafEditor).LeafProperties.LoadedLeaf;
                 else if (DocClosing.GetType() == typeof(Form_RawText))
                     filetoclose = (DocClosing as Form_RawText).loadedfile;
 
@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FileInfo filetoclose = null;
                 if (!TCLE.Instance.Disposing) {
                     if (doc.GetType() == typeof(Form_MasterEditor))
-                        filetoclose = (doc as Form_MasterEditor).loadedmaster;
+                        filetoclose = (doc as Form_MasterEditor).MasterProperties.LoadedMaster;
                     else if (doc.GetType() == typeof(Form_GateEditor))
                         filetoclose = (doc as Form_GateEditor).loadedgate;
                     else if (doc.GetType() == typeof(Form_LvlEditor))
@@ -158,7 +158,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else if (doc.GetType() == typeof(Form_SampleEditor))
                         filetoclose = (doc as Form_SampleEditor).loadedsample;
                     else if (doc.GetType() == typeof(Form_LeafEditor))
-                        filetoclose = (doc as Form_LeafEditor).leafProperties.LoadedLeaf;
+                        filetoclose = (doc as Form_LeafEditor).LeafProperties.LoadedLeaf;
                     else if (doc.GetType() == typeof(Form_RawText))
                         filetoclose = (doc as Form_RawText).loadedfile;
 

@@ -16,13 +16,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void InitializeComponent()
         {
+            /*
             this.SuspendLayout();
             // 
             // DockContentEx
             // 
             this.ClientSize = new Size(314, 261);
             this.Name = "DockContentEx";
-            this.ResumeLayout(false);
+            this.ResumeLayout(false);*/
         }
     }
 
