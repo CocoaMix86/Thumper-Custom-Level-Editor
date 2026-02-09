@@ -12,25 +12,40 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
         {
             InitializeComponent();
-            InitializeMasterStuff();
+            RenderForm();
             ColorFormElements();
-            ///propertyGridMaster.Controls[2].MouseClick += propertyGridMaster_MouseClick;
+
             SaveOnlyNoLoad = saveonlynoload;
-            masterToolStrip.Renderer = new ToolStripOverride();
-            TCLE.DoubleBufferDGV(masterLvlList);
 
             if (load != null) {
                 LoadMaster(load, filepath);
-                UndoList.Add(new SaveState() {
-                    reason = "",
-                    savestate = load
-                });
-
-                TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
-                foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
-                    TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
-                }
+                LoadEnd(load);
             }
+        }
+
+        public void RenderForm()
+        {
+            if (SaveOnlyNoLoad)
+                return;
+
+            dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            //
+            contentPropertyGrid.Controls.Add(propertyGridMaster);
+            propertyGridMaster.Dock = DockStyle.Fill;
+            //
+            try {
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_master.config", m_deserializeDockContent);
+            } catch {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            }
+
+            masterToolStrip.Renderer = new ToolStripOverride();
+            TCLE.DoubleBufferDGV(masterLvlList);
         }
 
         private void Form_MasterEditor_Shown(object sender, EventArgs e)
@@ -65,6 +80,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private bool LogUndo = true;
         public ObservableCollection<MasterLvlData> MasterLvls => MasterProperties.masterlvls;
         public MasterProperties MasterProperties;
+        public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
         public DockContentEx contentPropertyGrid = new() {
@@ -677,24 +693,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// METHODS ///
         ///         ///
 
-        public void InitializeMasterStuff()
-        {
-            dockPanel1.Theme = TCLE.DockTheme;
-            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            //
-            contentMain.Controls.Add(panelMain);
-            panelMain.Dock = DockStyle.Fill;
-            //
-            contentPropertyGrid.Controls.Add(propertyGridMaster);
-            propertyGridMaster.Dock = DockStyle.Fill;
-            //
-            try {
-                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_master.config", m_deserializeDockContent);
-            } catch {
-                contentMain.Show(dockPanel1, DockState.Document);
-                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
-            }
-        }
+        
 
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
@@ -730,9 +729,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //setup new master properties
             masterLvlList.Rows.Clear();
             MasterProperties = new(this, filepath) {
-                skybox = (string)_load["skybox_name"] == "" ? "<none>" : (string)_load["skybox_name"],
-                introlvl = (string)_load["intro_lvl_name"] == "" ? "<none>" : (string)_load["intro_lvl_name"],
-                checkpointlvl = (string)_load["checkpoint_lvl_name"] == "" ? "<none>" : (string)_load["checkpoint_lvl_name"]
+                skybox = string.IsNullOrEmpty(_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
+                introlvl = string.IsNullOrEmpty(_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
+                checkpointlvl = string.IsNullOrEmpty(_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
             this.Text = $"{MasterProperties.LoadedMaster.Name}";
             //calc intro lvl
@@ -755,12 +754,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 10000000)
                 });
             }
+        }
+
+        public void LoadEnd(dynamic savestate)
+        {
+            UndoList.Add(new SaveState() {
+                reason = "",
+                savestate = savestate
+            });
+
+            TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
+            foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
+                TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
+            }
             ///set save flag (master just loaded, has no changes)
             EditorLoading = false;
             EditorIsSaved = true;
         }
 
-        public List<SaveState> UndoList = new();
         public List<SaveState> GetUndoList()
         {
             return UndoList;
