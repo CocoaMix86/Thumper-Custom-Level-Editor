@@ -388,19 +388,36 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public string SequencerType { get; set; } = ".leaf";
 
-        public LeafProperties(Form_LeafEditor Parent, FileInfo path, int _beats)
+        public LeafProperties(Form_LeafEditor Parent, FileInfo path)
         {
             ParentEditor = Parent;
-            Beats = _beats;
             selectedobj = new() { ParentLeaf = this };
         }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => FilePath.FullName;
+        public string filepath => LoadedLeaf.FullName;
         [Browsable(false)]
-        public FileInfo FilePath => ParentEditor.loadedleaf;
+        public FileInfo LoadedLeaf
+        {
+            get => _loadedleaf;
+            set {
+                if (_loadedleaf != value) {
+                    if (_loadedleaf != null)
+                        TCLE.CloseFileLock(_loadedleaf);
+                    _loadedleaf = value;
+                    if (!_loadedleaf.Exists) {
+                        using (StreamWriter sw = _loadedleaf.CreateText()) {
+                            sw.Write(' ');
+                            sw.Close();
+                        }
+                    }
+                    TCLE.AddFileLock(_loadedleaf);
+                }
+            }
+        }
+        private FileInfo _loadedleaf;
 
         [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]

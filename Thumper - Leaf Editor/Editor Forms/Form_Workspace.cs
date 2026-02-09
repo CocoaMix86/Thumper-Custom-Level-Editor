@@ -103,7 +103,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (DocClosing.GetType() == typeof(Form_SampleEditor))
                     filetoclose = (DocClosing as Form_SampleEditor).loadedsample;
                 else if (DocClosing.GetType() == typeof(Form_LeafEditor))
-                    filetoclose = (DocClosing as Form_LeafEditor).loadedleaf;
+                    filetoclose = (DocClosing as Form_LeafEditor).leafProperties.LoadedLeaf;
                 else if (DocClosing.GetType() == typeof(Form_RawText))
                     filetoclose = (DocClosing as Form_RawText).loadedfile;
 
@@ -158,7 +158,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else if (doc.GetType() == typeof(Form_SampleEditor))
                         filetoclose = (doc as Form_SampleEditor).loadedsample;
                     else if (doc.GetType() == typeof(Form_LeafEditor))
-                        filetoclose = (doc as Form_LeafEditor).loadedleaf;
+                        filetoclose = (doc as Form_LeafEditor).leafProperties.LoadedLeaf;
                     else if (doc.GetType() == typeof(Form_RawText))
                         filetoclose = (doc as Form_RawText).loadedfile;
 
