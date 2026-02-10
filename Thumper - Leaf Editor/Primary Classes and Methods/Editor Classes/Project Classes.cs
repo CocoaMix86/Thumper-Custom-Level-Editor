@@ -2,6 +2,7 @@
 using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Drawing.Imaging;
+using System.Reflection.Metadata;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -9,34 +10,44 @@ namespace Thumper_Custom_Level_Editor
 {
     public class ProjectProperties
     {
-        [Browsable(false)]
-        public FileInfo TCL;
-
         public ProjectProperties()
         {
 
         }
+
+        [Browsable(false)]
+        public FileInfo WorkingFile { 
+            get => _workfile;
+            set {
+                _workfile = value;
+                if (value is not null)
+                    FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            } 
+        }
+        private FileInfo _workfile;
+        [Browsable(false)]
+        private FileStream FileLock;
 
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
         public string folder => WorkingFolder.FullName;
         [Browsable(false)]
-        public DirectoryInfo WorkingFolder; 
+        public DirectoryInfo WorkingFolder => WorkingFile.Directory; 
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]
-        public string projectname
+        public string ProjectName
         {
-            get => _ProjectName;
+            get => _projectName;
             set {
                 if (String.IsNullOrEmpty(value))
                     return;
-                _ProjectName = value;
+                _projectName = value;
                 TCLE.Instance.toolstripLevelName.Text = value;
             }
         }
-        private string _ProjectName;
+        private string _projectName;
 
         [Category("General Project Info")]
         [DisplayName("Author(s)")]
@@ -57,11 +68,11 @@ namespace Thumper_Custom_Level_Editor
         [Category("General Project Info")]
         [DisplayName("Thumbnail")]
         [Description("The image to use in the mod loader when loading this level.")]
-        public Image thumbnail
+        public Image Thumbnail
         {
-            get => Thumbnail;
+            get => _thumbnail;
             set {
-                Thumbnail = value;
+                _thumbnail = value;
                 if (value != null) {
                     if (File.Exists($@"{WorkingFolder}\thumbnail.png"))
                         File.Delete($@"{WorkingFolder}\thumbnail.png");
@@ -69,31 +80,31 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-        public Image Thumbnail;
+        private Image _thumbnail;
 
         [Category("Level Properties")]
         [DisplayName("BPM")]
         [Description("Beats Per Minute. If your song is at 100bpm, you'll likely want to map at either 200 or 400, so you can place objects on half note and quarter note intervals.")]
         [RefreshProperties(RefreshProperties.All)]
-        public decimal bpm
+        public decimal BPM
         {
-            get { return Bpm; }
+            get { return _bpm; }
             set {
                 if (value < 1)
                     value = 1;
-                if (value > 99999.99m)
-                    value = 99999.99m;
-                Bpm = value;
-                foreach (IDockContent dc in TCLE.Documents) {
-                    if (dc.DockHandler.TabText.Contains(".lvl")) (dc as Form_LvlEditor).RecalculateRuntime();
-                    else if (dc.DockHandler.TabText.Contains(".gate")) (dc as Form_GateEditor).RecalculateRuntime();
-                    else if (dc.DockHandler.TabText.Contains(".master")) (dc as Form_MasterEditor).RecalculateRuntime();
-                    else if (dc.DockHandler.TabText.Contains(".leaf")) {
-                        foreach (Sequencer_Object seq in (dc as Form_LeafEditor).LeafProperties.seq_objs) {
+                if (value > 999999.99m)
+                    value = 999999.99m;
+                _bpm = value;
+                foreach ((string name, DockContentEx tab) in TCLE.Documents) {
+                    if (name.EndsWith(".lvl")) (tab as Form_LvlEditor).RecalculateRuntime();
+                    else if (name.EndsWith(".gate")) (tab as Form_GateEditor).RecalculateRuntime();
+                    else if (name.EndsWith(".master")) (tab as Form_MasterEditor).RecalculateRuntime();
+                    else if (name.EndsWith(".leaf")) {
+                        foreach (Sequencer_Object seq in (tab as Form_LeafEditor).LeafProperties.seq_objs) {
                             seq.WaveBitmap = null;
                         }
                         TCLE.alzheimer();
-                        (dc as Form_LeafEditor).trackEditor.Invalidate();
+                        (tab as Form_LeafEditor).trackEditor.Invalidate();
                     }
                 }
                 foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Editor != null)) {
@@ -101,7 +112,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-        private decimal Bpm;
+        private decimal _bpm;
         
         [Category("Level Properties")]
         [DisplayName("Rail Color")]

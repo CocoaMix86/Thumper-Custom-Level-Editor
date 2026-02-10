@@ -124,9 +124,9 @@ namespace Thumper_Custom_Level_Editor
                     foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value)) {
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
-                            ImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            SelectedImageKey = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            ContextMenuStrip = TCLE.ObjectFavorites.ContainsKey(obj.param_path) ? contextMenuFavRemove : contextMenuFav,
+                            ImageKey = obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}",
+                            SelectedImageKey = obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}",
+                            ContextMenuStrip = obj.favorite ? contextMenuFavRemove : contextMenuFav,
                             Tag = obj.obj_name + ";" + obj.param_path
                         };
                         _node.Nodes.Add(_param);
@@ -141,7 +141,7 @@ namespace Thumper_Custom_Level_Editor
             bool filtersearch = txtSearch is not "" and not "Search Objects (Ctrl+;)";
 
             _tree.Nodes[0].Nodes.Clear();
-            foreach (Object_Params obj in TCLE.ObjectFavorites.Select(x => x.Value).Order()) {
+            foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).Order()) {
                 TreeNode _param = new() {
                     Text = obj.param_displayname,
                     ImageKey = "fav",
@@ -228,35 +228,34 @@ namespace Thumper_Custom_Level_Editor
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             if (Source.SelectedNode.ImageKey == "fav")
                 return;
-            Object_Params match = TCLE.LeafObjects[(string)Source.SelectedNode.Tag];
-            if (match != null && !TCLE.ObjectFavorites.ContainsValue(match))
-                TCLE.ObjectFavorites.Add(match.param_path, match);
+            TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = true;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIselect");
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
 
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            TCLE.ObjectFavorites.Remove((string)Source.SelectedNode.Tag);
+            TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = false;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIselect");
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
 
         public static void toolStripFavClear_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            TCLE.ObjectFavorites.Clear();
+            foreach (Object_Params obj in TCLE.LeafObjects.Values)
+                obj.favorite = false;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             TCLE.PlaySound("UIdelete");
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
         }
     }

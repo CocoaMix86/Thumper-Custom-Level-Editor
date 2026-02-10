@@ -763,9 +763,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 savestate = savestate
             });
 
-            TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
+            TCLE._projprops.LevelSections = new() { "SECTION_LINEAR" };
             foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
-                TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
+                TCLE._projprops.LevelSections.Add("SECTION_LINEAR");
             }
             ///set save flag (master just loaded, has no changes)
             EditorLoading = false;
@@ -859,9 +859,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(MasterProperties.LoadedMaster.Name);
                 //update level sections
-                TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
+                TCLE._projprops.LevelSections = new() { "SECTION_LINEAR" };
                 foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
-                    TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
+                    TCLE._projprops.LevelSections.Add("SECTION_LINEAR");
                 }
                 if (!SaveOnlyNoLoad) {
                     TCLE.SaveTCL();

@@ -32,7 +32,7 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue0 = 1.000m;
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public static Dictionary<string, Object_Params> LeafObjects = new();
-        public static Dictionary<string, Object_Params> ObjectFavorites = new();
+        //public static Dictionary<string, Object_Params> ObjectFavorites = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
         public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, double> ProjectSampleRuntimes = new();
@@ -150,8 +150,11 @@ namespace Thumper_Custom_Level_Editor
             //import default colors per object
             ImportDefaultColors();
             //import favorites
-            if (AppSettings.SequencerFavorites != null)
-                ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.Key)).ToDictionary();
+            if (AppSettings.SequencerFavorites != null) {
+                foreach (string key in AppSettings.SequencerFavorites)
+                    LeafObjects[key].favorite = true;
+            }
+                //ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.Key)).ToDictionary();
         }
 
         public static void ImportDefaultColors()
@@ -183,17 +186,17 @@ namespace Thumper_Custom_Level_Editor
 
             TCLE.Explorer?.ColorFormElements();
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 leaf.ColorFormElements();
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor)))
                 lvl.ColorFormElements();
-            foreach (Form_GateEditor gate in TCLE.Documents.Where(x => x.GetType() == typeof(Form_GateEditor)))
+            foreach (Form_GateEditor gate in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_GateEditor)))
                 gate.ColorFormElements();
-            foreach (Form_MasterEditor master in TCLE.Documents.Where(x => x.GetType() == typeof(Form_MasterEditor)))
+            foreach (Form_MasterEditor master in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_MasterEditor)))
                 master.ColorFormElements();
-            foreach (Form_SampleEditor sample in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor)))
+            foreach (Form_SampleEditor sample in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_SampleEditor)))
                 sample.ColorFormElements();
-            foreach (Form_RawText raw in TCLE.Documents.Where(x => x.GetType() == typeof(Form_RawText)))
+            foreach (Form_RawText raw in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_RawText)))
                 raw.ColorFormElements();
         }
 
@@ -275,6 +278,12 @@ namespace Thumper_Custom_Level_Editor
             toolstripFormRestore.Visible = true;
             toolstripFormIcon.Visible = true;
             toolstripExitFullscreen.Visible = TCLE.Fullscreen;
+
+            toolstripProject.Enabled = true;
+            toolstripEdit.Enabled = true;
+            toolstripWindow.Enabled = true;
+            toolstripViewExplorer.Enabled = true;
+            toolstripViewProperties.Enabled = true;
         }
 
         /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
@@ -312,6 +321,7 @@ namespace Thumper_Custom_Level_Editor
         ///
         /// File Lock read/write methods
         /// 
+        /*
         public static void AddFileLock(FileInfo file)
         {
             if (file == null)
@@ -319,7 +329,7 @@ namespace Thumper_Custom_Level_Editor
             if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
                 lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite));
             }
-        }
+        }*/
 
         public static void WriteFileLock(FileStream fs, JObject _save)
         {
@@ -363,7 +373,7 @@ namespace Thumper_Custom_Level_Editor
 
             return _load;
         }
-
+        /*
         public static void DeleteFileLock(FileInfo filetodelete)
         {
             if (lockedfiles.TryGetValue(filetodelete, out FileStream? value)) {
@@ -374,8 +384,8 @@ namespace Thumper_Custom_Level_Editor
             TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
             TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
             TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
-        }
-
+        }*/
+        /*
         public static void CloseFileLock(FileInfo filetoclose)
         {
             if (filetoclose == null)
@@ -384,8 +394,8 @@ namespace Thumper_Custom_Level_Editor
                 value.Close();
                 lockedfiles.Remove(filetoclose);
             }
-        }
-
+        }*/
+        /*
         public static void ClearFileLock()
         {
             //clear previously locked files
@@ -393,7 +403,7 @@ namespace Thumper_Custom_Level_Editor
                 i.Value.Close();
             }
             lockedfiles.Clear();
-        }
+        }*/
         /// 
         /// 
         /// 
@@ -534,10 +544,10 @@ namespace Thumper_Custom_Level_Editor
         {
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
                 //load loop track names and paths to lvlLoopTracks DGV
                 ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             }
@@ -591,10 +601,10 @@ namespace Thumper_Custom_Level_Editor
             Bass.BASS_Free();
             alzheimer();
             TCLE.PlayingChannels.Clear();
-            foreach (Form_SampleEditor samp in TCLE.Documents.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
+            foreach (Form_SampleEditor samp in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
                 samp.sampleList.Refresh();
             }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
                 lvl.lvlLoopTracks.Refresh();
             }
             // Initialize Sound library
@@ -914,39 +924,43 @@ namespace Thumper_Custom_Level_Editor
                     if (ReturnContent)
                         return rawtext;
                     rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
+                    TCLE.Documents.Add(rawtext.WorkingFile.Name + "-raw", rawtext);
                     return null;
                 }
             }
-            //otherwise, open a standard editor for the document type
-            string filetype = filepath.Extension;
             //this finds a pane in the active workspace that has matching extensions already open on it
-            DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filetype)).Any());
+            DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
 
-            DockContent OpenFile = new();
-            if (filetype == ".master") {
+            DockContentEx OpenFile = new(null);
+            if (filepath.Extension == ".master") {
                 OpenFile = new Form_MasterEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            else if (filetype == ".lvl") {
+            else if (filepath.Extension == ".lvl") {
                 OpenFile = new Form_LvlEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            else if (filetype == ".gate") {
+            else if (filepath.Extension == ".gate") {
                 OpenFile = new Form_GateEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            else if (filetype == ".leaf") {
+            else if (filepath.Extension == ".leaf") {
                 OpenFile = new Form_LeafEditor(_load, filepath, Playback.Generating) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            else if (filetype == ".samp") {
+            else if (filepath.Extension == ".samp") {
                 OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
+            TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return OpenFile;
             if (OpenHere != null) OpenFile.Show(OpenHere, null);
             else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
+
             return null;
         }
 
         public static void CloseFile(FileInfo filepath)
         {
+            TCLE.Documents[filepath.Name]?.Dispose();
+            TCLE.Documents[filepath.Name + "-raw"]?.Dispose();
+            /*
             //check tabs in non float
             IDockContent workspacehastab = TCLE.Workspaces.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents).FirstOrDefault(y => y.DockHandler.TabText.StartsWith(filepath.Name));
             if (workspacehastab != null) {
@@ -960,6 +974,7 @@ namespace Thumper_Custom_Level_Editor
                     (toclose as DockContent).DockHandler.Dispose();
                 }
             }
+            */
         }
 
         public static void ReloadLvlsInProject()
@@ -974,14 +989,17 @@ namespace Thumper_Custom_Level_Editor
         public static void FindReloadRaw(string documentname)
         {
             //find if any raw text docs matching documentname are open and update them
+            (TCLE.Documents[documentname + "-raw"] as Form_RawText)?.Reload();
+            /*
             foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
                 (document as Form_RawText).Reload();
             }
+            */
         }
 
         public static void FindEditorRunMethod(Type editor, string method)
         {
-            foreach (IDockContent document in TCLE.Documents.Where(x => x.GetType() == editor)) {
+            foreach (IDockContent document in TCLE.Documents.Values.Where(x => x.GetType() == editor)) {
                 document.GetType().GetMethod(method).Invoke(document, null);
             }
         }
@@ -1011,7 +1029,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //closing everything
             else {
-                foreach (IDockContent document in TCLE.Documents) {
+                foreach (IDockContent document in TCLE.Documents.Values) {
                     bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
                     if (!save)
                         return true;
@@ -1065,15 +1083,15 @@ namespace Thumper_Custom_Level_Editor
             dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
             dynamic ProjectConfig = LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
             ProjectProperties Convert = new() {
-                projectname = (string)ProjectJson["level_name"] ?? "New Project",
+                ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
                 description = (string)ProjectJson["description"] ?? "Please add a description",
                 authornames = (string)ProjectJson["author"] ?? "a person",
-                bpm = (decimal?)ProjectConfig["bpm"] ?? 400m
+                BPM = (decimal?)ProjectConfig["bpm"] ?? 400m
             };
             //load colors, with failover to White
             try {
-                Convert.bpm = (decimal?)ProjectConfig["bpm"] ?? 400m;
+                Convert.BPM = (decimal?)ProjectConfig["bpm"] ?? 400m;
                 dynamic railcolor = ProjectConfig["rails_color"];
                 Convert.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
                 dynamic railglowcolor = ProjectConfig["rails_glow_color"];
@@ -1112,31 +1130,27 @@ namespace Thumper_Custom_Level_Editor
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_LeafEditor _leaf = new(_load, newfile, true);
                     _leaf.SaveCheckAndWrite(true, "");
-                    CloseFileLock(newfile);
                 }
                 else if (newfile.Extension == ".lvl") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_LvlEditor _lvl = new(_load, newfile, true);
                     _lvl.SaveCheckAndWrite(true, "");
-                    CloseFileLock(newfile);
                 }
                 else if (newfile.Extension == ".master") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_MasterEditor _master = new(_load, newfile, true);
                     _master.SaveCheckAndWrite(true, "");
-                    CloseFileLock(newfile);
                 }
                 else if (newfile.Extension == ".samp") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_SampleEditor _samp = new(_load, newfile, true);
                     _samp.SaveCheckAndWrite(true, "");
-                    CloseFileLock(newfile);
                 }
             }
             //build the JSON to write to file
             JObject _saveJSON = BuildSave(Convert);
             //write JSON to file
-            File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            File.WriteAllText($@"{LevelDetails.DirectoryName}\{Convert.ProjectName}.TCL", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
             //locate pyramid_outro
             FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
             if (pyramid != null)
@@ -1144,17 +1158,17 @@ namespace Thumper_Custom_Level_Editor
             else
                 File.WriteAllText($@"{LevelDetails.DirectoryName}\pyramid_outro.leaf", Properties.Resources.leaf_pyramid_outro);
 
-            OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.projectname}.TCL"));
+            OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.ProjectName}.TCL"));
         }
 
         public static JObject BuildSave(ProjectProperties _properties)
         {
             JObject _save = new() {
-                { "level_name", _properties.projectname },
+                { "level_name", _properties.ProjectName },
                 { "difficulty", _properties.difficulty },
                 { "description", _properties.description },
                 { "author", _properties.authornames },
-                { "bpm", _properties.bpm },
+                { "bpm", _properties.BPM },
                 { "level_sections", new JArray() {_properties.LevelSections} },
                 { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
                 { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
@@ -1171,7 +1185,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
             //write JSON to file
-            File.WriteAllText($"{TCLE.ProjectProperties.TCL.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            File.WriteAllText($"{TCLE.ProjectProperties.WorkingFile.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
 
             lastsave = DateTime.Now;
         }

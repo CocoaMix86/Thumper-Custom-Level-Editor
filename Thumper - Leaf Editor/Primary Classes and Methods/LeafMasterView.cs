@@ -45,14 +45,14 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             if (Leaf == null || Leaf.ParentEditor.EditorIsProcessing || TCLE.IsClosing)
                 return;
             //set size of picture to draw
-            Size pic = new(Width * Leaf.beats, (Height * 5) + (Gap * 4) + 4);
+            Size pic = new(Width * Leaf.Beats, (Height * 5) + (Gap * 4) + 4);
             LayerTrack = new(pic.Width, pic.Height);
             Master = new(pic.Width, pic.Height);
             //initialize variables needed
             Middle = (pic.Height / 2) - (Height / 2);
             OffsetsDict = new() { { "a01", -1 * ((Height * 2) + (Gap * 2)) }, { "a02", -1 * (Height + Gap) }, { "ent", 0 }, { "z01", Height + Gap }, { "z02", ((Height * 2) + (Gap * 2)) } };
 
-            Leaf.ParentEditor.dgvMasterView.ColumnCount = Leaf.beats;
+            Leaf.ParentEditor.dgvMasterView.ColumnCount = Leaf.Beats;
             foreach (DataGridViewColumn dgvc in Leaf.ParentEditor.dgvMasterView.Columns)
                 dgvc.Width = Width;
             Leaf.ParentEditor.dgvMasterView.RowCount = 5;

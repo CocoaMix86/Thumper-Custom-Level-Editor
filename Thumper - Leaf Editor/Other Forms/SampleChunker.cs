@@ -13,7 +13,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         Form_SampleEditor ReturnForm;
 
         //how many seconds pass for 1 beat
-        double BeatTime => 60d / (double)TCLE.projectProperties.bpm;
+        double BeatTime => 60d / (double)TCLE.ProjectProperties.BPM;
         //how many beats 1 chunk is
         double ChunkSize;
         //total seconds for 1 chunk
@@ -62,10 +62,10 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             DrawWave();
 
             this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
-            lblMousePos.Text = $"CURRENT BPM = {TCLE.projectProperties.bpm} = 1 min";
+            lblMousePos.Text = $"CURRENT BPM = {TCLE.ProjectProperties.BPM} = 1 min";
             lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fffff")}";
             lblBeats.Text = $"Beats: {SampleToChunk.beats.ToString("0.#####")}";
-            lblBpm.Text = $"Current BPM = {TCLE.projectProperties.bpm} = 1 min";
+            lblBpm.Text = $"Current BPM = {TCLE.ProjectProperties.BPM} = 1 min";
 
             numSplitBeat.Maximum = (decimal)SampleToChunk.beats;
             numSplitSec.Maximum = (decimal)_samp.alteredtime;
@@ -96,7 +96,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             panelStart.Enabled = chkPosStart.Checked;
             if (chkPosStart.Checked)
                 if (radioBeats.Checked)
-                    Starttime = (double)((txtBeatStart.Value / TCLE.projectProperties.bpm) * 60m);
+                    Starttime = (double)((txtBeatStart.Value / TCLE.ProjectProperties.BPM) * 60m);
                 else {
                     if (TimeSpan.TryParse(txtTimeStart.Text, out TimeSpan _result))
                         Starttime = _result.TotalSeconds;
@@ -112,7 +112,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             panelEnd.Enabled = chkPosEnd.Checked;
             if (chkPosEnd.Checked) {
                 if (radioBeats.Checked)
-                    Endtime = (double)((txtBeatEnd.Value / TCLE.projectProperties.bpm) * 60m);
+                    Endtime = (double)((txtBeatEnd.Value / TCLE.ProjectProperties.BPM) * 60m);
                 else {
                     if (TimeSpan.TryParse(txtTimeEnd.Text, out TimeSpan _result))
                         Endtime = _result.TotalSeconds;
@@ -143,7 +143,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private void txtBeatStart_ValueChanged(object sender, EventArgs e)
         {
             txtBeatEnd.Value = txtBeatStart.Value + 1;
-            Starttime = (double)((txtBeatStart.Value / TCLE.projectProperties.bpm) * 60m);
+            Starttime = (double)((txtBeatStart.Value / TCLE.ProjectProperties.BPM) * 60m);
             ParseInputs();
             DrawMarkers();
         }
@@ -179,14 +179,14 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         private void numSplitSec_ValueChanged(object sender, EventArgs e)
         {
             numSplitBeat.ValueChanged -= numSplitBeat_ValueChanged;
-            numSplitBeat.Value = (TCLE.projectProperties.bpm / 60m) * numSplitSec.Value;
+            numSplitBeat.Value = (TCLE.ProjectProperties.BPM / 60m) * numSplitSec.Value;
             numSplitBeat.ValueChanged += numSplitBeat_ValueChanged;
         }
 
         private void numSplitBeat_ValueChanged(object sender, EventArgs e)
         {
             numSplitSec.ValueChanged -= numSplitSec_ValueChanged;
-            numSplitSec.Value = (numSplitBeat.Value / TCLE.projectProperties.bpm) * 60m;
+            numSplitSec.Value = (numSplitBeat.Value / TCLE.ProjectProperties.BPM) * 60m;
             numSplitSec.ValueChanged += numSplitSec_ValueChanged;
         }
 

@@ -68,16 +68,16 @@ namespace Thumper_Custom_Level_Editor
         {
             FileInfo NewProject = new($@"{txtCustomPath.Text}\{txtCustomName.Text}\{txtCustomName.Text}.TCL");
             ProjectProperties NewProjectProperties = new() {
-                projectname = txtCustomName.Text,
+                ProjectName = txtCustomName.Text,
                 difficulty = txtCustomDiff.Text,
                 description = txtDesc.Text,
                 authornames = txtCustomAuthor.Text,
-                bpm = 400,
+                BPM = 400,
                 rail = Color.White,
                 railglow = Color.White,
                 path = Color.White,
                 WorkingFolder = NewProject.Directory,
-                TCL = NewProject
+                WorkingFile = NewProject
             };
 
             if (!NewProjectProperties.WorkingFolder.Exists)

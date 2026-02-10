@@ -18,6 +18,7 @@ namespace Thumper_Custom_Level_Editor
         public decimal default_value { get; set; }
         public string footer { get; set; }
         public Color defaultcolor { get; set; }
+        public bool favorite { get; set; }
     }
 
     public class Sequencer_Object : DataGridViewRow
@@ -370,6 +371,12 @@ namespace Thumper_Custom_Level_Editor
 
     public class LeafProperties
     {
+        public LeafProperties(Form_LeafEditor Parent)
+        {
+            ParentEditor = Parent;
+            selectedobj = new() { ParentLeaf = this };
+        }
+
         [Browsable(false)]
         public Form_LeafEditor ParentEditor;
         [Browsable(false)]
@@ -388,17 +395,11 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public string SequencerType { get; set; } = ".leaf";
 
-        public LeafProperties(Form_LeafEditor Parent, FileInfo path)
-        {
-            ParentEditor = Parent;
-            LoadedLeaf = path;
-            selectedobj = new() { ParentLeaf = this };
-        }
-
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => LoadedLeaf.FullName;
+        public string filepath => this.ParentEditor.WorkingFile.FullName;
+        /*
         [Browsable(false)]
         public FileInfo LoadedLeaf
         {
@@ -419,14 +420,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private FileInfo _loadedleaf;
-
+        */
         [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]
         [Description("How many beats long this sequencer/leaf is.")]
         [Editor(typeof(LeafBeatLength), typeof(UITypeEditor))]
-        public int beats
+        public int Beats
         {
-            get => Beats;
+            get => _beats;
             set {
                 if (SequencerType == ".leaf") {
                     if (value > 255)
@@ -437,16 +438,16 @@ namespace Thumper_Custom_Level_Editor
                 //cannot change beats if editing a non-leaf sequencer
                 else
                     return;
-                Beats = (int)value;
+                _beats = (int)value;
                 BeatsChangedSinceSave = true;
                 if (!ParentEditor.EditorIsLoading)
                     ParentEditor.LeafLengthChanged();
             }
         }
         [Browsable(false)]
-        public int Beats;
+        public int _beats;
         [Browsable(false)]
-        public int BeatsAndFrozen => Beats + Form_LeafEditor.FrozenColumnOffset;
+        public int BeatsAndFrozen => _beats + Form_LeafEditor.FrozenColumnOffset;
         [Browsable(false)]
         public bool BeatsChangedSinceSave = false;
 

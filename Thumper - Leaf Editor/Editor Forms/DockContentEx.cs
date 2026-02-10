@@ -4,9 +4,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public class DockContentEx : DockContent
     {
-        public DockContentEx()
+        public bool NoLock { get; set; }
+        public FileInfo WorkingFile { 
+            get => _workfile; 
+            set {
+                _workfile = value;
+                if (value is not null && !NoLock)
+                    FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            } 
+        }
+        private FileInfo _workfile;
+        public FileStream FileLock { get; set; }
+        public DockContentEx(FileInfo _filetolock)
         {
-            
+            if (_filetolock == null)
+                return;
+            WorkingFile = _filetolock;
         }
 
         protected override string GetPersistString()
@@ -16,14 +29,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void InitializeComponent()
         {
-            /*
-            this.SuspendLayout();
-            // 
-            // DockContentEx
-            // 
-            this.ClientSize = new Size(314, 261);
-            this.Name = "DockContentEx";
-            this.ResumeLayout(false);*/
+
         }
     }
 

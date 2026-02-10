@@ -22,22 +22,18 @@ namespace Thumper_Custom_Level_Editor
         public static DockPanel DockMain => Instance.dockMain;
         public static Form_WorkSpace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
-        public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents.Concat((x as Form_WorkSpace).dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents)));
+        //public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents.Concat((x as Form_WorkSpace).dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents)));
+        public static Dictionary<string, DockContentEx> Documents = new();
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         private static Properties.Settings AppSettings = Properties.Settings.Default;
         public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
-        public static decimal BPM => ProjectProperties.bpm;
+        public static decimal BPM => ProjectProperties.BPM;
         public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
         public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
         public static Dictionary<string, Keys> Keybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        public static Dictionary<FileInfo, FileStream> lockedfiles = new();
-        public static ProjectProperties projectProperties
-        {
-            get => ProjectProperties;
-            set => ProjectProperties = value;
-        }
+        //public static Dictionary<FileInfo, FileStream> lockedfiles = new();
         public static ProjectProperties ProjectProperties;
         public static SettingsUITheme settingsUITheme = new();
         public static bool Fullscreen;
@@ -69,12 +65,12 @@ namespace Thumper_Custom_Level_Editor
             TabRightClickMenu = contextmenuTabClick;
             MainBeeble.Owner = this;
             DragDropItems.Owner = this;
-            projectProperties = new() {
-                projectname = "",
+            ProjectProperties = new() {
+                ProjectName = "",
                 description = "",
                 authornames = "",
-                bpm = 0,
-                WorkingFolder = null
+                BPM = 0,
+                WorkingFile = null
             };
             MenusVisible(false);
 
@@ -205,7 +201,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save sequencer favs
-            AppSettings.SequencerFavorites = TCLE.ObjectFavorites.Select(x => x.Value.param_path).ToList();
+            AppSettings.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.favorite).Select(x => $"{x.obj_name};{x.param_path}").ToList();
             //save panel sizes and locations
             AppSettings.beeblesize = MainBeeble.Size;
             AppSettings.beebleloc = MainBeeble.Location;
@@ -487,9 +483,8 @@ namespace Thumper_Custom_Level_Editor
             //Try locking the .TCL first. If it fails, the level is already open
             //in that case, return before doing anything
             try {
-                lockedfiles.Add(TCL, new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read));
-                CloseFileLock(TCL);
-                //ClearFileLock();
+                var _testlock = new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                _testlock.Close();
             } catch (Exception) {
                 MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
                 return;
@@ -508,40 +503,38 @@ namespace Thumper_Custom_Level_Editor
                     Thumbnail = Image.FromStream(fs);
                 }
             }
-            projectProperties = new() {
-                projectname = (string)ProjectJson["level_name"] ?? "New Project",
+            ProjectProperties = new() {
+                ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
                 description = (string)ProjectJson["description"] ?? "Please add a description",
                 authornames = (string)ProjectJson["author"] ?? "a person",
-                bpm = (decimal?)ProjectJson["bpm"] ?? 400m,
-                WorkingFolder = TCL.Directory,
-                TCL = TCL,
+                BPM = (decimal?)ProjectJson["bpm"] ?? 400m,
+                WorkingFile = TCL,
                 Thumbnail = Thumbnail
             };
             MenusVisible(true);
             //load colors, with failover to White
             try {
                 dynamic railcolor = ProjectJson["rails_color"];
-                projectProperties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                ProjectProperties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
                 dynamic railglowcolor = ProjectJson["rails_glow_color"];
-                projectProperties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                ProjectProperties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
                 dynamic pathcolor = ProjectJson["path_color"];
-                projectProperties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+                ProjectProperties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
             } catch (Exception) {
-                projectProperties.rail = Color.White;
-                projectProperties.railglow = Color.White;
-                projectProperties.path = Color.White;
+                ProjectProperties.rail = Color.White;
+                ProjectProperties.railglow = Color.White;
+                ProjectProperties.path = Color.White;
             }
             //update some visual elements
-            toolstripLevelName.Text = projectProperties.projectname;
-            toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{projectProperties.difficulty}");
+            toolstripLevelName.Text = ProjectProperties.ProjectName;
+            toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{ProjectProperties.difficulty}");
             //add to recent files
             AppSettings.Recentfiles.Remove(TCL.FullName);
             AppSettings.Recentfiles.Insert(0, TCL.FullName);
             JumpListUpdate();
             //load sample of the project
             ReloadProjectSamples();
-            panelRecentFiles.Visible = false;
 
             //create Project Explorer and Project Property panels
             Explorer = new() { TabText = "Project Explorer", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
@@ -564,12 +557,6 @@ namespace Thumper_Custom_Level_Editor
             IsLoadingProject = false;
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
-
-            toolstripProject.Enabled = true;
-            toolstripEdit.Enabled = true;
-            toolstripWindow.Enabled = true;
-            toolstripViewExplorer.Enabled = true;
-            toolstripViewProperties.Enabled = true;
 
             DockPane documentsPane = dockMain.Panes.FirstOrDefault(x => x.DockState == DockState.Document);
             if (documentsPane != null) {
@@ -719,7 +706,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionShowCategory_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowCategory = leafoptionShowCategory.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 foreach (Sequencer_Object seq in leaf.LeafProperties.seq_objs) {
                     Form_LeafEditor.ChangeTrackName(seq, seq.category);
                 }
@@ -730,7 +717,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionShowGrid_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
                 leaf.dgvMasterView.Refresh();
             }
@@ -739,7 +726,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionConnectBars_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionConnectBars = leafoptionConnectBars.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
         }
@@ -747,7 +734,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionShowLanes_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowLane = leafoptionShowLanes.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 if (Properties.Settings.Default.LeafOptionShowLane) {
                     foreach (Sequencer_Object seq in leaf.LeafProperties.seq_objs) {
                         seq.expandlanes = true;
@@ -762,7 +749,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionEaseDots_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionEaseDots = leafoptionEaseDots.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
         }
@@ -770,7 +757,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionThinValues_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionThinBars = leafoptionThinValues.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
         }
@@ -778,7 +765,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionShowWave_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowWave = leafoptionShowWave.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
         }
@@ -786,7 +773,7 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionVerticalCells_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionVerticalCells = leafoptionVerticalCells.Checked;
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 leaf.trackEditor.Refresh();
             }
         }
@@ -1057,7 +1044,6 @@ namespace Thumper_Custom_Level_Editor
                 else {
                     if (files.Any(x => x.Name == pack.Item1.Name)) {
                         TCLE.CloseFile(pack.Item1);
-                        TCLE.DeleteFileLock(files.First(x => x.Name == pack.Item1.Name));
                         TCLE.RemoveProjectSamples(files.First(x => x.Name == pack.Item1.Name));
                         filesupdates = true;
                     }

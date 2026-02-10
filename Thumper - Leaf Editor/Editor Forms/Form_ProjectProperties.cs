@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadProjectProperties()
         {
             propertyGridProject.PropertyValueChanged -= propertyGridProject_PropertyValueChanged;
-            propertyGridProject.SelectedObject = TCLE.ProjectProperties;
+            propertyGridProject.SelectedObject = TCLE._projprops;
             propertyGridProject.PropertyValueChanged += propertyGridProject_PropertyValueChanged;
         }
         #endregion

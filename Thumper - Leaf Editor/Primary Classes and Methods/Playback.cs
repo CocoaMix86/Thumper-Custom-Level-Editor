@@ -128,13 +128,13 @@ namespace Thumper_Custom_Level_Editor
             BeatOffset = _BeatOffset;
             SequencerEvents = new List<BASS_MIDI_EVENT>[23];
             for (int x = 0; x < SequencerEvents.Length; x++) {
-                SequencerEvents[x] = new(Leaf.beats + CallOffset);
+                SequencerEvents[x] = new(Leaf.Beats + CallOffset);
             }
 
-            LeafLastBeat = Leaf.beats;
+            LeafLastBeat = Leaf.Beats;
             if (BeatStop > 0) {
                 BeatStop += 1;
-                LeafLastBeat = Math.Min(Leaf.beats, BeatStop);
+                LeafLastBeat = Math.Min(Leaf.Beats, BeatStop);
             }
             GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.LoadedLeaf.Name, (BeatOffset) * 100));
 
@@ -306,14 +306,14 @@ namespace Thumper_Custom_Level_Editor
                 beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
             Form_LeafEditor lvlseq = new(Lvl, true);
-            Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
+            Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.Beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
                 Form_LeafEditor leaftoplay = (Form_LeafEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf.leafname), false, true);
                 if (leaftoplay == null)
                     continue;
-                Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.beats + Form_LeafEditor.FrozenColumnOffset, beatoffset);
+                Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.Beats + Form_LeafEditor.FrozenColumnOffset, beatoffset);
                 beatoffset += leaf.beats;
                 leaftoplay.Dispose();
             }
