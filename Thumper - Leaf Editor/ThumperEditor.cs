@@ -707,7 +707,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionShowCategory = leafoptionShowCategory.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                foreach (Sequencer_Object seq in leaf.LeafProperties.seq_objs) {
+                foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
                     Form_LeafEditor.ChangeTrackName(seq, seq.category);
                 }
                 TCLE.ResizeHeaders(leaf.trackEditor);
@@ -736,7 +736,7 @@ namespace Thumper_Custom_Level_Editor
             Properties.Settings.Default.LeafOptionShowLane = leafoptionShowLanes.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 if (Properties.Settings.Default.LeafOptionShowLane) {
-                    foreach (Sequencer_Object seq in leaf.LeafProperties.seq_objs) {
+                    foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
                         seq.expandlanes = true;
                     }
                     leaf.trackEditor.Invalidate();

@@ -9,32 +9,75 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LvlEditor : DockContentEx
     {
         #region Form Construction
-        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
+        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
         {
-            if (Playback.Generating) {
+            SimpleLoad = saveonlynoload;
+            if (SimpleLoad) {
                 LoadLvlSimple(load, filepath);
                 return;
             }
-            SaveOnlyNoLoad = saveonlynoload;
+
             InitializeComponent();
-            InitializeLvlStuff();
+            RenderForm();
             ColorFormElements();
-            lvlToolStrip.Renderer = new ToolStripOverride();
-            lvlPathsToolStrip.Renderer = new ToolStripOverride();
-            lvlLoopToolStrip.Renderer = new ToolStripOverride();
-            TCLE.DoubleBufferDGV(lvlLeafList);
 
             if (load != null) {
                 LoadLvl(load, filepath);
-                _ = new Form_LeafEditor(lvlProperties, saveonlynoload);
+                _ = new Form_LeafEditor(LvlProperties, filepath, true);
                 UndoList.Add(new SaveState() {
                     reason = "",
                     savestate = load
                 });
             }
-
-            btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
         }
+
+        public void RenderForm()
+        {
+            if (SimpleLoad)
+                return;
+            ///customize Loop Track list a bit
+            //custom column containing comboboxes per cell
+            lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
+            lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
+            ///
+            dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            //
+            contentTunnel.Controls.Add(panelTunnel);
+            panelTunnel.Dock = DockStyle.Fill;
+            //
+            contentLoop.Controls.Add(panelLoop);
+            panelLoop.Dock = DockStyle.Fill;
+            //
+            lvlToolStrip.Renderer = new ToolStripOverride();
+            lvlPathsToolStrip.Renderer = new ToolStripOverride();
+            lvlLoopToolStrip.Renderer = new ToolStripOverride();
+            TCLE.DoubleBufferDGV(lvlLeafList);
+            btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
+            //
+            try {
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_lvl.config", m_deserializeDockContent);
+            } catch {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
+                contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
+            }
+
+            if (TCLE.ClipboardPaths.Count > 0)
+                btnLvlPasteTunnel.Enabled = true;
+        }
+
+        public void ColorFormElements()
+        {
+            this.BackColor = Properties.Settings.Default.ColorLvlBG;
+            lvlLeafList.BackgroundColor = Properties.Settings.Default.ColorLvlLeafBG;
+            lvlLeafPaths.BackgroundColor = Properties.Settings.Default.ColorLvlTunnelBG;
+            lvlLoopTracks.BackgroundColor = Properties.Settings.Default.ColorLvlLoopsBG;
+        }
+
         private void Form_LvlEditor_Shown(object sender, EventArgs e)
         {
         }
@@ -47,14 +90,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
         }
-
-        public void ColorFormElements()
-        {
-            this.BackColor = Properties.Settings.Default.ColorLvlBG;
-            lvlLeafList.BackgroundColor = Properties.Settings.Default.ColorLvlLeafBG;
-            lvlLeafPaths.BackgroundColor = Properties.Settings.Default.ColorLvlTunnelBG;
-            lvlLoopTracks.BackgroundColor = Properties.Settings.Default.ColorLvlLoopsBG;
-        }
         #endregion
 
         #region Variables
@@ -65,39 +100,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             set;
         }
         public bool LogUndo = true;
-        private bool SaveOnlyNoLoad;
-        public FileInfo loadedlvl
+        private bool SimpleLoad;
+        public LvlProperties LvlProperties
         {
-            get => LoadedLvl;
+            get { return _lvlproperties; }
             set {
-                if (LoadedLvl != value) {
-                    TCLE.CloseFileLock(LoadedLvl);
-                    LoadedLvl = value;
-                    if (!LoadedLvl.Exists) {
-                        using (StreamWriter sw = LoadedLvl.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(LoadedLvl);
-                }
-            }
-        }
-        public FileInfo LoadedLvl;
-        public LvlProperties lvlProperties
-        {
-            get { return LvlProperties; }
-            set {
-                LvlProperties = value;
+                _lvlproperties = value;
                 SaveCheckAndWrite(false, "uuuuuhhhhhhhhhhhhhh");
             }
         }
-        private LvlProperties LvlProperties;
+        private LvlProperties _lvlproperties;
+        public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
-        public ObservableCollection<LvlLeafData> LvlLeafs { get => LvlProperties.lvlleafs; set => LvlProperties.lvlleafs = value; }
+        public ObservableCollection<LvlLeafData> LvlLeafs => LvlProperties.lvlleafs;
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentTunnel = new() {
+        public DockContentEx contentTunnel = new(null) {
             TabText = "Paths/Tunnels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -105,7 +123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new() {
+        public DockContentEx contentMain = new(null) {
             TabText = "Leaf List",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -113,7 +131,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentLoop = new() {
+        public DockContentEx contentLoop = new(null) {
             TabText = "Loop Tracks",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -135,7 +153,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            lvlProperties.sublevel = LvlLeafs[e.RowIndex];
+            LvlProperties.sublevel = LvlLeafs[e.RowIndex];
             LvlUpdatePaths(LvlProperties.sublevel);
         }
 
@@ -155,7 +173,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (lvlLeafList.RowCount < 1 || lvlLeafList.SelectedRows.Count == 0)
                 return;
-            lvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
+            LvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
             LvlUpdatePaths(LvlProperties.sublevel);
         }
 
@@ -386,8 +404,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                     foreach (string path in RowsToMove) {
-                        lvlProperties.sublevel.paths.Remove(path);
-                        lvlProperties.sublevel.paths.Insert(targetRow, path);
+                        LvlProperties.sublevel.paths.Remove(path);
+                        LvlProperties.sublevel.paths.Insert(targetRow, path);
                         previousDragOver = targetRow;
                         lvlLeafPaths.Rows[targetRow].Selected = true;
                     }
@@ -600,7 +618,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //save check state
             Properties.Settings.Default.PreviewTunnel = btnLvlPathView.Checked;
             //update every active lvl document with new state
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor)))
                 lvl.btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
         }
 
@@ -814,11 +832,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlCopyTunnel_Click(object sender, EventArgs e)
         {
-            if (loadedlvl == null)
+            if (this.WorkingFile == null)
                 return;
             TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
             //enable the paste button everywhere
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
                 lvl.btnLvlPasteTunnel.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
@@ -880,7 +898,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DockPaneCollection Panes = TCLE.ActiveWorkspace.dockMain.Panes;
             DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(".leaf")).Any());
 
-            Form_LeafEditor leaf = new(LvlProperties) { DockAreas = DockAreas.Document | DockAreas.Float };
+            Form_LeafEditor leaf = new(LvlProperties, this.WorkingFile, false) { DockAreas = DockAreas.Document | DockAreas.Float };
             if (OpenHere != null)
                 leaf.Show(OpenHere, null);
             else
@@ -892,40 +910,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         /// METHODS ///
         ///         ///
-
-        public void InitializeLvlStuff()
-        {
-            if (SaveOnlyNoLoad)
-                return;
-            ///customize Loop Track list a bit
-            //custom column containing comboboxes per cell
-            lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
-            lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
-            ///
-            dockPanel1.Theme = TCLE.DockTheme;
-            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            //
-            contentMain.Controls.Add(panelMain);
-            panelMain.Dock = DockStyle.Fill;
-            //
-            contentTunnel.Controls.Add(panelTunnel);
-            panelTunnel.Dock = DockStyle.Fill;
-            //
-            contentLoop.Controls.Add(panelLoop);
-            panelLoop.Dock = DockStyle.Fill;
-            //
-            try {
-                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_lvl.config", m_deserializeDockContent);
-            } catch {
-                contentMain.Show(dockPanel1, DockState.Document);
-                contentTunnel.Show(contentMain.Pane, DockAlignment.Right, 0.4d);
-                contentLoop.Show(contentTunnel.Pane, DockAlignment.Bottom, 0.4d);
-            }
-
-            if (TCLE.ClipboardPaths.Count > 0)
-                btnLvlPasteTunnel.Enabled = true;
-        }
-
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_lvl.config");
@@ -960,18 +944,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a lvl file!");
                 return;
             }
-            loadedlvl = filepath;
-            this.Text = LoadedLvl.Name;
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
 
-            lvlProperties = new(this, filepath) {
+            LvlProperties = new(this) {
                 approachbeats = (int)_load["approach_beats"],
                 volume = (decimal)_load["volume"],
                 allowinput = (string)_load["input_allowed"] == "True",
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
+            this.WorkingFile = filepath;
+            this.Text = this.WorkingFile.Name;
 
             //Clear DGVs so new data can load
             lvlLoopTracks.Rows.Clear();
@@ -982,7 +966,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //load loop track names and paths to lvlLoopTracks DGV
             ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             foreach (dynamic samp in _load["loops"]) {
-                lvlProperties.lvlloops.Add(new LvlLoop() {
+                LvlProperties.lvlloops.Add(new LvlLoop() {
                     sample = (string)samp["samp_name"],
                     beats = (decimal?)samp["beats_per_loop"] == null ? 0 : (decimal)samp["beats_per_loop"]
                 });
@@ -1009,19 +993,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
-            LoadedLvl = filepath;
 
-            lvlProperties = new(this, filepath) {
+            LvlProperties = new(this) {
                 approachbeats = (int)_load["approach_beats"],
                 volume = (decimal)_load["volume"],
                 allowinput = (string)_load["input_allowed"] == "True",
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
+            this.WorkingFile = filepath;
             //load loop tracks
             LvlProperties.lvlloops.CollectionChanged -= lvlloop_CollectionChanged;
             foreach (dynamic samp in _load["loops"]) {
-                lvlProperties.lvlloops.Add(new LvlLoop() {
+                LvlProperties.lvlloops.Add(new LvlLoop() {
                     sample = (string)samp["samp_name"],
                     beats = (decimal?)samp["beats_per_loop"] == null ? 0 : (decimal)samp["beats_per_loop"]
                 });
@@ -1120,15 +1104,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlUpdatePaths(LvlProperties.sublevel);
         }
 
-        public void Reload()
-        {
-            dynamic _load = TCLE.LoadFileLock(LoadedLvl.FullName);
-            LoadLvl(_load, LoadedLvl);
-            RecalculateRuntime();
-            lvlLeafList.Invalidate();
-        }
-
-        public List<SaveState> UndoList = new();
         public List<SaveState> GetUndoList()
         {
             return UndoList;
@@ -1139,7 +1114,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadLvl(UndoList[undolistindex].savestate, LoadedLvl);
+            LoadLvl(UndoList[undolistindex].savestate, this.WorkingFile);
             UndoList.RemoveRange(0, undolistindex);
 
             if (!_trackNotSaved) {
@@ -1153,7 +1128,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save(bool playsound = true)
         {
             //if _loadedlvl is somehow not set, force Save As instead
-            if (LoadedLvl == null) {
+            if (this.WorkingFile == null) {
                 SaveAs();
             }
             else
@@ -1168,9 +1143,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedlvl = new FileInfo(sfd.FileName);
+                this.WorkingFile = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
-                lvlProperties ??= new(this, loadedlvl) {
+                LvlProperties ??= new(this) {
                     approachbeats = 16,
                     volume = 1,
                     allowinput = true,
@@ -1178,12 +1153,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 };
                 EditorIsLoading = false;
                 SaveCheckAndWrite(true, "", true);
-                if (isnew)
-                    TCLE.CloseFileLock(loadedlvl);
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
-            return loadedlvl;
+            return this.WorkingFile;
         }
 
         public bool IsSaved()
@@ -1212,7 +1185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 this.Text = LoadedLvl.Name;
-                lvlProperties.seqJSON = _saveJSON["seq_objs"];
+                LvlProperties.seqJSON = _saveJSON["seq_objs"];
                 //write JSON to file
                 TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _saveJSON);
                 //find if any raw text docs are open of this gate and update them
@@ -1221,7 +1194,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                if (!SaveOnlyNoLoad) {
+                if (!SimpleLoad) {
                     TCLE.SaveTCL();
                 }
             }
@@ -1229,7 +1202,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
-            if (EditorIsLoading || SaveOnlyNoLoad)
+            if (EditorIsLoading || SimpleLoad)
                 return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
@@ -1242,7 +1215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntimeSublevel(LvlLeafData _leaf)
         {
-            if (EditorIsLoading || SaveOnlyNoLoad)
+            if (EditorIsLoading || SimpleLoad)
                 return 0;
 
             FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
@@ -1295,7 +1268,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             //this section adds all colume sequencer controls
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
+            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault)) {
                 //skip blank tracks
                 if (seq_obj.friendly_param == null)
                     continue;
@@ -1487,7 +1460,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("lvl");
                 Playback.CreatePlaybackFromLvl(LvlProperties);
-                Playback.Play(lvlLeafList.SelectedRows.Count > 0 ? LvlLeafs[lvlLeafList.SelectedRows[^1].Index].beatstart : -1, LvlProperties.beats + lvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
+                Playback.Play(lvlLeafList.SelectedRows.Count > 0 ? LvlLeafs[lvlLeafList.SelectedRows[^1].Index].beatstart : -1, LvlProperties.beats + LvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }

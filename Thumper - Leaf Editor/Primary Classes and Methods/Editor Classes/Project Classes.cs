@@ -100,7 +100,7 @@ namespace Thumper_Custom_Level_Editor
                     else if (name.EndsWith(".gate")) (tab as Form_GateEditor).RecalculateRuntime();
                     else if (name.EndsWith(".master")) (tab as Form_MasterEditor).RecalculateRuntime();
                     else if (name.EndsWith(".leaf")) {
-                        foreach (Sequencer_Object seq in (tab as Form_LeafEditor).LeafProperties.seq_objs) {
+                        foreach (Sequencer_Object seq in (tab as Form_LeafEditor).LeafProperties.SequencerObjects) {
                             seq.WaveBitmap = null;
                         }
                         TCLE.alzheimer();

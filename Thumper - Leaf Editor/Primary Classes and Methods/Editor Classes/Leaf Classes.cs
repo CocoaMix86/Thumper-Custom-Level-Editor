@@ -125,7 +125,7 @@ namespace Thumper_Custom_Level_Editor
                 if (friendly_lane is "none")
                     return new() { this };
                 //
-                return ParentLeaf.seq_objs.GetRange(this.Index + this.LaneOffsetFromTop, 5).Select(x => x.friendly_param == this.friendly_param ? x : null).ToList();
+                return ParentLeaf.SequencerObjects.GetRange(this.Index + this.LaneOffsetFromTop, 5).Select(x => x.friendly_param == this.friendly_param ? x : null).ToList();
             }
         }
         public int LaneOffsetFromTop { 
@@ -382,14 +382,14 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public DataGridView trackEditor => ParentEditor.trackEditor;
         [Browsable(false)]
-        public List<Sequencer_Object> seq_objs {
-            get => _SeqObjs;
+        public List<Sequencer_Object> SequencerObjects {
+            get => _seqobjs;
             set {
-                _SeqObjs = value;
+                _seqobjs = value;
                 ParentEditor.EnableLeafButtons();
             }
         }
-        private List<Sequencer_Object> _SeqObjs = new();
+        private List<Sequencer_Object> _seqobjs = new();
         [Browsable(false)]
         public Sequencer_Object selectedobj { get; set; }
         [Browsable(false)]

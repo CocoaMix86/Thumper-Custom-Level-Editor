@@ -31,34 +31,29 @@ namespace Thumper_Custom_Level_Editor
 
     public static partial class ProjectExplorer
     {
+        private const int SB_HORZ = 0x0;
+        private const int SB_VERT = 0x1;
         [LibraryImport("user32.dll")]
         public static partial int GetScrollPos(IntPtr hWnd, int nBar);
-
         [LibraryImport("user32.dll")]
         public static partial int SetScrollPos(IntPtr hWnd, int nBar, int nPos, [MarshalAs(UnmanagedType.Bool)] bool bRedraw);
-
         public static Point GetTreeViewScrollPos(TreeView treeView)
         {
             return new Point(
                 GetScrollPos(treeView.Handle, SB_HORZ),
                 GetScrollPos(treeView.Handle, SB_VERT));
         }
-
         public static void SetTreeViewScrollPos(TreeView treeView, Point scrollPosition)
         {
             SetScrollPos(treeView.Handle, SB_HORZ, scrollPosition.X, true);
             SetScrollPos(treeView.Handle, SB_VERT, scrollPosition.Y, true);
         }
 
-        private const int SB_HORZ = 0x0;
-        private const int SB_VERT = 0x1;
-        //public static Dictionary<string, FileInfo> Files = new();
-        //public static Dictionary<string, DirectoryInfo> Folders = new();
         public static TreeNodeCollection ProjectTree => TCLE.Explorer.treeView1.Nodes;
         public static TreeNode ProjectRoot => ProjectTree[0];
         public static Dictionary<TreeNode, FileOrFolder> AllFiles = new();
-        public static IEnumerable<FileInfo> Files = AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
-        public static IEnumerable<DirectoryInfo> Folders = AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
+        public static IEnumerable<FileInfo> Files => AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
+        public static IEnumerable<DirectoryInfo> Folders => AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
         public static List<string> expandednodes = new();
         public static bool filterenabled;
         public static bool filtersearch;

@@ -31,6 +31,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
 
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            FileLock.Close();
+        }
     }
 
     public class CustomFloatWindow : FloatWindow

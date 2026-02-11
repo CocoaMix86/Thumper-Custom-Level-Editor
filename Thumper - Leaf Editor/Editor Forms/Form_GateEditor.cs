@@ -9,7 +9,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_GateEditor : DockContentEx
     {
         #region Form Construction
-        public Form_GateEditor(dynamic load = null, FileInfo filepath = null)
+        public Form_GateEditor(dynamic load = null, FileInfo filepath = null) : base(filepath)
         {
             if (Playback.Generating) {
                 LoadGateSimple(load, filepath);
@@ -17,9 +17,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             InitializeComponent();
-            InitializeGateStuff();
-            gateToolStrip.Renderer = new ToolStripOverride();
-            TCLE.DoubleBufferDGV(gateLvlList);
+            RenderForm();
 
             if (load != null) {
                 LoadGate(load, filepath);
@@ -29,6 +27,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
         }
+
+        public void RenderForm()
+        {
+            dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            //
+            contentPropertyGrid.Controls.Add(propertyGridGate);
+            propertyGridGate.Dock = DockStyle.Fill;
+            //
+            TCLE.DoubleBufferDGV(gateLvlList);
+            gateToolStrip.Renderer = new ToolStripOverride();
+            //
+            try {
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_gate.config", m_deserializeDockContent);
+            } catch {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
+            }
+        }
+
         private void Form_GateEditor_Shown(object sender, EventArgs e)
         {
             propertyGridGate.Focus();
@@ -51,31 +72,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool EditorIsSaved = true;
-        public bool EditorLoading;
-        private bool SaveOnlyNoLoad;
-        private bool LogUndo = true;
-        private bool IsAddingItems;
-        public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.random));
-        public FileInfo loadedgate
-        {
-            get => LoadedGate;
-            set {
-                if (LoadedGate != value) {
-                    TCLE.CloseFileLock(LoadedGate);
-                    LoadedGate = value;
-                    if (!LoadedGate.Exists) {
-                        using (StreamWriter sw = LoadedGate.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(LoadedGate);
-                }
-            }
-        }
-        private FileInfo LoadedGate;
-        private List<DataGridViewRow> SelectedRows = new();
+        //Static
         private static readonly string[] node_name_hash = new string[] { "0c3025e2", "27e9f06d", "3c5c8436", "3428c8e3" };
         public static readonly List<BossData> bossdata = new() {
             new BossData() {boss_name = "Level 1 - circle", boss_spn = "boss_gate.spn", boss_ent = "boss_gate_pellet.ent"},
@@ -113,19 +110,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             { "SECTION_BOSS_CRAKHED_FINAL", "Final Boss" },
             { "SECTION_BOSS_PYRAMID", "Infinity" }
         };
-        private dynamic gatejson;
-        public GateProperties gateproperties
+        //
+        //Local basic vars
+        public bool EditorIsSaved = true;
+        public bool EditorLoading;
+        private bool SimpleLoad;
+        private bool LogUndo = true;
+        private bool IsAddingItems;
+        public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.Random));
+        //
+        //Local custom class vars
+        public GateProperties GateProperties
         {
-            get { return GateProperties; }
+            get { return _gateproperties; }
             set {
-                GateProperties = value;
+                _gateproperties = value;
                 SaveCheckAndWrite(false, "Unsure what this one tracks");
             }
         }
-        private GateProperties GateProperties;
+        private GateProperties _gateproperties;
+        private List<DataGridViewRow> SelectedRows = new();
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
+        public List<SaveState> UndoList = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new() {
+        public DockContentEx contentPropertyGrid = new(null) {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -133,7 +141,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new() {
+        public DockContentEx contentMain = new(null) {
             TabText = "Lvl Phases",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -165,7 +173,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GateLvls[e.RowIndex].lvlname}")));
+            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GateLvls[e.RowIndex].Lvlname}")));
         }
 
         bool MouseDown;
@@ -395,7 +403,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (Playback.IsPlaying) {
-                if (GateProperties.FilePath.Name == Playback.GlobalCurrentGate && GateLvls[e.RowIndex].lvlname == Playback.GlobalCurrentLvl) {
+                if (this.WorkingFile.Name == Playback.GlobalCurrentGate && GateLvls[e.RowIndex].Lvlname == Playback.GlobalCurrentLvl) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)GateLvls[e.RowIndex].beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
@@ -430,9 +438,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
                 gateLvlList.Rows.Insert(_in, new object[] {
-                    GateProperties.random ? GateLvls[_in].bucket : GateLvls.IndexOf(GateLvls[_in]),
+                    _gateproperties.Random ? GateLvls[_in].bucket : GateLvls.IndexOf(GateLvls[_in]),
                     Properties.Resources.editor_lvl,
-                    GateLvls[_in].lvlname,
+                    GateLvls[_in].Lvlname,
                     0
                 });
             }
@@ -444,9 +452,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
-            btnGateLvlDelete.Enabled = GateProperties.gatelvls.Count > 0;
-            btnGateLvlUp.Enabled = GateProperties.gatelvls.Count > 1;
-            btnGateLvlDown.Enabled = GateProperties.gatelvls.Count > 1;
+            btnGateLvlDelete.Enabled = _gateproperties.gatelvls.Count > 0;
+            btnGateLvlUp.Enabled = _gateproperties.gatelvls.Count > 1;
+            btnGateLvlDown.Enabled = _gateproperties.gatelvls.Count > 1;
 
             //limit how many phases can be added
             btnGateLvlAdd.Enabled = IsAllowedToAddLvl;
@@ -492,11 +500,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<GateLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in gateLvlList.SelectedRows) {
-                todelete.Add(GateProperties.gatelvls[dgvr.Index]);
+                todelete.Add(_gateproperties.gatelvls[dgvr.Index]);
             }
             LogUndo = false;
             foreach (GateLvlData gld in todelete)
-                GateProperties.gatelvls.Remove(gld);
+                _gateproperties.gatelvls.Remove(gld);
             LogUndo = true;
             SaveCheckAndWrite(false, "Remove Phase");
             TCLE.PlaySound("UIobjectremove");
@@ -530,8 +538,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                GateProperties.gatelvls.Insert(dgvr - 1, GateProperties.gatelvls[dgvr]);
-                GateProperties.gatelvls.RemoveAt(dgvr + 1);
+                _gateproperties.gatelvls.Insert(dgvr - 1, _gateproperties.gatelvls[dgvr]);
+                _gateproperties.gatelvls.RemoveAt(dgvr + 1);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -547,8 +555,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                GateProperties.gatelvls.Insert(dgvr + 2, GateProperties.gatelvls[dgvr]);
-                GateProperties.gatelvls.RemoveAt(dgvr);
+                _gateproperties.gatelvls.Insert(dgvr + 2, _gateproperties.gatelvls[dgvr]);
+                _gateproperties.gatelvls.RemoveAt(dgvr);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -566,41 +574,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             Paste();
         }
-
-        private void btnRevertGate_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            SaveCheckAndWrite(true, "");
-            LoadGate(gatejson, LoadedGate);
-            TCLE.PlaySound("UIrevertchanges");
-        }
         #endregion
 
         #region Methods
         ///         ///
         /// Methods ///
         ///         ///
-
-        public void InitializeGateStuff()
-        {
-            dockPanel1.Theme = TCLE.DockTheme;
-            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            //
-            contentMain.Controls.Add(panelMain);
-            panelMain.Dock = DockStyle.Fill;
-            //
-            contentPropertyGrid.Controls.Add(propertyGridGate);
-            propertyGridGate.Dock = DockStyle.Fill;
-            //
-            try {
-                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_gate.config", m_deserializeDockContent);
-            } catch {
-                contentMain.Show(dockPanel1, DockState.Document);
-                contentPropertyGrid.Show(dockPanel1, DockState.DockRight);
-            }
-        }
-
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_gate.config");
@@ -619,7 +598,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public object GetProperties()
         {
-            return GateProperties;
+            return _gateproperties;
         }
 
         public void LoadGate(dynamic _load, FileInfo filepath)
@@ -631,27 +610,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a gate file!");
                 return;
             }
-            loadedgate = filepath;
-            //set some visual elements
-            this.Text = LoadedGate.Name;
             //set flag that load is in progress. This skips Save method
             EditorLoading = true;
 
-            gateproperties = new(this, filepath) {
-                boss = bossdata.FirstOrDefault(x => x.boss_spn == (string)_load["spn_name"])?.boss_name ?? bossdata[0].boss_name,
+            GateProperties = new(this) {
+                Boss = bossdata.FirstOrDefault(x => x.boss_spn == (string)_load["spn_name"])?.boss_name ?? bossdata[0].boss_name,
                 prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
                 postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
                 restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
                 sectiontype = gatesectiontypes.FirstOrDefault(x => x.Key == (string)_load["section_type"]).Value ?? "Boss",
-                random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
+                Random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
+            this.WorkingFile = filepath;
+            //set some visual elements
+            this.Text = this.WorkingFile.Name;
 
             ///Clear form elements so new data can load
             GateLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["boss_patterns"]) {
-                GateProperties.gatelvls.Add(new GateLvlData() {
-                    _Lvlname = _lvl["lvl_name"],
+                _gateproperties.gatelvls.Add(new GateLvlData() {
+                    _lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
                     bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
@@ -665,21 +644,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadGateSimple(dynamic _load, FileInfo filepath)
         {
             EditorLoading = true;
-            LoadedGate = filepath;
 
-            gateproperties = new(this, filepath) {
-                boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
+            GateProperties = new(this) {
+                Boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
                 prelvl = string.IsNullOrEmpty((string)_load["pre_lvl_name"]) ? "<none>" : (string)_load["pre_lvl_name"],
                 postlvl = string.IsNullOrEmpty((string)_load["post_lvl_name"]) ? "<none>" : (string)_load["post_lvl_name"],
                 restartlvl = string.IsNullOrEmpty((string)_load["restart_lvl_name"]) ? "<none>" : (string)_load["restart_lvl_name"],
                 sectiontype = gatesectiontypes.First(x => x.Key == (string)_load["section_type"]).Value,
-                random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
+                Random = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET",
             };
+            this.WorkingFile = filepath;
 
             GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
             foreach (dynamic _lvl in _load["boss_patterns"]) {
-                GateProperties.gatelvls.Add(new GateLvlData() {
-                    _Lvlname = _lvl["lvl_name"],
+                _gateproperties.gatelvls.Add(new GateLvlData() {
+                    _lvlname = _lvl["lvl_name"],
                     sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
                     bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
@@ -690,15 +669,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
         }
 
-        public void Reload()
-        {
-            dynamic _load = TCLE.LoadFileLock(LoadedGate.FullName);
-            LoadGate(_load, LoadedGate);
-            RecalculateRuntime();
-            gateLvlList.Invalidate();
-        }
-
-        public List<SaveState> UndoList = new();
         public List<SaveState> GetUndoList()
         {
             return UndoList;
@@ -709,7 +679,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadGate(UndoList[undolistindex].savestate, LoadedGate);
+            LoadGate(UndoList[undolistindex].savestate, this.WorkingFile);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridGate.Refresh();
 
@@ -724,7 +694,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save(bool playsound = true)
         {
             //if LoadedGate is somehow not set, force Save As instead
-            if (LoadedGate == null)
+            if (this.WorkingFile == null)
                 SaveAs();
             else
                 SaveCheckAndWrite(true, "", playsound);
@@ -737,24 +707,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedgate = new FileInfo(sfd.FileName);
+                this.WorkingFile = new FileInfo(sfd.FileName);
 
-                gateproperties ??= new(this, loadedgate) {
-                    boss = "Level 1 - circle",
+                GateProperties ??= new(this) {
+                    Boss = "Level 1 - circle",
                     prelvl = "<none>",
                     postlvl = "<none>",
                     restartlvl = "<none>",
                     sectiontype = "None",
-                    random = false,
+                    Random = false,
                 };
 
                 SaveCheckAndWrite(true, "", true);
-                if (isnew)
-                    TCLE.CloseFileLock(loadedgate);
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
-            return loadedgate;
+            return this.WorkingFile;
         }
 
         public bool IsSaved()
@@ -770,11 +738,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
-            JObject _saveJSON = BuildSave(gateproperties);
+            JObject _saveJSON = BuildSave(GateProperties);
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedGate.Name + "*";
+                this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
                     reason = Reason,
@@ -782,16 +750,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                this.Text = LoadedGate.Name;
+                this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedGate], _saveJSON);
+                TCLE.WriteFileLock(this.FileLock, _saveJSON);
 
                 //find if any raw text docs are open of this gate and update them
-                TCLE.FindReloadRaw(LoadedGate.Name);
+                TCLE.FindReloadRaw(this.WorkingFile.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                if (!SaveOnlyNoLoad) {
+                if (!SimpleLoad) {
                     TCLE.SaveTCL();
                 }
             }
@@ -822,14 +790,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add lvl/gate data to the list
             if (index == -1) {
                 GateLvls.Add(new GateLvlData() {
-                    _Lvlname = (string)_load["obj_name"],
+                    _lvlname = (string)_load["obj_name"],
                     sentrytype = "None",
                     bucket = 0
                 });
             }
             else {
                 GateLvls.Insert(index, new GateLvlData() {
-                    _Lvlname = (string)_load["obj_name"],
+                    _lvlname = (string)_load["obj_name"],
                     sentrytype = "None",
                     bucket = 0
                 });
@@ -841,27 +809,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
-            if (EditorLoading || GateProperties == null)
+            if (EditorLoading || _gateproperties == null)
                 return 0;
             //depending on the gate configuration, it can have a different amount of lvls in it
-            GateProperties.MaximumRows = 0;
-            if (GateProperties.boss != "Level 9 - pyramid" && !GateProperties.random)
-                GateProperties.MaximumRows = 4;
-            else if (GateProperties.boss == "Level 9 - pyramid")
-                GateProperties.MaximumRows = 5;
-            else if (GateProperties.random)
-                GateProperties.MaximumRows = 16;
+            _gateproperties.MaximumRows = 0;
+            if (_gateproperties.Boss != "Level 9 - pyramid" && !_gateproperties.Random)
+                _gateproperties.MaximumRows = 4;
+            else if (_gateproperties.Boss == "Level 9 - pyramid")
+                _gateproperties.MaximumRows = 5;
+            else if (_gateproperties.Random)
+                _gateproperties.MaximumRows = 16;
 
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
-            GateProperties.prebeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == GateProperties.prelvl)?.FullName);
+            _gateproperties.prebeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.prelvl)?.FullName);
             //calc post lvl beats
-            GateProperties.postbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == GateProperties.postlvl)?.FullName);
+            _gateproperties.postbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.postlvl)?.FullName);
             //loop over each lvl and update the grid with runtime or a warning
             foreach (GateLvlData _lvl in GateLvls) {
                 RecalculateRuntimeSublevel(_lvl);
-                if (GateProperties.random) {
+                if (_gateproperties.Random) {
                     if (!bucketscounted.Contains(_lvl.bucket)) {
                         beattotal += _lvl.beats;
                         bucketscounted.Add(_lvl.bucket);
@@ -881,13 +849,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorLoading)
                 return 0;
 
-            FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_lvl.lvlname}"));
+            FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_lvl.Lvlname}"));
             lvlfile?.Refresh();
 
             if (lvlfile == null || !lvlfile.Exists)
                 _lvl.beats = -1;
             else
-                _lvl.beats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.lvlname)?.FullName);
+                _lvl.beats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.Lvlname)?.FullName);
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
             if (!Playback.Generating)
@@ -899,7 +867,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void UpdateBeatPosition()
         {
-            int beatpos = GateProperties.prebeats + GateProperties.postbeats;
+            int beatpos = _gateproperties.prebeats + _gateproperties.postbeats;
             foreach (GateLvlData _lvl in GateLvls) {
                 _lvl.beatstart = beatpos;
                 beatpos += _lvl.beats;
@@ -909,13 +877,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void ColorRow(GateLvlData _lvl, int index)
         {
             //if random, the phase counter will instead show bucket numbers
-            gateLvlList.Rows[index].Cells[0].Value = GateProperties.random ? _lvl.bucket + 1 : index + 1;
-            if (index >= GateProperties.MaximumRows) {
+            gateLvlList.Rows[index].Cells[0].Value = _gateproperties.Random ? _lvl.bucket + 1 : index + 1;
+            if (index >= _gateproperties.MaximumRows) {
                 gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
-                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in list (max. {GateProperties.MaximumRows})";
+                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in list (max. {_gateproperties.MaximumRows})";
             }
             //each bucket can have 4 lvls only. Show warning if more than 4.
-            else if (GateProperties.random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
+            else if (_gateproperties.Random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
                 gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
                 gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
             }
@@ -940,25 +908,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///being build Master JSON object
             JObject _save = new() {
                 { "obj_type", "SequinGate" },
-                { "obj_name", _properties.FilePath.Name },
-                { "spn_name", bossdata.First(x => x.boss_name == _properties.boss).boss_spn },
-                { "param_path", bossdata.First(x => x.boss_name == _properties.boss).boss_ent },
+                { "obj_name", _properties.ParentEditor.WorkingFile.Name },
+                { "spn_name", bossdata.First(x => x.boss_name == _properties.Boss).boss_spn },
+                { "param_path", bossdata.First(x => x.boss_name == _properties.Boss).boss_ent },
                 { "pre_lvl_name", _properties.prelvl.Replace("<none>", "") },
                 { "post_lvl_name", _properties.postlvl.Replace("<none>", "") },
                 { "restart_lvl_name", _properties.restartlvl.Replace("<none>", "") },
                 { "section_type", gatesectiontypes.First(x => x.Value == _properties.sectiontype).Key},
-                { "random_type", $"LEVEL_RANDOM_{(_properties.random ? "BUCKET" : "NONE")}" }
+                { "random_type", $"LEVEL_RANDOM_{(_properties.Random ? "BUCKET" : "NONE")}" }
             };
             //setup boss_patterns
             JArray boss_patterns = new();
             for (int x = 0; x < _properties.gatelvls.Count; x++) {
                 JObject s = new() {
-                    { "lvl_name", _properties.gatelvls[x].lvlname },
+                    { "lvl_name", _properties.gatelvls[x].Lvlname },
                     { "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
                     { "bucket_num", _properties.gatelvls[x].bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
-                if (_properties.random) {
+                if (_properties.Random) {
                     switch (_properties.gatelvls[x].bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
@@ -1023,7 +991,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardGate.Reverse();
             //enable the paste button everywhere
-            foreach (Form_GateEditor gate in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".gate")))
+            foreach (Form_GateEditor gate in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".gate")))
                 gate.btnGatePaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
@@ -1063,8 +1031,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 btnGatePlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("gate");
-                Playback.CreatePlaybackFromGate(GateProperties);
-                Playback.Play(gateLvlList.SelectedRows.Count > 0 ? GateLvls[gateLvlList.SelectedRows[^1].Index].beatstart : -1, GateProperties.beats, PlaybackLoop);
+                Playback.CreatePlaybackFromGate(_gateproperties);
+                Playback.Play(gateLvlList.SelectedRows.Count > 0 ? GateLvls[gateLvlList.SelectedRows[^1].Index].beatstart : -1, _gateproperties.beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
@@ -1090,7 +1058,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(Playback.GlobalCurrentLeaf)) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as Form_LeafEditor;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
@@ -1103,7 +1071,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinglvl)) as Form_LvlEditor;
+                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as Form_LvlEditor;
                     //switch to the lvl if it's open
                     _playinglvlform?.DockHandler?.Activate();
                 }

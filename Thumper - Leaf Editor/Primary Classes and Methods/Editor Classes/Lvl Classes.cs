@@ -54,21 +54,32 @@ namespace Thumper_Custom_Level_Editor
 
     public class LvlProperties
     {
+        public LvlProperties(Form_LvlEditor Parent)
+        {
+            ParentEditor = Parent;
+            sublevel = new();
+            SequencerObjects = new();
+            lvlleafs = new();
+            lvlleafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
+            lvlloops = new();
+            lvlloops.CollectionChanged += ParentEditor.lvlloop_CollectionChanged;
+        }
+
         [Browsable(false)]
-        public Form_LvlEditor parent;
+        public Form_LvlEditor ParentEditor;
         [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
         public dynamic seqJSON;
         [Browsable(false)]
-        public List<Sequencer_Object> seq_objs {
-            get => _SeqObjs;
+        public List<Sequencer_Object> SequencerObjects {
+            get => _seqobjs;
             set {
-                _SeqObjs = value;
-                parent.SaveCheckAndWrite(true, "Sequencer saved", false);
+                _seqobjs = value;
+                ParentEditor.SaveCheckAndWrite(true, "Sequencer saved", false);
             }
         }
-        private List<Sequencer_Object> _SeqObjs;
+        private List<Sequencer_Object> _seqobjs;
         [Browsable(false)]
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]
@@ -78,30 +89,16 @@ namespace Thumper_Custom_Level_Editor
         {
             get => _leafreload; set {
                 if (value)
-                    lvlleafs.CollectionChanged -= parent.lvlleaf_CollectionChanged;
+                    lvlleafs.CollectionChanged -= ParentEditor.lvlleaf_CollectionChanged;
                 _leafreload = value;
             }
         }
         private bool _leafreload;
 
-        public LvlProperties(Form_LvlEditor Parent, FileInfo path)
-        {
-            parent = Parent;
-            FilePath = path;
-            sublevel = new();
-            seq_objs = new();
-            lvlleafs = new();
-            lvlleafs.CollectionChanged += parent.lvlleaf_CollectionChanged;
-            lvlloops = new();
-            lvlloops.CollectionChanged += parent.lvlloop_CollectionChanged;
-        }
-
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => FilePath.FullName;
-        [Browsable(false)]
-        public FileInfo FilePath;
+        public string filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Approach Beats")]

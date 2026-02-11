@@ -21,7 +21,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
-                LoadLeafSimple(load, filepath);
+                LoadLeafSimple(load);
                 LoadSequencer(load["seq_objs"], _leafproperties, SimpleTrackEditor);
                 return;
             }
@@ -33,18 +33,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load == null)
                 return;
 
-            LoadLeaf(load, filepath);
+            LoadLeaf(load);
             LoadSequencer(load["seq_objs"], _leafproperties, trackEditor);
             LoadEnd(load);
         }
         ///Load LVL Sequencer
-        public Form_LeafEditor(LvlProperties toload, bool simpleload = false) : base(null)
+        public Form_LeafEditor(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
-                LvlSequencer = toload;
-                LoadLeafSimple(null, LvlSequencer.FilePath, LvlSequencer);
-                LoadSequencer(LvlSequencer.seqJSON, _leafproperties, SimpleTrackEditor);
+                AltSequencer = toload;
+                LoadLeafSimple(null);
+                LoadSequencer(((LvlProperties)AltSequencer).seqJSON, LeafProperties, SimpleTrackEditor);
                 return;
             }
 
@@ -56,10 +56,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (toload == null)
                 return;
 
-            LvlSequencer = toload;
-            LoadLeaf(null, LvlSequencer.FilePath, LvlSequencer);
-            LoadSequencer(LvlSequencer.seqJSON, _leafproperties, trackEditor);
-            LoadEnd(LvlSequencer.seqJSON);
+            AltSequencer = toload;
+            LoadLeaf(null);
+            LoadSequencer(((LvlProperties)AltSequencer).seqJSON, LeafProperties, trackEditor);
+            LoadEnd(((LvlProperties)AltSequencer).seqJSON);
         }
 
         private void RenderForm()
@@ -199,8 +199,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LeafProperties _leafproperties;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
-        public LvlProperties LvlSequencer;
-        private List<Sequencer_Object> SequencerObjects => _leafproperties?.seq_objs;
+        public object AltSequencer;
+        private List<Sequencer_Object> SequencerObjects => _leafproperties?.SequencerObjects;
         public List<SaveState> UndoList = new();
         private List<SeqDataPoint> SelectedDPs = new();
         public List<int> SelectedRows = new();
@@ -1321,41 +1321,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        ///LEAF - LOAD FILE
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
-                ofd.Title = "Load a Thumper Leaf file";
-                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-                if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
-                    if (filepath == null)
-                        return;
-                    //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
-                    LoadLeaf(_load, filepath);
-                }
-            }
-        }
-        /// LEAF - LOAD TEMPLATE
-        private void leafTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Leaf File (*.leaf)|*.leaf";
-                ofd.Title = "Load a Thumper Leaf file";
-                //set folder to the templates location
-                ofd.InitialDirectory = $@"{AppDomain.CurrentDomain.BaseDirectory}templates";
-                if (ofd.ShowDialog() == DialogResult.OK) {
-                    object _load = TCLE.LoadFileLock(ofd.FileName);
-                    LoadLeaf(_load, new FileInfo("template"));
-                }
-            }
-        }
-
         private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
@@ -2178,7 +2143,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLeafSplit_Click(object sender, EventArgs e)
         {
-            if (LvlSequencer != null) {
+            if (AltSequencer != null) {
                 MessageBox.Show("Not allowed to split a lvl sequencer!", "Jumper Justum Jevel Jeditor");
                 return;
             }
@@ -2367,28 +2332,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Methods
-        public static void InitializeLeafStuff()
-        {
-            //meh
-        }
-
         public object GetProperties()
         {
             return _leafproperties;
         }
 
         ///Update DGV from _tracks
-        public void LoadLeaf(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
+        public void LoadLeaf(dynamic _load, bool template = false)
         {
             //skip certain checks if we're loading a non-leaf sequencer
-            if (filepath.Extension == ".leaf") {
+            if (this.WorkingFile.Extension == ".leaf") {
                 if (_load == null)
                     return;
                 //reset flag in case it got stuck previously
                 EditorIsLoading = false;
                 //detect if file is actually Leaf or not
                 if ((string)_load["obj_type"] != "SequinLeaf") {
-                    MessageBox.Show($"{filepath.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
+                    MessageBox.Show($"{this.WorkingFile.Name} does not appear to be a leaf file.\n'obj_type' was not SequinLeaf.", "Thumper Custom Level Editor");
                     return;
                 }
                 //check if it has a name
@@ -2400,50 +2360,50 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
-            if (filepath.Extension == ".leaf") {
+            if (this.WorkingFile.Extension == ".leaf") {
                 LeafProperties = new(this) {
-                    SequencerType = filepath.Extension,
+                    SequencerType = this.WorkingFile.Extension,
                     timesignature = (string)_load["time_sig"] ?? "4/4",
                     _beats = (int?)_load["beat_cnt"] ?? 1,
                 };
             }
-            else if (filepath.Extension == ".lvl") {
+            else if (this.WorkingFile.Extension == ".lvl") {
                 LeafProperties = new(this) {
-                    SequencerType = filepath.Extension,
+                    SequencerType = this.WorkingFile.Extension,
                     timesignature = "4/4",
-                    _beats = Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats + (Lvl.lvlleafs.Count(x => x.beats == -1) * 2)
+                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
             }
             //check for template or regular file
-            this.WorkingFile = filepath.Name == "template" ? null : filepath;
+            if (template)
+                this.WorkingFile = null;
             //Add [sequencer] tag on tab text if its a lvl sequencer
-            this.Text = $"{this.WorkingFile.Name}{(filepath.Extension == ".lvl" ? " [Sequencer]" : "")}";
+            this.Text = $"{this.WorkingFile.Name}{(this.WorkingFile.Extension == ".lvl" ? " [Sequencer]" : "")}";
 
             trackEditor.Rows.Clear();
             LeafLengthChanged();
         }
 
         public DataGridView SimpleTrackEditor = new();
-        public void LoadLeafSimple(dynamic _load, FileInfo filepath, LvlProperties Lvl = null)
+        public void LoadLeafSimple(dynamic _load)
         {
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
-            if (filepath.Extension == ".leaf") {
+            if (this.WorkingFile.Extension == ".leaf") {
                 LeafProperties = new(this) {
-                    SequencerType = filepath.Extension,
+                    SequencerType = this.WorkingFile.Extension,
                     timesignature = (string)_load["time_sig"] ?? "4/4",
                     _beats = (int?)_load["beat_cnt"] ?? 1
                 };
             }
-            else if (filepath.Extension == ".lvl") {
+            else if (this.WorkingFile.Extension == ".lvl") {
                 LeafProperties = new(this) {
-                    SequencerType = filepath.Extension,
+                    SequencerType = this.WorkingFile.Extension,
                     timesignature = "4/4",
-                    _beats = Lvl.lvlleafs.Select(x => x.beats).Sum() + Lvl.approachbeats + (Lvl.lvlleafs.Count(x => x.beats == -1) * 2)
+                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
             }
             this.NoLock = true;
-            this.WorkingFile = filepath;
 
             while (_leafproperties.BeatsAndFrozen > SimpleTrackEditor.ColumnCount)
                 SimpleTrackEditor.Columns.Add(new SequencerColumn());
@@ -2545,7 +2505,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
             string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             //return Seq_Objs;
-            ParentLeaf.seq_objs = LoadedObjects;
+            ParentLeaf.SequencerObjects = LoadedObjects;
         }
 
         public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)
@@ -2689,7 +2649,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.expandlanes == true).ToList();
             List<Tuple<int, int>> _selection = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(x => new Tuple<int, int>(x.ColumnIndex, x.RowIndex)).ToList();
             //
-            LoadLeaf(UndoList[undolistindex].savestate, LvlSequencer?.FilePath ?? this.WorkingFile, LvlSequencer);
+            LoadLeaf(UndoList[undolistindex].savestate);
             LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties, trackEditor);
             LoadEnd(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
@@ -2807,8 +2767,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (playsound) TCLE.PlaySound("UIsave");
                 }
                 //else if a different sequencer, pass data back and force save
-                else {
-                    LvlSequencer.seq_objs = _leafproperties.seq_objs;
+                else if (this.WorkingFile.Extension == ".lvl") {
+                    ((LvlProperties)AltSequencer).SequencerObjects = _leafproperties.SequencerObjects;
                 }
 
                 if (!EditorIsLoading && !SimpleLoad) {
@@ -2917,8 +2877,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
             }
 
-            if (LvlSequencer != null)
-                TrackLeafDividerHighlighting(LvlSequencer);
+            if (AltSequencer != null)
+                TrackLeafDividerHighlighting((LvlProperties)AltSequencer);
         }
 
         public void TrackLeafDividerHighlighting(LvlProperties Lvl)
@@ -2985,7 +2945,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
 
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.seq_objs.Where(x => !x.isdefault)) {
+            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault)) {
                 //skip blank tracks
                 if (seq_obj.friendly_param == null)
                     continue;
@@ -3225,13 +3185,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             int count = 1;
             List<Sequencer_Object> TuningLayers = new();
-            while (_properties.seq_objs[seq.Index - count].obj_name == "_TuningLayerX") {
+            while (_properties.SequencerObjects[seq.Index - count].obj_name == "_TuningLayerX") {
                 count++;
             }
-            Sequencer_Object Main = _properties.seq_objs[seq.Index - count];
+            Sequencer_Object Main = _properties.SequencerObjects[seq.Index - count];
             count = 1;
-            while (Main.Index + count < _properties.seq_objs.Count && _properties.seq_objs[Main.Index + count].obj_name == "_TuningLayerX") {
-                TuningLayers.Add(_properties.seq_objs[Main.Index + count]);
+            while (Main.Index + count < _properties.SequencerObjects.Count && _properties.SequencerObjects[Main.Index + count].obj_name == "_TuningLayerX") {
+                TuningLayers.Add(_properties.SequencerObjects[Main.Index + count]);
                 count++;
             }
 

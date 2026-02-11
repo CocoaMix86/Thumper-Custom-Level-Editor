@@ -7,7 +7,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private DeserializeDockContent m_deserializeDockContent;
 
         #region Form Construction
-        public Form_WorkSpace(string configtoload)
+        public Form_WorkSpace(string configtoload) : base(null)
         {
             InitializeComponent();
             this.Text = configtoload;
@@ -91,22 +91,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
         {
-            IDockContent DocClosing = e.Content;
+            DockContentEx DocClosing = (DockContentEx)e.Content;
             FileInfo filetoclose = null;
             if (!TCLE.Instance.Disposing) {
+                filetoclose = DocClosing.WorkingFile;
+                /*
                 if (DocClosing.GetType() == typeof(Form_MasterEditor))
-                    filetoclose = (DocClosing as Form_MasterEditor).MasterProperties.LoadedMaster;
+                    filetoclose = (DocClosing as Form_MasterEditor).WorkingFile;
                 else if (DocClosing.GetType() == typeof(Form_GateEditor))
-                    filetoclose = (DocClosing as Form_GateEditor).loadedgate;
+                    filetoclose = (DocClosing as Form_GateEditor).WorkingFile;
                 else if (DocClosing.GetType() == typeof(Form_LvlEditor))
                     filetoclose = (DocClosing as Form_LvlEditor).loadedlvl;
                 else if (DocClosing.GetType() == typeof(Form_SampleEditor))
                     filetoclose = (DocClosing as Form_SampleEditor).loadedsample;
                 else if (DocClosing.GetType() == typeof(Form_LeafEditor))
-                    filetoclose = (DocClosing as Form_LeafEditor).LeafProperties.LoadedLeaf;
+                    filetoclose = (DocClosing as Form_LeafEditor).WorkingFile;
                 else if (DocClosing.GetType() == typeof(Form_RawText))
                     filetoclose = (DocClosing as Form_RawText).loadedfile;
-
+                */
                 if (TCLE.GlobalLastGate == DocClosing)
                     TCLE.GlobalLastGate = null;
                 if (TCLE.GlobalLastLvl == DocClosing)
@@ -115,13 +117,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.GlobalLastMaster = null;
                 //check if any other tab is open that is the same file
                 //if it is, we don't want to close the file lock
+                /*
                 if (filetoclose == null)
                     return;
                 foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(filetoclose.Name))) {
                     return;
                 }
-
-                TCLE.CloseFileLock(filetoclose);
+                */
                 dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
                 ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
             }
@@ -146,9 +148,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //When workspace closes, close the file lock on all the files inside it
-            foreach (IDockContent doc in this.dockMain.Documents) {
+            foreach (DockContentEx doc in this.dockMain.Documents) {
                 FileInfo filetoclose = null;
                 if (!TCLE.Instance.Disposing) {
+                    filetoclose = doc.WorkingFile;
+                    doc.Dispose();
+                    /*
                     if (doc.GetType() == typeof(Form_MasterEditor))
                         filetoclose = (doc as Form_MasterEditor).MasterProperties.LoadedMaster;
                     else if (doc.GetType() == typeof(Form_GateEditor))
@@ -161,11 +166,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         filetoclose = (doc as Form_LeafEditor).LeafProperties.LoadedLeaf;
                     else if (doc.GetType() == typeof(Form_RawText))
                         filetoclose = (doc as Form_RawText).loadedfile;
-
+                    
                     if (filetoclose == null)
                         continue;
 
                     TCLE.CloseFileLock(filetoclose);
+                    */
                 }
             }
         }

@@ -9,9 +9,9 @@ namespace Thumper_Custom_Level_Editor
     {
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sublevel Name")]
-        public string lvlname { get => _Lvlname; }
+        public string Lvlname { get => _lvlname; }
         [Browsable(false)]
-        public string _Lvlname;
+        public string _lvlname;
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sentry")]
@@ -53,40 +53,37 @@ namespace Thumper_Custom_Level_Editor
     public class GateProperties
     {
         [Browsable(false)]
-        public Form_GateEditor parent;
+        public Form_GateEditor ParentEditor;
         [Browsable(false)]
         public ObservableCollection<GateLvlData> gatelvls;
 
-        public GateProperties(Form_GateEditor Parent, FileInfo path)
+        public GateProperties(Form_GateEditor Parent)
         {
-            parent = Parent;
-            FilePath = path;
+            ParentEditor = Parent;
             gatelvls = new();
-            gatelvls.CollectionChanged += parent.gatelvls_CollectionChanged;
+            gatelvls.CollectionChanged += ParentEditor.gatelvls_CollectionChanged;
         }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => FilePath.FullName;
-        [Browsable(false)]
-        public FileInfo FilePath;
+        public string filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Boss")]
         [Description("The boss to fight.")]
         [TypeConverter(typeof(GateBossList))]
-        public string boss { 
-            get => Boss;
+        public string Boss { 
+            get => _boss;
             set {
-                if (random)
+                if (Random)
                     return;
-                Boss = value;
-                parent.RecalculateRuntime();
-                if (Boss == "Level 9 - pyramid" && !parent.EditorLoading)
+                _boss = value;
+                ParentEditor.RecalculateRuntime();
+                if (_boss == "Level 9 - pyramid" && !ParentEditor.EditorLoading)
                     MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence. Otherwise the level will crash.", "Thumper Custom Level Editor");
             } }
-        private string Boss;
+        private string _boss;
 
         [CategoryAttribute("Options")]
         [DisplayName("Level Subtitle")]
@@ -119,18 +116,18 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Random")]
         [Description("When TRUE, only Spirograph boss can be used. Each phase can hold up to 4 lvls in its 'bucket'. Then in game, every time a phase is repeated, it will use one of the lvls in its bucket randomly.")]
-        public bool random
+        public bool Random
         {
-            get => Random;
+            get => _random;
             set {
                 if (value == true) {
-                    boss = "Level 6 - spirograph";
+                    Boss = "Level 6 - spirograph";
                 }
-                Random = value;
-                parent.RecalculateRuntime();
+                _random = value;
+                ParentEditor.RecalculateRuntime();
             }
         }
-        private bool Random;
+        private bool _random;
         [Browsable(false)]
         public int MaximumRows;
 
