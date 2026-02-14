@@ -6,7 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_GateEditor : DockContentEx
+    public partial class Form_GateEditor : EditorBase
     {
         #region Form Construction
         public Form_GateEditor(dynamic load = null, FileInfo filepath = null) : base(filepath)
@@ -133,7 +133,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
         public List<SaveState> UndoList = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new(null) {
+        public EditorBase contentPropertyGrid = new(null) {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -141,7 +141,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new(null) {
+        public EditorBase contentMain = new(null) {
             TabText = "Lvl Phases",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,

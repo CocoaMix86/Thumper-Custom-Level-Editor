@@ -97,7 +97,7 @@ namespace Thumper_Custom_Level_Editor
                 if (value > 999999.99m)
                     value = 999999.99m;
                 _bpm = value;
-                foreach ((string name, DockContentEx tab) in TCLE.Documents) {
+                foreach ((string name, EditorBase tab) in TCLE.Documents) {
                     if (name.EndsWith(".lvl")) (tab as Form_LvlEditor).RecalculateRuntime();
                     else if (name.EndsWith(".gate")) (tab as Form_GateEditor).RecalculateRuntime();
                     else if (name.EndsWith(".master")) (tab as Form_MasterEditor).RecalculateRuntime();

@@ -23,7 +23,7 @@ namespace Thumper_Custom_Level_Editor
         public static Form_WorkSpace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
         //public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents.Concat((x as Form_WorkSpace).dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents)));
-        public static Dictionary<string, DockContentEx> Documents = new();
+        public static Dictionary<string, EditorBase> Documents = new();
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
         private static Properties.Settings AppSettings = Properties.Settings.Default;

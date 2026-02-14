@@ -4,7 +4,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_ProjectExplorer : DockContentEx
+    public partial class Form_ProjectExplorer : EditorBase
     {
         #region Form Construction
         public Form_ProjectExplorer() : base(null)
@@ -268,7 +268,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             continue;
                         //some files may be lock loaded, so we use different writing methods for those
                         //also force editor to reload the document
-                        if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, DockContentEx> stream && stream.Value != null) {
+                        if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, EditorBase> stream && stream.Value != null) {
                             TCLE.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
                             //a document might be open multiple times (normal and raw), so need to locate both of them
                             foreach (IDockContent doc in TCLE.Documents.Values.Where(x => x.DockHandler.TabText.StartsWith(stream.Key)))

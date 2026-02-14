@@ -6,7 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_MasterEditor : DockContentEx
+    public partial class Form_MasterEditor : EditorBase
     {
         #region Form Construction
         public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new(null) {
+        public EditorBase contentPropertyGrid = new(null) {
             TabText = "Sublevel Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new(null) {
+        public EditorBase contentMain = new(null) {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,

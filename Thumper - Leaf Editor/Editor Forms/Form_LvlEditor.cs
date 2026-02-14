@@ -6,7 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LvlEditor : DockContentEx
+    public partial class Form_LvlEditor : EditorBase
     {
         #region Form Construction
         public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
@@ -115,7 +115,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<LvlLeafData> LvlLeafs => LvlProperties.lvlleafs;
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentTunnel = new(null) {
+        public EditorBase contentTunnel = new(null) {
             TabText = "Paths/Tunnels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -123,7 +123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new(null) {
+        public EditorBase contentMain = new(null) {
             TabText = "Leaf List",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -131,7 +131,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentLoop = new(null) {
+        public EditorBase contentLoop = new(null) {
             TabText = "Loop Tracks",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,

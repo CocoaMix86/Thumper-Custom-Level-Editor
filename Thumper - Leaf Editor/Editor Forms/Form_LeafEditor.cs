@@ -13,11 +13,11 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LeafEditor : DockContentEx
+    public partial class Form_LeafEditor : EditorBase
     {
         #region Form Construction
         ///Load LEAF
-        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath)
+        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -205,7 +205,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private List<SeqDataPoint> SelectedDPs = new();
         public List<int> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new(null) {
+        public EditorBase contentPropertyGrid = new(null) {
             TabText = "Data Point Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -213,7 +213,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new(null) {
+        public EditorBase contentMain = new(null) {
             TabText = "Advanced Editor",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -221,7 +221,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentObjects = new(null) {
+        public EditorBase contentObjects = new(null) {
             TabText = "Objects",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -229,7 +229,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMasterView = new(null) {
+        public EditorBase contentMasterView = new(null) {
             TabText = "Basic Editor",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = false,

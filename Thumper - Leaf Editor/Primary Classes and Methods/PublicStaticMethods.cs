@@ -935,7 +935,7 @@ namespace Thumper_Custom_Level_Editor
             //this finds a pane in the active workspace that has matching extensions already open on it
             DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
 
-            DockContentEx OpenFile = new(null);
+            EditorBase OpenFile = new(null);
             if (filepath.Extension == ".master") {
                 OpenFile = new Form_MasterEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
@@ -962,7 +962,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CloseFile(FileInfo filepath)
         {
-            TCLE.Documents.TryGetValue(filepath.Name, out DockContentEx _close);
+            TCLE.Documents.TryGetValue(filepath.Name, out EditorBase _close);
             _close?.Close();
             _close?.Dispose();
             TCLE.Documents.TryGetValue(filepath.Name + "-raw", out _close);
@@ -997,7 +997,7 @@ namespace Thumper_Custom_Level_Editor
         public static void FindReloadRaw(string documentname)
         {
             //find if any raw text docs matching documentname are open and update them
-            TCLE.Documents.TryGetValue(documentname + "-raw", out DockContentEx _found);
+            TCLE.Documents.TryGetValue(documentname + "-raw", out EditorBase _found);
             (_found as Form_RawText)?.Reload();
             /*
             foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {

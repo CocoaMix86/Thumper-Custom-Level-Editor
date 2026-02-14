@@ -5,7 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_RawText : DockContentEx
+    public partial class Form_RawText : EditorBase
     {
         #region Form Construction
         public Form_RawText(string _load, FileInfo filepath) : base(filepath, true)
@@ -102,7 +102,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (DockContentEx document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
+                foreach (EditorBase document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
                     document.GetType().GetMethod("Reload").Invoke(document, null);
                 }
             }

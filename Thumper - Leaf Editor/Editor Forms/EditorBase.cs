@@ -2,23 +2,31 @@
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public class DockContentEx : DockContent
+    public class EditorBase : DockContent
     {
+        public EditorBase(FileInfo _filetolock, bool rawtext = false, bool nolock = false)
+        {
+            if (_filetolock == null)
+                return;
+            NoLock = nolock;
+            RawText = rawtext;
+            WorkingFile = _filetolock;
+        }
+
         public bool RawText { get; set; }
         public bool NoLock { get; set; }
         public FileInfo WorkingFile { 
             get => _workfile; 
             set {
-                if (!RawText && value != null && _workfile != null) {
-                    TCLE.Documents.Remove(_workfile.Name);
+                if (!NoLock && value != null && _workfile != null) {
+                    TCLE.Documents.Remove(_workfile.Name + (RawText ? "-raw" : ""));
                 }
 
                 _workfile = value;
 
-                if (value is not null && !NoLock) {
+                if (value != null && !NoLock) {
                     FileLock?.Close();
-                    if (!RawText)
-                        TCLE.Documents.TryAdd(value.Name, this);
+                    TCLE.Documents.TryAdd(value.Name + (RawText ? "-raw" : ""), this);
                     try {
                         FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                     } catch (Exception) {
@@ -29,13 +37,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private FileInfo _workfile;
         public FileStream FileLock { get; set; }
-        public DockContentEx(FileInfo _filetolock, bool rawtext = false)
-        {
-            if (_filetolock == null)
-                return;
-            RawText = rawtext;
-            WorkingFile = _filetolock;
-        }
 
         protected override string GetPersistString()
         {
@@ -44,8 +45,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void Dispose(bool disposing)
         {
+            if (TCLE.GlobalLastGate == this)
+                TCLE.GlobalLastGate = null;
+            if (TCLE.GlobalLastLvl == this)
+                TCLE.GlobalLastLvl = null;
+            if (TCLE.GlobalLastMaster == this)
+                TCLE.GlobalLastMaster = null;
+
             FileLock?.Close();
-            TCLE.Documents.Remove(WorkingFile?.Name ?? "");
+            TCLE.Documents.Remove(WorkingFile?.Name + (RawText ? "-raw" : ""));
             base.Dispose(disposing);
         }
     }
