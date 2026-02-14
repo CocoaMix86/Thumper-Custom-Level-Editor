@@ -292,20 +292,20 @@ namespace Thumper_Custom_Level_Editor
         public static void CreatePlaybackFromLvl(LvlProperties Lvl, int BeatStop = -1, int _BeatOffset = 0)
         {
             //show the loading message
-            TCLE.Instance.lblLoadingLvl.Text = $"Lvl: {Lvl.FilePath.Name}";
+            TCLE.Instance.lblLoadingLvl.Text = $"Lvl: {Lvl.ParentEditor.WorkingFile.Name}";
             TCLE.Instance.lblLoadingLvl.Invalidate();
             TCLE.Instance.lblLoadingLvl.Update();
             TCLE.Instance.lblLoadingLvl.Refresh();
             Application.DoEvents();
             //
             Generating = true;
-            GlobalLvlQueue.Add(new Tuple<string, int>(Lvl.FilePath.Name, (_BeatOffset) * 100));
+            GlobalLvlQueue.Add(new Tuple<string, int>(Lvl.ParentEditor.WorkingFile.Name, (_BeatOffset) * 100));
             Playback.CallOffset = 0;
             int beatoffset = _BeatOffset;
             if (_BeatOffset == 0)
                 beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
             //create playback of the lvl sequencer
-            Form_LeafEditor lvlseq = new(Lvl, true);
+            Form_LeafEditor lvlseq = new(Lvl, null, true);
             Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.Beats + Form_LeafEditor.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
             lvlseq.Dispose();
             //create playback for each leaf
@@ -390,7 +390,7 @@ namespace Thumper_Custom_Level_Editor
                     lvlrest.Dispose();
                 }
                 //load main lvl
-                if (lvl.type == "gate") {
+                if (lvl.Type == "gate") {
                     Form_GateEditor gatetoplay = (Form_GateEditor)TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == lvl.name), false, true);
                     Playback.CreatePlaybackFromGate(gatetoplay.GateProperties, gatetoplay.GateProperties.beats, beatoffset);
                     beatoffset += gatetoplay.GateProperties.beats;
@@ -707,7 +707,7 @@ namespace Thumper_Custom_Level_Editor
         {
             foreach (LvlLoop loop in Lvl.lvlloops) {
                 //add new entry to the loops
-                GlobalLoopTracks.Add(new(Lvl.FilePath.Name, loop.sample, loop.beats));
+                GlobalLoopTracks.Add(new(Lvl.ParentEditor.WorkingFile.Name, loop.sample, loop.beats));
                 GlobalLoopEvents.Add(new());
                 //get sample data and its volume
                 SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.sample);

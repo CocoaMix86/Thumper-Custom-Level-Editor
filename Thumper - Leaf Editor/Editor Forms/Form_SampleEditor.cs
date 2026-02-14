@@ -12,27 +12,62 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_SampleEditor : DockContentEx
     {
         #region Form Construction
-        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
+        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
         {
-            SaveOnlyNoLoad = saveonlynoload;
+            this.SimpleLoad = saveonlynoload;
+            if (this.SimpleLoad) {
+                LoadSampleSimple(load);
+                return;
+            }
+
             InitializeComponent();
+            RenderForm();
             ColorFormElements();
-            InitializeSampleStuff();
 
             if (load != null) {
-                if (!SaveOnlyNoLoad) {
-                    TCLE.DoubleBufferDGV(sampleList);
-                    LoadSample(load, filepath);
-                    UndoList.Add(new SaveState() {
-                        reason = "",
-                        savestate = load
-                    });
-                }
-                else
-                    LoadSampleSimple(load, filepath);
+                LoadSample(load);
+                UndoList.Add(new SaveState() {
+                    reason = "",
+                    savestate = load
+                });
             }
             propertyGridSample.SelectedObject = SampleProperties;
         }
+
+        public void RenderForm()
+        {
+            if (SimpleLoad)
+                return;
+            _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
+            sampleToolStrip.Renderer = new ToolStripOverride();
+            //
+            sampleList.Columns[1].ValueType = typeof(string);
+            //
+            dockPanel1.Theme = TCLE.DockTheme;
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            //
+            contentMain.Controls.Add(panelMain);
+            panelMain.Dock = DockStyle.Fill;
+            //
+            contentWave.Controls.Add(pictureSpectrum);
+            contentWave.Controls.Add(pictureWave);
+            pictureSpectrum.Dock = DockStyle.Top;
+            pictureWave.Dock = DockStyle.Top;
+            contentWave.SizeChanged += contentWave_SizeChanged;
+            //
+            contentPropertyGrid.Controls.Add(propertyGridSample);
+            propertyGridSample.Dock = DockStyle.Fill;
+            TCLE.DoubleBufferDGV(sampleList);
+            //
+            try {
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_sample.config", m_deserializeDockContent);
+            } catch {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
+                contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
+            }
+        }
+
         private void Form_SampleEditor_Shown(object sender, EventArgs e)
         {
             propertyGridSample.Focus();
@@ -49,7 +84,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ColorFormElements()
         {
-            if (SaveOnlyNoLoad)
+            if (SimpleLoad)
                 return;
             this.BackColor = Properties.Settings.Default.ColorSampleBG;
             sampleList.BackgroundColor = Properties.Settings.Default.ColorSampleListBG;
@@ -61,40 +96,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading;
-        public bool SaveOnlyNoLoad;
-        public FileInfo loadedsample
-        {
-            get { return LoadedSample; }
-            set {
-                if (LoadedSample != value) {
-                    TCLE.CloseFileLock(LoadedSample);
-                    LoadedSample = value;
-                    if (!LoadedSample.Exists) {
-                        using (StreamWriter sw = LoadedSample.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(LoadedSample);
-                }
-            }
-        }
-        private FileInfo LoadedSample;
-        dynamic samplejson;
-        public SampleProperties sampleproperties
-        {
-            get => SampleProperties;
-            set {
-                SampleProperties = value;
-                SaveCheckAndWrite(false, "woooooooooooooooooow");
-            }
-        }
-        private SampleProperties SampleProperties;
+        public bool SimpleLoad;
+        public SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
-        BASSTimer _updateTimer = new(50);
+        public BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new() {
+        public DockContentEx contentPropertyGrid = new(null) {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -102,7 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new() {
+        public DockContentEx contentMain = new(null) {
             TabText = "Samples",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -110,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentWave = new() {
+        public DockContentEx contentWave = new(null) {
             TabText = "Waveform",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -135,7 +143,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
-            sampleproperties.sample = SampleList[e.RowIndex];
+            SampleProperties.sample = SampleList[e.RowIndex];
             propertyGridSample.ExpandAllGridItems();
             propertyGridSample.Refresh();
 
@@ -213,31 +221,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
             btnSampleDelete.Enabled = SampleList.Count > 0;
-        }
-
-        private void SamplenewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                //SamplesaveAsToolStripMenuItem_Click(null, null);
-            }
-        }
-
-        private void SampleopenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current Samples is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Sample File (*.txt)|samp_*.txt";
-                ofd.Title = "Load a Thumper Sample file";
-                if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
-                    if (filepath == null)
-                        return;
-                    //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
-                    LoadSample(_load, filepath);
-                }
-            }
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -332,7 +315,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void propertyGridSample_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            SaveCheckAndWrite(false, "Change Sample Property");
+            SaveCheckAndWrite(false, "Changed Sample Property");
         }
         #endregion
 
@@ -461,55 +444,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //Bass.BASS_SetVolume(volumeSlider1.Volume);
         }
-
-        private void btnRevertSample_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-            //SaveCheckAndWrite(true);
-            LoadSample(samplejson, loadedsample);
-            TCLE.PlaySound("UIrevertchanges");
-        }
         #endregion
 
         #region Methods
         ///         ///
         /// METHODS ///
         ///         ///
-
-        public void InitializeSampleStuff()
-        {
-            if (SaveOnlyNoLoad)
-                return;
-            _updateTimer.Tick += new EventHandler(timerUpdate_Tick);
-            sampleToolStrip.Renderer = new ToolStripOverride();
-            //
-            sampleList.Columns[1].ValueType = typeof(string);
-            //
-            dockPanel1.Theme = TCLE.DockTheme;
-            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-            //
-            contentMain.Controls.Add(panelMain);
-            panelMain.Dock = DockStyle.Fill;
-            //
-            contentWave.Controls.Add(pictureSpectrum);
-            contentWave.Controls.Add(pictureWave);
-            pictureSpectrum.Dock = DockStyle.Top;
-            pictureWave.Dock = DockStyle.Top;
-            contentWave.SizeChanged += contentWave_SizeChanged;
-            //
-            contentPropertyGrid.Controls.Add(propertyGridSample);
-            propertyGridSample.Dock = DockStyle.Fill;
-            //
-            try {
-                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_sample.config", m_deserializeDockContent);
-            } catch {
-                contentMain.Show(dockPanel1, DockState.Document);
-                contentWave.Show(contentMain.Pane, DockAlignment.Right, 0.5);
-                contentPropertyGrid.Show(contentWave.Pane, DockAlignment.Bottom, 0.7);
-            }
-        }
-
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_sample.config");
@@ -539,7 +479,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return SampleProperties;
         }
 
-        public void LoadSample(dynamic _load, FileInfo filepath)
+        public void LoadSample(dynamic _load)
         {
             if (_load == null)
                 return;
@@ -548,14 +488,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a sample file!");
                 return;
             }
-            loadedsample = filepath;
             //set some visual elements
-            this.Text = LoadedSample.Name;
+            this.Text = this.WorkingFile.Name;
             //set flag that load is in progress. This skips Save method
             EditorLoading = true;
 
-            sampleproperties = new(this, filepath);
-            propertyGridSample.SelectedObject = sampleproperties;
+            SampleProperties = new(this);
+            propertyGridSample.SelectedObject = SampleProperties;
 
             ///Clear form elements so new data can load
             SampleList.CollectionChanged -= _samplelist_CollectionChanged;
@@ -583,16 +522,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorLoading = false;
             EditorIsSaved = true;
         }
-        public void LoadSampleSimple(dynamic _load, FileInfo filepath)
+        public void LoadSampleSimple(dynamic _load)
         {
             //detect if file is actually Gate or not
             if (!_load.ContainsKey("items")) {
                 return;
             }
-            loadedsample = filepath;
             //set flag that load is in progress. This skips Save method
             EditorLoading = true;
-            sampleproperties = new(this, filepath);
+            SampleProperties = new(this);
             ///Clear form elements so new data can load
             SampleList.CollectionChanged -= _samplelist_CollectionChanged;
             SampleList.Clear();
@@ -615,8 +553,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = TCLE.LoadFileLock(LoadedSample.FullName);
-            LoadSample(_load, LoadedSample);
+            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
+            LoadSample(_load);
             this.Invalidate();
         }
 
@@ -631,7 +569,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadSample(UndoList[undolistindex].savestate, LoadedSample);
+            LoadSample(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridSample.Refresh();
 
@@ -646,7 +584,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save(bool playsound = true)
         {
             //if _loadedgate is somehow not set, force Save As instead
-            if (loadedsample == null) {
+            if (this.WorkingFile == null) {
                 SaveAs();
             }
             else
@@ -661,19 +599,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                loadedsample = new FileInfo(sfd.FileName);
+                this.WorkingFile = new FileInfo(sfd.FileName);
 
-                sampleproperties ??= new(this, loadedsample) {
+                SampleProperties ??= new(this) {
 
                 };
 
                 SaveCheckAndWrite(true, "", true);
-                if (isnew)
-                    TCLE.CloseFileLock(loadedsample);
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
-            return loadedsample;
+            return this.WorkingFile;
         }
 
         public bool IsSaved()
@@ -693,7 +629,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedSample.Name + "*";
+                this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
                     reason = Reason,
@@ -701,13 +637,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                this.Text = LoadedSample.Name;
+                this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedSample], _saveJSON);
-                TCLE.UpdateProjectSamplesFromFile(LoadedSample, true, true, out string _);
+                TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                TCLE.UpdateProjectSamplesFromFile(this.WorkingFile, true, true, out string _);
                 if (playsound) TCLE.PlaySound("UIsave");
             }
-            if (!SaveOnlyNoLoad) {
+            if (!SimpleLoad) {
                 TCLE.SaveTCL();
             }
         }
@@ -897,17 +833,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             newsample.UpdateRuntime();
 
             //TCLE.UpdateProjectSamplesFromFile(SampleEditor.LoadedSample, true, out string _);
-        }
-
-        private void ResetSample()
-        {
-            //reset things to default values
-            samplejson = null;
-            SampleList.Clear();
-            this.Text = "Sample Editor";
-            //set saved flag to true, because nothing is loaded
-            SaveCheckAndWrite(true, "");
-            FSBtoSamp.Enabled = true;
         }
         #endregion
     }

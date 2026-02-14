@@ -6,7 +6,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_ProjectProperties : DockContentEx
     {
         #region Form Construction
-        public Form_ProjectProperties()
+        public Form_ProjectProperties() : base(null)
         {
             InitializeComponent();
         }
@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadProjectProperties()
         {
             propertyGridProject.PropertyValueChanged -= propertyGridProject_PropertyValueChanged;
-            propertyGridProject.SelectedObject = TCLE._projprops;
+            propertyGridProject.SelectedObject = TCLE.ProjectProperties;
             propertyGridProject.PropertyValueChanged += propertyGridProject_PropertyValueChanged;
         }
         #endregion

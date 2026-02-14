@@ -1046,6 +1046,7 @@ namespace Thumper_Custom_Level_Editor
                         TCLE.CloseFile(pack.Item1);
                         TCLE.RemoveProjectSamples(files.First(x => x.Name == pack.Item1.Name));
                         filesupdates = true;
+                        pack.Item1.Delete();
                     }
                 }
             }

@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.ImportDefaultColors();
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
 

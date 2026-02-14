@@ -7,7 +7,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_ProjectExplorer : DockContentEx
     {
         #region Form Construction
-        public Form_ProjectExplorer()
+        public Form_ProjectExplorer() : base(null)
         {
             InitializeComponent();
             //set custom renderer for some controls
@@ -152,7 +152,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             if (selectedNodes.Count > 1) {
-                if (MessageBox.Show($"The selected items will be deleted permanently.", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
+                if (MessageBox.Show($"The selected items will be deleted permanently, including all nested items within folders.", "Thumper Custom Level Editor", MessageBoxButtons.OKCancel) == DialogResult.Cancel) {
                     return;
                 }
             }
@@ -162,14 +162,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     DirectoryInfo source = ProjectExplorer.AllFiles[tn].Folder;
                     foreach (FileInfo file in source.GetFiles("*", SearchOption.AllDirectories)) {
                         TCLE.CloseFile(file);
-                        TCLE.DeleteFileLock(file);
                     }
                     source.Delete(true);
                 }
                 else {
                     FileInfo source = ProjectExplorer.AllFiles[tn].File;
                     TCLE.CloseFile(source);
-                    TCLE.DeleteFileLock(source);
+                    source.Delete();
                     ///FindDuplicateFile(tn, Color.White);
                 }
                 tn.Remove();
@@ -194,7 +193,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             dontcancelifrename = true;
             //check if file is open. Prevent renaming if it is
-            if (TCLE.lockedfiles.Any(x => x.Key.Name.Equals(selectedNodes[0].Text, StringComparison.OrdinalIgnoreCase))) {
+            if (TCLE.Documents.Any(x => x.Key.Equals(selectedNodes[0].Text, StringComparison.OrdinalIgnoreCase))) {
                 MessageBox.Show($"{selectedNodes[0].Text} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
                 return;
             }
@@ -248,7 +247,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //check if file is open. Prevent renaming if it is
-                if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
+                if (TCLE.Documents.Any(x => x.Value.WorkingFile.FullName == source))
                     MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
                 else {
                     File.Move(source, dest);
@@ -269,10 +268,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             continue;
                         //some files may be lock loaded, so we use different writing methods for those
                         //also force editor to reload the document
-                        if (TCLE.lockedfiles.FirstOrDefault(x => x.Key.FullName == file.FullName) is KeyValuePair<FileInfo, FileStream> stream && stream.Value != null) {
-                            TCLE.WriteFileLock(stream.Value, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                        if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, DockContentEx> stream && stream.Value != null) {
+                            TCLE.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
                             //a document might be open multiple times (normal and raw), so need to locate both of them
-                            foreach (IDockContent doc in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(stream.Key.Name)))
+                            foreach (IDockContent doc in TCLE.Documents.Values.Where(x => x.DockHandler.TabText.StartsWith(stream.Key)))
                                 doc.GetType().GetMethod("Reload").Invoke(doc, null);
                         }
                         else
@@ -618,13 +617,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string source = ProjectExplorer.AllFiles[tn].FullPath;
                 string dest = $@"{ProjectExplorer.AllFiles[targetNode].Folder.FullName}\{ProjectExplorer.AllFiles[tn].Name}";
                 if (tn.ImageKey == "folder") {
-                    if (TCLE.lockedfiles.Any(x => x.Key.FullName.Contains(source)))
+                    if (TCLE.Documents.Any(x => x.Value.WorkingFile.FullName.Contains(source)))
                         errorlog += source + '\n';
                     else
                         Directory.Move(source, dest);
                 }
                 else {
-                    if (TCLE.lockedfiles.Any(x => x.Key.FullName == source))
+                    if (TCLE.Documents.Any(x => x.Value.WorkingFile.FullName == source))
                         errorlog += source + '\n';
                     else
                         File.Move(source, dest);

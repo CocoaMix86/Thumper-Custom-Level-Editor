@@ -2175,11 +2175,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 return;
 
+            EditorIsInterpolating = true;
             File.Copy(this.WorkingFile.FullName, SplitFile.FullName);
             Form_LeafEditor LeafSplitAfter = (Form_LeafEditor)TCLE.OpenFile(SplitFile, false, true);
-            //remove columns from the beginning to shoft all cells backwards until they get to beat 0
+            //remove columns from the beginning to shift all cells backwards until they get to beat 0
             for (int x = 0; x < splitindex; x++) {
                 LeafSplitAfter.trackEditor.Columns.RemoveAt(0);
+            }
+            //need to rename Track Effect objects to point to the new leaf name
+            foreach (Sequencer_Object _seq in LeafSplitAfter.SequencerObjects) {
+                if (_seq.obj_name == this.WorkingFile.Name)
+                    _seq.obj_name = LeafSplitAfter.WorkingFile.Name;
             }
             //reduce split leafs beat count and save
             LeafSplitAfter._leafproperties.Beats = _leafproperties.Beats - splitindex;
@@ -2193,6 +2199,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ProjectExplorer.CreateTreeView();
             //load new leaf that was just split
             TCLE.OpenFile(SplitFile);
+            EditorIsInterpolating = false;
         }
 
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
@@ -2472,7 +2479,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
-                        string normalizeParam = $"{ObjectToImport.obj_name.Replace(ParentLeaf.ParentEditor.WorkingFile.Name, "leafname")};{ObjectToImport.param_path.Replace(ObjectToImport.param_path_lane, "ent")}";
+                        string normalizeParam = $"{(ObjectToImport.obj_name.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.obj_name)};{ObjectToImport.param_path.Replace(ObjectToImport.param_path_lane, "ent")}";
                         Object_Params objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
                         ObjectToImport.friendly_param = objmatch?.param_displayname ?? "";
                         ObjectToImport.category = objmatch?.category ?? "";
@@ -2560,6 +2567,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadedObjects[index] = ObjectToImport;
             dgv.Rows.RemoveAt(index);
             dgv.Rows.Insert(index, LoadedObjects[index]);
+        }
+
+        public void Reload()
+        {
+            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
+
+            LoadLeaf(_load);
+            LoadSequencer(_load["seq_objs"], LeafProperties, trackEditor);
+            LoadEnd(_load);
         }
 
         /*
@@ -2797,6 +2813,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             if (SimpleLoad)
                 return;
+            dgvMasterView.ColumnCount = trackEditor.ColumnCount - FrozenColumnOffset;
             LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);
             //set cell zoom
             trackZoom_Scroll(null, null);
@@ -2926,7 +2943,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void EnableLeafButtons()
         {
-            if (Playback.Generating)
+            if (Playback.Generating || this.SimpleLoad)
                 return;
             btnTrackDelete.Enabled = SequencerObjects.Count > 0;
             btnTrackUp.Enabled = SequencerObjects.Count > 1;

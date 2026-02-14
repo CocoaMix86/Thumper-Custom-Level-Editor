@@ -88,7 +88,7 @@ namespace Thumper_Custom_Level_Editor
         public void UpdateRuntime()
         {
             if (this.Editor != null) {
-                int rowindex = this.Editor.sampleproperties.samplelist.IndexOf(this);
+                int rowindex = this.Editor.SampleProperties.samplelist.IndexOf(this);
                 this.Editor.sampleList.Rows[rowindex].Cells[2].Value = $"{this.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(this.alteredtime).ToString(@"hh\:mm\:ss\.fff")}";
             }
         }
@@ -96,28 +96,25 @@ namespace Thumper_Custom_Level_Editor
 
     public class SampleProperties
     {
+        public SampleProperties(Form_SampleEditor Parent)
+        {
+            ParentEditor = Parent;
+            sample = new();
+            samplelist = new();
+            samplelist.CollectionChanged += ParentEditor._samplelist_CollectionChanged;
+        }
+
         [Browsable(false)]
-        public Form_SampleEditor parent;
+        public Form_SampleEditor ParentEditor;
         [Browsable(false)]
         public ObservableCollection<SampleData> samplelist;
         [Browsable(false)]
         public SampleData sample { get; set; }
 
-        public SampleProperties(Form_SampleEditor Parent, FileInfo path)
-        {
-            parent = Parent;
-            FilePath = path;
-            sample = new();
-            samplelist = new();
-            samplelist.CollectionChanged += parent._samplelist_CollectionChanged;
-        }
-
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this sample file.")]
-        public string filepath => FilePath.FullName;
-        [Browsable(false)]
-        public FileInfo FilePath;
+        public string filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Sample Settings")]
         [DisplayName("Sample Name")]
@@ -134,7 +131,7 @@ namespace Thumper_Custom_Level_Editor
                         TCLE.PlayingChannels[x] = new Tuple<DataGridView, string, int>(TCLE.PlayingChannels[x].Item1, value, TCLE.PlayingChannels[x].Item3);
                 }
                 sample.obj_name = value;
-                parent._samplelist_CollectionChanged(null, null);
+                ParentEditor._samplelist_CollectionChanged(null, null);
             }
         }
 

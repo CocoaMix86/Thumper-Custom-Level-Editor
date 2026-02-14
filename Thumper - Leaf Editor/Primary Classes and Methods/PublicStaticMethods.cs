@@ -414,14 +414,18 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 return filepath;
 
-            string dir = Path.GetDirectoryName(filepath);
-            string file = Path.GetFileName(filepath);
-            if (dir != WorkingFolder.FullName) {
-                DialogResult result = MessageBox.Show("That file is not in the current Working Folder. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
+            FileInfo _input = new(filepath);
+            if (!_input.DirectoryName.Contains(WorkingFolder.FullName, StringComparison.OrdinalIgnoreCase)) {
+                DialogResult result = MessageBox.Show("That file does not exist in the current Project. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
-                    if (!File.Exists($@"{WorkingFolder}\{file}")) 
-                        File.Copy(filepath, $@"{WorkingFolder}\{file}");
-                    filepath = $@"{WorkingFolder}\{file}";
+                    string dest = null;
+                    if (!File.Exists($@"{WorkingFolder}\{_input.Name}"))
+                        dest = $@"{WorkingFolder}\{_input.Name}";
+                    else
+                        dest = $@"{WorkingFolder}\{_input.Name} ({WorkingFolder.GetFiles($"{Path.GetFileNameWithoutExtension(filepath)}*").Length + 1})";
+                    File.Copy(filepath, dest);
+                    filepath = dest;
+                    ProjectExplorer.CreateTreeView();
                 }
                 else
                     filepath = null;
@@ -781,7 +785,7 @@ namespace Thumper_Custom_Level_Editor
         public static int CalculateSublevelRuntime(MasterLvlData _masterlvl)
         {
             int _beatcount = 0;
-            if (_masterlvl.type == "lvl") {
+            if (_masterlvl.Type == "lvl") {
                 FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.name}"));
                 if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
                 else return -1;
@@ -924,7 +928,7 @@ namespace Thumper_Custom_Level_Editor
                     if (ReturnContent)
                         return rawtext;
                     rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
-                    TCLE.Documents.Add(rawtext.WorkingFile.Name + "-raw", rawtext);
+                    //TCLE.Documents.Add(rawtext.WorkingFile.Name + "-raw", rawtext);
                     return null;
                 }
             }
@@ -947,7 +951,7 @@ namespace Thumper_Custom_Level_Editor
             else if (filepath.Extension == ".samp") {
                 OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
-            TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
+            //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return OpenFile;
             if (OpenHere != null) OpenFile.Show(OpenHere, null);
@@ -958,8 +962,12 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CloseFile(FileInfo filepath)
         {
-            TCLE.Documents[filepath.Name]?.Dispose();
-            TCLE.Documents[filepath.Name + "-raw"]?.Dispose();
+            TCLE.Documents.TryGetValue(filepath.Name, out DockContentEx _close);
+            _close?.Close();
+            _close?.Dispose();
+            TCLE.Documents.TryGetValue(filepath.Name + "-raw", out _close);
+            _close?.Close();
+            _close?.Dispose();
             /*
             //check tabs in non float
             IDockContent workspacehastab = TCLE.Workspaces.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents).FirstOrDefault(y => y.DockHandler.TabText.StartsWith(filepath.Name));
@@ -989,7 +997,8 @@ namespace Thumper_Custom_Level_Editor
         public static void FindReloadRaw(string documentname)
         {
             //find if any raw text docs matching documentname are open and update them
-            (TCLE.Documents[documentname + "-raw"] as Form_RawText)?.Reload();
+            TCLE.Documents.TryGetValue(documentname + "-raw", out DockContentEx _found);
+            (_found as Form_RawText)?.Reload();
             /*
             foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
                 (document as Form_RawText).Reload();
@@ -1185,7 +1194,8 @@ namespace Thumper_Custom_Level_Editor
                 return;
             JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
             //write JSON to file
-            File.WriteAllText($"{TCLE.ProjectProperties.WorkingFile.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
+            TCLE.WriteFileLock(TCLE.ProjectProperties.FileLock, _saveJSON);
+            //File.WriteAllText($"{TCLE.ProjectProperties.WorkingFile.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
 
             lastsave = DateTime.Now;
         }

@@ -13,7 +13,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             SimpleLoad = saveonlynoload;
             if (SimpleLoad) {
-                LoadLvlSimple(load, filepath);
+                LoadLvlSimple(load);
                 return;
             }
 
@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ColorFormElements();
 
             if (load != null) {
-                LoadLvl(load, filepath);
+                LoadLvl(load);
                 _ = new Form_LeafEditor(LvlProperties, filepath, true);
                 UndoList.Add(new SaveState() {
                     reason = "",
@@ -879,16 +879,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
             //if the Sequencer is open already, attempt to locate it and open it
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == LoadedLvl.Name + " [Sequencer]"));
+            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]"));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
-                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == LoadedLvl.Name + " [Sequencer]").DockHandler.Activate();
+                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").DockHandler.Activate();
                 return;
             }
 
             IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
             foreach (Form_WorkSpace ws in workspacewithfloats) {
-                IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText.Replace("*", "") == LoadedLvl.Name + " [Sequencer]").FirstOrDefault();
+                IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").FirstOrDefault();
                 if (activate != null) {
                     activate.DockHandler.Activate();
                     return;
@@ -933,7 +933,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return LvlProperties;
         }
 
-        public void LoadLvl(dynamic _load, FileInfo filepath)
+        public void LoadLvl(dynamic _load)
         {
             //reset flag in case it got stuck previously
             EditorIsLoading = false;
@@ -954,7 +954,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
-            this.WorkingFile = filepath;
             this.Text = this.WorkingFile.Name;
 
             //Clear DGVs so new data can load
@@ -989,7 +988,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
         }
 
-        public void LoadLvlSimple(dynamic _load, FileInfo filepath)
+        public void LoadLvlSimple(dynamic _load)
         {
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
@@ -1001,7 +1000,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 tutorialtype = (string)_load["tutorial_type"],
                 seqJSON = _load["seq_objs"]
             };
-            this.WorkingFile = filepath;
             //load loop tracks
             LvlProperties.lvlloops.CollectionChanged -= lvlloop_CollectionChanged;
             foreach (dynamic samp in _load["loops"]) {
@@ -1037,41 +1035,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            //this is why I utilize workingfolder
-            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
-                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
-                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
-                        ProjectExplorer.CreateTreeView();
-                    }
-                    else {
-                        MessageBox.Show($"A file with that name already exists in \"{TCLE.WorkingFolder.FullName}\". File not copied over.", "Thumper Custom Level Editor");
-                        return;
-                    }
-            }
-            TCLE.PlaySound("UIobjectadd");
+            TCLE.CopyToWorkingFolderCheck(path);
             //Setup list of tunnels if copy check is enabled
             List<string> copytunnels = new();
-            if (chkTunnelCopy.Checked) {
-                copytunnels = new List<string>(LvlLeafs.Last().paths);
-            }
+            if (chkTunnelCopy.Checked) 
+                copytunnels = new List<string>(LvlLeafs.Last().paths);            
             //add leaf data to the list
+            LvlLeafData _toadd = new LvlLeafData() {
+                leafname = (string)_load["obj_name"],
+                beats = (int)_load["beat_cnt"],
+                paths = new List<string>(copytunnels),
+                id = TCLE.rng.Next()
+            };
             if (index is -1)
-                LvlLeafs.Add(new LvlLeafData() {
-                    leafname = (string)_load["obj_name"],
-                    beats = (int)_load["beat_cnt"],
-                    paths = new List<string>(copytunnels),
-                    id = TCLE.rng.Next()
-                });
+                LvlLeafs.Add(_toadd);
             else
-                LvlLeafs.Insert(index, new LvlLeafData() {
-                    leafname = (string)_load["obj_name"],
-                    beats = (int)_load["beat_cnt"],
-                    paths = new List<string>(copytunnels),
-                    id = TCLE.rng.Next()
-                });
+                LvlLeafs.Insert(index, _toadd);
+
             SaveCheckAndWrite(false, "Add New Leaf");
+            TCLE.PlaySound("UIobjectadd");
         }
 
         public void LvlUpdatePaths(LvlLeafData leaf)
@@ -1114,7 +1096,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadLvl(UndoList[undolistindex].savestate, this.WorkingFile);
+            LoadLvl(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
 
             if (!_trackNotSaved) {
@@ -1176,7 +1158,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedLvl.Name + "*";
+                this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
                     reason = Reason,
@@ -1184,12 +1166,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                this.Text = LoadedLvl.Name;
+                this.Text = this.WorkingFile.Name;
                 LvlProperties.seqJSON = _saveJSON["seq_objs"];
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[LoadedLvl], _saveJSON);
+                TCLE.WriteFileLock(this.FileLock, _saveJSON);
                 //find if any raw text docs are open of this gate and update them
-                TCLE.FindReloadRaw(LoadedLvl.Name);
+                TCLE.FindReloadRaw(this.WorkingFile.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
                 if (playsound) TCLE.PlaySound("UIsave");
@@ -1263,7 +1245,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLevel" },
-                { "obj_name", _properties.FilePath.Name },
+                { "obj_name", _properties.ParentEditor.WorkingFile.Name },
                 { "approach_beats", _properties.approachbeats }
             };
             //this section adds all colume sequencer controls
@@ -1365,7 +1347,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardLvl.Reverse();
             //enable the paste button everywhere
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".lvl")))
+            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
                 lvl.btnLvlLeafPaste.Enabled = true;
             TCLE.PlaySound("UIkcopy");
         }
@@ -1484,7 +1466,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name.StartsWith(_playingleaf)) as Form_LeafEditor;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }

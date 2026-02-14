@@ -4,21 +4,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public class DockContentEx : DockContent
     {
+        public bool RawText { get; set; }
         public bool NoLock { get; set; }
         public FileInfo WorkingFile { 
             get => _workfile; 
             set {
+                if (!RawText && value != null && _workfile != null) {
+                    TCLE.Documents.Remove(_workfile.Name);
+                }
+
                 _workfile = value;
-                if (value is not null && !NoLock)
-                    FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+                if (value is not null && !NoLock) {
+                    FileLock?.Close();
+                    if (!RawText)
+                        TCLE.Documents.TryAdd(value.Name, this);
+                    try {
+                        FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                    } catch (Exception) {
+                        FileLock = null;
+                    }
+                }
             } 
         }
         private FileInfo _workfile;
         public FileStream FileLock { get; set; }
-        public DockContentEx(FileInfo _filetolock)
+        public DockContentEx(FileInfo _filetolock, bool rawtext = false)
         {
             if (_filetolock == null)
                 return;
+            RawText = rawtext;
             WorkingFile = _filetolock;
         }
 
@@ -27,15 +42,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
 
-        private void InitializeComponent()
-        {
-
-        }
-
         protected override void Dispose(bool disposing)
         {
+            FileLock?.Close();
+            TCLE.Documents.Remove(WorkingFile?.Name ?? "");
             base.Dispose(disposing);
-            FileLock.Close();
         }
     }
 

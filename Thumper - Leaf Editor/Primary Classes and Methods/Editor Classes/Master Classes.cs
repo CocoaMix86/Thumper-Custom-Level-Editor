@@ -3,18 +3,17 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Windows.ApplicationModel.Calls;
 
 namespace Thumper_Custom_Level_Editor
 {
     public class MasterLvlData
     {
-        public MasterLvlData() { }
+        public MasterLvlData()
+        { 
 
-        [Browsable(false)]
-        public string type { get; set; }
-        [CategoryAttribute("Selected Sublevel(s)")]
-        [DisplayName("Name")]
-        public string name2 => $"{Name}.{type}";
+        }
+
         [Browsable(false)]
         public string name
         {
@@ -22,10 +21,16 @@ namespace Thumper_Custom_Level_Editor
             set {
                 int idx = value.LastIndexOf('.');
                 Name = idx != -1 ? value[..idx] : value;
+                Type = idx != -1 ? value[(idx + 1)..] : "";
             }
         }
         [Browsable(false)]
         public string Name;
+        [Browsable(false)]
+        public string Type { get; set; }
+        [CategoryAttribute("Selected Sublevel(s)")]
+        [DisplayName("Name")]
+        public string name2 => $"{Name}.{Type}";
 
         [CategoryAttribute("Selected Sublevel(s)")]
         [DisplayName("Play Plus")]
@@ -85,42 +90,22 @@ namespace Thumper_Custom_Level_Editor
 
     public class MasterProperties
     {
+        public MasterProperties(Form_MasterEditor Parent)
+        {
+            ParentEditor = Parent;
+            masterlvls = new();
+            masterlvls.CollectionChanged += ParentEditor.masterlvls_CollectionChanged;
+        }
+
         [Browsable(false)]
         public Form_MasterEditor ParentEditor;
         [Browsable(false)]
         public ObservableCollection<MasterLvlData> masterlvls;
 
-        public MasterProperties(Form_MasterEditor Parent, FileInfo path)
-        {
-            ParentEditor = Parent;
-            LoadedMaster = path;
-            masterlvls = new();
-            masterlvls.CollectionChanged += ParentEditor.masterlvls_CollectionChanged;
-        }
-
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => LoadedMaster.FullName;
-        [Browsable(false)]
-        public FileInfo LoadedMaster
-        {
-            get { return _loadedmaster; }
-            set {
-                if (_loadedmaster != value) {
-                    TCLE.CloseFileLock(_loadedmaster);
-                    _loadedmaster = value;
-                    if (!_loadedmaster.Exists) {
-                        using (StreamWriter sw = _loadedmaster.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(_loadedmaster);
-                }
-            }
-        }
-        private FileInfo _loadedmaster;
+        public string filepath => ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]

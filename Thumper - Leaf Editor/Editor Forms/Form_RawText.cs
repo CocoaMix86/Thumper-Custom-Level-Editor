@@ -8,9 +8,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_RawText : DockContentEx
     {
         #region Form Construction
-        public Form_RawText(string _load, FileInfo filepath)
+        public Form_RawText(string _load, FileInfo filepath) : base(filepath, true)
         {
-            loadedfile = filepath;
             InitializeComponent();
             ColorFormElements();
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
@@ -38,25 +37,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
         #region Variables
         public bool EditorIsSaved = true;
-        public FileInfo loadedfile
-        {
-            get => LoadedFile;
-            set {
-                if (LoadedFile != value) {
-                    if (LoadedFile != null)
-                        TCLE.CloseFileLock(LoadedFile);
-                    LoadedFile = value;
-                    if (!LoadedFile.Exists) {
-                        using (StreamWriter sw = LoadedFile.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(LoadedFile);
-                }
-            }
-        }
-        private FileInfo LoadedFile;
+
         #endregion
         #region Event Handlers
         private void textEditor_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
@@ -82,7 +63,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = TCLE.LoadFileLock(LoadedFile.FullName);
+            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
             textEditor.TextChanged -= textEditor_TextChanged;
             textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
             textEditor.ClearUndo();
@@ -90,7 +71,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             textEditor.TextChanged += textEditor_TextChanged;
 
             EditorIsSaved = true;
-            this.Text = LoadedFile.Name + " [Raw]";
+            this.Text = this.WorkingFile.Name + " [Raw]";
             this.Invalidate();
         }
 
@@ -102,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = LoadedFile.Name + " [Raw]*";
+                this.Text = this.WorkingFile.Name + " [Raw]*";
             }
             else {
                 //build the JSON to write to file
@@ -114,18 +95,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show($"JSON failed to parse in file. Changes not saved.\n\n{ex}", "Thumper Custom Level Editor");
                     return;
                 }
-                //denote editor tab is not saved
-                this.Text = LoadedFile.Name + " [Raw]";
+                //denote editor tab is saved
+                this.Text = this.WorkingFile.Name + " [Raw]";
                 //write JSON to file
-                //TCLE.WriteFileLock(TCLE.lockedfiles[LoadedFile], _saveJSON);
-                TCLE.WriteFileLock(TCLE.lockedfiles.First(x => x.Key.FullName == LoadedFile.FullName).Value, _saveJSON);
+                TCLE.WriteFileLock(this.FileLock, _saveJSON);
 
                 if (playsound) TCLE.PlaySound("UIsave");
 
-                foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(LoadedFile.Name))) {
+                foreach (DockContentEx document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
                     document.GetType().GetMethod("Reload").Invoke(document, null);
                 }
-
             }
         }
 

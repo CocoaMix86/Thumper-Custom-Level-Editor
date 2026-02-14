@@ -20,20 +20,22 @@ namespace Thumper_Custom_Level_Editor
             get => _workfile;
             set {
                 _workfile = value;
-                if (value is not null)
+                if (value is not null) {
+                    FileLock?.Close();
                     FileLock = new FileStream(_workfile.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                }
             } 
         }
         private FileInfo _workfile;
         [Browsable(false)]
-        private FileStream FileLock;
+        public FileStream FileLock;
 
         [Category("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
         public string folder => WorkingFolder.FullName;
         [Browsable(false)]
-        public DirectoryInfo WorkingFolder => WorkingFile.Directory; 
+        public DirectoryInfo WorkingFolder => WorkingFile?.Directory; 
 
         [Category("General Project Info")]
         [DisplayName("Level Name")]

@@ -9,23 +9,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : DockContentEx
     {
         #region Form Construction
-        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false)
+        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
         {
             InitializeComponent();
             RenderForm();
             ColorFormElements();
 
-            SaveOnlyNoLoad = saveonlynoload;
+            SimpleLoad = saveonlynoload;
 
             if (load != null) {
-                LoadMaster(load, filepath);
+                LoadMaster(load);
                 LoadEnd(load);
             }
         }
 
         public void RenderForm()
         {
-            if (SaveOnlyNoLoad)
+            if (SimpleLoad)
                 return;
 
             dockPanel1.Theme = TCLE.DockTheme;
@@ -72,7 +72,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         public bool EditorIsSaved = true;
         public bool EditorLoading;
-        private bool SaveOnlyNoLoad;
+        private bool SimpleLoad;
         private bool IsAddingItems;
         private bool GlobalCheckpoint;
         private bool GlobalPlayPlus;
@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public DockContentEx contentPropertyGrid = new() {
+        public DockContentEx contentPropertyGrid = new(null) {
             TabText = "Sublevel Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public DockContentEx contentMain = new() {
+        public DockContentEx contentMain = new(null) {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -453,7 +453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void masterlvls_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (SaveOnlyNoLoad)
+            if (SimpleLoad)
                 return;
 
             /*masterLvlList.Rows.Clear();
@@ -477,7 +477,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //get the runtime of the object
                 masterLvlList.Rows.Insert(_in, new object[] {
                     0,
-                    (MasterLvls[_in].type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
+                    (MasterLvls[_in].Type == "lvl" ? Properties.Resources.editor_lvl : Properties.Resources.editor_gate),
                     MasterLvls[_in].name,
                     0
                 });
@@ -508,53 +508,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void propertyGridMaster_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             SaveCheckAndWrite(false, "Change Master Property");
-        }
-        /*
-        private void propertyGridMaster_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            var grid = propertyGridMaster.Controls[2];
-            var flags = BindingFlags.Instance | BindingFlags.NonPublic;
-            var invalidPoint = new Point(-2147483648, -2147483648);
-            var FindPosition = grid.GetType().GetMethod("FindPosition", flags);
-            var p = (Point)FindPosition.Invoke(grid, new object[] { e.X, e.Y });
-            GridItem entry = null;
-            if (p != invalidPoint) {
-                var GetGridEntryFromRow = grid.GetType()
-                                              .GetMethod("GetGridEntryFromRow", flags);
-                entry = (GridItem)GetGridEntryFromRow.Invoke(grid, new object[] { p.Y });
-            }
-            if (entry != null && entry.Value != null) {
-                object parent;
-                if (entry.Parent != null && entry.Parent.Value != null)
-                    parent = entry.Parent.Value;
-                else
-                    parent = propertyGridMaster.SelectedObjects.Length > 1 ? propertyGridMaster.SelectedObjects : propertyGridMaster.SelectedObject;
-                if (entry.Value != null && entry.Value is bool) {
-                    var ee = propertyGridMaster.SelectedObjects;
-                    entry.PropertyDescriptor.SetValue(parent, !(bool)entry.Value);
-                    propertyGridMaster.Refresh();
-                    masterLvlList.Invalidate();
-                }
-            }
-        }*/
-
-        private void masteropenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if ((!EditorIsSaved && MessageBox.Show("Current Master is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
-                using OpenFileDialog ofd = new();
-                ofd.Filter = "Thumper Master File (*.master)|*.master";
-                ofd.Title = "Load a Thumper Master file";
-                ofd.InitialDirectory = TCLE.WorkingFolder.FullName ?? Application.StartupPath;
-                if (ofd.ShowDialog() == DialogResult.OK) {
-                    //storing the filename in temp so it doesn't overwrite _loadedlvl in case it fails the check in LoadLvl()
-                    FileInfo filepath = new(TCLE.CopyToWorkingFolderCheck(ofd.FileName));
-                    if (filepath == null)
-                        return;
-                    //load json from file into _load. The regex strips any comments from the text.
-                    dynamic _load = TCLE.LoadFileLock(filepath.FullName);
-                    LoadMaster(_load, filepath);
-                }
-            }
         }
         #endregion
 
@@ -602,21 +555,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            //this is why I utilize workingfolder
-            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
-                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
-                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
-                        ProjectExplorer.CreateTreeView();
-                    }
-                    else
-                        return;
-            }
-            TCLE.PlaySound("UIobjectadd");
+            TCLE.CopyToWorkingFolderCheck(path);
             //add lvl/gate data to the list
             MasterLvlData _import = new() {
-                type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
+                Type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
                 name = (string)_load["obj_name"],
                 playplus = true,
                 checkpoint = true,
@@ -632,7 +574,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             
             if (!IsAddingItems)
                 propertyGridMaster.Refresh();
+
             SaveCheckAndWrite(false, "Add New Lvl");
+            TCLE.PlaySound("UIobjectadd");
         }
 
         private void btnMasterLvlUp_Click(object sender, EventArgs e)
@@ -692,9 +636,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
         /// METHODS ///
         ///         ///
-
-        
-
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_master.config");
@@ -703,7 +644,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private IDockContent GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
-            if (persistString is "Properties")
+            if (persistString is "Sublevel Props.")
                 return contentPropertyGrid;
             if (persistString is "Sublevels")
                 return contentMain;
@@ -716,7 +657,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return MasterProperties;
         }
 
-        public void LoadMaster(dynamic _load, FileInfo filepath)
+        public void LoadMaster(dynamic _load)
         {
             if (_load == null)
                 return;
@@ -728,12 +669,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //setup new master properties
             masterLvlList.Rows.Clear();
-            MasterProperties = new(this, filepath) {
+            MasterProperties = new(this) {
                 skybox = string.IsNullOrEmpty((string)_load["skybox_name"]) ? "<none>" : (string)_load["skybox_name"],
                 introlvl = string.IsNullOrEmpty((string)_load["intro_lvl_name"]) ? "<none>" : (string)_load["intro_lvl_name"],
                 checkpointlvl = string.IsNullOrEmpty((string)_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
-            this.Text = $"{MasterProperties.LoadedMaster.Name}";
+            this.Text = $"{this.WorkingFile.Name}";
             //calc intro lvl
             MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
@@ -744,7 +685,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["groupings"]) {
                 MasterLvls.Add(new MasterLvlData() {
-                    type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
+                    Type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
                     name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     checkpoint = _lvl["checkpoint"],
                     playplus = _lvl["play_plus"],
@@ -763,9 +704,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 savestate = savestate
             });
 
-            TCLE._projprops.LevelSections = new() { "SECTION_LINEAR" };
+            TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
             foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
-                TCLE._projprops.LevelSections.Add("SECTION_LINEAR");
+                TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
             }
             ///set save flag (master just loaded, has no changes)
             EditorLoading = false;
@@ -782,7 +723,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = EditorIsSaved;
-            LoadMaster(UndoList[undolistindex].savestate, MasterProperties.LoadedMaster);
+            LoadMaster(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridMaster.Refresh();
 
@@ -797,7 +738,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void Save(bool playsound = true)
         {
             //if LoadedMaster is somehow not set, force Save As instead
-            if (MasterProperties.LoadedMaster == null)
+            if (this.WorkingFile == null)
                 SaveAs();
             else
                 SaveCheckAndWrite(true, "", playsound);
@@ -811,21 +752,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                MasterProperties.LoadedMaster = new FileInfo(sfd.FileName);
+                this.WorkingFile = new FileInfo(sfd.FileName);
 
-                MasterProperties ??= new(this, MasterProperties.LoadedMaster) {
+                MasterProperties ??= new(this) {
                     skybox = "<none>",
                     introlvl = "<none>",
                     checkpointlvl = "<none>"
                 };
 
                 SaveCheckAndWrite(true, "", true);
-                if (isnew)
-                    TCLE.CloseFileLock(MasterProperties.LoadedMaster);
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
-            return MasterProperties.LoadedMaster;
+            return this.WorkingFile;
         }
 
         public bool IsSaved()
@@ -845,7 +784,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = MasterProperties.LoadedMaster.Name + "*";
+                this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
                     reason = Reason,
@@ -853,17 +792,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             else {
-                this.Text = MasterProperties.LoadedMaster.Name;
+                this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(TCLE.lockedfiles[MasterProperties.LoadedMaster], _saveJSON);
+                TCLE.WriteFileLock(this.FileLock, _saveJSON);
                 //find if any raw text docs are open of this gate and update them
-                TCLE.FindReloadRaw(MasterProperties.LoadedMaster.Name);
+                TCLE.FindReloadRaw(this.WorkingFile.Name);
                 //update level sections
-                TCLE._projprops.LevelSections = new() { "SECTION_LINEAR" };
+                TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
                 foreach (MasterLvlData mld in MasterLvls.Where(x => x.checkpoint)) {
-                    TCLE._projprops.LevelSections.Add("SECTION_LINEAR");
+                    TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
                 }
-                if (!SaveOnlyNoLoad) {
+                if (!SimpleLoad) {
                     TCLE.SaveTCL();
                 }
                 //
@@ -873,7 +812,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
-            if (SaveOnlyNoLoad)
+            if (SimpleLoad)
                 return 0;
             int beattotal = 0;
             //calc intro lvl
@@ -891,7 +830,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntimeSublevel(MasterLvlData _lvl, bool updatebeats = true)
         {
-            if (SaveOnlyNoLoad)
+            if (SimpleLoad)
                 return 0;
 
             _lvl.Beats = TCLE.CalculateSublevelRuntime(_lvl);
@@ -952,8 +891,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData group in _properties.masterlvls) {
                 JObject s = new() {
-                    { "lvl_name", (group.type == "lvl" ? group.name : "") },
-                    { "gate_name", (group.type == "gate" ? group.name : "") },
+                    { "lvl_name", (group.Type == "lvl" ? group.name : "") },
+                    { "gate_name", (group.Type == "gate" ? group.name : "") },
                     { "checkpoint", group.checkpoint },
                     { "checkpoint_leader_lvl_name", group.checkpoint_leader.Replace("<none>", "") ?? "" },
                     { "rest_lvl_name", group.rest.Replace("<none>", "") ?? "" },
@@ -997,7 +936,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardMaster.Reverse();
             TCLE.PlaySound("UIkcopy");
             //enable the paste button everywhere
-            foreach (Form_MasterEditor master in TCLE.Documents.Where(x => x.DockHandler.TabText.Replace("*", "").EndsWith(".master")))
+            foreach (Form_MasterEditor master in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension == ".master"))
                 master.btnMasterLvlPaste.Enabled = true;
         }
 
@@ -1062,7 +1001,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
@@ -1075,7 +1014,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinglvl)) as Form_LvlEditor;
+                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinglvl)) as Form_LvlEditor;
                     //switch to the lvl if it's open
                     _playinglvlform?.DockHandler?.Activate();
                 }
@@ -1083,7 +1022,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinggate != Playback.GlobalCurrentGate) {
                     _playinggate = Playback.GlobalCurrentGate;
-                    _playinggateform = TCLE.Documents.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinggate)) as Form_GateEditor;
+                    _playinggateform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinggate)) as Form_GateEditor;
                     //switch to the gate if it's open
                     _playinggateform?.DockHandler?.Activate();
                 }

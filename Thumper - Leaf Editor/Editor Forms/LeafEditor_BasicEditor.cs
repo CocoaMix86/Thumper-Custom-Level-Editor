@@ -185,7 +185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     enabled = true
                 };
                 if (_importseq.obj_name == "leafname")
-                    _importseq.obj_name = _leafproperties.LoadedLeaf.Name;
+                    _importseq.obj_name = this.WorkingFile.Name;
                 _importseq.expandlanes = _importseq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
                 if (_importseq.friendly_lane == "lane center") {
                     LoadMultiLanes(_importseq, SequencerObjects, trackEditor);

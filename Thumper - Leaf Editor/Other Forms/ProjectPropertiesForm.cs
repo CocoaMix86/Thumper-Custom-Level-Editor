@@ -76,7 +76,6 @@ namespace Thumper_Custom_Level_Editor
                 rail = Color.White,
                 railglow = Color.White,
                 path = Color.White,
-                WorkingFolder = NewProject.Directory,
                 WorkingFile = NewProject
             };
 
