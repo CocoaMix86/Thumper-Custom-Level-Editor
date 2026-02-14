@@ -239,7 +239,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         };
         #endregion
 
-        private IDockContent GetContentFromPersistString(string persistString)
+        private EditorBase? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Data Point Props.")
@@ -250,6 +250,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return contentMain;
             if (persistString is "Basic Editor")
                 return contentMasterView;
+
+            return null;
 
             throw new NotImplementedException();
         }

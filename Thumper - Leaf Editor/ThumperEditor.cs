@@ -39,6 +39,39 @@ namespace Thumper_Custom_Level_Editor
         public static bool Fullscreen;
         public static string DragSource = "none";
         public static PrivateFontCollection ImportedFonts = new PrivateFontCollection();
+        //Active File Tracking
+        public static EditorBase? GlobalActiveDocument
+        {
+            get => _GAD;
+            set {
+                if (value == null) {
+                    dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
+                    dockProjectProperties.TabText = $"Project Properties";
+                    _GAD = value;
+                    return;
+                }
+                if (value.WorkingFile is null)
+                    return;
+                _GAD = value;
+                //for testing -> TCLE.Instance.toolstripLevelName.Text = GlobalActiveDocument.WorkingFile.Name;
+                dockProjectProperties.propertyGridProject.SelectedObject = GlobalActiveDocument.GetType().GetMethod("GetProperties").Invoke(GlobalActiveDocument, null);
+                dockProjectProperties.TabText = $"{GlobalActiveDocument.DockHandler.TabText} Properties";
+
+                if (GlobalActiveDocument.GetType() == typeof(Form_LvlEditor)) {
+                    GlobalLastLvl = GlobalActiveDocument as Form_LvlEditor;
+                }
+                else if (GlobalActiveDocument.GetType() == typeof(Form_GateEditor)) {
+                    GlobalLastGate = GlobalActiveDocument as Form_GateEditor;
+                }
+                else if (GlobalActiveDocument.GetType() == typeof(Form_MasterEditor)) {
+                    GlobalLastMaster = GlobalActiveDocument as Form_MasterEditor;
+                }
+            }
+        }
+        private static EditorBase? _GAD;
+        public static Form_LvlEditor? GlobalLastLvl { get; set; }
+        public static Form_GateEditor? GlobalLastGate { get; set; }
+        public static Form_MasterEditor? GlobalLastMaster { get; set; }
         //Public accessible clipboards
         public static List<Sequencer_Object> ClipboardSequencer = new();
         public static List<SeqDataPoint> ClipboardDataPoints;
@@ -1138,35 +1171,6 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Dock Tab Rightclick
-        public static IDockContent GlobalActiveDocument
-        {
-            get => _GAD;
-            set {
-                if (value == null) {
-                    dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
-                    dockProjectProperties.TabText = $"Project Properties";
-                    _GAD = value;
-                    return;
-                }
-                _GAD = value;
-                dockProjectProperties.propertyGridProject.SelectedObject = _GAD.GetType().GetMethod("GetProperties").Invoke(_GAD, null);
-                dockProjectProperties.TabText = $"{_GAD.DockHandler.TabText} Properties";
-
-                if (_GAD.GetType() == typeof(Form_LvlEditor)) {
-                    GlobalLastLvl = _GAD as Form_LvlEditor;
-                }
-                else if (_GAD.GetType() == typeof(Form_GateEditor)) {
-                    GlobalLastGate = _GAD as Form_GateEditor;
-                }
-                else if (_GAD.GetType() == typeof(Form_MasterEditor)) {
-                    GlobalLastMaster = _GAD as Form_MasterEditor;
-                }
-            }
-        }
-        private static IDockContent _GAD;
-        public static Form_LvlEditor GlobalLastLvl;
-        public static Form_GateEditor GlobalLastGate;
-        public static Form_MasterEditor GlobalLastMaster;
         private void contextmenuTabClick_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             toolstripTabSave.Text = "Save " + GlobalActiveDocument.DockHandler.TabText;

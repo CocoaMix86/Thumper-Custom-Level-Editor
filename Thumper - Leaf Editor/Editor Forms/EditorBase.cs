@@ -42,9 +42,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
-
+        /*
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            if (this.WorkingFile != null && TCLE.GlobalActiveDocument != this) {
+                TCLE.GlobalActiveDocument = this;
+                TCLE.Instance.toolstripLevelName.Text = TCLE.GlobalActiveDocument.WorkingFile.Name;
+            }
+        }
+        
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+            if (this.WorkingFile != null && TCLE.GlobalActiveDocument != this) {
+                TCLE.GlobalActiveDocument = this;
+            }
+        }
+        */
         protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
+            if (this.WorkingFile is null)
+                return;
+
             if (TCLE.GlobalLastGate == this)
                 TCLE.GlobalLastGate = null;
             if (TCLE.GlobalLastLvl == this)
@@ -54,7 +75,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             FileLock?.Close();
             TCLE.Documents.Remove(WorkingFile?.Name + (RawText ? "-raw" : ""));
-            base.Dispose(disposing);
         }
     }
 
@@ -80,7 +100,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             IDockContent focus = this.NestedPanes.Select(x => x.ActiveContent).FirstOrDefault();
             if (focus != null)
-                TCLE.GlobalActiveDocument = focus;
+                TCLE.GlobalActiveDocument = (EditorBase?)focus;
         }
     }
 

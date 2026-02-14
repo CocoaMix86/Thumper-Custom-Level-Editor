@@ -64,9 +64,6 @@
             this.Text = "Workspace";
             this.FormClosing += this.Form_WorkSpace_FormClosing;
             this.FormClosed += this.Form_WorkSpace_FormClosed;
-            this.Load += this.Form_WorkSpace_Load;
-            this.Shown += this.Form_WorkSpace_Shown;
-            this.KeyDown += this.Form_WorkSpace_KeyDown;
             this.ResumeLayout(false);
         }
 

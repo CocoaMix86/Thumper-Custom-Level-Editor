@@ -877,7 +877,7 @@ namespace Thumper_Custom_Level_Editor
             return ProjectExplorer.Files.Any(x => x.Extension is ".master");
         }
 
-        public static DockContent OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
+        public static EditorBase OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
         {
             if (filepath == null)
                 return null;

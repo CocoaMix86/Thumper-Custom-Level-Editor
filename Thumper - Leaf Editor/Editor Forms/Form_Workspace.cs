@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private IDockContent GetContentFromPersistString(string persistString)
+        private EditorBase? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             bool raw = persistString.Contains(" [Raw]");
@@ -43,14 +43,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
+        private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
+        {
+            //EditorBase DocClosing = (EditorBase)e.Content;
+            //FileInfo filetoclose = null;
+            if (!TCLE.Instance.Disposing) {
+                //filetoclose = DocClosing.WorkingFile;
+                dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+                ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
+            }
+        }
+
         private void dockMain_Enter(object sender, EventArgs e)
         {
             if (TCLE.DontSwitchGAD)
                 return;
             if (this.Disposing)
                 return;
-            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
+            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+            //    TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
+            
             //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
@@ -58,9 +70,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.DontSwitchGAD)
                 return;
             if (this.Disposing)
-                return;
+                return; 
+            
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
+                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
+
             //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
@@ -69,9 +83,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (this.Disposing)
                 return;
+            
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
+            
+            //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
@@ -84,30 +100,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if (dockMain.ActiveContent == null)
             //if (dockMain.Panes.Count > 0)
             //    dockMain.Panes[0].Activate();
-            //TCLE.GlobalActiveDocument = dockMain.ActiveContent;
+            TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveContent;
             //}
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
-        }
-
-        private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
-        {
-            //EditorBase DocClosing = (EditorBase)e.Content;
-            //FileInfo filetoclose = null;
-            if (!TCLE.Instance.Disposing) {
-                //filetoclose = DocClosing.WorkingFile;
-
-                dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
-                ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
-            }
-        }
-
-        private void Form_WorkSpace_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form_WorkSpace_KeyDown(object sender, KeyEventArgs e)
-        {
+            //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
         private void Form_WorkSpace_FormClosing(object sender, FormClosingEventArgs e)
@@ -153,10 +148,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 File.Delete($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
             } catch { }
-        }
-
-        private void Form_WorkSpace_Shown(object sender, EventArgs e)
-        {
         }
     }
 }

@@ -585,13 +585,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_gate.config");
         }
 
-        private IDockContent GetContentFromPersistString(string persistString)
+        private EditorBase? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Properties")
                 return contentPropertyGrid;
             if (persistString is "Lvl Phases")
                 return contentMain;
+
+            return null;
 
             throw new NotImplementedException();
         }

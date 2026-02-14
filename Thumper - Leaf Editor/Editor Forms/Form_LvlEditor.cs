@@ -915,7 +915,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_lvl.config");
         }
 
-        private IDockContent GetContentFromPersistString(string persistString)
+        private EditorBase? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString.Contains("Paths/Tunnels"))
@@ -924,6 +924,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return contentMain;
             if (persistString is "Loop Tracks")
                 return contentLoop;
+
+            return null;
 
             throw new NotImplementedException();
         }
