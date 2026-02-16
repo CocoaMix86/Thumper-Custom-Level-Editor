@@ -20,6 +20,17 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
             graphics.DrawImage(MasterBG, 0 - this.HorizontalScrollingOffset + 3, 0);
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (Playback.IsPlaying) {
+                e.Graphics.DrawImage(Properties.Resources.basiceditor_beebleNormal,
+                    (int)(((double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat)) * this.Columns[0].Width) - this.HorizontalScrollingOffset,
+                    44,
+                    20,
+                    20);
+            }
+        }
     }
 
     public class DGVPlayback : DataGridView
@@ -34,8 +45,9 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if (PlaybackPosition > 0 && _positionpixels > this.RowHeadersWidth + 75)
+            if (PlaybackPosition > 0 && _positionpixels > this.RowHeadersWidth + 75) {
                 e.Graphics.DrawLine(LeafCellPainting.PenVioletThick, _positionpixels, 0, _positionpixels, this.Height);
+            }
         }
 
         public void ResetPlayback()

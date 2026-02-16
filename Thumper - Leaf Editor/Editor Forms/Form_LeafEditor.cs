@@ -38,7 +38,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadEnd(load);
         }
         ///Load LVL Sequencer
-        public Form_LeafEditor(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath)
+        public Form_LeafEditor(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -2398,16 +2398,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
-            if (this.WorkingFile.Extension == ".leaf") {
+            if (this.WorkingFile?.Extension == ".leaf") {
                 LeafProperties = new(this) {
-                    SequencerType = this.WorkingFile.Extension,
+                    SequencerType = ".leaf",
                     timesignature = (string)_load["time_sig"] ?? "4/4",
                     _beats = (int?)_load["beat_cnt"] ?? 1
                 };
             }
-            else if (this.WorkingFile.Extension == ".lvl") {
+            else if (this.WorkingFile?.Extension is ".lvl" or null) {
                 LeafProperties = new(this) {
-                    SequencerType = this.WorkingFile.Extension,
+                    SequencerType = ".lvl",
                     timesignature = "4/4",
                     _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
@@ -3524,6 +3524,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (Playback.IsPlaying /*&& Playback.PlaybackBeat + FrozenColumnOffset < trackEditor.ColumnCount*/) {
                 trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                 trackEditor.Invalidate();
+                dgvMasterView.Invalidate();
                 if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                     trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
             }

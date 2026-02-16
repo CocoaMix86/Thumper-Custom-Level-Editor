@@ -118,7 +118,7 @@ namespace Thumper_Custom_Level_Editor
         public static void CreatePlaybackFromLeaf(LeafProperties Leaf, int BeatStop = -1, int _BeatOffset = 0)
         {
             //show the loading message
-            TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.ParentEditor.WorkingFile.Name}";
+            TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.ParentEditor.WorkingFile?.Name ?? "Lvl Sequencer"}";
             TCLE.Instance.lblLoadingLeaf.Invalidate();
             TCLE.Instance.lblLoadingLeaf.Update();
             TCLE.Instance.lblLoadingLeaf.Refresh();
@@ -136,7 +136,8 @@ namespace Thumper_Custom_Level_Editor
                 BeatStop += 1;
                 LeafLastBeat = Math.Min(Leaf.Beats, BeatStop);
             }
-            GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.ParentEditor.WorkingFile.Name, (BeatOffset) * 100));
+            if (Leaf.ParentEditor.WorkingFile != null)
+                GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.ParentEditor.WorkingFile.Name, (BeatOffset) * 100));
 
             foreach (Sequencer_Object Seq in Leaf.SequencerObjects)
             {

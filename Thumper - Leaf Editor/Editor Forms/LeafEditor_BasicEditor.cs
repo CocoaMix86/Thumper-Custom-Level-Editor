@@ -26,6 +26,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             if (Properties.Settings.Default.LeafOptionShowGrid)
                 e.Graphics.DrawRectangle(BasicEditorPenGrid, e.CellBounds);
+
         }
 
         private void dgvMasterView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

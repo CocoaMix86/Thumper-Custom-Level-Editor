@@ -1,4 +1,5 @@
-﻿using WeifenLuo.WinFormsUI.Docking;
+﻿using System.ComponentModel;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -60,9 +61,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         */
-        protected override void Dispose(bool disposing)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            base.Dispose(disposing);
+            base.OnClosing(e);
             if (this.WorkingFile is null)
                 return;
 
@@ -75,6 +76,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             FileLock?.Close();
             TCLE.Documents.Remove(WorkingFile?.Name + (RawText ? "-raw" : ""));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 

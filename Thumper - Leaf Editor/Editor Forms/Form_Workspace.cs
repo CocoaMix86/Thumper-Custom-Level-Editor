@@ -40,67 +40,64 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void dockMain_ContentAdded(object sender, DockContentEventArgs e)
         {
             e.Content.DockHandler.TabPageContextMenuStrip = TCLE.TabRightClickMenu;
+            if (TCLE.IsLoadingProject)
+                return;
             dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
         {
+            if (TCLE.IsLoadingProject || TCLE.Instance.Disposing)
+                return;
             //EditorBase DocClosing = (EditorBase)e.Content;
             //FileInfo filetoclose = null;
-            if (!TCLE.Instance.Disposing) {
-                //filetoclose = DocClosing.WorkingFile;
-                dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
-                ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
-            }
+            //filetoclose = DocClosing.WorkingFile;
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+            ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
+
         }
 
         private void dockMain_Enter(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD)
+            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
                 return;
-            if (this.Disposing)
-                return;
-            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-            //    TCLE.GlobalActiveDocument = dockMain.ActiveDocument;
+
+            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
             
-            //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD)
+            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
                 return;
-            if (this.Disposing)
-                return; 
-            
+
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
 
-            //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD)
+            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
                 return;
-            if (this.Disposing)
-                return;
-            
+
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
             
-            //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD)
-                return;
-            if (this.Disposing)
+            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
                 return;
             //if (dockMain.ActivePane == null) {
             //if (dockMain.ActiveContent == null)
             //if (dockMain.Panes.Count > 0)
             //    dockMain.Panes[0].Activate();
-            TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveContent;
+            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveContent;
             //}
             //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }

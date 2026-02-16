@@ -133,6 +133,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap basiceditor_beebleNormal {
+            get {
+                object obj = ResourceManager.GetObject("basiceditor_beebleNormal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap basiceditor_bossfx {
             get {
                 object obj = ResourceManager.GetObject("basiceditor_bossfx", resourceCulture);

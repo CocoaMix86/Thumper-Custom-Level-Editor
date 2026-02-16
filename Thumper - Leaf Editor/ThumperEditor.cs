@@ -135,27 +135,31 @@ namespace Thumper_Custom_Level_Editor
             //
             AppSettings.Recentfiles ??= new List<string>();
             //
-            if (Properties.Settings.Default.version != TCLE.VersionNumber) {
-                Properties.Settings.Default.version = TCLE.VersionNumber;
-                if (Directory.Exists($@"{AppLocation}\temp"))
-                    Directory.Delete($@"{AppLocation}\temp", true);
-                if (Directory.Exists($@"{AppLocation}\settings"))
-                    Directory.Delete($@"{AppLocation}\settings", true);
+            try {
+                if (Properties.Settings.Default.version != TCLE.VersionNumber) {
+                    Properties.Settings.Default.version = TCLE.VersionNumber;
+                    if (Directory.Exists($@"{AppLocation}\temp"))
+                        Directory.Delete($@"{AppLocation}\temp", true);
+                    if (Directory.Exists($@"{AppLocation}\settings"))
+                        Directory.Delete($@"{AppLocation}\settings", true);
+                }
+                //Create directory for leaf templates and other default files
+                if (!Directory.Exists($@"{AppLocation}\templates")) {
+                    toolstripFileTemplateRegen_Click(null, null);
+                }
+                if (!Directory.Exists($@"{AppLocation}\temp")) {
+                    Directory.CreateDirectory($@"{AppLocation}\temp");
+                }
+                if (!Directory.Exists($@"{AppLocation}\settings")) {
+                    Directory.CreateDirectory($@"{AppLocation}\settings");
+                }
+                //load fonts
+                if (!File.Exists($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf"))
+                    File.WriteAllBytes($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
+                ImportedFonts.AddFontFile($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf");
+            } catch (Exception ex) {
+                MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
             }
-            //Create directory for leaf templates and other default files
-            if (!Directory.Exists($@"{AppLocation}\templates")) {
-                toolstripFileTemplateRegen_Click(null, null);
-            }
-            if (!Directory.Exists($@"{AppLocation}\temp")) {
-                Directory.CreateDirectory($@"{AppLocation}\temp");
-            }
-            if (!Directory.Exists($@"{AppLocation}\settings")) {
-                Directory.CreateDirectory($@"{AppLocation}\settings");
-            }
-            //load fonts
-            if (!File.Exists($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf"))
-                File.WriteAllBytes($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
-            ImportedFonts.AddFontFile($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf");
             //call methods to initialize various aspects of the editors
             ImportObjects();
             ColorFormElements(TCLE.Instance);
@@ -587,6 +591,9 @@ namespace Thumper_Custom_Level_Editor
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
                 OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
             }
+            foreach (Form_WorkSpace _ws in TCLE.Workspaces) {
+                _ws.dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{_ws.Text}.config");
+            }
             IsLoadingProject = false;
             //this will be the loading sound :D
             TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
@@ -751,8 +758,8 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
-                leaf.dgvMasterView.Refresh();
+                leaf.trackEditor.Invalidate();
+                leaf.dgvMasterView.Invalidate();
             }
         }
 
@@ -760,7 +767,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionConnectBars = leafoptionConnectBars.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
+                leaf.trackEditor.Invalidate();
             }
         }
 
@@ -783,7 +790,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionEaseDots = leafoptionEaseDots.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
+                leaf.trackEditor.Invalidate();
             }
         }
 
@@ -791,7 +798,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionThinBars = leafoptionThinValues.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
+                leaf.trackEditor.Invalidate();
             }
         }
 
@@ -799,7 +806,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionShowWave = leafoptionShowWave.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
+                leaf.trackEditor.Invalidate();
             }
         }
 
@@ -807,7 +814,7 @@ namespace Thumper_Custom_Level_Editor
         {
             Properties.Settings.Default.LeafOptionVerticalCells = leafoptionVerticalCells.Checked;
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
-                leaf.trackEditor.Refresh();
+                leaf.trackEditor.Invalidate();
             }
         }
 

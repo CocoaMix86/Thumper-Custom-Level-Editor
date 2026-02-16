@@ -9,9 +9,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_LvlEditor : EditorBase
     {
         #region Form Construction
-        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
+        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
-            SimpleLoad = saveonlynoload;
+            SimpleLoad = simpleload;
             if (SimpleLoad) {
                 LoadLvlSimple(load);
                 return;
@@ -1475,6 +1475,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleafform is not null) {
                     _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
+                    _playingleafform.dgvMasterView.Invalidate();
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                         _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
                 }

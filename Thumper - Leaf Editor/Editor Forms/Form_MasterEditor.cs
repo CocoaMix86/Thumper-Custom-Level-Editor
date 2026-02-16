@@ -9,13 +9,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_MasterEditor : EditorBase
     {
         #region Form Construction
-        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool saveonlynoload = false) : base(filepath)
+        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
+            SimpleLoad = simpleload;
+
             InitializeComponent();
             RenderForm();
             ColorFormElements();
-
-            SimpleLoad = saveonlynoload;
 
             if (load != null) {
                 LoadMaster(load);
@@ -1003,20 +1003,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playingleaf)) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as Form_LeafEditor;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
                 if (_playingleafform is not null) {
                     _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
+                    _playingleafform.dgvMasterView.Invalidate();
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                         _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
                 }
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinglvl)) as Form_LvlEditor;
+                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as Form_LvlEditor;
                     //switch to the lvl if it's open
                     _playinglvlform?.DockHandler?.Activate();
                 }
@@ -1024,7 +1025,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinggate != Playback.GlobalCurrentGate) {
                     _playinggate = Playback.GlobalCurrentGate;
-                    _playinggateform = TCLE.Documents.Values.FirstOrDefault(x => x.DockHandler.TabText.StartsWith(_playinggate)) as Form_GateEditor;
+                    _playinggateform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinggate) as Form_GateEditor;
                     //switch to the gate if it's open
                     _playinggateform?.DockHandler?.Activate();
                 }

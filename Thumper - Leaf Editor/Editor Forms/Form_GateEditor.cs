@@ -9,9 +9,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class Form_GateEditor : EditorBase
     {
         #region Form Construction
-        public Form_GateEditor(dynamic load = null, FileInfo filepath = null) : base(filepath)
+        public Form_GateEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
-            if (Playback.Generating) {
+            this.SimpleLoad = simpleload;
+            if (this.SimpleLoad) {
                 LoadGateSimple(load, filepath);
                 return;
             }
@@ -112,9 +113,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         };
         //
         //Local basic vars
+        public bool SimpleLoad;
         public bool EditorIsSaved = true;
         public bool EditorLoading;
-        private bool SimpleLoad;
         private bool LogUndo = true;
         private bool IsAddingItems;
         public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.Random));
@@ -1067,6 +1068,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleafform is not null) {
                     _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
+                    _playingleafform.dgvMasterView.Invalidate();
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll)
                         _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
                 }
