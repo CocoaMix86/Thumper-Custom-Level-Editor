@@ -2412,11 +2412,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
             }
-            this.NoLock = true;
 
             while (_leafproperties.BeatsAndFrozen > SimpleTrackEditor.ColumnCount)
-                SimpleTrackEditor.Columns.Add(new SequencerColumn());
-            //LeafLengthChanged();
+                SimpleTrackEditor.Columns.Add(new SequencerColumn() { FillWeight = 0.001f });
         }
 
         public void LoadEnd(dynamic savestate)
@@ -2499,20 +2497,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
                 if (ObjectToImport.friendly_lane is not "none") {
                     LoadMultiLanes(ObjectToImport, LoadedObjects, dgv);
-                    ObjectToImport.expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                    if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) ObjectToImport.expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 }
                 else {
                     ObjectToImport.expandlanes = true;
                     LoadedObjects.Add(ObjectToImport);
                     dgv.Rows.Add(ObjectToImport);
                 }
+                //this line exists to force the app to recognize the rows have proper indexes instead of -1
+                string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj);
                 RowReadOnly(ObjectToImport, !ObjectToImport.enabled);
             }
 
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
-            string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
+            string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects;
         }
@@ -2553,15 +2553,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             if (lookup == null) {
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
+                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].expandlanes = Properties.Settings.Default.LeafOptionShowLane;
 
                 lookup = LoadedObjects.FirstOrDefault(x => x.obj_name == ObjectToImport.obj_name && x.param_path == ObjectToImport.param_path && x.param_path_lane == ObjectToImport.param_path_lane && x.isdefault == true);
             }

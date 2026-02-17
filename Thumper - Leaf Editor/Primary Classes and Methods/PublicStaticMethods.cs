@@ -340,11 +340,27 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public static void WriteFileLock(string fs, string _save)
+        {
+            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, _save.Length, true)) {
+                sr.Write(_save);
+            }
+        }
+
         public static void WriteFileLock(FileStream fs, string _save)
         {
             string tosave = _save;
             using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
                 fs.SetLength(0);
+                sr.Write(tosave);
+            }
+        }
+
+        public static void WriteFileLock(string fs, JObject _save)
+        {
+            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
+            File.Delete(fs);
+            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, tosave.Length, true)) {
                 sr.Write(tosave);
             }
         }
@@ -1135,25 +1151,33 @@ namespace Thumper_Custom_Level_Editor
                 FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
                 File.Move(file.FullName, newfile.FullName);
                 //resave leafs and lvls to properly convert the datapoints
+                JObject _save = null;
                 if (newfile.Extension == ".leaf") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_LeafEditor _leaf = new(_load, newfile, true);
-                    _leaf.SaveCheckAndWrite(true, "");
+                    _save = Form_LeafEditor.BuildSave(_leaf.LeafProperties);
+                    //_leaf.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".lvl") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_LvlEditor _lvl = new(_load, newfile, true);
-                    _lvl.SaveCheckAndWrite(true, "");
+                    _save = Form_LvlEditor.BuildSave(_lvl.LvlProperties);
+                    //_lvl.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".master") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_MasterEditor _master = new(_load, newfile, true);
-                    _master.SaveCheckAndWrite(true, "");
+                    _save = Form_MasterEditor.BuildSave(_master.MasterProperties);
+                    //_master.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".samp") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_SampleEditor _samp = new(_load, newfile, true);
-                    _samp.SaveCheckAndWrite(true, "");
+                    _save = Form_SampleEditor.BuildSave(_samp.SampleProperties);
+                    //_samp.SaveCheckAndWrite(true, "");
+                }
+                if (_save != null) {
+                    WriteFileLock(newfile.FullName, _save);
                 }
             }
             //build the JSON to write to file
@@ -1163,9 +1187,7 @@ namespace Thumper_Custom_Level_Editor
             //locate pyramid_outro
             FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
             if (pyramid != null)
-                File.WriteAllText($@"{pyramid.FullName}", Properties.Resources.leaf_pyramid_outro);
-            else
-                File.WriteAllText($@"{LevelDetails.DirectoryName}\pyramid_outro.leaf", Properties.Resources.leaf_pyramid_outro);
+                TCLE.WriteFileLock(pyramid.FullName, Properties.Resources.leaf_pyramid_outro);
 
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.ProjectName}.TCL"));
         }
