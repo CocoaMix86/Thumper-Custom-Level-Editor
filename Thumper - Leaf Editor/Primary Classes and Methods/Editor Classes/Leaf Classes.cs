@@ -427,6 +427,28 @@ namespace Thumper_Custom_Level_Editor
             selectedobj = new() { ParentLeaf = this };
         }
 
+        public JObject ConvertToJson()
+        {
+            //start building JSON output
+            JObject _save = new() {
+                { "obj_type", "SequinLeaf" },
+                { "obj_name", this.ParentEditor.WorkingFile.Name },
+                { "beat_cnt", this.Beats },
+                { "time_sig", this.timesignature }
+            };
+
+            JArray seq_objs = new();
+            //isdefault = true means object has not been changed in any way.
+            //friendly_param = null means the object wasn't initialized properly and will have errors when it comes time to save.
+            foreach (Sequencer_Object seq_obj in this.SequencerObjects.Where(x => !x.isdefault && x.friendly_param != null)) {
+                seq_objs.Add(seq_obj.ConvertToJson());
+            }
+            //add all seq_objs to the overall leaf
+            _save.Add("seq_objs", seq_objs);
+
+            return _save;
+        }
+
         [Browsable(false)]
         public Form_LeafEditor ParentEditor;
         [Browsable(false)]

@@ -1155,7 +1155,7 @@ namespace Thumper_Custom_Level_Editor
                 if (newfile.Extension == ".leaf") {
                     dynamic _load = LoadFileLock(newfile.FullName);
                     Form_LeafEditor _leaf = new(_load, newfile, true);
-                    _save = Form_LeafEditor.BuildSave(_leaf.LeafProperties);
+                    _save = _leaf.LeafProperties.ConvertToJson();
                     //_leaf.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".lvl") {

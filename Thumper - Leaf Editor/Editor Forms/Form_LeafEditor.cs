@@ -2740,7 +2740,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.MainBeeble.MakeFace();
 
             EditorIsSaved = IsSaved;
-            JObject _saveJSON = BuildSave(LeafProperties);
+            JObject _saveJSON = LeafProperties.ConvertToJson();
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
@@ -2949,28 +2949,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackClear.Enabled = SequencerObjects.Count > 0;
             btnTrackCopy.Enabled = SequencerObjects.Count > 0;
             btnTrackPaste.Enabled = TCLE.ClipboardSequencer.Count > 0;
-        }
-
-        public static JObject BuildSave(LeafProperties _properties)
-        {
-            //start building JSON output
-            JObject _save = new() {
-                { "obj_type", "SequinLeaf" },
-                { "obj_name", _properties.ParentEditor.WorkingFile.Name },
-                { "beat_cnt", _properties.Beats },
-                { "time_sig", _properties.timesignature }
-            };
-
-            JArray seq_objs = new();
-            //isdefault = true means object has not been changed in any way.
-            //friendly_param = null means the object wasn't initialized properly and will have errors when it comes time to save.
-            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault && x.friendly_param != null)) {
-                seq_objs.Add(seq_obj.ConvertToJson());
-            }
-            //add all seq_objs to the overall leaf
-            _save.Add("seq_objs", seq_objs);
-
-            return _save;
         }
 
         #region Cut Copy Paste
