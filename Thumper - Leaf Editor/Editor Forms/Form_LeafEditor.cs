@@ -2807,7 +2807,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
-                    trackEditor.Columns.Add(new SequencerColumn());
+                    trackEditor.Columns.Add(new SequencerColumn() { FillWeight = 0.0001f });
                 TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
             else {
@@ -2919,10 +2919,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 index += leaf.beats != -1 ? leaf.beats : 1;
             }
         }
-        private void trackEditor_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.FillWeight = 0.001f;
-        }
 
         private static void RowReadOnly(Sequencer_Object seq, bool setreadonly)
         {
@@ -2955,70 +2951,25 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackPaste.Enabled = TCLE.ClipboardSequencer.Count > 0;
         }
 
-        public static JObject BuildSave(LeafProperties _properties, bool skiprevertsave = false)
+        public static JObject BuildSave(LeafProperties _properties)
         {
-            ///start building JSON output
+            //start building JSON output
             JObject _save = new() {
                 { "obj_type", "SequinLeaf" },
-                { "obj_name", _properties.ParentEditor.WorkingFile.Name }
+                { "obj_name", _properties.ParentEditor.WorkingFile.Name },
+                { "beat_cnt", _properties.Beats },
+                { "time_sig", _properties.timesignature }
             };
 
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault)) {
-                //skip blank tracks
-                if (seq_obj.friendly_param == null)
-                    continue;
-                JObject s = new();
-                //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                if (seq_obj.obj_name == "leafname" || seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
-                    seq_obj.obj_name = _properties.ParentEditor.WorkingFile.Name;
-                s.Add("obj_name", seq_obj.obj_name);
-                //write param_path or param_path_hash
-                if (seq_obj.param_path.StartsWith("0x"))
-                    s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
-                else
-                    s.Add("param_path", $"{seq_obj.param_path}");
-                s.Add("trait_type", seq_obj.trait_type);
-                //
-                JArray datapoints = new();
-                for (int _in = FrozenColumnOffset; _in < _properties.Beats + FrozenColumnOffset; _in++) {
-                    if (seq_obj[_in]?.Value == null)
-                        continue;
-                    if (seq_obj.trait_type == "kTraitFloat") {
-                        JObject d = new() {
-                            { "beat", seq_obj[_in].beat },
-                            { "value", (decimal)seq_obj[_in].Value },
-                            { "interp", $"kTraitInterp{seq_obj[_in].Interpolation ?? "Linear"}" },
-                            { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                        };
-                        datapoints.Add(d);
-                    }
-                    else {
-                        JObject d = new() {
-                            { "beat", seq_obj[_in].beat },
-                            { "value", (int)(decimal)seq_obj[_in].Value },
-                            { "interp", $"kTraitInterp{seq_obj[_in].Interpolation ?? "Linear"}" },
-                            { "ease", $"k{seq_obj[_in].Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                        };
-                        datapoints.Add(d);
-                    }
-                }
-                s.Add("data_points", datapoints);
-                //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step);
-                s.Add("default", seq_obj.defaultvalue);
-                s.Add("footer", seq_obj.footer);
-                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                s.Add("enabled", seq_obj.enabled);
-
-                seq_objs.Add(s);
+            //isdefault = true means object has not been changed in any way.
+            //friendly_param = null means the object wasn't initialized properly and will have errors when it comes time to save.
+            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault && x.friendly_param != null)) {
+                seq_objs.Add(seq_obj.ConvertToJson());
             }
             //add all seq_objs to the overall leaf
             _save.Add("seq_objs", seq_objs);
-            //end leaf with final keys
-            _save.Add("beat_cnt", _properties.Beats);
-            _save.Add("time_sig", _properties.timesignature);
-            ///end building JSON output
+
             return _save;
         }
 

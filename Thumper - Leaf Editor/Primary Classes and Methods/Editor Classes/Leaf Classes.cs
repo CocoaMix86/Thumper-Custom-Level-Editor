@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
@@ -29,6 +31,34 @@ namespace Thumper_Custom_Level_Editor
         {
             this.DividerHeight = 0;
             this.HeaderCell.Style.BackColor = Color.Black;
+        }
+
+        public JObject ConvertToJson()
+        {
+            //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
+            if (this.obj_name == "leafname" || this.obj_name.Contains(".leaf") || string.IsNullOrEmpty(this.obj_name))
+                this.obj_name = this.ParentLeaf.ParentEditor.WorkingFile.Name;
+            //add all the required fields to the json object
+            JObject s = new() {
+                { "obj_name", this.obj_name },
+                { (this.param_path.StartsWith("0x") ? "param_path_hash" : "param_path"), this.param_path.Replace("0x", "") },
+                { "trait_type", this.trait_type },
+                { "step", this.step },
+                { "default", this.defaultvalue },
+                { "footer", this.footer },
+                { "editor_data", new JArray() { new object[] { this.highlight_color.ToArgb(), this.highlight_value } } },
+                { "enabled", this.enabled },
+            };
+            //add all the datapoints of object
+            JArray datapoints = new();
+            for (int _in = Form_LeafEditor.FrozenColumnOffset; _in < this.ParentLeaf.Beats + Form_LeafEditor.FrozenColumnOffset; _in++) {
+                if (this[_in]?.Value == null)
+                    continue;
+                datapoints.Add(this[_in].ConvertToJson());
+            }
+            s.Add("data_points", datapoints);
+
+            return s;
         }
 
         public SeqDataPoint this[int index]
@@ -236,6 +266,26 @@ namespace Thumper_Custom_Level_Editor
             this.Interpolation = "Linear";
             this.Ease = "Ease In Out";
             this.Value = null;
+        }
+
+        public JObject ConvertToJson()
+        {
+            if (this.ParentSeqObj.trait_type == "kTraitFloat") {
+                return new() {
+                            { "beat", this.beat },
+                            { "value", (decimal)this.Value },
+                            { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" },
+                            { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                };
+            }
+            else {
+                return new() {
+                            { "beat", this.beat },
+                            { "value", (int)(decimal)this.Value },
+                            { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" },
+                            { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
+                };
+            }
         }
 
         [Browsable(false)]

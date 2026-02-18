@@ -425,7 +425,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.CellMouseUp += this.trackEditor_CellMouseUp;
             this.trackEditor.CellPainting += this.trackEditor_CellPainting;
             this.trackEditor.CellParsing += this.trackEditor_CellParsing;
-            this.trackEditor.ColumnAdded += this.trackEditor_ColumnAdded;
             this.trackEditor.DataError += this.trackEditor_DataError;
             this.trackEditor.EditingControlShowing += this.trackEditor_EditingControlShowing;
             this.trackEditor.RowEnter += this.trackEditor_RowEnter;
