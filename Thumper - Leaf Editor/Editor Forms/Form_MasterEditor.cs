@@ -55,7 +55,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!IsSaved()) {
+            if (!this.Saved) {
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -70,7 +70,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool EditorIsSaved = true;
         public bool EditorLoading;
         private bool SimpleLoad;
         private bool IsAddingItems;
@@ -712,7 +711,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             ///set save flag (master just loaded, has no changes)
             EditorLoading = false;
-            EditorIsSaved = true;
+            this.Saved = true;
         }
 
         public List<SaveState> GetUndoList()
@@ -724,13 +723,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
-            bool _trackNotSaved = EditorIsSaved;
+            bool _trackNotSaved = this.Saved;
             LoadMaster(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridMaster.Refresh();
 
             if (!_trackNotSaved) {
-                EditorIsSaved = false;
+                this.Saved = false;
                 if (!this.Text.EndsWith("*"))
                     this.Text += '*';
             }
@@ -769,11 +768,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public bool IsSaved()
-        {
-            return EditorIsSaved;
-        }
-
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorLoading || !LogUndo || Playback.Generating)
@@ -781,7 +775,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = IsSaved;
+            this.Saved = IsSaved;
             JObject _saveJSON = BuildSave(MasterProperties);
             //
             if (!IsSaved) {

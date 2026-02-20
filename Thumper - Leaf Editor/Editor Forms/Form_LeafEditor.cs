@@ -123,7 +123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!IsSaved()) {
+            if (!this.Saved) {
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -161,7 +161,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //
         //Local basic vars
         private bool SimpleLoad;
-        public bool EditorIsSaved = true;
         public bool EditorIsLoading;
         private bool EditorIsRandomizing;
         private bool EditorIsMoving;
@@ -1318,7 +1317,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///LEAF - NEW
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ((!EditorIsSaved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || EditorIsSaved) {
+            if ((!this.Saved && MessageBox.Show("Current leaf is not saved. Do you want to continue?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes) || this.Saved) {
                 SaveAs();
             }
         }
@@ -2149,7 +2148,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("Not allowed to split a lvl sequencer!", "Jumper Justum Jevel Jeditor");
                 return;
             }
-            if (!EditorIsSaved) {
+            if (!this.Saved) {
                 MessageBox.Show("Not allowed to split a leaf with unsaved changes.", "Thump Cust Lev Edit");
                 return;
             }
@@ -2662,7 +2661,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
-            bool _trackNotSaved = EditorIsSaved;
+            bool _trackNotSaved = this.Saved;
             //track which objects are expanded
             List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.expandlanes == true).ToList();
             List<Tuple<int, int>> _selection = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(x => new Tuple<int, int>(x.ColumnIndex, x.RowIndex)).ToList();
@@ -2683,8 +2682,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (!_trackNotSaved) {
-                EditorIsSaved = false;
-                if (!this.Text.EndsWith("*"))
+                this.Saved = false;
+                if (!this.Text.EndsWith('*'))
                     this.Text += '*';
             }
 
@@ -2727,11 +2726,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public bool IsSaved()
-        {
-            return EditorIsSaved;
-        }
-
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading || Playback.Generating)
@@ -2739,7 +2733,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = IsSaved;
+            this.Saved = IsSaved;
             JObject _saveJSON = LeafProperties.ConvertToJson();
             //
             if (!IsSaved) {

@@ -38,6 +38,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private FileInfo _workfile;
         public FileStream FileLock { get; set; }
+        public bool Saved { get; set; }
 
         protected override string GetPersistString()
         {

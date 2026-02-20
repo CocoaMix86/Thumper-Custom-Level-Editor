@@ -717,10 +717,10 @@ namespace Thumper_Custom_Level_Editor
                 if (velocity > 127)
                     velocity = 127;
                 //
-                if (200 + GlobalLoopEvents.Count() - 1 == 316)
+                if (200 + GlobalLoopEvents.Count - 1 == 316)
                     ;
                 for (decimal x = 0; x < Lvl.beats + Lvl.approachbeats; x += loop.beats) {
-                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50 + GlobalLoopEvents.Count() - 1, (int)((x + CallOffset - offset + lvloffset) * 100), 0));
+                    GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50 + GlobalLoopEvents.Count - 1, (int)((x + CallOffset - offset + lvloffset) * 100), 0));
                 }
             }
         }
@@ -806,7 +806,7 @@ namespace Thumper_Custom_Level_Editor
             //for ;v; loop events, insert EVENT_PROGRAM at tick 0 so it uses the correct soundfont
             for (int x = 0; x < GlobalLoopEvents.Count; x++) {
                 int channeloffset = 50 + x;
-                GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, GlobalSampleEvents.Count() > 0 ? 2 : 1, channeloffset, 0, 0));
+                GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, GlobalSampleEvents.Count > 0 ? 2 : 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
                 GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
                 if (GlobalLoopEvents[x].Count > 0) {

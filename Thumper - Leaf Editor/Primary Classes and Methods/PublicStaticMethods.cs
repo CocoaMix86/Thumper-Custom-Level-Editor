@@ -1037,26 +1037,23 @@ namespace Thumper_Custom_Level_Editor
             if (work != null) {
                 //closing a specific file type
                 if (type != null) {
-                    foreach (IDockContent document in work.dockMain.Documents.Where(x => x.GetType() == type)) {
-                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
-                        if (!save)
+                    foreach (EditorBase document in work.dockMain.Documents.Where(x => x.GetType() == type)) {
+                        if (!document.Saved)
                             return true;
                     }
                 }
                 //closing all in workspace
                 else {
-                    foreach (IDockContent document in work.dockMain.Documents) {
-                        bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
-                        if (!save)
+                    foreach (EditorBase document in work.dockMain.Documents) {
+                        if (!document.Saved)
                             return true;
                     }
                 }
             }
             //closing everything
             else {
-                foreach (IDockContent document in TCLE.Documents.Values) {
-                    bool save = (bool)document.GetType().GetMethod("IsSaved").Invoke(document, null);
-                    if (!save)
+                foreach (EditorBase document in TCLE.Documents.Values) {
+                    if (!document.Saved)
                         return true;
                 }
             }

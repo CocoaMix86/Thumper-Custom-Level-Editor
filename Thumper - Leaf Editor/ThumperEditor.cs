@@ -455,7 +455,7 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
-        VolumeMaster volma = null;
+        VolumeMaster volma;
         private void btnVolumeMixer_Click(object sender, EventArgs e)
         {
             if (volma == null || volma.IsDisposed)
@@ -1172,6 +1172,8 @@ namespace Thumper_Custom_Level_Editor
 
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
+            if (TCLE.IsLoadingProject)
+                return;
             if (!Directory.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}"))
                 Directory.CreateDirectory($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}");
             dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config");
@@ -1185,7 +1187,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabClose_Click(object sender, EventArgs e)
         {
-            if ((bool)GlobalActiveDocument.GetType().GetMethod("IsSaved").Invoke(GlobalActiveDocument, null)) {
+            if (!GlobalActiveDocument.Saved) {
                 if (MessageBox.Show("File is unsaved. Are you sure you want to close it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     return;
                 }
@@ -1210,13 +1212,14 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripTabCopyPath_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(ProjectExplorer.Files.First(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText.Replace("*", "").Split(" [")[0]}"))?.FullName);
+            //Clipboard.SetText(ProjectExplorer.Files.First(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText.Replace("*", "").Split(" [")[0]}"))?.FullName);
+            Clipboard.SetText(GlobalActiveDocument.WorkingFile.FullName);
         }
 
         private void toolstripTabOpenFolder_Click(object sender, EventArgs e)
         {
-            FileInfo foldertoopen = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GlobalActiveDocument.DockHandler.TabText.Replace("*", "").Split(" [")[0]}"));
-            if (foldertoopen != null && foldertoopen.Directory.Exists)
+            DirectoryInfo foldertoopen = GlobalActiveDocument.WorkingFile.Directory;
+            if (foldertoopen != null && foldertoopen.Exists)
                 Process.Start("explorer.exe", $@"/select, ""{foldertoopen.FullName}""");
         }
         #endregion

@@ -84,7 +84,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!IsSaved()) {
+            if (!this.Saved) {
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -93,7 +93,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool EditorIsSaved = true;
         private bool EditorIsLoading
         {
             get;
@@ -985,7 +984,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlLeafRandom.Enabled = true;
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
-            EditorIsSaved = true;
+            this.Saved = true;
             btnLvlSequencer.Enabled = true;
             RecalculateRuntime();
         }
@@ -1023,7 +1022,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
-            EditorIsSaved = true;
+            this.Saved = true;
             RecalculateRuntime();
         }
 
@@ -1097,12 +1096,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
-            bool _trackNotSaved = EditorIsSaved;
+            bool _trackNotSaved = this.Saved;
             LoadLvl(UndoList[undolistindex].savestate);
             UndoList.RemoveRange(0, undolistindex);
 
             if (!_trackNotSaved) {
-                EditorIsSaved = false;
+                this.Saved = false;
                 if (!this.Text.EndsWith("*"))
                     this.Text += '*';
             }
@@ -1143,11 +1142,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public bool IsSaved()
-        {
-            return EditorIsSaved;
-        }
-
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading || !LogUndo || Playback.Generating)
@@ -1155,7 +1149,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
-            EditorIsSaved = IsSaved;
+            this.Saved = IsSaved;
             JObject _saveJSON = BuildSave(LvlProperties);
             //
             if (!IsSaved) {
