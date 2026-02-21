@@ -1,4 +1,5 @@
 ﻿using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -55,7 +56,7 @@ namespace Thumper_Custom_Level_Editor
             ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
             int index = tmsi.Owner.Items.IndexOf(tmsi);
             UndoFunction(index + 1);
-            TCLE.PlaySound("UIrevertchanges");
+            UtilAudio.PlaySound("UIrevertchanges");
         }
 
         public static void UndoFunction(int undoindex)

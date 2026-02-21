@@ -1,5 +1,6 @@
 ﻿using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -105,22 +106,22 @@ namespace Thumper_Custom_Level_Editor
         #region UI colors
         private void btnSetColor(object sender, EventArgs e)
         {
-            TCLE.PlaySound("UIcoloropen");
+            UtilAudio.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
             colorDialog.Color = btn.BackColor;
             if (colorDialog.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
+                UtilAudio.PlaySound("UIcolorapply");
                 btn.BackColor = colorDialog.Color;
             }
         }
 
         private void btnObjectColor_Click(object sender, EventArgs e)
         {
-            TCLE.PlaySound("UIcoloropen");
+            UtilAudio.PlaySound("UIcoloropen");
             Button btn = (Button)sender;
             colorDialog.Color = btn.BackColor;
             if (colorDialog.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
+                UtilAudio.PlaySound("UIcolorapply");
                 btn.BackColor = colorDialog.Color;
             }
         }
@@ -129,7 +130,7 @@ namespace Thumper_Custom_Level_Editor
         private void checkMuteApp_CheckedChanged(object sender, EventArgs e)
         {
             if (!checkMuteApp.Checked) {
-                TCLE.PlaySound("UIselect");
+                UtilAudio.PlaySound("UIselect");
             }
         }
         #endregion
@@ -178,10 +179,10 @@ namespace Thumper_Custom_Level_Editor
             if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0)
                 return;
 
-            TCLE.PlaySound("UIcoloropen");
+            UtilAudio.PlaySound("UIcoloropen");
             colorDialog.Color = Color.FromArgb(int.Parse(e.Node.ImageKey));
             if (colorDialog.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
+                UtilAudio.PlaySound("UIcolorapply");
                 //create color and store it in the bitmap dictionary
                 Bitmap color = new(16, 16);
                 using (Graphics g = Graphics.FromImage(color)) {

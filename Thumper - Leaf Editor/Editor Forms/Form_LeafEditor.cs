@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -276,7 +277,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLeafZoom_Click(object sender, EventArgs e)
         {
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
             panelZoom.Visible = !panelZoom.Visible;
             panelZoom.BringToFront();
             if (!panelZoom.Visible && ZoomHasChanged) {
@@ -925,7 +926,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(0);
-                TCLE.PlaySound("UIselect");
+                UtilAudio.PlaySound("UIselect");
             }
             //test if column header was clicked for global mute
             else if (e.RowIndex == -1 && e.ColumnIndex == 1) {
@@ -935,7 +936,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(1);
-                TCLE.PlaySound("UIselect");
+                UtilAudio.PlaySound("UIselect");
             }
             //test if column header was clicked for global expand
             else if (e.RowIndex == -1 && e.ColumnIndex == 2) {
@@ -948,7 +949,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //invalidate the column to repaint it, so images update
                 trackEditor.InvalidateColumn(2);
-                TCLE.PlaySound("UIselect");
+                UtilAudio.PlaySound("UIselect");
             }
             else if (e.RowIndex == -1) {
                 if (e.Button == MouseButtons.Right) {
@@ -991,11 +992,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.ColumnIndex is 0) {
                     seq.enabled = !seq.enabled;
                     RowReadOnly(seq, !seq.enabled);
-                    TCLE.PlaySound("UIselect");
+                    UtilAudio.PlaySound("UIselect");
                 }
                 if (e.ColumnIndex is 1) {
                     seq.mute = !seq.mute;
-                    TCLE.PlaySound("UIselect");
+                    UtilAudio.PlaySound("UIselect");
                 }
                 if (e.ColumnIndex is 2 && seq.friendly_lane == "lane center") {
                     //if ShowLanes, don't alter lane visibility
@@ -1007,7 +1008,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects[seq.Index - 1].expandlanes = seq.expandlanes;
                     SequencerObjects[seq.Index + 1].expandlanes = seq.expandlanes;
                     SequencerObjects[seq.Index + 2].expandlanes = seq.expandlanes;
-                    TCLE.PlaySound("UIselect");
+                    UtilAudio.PlaySound("UIselect");
                 }
                 trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                 //invalidate cell to repaint it to update the images
@@ -1367,7 +1368,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ChangeTrackName(seq, seq.category);
             //FindMissingLaneObjects(seq);
             SaveCheckAndWrite(false, "Add Object");
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
         }
 
         private void treeObjects_MouseDown(object sender, MouseEventArgs e)
@@ -1390,7 +1391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
 
                 if (SampToPlay.TempFile == null) {
-                    string SampleToPlay = TCLE.PCtoAudioFile(SampToPlay);
+                    string SampleToPlay = UtilAudio.PCtoAudioFile(SampToPlay);
                     if (String.IsNullOrEmpty(SampleToPlay))
                         return;
                 }
@@ -1453,7 +1454,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = true;
             SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
         }
 
         private void toolStripFavRemove_Click(object sender, EventArgs e)
@@ -1477,14 +1478,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
         }
 
         private void toolStripFavClear_Click(object sender, EventArgs e)
         {
             foreach (Object_Params obj in TCLE.LeafObjects.Values)
                 obj.favorite = false;
-            TCLE.PlaySound("UIdelete");
+            UtilAudio.PlaySound("UIdelete");
             SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
         }
         #endregion
@@ -1530,7 +1531,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.InvalidateRow(_currentseq.Index);
 
             SaveCheckAndWrite(false, "Add Object");
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
         }
 
         private void btnTrackDelete_Click(object sender, EventArgs e)
@@ -1556,7 +1557,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.ResumeLayout();
             trackEditor.Invalidate();
             SaveCheckAndWrite(false, "Delete Object");
-            TCLE.PlaySound("UIobjectremove");
+            UtilAudio.PlaySound("UIobjectremove");
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
@@ -1771,7 +1772,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase)))
                 leaf.btnTrackPaste.Enabled = true;
-            TCLE.PlaySound("UIkcopy");
+            UtilAudio.PlaySound("UIkcopy");
         }
 
         private void btnTrackPaste_Click(object sender, EventArgs e)
@@ -1808,7 +1809,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             EditorIsPasting = false;
-            TCLE.PlaySound("UIkpaste");
+            UtilAudio.PlaySound("UIkpaste");
             LogUndo = true;
             SaveCheckAndWrite(false, "Paste Objects");
         }
@@ -1838,7 +1839,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             LogUndo = true;
-            TCLE.PlaySound("UIdataerase");
+            UtilAudio.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Object Values");
         }
 
@@ -1906,7 +1907,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             try {
                 TrackRawImport(SequencerObjects[CurrentRow], JObject.Parse($"{{{textEditor.Text}}}"));
-                TCLE.PlaySound("UIkpaste");
+                UtilAudio.PlaySound("UIkpaste");
             } catch (JsonReaderException ex) {
                 MessageBox.Show($"Invalid format or characters in imported data. Please fix.\n\n{ex.Message}", "Thumper Custom Editor Level");
             }
@@ -2120,7 +2121,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsInterpolating = false;
             //
             ShowRawTrackData(interpobject);
-            TCLE.PlaySound("UIinterpolate");
+            UtilAudio.PlaySound("UIinterpolate");
             SaveCheckAndWrite(false, "Interpolated");
         }
 
@@ -2134,9 +2135,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //do nothing if no cells selected
             if (trackEditor.SelectedCells.Count == 0)
                 return;
-            TCLE.PlaySound("UIcoloropen");
+            UtilAudio.PlaySound("UIcoloropen");
             if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
-                TCLE.PlaySound("UIcolorapply");
+                UtilAudio.PlaySound("UIcolorapply");
                 trackEditor.SelectedCells[0].Value = (decimal)TCLE.colorDialogNew.Color.ToArgb();
                 CellValueChanged(trackEditor[trackEditor.SelectedCells[0].ColumnIndex, trackEditor.SelectedCells[0].RowIndex]);
             }
@@ -2196,7 +2197,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //reduce beat count of the leaf that was just split and save it
             LeafProperties.Beats = splitindex;
             SaveCheckAndWrite(true, "");
-            TCLE.PlaySound("UIleafsplit");
+            UtilAudio.PlaySound("UIleafsplit");
             ProjectExplorer.CreateTreeView();
             //load new leaf that was just split
             TCLE.OpenFile(SplitFile);
@@ -2206,12 +2207,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
         {
             ///TCLE.ImportObjects();
-            TCLE.PlaySound("UIrefresh");
+            UtilAudio.PlaySound("UIrefresh");
         }
 
         private void btnLeafAutoPlace_Click(object sender, EventArgs e)
         {
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
             Properties.Settings.Default.LeafOptionAutoPlace = btnLeafAutoPlace.Checked;
             Properties.Settings.Default.Save();
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
@@ -2280,7 +2281,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } while (!seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value is not null));
 
             trackEditor.Invalidate();
-            TCLE.PlaySound("UIaddrandom");
+            UtilAudio.PlaySound("UIaddrandom");
             EditorIsRandomizing = false;
             SaveCheckAndWrite(false, "Added Random Object");
         }
@@ -2314,7 +2315,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ShowRawTrackData(SequencerObjects[CurrentRow]);
                 trackEditor.Invalidate();
 
-                TCLE.PlaySound("UIaddrandom");
+                UtilAudio.PlaySound("UIaddrandom");
                 EditorIsRandomizing = false;
                 SaveCheckAndWrite(false, "Set Random Values");
                 //SaveCheckAndWrite(false, "Set random values", $"{_tracks[trackEditor.CurrentRow.Index].friendly_type} {_tracks[trackEditor.CurrentRow.Index].friendly_param}");
@@ -2572,7 +2573,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
 
             LoadLeaf(_load);
             LoadSequencer(_load["seq_objs"], LeafProperties, trackEditor);
@@ -2623,7 +2624,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Insert(index + 1, seq);
             ChangeTrackName(seq, "");
             SaveCheckAndWrite(false, "Add Object");
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
         }
 
         private void toolstripObjConvert_Click(object sender, EventArgs e)
@@ -2650,7 +2651,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Rows.Insert(trackEditor.CurrentRow.Index + 1, seq);
 
             ChangeTrackName(seq, "");
-            TCLE.PlaySound("UIinterpolatewindow");
+            UtilAudio.PlaySound("UIinterpolatewindow");
 
             CalculateTuningLayers(LeafProperties, seq);
             SaveCheckAndWrite(false, "Converted object to tuning layer");
@@ -2754,11 +2755,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //If leaf, build the JSON to write to file
                 if (this.WorkingFile.Extension == ".leaf") {
                     //write JSON to file
-                    TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                    UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                     //need to update leaf beat count in every lvl that references this file
                     if (_leafproperties.BeatsChangedSinceSave) {
                         foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))) {
-                            dynamic _loadfile = TCLE.LoadFileLock(lvl.FullName);
+                            dynamic _loadfile = UtilFile.LoadFileLock(lvl.FullName);
                             //if load fails, skip
                             if (_loadfile == null)
                                 continue;
@@ -2772,11 +2773,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                                 }
                             }
                             if (changes)
-                                TCLE.WriteFileLock(new FileStream(lvl.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
+                                UtilFile.WriteFileLock(new FileStream(lvl.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
                         }
                         TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
                     }
-                    if (playsound) TCLE.PlaySound("UIsave");
+                    if (playsound) UtilAudio.PlaySound("UIsave");
                 }
                 //else if a different sequencer, pass data back and force save
                 else if (this.WorkingFile.Extension == ".lvl") {
@@ -2963,7 +2964,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             _selected = lanecells.Concat(_selected).OrderBy(x => x.RowIndex).ThenBy(x => x.ColumnIndex);
             TCLE.ClipboardDataPoints = _selected.Select(x => x.Clone()).ToList();
-            TCLE.PlaySound("UIkcopy");
+            UtilAudio.PlaySound("UIkcopy");
         }
 
         public void Cut()

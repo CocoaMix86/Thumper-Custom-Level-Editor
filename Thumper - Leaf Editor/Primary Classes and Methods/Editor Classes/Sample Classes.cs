@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Windows.Devices.Lights;
@@ -70,7 +71,7 @@ namespace Thumper_Custom_Level_Editor
         public void CalculateRuntime(int channel = -1, bool free = true)
         {
             if (this.TempFile == null)
-                TCLE.PCtoAudioFile(this);
+                UtilAudio.PCtoAudioFile(this);
             if (channel == -1) 
                 channel = Bass.BASS_StreamCreateFile(this.TempFile, 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
             //pitch shift, pan, other fx
@@ -78,7 +79,7 @@ namespace Thumper_Custom_Level_Editor
             Bass.BASS_ChannelGetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
             Bass.BASS_ChannelSetAttribute(channel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)this.pitch);
             //after fx are done, generate the new wave and runtime
-            TCLE.GenerateSampWave(this, channel);
+            UtilAudio.GenerateSampWave(this, channel);
             if (free) {
                 Bass.BASS_ChannelFree(channel);
                 Bass.BASS_StreamFree(channel);
@@ -126,9 +127,9 @@ namespace Thumper_Custom_Level_Editor
                 if (!value.EndsWith(".samp"))
                     value += ".samp";
                 //need to change the sample name in the playing channels
-                for (int x = 0; x < TCLE.PlayingChannels.Count; x++) {
-                    if (TCLE.PlayingChannels[x].Item2 == sample.obj_name)
-                        TCLE.PlayingChannels[x] = new Tuple<DataGridView, string, int>(TCLE.PlayingChannels[x].Item1, value, TCLE.PlayingChannels[x].Item3);
+                for (int x = 0; x < UtilAudio.PlayingChannels.Count; x++) {
+                    if (UtilAudio.PlayingChannels[x].Item2 == sample.obj_name)
+                        UtilAudio.PlayingChannels[x] = new Tuple<DataGridView, string, int>(UtilAudio.PlayingChannels[x].Item1, value, UtilAudio.PlayingChannels[x].Item3);
                 }
                 sample.obj_name = value;
                 ParentEditor._samplelist_CollectionChanged(null, null);

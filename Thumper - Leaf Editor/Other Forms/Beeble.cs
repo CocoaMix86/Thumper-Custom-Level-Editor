@@ -1,4 +1,5 @@
 ﻿using System.Windows.Media.Imaging;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -49,7 +50,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
 
-            TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
+            UtilAudio.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
             this.BackColor = Color.FromArgb(rng.Next(0, 255), rng.Next(0, 255), rng.Next(0, 255));
             MakeFace();
 
@@ -71,7 +72,7 @@ namespace Thumper_Custom_Level_Editor
             int i = rng.Next(0, 1001);
             if (i == 1000) {
                 pictureBeeble.Image = Properties.Resources.beeblegold;
-                TCLE.PlaySound("UIbeetleclickGOLD");
+                UtilAudio.PlaySound("UIbeetleclickGOLD");
             }
             else {
                 pictureBeeble.Image = beebleimages[i % beebleimages.Count];

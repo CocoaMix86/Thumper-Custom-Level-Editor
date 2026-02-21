@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
 using static System.Windows.Forms.DataFormats;
@@ -735,12 +736,12 @@ namespace Thumper_Custom_Level_Editor
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             string _outloops = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             foreach (string sample in GlobalSamplesToPlay) {
-                string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == sample));
+                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == sample));
                 _out += $"<region> sample={Path.GetFileName(FileName)} key={GlobalSamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
 
             foreach (Tuple<string, string, decimal> loop in GlobalLoopTracks) {
-                string FileName = TCLE.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
+                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
                 _outloops += $"<region> sample={Path.GetFileName(FileName)} key={GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
             }
 

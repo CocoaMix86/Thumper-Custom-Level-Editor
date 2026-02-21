@@ -9,6 +9,7 @@ using Thumper_Custom_Level_Editor.Other_Forms;
 using System.Linq;
 using System.Drawing.Text;
 using System.Security.Permissions;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -183,7 +184,7 @@ namespace Thumper_Custom_Level_Editor
         private void FormLeafEditor_Load(object sender, EventArgs e)
         {
             //finalize boot
-            PlaySound("UIboot");
+            UtilAudio.PlaySound("UIboot");
             ///version check
             /*
             if (AppSettings.version != "2.2release1") {
@@ -262,9 +263,10 @@ namespace Thumper_Custom_Level_Editor
         public void SetKeyBinds()
         {
             Dictionary<string, Keys> _default = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
+            //check if custom keybinds set
             if (Properties.Settings.Default.UserKeybinds != "-") {
                 Dictionary<string, Keys> _user = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-
+                //once user keys are loaded, iterate each and copy values over to _default
                 _user.ToList().ForEach(x => _default[x.Key] = x.Value);
             }
             Keybinds = _default;
@@ -473,7 +475,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)
         {
-            StopAudio();
+            UtilAudio.StopAudio();
         }
         #endregion
         #region Toolstrip File
@@ -533,7 +535,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             //load the properties of the TCL and create projectProperties
-            dynamic ProjectJson = LoadFileLock(TCL.FullName);
+            dynamic ProjectJson = UtilFile.LoadFileLock(TCL.FullName);
             Image Thumbnail = null;
             if (File.Exists($@"{TCL.Directory}\thumbnail.png")) {
                 using (FileStream fs = new($@"{TCL.Directory}\thumbnail.png", FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -596,7 +598,7 @@ namespace Thumper_Custom_Level_Editor
             }
             IsLoadingProject = false;
             //this will be the loading sound :D
-            TCLE.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
+            UtilAudio.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");
 
             DockPane documentsPane = dockMain.Panes.FirstOrDefault(x => x.DockState == DockState.Document);
             if (documentsPane != null) {
@@ -1117,9 +1119,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripProjectPreload_Click(object sender, EventArgs e)
         {
-            TCLE.CalculateSampleRuntimes();
+            UtilAudio.CalculateSampleRuntimes();
             foreach (SampleData samp in ProjectSamples) {
-                PCtoAudioFile(samp);
+                UtilAudio.PCtoAudioFile(samp);
             }
         }
         #endregion
@@ -1145,7 +1147,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             TCLE.SaveTCL();
-            TCLE.PlaySound("UIsave");
+            UtilAudio.PlaySound("UIsave");
         }
         #endregion
 

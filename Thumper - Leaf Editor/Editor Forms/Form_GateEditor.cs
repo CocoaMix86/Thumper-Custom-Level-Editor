@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -481,7 +482,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _gateproperties.gatelvls.Remove(gld);
             LogUndo = true;
             SaveCheckAndWrite(false, "Remove Phase");
-            TCLE.PlaySound("UIobjectremove");
+            UtilAudio.PlaySound("UIobjectremove");
         }
 
         private void btnGateLvlAdd_Click(object sender, EventArgs e)
@@ -723,12 +724,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                UtilFile.WriteFileLock(this.FileLock, _saveJSON);
 
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
                 TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
-                if (playsound) TCLE.PlaySound("UIsave");
+                if (playsound) UtilAudio.PlaySound("UIsave");
 
                 if (!SimpleLoad) {
                     TCLE.SaveTCL();
@@ -739,7 +740,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void AddFileToGate(string path, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = TCLE.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(path);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel") {
                 MessageBox.Show("That does not appear to be a lvl.\nItem not added to gate.", "Bumper Custom Level Editor");
@@ -757,7 +758,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     else
                         return;
             }
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             if (index == -1) {
                 GateLvls.Add(new GateLvlData() {
@@ -964,7 +965,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //enable the paste button everywhere
             foreach (Form_GateEditor gate in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".gate")))
                 gate.btnGatePaste.Enabled = true;
-            TCLE.PlaySound("UIkcopy");
+            UtilAudio.PlaySound("UIkcopy");
         }
 
         public void Paste()
@@ -978,7 +979,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             gatelvls_CollectionChanged(null, null);
 
             SaveCheckAndWrite(false, "Paste Lvl");
-            TCLE.PlaySound("UIkpaste");
+            UtilAudio.PlaySound("UIkpaste");
         }
         #endregion
 

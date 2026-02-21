@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -63,7 +64,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
             textEditor.TextChanged -= textEditor_TextChanged;
             textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
             textEditor.ClearUndo();
@@ -98,9 +99,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //denote editor tab is saved
                 this.Text = this.WorkingFile.Name + " [Raw]";
                 //write JSON to file
-                TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                UtilFile.WriteFileLock(this.FileLock, _saveJSON);
 
-                if (playsound) TCLE.PlaySound("UIsave");
+                if (playsound) UtilAudio.PlaySound("UIsave");
 
                 foreach (EditorBase document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
                     document.GetType().GetMethod("Reload").Invoke(document, null);

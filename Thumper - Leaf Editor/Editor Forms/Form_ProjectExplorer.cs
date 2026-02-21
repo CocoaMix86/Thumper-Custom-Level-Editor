@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -251,14 +252,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
                 else {
                     File.Move(source, dest);
-                    dynamic towrite = TCLE.LoadFileLock(dest);
+                    dynamic towrite = UtilFile.LoadFileLock(dest);
                     File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
                     //Set scroll position and rebuild the tree
                     ProjectExplorer.CreateTreeView();
                     //
                     //need to update the name in every other file that references it too
                     foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
-                        dynamic _loadfile = TCLE.LoadFileLock(file.FullName);
+                        dynamic _loadfile = UtilFile.LoadFileLock(file.FullName);
                         //if load fails, skip
                         if (_loadfile == null)
                             continue;
@@ -269,7 +270,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //some files may be lock loaded, so we use different writing methods for those
                         //also force editor to reload the document
                         if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, EditorBase> stream && stream.Value != null) {
-                            TCLE.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                            UtilFile.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
                             //a document might be open multiple times (normal and raw), so need to locate both of them
                             foreach (IDockContent doc in TCLE.Documents.Values.Where(x => x.DockHandler.TabText.StartsWith(stream.Key)))
                                 doc.GetType().GetMethod("Reload").Invoke(doc, null);
@@ -373,11 +374,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     if (tn.ImageKey == "folder" && Directory.Exists(source)) {
-                        TCLE.CopyDirectory(source, dest, true);
+                        UtilFile.CopyDirectory(source, dest, true);
                     }
                     else if (File.Exists(source)) {
                         //File.Copy(source, dest);
-                        dynamic towrite = TCLE.LoadFileLock(source);
+                        dynamic towrite = UtilFile.LoadFileLock(source);
                         File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
                     }
                 }
@@ -403,7 +404,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }            
 
             if (File.Exists(source)) {
-                dynamic towrite = TCLE.LoadFileLock(source);
+                dynamic towrite = UtilFile.LoadFileLock(source);
                 File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
             }
 

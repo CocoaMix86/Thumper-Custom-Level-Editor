@@ -1,4 +1,6 @@
-﻿namespace Thumper_Custom_Level_Editor
+﻿using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+
+namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
     { 
@@ -9,7 +11,7 @@
             panelRecentFiles.BringToFront();
             foreach (string _projectpath in recentfiles) {
                 FileInfo tcl = new(_projectpath);
-                dynamic _tclinfo = TCLE.LoadFileLock(_projectpath);
+                dynamic _tclinfo = UtilFile.LoadFileLock(_projectpath);
                 if (_tclinfo is null) {
                     dgvRecentFiles.Rows.Add("D0", Path.GetFileName(_projectpath), "some error occurred when trying to load the project details.");
                 }
@@ -94,7 +96,7 @@
             }
             //open the project if everything else above clears
             panelRecentFiles.Visible = false;
-            PlaySound("UIfolderclose");
+            UtilAudio.PlaySound("UIfolderclose");
             OpenProject(level);
 
         }
@@ -112,7 +114,7 @@
 
         private void btnRecentClose_Click(object sender, EventArgs e)
         {
-            PlaySound("UIfolderclose");
+            UtilAudio.PlaySound("UIfolderclose");
             MenusVisible(true);
         }
 
@@ -126,7 +128,7 @@
             dgvRecentFiles.Rows.RemoveAt(index);
             Properties.Settings.Default.Recentfiles.RemoveAt(index);
             Properties.Settings.Default.Save();
-            PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
         }
     }
 }

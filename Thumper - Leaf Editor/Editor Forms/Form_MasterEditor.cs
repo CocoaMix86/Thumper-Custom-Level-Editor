@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -527,7 +528,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MasterLvls.Remove(mld);
 
             LogUndo = true;
-            TCLE.PlaySound("UIobjectremove");
+            UtilAudio.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Lvl");
             masterLvlList_CellClick(null, new DataGridViewCellEventArgs(1, _in >= MasterLvls.Count ? _in - 1 : _in));
         }
@@ -547,14 +548,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void AddFiletoMaster(string path, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = TCLE.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(path);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
                 MessageBox.Show("That does not appear to be a lvl or a gate file.\nItem not added to master.", "Bumper Custom Level Editor");
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            TCLE.CopyToWorkingFolderCheck(path);
+            UtilFile.CopyToWorkingFolderCheck(path);
             //add lvl/gate data to the list
             MasterLvlData _import = new() {
                 Type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
@@ -575,7 +576,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 propertyGridMaster.Refresh();
 
             SaveCheckAndWrite(false, "Add New Lvl");
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
         }
 
         private void btnMasterLvlUp_Click(object sender, EventArgs e)
@@ -627,7 +628,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MessageBox.Show("Revert all changes to last save?", "Revert changes", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             //LoadMaster(masterproperties.revertPoint, LoadedMaster);
-            TCLE.PlaySound("UIrevertchanges");
+            UtilAudio.PlaySound("UIrevertchanges");
         }
         #endregion
 
@@ -790,7 +791,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
                 //update level sections
@@ -802,7 +803,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TCLE.SaveTCL();
                 }
                 //
-                if (playsound) TCLE.PlaySound("UIsave");
+                if (playsound) UtilAudio.PlaySound("UIsave");
             }
         }
 
@@ -930,7 +931,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
             TCLE.ClipboardMaster = MasterLvls.Where(x => selectedrows.Contains(MasterLvls.IndexOf(x))).ToList();
             TCLE.ClipboardMaster.Reverse();
-            TCLE.PlaySound("UIkcopy");
+            UtilAudio.PlaySound("UIkcopy");
             //enable the paste button everywhere
             foreach (Form_MasterEditor master in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension == ".master"))
                 master.btnMasterLvlPaste.Enabled = true;
@@ -947,7 +948,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //masterlvls_CollectionChanged(null, null);
 
             SaveCheckAndWrite(false, "Paste Lvl");
-            TCLE.PlaySound("UIkpaste");
+            UtilAudio.PlaySound("UIkpaste");
         }
         #endregion
 

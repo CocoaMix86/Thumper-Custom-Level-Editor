@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor 
 { 
@@ -230,7 +231,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = true;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
@@ -241,7 +242,7 @@ namespace Thumper_Custom_Level_Editor
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = false;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            TCLE.PlaySound("UIselect");
+            UtilAudio.PlaySound("UIselect");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
@@ -253,7 +254,7 @@ namespace Thumper_Custom_Level_Editor
             foreach (Object_Params obj in TCLE.LeafObjects.Values)
                 obj.favorite = false;
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            TCLE.PlaySound("UIdelete");
+            UtilAudio.PlaySound("UIdelete");
 
             foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());

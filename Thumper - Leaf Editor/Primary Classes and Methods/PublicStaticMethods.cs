@@ -11,6 +11,7 @@ using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
 using NAudio.Wave;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -36,18 +37,6 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, Bitmap> ColorIcons = new();
         public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, double> ProjectSampleRuntimes = new();
-        public static Dictionary<int, int> Frequencies = new() {
-            { 1, 8000 },
-            { 2, 11_000 },
-            { 3, 11_025 },
-            { 4, 16_000 },
-            { 5, 22_050 },
-            { 6, 24_000 },
-            { 7, 32_000 },
-            { 8, 44_100 },
-            { 9, 48_000 },
-            { 10,96_000 }
-        };
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
@@ -242,7 +231,7 @@ namespace Thumper_Custom_Level_Editor
                 //skip self to not include self
                 if (file.Name == searchreference)
                     continue;
-                string text = ((JObject)LoadFileLock(file.FullName)).ToString(Formatting.None);
+                string text = ((JObject)UtilFile.LoadFileLock(file.FullName)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
                 if (text.Contains(searchreference)) {
                     referencefiles += file.Name + '\n';
@@ -316,171 +305,7 @@ namespace Thumper_Custom_Level_Editor
             //set header width manually and allow resizing
             dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             dgv.RowHeadersWidth = biggestheader + 15;
-        }
-
-        ///
-        /// File Lock read/write methods
-        /// 
-        /*
-        public static void AddFileLock(FileInfo file)
-        {
-            if (file == null)
-                return;
-            if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
-                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite));
-            }
-        }*/
-
-        public static void WriteFileLock(FileStream fs, JObject _save)
-        {
-            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
-                fs.SetLength(0);
-                sr.Write(tosave);
-            }
-        }
-
-        public static void WriteFileLock(string fs, string _save)
-        {
-            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, _save.Length, true)) {
-                sr.Write(_save);
-            }
-        }
-
-        public static void WriteFileLock(FileStream fs, string _save)
-        {
-            string tosave = _save;
-            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
-                fs.SetLength(0);
-                sr.Write(tosave);
-            }
-        }
-
-        public static void WriteFileLock(string fs, JObject _save)
-        {
-            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            File.Delete(fs);
-            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, tosave.Length, true)) {
-                sr.Write(tosave);
-            }
-        }
-
-        public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
-        {
-            object _load;
-            if (!File.Exists(_selectedfilename))
-                return null;
-            ///reference:
-            ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
-            using (StreamReader textReader = new(fileStream)) {
-                if (LoadText) {
-                    _load = textReader.ReadToEnd();
-                }
-                else {
-                    try {
-                        _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
-                    } catch (Exception) {
-                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
-                        _load = null;
-                    }
-                }
-            }
-
-            return _load;
-        }
-        /*
-        public static void DeleteFileLock(FileInfo filetodelete)
-        {
-            if (lockedfiles.TryGetValue(filetodelete, out FileStream? value)) {
-                value.Close();
-                lockedfiles.Remove(filetodelete);
-            }
-            filetodelete.Delete();
-            TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
-            TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
-            TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
-        }*/
-        /*
-        public static void CloseFileLock(FileInfo filetoclose)
-        {
-            if (filetoclose == null)
-                return;
-            if (lockedfiles.TryGetValue(filetoclose, out FileStream? value)) {
-                value.Close();
-                lockedfiles.Remove(filetoclose);
-            }
-        }*/
-        /*
-        public static void ClearFileLock()
-        {
-            //clear previously locked files
-            foreach (KeyValuePair<FileInfo, FileStream> i in lockedfiles) {
-                i.Value.Close();
-            }
-            lockedfiles.Clear();
-        }*/
-        /// 
-        /// 
-        /// 
-
-
-        public static string CopyToWorkingFolderCheck(string filepath)
-        {
-            if (WorkingFolder == null)
-                return filepath;
-
-            FileInfo _input = new(filepath);
-            if (!_input.DirectoryName.Contains(WorkingFolder.FullName, StringComparison.OrdinalIgnoreCase)) {
-                DialogResult result = MessageBox.Show("That file does not exist in the current Project. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes) {
-                    string dest = null;
-                    if (!File.Exists($@"{WorkingFolder}\{_input.Name}"))
-                        dest = $@"{WorkingFolder}\{_input.Name}";
-                    else
-                        dest = $@"{WorkingFolder}\{_input.Name} ({WorkingFolder.GetFiles($"{Path.GetFileNameWithoutExtension(filepath)}*").Length + 1})";
-                    File.Copy(filepath, dest);
-                    filepath = dest;
-                    ProjectExplorer.CreateTreeView();
-                }
-                else
-                    filepath = null;
-            }
-
-            return filepath;
-        }
-
-        ///
-        ///https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
-        public static void CopyDirectory(string sourceDir, string destinationDir, bool recursive)
-        {
-            // Get information about the source directory
-            DirectoryInfo dir = new(sourceDir);
-
-            // Check if the source directory exists
-            if (!dir.Exists)
-                throw new DirectoryNotFoundException($"Source directory not found: {dir.FullName}");
-
-            // Cache directories before we start copying
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            // Create the destination directory
-            Directory.CreateDirectory(destinationDir);
-
-            // Get the files in the source directory and copy to the destination directory
-            foreach (FileInfo file in dir.GetFiles()) {
-                string targetFilePath = Path.Combine(destinationDir, file.Name);
-                file.CopyTo(targetFilePath);
-            }
-
-            // If recursive and copying subdirectories, recursively call this method
-            if (recursive) {
-                foreach (DirectoryInfo subDir in dirs) {
-                    string newDestinationDir = Path.Combine(destinationDir, subDir.Name);
-                    CopyDirectory(subDir.FullName, newDestinationDir, true);
-                }
-            }
-        }
+        }        
 
         public static void ReloadProjectSamples()
         {
@@ -511,8 +336,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             if (!Properties.Settings.Default.RuntimeSkip) {
-                CalculateSampleRuntimes();
-                StopAudio();
+                UtilAudio.CalculateSampleRuntimes();
+                UtilAudio.StopAudio();
             }
 
             UpdateEditorsWithSamples();
@@ -524,7 +349,7 @@ namespace Thumper_Custom_Level_Editor
             //remove samples that match the incoming sample file, so that they're rewritten
             ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //parse file to JSON
-            dynamic _in = TCLE.LoadFileLock(SampFile.FullName);
+            dynamic _in = UtilFile.LoadFileLock(SampFile.FullName);
             warning = "";
             //skip if somehow empty
             if (_in == null || !_in.ContainsKey("items"))
@@ -571,187 +396,7 @@ namespace Thumper_Custom_Level_Editor
                 //load loop track names and paths to lvlLoopTracks DGV
                 ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             }
-        }
-
-        public static void CalculateSampleRuntimes()
-        {
-            foreach (SampleData samp in ProjectSamples.Where(x => x.time == 0)) {
-                byte[] _bytes;
-                //get the hash of this filename. This will be used to locate the sample's .PC file
-                string _hashedname = TCLE.HashPCName($"A{samp.path}");
-                //check if sample is custom or not. This changes where we load audio from
-                string filetoread;
-                try {
-                    if (samp.path.Contains("custom"))
-                        filetoread = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc";
-                    else
-                        filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
-
-                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))) {
-                        reader.ReadUInt32(); //pc header
-                        reader.ReadUInt32(); //fsb5 header
-                        reader.ReadUInt32(); //version
-                        reader.ReadUInt32(); //# of tracks
-                        reader.ReadUInt32(); //size of sample header
-                        reader.ReadUInt32(); //size of header table
-                        reader.ReadUInt32(); //sample bytes
-                        reader.ReadUInt32(); //audio type
-                        reader.ReadUInt32(); //unknown
-                        reader.ReadUInt32(); //flags
-                        reader.ReadUInt64(); //hash1
-                        reader.ReadUInt64(); //hash2
-                        reader.ReadUInt64(); //hash3
-                        UInt64 metadata = reader.ReadUInt64(); //metadata
-
-                        UInt64 freqid = (metadata & 0b11110) >> 1;
-                        UInt64 samples = metadata >> 34;
-                        int freq = Frequencies[(int)freqid];
-                        samp.time = (double)(samples) / (double)freq;
-                    }
-                }
-                catch (Exception ex) {
-                    samp.time = 0;
-                }
-            }
-        }
-
-        public static void StopAudio()
-        {
-            Playback.StopPlayback();
-            Bass.BASS_Free();
-            alzheimer();
-            TCLE.PlayingChannels.Clear();
-            foreach (Form_SampleEditor samp in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
-                samp.sampleList.Refresh();
-            }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
-                lvl.lvlLoopTracks.Refresh();
-            }
-            // Initialize Sound library
-            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, TCLE.Instance.Handle);
-        }
-
-        public static string PCtoAudioFile(SampleData _samp)
-        {
-            if (_samp == null || _samp.obj_name == ".samp")
-                return null;
-            //check if the gamedir has been set so the method can find the .pc files
-            if (Properties.Settings.Default.game_dir == "none") {
-                TCLE.Read_Config();
-            }
-
-            byte[] _bytes;
-            //get the hash of this filename. This will be used to locate the sample's .PC file
-            string _hashedname = HashPCName($"A{_samp.path}");
-
-            //check if sample is custom or not. This changes where we load audio from
-            if (_samp.path.Contains("custom")) {
-                //attempt to locate file. But error and return safely if nothing found
-                try {
-                    _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
-                    _bytes = _bytes.Skip(4).ToArray();
-                }
-                catch {
-                    _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
-                    return null;
-                }
-            }
-            else {
-                try {
-                    _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
-                    _bytes = _bytes.Skip(4).ToArray();
-                }
-                catch {
-                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
-                    return null;
-                }
-            }
-            if (_bytes.Length == 0) {
-                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample {_samp.obj_name}. You may need to re-import the file.";
-                return null;
-            }
-            //check if file has been converted already. Ready the path if true
-            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
-                _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
-                return _samp.TempFile;
-            }
-            ///
-            // credit to https://github.com/SamboyCoding/Fmod5Sharp
-            FmodSoundBank bank = FsbLoader.LoadFsbFromByteArray(_bytes);
-            List<FmodSample> samples = bank.Samples;
-            /*byte 24 of FSB files contains the data type of the audio
-            PCM8 = 1,
-            PCM16 = 2,
-            PCM24 = 3,
-            PCM32 = 4,
-            PCMFLOAT = 5,
-            GCADPCM = 6,
-            IMAADPCM = 7,
-            VAG = 8,
-            HEVAG = 9,
-            XMA = 10,
-            MPEG = 11,
-            CELT = 12,
-            AT9 = 13,
-            XWMA = 14,
-            VORBIS = 15,*/
-            int type = _bytes[24];
-            byte[] dataBytes = null;
-            string fileExtension = "";
-            //PCM types
-            if (type is 1 or 2 or 3 or 4) {
-                try {
-                    //My reimplementation of the RebuildAsStandardFileFormat() function, to support PCM24
-                    dataBytes = TCLE.RebuildWav(samples[0], bank.Header.AudioType);
-                    fileExtension = "wav";
-                } catch (Exception) {
-                    _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
-                    return null;
-                }
-            }
-            //Vorbis (ogg)
-            else if (type is 15) {
-                samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);                
-            }
-
-            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-            using (var stream = File.Open(finalfilename, FileMode.Create)) {
-                using (BinaryWriter bw = new(stream)) {
-                    bw.Write(dataBytes);
-                }
-            }
-            //File.WriteAllBytes(finalfilename, dataBytes);
-            _samp.TempFile = finalfilename;
-            return _samp.TempFile;
-        }
-
-        public static byte[] RebuildWav(FmodSample sample, FmodAudioType type)
-        {
-            int width = type switch {
-                FmodAudioType.PCM8 => 1,
-                FmodAudioType.PCM16 => 2,
-                FmodAudioType.PCM24 => 3,
-                FmodAudioType.PCM32 => 4,
-                _ => 0
-                //_ => throw new($"FmodPcmRebuilder does not support encoding of type {type}"),
-            };
-
-            int numChannels = sample.Metadata.IsStereo ? 2 : 1;
-            WaveFormat format = WaveFormat.CreateCustomFormat(
-                WaveFormatEncoding.Pcm,
-                sample.Metadata.Frequency,
-                numChannels,
-                sample.Metadata.Frequency * numChannels * width,
-                numChannels * width,
-                width * 8
-            );
-            using MemoryStream stream = new();
-            using WaveFileWriter writer = new(stream, format);
-
-            writer.Write(sample.SampleBytes, 0, sample.SampleBytes.Length);
-
-            return stream.GetBuffer();
-        }
+        }        
 
         public static uint Hash32(string s)
         {
@@ -829,7 +474,7 @@ namespace Thumper_Custom_Level_Editor
             //load the gate to then loop through all lvls in it
             FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{gatename}"));
             if (gate != null) {
-                _load = TCLE.LoadFileLock(gate.FullName);
+                _load = UtilFile.LoadFileLock(gate.FullName);
                 //if gate not found, _load is null. Return -1 to denote this
                 if (_load == null)
                     return -1;
@@ -872,13 +517,13 @@ namespace Thumper_Custom_Level_Editor
             int _beatcount = 0;
 
             //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = TCLE.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(path);
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(leaf["leaf_name"])}"));
                 if (_leaf != null && _leaf.Exists)
-                    _beatcount += (int)TCLE.LoadFileLock(_leaf.FullName)["beat_cnt"];
+                    _beatcount += (int)UtilFile.LoadFileLock(_leaf.FullName)["beat_cnt"];
                 ///_beatcount += (int)leaf["beat_cnt"];
             }
             //every lvl has an approach beats to consider too
@@ -912,7 +557,7 @@ namespace Thumper_Custom_Level_Editor
                 openraw = true;
             }
 
-            object _load = LoadFileLock(filepath.FullName, openraw);
+            object _load = UtilFile.LoadFileLock(filepath.FullName, openraw);
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
@@ -1102,8 +747,8 @@ namespace Thumper_Custom_Level_Editor
             bool sort = MessageBox.Show($"Sort files into subfolders?\n{countleaf} leaf files\n{countlvl} lvl files\n{countgate} gate files\n{countsamp} samp files\n{countmaster} master files", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
 
             //load the properties of the TCL and create projectProperties
-            dynamic ProjectJson = LoadFileLock(LevelDetails.FullName);
-            dynamic ProjectConfig = LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
+            dynamic ProjectJson = UtilFile.LoadFileLock(LevelDetails.FullName);
+            dynamic ProjectConfig = UtilFile.LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
             ProjectProperties Convert = new() {
                 ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
@@ -1150,31 +795,31 @@ namespace Thumper_Custom_Level_Editor
                 //resave leafs and lvls to properly convert the datapoints
                 JObject _save = null;
                 if (newfile.Extension == ".leaf") {
-                    dynamic _load = LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
                     Form_LeafEditor _leaf = new(_load, newfile, true);
                     _save = _leaf.LeafProperties.ConvertToJson();
                     //_leaf.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".lvl") {
-                    dynamic _load = LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
                     Form_LvlEditor _lvl = new(_load, newfile, true);
                     _save = Form_LvlEditor.BuildSave(_lvl.LvlProperties);
                     //_lvl.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".master") {
-                    dynamic _load = LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
                     Form_MasterEditor _master = new(_load, newfile, true);
                     _save = Form_MasterEditor.BuildSave(_master.MasterProperties);
                     //_master.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".samp") {
-                    dynamic _load = LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
                     Form_SampleEditor _samp = new(_load, newfile, true);
                     _save = Form_SampleEditor.BuildSave(_samp.SampleProperties);
                     //_samp.SaveCheckAndWrite(true, "");
                 }
                 if (_save != null) {
-                    WriteFileLock(newfile.FullName, _save);
+                    UtilFile.WriteFileLock(newfile.FullName, _save);
                 }
             }
             //build the JSON to write to file
@@ -1184,7 +829,7 @@ namespace Thumper_Custom_Level_Editor
             //locate pyramid_outro
             FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
             if (pyramid != null)
-                TCLE.WriteFileLock(pyramid.FullName, Properties.Resources.leaf_pyramid_outro);
+                UtilFile.WriteFileLock(pyramid.FullName, Properties.Resources.leaf_pyramid_outro);
 
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.ProjectName}.TCL"));
         }
@@ -1213,121 +858,10 @@ namespace Thumper_Custom_Level_Editor
                 return;
             JObject _saveJSON = TCLE.BuildSave(TCLE.ProjectProperties);
             //write JSON to file
-            TCLE.WriteFileLock(TCLE.ProjectProperties.FileLock, _saveJSON);
+            UtilFile.WriteFileLock(TCLE.ProjectProperties.FileLock, _saveJSON);
             //File.WriteAllText($"{TCLE.ProjectProperties.WorkingFile.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
 
             lastsave = DateTime.Now;
-        }
-
-
-        public static void PlaySound(string audiofile)
-        {
-            if (Properties.Settings.Default.muteapplication)
-                return;
-            if (rng.Next(0, 1001) == 1000) {
-                MemoryStream tempstream = new();
-                byte[] duckbytes = Properties.Resources.duck;
-                PlaySampleOneOff("duck", duckbytes, out _);
-            }
-            else
-                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out _);
-            TCLE.alzheimer();
-        }
-        public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
-        public static int LastChannel;
-        public static float initialfreq;
-        public static SYNCPROC EndingProc = new(OnEnding);
-        public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
-        {
-            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
-                string SampleToPlay = TCLE.PCtoAudioFile(_samp);
-                if (String.IsNullOrEmpty(SampleToPlay)) {
-                    SampChannel = 0;
-                    return false;
-                }
-
-                //initialize the player and load the sample
-                SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
-                _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
-                //pitch shift and pan
-                Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
-                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
-                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_VOL, (float)Properties.Settings.Default.VolKey99 / 100f);
-                Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
-                if (_samp.wave == null) {
-                    _samp.CalculateRuntime(SampChannel, false);
-                    _samp.UpdateRuntime();
-                }
-                //play the sample
-                if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
-                    PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                Tuple<DataGridView, string, int> ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
-                SampChannel = ItemToRemove.Item3;
-                Bass.BASS_ChannelStop(ItemToRemove.Item3);
-                Bass.BASS_ChannelFree(ItemToRemove.Item3);
-                PlayingChannels.Remove(ItemToRemove);
-                return false;
-            }
-        }
-        public static int PlaySampleOneOff(string samplename, byte[] stream, out int SampChannel)
-        {
-            //initialize the player and load the sample
-            SampChannel = Bass.BASS_SampleLoad(stream, 0, stream.Length, 10, BASSFlag.BASS_SAMPLE_FLOAT);
-            SampChannel = Bass.BASS_SampleGetChannel(SampChannel, BASSFlag.BASS_SAMPLE_FLOAT);
-            _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
-            //play the sample
-            if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
-                return SampChannel;
-            }
-            else {
-                return SampChannel = 0;
-            }
-        }
-
-        private static void OnEnding(int handle, int channel, int data, IntPtr user)
-        {
-            bool free1 = Bass.BASS_ChannelStop(channel);
-            bool free2 = Bass.BASS_ChannelFree(channel);
-            Tuple<DataGridView, string, int>? ItemToRemove = PlayingChannels.FirstOrDefault(x => x.Item3 == channel);
-            if (ItemToRemove != null) {
-                ItemToRemove.Item1.InvalidateColumn(0);
-                PlayingChannels.Remove(ItemToRemove);
-                if (TCLE.PlayingChannels.Count > 0)
-                    LastChannel = PlayingChannels.Last().Item3;
-            }
-            TCLE.alzheimer();
-        }
-
-        public static void GenerateSampWave(SampleData samp, int channel)
-        {
-            WaveForm wave = new(samp.TempFile) {
-                DrawWaveForm = WaveForm.WAVEFORMDRAWTYPE.DualMono
-            };
-            //math to figure out how long the sample is, in seconds and dimensions
-            long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);/* - ((double)samp.offset / 1000d)) / (double)samp.pitch;*/
-            //render wave
-            wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
-            samp.wave = wave;
-        }
-    }
-
-    public static class StringExtensions
-    {        
-        public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
-        {
-            if (extensions == null)
-                throw new ArgumentNullException("extensions");
-            IEnumerable<FileInfo> files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories);
-            return files.Where(f => extensions.Contains(f.Extension));
-        }
+        }        
     }
 }

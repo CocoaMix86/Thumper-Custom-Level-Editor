@@ -6,6 +6,7 @@ using Thumper_Custom_Level_Editor.Other_Forms;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using WeifenLuo.WinFormsUI.Docking;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -184,7 +185,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int x = e.CellBounds.Left + ((e.CellBounds.Width - w) / 2);
             int y = e.CellBounds.Top + ((e.CellBounds.Height - h) / 2);
             //paint the image
-            if (TCLE.PlayingChannels.Any(x => x.Item2 == sampleList[1, e.RowIndex].Value.ToString()))
+            if (UtilAudio.PlayingChannels.Any(x => x.Item2 == sampleList[1, e.RowIndex].Value.ToString()))
                 e.Graphics.DrawImage(Properties.Resources.icon_stop, new Rectangle(x, y, w, h));
             else
                 e.Graphics.DrawImage(Properties.Resources.icon_play, new Rectangle(x, y, w, h));
@@ -371,7 +372,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 SaveCheckAndWrite(false, "Remove Sample");
             //force save as this cannot be undone
-            TCLE.PlaySound("UIobjectremove");
+            UtilAudio.PlaySound("UIobjectremove");
         }
         private void btnSampleAdd_Click(object sender, EventArgs e)
         {
@@ -388,7 +389,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             SampleList.Add(newsample);
             SaveCheckAndWrite(false, "Add Sample");
-            TCLE.PlaySound("UIobjectadd");
+            UtilAudio.PlaySound("UIobjectadd");
         }
 
         private void btnSampleChunk_Click(object sender, EventArgs e)
@@ -417,8 +418,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            if (TCLE.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out int SampChannel)) {
-                TCLE.LastChannel = SampChannel;
+            if (UtilAudio.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out int SampChannel)) {
+                UtilAudio.LastChannel = SampChannel;
                 _updateTimer.Start();
                 sampleList.InvalidateCell(CellToPlay);
             }
@@ -430,13 +431,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
-            if (!TCLE.PlayingChannels.Any(x => x.Item1 == this.sampleList)) {
+            if (!UtilAudio.PlayingChannels.Any(x => x.Item1 == this.sampleList)) {
                 _updateTimer.Stop();
                 return;
             }
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Properties.Settings.Default.ColorWaveformBG, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(TCLE.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Properties.Settings.Default.ColorWaveformBG, 1, false, true, false);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Properties.Settings.Default.ColorWaveformBG, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Properties.Settings.Default.ColorWaveformBG, 1, false, true, false);
         }
 
         private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
@@ -554,7 +555,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = TCLE.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
             LoadSample(_load);
             this.Invalidate();
         }
@@ -635,9 +636,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 this.Text = this.WorkingFile.Name;
                 //write JSON to file
-                TCLE.WriteFileLock(this.FileLock, _saveJSON);
+                UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                 TCLE.UpdateProjectSamplesFromFile(this.WorkingFile, true, true, out string _);
-                if (playsound) TCLE.PlaySound("UIsave");
+                if (playsound) UtilAudio.PlaySound("UIsave");
             }
             if (!SimpleLoad) {
                 TCLE.SaveTCL();
@@ -708,7 +709,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show($"{filepath} is not an accepted format (.wav, .ogg, .fsb). It was {Path.GetExtension(filepath)}. File not added to sample list.", "Sample load error");
             if (addedfile) {
                 SaveCheckAndWrite(false, "Add Sample");
-                TCLE.PlaySound("UIobjectadd");
+                UtilAudio.PlaySound("UIobjectadd");
             }
         }
 
