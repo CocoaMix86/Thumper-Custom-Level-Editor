@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    partial class Form_ProjectExplorer
+    partial class DockProjectExplorer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProjectExplorer));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DockProjectExplorer));
             this.toolTip1 = new ToolTip(this.components);
             this.treeView1 = new TreeViewEx();
             this.contextMenuAddFile = new ContextMenuStrip(this.components);

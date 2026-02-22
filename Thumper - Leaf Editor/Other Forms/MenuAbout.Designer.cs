@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor
 {
-	partial class AboutThumperEditor
+	partial class MenuAbout
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -26,7 +26,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutThumperEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuAbout));
             this.okButton = new Button();
             this.textBoxDescription = new TextBox();
             this.labelCompanyName = new Label();

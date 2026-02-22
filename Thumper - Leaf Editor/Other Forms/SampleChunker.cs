@@ -2,6 +2,7 @@
 using System.Data;
 using System.Text;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
@@ -10,7 +11,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
     {
         #region Variables
         SampleData SampleToChunk;
-        Form_SampleEditor ReturnForm;
+        EditorSample ReturnForm;
 
         //how many seconds pass for 1 beat
         double BeatTime => 60d / (double)TCLE.ProjectProperties.BPM;
@@ -31,7 +32,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
         #endregion
 
         #region Form Construction
-        public SampleChunker(SampleData _samp, Form_SampleEditor _return)
+        public SampleChunker(SampleData _samp, EditorSample _return)
         {
             InitializeComponent();
             ReturnForm = _return;
@@ -324,7 +325,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                 //get the hash of the FSB filename. This will be used to name the final .PC file
                 string chunkname = $"{txtChunkName.Text.Replace("{X}", x.ToString())}";
                 string _hashedname = "";
-                byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"Asamples/levels/custom/{chunkname}.wav"));
+                byte[] hashbytes = BitConverter.GetBytes(UtilMath.Hash32($"Asamples/levels/custom/{chunkname}.wav"));
                 Array.Reverse(hashbytes);
                 foreach (byte b in hashbytes)
                     _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
@@ -337,7 +338,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     Directory.CreateDirectory($@"{TCLE.WorkingFolder}\extras");
                 using (BinaryWriter sw = new(new FileStream($@"{TCLE.WorkingFolder}\extras\{_hashedname}.pc", FileMode.OpenOrCreate))) {
                     //write pc file header
-                    sw.Write(Form_SampleEditor.PCfileheader);
+                    sw.Write(EditorSample.PCfileheader);
                     //
                     sw.Write(Encoding.UTF8.GetBytes("FSB5")); //fsb5
                     sw.Write((UInt32)1); //version
@@ -358,11 +359,11 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
                     metadata <<= 2; //make room for next item
                     metadata |= 1; //2^n channels in audio
                     metadata <<= 4; //make room for next item
-                    metadata |= Form_SampleEditor.FrequencyID[SampleInfo.freq]; //frequency of audio
+                    metadata |= EditorSample.FrequencyID[SampleInfo.freq]; //frequency of audio
                     metadata <<= 1; //make room for next item
                     //the last bit of the metadata is always 0, so I don't need to manip it here.
                     sw.Write(metadata);
-                    sw.Write(Form_SampleEditor.nametable, 0, Form_SampleEditor.nametable.Length);
+                    sw.Write(EditorSample.nametable, 0, EditorSample.nametable.Length);
                     foreach (byte val in chunkbytes)
                         sw.Write(val);
                 }

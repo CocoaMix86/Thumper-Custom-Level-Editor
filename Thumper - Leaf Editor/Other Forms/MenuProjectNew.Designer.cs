@@ -1,7 +1,7 @@
 ﻿
 namespace Thumper_Custom_Level_Editor
 {
-	partial class ProjectPropertiesForm
+	partial class MenuProjectNew
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectPropertiesForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuProjectNew));
             this.txtCustomPath = new TextBox();
             this.label1 = new Label();
             this.btnCustomFolder = new Button();

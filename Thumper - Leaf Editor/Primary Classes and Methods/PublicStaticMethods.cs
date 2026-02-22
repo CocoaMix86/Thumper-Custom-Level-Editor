@@ -1,17 +1,11 @@
-﻿using Fmod5Sharp.FmodTypes;
-using Fmod5Sharp;
-using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using WeifenLuo.WinFormsUI.Docking;
-using Un4seen.Bass;
-using Un4seen.Bass.Misc;
 using Thumper_Custom_Level_Editor.Other_Forms;
-using NAudio.Wave;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -20,7 +14,6 @@ namespace Thumper_Custom_Level_Editor
         #region Variable
         //Static
         public static string VersionNumber = "3.0.0-a66";
-        public static string _errorlog = "";
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
         public static decimal LeafQuickValue3 = 1.000m;
@@ -33,10 +26,8 @@ namespace Thumper_Custom_Level_Editor
         public static decimal LeafQuickValue0 = 1.000m;
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public static Dictionary<string, Object_Params> LeafObjects = new();
-        //public static Dictionary<string, Object_Params> ObjectFavorites = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
         public static List<SampleData> ProjectSamples = new();
-        public static Dictionary<string, double> ProjectSampleRuntimes = new();
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
@@ -44,30 +35,7 @@ namespace Thumper_Custom_Level_Editor
         public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
         //
-        //Local basic vars
-        //
-        //Local custom class vars
-        private DeserializeDockContent m_deserializeDockContent;
-        //
         #endregion
-
-        private static void LoadQuickValues()
-        {
-            if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))
-                return;
-            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\settings\quickvalues.txt");
-
-            LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1.000m;
-            LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1.000m;
-            LeafQuickValue2 = decimal.TryParse(_load[2], out result) ? result : 1.000m;
-            LeafQuickValue3 = decimal.TryParse(_load[3], out result) ? result : 1.000m;
-            LeafQuickValue4 = decimal.TryParse(_load[4], out result) ? result : 1.000m;
-            LeafQuickValue5 = decimal.TryParse(_load[5], out result) ? result : 1.000m;
-            LeafQuickValue6 = decimal.TryParse(_load[6], out result) ? result : 1.000m;
-            LeafQuickValue7 = decimal.TryParse(_load[7], out result) ? result : 1.000m;
-            LeafQuickValue8 = decimal.TryParse(_load[8], out result) ? result : 1.000m;
-            LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1.000m;
-        }
 
         public static void DoubleBufferDGV(DataGridView grid)
         {
@@ -79,7 +47,7 @@ namespace Thumper_Custom_Level_Editor
                 pi.SetValue(grid, true, null);
             }
         }
-
+        /*
         public static void GenerateColumnStyle(IEnumerable<DataGridViewColumn> columns, int offset = 0)
         {
             foreach (DataGridViewColumn dgvc in columns) {
@@ -96,131 +64,32 @@ namespace Thumper_Custom_Level_Editor
                 dgvc.ValueType = typeof(decimal?);
                 dgvc.DefaultCellStyle.Format = "0.###";
                 dgvc.FillWeight = 0.001F;
-                dgvc.DefaultCellStyle.Font = Form_LeafEditor.TuningFont;
+                dgvc.DefaultCellStyle.Font = EditorLeaf.TuningFont;
                 dgvc.Width = Properties.Settings.Default.ZoomHoriz;
             }
-        }
-
-        public static void ImportObjects()
-        {
-            LeafObjects.Clear();
-            //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{AppLocation}\settings\track_objects_v4.txt")) {
-                using (StreamWriter sw = File.CreateText($@"{AppLocation}\settings\track_objects_v4.txt")) {
-                    sw.Write(Properties.Resources.trackobjects_v4);
-                }
-            }
-            //import selectable objects from file and parse them into lists for manipulation
-            string[] _importedObjects = File.ReadAllLines($@"{AppLocation}\settings\track_objects_v4.txt");
-            LeafObjects = _importedObjects.Select(x => x.Split(';'))
-                                        .Select(x => new KeyValuePair<string, Object_Params>(x[1]+";"+x[3], new Object_Params {
-                                            category = x[0],
-                                            obj_name = x[1],
-                                            param_displayname = x[2],
-                                            param_path = x[3],
-                                            trait_type = x[4],
-                                            step = x[5] == "True",
-                                            default_value = decimal.TryParse(x[6], out decimal _result) ? _result : 0,
-                                            footer = x[7].Replace("[", "").Replace("]", ""),
-                                            defaultcolor = Color.Purple
-                                        })).ToDictionary();
-            
-            LeafObjects.Add("_TuningLayerX;⮝ Tuning Layer X", new Object_Params {
-                category = "",
-                obj_name = "_TuningLayerX",
-                param_displayname = "⮝ Tuning Layer X",
-                param_path = "⮝ Tuning Layer X",
-                trait_type = "",
-                step = false,
-                default_value = 0m,
-                footer = "",
-                defaultcolor = Color.FromArgb(40, 40, 40)
-            });
-            //import default colors per object
-            ImportDefaultColors();
-            //import favorites
-            if (AppSettings.SequencerFavorites != null) {
-                foreach (string key in AppSettings.SequencerFavorites)
-                    LeafObjects[key].favorite = true;
-            }
-                //ObjectFavorites = LeafObjects.Where(x => AppSettings.SequencerFavorites.Contains(x.Key)).ToDictionary();
-        }
-
-        public static void ImportDefaultColors()
-        {
-            Dictionary<string, Color> ObjectColors = new();
-            if (!File.Exists($@"{AppLocation}\settings\objects_defaultcolors_v3.txt")) {
-                File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
-            }
-            ObjectColors = File.ReadAllLines($@"{AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
-
-            ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
-            //once all the colors are processed, assign them directly to the objects
-            foreach (Object_Params obj in LeafObjects.Select(x => x.Value)) {
-                obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
-                Bitmap color = new(16, 16);
-                using (Graphics g = Graphics.FromImage(color)) {
-                    g.Clear(value);
-                }
-                ColorIcons.TryAdd(value.ToArgb().ToString(), color);
-            }
-        }
-
+        }        
+        */
         ///Color elements based on set properties
         public static void ColorFormElements(TCLE MainForm)
         {
-            MainForm.toolStripTitle.BackColor = AppSettings.ColorMainMenuBar;
-            MainForm.panelToolStrips.BackColor = AppSettings.ColorMainSubMenubar;
-            MainForm.dockMain.BackColor = AppSettings.ColorMainBG;
+            MainForm.toolStripTitle.BackColor = Properties.Settings.Default.ColorMainMenuBar;
+            MainForm.panelToolStrips.BackColor = Properties.Settings.Default.ColorMainSubMenubar;
+            MainForm.dockMain.BackColor = Properties.Settings.Default.ColorMainBG;
 
             TCLE.Explorer?.ColorFormElements();
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor)))
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
                 leaf.ColorFormElements();
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl)))
                 lvl.ColorFormElements();
-            foreach (Form_GateEditor gate in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_GateEditor)))
+            foreach (EditorGate gate in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorGate)))
                 gate.ColorFormElements();
-            foreach (Form_MasterEditor master in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_MasterEditor)))
+            foreach (EditorMaster master in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorMaster)))
                 master.ColorFormElements();
-            foreach (Form_SampleEditor sample in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_SampleEditor)))
+            foreach (EditorSample sample in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorSample)))
                 sample.ColorFormElements();
-            foreach (Form_RawText raw in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_RawText)))
+            foreach (EditorRawText raw in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorRawText)))
                 raw.ColorFormElements();
-        }
-
-        /// <summary>Blends the specified colors together.</summary>
-        /// <param name="color">Color to blend onto the background color.</param>
-        /// <param name="backColor">Color to blend the other color onto.</param>
-        /// <param name="amount">How much of <paramref name="color"/> to keep,
-        /// “on top of” <paramref name="backColor"/>.</param>
-        /// <returns>The blended colors.</returns>
-        public static Color Blend(Color color, Color backColor, double amount)
-        {
-            byte r = (byte)((color.R * amount) + (backColor.R * (1 - amount)));
-            byte g = (byte)((color.G * amount) + (backColor.G * (1 - amount)));
-            byte b = (byte)((color.B * amount) + (backColor.B * (1 - amount)));
-            return Color.FromArgb(r, g, b);
-        }
-
-        public static void Read_Config()
-        {
-            CommonOpenFileDialog cfd_lvl = new() {
-                IsFolderPicker = true,
-                Multiselect = false,
-                Title = "Select the folder where Thumper is installed (NOT the cache folder)"
-            };
-            //check if the game_dir has been set before. It'll be empty if starting for the first time
-            if (Properties.Settings.Default.game_dir == "none")
-                cfd_lvl.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
-            else
-                //if it's not empty, initialize the FolderBrowser to be whatever was selected last
-                cfd_lvl.InitialDirectory = Properties.Settings.Default.game_dir;
-            //show FolderBrowser, and then set "game_dir" to whatever is chosen
-            if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
-                Properties.Settings.Default.game_dir = cfd_lvl.FileName;
-
-            Properties.Settings.Default.Save();
         }
 
         public static string SearchReferences(string searchreference)
@@ -275,23 +144,6 @@ namespace Thumper_Custom_Level_Editor
             toolstripViewProperties.Enabled = true;
         }
 
-        /// https://stackoverflow.com/questions/3143657/truncate-two-decimal-places-without-rounding#answer-43639947
-        public static decimal? TruncateDecimal(decimal? d, byte decimals)
-        {
-            if (d == null)
-                return null;
-            decimal r = Math.Round((decimal)d, decimals);
-
-            if (d > 0 && r > d) {
-                return r - new decimal(1, 0, 0, false, decimals);
-            }
-            else if (d < 0 && r < d) {
-                return r + new decimal(1, 0, 0, false, decimals);
-            }
-
-            return r;
-        }
-
         public static void ResizeHeaders(DataGridView dgv)
         {
             int biggestheader = 50;
@@ -305,7 +157,7 @@ namespace Thumper_Custom_Level_Editor
             //set header width manually and allow resizing
             dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing;
             dgv.RowHeadersWidth = biggestheader + 15;
-        }        
+        }
 
         public static void ReloadProjectSamples()
         {
@@ -389,147 +241,13 @@ namespace Thumper_Custom_Level_Editor
         {
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl))) {
                 //load loop track names and paths to lvlLoopTracks DGV
                 ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
             }
-        }        
-
-        public static uint Hash32(string s)
-        {
-            //this hashes stuff. Don't know why it does it this why.
-            //this is ripped directly from the game's code
-            uint h = 0x811c9dc5;
-            foreach (char c in s)
-                h = ((h ^ c) * 0x1000193) & 0xffffffff;
-            h = (h * 0x2001) & 0xffffffff;
-            h = (h ^ (h >> 0x7)) & 0xffffffff;
-            h = (h * 0x9) & 0xffffffff;
-            h = (h ^ (h >> 0x11)) & 0xffffffff;
-            h = (h * 0x21) & 0xffffffff;
-
-            return h;
-        }
-
-        public static string HashPCName(string StringToHash)
-        {
-            string _hashedname = "";
-            byte[] hashbytes = BitConverter.GetBytes(Hash32(StringToHash));
-            Array.Reverse(hashbytes);
-            foreach (byte b in hashbytes)
-                _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
-            //if the hashed name starts with a '0', remove it
-            if (_hashedname[0] == '0')
-                _hashedname = _hashedname[1..];
-            return _hashedname;
-        }
-
-        public static int ByteSearch(byte[] src, byte[] pattern)
-        {
-            int maxFirstCharSlot = src.Length - pattern.Length + 1;
-            for (int i = 0; i < maxFirstCharSlot; i++) {
-                if (src[i] != pattern[0]) // compare only first byte
-                    continue;
-
-                // found a match on first byte, now try to match rest of the pattern
-                for (int j = pattern.Length - 1; j >= 1; j--) {
-                    if (src[i + j] != pattern[j]) break;
-                    if (j == 1) return i;
-                }
-            }
-            return -1;
-        }
-
-        public static int CalculateSublevelRuntime(MasterLvlData _masterlvl)
-        {
-            int _beatcount = 0;
-            if (_masterlvl.Type == "lvl") {
-                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.name}"));
-                if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
-                else return -1;
-            }
-            //this section handles gate
-            else {
-                int gatebeats = CalculateGateRuntimeFromFile(_masterlvl.name);
-                if (gatebeats == -1)
-                    return -1;
-                else
-                    _beatcount += gatebeats;
-            }
-            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.rest}"));
-            if (lvlrest != null) _beatcount += CalculateLvlRuntime(lvlrest.FullName);
-
-            return _beatcount;
-        }
-
-        public static int CalculateGateRuntimeFromFile(string gatename)
-        {
-            dynamic _load;
-            int _beatcount = 0;
-            List<int> bucketscounted = new();
-            bool israndom;
-            //load the gate to then loop through all lvls in it
-            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{gatename}"));
-            if (gate != null) {
-                _load = UtilFile.LoadFileLock(gate.FullName);
-                //if gate not found, _load is null. Return -1 to denote this
-                if (_load == null)
-                    return -1;
-                //check if random is enabled on this gate
-                israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
-                //loop through each lvl in gate
-                foreach (dynamic _lvl in _load["boss_patterns"]) {
-                    //attempt to load lvl
-                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
-                    if (lvl != null) {
-                        //if random is enabled, count only the first entry in each bucket
-                        if (israndom) {
-                            if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
-                                bucketscounted.Add((int)_lvl["bucket_num"]);
-                                _beatcount += CalculateLvlRuntime(lvl.FullName);
-                            }
-                        }
-                        //otherwise count each lvl
-                        else
-                            _beatcount += CalculateLvlRuntime(lvl.FullName);
-                    }
-                }
-                //need to also count pre and post lvl
-                FileInfo prelvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["pre_lvl_name"]}"));
-                if (prelvl != null) {
-                    _beatcount += CalculateLvlRuntime(prelvl.FullName);
-                }
-                FileInfo postlvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["post_lvl_name"]}"));
-                if (postlvl != null) {
-                    _beatcount += CalculateLvlRuntime(postlvl.FullName);
-                }
-            }
-            else
-                return -1;
-
-            return _beatcount;
-        }
-        public static int CalculateLvlRuntime(string path)
-        {
-            int _beatcount = 0;
-
-            //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = UtilFile.LoadFileLock(path);
-            if (_load == null)
-                return 0;
-            foreach (dynamic leaf in _load["leaf_seq"]) {
-                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(leaf["leaf_name"])}"));
-                if (_leaf != null && _leaf.Exists)
-                    _beatcount += (int)UtilFile.LoadFileLock(_leaf.FullName)["beat_cnt"];
-                ///_beatcount += (int)leaf["beat_cnt"];
-            }
-            //every lvl has an approach beats to consider too
-            //_beatcount += (int)_load["approach_beats"];
-
-            return _beatcount;
         }
 
         //check if at least 1 master file exists
@@ -548,7 +266,7 @@ namespace Thumper_Custom_Level_Editor
                 using (FileStream fs = new(filepath.FullName, FileMode.Open)) {
                     theimage = Image.FromStream(fs);
                 }
-                ImageViewer image = new(theimage) { Text = filepath.Name};
+                ImageViewer image = new(theimage) { Text = filepath.Name };
                 image.Show();
                 return null;
             }
@@ -563,20 +281,20 @@ namespace Thumper_Custom_Level_Editor
             //if there are no workspaces, add one
             if (!ReturnContent) {
                 if (!Workspaces.Any()) {
-                    Form_WorkSpace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
+                    DockWorkspace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
                     workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
                 }
                 //find if the document is loaded already in a tab
                 //if so, make it activate
-                IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
+                IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
                 if (workspacehastab != null) {
                     workspacehastab.DockHandler.Activate();
-                    (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
+                    (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
                     return null;
                 }
 
-                IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-                foreach (Form_WorkSpace ws in workspacewithfloats) {
+                IEnumerable<DockWorkspace> workspacewithfloats = TCLE.Workspaces.Cast<DockWorkspace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+                foreach (DockWorkspace ws in workspacewithfloats) {
                     IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
                     if (activate != null) {
                         activate.DockHandler.Activate();
@@ -585,7 +303,7 @@ namespace Thumper_Custom_Level_Editor
                 }
                 //open document in raw viewer if that option was selected
                 if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
-                    Form_RawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                    EditorRawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                     if (ReturnContent)
                         return rawtext;
                     rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
@@ -598,19 +316,19 @@ namespace Thumper_Custom_Level_Editor
 
             EditorBase OpenFile = new(null);
             if (filepath.Extension == ".master") {
-                OpenFile = new Form_MasterEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorMaster(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filepath.Extension == ".lvl") {
-                OpenFile = new Form_LvlEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorLvl(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filepath.Extension == ".gate") {
-                OpenFile = new Form_GateEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorGate(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filepath.Extension == ".leaf") {
-                OpenFile = new Form_LeafEditor(_load, filepath, Playback.Generating) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorLeaf(_load, filepath, Playback.Generating) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else if (filepath.Extension == ".samp") {
-                OpenFile = new Form_SampleEditor(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorSample(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
             //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
@@ -659,7 +377,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //find if any raw text docs matching documentname are open and update them
             TCLE.Documents.TryGetValue(documentname + "-raw", out EditorBase _found);
-            (_found as Form_RawText)?.Reload();
+            (_found as EditorRawText)?.Reload();
             /*
             foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
                 (document as Form_RawText).Reload();
@@ -674,7 +392,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static bool AnyUnsaved(Form_WorkSpace work = null, Type type = null)
+        public static bool AnyUnsaved(DockWorkspace work = null, Type type = null)
         {
             //Different save check method depending on what files are to be closed
 
@@ -705,25 +423,12 @@ namespace Thumper_Custom_Level_Editor
             return false;
         }
 
-        /// This also works for negative numbers
-        public static int mod(int x, int m)
-        {
-            int r = x % m;
-            return r < 0 ? r + m : r;
-        }
-        public static decimal mod(decimal x, int m)
-        {
-            decimal r = x % m;
-            return r < 0 ? r + m : r;
-        }
-
         public void ConvertProjectToNew()
         {
             FileInfo LevelDetails;
-            FileInfo ConfigFile;
             using OpenFileDialog ofd = new();
             ofd.Title = "Find a LEVEL DETAILS.txt file";
-            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt"; 
+            ofd.Filter = "LEVEL DETAILS.txt|LEVEL DETAILS.txt";
             ofd.FilterIndex = 1;
             ofd.InitialDirectory = Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
@@ -796,26 +501,26 @@ namespace Thumper_Custom_Level_Editor
                 JObject _save = null;
                 if (newfile.Extension == ".leaf") {
                     dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
-                    Form_LeafEditor _leaf = new(_load, newfile, true);
+                    EditorLeaf _leaf = new(_load, newfile, true);
                     _save = _leaf.LeafProperties.ConvertToJson();
                     //_leaf.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".lvl") {
                     dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
-                    Form_LvlEditor _lvl = new(_load, newfile, true);
-                    _save = Form_LvlEditor.BuildSave(_lvl.LvlProperties);
+                    EditorLvl _lvl = new(_load, newfile, true);
+                    _save = EditorLvl.BuildSave(_lvl.LvlProperties);
                     //_lvl.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".master") {
                     dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
-                    Form_MasterEditor _master = new(_load, newfile, true);
-                    _save = Form_MasterEditor.BuildSave(_master.MasterProperties);
+                    EditorMaster _master = new(_load, newfile, true);
+                    _save = EditorMaster.BuildSave(_master.MasterProperties);
                     //_master.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".samp") {
                     dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
-                    Form_SampleEditor _samp = new(_load, newfile, true);
-                    _save = Form_SampleEditor.BuildSave(_samp.SampleProperties);
+                    EditorSample _samp = new(_load, newfile, true);
+                    _save = EditorSample.BuildSave(_samp.SampleProperties);
                     //_samp.SaveCheckAndWrite(true, "");
                 }
                 if (_save != null) {
@@ -862,6 +567,6 @@ namespace Thumper_Custom_Level_Editor
             //File.WriteAllText($"{TCLE.ProjectProperties.WorkingFile.FullName}", JsonConvert.SerializeObject(_saveJSON, Formatting.Indented));
 
             lastsave = DateTime.Now;
-        }        
+        }
     }
 }

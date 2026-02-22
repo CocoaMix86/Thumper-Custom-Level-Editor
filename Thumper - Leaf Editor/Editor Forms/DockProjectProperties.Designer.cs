@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    partial class Form_ProjectProperties
+    partial class DockProjectProperties
     {
         /// <summary>
         /// Required designer variable.
@@ -27,7 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_ProjectProperties));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DockProjectProperties));
             this.propertyGridProject = new PropertyGrid();
             this.SuspendLayout();
             // 

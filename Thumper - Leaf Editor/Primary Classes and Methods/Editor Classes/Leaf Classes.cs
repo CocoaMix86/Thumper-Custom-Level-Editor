@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -51,7 +52,7 @@ namespace Thumper_Custom_Level_Editor
             };
             //add all the datapoints of object
             JArray datapoints = new();
-            for (int _in = Form_LeafEditor.FrozenColumnOffset; _in < this.ParentLeaf.Beats + Form_LeafEditor.FrozenColumnOffset; _in++) {
+            for (int _in = EditorLeaf.FrozenColumnOffset; _in < this.ParentLeaf.Beats + EditorLeaf.FrozenColumnOffset; _in++) {
                 if (this[_in]?.Value == null)
                     continue;
                 datapoints.Add(this[_in].ConvertToJson());
@@ -143,7 +144,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 if (this.friendly_lane is not "lane center" and not "none")
                     this.Visible = value;
-                Form_LeafEditor.ChangeTrackName(this, this.category);
+                EditorLeaf.ChangeTrackName(this, this.category);
             }
         }
         private bool ExpandLanes;
@@ -294,7 +295,7 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Beat #")]
         public int beat { 
             get {
-                return this.ColumnIndex - Form_LeafEditor.FrozenColumnOffset; 
+                return this.ColumnIndex - EditorLeaf.FrozenColumnOffset; 
             } 
         }
         /*
@@ -327,14 +328,14 @@ namespace Thumper_Custom_Level_Editor
                         value = 1m;
                 }
                 else if (ParentSeqObj.trait_type == "kTraitColor") {
-                    value = TCLE.TruncateDecimal((decimal?)value, 0);
+                    value = UtilMath.TruncateDecimal((decimal?)value, 0);
                 }
                 else if (ParentSeqObj.trait_type == "kTraitAction") {
                     if ((decimal?)value is not null or 1 or 0)
                         value = 1m;
                 }
                 else if (ParentSeqObj.trait_type == "kTraitInt") {
-                    value = TCLE.TruncateDecimal((decimal?)value, 0);
+                    value = UtilMath.TruncateDecimal((decimal?)value, 0);
                 }
             }
 
@@ -349,7 +350,7 @@ namespace Thumper_Custom_Level_Editor
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             //if value changing on a tuning layer, recalc the values
             if (((Sequencer_Object)this.OwningRow).obj_name == "_TuningLayerX") {
-                Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
+                EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             }
             ParentSeqObj.isdefault = false;
@@ -379,7 +380,7 @@ namespace Thumper_Custom_Level_Editor
                 if (ParentSeqObj == null || ParentSeqObj.ParentLeaf.ParentEditor.EditorIsLoading)
                     return;
                 if (ParentSeqObj.obj_name == "_TuningLayerX") {
-                    Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
+                    EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                     ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
             } 
@@ -397,7 +398,7 @@ namespace Thumper_Custom_Level_Editor
                 if (ParentSeqObj == null || ParentSeqObj.ParentLeaf.ParentEditor.EditorIsLoading)
                     return;
                 if (ParentSeqObj.obj_name == "_TuningLayerX") {
-                    Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
+                    EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                     ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
             }
@@ -421,7 +422,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class LeafProperties
     {
-        public LeafProperties(Form_LeafEditor Parent)
+        public LeafProperties(EditorLeaf Parent)
         {
             ParentEditor = Parent;
             selectedobj = new() { ParentLeaf = this };
@@ -450,7 +451,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [Browsable(false)]
-        public Form_LeafEditor ParentEditor;
+        public EditorLeaf ParentEditor;
         [Browsable(false)]
         public DataGridView trackEditor => ParentEditor.trackEditor;
         [Browsable(false)]
@@ -519,7 +520,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public int _beats;
         [Browsable(false)]
-        public int BeatsAndFrozen => _beats + Form_LeafEditor.FrozenColumnOffset;
+        public int BeatsAndFrozen => _beats + EditorLeaf.FrozenColumnOffset;
         [Browsable(false)]
         public bool BeatsChangedSinceSave = false;
 

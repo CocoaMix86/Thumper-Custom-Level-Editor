@@ -1,8 +1,13 @@
-﻿using System.Drawing.Drawing2D;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Thumper_Custom_Level_Editor
+namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
-    public static class GraphicExtensions
+    public static class UtilGraphics
     {
         private static GraphicsPath CreateRoundedRectangle(Rectangle bounds, int radius)
         {
@@ -36,10 +41,10 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public static void DrawRoundedRectangle(this Graphics graphics, Pen pen, Rectangle bounds, int cornerRadius)
-        {            
+        {
             using (GraphicsPath path = CreateRoundedRectangle(bounds, cornerRadius)) {
                 graphics.DrawPath(pen, path);
-            }            
+            }
         }
 
         public static void FillRoundedRectangle(this Graphics graphics, Brush brush, Rectangle bounds, int cornerRadius)

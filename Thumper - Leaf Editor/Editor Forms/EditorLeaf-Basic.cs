@@ -7,7 +7,7 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LeafEditor
+    public partial class EditorLeaf
     {
         #region VARIABLES
         private static string[] LaneParams = new[] { "a01", "a02", "ent", "z01", "z02" };

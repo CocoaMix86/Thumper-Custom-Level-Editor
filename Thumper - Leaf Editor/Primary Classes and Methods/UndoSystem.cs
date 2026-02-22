@@ -61,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void UndoFunction(int undoindex)
         {
-            if (TCLE.GlobalActiveDocument is Form_RawText)
+            if (TCLE.GlobalActiveDocument is EditorRawText)
                 return;
             TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
         }

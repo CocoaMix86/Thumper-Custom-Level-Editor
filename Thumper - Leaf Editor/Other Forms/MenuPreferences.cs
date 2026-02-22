@@ -4,7 +4,7 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class CustomizeWorkspace : Form
+    public partial class MenuPreferences : Form
     {
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor
         private Dictionary<string, Keys> DictRandomization = new();
         #endregion
         #region Form Construction and initialization
-        public CustomizeWorkspace()
+        public MenuPreferences()
         {
             InitializeComponent();
             toolstripCustomize.Renderer = new ToolStripOverride();
@@ -81,10 +81,10 @@ namespace Thumper_Custom_Level_Editor
 
             //write sequencer colors to txt file
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.Value.param_displayname};{x.Value.defaultcolor.ToArgb()}"));
-            TCLE.ImportDefaultColors();
+            UtilImport.ImportDefaultColors();
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LeafEditor))) {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
 

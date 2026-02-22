@@ -67,7 +67,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //draw
             using (Graphics g = Graphics.FromImage(LayerTrack)) {
                 g.Clear(Color.Transparent);
-                g.TranslateTransform(-1 * (Width * Form_LeafEditor.FrozenColumnOffset), 0);
+                g.TranslateTransform(-1 * (Width * EditorLeaf.FrozenColumnOffset), 0);
                 DrawLanes(g, SequencerObjects, Leaf);
                 DrawThumps(g, SequencerObjects, Leaf);
                 DrawSpikes(g, SequencerObjects, Leaf);
@@ -395,7 +395,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
                 g.FillRectangle(Brushes.Gray, beat * Width, Middle + OffsetBottomLane + Height, Width, 6);
                 g.FillRectangle(Brushes.OrangeRed, (beat * Width) + 2, Middle + OffsetBottomLane + Height, Width - 4, 3);
-                g.DrawString(value.ToString() + "°", Form_LeafEditor.TuningFont, Brushes.White, beat * Width + (Width/ 2) - 8, Middle + OffsetBottomLane + Height + 6);
+                g.DrawString(value.ToString() + "°", EditorLeaf.TuningFont, Brushes.White, beat * Width + (Width/ 2) - 8, Middle + OffsetBottomLane + Height + 6);
             }
             //turning right
             else {
@@ -409,7 +409,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
                 g.FillRectangle(Brushes.Gray, beat * Width, Middle + OffsetTopLane - 6, Width, 6);
                 g.FillRectangle(Brushes.OrangeRed, (beat * Width) + 2, Middle + OffsetTopLane - 3, Width - 4, 3);
-                g.DrawString(value.ToString() + "°", Form_LeafEditor.TuningFont, Brushes.White, beat * Width + (Width / 2) - 8, Middle + OffsetTopLane - 16);
+                g.DrawString(value.ToString() + "°", EditorLeaf.TuningFont, Brushes.White, beat * Width + (Width / 2) - 8, Middle + OffsetTopLane - 16);
             }
         }
         #endregion

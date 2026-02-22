@@ -14,6 +14,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private static TCLE _tcle;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -31,7 +32,7 @@ namespace Thumper_Custom_Level_Editor
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+            //AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
             tcle = new(args[0]) { WindowState = FormWindowState.Normal, Width = 20, Height = 20, StartPosition = FormStartPosition.CenterScreen };
             ImageMessageBox splash = new("splashscreen", tcle) { TopMost = true, TopLevel = true };
@@ -42,14 +43,16 @@ namespace Thumper_Custom_Level_Editor
             Application.Run(tcle);
         }
 
+        public static List<string> total = new();
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             Assembly thisAssembly = Assembly.GetExecutingAssembly();
             string name = args.Name[..args.Name.IndexOf(',')] + ".dll";
-            System.Collections.Generic.IEnumerable<string> resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name));
+            List<string> resources = thisAssembly.GetManifestResourceNames().Where(s => s.EndsWith(name)).ToList();
 
-            if (resources.Any()) {
+            if (resources.Count > 0) {
                 string resourceName = resources.First();
+                total.Add(resourceName);
 
                 using Stream stream = thisAssembly.GetManifestResourceStream(resourceName);
                 if (stream == null)

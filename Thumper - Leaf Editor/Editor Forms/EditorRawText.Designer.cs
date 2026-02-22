@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    partial class Form_RawText
+    partial class EditorRawText
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_RawText));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorRawText));
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
             this.SuspendLayout();

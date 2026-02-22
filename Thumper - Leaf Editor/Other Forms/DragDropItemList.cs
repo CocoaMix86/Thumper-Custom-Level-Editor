@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
@@ -45,7 +46,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }

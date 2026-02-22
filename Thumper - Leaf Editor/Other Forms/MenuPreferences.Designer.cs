@@ -1,7 +1,7 @@
 ﻿
 namespace Thumper_Custom_Level_Editor
 {
-	partial class CustomizeWorkspace
+	partial class MenuPreferences
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomizeWorkspace));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPreferences));
             this.colorDialog1 = new ColorDialog();
             this.toolstripCustomize = new ToolStrip();
             this.btnCustomizeApply = new ToolStripButton();

@@ -2,12 +2,12 @@
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_WorkSpace : EditorBase
+    public partial class DockWorkspace : EditorBase
     {
         private DeserializeDockContent m_deserializeDockContent;
 
         #region Form Construction
-        public Form_WorkSpace(string configtoload) : base(null)
+        public DockWorkspace(string configtoload) : base(null)
         {
             InitializeComponent();
             this.Text = configtoload;
@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_Enter(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
+            if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -69,7 +69,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
+            if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -79,7 +79,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
+            if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -90,7 +90,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
-            if (TCLE.DontSwitchGAD || this.Disposing || TCLE.IsLoadingProject)
+            if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
             //if (dockMain.ActivePane == null) {
             //if (dockMain.ActiveContent == null)

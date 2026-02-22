@@ -2,9 +2,9 @@
 
 namespace Thumper_Custom_Level_Editor
 {
-    internal partial class AboutThumperEditor : Form
+    internal partial class MenuAbout : Form
 	{
-		public AboutThumperEditor()
+		public MenuAbout()
 		{
 			InitializeComponent();
 			this.Text = String.Format("About {0}", AssemblyTitle);

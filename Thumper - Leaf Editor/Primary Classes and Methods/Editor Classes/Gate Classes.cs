@@ -53,11 +53,11 @@ namespace Thumper_Custom_Level_Editor
     public class GateProperties
     {
         [Browsable(false)]
-        public Form_GateEditor ParentEditor;
+        public EditorGate ParentEditor;
         [Browsable(false)]
         public ObservableCollection<GateLvlData> gatelvls;
 
-        public GateProperties(Form_GateEditor Parent)
+        public GateProperties(EditorGate Parent)
         {
             ParentEditor = Parent;
             gatelvls = new();

@@ -1,6 +1,6 @@
 ﻿namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    partial class Form_GateEditor
+    partial class EditorGate
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_GateEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorGate));
             this.gateLvlList = new DataGridView();
             this.gatePhaseNum = new DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new DataGridViewImageColumn();

@@ -5,10 +5,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_ProjectExplorer : EditorBase
+    public partial class DockProjectExplorer : EditorBase
     {
         #region Form Construction
-        public Form_ProjectExplorer() : base(null)
+        public DockProjectExplorer() : base(null)
         {
             InitializeComponent();
             //set custom renderer for some controls
@@ -729,7 +729,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
                 path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
 
-            TCLE.OpenFile(new Form_LeafEditor().SaveAs(true, path));
+            TCLE.OpenFile(new EditorLeaf().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
@@ -739,7 +739,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
                 path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
 
-            TCLE.OpenFile(new Form_LvlEditor().SaveAs(true, path));
+            TCLE.OpenFile(new EditorLvl().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
@@ -749,7 +749,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
                 path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
 
-            TCLE.OpenFile(new Form_GateEditor().SaveAs(true, path));
+            TCLE.OpenFile(new EditorGate().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
@@ -763,7 +763,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
                 path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
 
-            TCLE.OpenFile(new Form_MasterEditor().SaveAs(true, path));
+            TCLE.OpenFile(new EditorMaster().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
@@ -773,7 +773,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.Exists)
                 path = ProjectExplorer.AllFiles[selectedNodes[^1]].Folder.FullName;
 
-            TCLE.OpenFile(new Form_SampleEditor().SaveAs(true, path));
+            TCLE.OpenFile(new EditorSample().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 

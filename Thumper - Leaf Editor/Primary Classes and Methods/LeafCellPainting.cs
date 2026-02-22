@@ -1,11 +1,12 @@
 ﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
     public static class LeafCellPainting
     {
-        public static int FrozenColumnOffset => Form_LeafEditor.FrozenColumnOffset;
+        public static int FrozenColumnOffset => EditorLeaf.FrozenColumnOffset;
         public static int IconWidth = 16;
         public static int IconHeight = 16;
         public static Pen PenCorn = new(Brushes.CornflowerBlue, 3);
@@ -216,7 +217,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void CellPaintIcons(DataGridViewCellPaintingEventArgs e, Form_LeafEditor Leaf, Sequencer_Object seq = null)
+        public static void CellPaintIcons(DataGridViewCellPaintingEventArgs e, EditorLeaf Leaf, Sequencer_Object seq = null)
         {
             if (e.RowIndex != -1 && seq.obj_name == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
                 return;
@@ -270,7 +271,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //column -1 is row headers
             if (e.ColumnIndex is -1) {
                 e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-                CellPaintingColor.Color = TCLE.Blend(seq.highlight_color, Color.Black, 0.4);
+                CellPaintingColor.Color = UtilMath.Blend(seq.highlight_color, Color.Black, 0.4);
                 bounds.X += 2;
                 bounds.Y += 2;
                 bounds.Width -= 4;
@@ -283,7 +284,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 //if row has a selected cell, highlight it, using a brighter color and white outline
                 if (SelectedRows.Contains(e.RowIndex)) {
                     e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
-                    CellPaintingColor.Color = TCLE.Blend(seq.highlight_color, Color.Black, 0.8);
+                    CellPaintingColor.Color = UtilMath.Blend(seq.highlight_color, Color.Black, 0.8);
                 }
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
@@ -448,7 +449,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                Pen ArrowPen = new(new SolidBrush(TCLE.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
@@ -459,23 +460,23 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 float endY = (e.CellBounds.Top + (e.CellBounds.Height / 3)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Sin(angleRadians));
 
                 if ((decimal)e.Value > 0) {
-                    if (TCLE.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                    if (UtilMath.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 45 and <= 135))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 135 and <= 225))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 225 and <= 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
                 }
                 else if ((decimal)e.Value < 0) {
-                    if (TCLE.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                    if (UtilMath.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 45 and <= 135))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 135 and <= 225))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
-                    else if (TCLE.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 225 and <= 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
                 }
                 e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3), endX, endY);

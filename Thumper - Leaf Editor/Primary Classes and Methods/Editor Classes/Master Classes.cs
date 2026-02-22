@@ -90,7 +90,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class MasterProperties
     {
-        public MasterProperties(Form_MasterEditor Parent)
+        public MasterProperties(EditorMaster Parent)
         {
             ParentEditor = Parent;
             masterlvls = new();
@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [Browsable(false)]
-        public Form_MasterEditor ParentEditor;
+        public EditorMaster ParentEditor;
         [Browsable(false)]
         public ObservableCollection<MasterLvlData> masterlvls;
 

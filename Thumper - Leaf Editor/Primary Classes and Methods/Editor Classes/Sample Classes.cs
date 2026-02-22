@@ -11,7 +11,7 @@ namespace Thumper_Custom_Level_Editor
 {
     public class SampleData
     {
-        public Form_SampleEditor Editor;
+        public EditorSample Editor;
         public FileInfo File { get; set; }
         public string TempFile { get; set; }
 
@@ -97,7 +97,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class SampleProperties
     {
-        public SampleProperties(Form_SampleEditor Parent)
+        public SampleProperties(EditorSample Parent)
         {
             ParentEditor = Parent;
             sample = new();
@@ -106,7 +106,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [Browsable(false)]
-        public Form_SampleEditor ParentEditor;
+        public EditorSample ParentEditor;
         [Browsable(false)]
         public ObservableCollection<SampleData> samplelist;
         [Browsable(false)]

@@ -7,10 +7,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_MasterEditor : EditorBase
+    public partial class EditorMaster : EditorBase
     {
         #region Form Construction
-        public Form_MasterEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorMaster(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             SimpleLoad = simpleload;
 
@@ -420,12 +420,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             if (MasterLvls.Any(x => x.isolate)) {
                 if (MasterLvls[e.RowIndex].isolate)
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
                 else
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
             else {
-                e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+                e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
@@ -678,9 +678,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             this.Text = $"{this.WorkingFile.Name}";
             //calc intro lvl
-            MasterProperties.introlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
+            MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
-            MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
+            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
 
             ///Clear form elements so new data can load
             MasterLvls.Clear();
@@ -813,9 +813,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             //calc intro lvl
-            MasterProperties.introlevelbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
+            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
             //calc checkpoint lvl
-            MasterProperties.checkpointbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
+            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
             //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
                 beattotal += RecalculateRuntimeSublevel(_lvl, false);
@@ -830,10 +830,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SimpleLoad)
                 return 0;
 
-            _lvl.Beats = TCLE.CalculateSublevelRuntime(_lvl);
+            _lvl.Beats = UtilMath.CalculateSublevelRuntime(_lvl);
             //include rest in lvl's runtime
             if (_lvl.rest is not "<none>" and not null)
-                _lvl.restlevelbeats += TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.rest)?.FullName);
+                _lvl.restlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.rest)?.FullName);
             //uptime visuals to show if lvl found or not
             ColorRow(_lvl, MasterLvls.IndexOf(_lvl));
             if (updatebeats)
@@ -933,7 +933,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardMaster.Reverse();
             UtilAudio.PlaySound("UIkcopy");
             //enable the paste button everywhere
-            foreach (Form_MasterEditor master in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension == ".master"))
+            foreach (EditorMaster master in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension == ".master"))
                 master.btnMasterLvlPaste.Enabled = true;
         }
 
@@ -983,11 +983,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private string _playingleaf;
-        private Form_LeafEditor _playingleafform;
+        private EditorLeaf _playingleafform;
         private string _playinglvl;
-        private Form_LvlEditor _playinglvlform;
+        private EditorLvl _playinglvlform;
         private string _playinggate;
-        private Form_GateEditor _playinggateform;
+        private EditorGate _playinggateform;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
@@ -998,7 +998,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as EditorLeaf;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
@@ -1012,7 +1012,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as Form_LvlEditor;
+                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as EditorLvl;
                     //switch to the lvl if it's open
                     _playinglvlform?.DockHandler?.Activate();
                 }
@@ -1020,7 +1020,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinggate != Playback.GlobalCurrentGate) {
                     _playinggate = Playback.GlobalCurrentGate;
-                    _playinggateform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinggate) as Form_GateEditor;
+                    _playinggateform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinggate) as EditorGate;
                     //switch to the gate if it's open
                     _playinggateform?.DockHandler?.Activate();
                 }

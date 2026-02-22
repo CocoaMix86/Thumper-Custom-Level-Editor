@@ -14,11 +14,11 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LeafEditor : EditorBase
+    public partial class EditorLeaf : EditorBase
     {
         #region Form Construction
         ///Load LEAF
-        public Form_LeafEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorLeaf(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -39,7 +39,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadEnd(load);
         }
         ///Load LVL Sequencer
-        public Form_LeafEditor(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorLeaf(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -859,7 +859,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool _changes = false;
             object _val = null;
             if (!setnull && Decimal.TryParse(StartCell.EditedFormattedValue?.ToString(), out decimal _valtoset))
-                _val = TCLE.TruncateDecimal(_valtoset, 3);
+                _val = UtilMath.TruncateDecimal(_valtoset, 3);
 
             List<DataGridViewCell> CellsToChange = new();
             if (StartCell.Selected)
@@ -1770,7 +1770,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase)))
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase)))
                 leaf.btnTrackPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -1921,7 +1921,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             set {
                 Properties.Settings.Default.LeafOptionInterp = value;
                 Properties.Settings.Default.Save();
-                foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
+                foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
                     leaf.btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
                     leaf.btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
                 }
@@ -2116,7 +2116,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //assign new values back to the data points
             EditorIsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
-                interpobject[InterpCells[0].ColumnIndex + x].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                interpobject[InterpCells[0].ColumnIndex + x].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
             }
             EditorIsInterpolating = false;
             //
@@ -2179,7 +2179,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             EditorIsInterpolating = true;
             File.Copy(this.WorkingFile.FullName, SplitFile.FullName);
-            Form_LeafEditor LeafSplitAfter = (Form_LeafEditor)TCLE.OpenFile(SplitFile, false, true);
+            EditorLeaf LeafSplitAfter = (EditorLeaf)TCLE.OpenFile(SplitFile, false, true);
             //remove columns from the beginning to shift all cells backwards until they get to beat 0
             for (int x = 0; x < splitindex; x++) {
                 LeafSplitAfter.trackEditor.Columns.RemoveAt(0);
@@ -2215,7 +2215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UtilAudio.PlaySound("UIselect");
             Properties.Settings.Default.LeafOptionAutoPlace = btnLeafAutoPlace.Checked;
             Properties.Settings.Default.Save();
-            foreach (Form_LeafEditor leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
                 leaf.btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             }
         }
@@ -2542,7 +2542,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (int.Parse(((JProperty)dp).Name) >= ObjectToImport.ParentLeaf._beats)
                         continue;
                     ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset] = data;
-                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
+                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
                 }
             }
         }
@@ -2775,7 +2775,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             if (changes)
                                 UtilFile.WriteFileLock(new FileStream(lvl.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
                         }
-                        TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
+                        TCLE.FindEditorRunMethod(typeof(EditorLvl), "RecalculateRuntime");
                     }
                     if (playsound) UtilAudio.PlaySound("UIsave");
                 }
@@ -2794,6 +2794,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         ///LEAF LENGTH
+        public static DataGridViewCellStyle DGVCS = new() {
+            Format = "0.###",
+            Font = EditorLeaf.TuningFont
+        };
         public void LeafLengthChanged()
         {
             if (_leafproperties == null)
@@ -2802,8 +2806,23 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
-                    trackEditor.Columns.Add(new SequencerColumn() { FillWeight = 0.0001f });
-                TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
+                    trackEditor.Columns.Add(new SequencerColumn() {
+                        FillWeight = 0.0001f,
+                        CellTemplate = new SeqDataPoint(),
+                        Name = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
+                        HeaderText = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
+                        Resizable = DataGridViewTriState.False,
+                        SortMode = DataGridViewColumnSortMode.NotSortable,
+                        DividerWidth = 0,
+                        AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                        Frozen = false,
+                        MinimumWidth = 2,
+                        ReadOnly = false,
+                        ValueType = typeof(decimal?),
+                        DefaultCellStyle = DGVCS,
+                        Width = Properties.Settings.Default.ZoomHoriz
+                    });
+                //TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
             else {
                 trackEditor.ColumnCount = _leafproperties.Beats + FrozenColumnOffset;
@@ -2827,8 +2846,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (SeqDataPoint data_point in DataNotNull) {
                 try {
-                    seq.Cells[data_point.beat + FrozenColumnOffset].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.Value.ToString()), 3);
-                    //seq[data_point.beat].Value = TCLE.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
+                    seq.Cells[data_point.beat + FrozenColumnOffset].Value = UtilMath.TruncateDecimal(Decimal.Parse(data_point.Value.ToString()), 3);
+                    //seq[data_point.beat].Value = UtilMath.TruncateDecimal(Decimal.Parse(data_point.value.ToString()), 3);
                 } catch (Exception ex) {
                     MessageBox.Show($"Failed to entirely parse raw text.\n\n{ex}", "Thumper Custom Level Editor");
                     break;
@@ -2843,8 +2862,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //iterate over each data point, and fill cells
             foreach (JProperty data_point in data_points) {
                 try {
-                    seq[int.Parse(data_point.Name)].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
-                    //seq[int.Parse(data_point.Name)].Value = TCLE.TruncateDecimal((decimal)data_point.Value, 3);
+                    seq[int.Parse(data_point.Name)].Value = UtilMath.TruncateDecimal((decimal)data_point.Value, 3);
+                    //seq[int.Parse(data_point.Name)].Value = UtilMath.TruncateDecimal((decimal)data_point.Value, 3);
                 } catch (ArgumentOutOfRangeException) {
                     break;
                 }
@@ -3057,19 +3076,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (SeqDataPoint dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
                 switch (randomtype) {
                     case 2:
-                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
                         break;
                     case 3:
-                        valueiftrue = TCLE.TruncateDecimal((decimal)rng.NextDouble(), 3);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)rng.NextDouble(), 3);
                         break;
                     case 4:
-                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
                         break;
                     case 5:
-                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
                         break;
                     case 6:
-                        valueiftrue = TCLE.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200 * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200 * (rng.Next(0, 1) == 0 ? 1 : -1);
                         break;
                     case 7:
                         valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
@@ -3265,7 +3284,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     //write the datapoints to a temp object to store them
                     for (int x = 0; x < _beats; x++) {
-                        _temp[InterpCells[0].beat + x + FrozenColumnOffset].Value = TCLE.TruncateDecimal((decimal)interp[x], 3);
+                        _temp[InterpCells[0].beat + x + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
                     }
                 }
                 //transfer temp data points to another temp as the first one will be cleared

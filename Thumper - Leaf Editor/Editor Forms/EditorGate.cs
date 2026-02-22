@@ -7,10 +7,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_GateEditor : EditorBase
+    public partial class EditorGate : EditorBase
     {
         #region Form Construction
-        public Form_GateEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorGate(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -393,7 +393,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
 
             if (sender == gateLvlList && TCLE.DragSource is "LvlList" or "FileExplorer") {
@@ -728,7 +728,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
-                TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
+                TCLE.FindEditorRunMethod(typeof(EditorMaster), "RecalculateRuntime");
                 if (playsound) UtilAudio.PlaySound("UIsave");
 
                 if (!SimpleLoad) {
@@ -795,9 +795,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
-            _gateproperties.prebeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.prelvl)?.FullName);
+            _gateproperties.prebeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.prelvl)?.FullName);
             //calc post lvl beats
-            _gateproperties.postbeats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.postlvl)?.FullName);
+            _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.postlvl)?.FullName);
             //loop over each lvl and update the grid with runtime or a warning
             foreach (GateLvlData _lvl in GateLvls) {
                 RecalculateRuntimeSublevel(_lvl);
@@ -827,7 +827,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (lvlfile == null || !lvlfile.Exists)
                 _lvl.beats = -1;
             else
-                _lvl.beats = TCLE.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.Lvlname)?.FullName);
+                _lvl.beats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.Lvlname)?.FullName);
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
             if (!Playback.Generating)
@@ -963,7 +963,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardGate.Reverse();
             //enable the paste button everywhere
-            foreach (Form_GateEditor gate in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".gate")))
+            foreach (EditorGate gate in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".gate")))
                 gate.btnGatePaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -1017,9 +1017,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private string _playingleaf;
-        private Form_LeafEditor _playingleafform;
+        private EditorLeaf _playingleafform;
         private string _playinglvl;
-        private Form_LvlEditor _playinglvlform;
+        private EditorLvl _playinglvlform;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
@@ -1030,7 +1030,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playingleaf) as EditorLeaf;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }
@@ -1044,7 +1044,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {
                     _playinglvl = Playback.GlobalCurrentLvl;
-                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as Form_LvlEditor;
+                    _playinglvlform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name == _playinglvl) as EditorLvl;
                     //switch to the lvl if it's open
                     _playinglvlform?.DockHandler?.Activate();
                 }

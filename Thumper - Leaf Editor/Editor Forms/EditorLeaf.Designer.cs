@@ -2,7 +2,7 @@
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    partial class Form_LeafEditor
+    partial class EditorLeaf
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_LeafEditor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorLeaf));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();

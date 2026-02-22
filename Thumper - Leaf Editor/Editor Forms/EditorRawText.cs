@@ -6,10 +6,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_RawText : EditorBase
+    public partial class EditorRawText : EditorBase
     {
         #region Form Construction
-        public Form_RawText(string _load, FileInfo filepath) : base(filepath, true)
+        public EditorRawText(string _load, FileInfo filepath) : base(filepath, true)
         {
             InitializeComponent();
             ColorFormElements();

@@ -5,14 +5,14 @@ using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public partial class ProjectPropertiesForm : Form
+    public partial class MenuProjectNew : Form
     {
         public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false, InitialDirectory = Application.StartupPath, Title = "Choose where to save the custom level" };
         private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
         public FileInfo ProjectToLoad;
         private nint WindowHandle => this.Handle;
 
-        public ProjectPropertiesForm()
+        public MenuProjectNew()
         {
             InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;

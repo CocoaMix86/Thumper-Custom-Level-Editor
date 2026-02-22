@@ -7,10 +7,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_LvlEditor : EditorBase
+    public partial class EditorLvl : EditorBase
     {
         #region Form Construction
-        public Form_LvlEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorLvl(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             SimpleLoad = simpleload;
             if (SimpleLoad) {
@@ -24,7 +24,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (load != null) {
                 LoadLvl(load);
-                _ = new Form_LeafEditor(LvlProperties, filepath, true);
+                _ = new EditorLeaf(LvlProperties, filepath, true);
                 UndoList.Add(new SaveState() {
                     reason = "",
                     savestate = load
@@ -475,7 +475,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
 
             if (sender == lvlLeafPaths)
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
@@ -618,7 +618,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //save check state
             Properties.Settings.Default.PreviewTunnel = btnLvlPathView.Checked;
             //update every active lvl document with new state
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor)))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl)))
                 lvl.btnLvlPathView.Checked = Properties.Settings.Default.PreviewTunnel;
         }
 
@@ -836,7 +836,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
             //enable the paste button everywhere
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
                 lvl.btnLvlPasteTunnel.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -879,15 +879,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
             //if the Sequencer is open already, attempt to locate it and open it
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as Form_WorkSpace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]"));
+            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]"));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
-                (workspacehastab as Form_WorkSpace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").DockHandler.Activate();
+                (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").DockHandler.Activate();
                 return;
             }
 
-            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-            foreach (Form_WorkSpace ws in workspacewithfloats) {
+            IEnumerable<DockWorkspace> workspacewithfloats = TCLE.Workspaces.Cast<DockWorkspace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            foreach (DockWorkspace ws in workspacewithfloats) {
                 IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").FirstOrDefault();
                 if (activate != null) {
                     activate.DockHandler.Activate();
@@ -898,7 +898,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DockPaneCollection Panes = TCLE.ActiveWorkspace.dockMain.Panes;
             DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(".leaf")).Any());
 
-            Form_LeafEditor leaf = new(LvlProperties, this.WorkingFile, false) { DockAreas = DockAreas.Document | DockAreas.Float };
+            EditorLeaf leaf = new(LvlProperties, this.WorkingFile, false) { DockAreas = DockAreas.Document | DockAreas.Float };
             if (OpenHere != null)
                 leaf.Show(OpenHere, null);
             else
@@ -1169,8 +1169,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
-                TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
-                TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
+                TCLE.FindEditorRunMethod(typeof(EditorGate), "RecalculateRuntime");
+                TCLE.FindEditorRunMethod(typeof(EditorMaster), "RecalculateRuntime");
                 if (playsound) UtilAudio.PlaySound("UIsave");
 
                 if (!SimpleLoad) {
@@ -1344,7 +1344,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardLvl.Reverse();
             //enable the paste button everywhere
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
                 lvl.btnLvlLeafPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -1452,7 +1452,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         private string _playingleaf;
-        private Form_LeafEditor _playingleafform;
+        private EditorLeaf _playingleafform;
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Playback.PlaybackBeat < 0)
@@ -1463,7 +1463,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_playingleaf != Playback.GlobalCurrentLeaf) {
                     _playingleaf = Playback.GlobalCurrentLeaf;
                     _playingleafform?.trackEditor.ResetPlayback();
-                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name.StartsWith(_playingleaf)) as Form_LeafEditor;
+                    _playingleafform = TCLE.Documents.Values.FirstOrDefault(x => x.WorkingFile.Name.StartsWith(_playingleaf)) as EditorLeaf;
                     //switch to the leaf if it's open
                     _playingleafform?.DockHandler?.Activate();
                 }

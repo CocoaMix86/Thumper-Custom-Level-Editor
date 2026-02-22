@@ -32,7 +32,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.time == 0)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
-                string _hashedname = TCLE.HashPCName($"A{samp.path}");
+                string _hashedname = UtilMath.HashPCName($"A{samp.path}");
                 //check if sample is custom or not. This changes where we load audio from
                 string filetoread;
                 try {
@@ -74,10 +74,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             Bass.BASS_Free();
             TCLE.alzheimer();
             PlayingChannels.Clear();
-            foreach (Form_SampleEditor samp in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_SampleEditor))) {
+            foreach (EditorSample samp in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorSample))) {
                 samp.sampleList.Refresh();
             }
-            foreach (Form_LvlEditor lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(Form_LvlEditor))) {
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl))) {
                 lvl.lvlLoopTracks.Refresh();
             }
             // Initialize Sound library
@@ -90,12 +90,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 return null;
             //check if the gamedir has been set so the method can find the .pc files
             if (Properties.Settings.Default.game_dir == "none") {
-                TCLE.Read_Config();
+                UtilImport.GetThumperCacheFolder();
             }
 
             byte[] _bytes;
             //get the hash of this filename. This will be used to locate the sample's .PC file
-            string _hashedname = TCLE.HashPCName($"A{_samp.path}");
+            string _hashedname = UtilMath.HashPCName($"A{_samp.path}");
 
             //check if sample is custom or not. This changes where we load audio from
             if (_samp.path.Contains("custom")) {

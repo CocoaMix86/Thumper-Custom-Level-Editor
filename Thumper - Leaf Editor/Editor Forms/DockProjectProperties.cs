@@ -3,10 +3,10 @@ using Newtonsoft.Json;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_ProjectProperties : EditorBase
+    public partial class DockProjectProperties : EditorBase
     {
         #region Form Construction
-        public Form_ProjectProperties() : base(null)
+        public DockProjectProperties() : base(null)
         {
             InitializeComponent();
         }

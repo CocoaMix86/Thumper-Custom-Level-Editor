@@ -10,10 +10,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class Form_SampleEditor : EditorBase
+    public partial class EditorSample : EditorBase
     {
         #region Form Construction
-        public Form_SampleEditor(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
+        public EditorSample(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
             if (this.SimpleLoad) {
@@ -203,7 +203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (sampleList.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(TCLE.Blend(e.InheritedRowStyle.BackColor, Color.Black, (sampleList.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (sampleList.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
 
@@ -343,7 +343,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (sd.path.Contains("custom")) {
                     customforcesave = true;
                     string _hashedname = null;
-                    byte[] hashbytes = BitConverter.GetBytes(TCLE.Hash32($"A{sd.path}"));
+                    byte[] hashbytes = BitConverter.GetBytes(UtilMath.Hash32($"A{sd.path}"));
                     Array.Reverse(hashbytes);
                     foreach (byte b in hashbytes)
                         _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
@@ -713,7 +713,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        private static void ImportAudioToSamp(string filepath, Form_SampleEditor SampleEditor)
+        private static void ImportAudioToSamp(string filepath, EditorSample SampleEditor)
         {
             string _filename = Path.GetFileNameWithoutExtension(filepath);
             //check if a sample with the same name already exists
@@ -724,7 +724,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             byte[] InputFileBytes;
             //get the hash of the FSB filename. This will be used to name the final .PC file
-            string _hashedname = TCLE.HashPCName($"Asamples/levels/custom/{_filename}.wav");
+            string _hashedname = UtilMath.HashPCName($"Asamples/levels/custom/{_filename}.wav");
             //see if file is in use and can be read
             try {
                 InputFileBytes = File.ReadAllBytes(filepath);
@@ -756,7 +756,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 uint freq = BitConverter.ToUInt32(InputFileBytes, 24);
                 ulong freqid = FrequencyID.TryGetValue((int)freq, out ulong value) ? value : 8;
                 //lookup where data starts and then remove header
-                int indexofdata = TCLE.ByteSearch(InputFileBytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
+                int indexofdata = UtilMath.ByteSearch(InputFileBytes, new byte[] { (byte)'d', (byte)'a', (byte)'t', (byte)'a' });
                 int datalength = BitConverter.ToInt32(InputFileBytes.AsSpan(indexofdata + 4, 4));
                 indexofdata += 8;
                 InputFileBytes = InputFileBytes.AsSpan(indexofdata, datalength).ToArray();

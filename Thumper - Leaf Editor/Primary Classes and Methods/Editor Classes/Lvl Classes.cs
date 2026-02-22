@@ -54,7 +54,7 @@ namespace Thumper_Custom_Level_Editor
 
     public class LvlProperties
     {
-        public LvlProperties(Form_LvlEditor Parent)
+        public LvlProperties(EditorLvl Parent)
         {
             ParentEditor = Parent;
             sublevel = new();
@@ -66,7 +66,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [Browsable(false)]
-        public Form_LvlEditor ParentEditor;
+        public EditorLvl ParentEditor;
         [Browsable(false)]
         public ObservableCollection<LvlLeafData> lvlleafs;
         [Browsable(false)]
