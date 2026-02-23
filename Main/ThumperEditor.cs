@@ -581,6 +581,8 @@ namespace Thumper_Custom_Level_Editor
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
             IsLoadingProject = true;
+            if (!Directory.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}"))
+                Directory.CreateDirectory($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}");
             DeserializeDockContent m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             try {
                 dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config", m_deserializeDockContent);
