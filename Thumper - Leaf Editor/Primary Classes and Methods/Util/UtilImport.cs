@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             ImportQuickValues();
             ImportObjects();
             ImportDefaultColors();
-            GetThumperCacheFolder();
+            GetThumperCacheFolder(true);
         }
 
         public static void ImportQuickValues()
@@ -100,8 +100,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
         }
 
-        public static void GetThumperCacheFolder()
+        public static void GetThumperCacheFolder(bool init = false)
         {
+            if (init && Properties.Settings.Default.game_dir != "none")
+                return;
+
             CommonOpenFileDialog cfd_lvl = new() {
                 IsFolderPicker = true,
                 Multiselect = false,

@@ -110,9 +110,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             lockedfiles.Clear();
         }*/
         /// 
-        /// 
-        /// 
-
 
         public static string CopyToWorkingFolderCheck(string filepath)
         {
@@ -171,10 +168,26 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
         }
 
+        public static string SearchReferences(string searchreference)
+        {
+            string referencefiles = "";
+            //search all files in the project folder
+            foreach (FileInfo file in TCLE.WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => TCLE.ProjectExtensions.Contains(x.Extension))) {
+                //skip self to not include self
+                if (file.Name == searchreference)
+                    continue;
+                string text = ((JObject)UtilFile.LoadFileLock(file.FullName)).ToString(Formatting.None);
+                //check if the file we're searching contains the obj_name
+                if (text.Contains(searchreference)) {
+                    referencefiles += file.Name + '\n';
+                }
+            }
+
+            return referencefiles.Length > 1 ? referencefiles : "<none>";
+        }
+
         public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
         {
-            if (extensions == null)
-                throw new ArgumentNullException("extensions");
             IEnumerable<FileInfo> files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories);
             return files.Where(f => extensions.Contains(f.Extension));
         }

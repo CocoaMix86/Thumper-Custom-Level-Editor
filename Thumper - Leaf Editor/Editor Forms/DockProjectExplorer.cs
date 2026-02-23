@@ -136,7 +136,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void toolstripFileSearch_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(TCLE.SearchReferences(selectedNodes[0].Name), "Thumper Custom Level Editor");
+            MessageBox.Show(UtilFile.SearchReferences(selectedNodes[0].Name), "Thumper Custom Level Editor");
         }
         private void toolstripFileExternal_Click(object sender, EventArgs e)
         {
