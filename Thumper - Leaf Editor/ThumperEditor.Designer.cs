@@ -2135,7 +2135,7 @@
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormClosing += this.TCLE_FormClosing;
             this.FormClosed += this.TCLE_FormClosed;
-            this.Load += this.FormLeafEditor_Load;
+            this.Load += this.TCLEMain_Load;
             this.LocationChanged += this.TCLE_LocationChanged;
             this.KeyDown += this.TCLE_KeyDown;
             this.Resize += this.TCLE_Resize;

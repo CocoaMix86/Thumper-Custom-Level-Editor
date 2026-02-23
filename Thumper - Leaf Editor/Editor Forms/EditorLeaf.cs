@@ -2805,30 +2805,39 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int data = trackEditor.ColumnCount - FrozenColumnOffset;
 
             if (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount) {
-                while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
-                    trackEditor.Columns.Add(new SequencerColumn() {
-                        FillWeight = 0.0001f,
-                        CellTemplate = new SeqDataPoint(),
-                        Name = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
-                        HeaderText = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
-                        Resizable = DataGridViewTriState.False,
-                        SortMode = DataGridViewColumnSortMode.NotSortable,
-                        DividerWidth = 0,
-                        AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
-                        Frozen = false,
-                        MinimumWidth = 2,
-                        ReadOnly = false,
-                        ValueType = typeof(decimal?),
-                        DefaultCellStyle = DGVCS,
-                        Width = Properties.Settings.Default.ZoomHoriz
-                    });
+                if (!SimpleLoad) {
+                    while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
+                        trackEditor.Columns.Add(new SequencerColumn() {
+                            FillWeight = 0.0001f,
+                            CellTemplate = new SeqDataPoint(),
+                            Name = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
+                            HeaderText = (trackEditor.ColumnCount - FrozenColumnOffset).ToString(),
+                            Resizable = DataGridViewTriState.False,
+                            SortMode = DataGridViewColumnSortMode.NotSortable,
+                            DividerWidth = 0,
+                            AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                            Frozen = false,
+                            MinimumWidth = 2,
+                            ReadOnly = false,
+                            ValueType = typeof(decimal?),
+                            DefaultCellStyle = DGVCS,
+                            Width = Properties.Settings.Default.ZoomHoriz
+                        });
+                }
+                else {
+                    while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
+                        trackEditor.Columns.Add(new SequencerColumn() {
+                            FillWeight = 0.0001f,
+                            CellTemplate = new SeqDataPoint(),
+                        });
+                    return;
+                }
                 //TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
             else {
                 trackEditor.ColumnCount = _leafproperties.Beats + FrozenColumnOffset;
             }
-            if (SimpleLoad)
-                return;
+
             dgvMasterView.ColumnCount = trackEditor.ColumnCount - FrozenColumnOffset;
             LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);
             //set cell zoom

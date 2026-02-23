@@ -9,6 +9,14 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
     public static class UtilImport
     {
+        public static void ImportInit()
+        {
+            ImportQuickValues();
+            ImportObjects();
+            ImportDefaultColors();
+            GetThumperCacheFolder();
+        }
+
         public static void ImportQuickValues()
         {
             if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))

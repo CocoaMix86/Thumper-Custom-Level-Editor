@@ -161,10 +161,9 @@ namespace Thumper_Custom_Level_Editor
                 MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
             }
             //call methods to initialize various aspects of the editors
-            UtilImport.ImportObjects();
+            UtilImport.ImportInit();
             ColorFormElements(TCLE.Instance);
             JumpListUpdate();
-            UtilImport.ImportQuickValues();
             SetKeyBinds();
             SeqObjTreeBuilder.Initialize();
             //import last used custom colors
@@ -180,7 +179,7 @@ namespace Thumper_Custom_Level_Editor
         #endregion
         #region Form Loading Closing
         ///FORM LOADING
-        private void FormLeafEditor_Load(object sender, EventArgs e)
+        private void TCLEMain_Load(object sender, EventArgs e)
         {
             //finalize boot
             UtilAudio.PlaySound("UIboot");
