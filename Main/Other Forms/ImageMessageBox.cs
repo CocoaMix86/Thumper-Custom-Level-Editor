@@ -57,7 +57,6 @@ namespace Thumper_Custom_Level_Editor
         {
             if (tcle != null) {
                 tcle.MaximizeScreenBounds();
-                TCLE.MainBeeble.Visible = true;
                 TCLE.MainBeeble.Location = Properties.Settings.Default.beebleloc;
             }
             this.Close();

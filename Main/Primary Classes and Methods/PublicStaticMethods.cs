@@ -92,14 +92,6 @@ namespace Thumper_Custom_Level_Editor
                 raw.ColorFormElements();
         }
 
-        public void ShowChangelog()
-        {
-            panelChangelog.Visible = true;
-            panelChangelog.BringToFront();
-            //lblChangelog.Text = Properties.Resources.changelog;
-        }
-        private void lblChangelogClose_Click(object sender, EventArgs e) => panelChangelog.Visible = false;
-
         public void MenusVisible(bool visible)
         {
             panelRecentFiles.Visible = !visible;
@@ -124,6 +116,8 @@ namespace Thumper_Custom_Level_Editor
             toolstripWindow.Enabled = true;
             toolstripViewExplorer.Enabled = true;
             toolstripViewProperties.Enabled = true;
+
+            MainBeeble.Visible = visible;
         }
 
         public static void ResizeHeaders(DataGridView dgv)

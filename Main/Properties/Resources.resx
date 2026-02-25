@@ -703,6 +703,12 @@
   <data name="obj_list_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\text\export objlibs\obj_list_2.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="options_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\options-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\text\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
@@ -1213,6 +1219,18 @@
   <data name="pixel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\images\misc\pixel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="projectnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectnew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectnew_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectnew-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectopen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectopen_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectopen-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\text\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
@@ -1260,6 +1278,9 @@
   </data>
   <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\text\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="thisisforberry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\thisisforberry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ThumperSequencerZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\audio\samples\ThumperSequencerZip.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

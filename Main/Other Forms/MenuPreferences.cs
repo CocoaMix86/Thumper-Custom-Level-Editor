@@ -6,6 +6,25 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class MenuPreferences : Form
     {
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                ReleaseCapture();
+                _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+        private void toolstripFormClose_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
         #region Variables
         private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
         private Dictionary<string, Keys> DictKeybind = new();
@@ -99,6 +118,7 @@ namespace Thumper_Custom_Level_Editor
             //save properties
             Properties.Settings.Default.Save();
 
+            UtilAudio.PlaySound("UIinterpolate");
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -199,5 +219,16 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         #endregion
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UtilAudio.PlaySound("UIselect");
+        }
+
+        private void MenuPreferences_SizeChanged(object sender, EventArgs e)
+        {
+            toolStripLabel1.Margin = new((this.Width / 2) - (toolStripLabel1.Width / 2), 0, 0, 0);
+            btnCustomizeApply.Margin = new((this.Width / 2) - (btnCustomizeApply.Width / 2), 0, 0, 0);
+        }
     }
 }
