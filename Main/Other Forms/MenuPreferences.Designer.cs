@@ -45,12 +45,16 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1 = new TabPage();
             this.propertyGridKeyBinds = new PropertyGrid();
             this.toolTip1 = new ToolTip(this.components);
+            this.toolStripTitle = new ToolStripEx();
+            this.toolStripLabel1 = new ToolStripLabel();
+            this.toolstripFormClose = new ToolStripButton();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabUIColors.SuspendLayout();
             this.tabSeq.SuspendLayout();
             this.tabAudio.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.toolStripTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog1
@@ -97,14 +101,15 @@ namespace Thumper_Custom_Level_Editor
             this.tabControl1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.tabControl1.HotTrack = true;
             this.tabControl1.ItemSize = new Size(30, 120);
-            this.tabControl1.Location = new Point(0, 0);
+            this.tabControl1.Location = new Point(0, 25);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new Size(496, 526);
+            this.tabControl1.Size = new Size(496, 501);
             this.tabControl1.SizeMode = TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 107;
             this.tabControl1.DrawItem += this.tabControl1_DrawItem;
+            this.tabControl1.SelectedIndexChanged += this.tabControl1_SelectedIndexChanged;
             // 
             // tabUIColors
             // 
@@ -114,7 +119,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabUIColors.Location = new Point(124, 4);
             this.tabUIColors.Name = "tabUIColors";
             this.tabUIColors.Padding = new Padding(3);
-            this.tabUIColors.Size = new Size(368, 518);
+            this.tabUIColors.Size = new Size(368, 493);
             this.tabUIColors.TabIndex = 0;
             this.tabUIColors.Text = "UI Theme";
             // 
@@ -138,7 +143,7 @@ namespace Thumper_Custom_Level_Editor
             this.propertyGridUIColors.RightToLeft = RightToLeft.No;
             this.propertyGridUIColors.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridUIColors.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridUIColors.Size = new Size(362, 512);
+            this.propertyGridUIColors.Size = new Size(362, 487);
             this.propertyGridUIColors.TabIndex = 122;
             this.propertyGridUIColors.ToolbarVisible = false;
             this.propertyGridUIColors.ViewBackColor = Color.FromArgb(31, 31, 31);
@@ -153,7 +158,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabSeq.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.tabSeq.Location = new Point(124, 4);
             this.tabSeq.Name = "tabSeq";
-            this.tabSeq.Size = new Size(368, 518);
+            this.tabSeq.Size = new Size(368, 493);
             this.tabSeq.TabIndex = 3;
             this.tabSeq.Text = "Sequencer Colors";
             // 
@@ -176,7 +181,7 @@ namespace Thumper_Custom_Level_Editor
             this.treeObjects.SelectedImageKey = "other";
             this.treeObjects.ShowNodeToolTips = true;
             this.treeObjects.ShowRootLines = false;
-            this.treeObjects.Size = new Size(368, 496);
+            this.treeObjects.Size = new Size(368, 471);
             this.treeObjects.TabIndex = 101;
             this.treeObjects.NodeMouseDoubleClick += this.treeObjects_NodeMouseDoubleClick;
             // 
@@ -240,7 +245,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.Location = new Point(124, 4);
             this.tabAudio.Name = "tabAudio";
             this.tabAudio.Padding = new Padding(3);
-            this.tabAudio.Size = new Size(368, 518);
+            this.tabAudio.Size = new Size(368, 493);
             this.tabAudio.TabIndex = 1;
             this.tabAudio.Text = "Audio";
             // 
@@ -264,7 +269,7 @@ namespace Thumper_Custom_Level_Editor
             this.tabPage1.Location = new Point(124, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new Padding(3);
-            this.tabPage1.Size = new Size(368, 518);
+            this.tabPage1.Size = new Size(368, 493);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Key Binds";
             // 
@@ -288,30 +293,71 @@ namespace Thumper_Custom_Level_Editor
             this.propertyGridKeyBinds.RightToLeft = RightToLeft.No;
             this.propertyGridKeyBinds.SelectedItemWithFocusBackColor = Color.FromArgb(113, 96, 232);
             this.propertyGridKeyBinds.SelectedItemWithFocusForeColor = Color.White;
-            this.propertyGridKeyBinds.Size = new Size(362, 512);
+            this.propertyGridKeyBinds.Size = new Size(362, 487);
             this.propertyGridKeyBinds.TabIndex = 123;
             this.propertyGridKeyBinds.ToolbarVisible = false;
             this.propertyGridKeyBinds.ViewBackColor = Color.FromArgb(31, 31, 31);
             this.propertyGridKeyBinds.ViewBorderColor = Color.FromArgb(61, 61, 61);
             this.propertyGridKeyBinds.ViewForeColor = Color.White;
             // 
-            // CustomizeWorkspace
+            // toolStripTitle
+            // 
+            this.toolStripTitle.BackColor = Color.FromArgb(80, 0, 0);
+            this.toolStripTitle.GripMargin = new Padding(0);
+            this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolStripLabel1, this.toolstripFormClose });
+            this.toolStripTitle.Location = new Point(0, 0);
+            this.toolStripTitle.MaximumSize = new Size(0, 31);
+            this.toolStripTitle.Name = "toolStripTitle";
+            this.toolStripTitle.Padding = new Padding(0);
+            this.toolStripTitle.RenderMode = ToolStripRenderMode.System;
+            this.toolStripTitle.Size = new Size(496, 25);
+            this.toolStripTitle.TabIndex = 152;
+            this.toolStripTitle.MouseDown += this.toolStripTitle_MouseDown;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new Font("Futura PT Book", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolStripLabel1.ForeColor = Color.White;
+            this.toolStripLabel1.Margin = new Padding(181, 1, 0, 2);
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new Size(157, 22);
+            this.toolStripLabel1.Text = "Application Preferences";
+            // 
+            // toolstripFormClose
+            // 
+            this.toolstripFormClose.Alignment = ToolStripItemAlignment.Right;
+            this.toolstripFormClose.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.toolstripFormClose.Image = Properties.Resources.icon_close;
+            this.toolstripFormClose.ImageScaling = ToolStripItemImageScaling.None;
+            this.toolstripFormClose.ImageTransparentColor = Color.Magenta;
+            this.toolstripFormClose.Margin = new Padding(0);
+            this.toolstripFormClose.Name = "toolstripFormClose";
+            this.toolstripFormClose.Overflow = ToolStripItemOverflow.Never;
+            this.toolstripFormClose.Padding = new Padding(12, 0, 12, 0);
+            this.toolstripFormClose.Size = new Size(38, 25);
+            this.toolstripFormClose.ToolTipText = "Close";
+            this.toolstripFormClose.Click += this.toolstripFormClose_Click;
+            // 
+            // MenuPreferences
             // 
             this.AutoScaleDimensions = new SizeF(6F, 13F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
             this.ClientSize = new Size(496, 551);
+            this.ControlBox = false;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.toolstripCustomize);
+            this.Controls.Add(this.toolStripTitle);
             this.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CustomizeWorkspace";
+            this.Name = "MenuPreferences";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = SizeGripStyle.Hide;
-            this.Text = "Customize Workspace";
+            this.SizeChanged += this.MenuPreferences_SizeChanged;
             this.toolstripCustomize.ResumeLayout(false);
             this.toolstripCustomize.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -321,6 +367,8 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.ResumeLayout(false);
             this.tabAudio.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.toolStripTitle.ResumeLayout(false);
+            this.toolStripTitle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -341,5 +389,8 @@ namespace Thumper_Custom_Level_Editor
         private TabPage tabPage1;
         public PropertyGrid propertyGridKeyBinds;
         private ImageList imageList1;
+        private ToolStripEx toolStripTitle;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripButton toolstripFormClose;
     }
 }

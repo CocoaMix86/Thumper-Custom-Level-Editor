@@ -10,6 +10,7 @@ using System.Linq;
 using System.Drawing.Text;
 using System.Security.Permissions;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -168,6 +169,7 @@ namespace Thumper_Custom_Level_Editor
             SeqObjTreeBuilder.Initialize();
             //import last used custom colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            this.Cursor = new Cursor(new MemoryStream(Properties.Resources.mousebeeble1));
             //load recent levels or the level from input arg
             FileInfo LevelToLoad = new(string.IsNullOrEmpty(LevelFromArg) ? "e" : LevelFromArg);
             if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
@@ -183,23 +185,18 @@ namespace Thumper_Custom_Level_Editor
         {
             //finalize boot
             UtilAudio.PlaySound("UIboot");
-            ///version check
-            /*
-            if (Properties.Settings.Default.version != "2.2release1") {
-                ShowChangelog();
-                if (MessageBox.Show($"2.2 contains many new objects to use! You will need to update the track_objects.txt file to use them. Do this now?", "NEW VERSION NOTICE!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    toolstripFileTemplateRegen_Click(null, null);
-                else
-                    MessageBox.Show("You can update later from the File menu.\nFile > Template Files > Regenerate", "ok", MessageBoxButtons.OK);
-                Properties.Settings.Default.version = "2.2release1";
-            }
-            */
             //finish loading
             Properties.Settings.Default.firstrun = false;
             Properties.Settings.Default.Save();
             //
+            MainBeeble.Visible = false;
             MainBeeble.Size = Properties.Settings.Default.beeblesize;
             MainBeeble.Location = Properties.Settings.Default.beebleloc;
+        }
+
+        private void TCLE_SizeChanged(object sender, EventArgs e)
+        {
+            panelRecentFiles.Location = new((this.Width / 2) - (panelRecentFiles.Width / 2), (this.Height / 2) - (panelRecentFiles.Height / 2));
         }
 
         private static void JumpListUpdate()
@@ -469,6 +466,7 @@ namespace Thumper_Custom_Level_Editor
         {
             dockProjectProperties.propertyGridProject.SelectedObject = ProjectProperties;
             dockProjectProperties.TabText = $"Project Properties";
+            UtilAudio.PlaySound("UIfolderopen");
         }
 
         private void toolstripStopAudio_Click(object sender, EventArgs e)
@@ -494,6 +492,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFileNewProject_Click(object sender, EventArgs e)
         {
             MenuProjectNew customlevel = new() { Owner = this };
+            UtilAudio.PlaySound("UIfolderopen");
             customlevel.ShowDialog();
             if (customlevel.DialogResult == DialogResult.Yes)
                 OpenProject(customlevel.ProjectToLoad);
@@ -503,6 +502,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripFileOpenProject_Click(object sender, EventArgs e)
         {
             using OpenFileDialog ofd = new();
+            UtilAudio.PlaySound("UIfolderopen");
             ofd.Title = "Open Project";
             ofd.Filter = "Thumper Custom Level (*.TCL)|*.TCL";
             ofd.FilterIndex = 1;
@@ -550,6 +550,7 @@ namespace Thumper_Custom_Level_Editor
                 Thumbnail = Thumbnail
             };
             MenusVisible(true);
+            this.Cursor = Cursors.Arrow;
             //load colors, with failover to White
             try {
                 dynamic railcolor = ProjectJson["rails_color"];
@@ -706,11 +707,6 @@ namespace Thumper_Custom_Level_Editor
         }
         #endregion
         #region Toolstrip Edit
-        private void toolstripEditUndo_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolstripEditCut_Click(object sender, EventArgs e)
         {
             GlobalActiveDocument.GetType().GetMethod("Cut").Invoke(GlobalActiveDocument, null);
@@ -728,16 +724,12 @@ namespace Thumper_Custom_Level_Editor
             GlobalActiveDocument.GetType().GetMethod("Paste").Invoke(GlobalActiveDocument, null);
         }
 
-        private void toolstripEditDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolstripEditPreferences_Click(object sender, EventArgs e)
         {
             //Show the CustomWorkspace form. If form OK, then save the settings to app properties
             //then call method to recolor the form elements immediately
             MenuPreferences custom = new() { Owner = this };
+            UtilAudio.PlaySound("UIinterpolatewindow");
             //custom._objects = _objects;
             if (custom.ShowDialog() == DialogResult.OK) {
 
@@ -966,7 +958,6 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripHelpAbout_Click(object sender, EventArgs e) => new MenuAbout().Show();
         private void toolstripHelpDiscord_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://discord.com/invite/gTQbquY", UseShellExecute = true });
         private void toolstripHelpGithub_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor", UseShellExecute = true });
-        private void toolstripHelpChangelog_Click(object sender, EventArgs e) => ShowChangelog();
         private void toolstripHelpKofi_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://ko-fi.com/I2I5ZZBRH", UseShellExecute = true });
         #endregion
         #region Toolstrip Project
@@ -1255,8 +1246,6 @@ namespace Thumper_Custom_Level_Editor
             GC.WaitForPendingFinalizers();
             _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
-
-        private void label2_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/wiki/TCLE-3.0#first-time-in-tcle", UseShellExecute = true });
 
         protected override CreateParams CreateParams
         {
