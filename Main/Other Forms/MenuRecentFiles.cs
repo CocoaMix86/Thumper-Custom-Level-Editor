@@ -72,9 +72,11 @@ namespace Thumper_Custom_Level_Editor
         }
 
         private int RecentFilesRowHover = -1;
+        private int RecentFilesColumnHover = -1;
         private void dgvRecentFiles_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
             RecentFilesRowHover = e.RowIndex;
+            RecentFilesColumnHover = e.ColumnIndex;
             dgvRecentFiles.Invalidate();
         }
 
@@ -131,7 +133,7 @@ namespace Thumper_Custom_Level_Editor
 
             if (e.RowIndex == RecentFilesRowHover)
                 e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(Color.Aqua, Color.Black, (e.RowIndex == RecentFilesRowHover ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend((RecentFilesColumnHover == 3 && RecentFilesRowHover == e.RowIndex) ? Color.Crimson : Color.Aqua, Color.Black, (e.RowIndex == RecentFilesRowHover ? 1 : 0.6))), bounds, 8);
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }
