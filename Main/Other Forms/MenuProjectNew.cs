@@ -83,6 +83,9 @@ namespace Thumper_Custom_Level_Editor
         public FileInfo CreateCustomLevelFolder()
         {
             FileInfo NewProject = new($@"{txtCustomPath.Text}\{txtCustomName.Text}\{txtCustomName.Text}.TCL");
+            if (!NewProject.Directory.Exists)
+                NewProject.Directory.Create();
+
             ProjectProperties NewProjectProperties = new() {
                 ProjectName = txtCustomName.Text,
                 difficulty = txtCustomDiff.Text,
@@ -95,8 +98,6 @@ namespace Thumper_Custom_Level_Editor
                 WorkingFile = NewProject
             };
 
-            if (!NewProjectProperties.WorkingFolder.Exists)
-                NewProjectProperties.WorkingFolder.Create();
 
             ///Initialize lists based on checkboxes and the new levelpath
             Dictionary<string, FileInfo> defaultFiles = new() {
@@ -124,7 +125,9 @@ namespace Thumper_Custom_Level_Editor
             }
 
             JObject save = TCLE.BuildSave(NewProjectProperties);
-            File.WriteAllText(NewProject.FullName, JsonConvert.SerializeObject(save, Formatting.Indented));
+            UtilFile.WriteFileLock(NewProjectProperties.FileLock, save);
+            NewProjectProperties.FileLock.Close();
+            //File.WriteAllText(NewProject.FullName, JsonConvert.SerializeObject(save, Formatting.Indented));
 
             return NewProject;
         }
