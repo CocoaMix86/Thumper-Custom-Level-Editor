@@ -169,6 +169,7 @@ namespace Thumper_Custom_Level_Editor
             SeqObjTreeBuilder.Initialize();
             //import last used custom colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
+            this.Cursor = new Cursor(new MemoryStream(Properties.Resources.mousebeeble1));
             //load recent levels or the level from input arg
             FileInfo LevelToLoad = new(string.IsNullOrEmpty(LevelFromArg) ? "e" : LevelFromArg);
             if (LevelToLoad.Extension.Equals(".tcl", StringComparison.OrdinalIgnoreCase) && LevelToLoad.Exists) {
@@ -549,6 +550,7 @@ namespace Thumper_Custom_Level_Editor
                 Thumbnail = Thumbnail
             };
             MenusVisible(true);
+            this.Cursor = Cursors.Arrow;
             //load colors, with failover to White
             try {
                 dynamic railcolor = ProjectJson["rails_color"];
