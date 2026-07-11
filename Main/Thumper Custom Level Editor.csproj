@@ -1,0 +1,330 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Thumper_Custom_Level_Editor</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>False</UseWPF>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>thumper_level_editor2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+    <EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SignAssembly>False</SignAssembly>
+    <ErrorReport>none</ErrorReport>
+    <Version>3.0.0</Version>
+    <Authors>CocoaMix</Authors>
+    <Company>CocoaMix Inc.</Company>
+    <Copyright>copyright 2082</Copyright>
+    <PackageProjectUrl>https://github.com/CocoaMix86/Thumper-Custom-Level-Editor</PackageProjectUrl>
+    <PackageIcon>icon-tcle.png</PackageIcon>
+    <Title>Thumper Custom Level Editor</Title>
+    <Description>A tool used to create custom levels for the video game THUMPER.</Description>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+    <Page Remove="bin\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\images\thumper_level_editor.png" />
+    <None Include="Assets\images\icon-calculator.png" />
+    <None Include="Assets\images\icon-saveas.png" />
+    <None Include="Assets\images\discord32x.png" />
+    <None Include="Assets\images\TCLE icon.png" />
+    <None Include="Assets\images\github32x.png" />
+    <None Include="Assets\images\github48.png" />
+    <None Include="Assets\images\kofi-logo.png" />
+    <None Include="Assets\images\Thumper_Splash.png" />
+    <None Include="Assets\images\leaf.ico" />
+    <None Include="Assets\images\lvl.ico" />
+    <None Include="Assets\images\master.ico" />
+    <None Include="Assets\images\sample.ico" />
+    <None Include="Assets\images\gate.ico" />
+    <None Include="Assets\images\icon-folder.ico" />
+    <None Include="Assets\images\icon-filter.png" />
+    <None Include="Assets\images\icon-file.png" />
+    <None Include="Assets\images\thumper_ico_24px.png" />
+    <None Include="Assets\images\icon-collapse.png" />
+    <None Include="Assets\images\icon-expand.png" />
+    <None Include="Assets\images\icon-view.png" />
+    <None Include="Assets\images\icon-cut.png" />
+    <None Include="Assets\images\icon-openfile.png" />
+    <None Include="Assets\images\icon-rawtext.png" />
+    <None Include="Assets\images\icons-openfile.png" />
+    <None Include="Assets\images\icon-save.png" />
+    <None Include="Assets\images\icon-save-all.png" />
+    <None Include="Assets\images\icon_maximize.png" />
+    <None Include="Assets\images\icon-close.png" />
+    <None Include="Assets\images\icon_restore.png" />
+    <None Include="Assets\images\icon_minimize.png" />
+    <None Include="Assets\images\icon_maximizeblack.png" />
+    <None Include="Assets\images\icon_restoreblack.png" />
+    <None Include="Assets\images\icon-closeblack.png" />
+    <None Include="Assets\images\icon_minimizeblack.png" />
+    <None Include="Assets\images\pixel.bmp" />
+    <None Include="Assets\images\railcolorhelp.png" />
+    <None Include="Assets\images\difficultyhelp.png" />
+    <None Include="Assets\images\exit.png" />
+    <None Include="Assets\images\gate.png" />
+    <None Include="Assets\images\icon_interp.png" />
+    <None Include="Assets\images\icon_newfile.png" />
+    <None Include="Assets\images\icon_openfile.png" />
+    <None Include="Assets\images\icon_save.png" />
+    <None Include="Assets\images\icon_saveas.png" />
+    <None Include="Assets\images\icon_template.png" />
+    <None Include="Assets\images\leaf.png" />
+    <None Include="Assets\images\lvl.png" />
+    <None Include="Assets\images\master.png" />
+    <None Include="Assets\images\bosssectionhelp.png" />
+    <None Include="Assets\images\sample.png" />
+    <None Include="Assets\images\icon-play.png" />
+    <None Include="Assets\images\icon-pause16.png" />
+    <None Include="Assets\images\icon-trash.png" />
+    <None Include="Assets\images\icon-copy.png" />
+    <None Include="Assets\images\icon-refresh.png" />
+    <None Include="Assets\images\Thumper_logo.png" />
+    <None Include="Assets\images\beeble.png" />
+    <None Include="Assets\images\icon-color-wheel.png" />
+    <None Include="Assets\images\icon-graph.png" />
+    <None Include="Assets\images\beeblehappy.png" />
+    <None Include="Assets\images\beebleconfuse.png" />
+    <None Include="Assets\images\beeblecool.png" />
+    <None Include="Assets\images\beeblederp.png" />
+    <None Include="Assets\images\beeblelaugh.png" />
+    <None Include="Assets\images\beeblestare.png" />
+    <None Include="Assets\images\beeblethink.png" />
+    <None Include="Assets\images\beebletiny.png" />
+    <None Include="Assets\images\beeblegold.png" />
+    <None Include="Assets\images\beeblespin.gif" />
+    <None Include="Assets\images\beebledance.gif" />
+    <None Include="Assets\images\beeblelove.png" />
+    <None Include="Assets\images\icon-paste.png" />
+    <None Include="Assets\images\icon-pencil.png" />
+    <None Include="Assets\images\icon-gear.png" />
+    <None Include="Assets\images\icon-divider.png" />
+    <None Include="Assets\images\icon-remove2.png" />
+    <None Include="Assets\images\icon-add2.png" />
+    <None Include="Assets\images\icon-arrowdown2.png" />
+    <None Include="Assets\images\icon-arrowup2.png" />
+    <None Include="Assets\images\icon-copy2.png" />
+    <None Include="Assets\images\icon-arrowupdock.png" />
+    <None Include="Assets\images\icon-save2.png" />
+    <None Include="Assets\images\icon-plus.png" />
+    <None Include="Assets\images\icon-paste2.png" />
+    <None Include="Assets\images\icon-refresh2.png" />
+    <None Include="Assets\images\icon-back.png" />
+    <None Include="Assets\images\icon-erase.png" />
+    <None Include="Assets\images\icon-sling.png" />
+    <None Include="Assets\images\icon-import.png" />
+    <None Include="Assets\images\icon-play2.png" />
+    <None Include="Assets\images\icon-stop.png" />
+    <None Include="Assets\images\icon-addfile.png" />
+    <None Include="Assets\images\icon-folder.png" />
+    <None Include="Assets\images\icon-template.png" />
+    <None Include="Assets\images\icon-zoom.png" />
+    <None Include="Assets\images\icon-export.png" />
+    <None Include="Assets\images\icon-import2.png" />
+    <None Include="Assets\images\icon-openedfolders.png" />
+    <None Include="Assets\images\icon-onefinger.png" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIbeetleclick2.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIbeetleclick3.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIbeetleclick4.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIboot.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIcolorapply.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIcoloropen.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIdataerase.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIdelete.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIfolderclose.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIfolderopen.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIinterpolate.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIkcopy.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIkpaste.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIleafsplit.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIobjectadd.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIobjectremove.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIrefresh.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIrevertchanges.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIsave.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIselect.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UItunneladd.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UItunnelremove.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIwindowclose.ogg" />
+    <EmbeddedResource Include="Assets\audio\UI sounds\UIwindowopen.ogg" />
+    <EmbeddedResource Include="Assets\images\beeble\beebledance.gif" />
+    <None Include="Assets\images\icon-info.png" />
+    <None Include="Assets\images\D0.png" />
+    <None Include="Assets\images\D1.png" />
+    <None Include="Assets\images\D2.png" />
+    <None Include="Assets\images\D3.png" />
+    <None Include="Assets\images\D4.png" />
+    <None Include="Assets\images\D5.png" />
+    <None Include="Assets\images\D6.png" />
+    <None Include="Assets\images\D7.png" />
+    <None Include="Assets\images\icon-explorer.png" />
+    <None Include="Assets\images\icon-random.png" />
+    <None Include="Assets\images\icon-randomize.png" />
+    <None Include="Assets\images\icon-check-32.png" />
+    <None Include="Assets\images\icon-check-16.png" />
+    <None Include="Assets\text\leaf_singletrack1.txt" />
+    <None Include="Assets\images\icon-undo.png" />
+    <None Include="Assets\images\icon-editdetails.png" />
+    <None Include="Assets\images\icon-clear-filters.png" />
+    <Content Include="Assets\text\paths.txt" />
+    <Content Include="Assets\text\track objects.txt" />
+    <Content Include="Assets\images\ThumperIconEditor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody">
+      <Version>6.0.0</Version>
+      <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="Cyotek.Windows.Forms.ColorPicker" Version="1.7.2" />
+    <PackageReference Include="Dax-FCTB" Version="2.16.26.120" />
+    <PackageReference Include="DockPanelSuite">
+      <Version>3.1.1</Version>
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2015">
+      <Version>3.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Fmod5Sharp">
+      <Version>3.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="ICSharpCode.TextEditor" Version="3.2.1.6466" />
+    <PackageReference Include="Microsoft-Windows10-APICodePack-Core">
+      <Version>1.1.8</Version>
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="Microsoft-Windows10-APICodePack-Shell">
+      <Version>1.1.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>6.1.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>10.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Utility Classes\PictureBoxEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\images\beeble\beebledance.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>dll\Bass.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Editor Forms\Form_DrawScene.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Editor Forms\DockWorkspace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Editor Forms\EditorRawText.cs" />
+    <Compile Update="Editor Forms\DockProjectProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Other Forms\ImageViewer.cs" />
+    <Compile Update="Properties\Resource1.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\images\icons\icon-tcle.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Target Name="ILMerge">
+    <Exec Command="$(ILMergeConsolePath) /out:'Thumper Custom Level Editor.exe' 'Thumper Custom Level Editor.exe' 'Newtonsoft.Json.dll'" />
+  </Target>
+</Project>

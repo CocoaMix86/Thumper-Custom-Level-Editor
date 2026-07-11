@@ -1,0 +1,9 @@
+Bool Chance;10
+Action Chance;10
+Color Chance;20
+Color R Minimum;0
+Color G Minimum;0
+Color B Minimum;0
+Color R Maximum;255
+Color G Maximum;255
+Color B Maximum;255

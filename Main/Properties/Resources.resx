@@ -1,0 +1,1417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="basiceditor_bar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_bar1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_bar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_bar3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bar4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_bar4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barcenter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_barcenter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barleft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_barleft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_barright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_barright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_beebleNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_beebleNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_bossfx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_bossfx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_camera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_camera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_gamma" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_gamma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_lanecolor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_lanecolor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_lanes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_lanes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_mill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_mill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_select" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_select.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_sentry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_sentry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_shield.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_skybox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_skybox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_spike.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_spike2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_spike4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_spike6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_spike8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_spike8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_tentacle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_tentacle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thump" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_thump.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpbar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_thumpbar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpbonus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_thumpbonus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpboss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_thumpboss.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_thumpfast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_thumpfast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnl15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnl30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnl45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnl90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnl90.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnr.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnr15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnr30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr45" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnr45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="basiceditor_turnr90" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\basiceditor_turnr90.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebleconfuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beebleconfuse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblecool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblecool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebledance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beebledance.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblederp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblederp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebleflesh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beebleflesh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblegold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblegold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblehappy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblehappy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblehop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblehop.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblelaugh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblelaugh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblelove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblelove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblespin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblespin.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblestare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblestare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beeblethink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beeblethink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebletiny" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beebletiny.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="beebleuwu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\beeble\beebleuwu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DefaultKeybinds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\DefaultKeybinds.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="difficulty_D0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="difficulty_D7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\difficulty-D7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="duck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\duck.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ease_Cubic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Cubic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Cubic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Cubic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Cubic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Cubic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Linear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Linear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quadratic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quadratic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quadratic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quadratic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quadratic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quadratic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quartic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quartic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quartic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quartic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quartic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quartic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quintic_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quintic Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quintic_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quintic Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Quintic_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Quintic Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Sine_Ease_In" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Sine Ease In.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Sine_Ease_In_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Sine Ease In Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ease_Sine_Ease_Out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\Easings\with graph\ease_Sine Ease Out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-gate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-leaf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-lvl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_master" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-master.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-sample.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="editor_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\editors\editor-workspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="external_discord" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\external-discord.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="external_github" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\external-github.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="external_kofi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\external-kofi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="footer_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\footer_1.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="footer_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\footer_2.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="header" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\header.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="help_bosssection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\help-bosssection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help_difficulty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\help-difficulty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help_railcolor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\help-railcolor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_add2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-add2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_addfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-addfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowdown2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-arrowdown2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowup2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-arrowup2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_arrowupdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-arrowupdock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_audio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-audio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_audio_mute" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-audio-mute.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_calculator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-calculator.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_check_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-check-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_check_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-check-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_check_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-check_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_clean" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-clean.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_clear_filters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-clear-filters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_closeblack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-closeblack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-collapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_color_wheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-color-wheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-copy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_copy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-copy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_cut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-cut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_divider" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-divider.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_editdetails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-editdetails.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_erase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-erase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-expand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_explorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-explorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_fav" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-fav.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_feather" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_feather.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_file" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-file.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_filter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-filter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_graph" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-graph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_import2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-import2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_lanes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-lanes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_lanesgray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-lanesgray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_leaftemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-leaftemplate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_maximizeblack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_maximizeblack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_minimizeblack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_minimizeblack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_onefinger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-onefinger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_openedfolders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-openedfolders.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_openfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-openfile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-paste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_paste2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-paste2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_pause16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-pause16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-pencil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_play2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-play2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_random" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-random.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_randomize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-randomize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_rawtext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-rawtext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_refresh2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-refresh2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_remove2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-remove2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_reset_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-reset-8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_restore" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_restore.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_restoreblack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon_restoreblack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_save2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-save2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_saveas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-saveas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_save_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-save-all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_sling" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-sling.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_split" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-split.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_tcle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-tcle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_toggle_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-toggle-off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_toggle_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-toggle-on.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_trash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-trash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_view" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-view.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_zoom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons\icon-zoom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_folder.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_gate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_gate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_leaf.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_lvl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_lvl.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_master" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_master.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_rawtext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico-rawtext.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_sample.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_workspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\ico_workspace.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="JetBrainsMono_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\fonts\JetBrainsMono-Medium.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="leaf_singletrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="mousebeeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\mousebeeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mousebeeble1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\mousebeeble.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="objects_defaultcolors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\objects_defaultcolors.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="obj_def_customlevel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\obj_def_customlevel.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="obj_list_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\obj_list_1.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="obj_list_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\export objlibs\obj_list_2.objlib;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="options_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\options-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\paths.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="path_arms_deca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_deca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_oct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_oct.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_sept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_sept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_arms_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_arms_triangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_black_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_black_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_bright_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_boss_bright_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_bright_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_boss_bright_B.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_Boss_tube_path" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_Boss_tube_path.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_tube_path_no_end" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_boss_tube_path_no_end.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_boss_tunnel_effect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_boss_tunnel_effect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_dec_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_dec_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_dec_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_dec_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_diamond_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_diamond_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_chrome_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_diamond_chrome_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_diamond_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_diamond_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_hexagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_hexagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_hexagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_hexagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_octo_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_octo_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_chrome_ring" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_octo_chrome_ring.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_octo_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_octo_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pentagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_pentagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pentagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_pentagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pyramid_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_pyramid_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_pyramid_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_pyramid_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_sept_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_sept_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_sept_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_sept_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_square_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_square_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_cave_square_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_cave_square_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_checkpoint_exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_checkpoint_exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_dec_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_dec_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_deca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_deca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_oct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_oct.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_sept" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_sept.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_glass_triangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_glass_triangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_Landscape01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_Landscape01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice1_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice1_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice1_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice1_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_blue2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_blue2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_green2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_green2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice2_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice2_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice3_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice3_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice3_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice3_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice4_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice4_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice4_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice4_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice5_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice5_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_chrome_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice5_chrome_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice5_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice5_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice6_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice6_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice6_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice6_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice7_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice7_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice7_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice7_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice8_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice8_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice8_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice8_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_lattice_7_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_lattice_7_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_level_arms_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_level_arms_A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_diamond" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_diamond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_diamond2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_diamond2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_octagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_octagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_pentagon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_pentagon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_ring_pentagon_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_ring_pentagon_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube01_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube01_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube01_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube01_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube02_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_chrome_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube02_chrome_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube02_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube02_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube02_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube03_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube03_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_psych_BW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube03_psych_BW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube03_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube03_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube04_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube04_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube04_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube04_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube05_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube05_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube05_purple_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube05_purple_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube06_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube06_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube06_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube06_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube07_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_psych" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube07_psych.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube07_purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube07_purple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube_diamondoid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube_diamondoid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_occlusion_tube_horizontal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_occlusion_tube_horizontal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_hex.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_hex_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_hex_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_hex_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_hex_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_pent_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_glass_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_pent_glass_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_pent_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_pent_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_lines" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_triangle_lines.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_lines_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_triangle_lines_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_scaffold_triangle_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_scaffold_triangle_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_no_end_cap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3_no_end_cap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_spaceship3_no_start_cap" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_spaceship3_no_start_cap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_triangle_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_glass_scaffold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_triangle_glass_scaffold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_triangle_tunnel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_triangle_tunnel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_dec_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_dec_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_dec_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_dec_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_bright_larg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_bright_larg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_arms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_chrome_arms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_glass_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_chrome_glass_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_chrome_larg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_chrome_larg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_diamond_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_diamond_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_hexagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_hexagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_hexagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_hexagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_octagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_octagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_octagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_octagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_bright_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_bright_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome_arm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_chrome_arm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_chrome_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_chrome_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_pentagon_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_pentagon_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_sept_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_sept_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_chrome_arms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_sept_chrome_arms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_sept_glass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_sept_glass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_square_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_square_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_square_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_square_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_black_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_black_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_chrome2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_chrome2_large" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_chrome2_large.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_flipped_bright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_flipped_bright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tube_triangle_flipped_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tube_triangle_flipped_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tunnel_chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tunnel_chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_tunnel_chrome_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_tunnel_chrome_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_web" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_web.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="path_web_points" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\tunnelssmall\path_web_points.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pixel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\pixel.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectnew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectnew_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectnew-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectopen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="projectopen_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\main menu\projectopen-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="SPIKES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\icons_basiceditor\SPIKES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="spn_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\spn_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+  <data name="thisisforberry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\thisisforberry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ThumperSequencerZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\samples\ThumperSequencerZip.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="thumper_level_editor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\ico\thumper_level_editor.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumper_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\Thumper_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Thumper_Splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\images\misc\Thumper_Splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trackobjects_v4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\trackobjects-v4.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="track_objects" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\track objects.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="UIaddrandom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIaddrandom.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick1.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick2.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick3.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick4.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick5.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick6.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick7.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclick8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclick8.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIbeetleclickGOLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIbeetleclickGOLD.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIboot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIboot.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcolorapply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIcolorapply.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIcoloropen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIcoloropen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdataerase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIdataerase.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIdelete.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIdock.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIdockun" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIdockun.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIfolderclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIfolderopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIfolderopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIinterpolate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIinterpolate.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIinterpolatewindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIinterpolatewindow.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkcopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIkcopy.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIkpaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIkpaste.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIleafsplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIleafsplit.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectadd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIobjectadd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIobjectremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIobjectremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrefresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIrefresh.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertchanges" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIrevertchanges.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIrevertnew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIrevertnew.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIsave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIsave.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIselect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIselect.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunneladd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UItunneladd.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UItunnelremove" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UItunnelremove.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowclose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIwindowclose.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UIwindowopen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\audio\UI sounds\UIwindowopen.ogg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="xfm_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\xfm_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
+  </data>
+</root>
