@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -16,6 +17,20 @@ namespace Thumper_Custom_Level_Editor
         {
             InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left) {
+                ReleaseCapture();
+                _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
 
         private void btnCustomFolder_Click(object sender, EventArgs e)
@@ -45,6 +60,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void btnCustomCancel_Click(object sender, EventArgs e)
         {
+            UtilAudio.PlaySound("UIfolderclose");
             this.DialogResult = DialogResult.No;
             this.Close();
         }
@@ -67,6 +83,9 @@ namespace Thumper_Custom_Level_Editor
         public FileInfo CreateCustomLevelFolder()
         {
             FileInfo NewProject = new($@"{txtCustomPath.Text}\{txtCustomName.Text}\{txtCustomName.Text}.TCL");
+            if (!NewProject.Directory.Exists)
+                NewProject.Directory.Create();
+
             ProjectProperties NewProjectProperties = new() {
                 ProjectName = txtCustomName.Text,
                 difficulty = txtCustomDiff.Text,
@@ -79,8 +98,6 @@ namespace Thumper_Custom_Level_Editor
                 WorkingFile = NewProject
             };
 
-            if (!NewProjectProperties.WorkingFolder.Exists)
-                NewProjectProperties.WorkingFolder.Create();
 
             ///Initialize lists based on checkboxes and the new levelpath
             Dictionary<string, FileInfo> defaultFiles = new() {
@@ -108,7 +125,9 @@ namespace Thumper_Custom_Level_Editor
             }
 
             JObject save = TCLE.BuildSave(NewProjectProperties);
-            File.WriteAllText(NewProject.FullName, JsonConvert.SerializeObject(save, Formatting.Indented));
+            UtilFile.WriteFileLock(NewProjectProperties.FileLock, save);
+            NewProjectProperties.FileLock.Close();
+            //File.WriteAllText(NewProject.FullName, JsonConvert.SerializeObject(save, Formatting.Indented));
 
             return NewProject;
         }
@@ -190,6 +209,11 @@ namespace Thumper_Custom_Level_Editor
         private void txtCustomPath_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCustomSave_EnabledChanged(object sender, EventArgs e)
+        {
+            btnCustomSave.BackColor = btnCustomSave.Enabled ? Color.Green : Color.Gray;
         }
     }
 }

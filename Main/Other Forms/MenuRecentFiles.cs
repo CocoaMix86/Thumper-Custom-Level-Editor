@@ -1,9 +1,12 @@
-﻿using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+﻿using System.Diagnostics;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
     public partial class TCLE
-    { 
+    {
+        private void label2_Click(object sender, EventArgs e) => System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/wiki/TCLE-3.0#first-time-in-tcle", UseShellExecute = true });
+
         private void RecentFiles(List<string> recentfiles)
         {
             dgvRecentFiles.Rows.Clear();
@@ -19,6 +22,68 @@ namespace Thumper_Custom_Level_Editor
                     dgvRecentFiles.Rows.Add((string)_tclinfo["difficulty"], tcl.Name.Replace(".TCL", "", StringComparison.OrdinalIgnoreCase), _projectpath);
             }
             dgvRecentFiles.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private int _imagetarget = rng.Next(10, 30);
+        private int _imagecounter = 0;
+        private void MainMenu_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender == pictureProjectOpen) {
+                pictureProjectOpen.Image = Properties.Resources.projectopen;
+                labelProjectOpen.ForeColor = Color.Gold;
+                labelProjectOpen.Font = new Font("Futura PT Heavy", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                labelProjectOpen.Location = new(159 - (labelProjectOpen.Width / 2), labelProjectOpen.Location.Y);
+            }
+            else if (sender == pictureProjectNew) {
+                pictureProjectNew.Image = Properties.Resources.projectnew;
+                labelProjectNew.ForeColor = Color.Green;
+                labelProjectNew.Font = new Font("Futura PT Heavy", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                labelProjectNew.Location = new(319 - (labelProjectNew.Width / 2), labelProjectOpen.Location.Y);
+            }
+            else if (sender == pictureOptions) {
+                _imagecounter++;
+                pictureOptions.Image = _imagecounter == _imagetarget ? Properties.Resources.thisisforberry : Properties.Resources.options;
+                labelOptions.ForeColor = Color.Aquamarine;
+                labelOptions.Font = new Font("Futura PT Heavy", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                labelOptions.Location = new(478 - (labelOptions.Width / 2), labelProjectOpen.Location.Y);
+            }
+        }
+
+        private void MainMenu_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender == pictureProjectOpen) {
+                pictureProjectOpen.Image = Properties.Resources.projectopen_gray;
+                labelProjectOpen.ForeColor = Color.FromArgb(150, 150, 150);
+                labelProjectOpen.Font = new Font("Futura PT Book", 12F);
+                labelProjectOpen.Location = new(159 - (labelProjectOpen.Width / 2), labelProjectOpen.Location.Y);
+            }
+            else if (sender == pictureProjectNew) {
+                pictureProjectNew.Image = Properties.Resources.projectnew_gray;
+                labelProjectNew.ForeColor = Color.FromArgb(150, 150, 150);
+                labelProjectNew.Font = new Font("Futura PT Book", 12F);
+                labelProjectNew.Location = new(319 - (labelProjectNew.Width / 2), labelProjectOpen.Location.Y);
+            }
+            else if (sender == pictureOptions) {
+                pictureOptions.Image = Properties.Resources.options_gray;
+                labelOptions.ForeColor = Color.FromArgb(150, 150, 150);
+                labelOptions.Font = new Font("Futura PT Book", 12F);
+                labelOptions.Location = new(478 - (labelOptions.Width / 2), labelProjectOpen.Location.Y);
+            }
+        }
+
+        private int RecentFilesRowHover = -1;
+        private int RecentFilesColumnHover = -1;
+        private void dgvRecentFiles_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            RecentFilesRowHover = e.RowIndex;
+            RecentFilesColumnHover = e.ColumnIndex;
+            dgvRecentFiles.Invalidate();
+        }
+
+        private void dgvRecentFiles_MouseLeave(object sender, EventArgs e)
+        {
+            RecentFilesRowHover = -1;
+            dgvRecentFiles.Invalidate();
         }
 
         private void dgvRecentFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -55,10 +120,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private static SolidBrush ClearColor = new(Color.Black);
-        private static SolidBrush BrushWhite = new(Color.White);
-        private static Pen PenGreen = new(Color.Green, 4);
-        private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void dgvRecentFiles_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             e.Handled = true;
@@ -67,12 +128,12 @@ namespace Thumper_Custom_Level_Editor
             bounds.Y += 2;
             bounds.Width -= 4;
             bounds.Height -= 4;
-            e.Graphics.FillRectangle(ClearColor, e.RowBounds);
+            e.Graphics.FillRectangle(Brushes.Black, e.RowBounds);
             DataGridView dgv = sender as DataGridView;
 
-            if (dgv.Rows[e.RowIndex].Selected)
-                e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(Color.Aqua, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            if (e.RowIndex == RecentFilesRowHover)
+                e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend((RecentFilesColumnHover == 3 && RecentFilesRowHover == e.RowIndex) ? Color.Crimson : Color.Aqua, Color.Black, (e.RowIndex == RecentFilesRowHover ? 1 : 0.6))), bounds, 8);
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
         }

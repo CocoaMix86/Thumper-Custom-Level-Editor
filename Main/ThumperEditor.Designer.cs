@@ -47,17 +47,15 @@
             this.closerecent = new DataGridViewTextBoxColumn();
             this.toolstripRecentFiles = new ToolStrip();
             this.toolStripLabel3 = new ToolStripLabel();
-            this.btnRecentClose = new ToolStripButton();
-            this.toolStripSeparator5 = new ToolStripSeparator();
-            this.toolStripSeparator6 = new ToolStripSeparator();
-            this.btnLevelFolder2 = new ToolStripButton();
+            this.toolStripLabel1 = new ToolStripLabel();
+            this.panel1 = new Panel();
+            this.labelOptions = new Label();
+            this.labelProjectNew = new Label();
+            this.labelProjectOpen = new Label();
+            this.pictureOptions = new PictureBox();
+            this.pictureProjectNew = new PictureBox();
+            this.pictureProjectOpen = new PictureBox();
             this.pictureTunnelViewer = new Label();
-            this.panelChangelog = new Panel();
-            this.panel8 = new Panel();
-            this.lblChangelog = new Label();
-            this.toolStripChangelog = new ToolStrip();
-            this.toolStripLabel4 = new ToolStripLabel();
-            this.lblChangelogClose = new ToolStripButton();
             this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.contextMenuFormRightClick = new ContextMenuStrip(this.components);
             this.contextFormRestore = new ToolStripMenuItem();
@@ -119,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripMenuItem4 = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -148,7 +146,6 @@
             this.toolstripHelpAbout = new ToolStripMenuItem();
             this.toolstripHelpDiscord = new ToolStripMenuItem();
             this.toolstripHelpGithub = new ToolStripMenuItem();
-            this.toolstripHelpChangelog = new ToolStripMenuItem();
             this.toolstripHelpKofi = new ToolStripMenuItem();
             this.toolstripHelp = new ToolStripMenuItem();
             this.toolStripMain = new ToolStripEx();
@@ -219,9 +216,10 @@
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
-            this.panelChangelog.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.toolStripChangelog.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.pictureOptions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.pictureProjectNew).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.pictureProjectOpen).BeginInit();
             this.contextMenuFormRightClick.SuspendLayout();
             this.contextmenuFile.SuspendLayout();
             this.contextMenuRecentProjects.SuspendLayout();
@@ -271,10 +269,11 @@
             this.panelRecentFiles.BorderStyle = BorderStyle.FixedSingle;
             this.panelRecentFiles.Controls.Add(this.dgvRecentFiles);
             this.panelRecentFiles.Controls.Add(this.toolstripRecentFiles);
-            this.panelRecentFiles.Location = new Point(16, 62);
+            this.panelRecentFiles.Controls.Add(this.panel1);
+            this.panelRecentFiles.Location = new Point(477, 62);
             this.panelRecentFiles.MinimumSize = new Size(60, 60);
             this.panelRecentFiles.Name = "panelRecentFiles";
-            this.panelRecentFiles.Size = new Size(569, 394);
+            this.panelRecentFiles.Size = new Size(640, 486);
             this.panelRecentFiles.TabIndex = 137;
             this.panelRecentFiles.Tag = "editorpanel";
             this.panelRecentFiles.Visible = false;
@@ -311,7 +310,7 @@
             this.dgvRecentFiles.Dock = DockStyle.Fill;
             this.dgvRecentFiles.EnableHeadersVisualStyles = false;
             this.dgvRecentFiles.GridColor = Color.Black;
-            this.dgvRecentFiles.Location = new Point(0, 22);
+            this.dgvRecentFiles.Location = new Point(0, 152);
             this.dgvRecentFiles.MultiSelect = false;
             this.dgvRecentFiles.Name = "dgvRecentFiles";
             this.dgvRecentFiles.ReadOnly = true;
@@ -328,13 +327,15 @@
             this.dgvRecentFiles.RowTemplate.Height = 30;
             this.dgvRecentFiles.RowTemplate.Resizable = DataGridViewTriState.False;
             this.dgvRecentFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRecentFiles.Size = new Size(567, 370);
+            this.dgvRecentFiles.Size = new Size(638, 332);
             this.dgvRecentFiles.TabIndex = 140;
             this.dgvRecentFiles.CellClick += this.dgvRecentFiles_CellClick;
             this.dgvRecentFiles.CellMouseDoubleClick += this.dgvRecentFiles_CellMouseDoubleClick;
+            this.dgvRecentFiles.CellMouseEnter += this.dgvRecentFiles_CellMouseEnter;
             this.dgvRecentFiles.CellPainting += this.dgvRecentFiles_CellPainting;
             this.dgvRecentFiles.RowPrePaint += this.dgvRecentFiles_RowPrePaint;
             this.dgvRecentFiles.Click += this.panelRecentClick;
+            this.dgvRecentFiles.MouseLeave += this.dgvRecentFiles_MouseLeave;
             // 
             // dataGridViewImageColumn1
             // 
@@ -403,14 +404,14 @@
             this.toolstripRecentFiles.BackColor = Color.FromArgb(40, 40, 40);
             this.toolstripRecentFiles.GripMargin = new Padding(0);
             this.toolstripRecentFiles.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolstripRecentFiles.Items.AddRange(new ToolStripItem[] { this.toolStripLabel3, this.btnRecentClose, this.toolStripSeparator5, this.toolStripSeparator6, this.btnLevelFolder2 });
-            this.toolstripRecentFiles.Location = new Point(0, 0);
+            this.toolstripRecentFiles.Items.AddRange(new ToolStripItem[] { this.toolStripLabel3, this.toolStripLabel1 });
+            this.toolstripRecentFiles.Location = new Point(0, 130);
             this.toolstripRecentFiles.MaximumSize = new Size(0, 22);
             this.toolstripRecentFiles.Name = "toolstripRecentFiles";
             this.toolstripRecentFiles.Padding = new Padding(0);
             this.toolstripRecentFiles.RenderMode = ToolStripRenderMode.System;
             this.toolstripRecentFiles.RightToLeft = RightToLeft.No;
-            this.toolstripRecentFiles.Size = new Size(567, 22);
+            this.toolstripRecentFiles.Size = new Size(638, 22);
             this.toolstripRecentFiles.TabIndex = 139;
             this.toolstripRecentFiles.Text = "titlebar";
             this.toolstripRecentFiles.Click += this.panelRecentClick;
@@ -423,38 +424,108 @@
             this.toolStripLabel3.Size = new Size(138, 19);
             this.toolStripLabel3.Text = "Recent Opened Projects";
             // 
-            // btnRecentClose
+            // toolStripLabel1
             // 
-            this.btnRecentClose.Alignment = ToolStripItemAlignment.Right;
-            this.btnRecentClose.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnRecentClose.Image = Properties.Resources.icon_remove2;
-            this.btnRecentClose.ImageTransparentColor = Color.Magenta;
-            this.btnRecentClose.Margin = new Padding(-2, 0, 0, 0);
-            this.btnRecentClose.Name = "btnRecentClose";
-            this.btnRecentClose.Size = new Size(23, 22);
-            this.btnRecentClose.Text = "toolStripButton6";
-            this.btnRecentClose.ToolTipText = "Close panel";
-            this.btnRecentClose.Click += this.btnRecentClose_Click;
+            this.toolStripLabel1.Font = new Font("Segoe UI", 8.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            this.toolStripLabel1.ForeColor = Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new Size(134, 19);
+            this.toolStripLabel1.Text = "(doubleclick a line to open)";
             // 
-            // toolStripSeparator5
+            // panel1
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new Size(6, 22);
+            this.panel1.BackColor = Color.FromArgb(10, 10, 10);
+            this.panel1.Controls.Add(this.labelOptions);
+            this.panel1.Controls.Add(this.labelProjectNew);
+            this.panel1.Controls.Add(this.labelProjectOpen);
+            this.panel1.Controls.Add(this.pictureOptions);
+            this.panel1.Controls.Add(this.pictureProjectNew);
+            this.panel1.Controls.Add(this.pictureProjectOpen);
+            this.panel1.Dock = DockStyle.Top;
+            this.panel1.Location = new Point(0, 0);
+            this.panel1.MinimumSize = new Size(60, 60);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new Size(638, 130);
+            this.panel1.TabIndex = 159;
+            this.panel1.Tag = "editorpanel";
             // 
-            // toolStripSeparator6
+            // labelOptions
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new Size(6, 22);
+            this.labelOptions.AutoSize = true;
+            this.labelOptions.BackColor = Color.Transparent;
+            this.labelOptions.Font = new Font("Futura PT Book", 12F);
+            this.labelOptions.ForeColor = Color.FromArgb(150, 150, 150);
+            this.labelOptions.Location = new Point(441, 102);
+            this.labelOptions.Name = "labelOptions";
+            this.labelOptions.Size = new Size(74, 21);
+            this.labelOptions.TabIndex = 164;
+            this.labelOptions.Text = "OPTIONS";
+            this.labelOptions.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // btnLevelFolder2
+            // labelProjectNew
             // 
-            this.btnLevelFolder2.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.btnLevelFolder2.Image = Properties.Resources.icon_folder;
-            this.btnLevelFolder2.ImageTransparentColor = Color.Magenta;
-            this.btnLevelFolder2.Name = "btnLevelFolder2";
-            this.btnLevelFolder2.Size = new Size(23, 19);
-            this.btnLevelFolder2.ToolTipText = "Open a project file that's not in this list";
-            this.btnLevelFolder2.Click += this.toolstripFileOpenProject_Click;
+            this.labelProjectNew.AutoSize = true;
+            this.labelProjectNew.BackColor = Color.Transparent;
+            this.labelProjectNew.Font = new Font("Futura PT Book", 12F);
+            this.labelProjectNew.ForeColor = Color.FromArgb(150, 150, 150);
+            this.labelProjectNew.Location = new Point(265, 102);
+            this.labelProjectNew.Name = "labelProjectNew";
+            this.labelProjectNew.Size = new Size(107, 21);
+            this.labelProjectNew.TabIndex = 163;
+            this.labelProjectNew.Text = "NEW PROJECT";
+            this.labelProjectNew.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // labelProjectOpen
+            // 
+            this.labelProjectOpen.AutoSize = true;
+            this.labelProjectOpen.BackColor = Color.Transparent;
+            this.labelProjectOpen.Font = new Font("Futura PT Book", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.labelProjectOpen.ForeColor = Color.FromArgb(150, 150, 150);
+            this.labelProjectOpen.Location = new Point(103, 102);
+            this.labelProjectOpen.Name = "labelProjectOpen";
+            this.labelProjectOpen.Size = new Size(112, 21);
+            this.labelProjectOpen.TabIndex = 162;
+            this.labelProjectOpen.Text = "OPEN PROJECT";
+            this.labelProjectOpen.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // pictureOptions
+            // 
+            this.pictureOptions.Image = Properties.Resources.options_gray;
+            this.pictureOptions.Location = new Point(428, 15);
+            this.pictureOptions.Name = "pictureOptions";
+            this.pictureOptions.Size = new Size(100, 100);
+            this.pictureOptions.SizeMode = PictureBoxSizeMode.CenterImage;
+            this.pictureOptions.TabIndex = 161;
+            this.pictureOptions.TabStop = false;
+            this.pictureOptions.Click += this.toolstripEditPreferences_Click;
+            this.pictureOptions.MouseEnter += this.MainMenu_MouseEnter;
+            this.pictureOptions.MouseLeave += this.MainMenu_MouseLeave;
+            // 
+            // pictureProjectNew
+            // 
+            this.pictureProjectNew.Image = Properties.Resources.projectnew_gray;
+            this.pictureProjectNew.Location = new Point(269, 15);
+            this.pictureProjectNew.Name = "pictureProjectNew";
+            this.pictureProjectNew.Size = new Size(100, 100);
+            this.pictureProjectNew.SizeMode = PictureBoxSizeMode.CenterImage;
+            this.pictureProjectNew.TabIndex = 160;
+            this.pictureProjectNew.TabStop = false;
+            this.pictureProjectNew.Click += this.toolstripFileNewProject_Click;
+            this.pictureProjectNew.MouseEnter += this.MainMenu_MouseEnter;
+            this.pictureProjectNew.MouseLeave += this.MainMenu_MouseLeave;
+            // 
+            // pictureProjectOpen
+            // 
+            this.pictureProjectOpen.Image = Properties.Resources.projectopen_gray;
+            this.pictureProjectOpen.Location = new Point(109, 15);
+            this.pictureProjectOpen.Name = "pictureProjectOpen";
+            this.pictureProjectOpen.Size = new Size(100, 100);
+            this.pictureProjectOpen.SizeMode = PictureBoxSizeMode.CenterImage;
+            this.pictureProjectOpen.TabIndex = 159;
+            this.pictureProjectOpen.TabStop = false;
+            this.pictureProjectOpen.Click += this.toolstripFileOpenProject_Click;
+            this.pictureProjectOpen.MouseEnter += this.MainMenu_MouseEnter;
+            this.pictureProjectOpen.MouseLeave += this.MainMenu_MouseLeave;
             // 
             // pictureTunnelViewer
             // 
@@ -462,7 +533,7 @@
             this.pictureTunnelViewer.BorderStyle = BorderStyle.Fixed3D;
             this.pictureTunnelViewer.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.pictureTunnelViewer.ForeColor = Color.White;
-            this.pictureTunnelViewer.Location = new Point(280, 268);
+            this.pictureTunnelViewer.Location = new Point(251, 333);
             this.pictureTunnelViewer.Margin = new Padding(4, 0, 4, 0);
             this.pictureTunnelViewer.MaximumSize = new Size(150, 150);
             this.pictureTunnelViewer.MinimumSize = new Size(150, 150);
@@ -471,81 +542,6 @@
             this.pictureTunnelViewer.TabIndex = 155;
             this.pictureTunnelViewer.Visible = false;
             this.pictureTunnelViewer.MouseEnter += this.pictureTunnelViewer_MouseEnter;
-            // 
-            // panelChangelog
-            // 
-            this.panelChangelog.AutoScroll = true;
-            this.panelChangelog.BackColor = Color.FromArgb(55, 55, 55);
-            this.panelChangelog.BorderStyle = BorderStyle.Fixed3D;
-            this.panelChangelog.Controls.Add(this.panel8);
-            this.panelChangelog.Controls.Add(this.toolStripChangelog);
-            this.panelChangelog.Location = new Point(605, 274);
-            this.panelChangelog.Name = "panelChangelog";
-            this.panelChangelog.Size = new Size(555, 535);
-            this.panelChangelog.TabIndex = 139;
-            this.panelChangelog.Tag = "editorpanel";
-            this.panelChangelog.Visible = false;
-            // 
-            // panel8
-            // 
-            this.panel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            this.panel8.AutoScroll = true;
-            this.panel8.BorderStyle = BorderStyle.Fixed3D;
-            this.panel8.Controls.Add(this.lblChangelog);
-            this.panel8.Location = new Point(7, 26);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new Size(535, 495);
-            this.panel8.TabIndex = 142;
-            // 
-            // lblChangelog
-            // 
-            this.lblChangelog.AutoSize = true;
-            this.lblChangelog.Dock = DockStyle.Top;
-            this.lblChangelog.ForeColor = Color.White;
-            this.lblChangelog.Location = new Point(0, 0);
-            this.lblChangelog.Name = "lblChangelog";
-            this.lblChangelog.Size = new Size(78, 15);
-            this.lblChangelog.TabIndex = 141;
-            this.lblChangelog.Text = "lblChangelog";
-            // 
-            // toolStripChangelog
-            // 
-            this.toolStripChangelog.BackColor = Color.FromArgb(40, 40, 40);
-            this.toolStripChangelog.GripMargin = new Padding(0);
-            this.toolStripChangelog.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripChangelog.Items.AddRange(new ToolStripItem[] { this.toolStripLabel4, this.lblChangelogClose });
-            this.toolStripChangelog.Location = new Point(0, 0);
-            this.toolStripChangelog.MaximumSize = new Size(0, 50);
-            this.toolStripChangelog.Name = "toolStripChangelog";
-            this.toolStripChangelog.Padding = new Padding(0);
-            this.toolStripChangelog.RenderMode = ToolStripRenderMode.System;
-            this.toolStripChangelog.RightToLeft = RightToLeft.No;
-            this.toolStripChangelog.Size = new Size(551, 25);
-            this.toolStripChangelog.Stretch = true;
-            this.toolStripChangelog.TabIndex = 140;
-            this.toolStripChangelog.Text = "titlebar";
-            // 
-            // toolStripLabel4
-            // 
-            this.toolStripLabel4.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            this.toolStripLabel4.ForeColor = Color.Yellow;
-            this.toolStripLabel4.Image = Properties.Resources.icon_info;
-            this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new Size(83, 22);
-            this.toolStripLabel4.Text = "Changelog";
-            // 
-            // lblChangelogClose
-            // 
-            this.lblChangelogClose.Alignment = ToolStripItemAlignment.Right;
-            this.lblChangelogClose.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            this.lblChangelogClose.Image = Properties.Resources.icon_remove2;
-            this.lblChangelogClose.ImageTransparentColor = Color.Magenta;
-            this.lblChangelogClose.Margin = new Padding(-2, 0, 0, 0);
-            this.lblChangelogClose.Name = "lblChangelogClose";
-            this.lblChangelogClose.Size = new Size(23, 25);
-            this.lblChangelogClose.Text = "toolStripButton6";
-            this.lblChangelogClose.ToolTipText = "Close panel";
-            this.lblChangelogClose.Click += this.lblChangelogClose_Click;
             // 
             // dockMain
             // 
@@ -561,7 +557,7 @@
             this.dockMain.Name = "dockMain";
             this.dockMain.ShowAutoHideContentOnHover = false;
             this.dockMain.ShowDocumentIcon = true;
-            this.dockMain.Size = new Size(990, 450);
+            this.dockMain.Size = new Size(1254, 524);
             this.dockMain.TabIndex = 147;
             this.dockMain.Visible = false;
             this.dockMain.ActiveDocumentChanged += this.dockMain_ActiveDocumentChanged;
@@ -788,12 +784,12 @@
             // toolstripFile
             // 
             this.toolstripFile.DropDown = this.contextmenuFile;
-            this.toolstripFile.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripFile.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripFile.ForeColor = Color.White;
             this.toolstripFile.Margin = new Padding(0, 5, 0, 5);
             this.toolstripFile.Name = "toolstripFile";
             this.toolstripFile.Padding = new Padding(3, 0, 3, 0);
-            this.toolstripFile.Size = new Size(36, 21);
+            this.toolstripFile.Size = new Size(39, 21);
             this.toolstripFile.Text = "&File";
             // 
             // contextmenuEdit
@@ -815,7 +811,6 @@
             this.toolstripEditUndo.ShortcutKeys = Keys.Control | Keys.Z;
             this.toolstripEditUndo.Size = new Size(217, 22);
             this.toolstripEditUndo.Text = "Undo";
-            this.toolstripEditUndo.Click += this.toolstripEditUndo_Click;
             // 
             // toolStripSeparator10
             // 
@@ -878,12 +873,12 @@
             // toolstripEdit
             // 
             this.toolstripEdit.DropDown = this.contextmenuEdit;
-            this.toolstripEdit.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripEdit.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripEdit.ForeColor = Color.White;
             this.toolstripEdit.Margin = new Padding(0, 5, 0, 5);
             this.toolstripEdit.Name = "toolstripEdit";
             this.toolstripEdit.Padding = new Padding(3, 0, 3, 0);
-            this.toolstripEdit.Size = new Size(39, 21);
+            this.toolstripEdit.Size = new Size(40, 21);
             this.toolstripEdit.Text = "&Edit";
             // 
             // contextMenuProject
@@ -986,9 +981,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1110,6 +1104,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1123,21 +1125,13 @@
             // 
             this.toolstripProject.DropDown = this.contextMenuProject;
             this.toolstripProject.Enabled = false;
-            this.toolstripProject.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripProject.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripProject.ForeColor = Color.White;
             this.toolstripProject.Margin = new Padding(0, 5, 0, 5);
             this.toolstripProject.Name = "toolstripProject";
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
-            this.toolstripProject.Size = new Size(57, 21);
+            this.toolstripProject.Size = new Size(58, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1245,22 +1239,22 @@
             // 
             this.toolstripWindow.DropDown = this.contextmenuWindow;
             this.toolstripWindow.Enabled = false;
-            this.toolstripWindow.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripWindow.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripWindow.ForeColor = Color.White;
             this.toolstripWindow.Margin = new Padding(0, 5, 0, 5);
             this.toolstripWindow.Name = "toolstripWindow";
             this.toolstripWindow.Padding = new Padding(3, 0, 3, 0);
-            this.toolstripWindow.Size = new Size(64, 21);
+            this.toolstripWindow.Size = new Size(69, 21);
             this.toolstripWindow.Text = "&Window";
             // 
             // contextmenuHelp
             // 
             this.contextmenuHelp.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextmenuHelp.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem13, this.toolstripHelpGameDir, this.toolStripSeparator16, this.toolstripHelpAbout, this.toolstripHelpDiscord, this.toolstripHelpGithub, this.toolstripHelpChangelog, this.toolstripHelpKofi });
+            this.contextmenuHelp.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem13, this.toolstripHelpGameDir, this.toolStripSeparator16, this.toolstripHelpAbout, this.toolstripHelpDiscord, this.toolstripHelpGithub, this.toolstripHelpKofi });
             this.contextmenuHelp.Name = "contextmenuHelp";
             this.contextmenuHelp.OwnerItem = this.toolstripHelp;
             this.contextmenuHelp.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuHelp.Size = new Size(201, 164);
+            this.contextmenuHelp.Size = new Size(248, 142);
             // 
             // toolStripMenuItem13
             // 
@@ -1268,7 +1262,7 @@
             this.toolStripMenuItem13.DropDownItems.AddRange(new ToolStripItem[] { this.toolstripHelpTentacles, this.toolstripHelpObjects, this.toolstripHelpAudio });
             this.toolStripMenuItem13.ForeColor = Color.White;
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new Size(200, 22);
+            this.toolStripMenuItem13.Size = new Size(247, 22);
             this.toolStripMenuItem13.Text = "Documentation...";
             // 
             // toolstripHelpTentacles
@@ -1337,8 +1331,8 @@
             this.toolstripHelpGameDir.ForeColor = Color.White;
             this.toolstripHelpGameDir.Image = Properties.Resources.icon_folder;
             this.toolstripHelpGameDir.Name = "toolstripHelpGameDir";
-            this.toolstripHelpGameDir.Size = new Size(200, 22);
-            this.toolstripHelpGameDir.Text = "Change Game Directory";
+            this.toolstripHelpGameDir.Size = new Size(247, 22);
+            this.toolstripHelpGameDir.Text = "Locate Thumper Cache Directory";
             this.toolstripHelpGameDir.Click += this.toolstripHelpGameDir_Click;
             // 
             // toolStripSeparator16
@@ -1346,7 +1340,7 @@
             this.toolStripSeparator16.BackColor = Color.FromArgb(46, 46, 46);
             this.toolStripSeparator16.ForeColor = Color.White;
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new Size(197, 6);
+            this.toolStripSeparator16.Size = new Size(244, 6);
             // 
             // toolstripHelpAbout
             // 
@@ -1354,7 +1348,7 @@
             this.toolstripHelpAbout.ForeColor = Color.White;
             this.toolstripHelpAbout.Image = Properties.Resources.icon_info;
             this.toolstripHelpAbout.Name = "toolstripHelpAbout";
-            this.toolstripHelpAbout.Size = new Size(200, 22);
+            this.toolstripHelpAbout.Size = new Size(247, 22);
             this.toolstripHelpAbout.Text = "About...";
             this.toolstripHelpAbout.Click += this.toolstripHelpAbout_Click;
             // 
@@ -1364,7 +1358,7 @@
             this.toolstripHelpDiscord.ForeColor = Color.White;
             this.toolstripHelpDiscord.Image = Properties.Resources.external_discord;
             this.toolstripHelpDiscord.Name = "toolstripHelpDiscord";
-            this.toolstripHelpDiscord.Size = new Size(200, 22);
+            this.toolstripHelpDiscord.Size = new Size(247, 22);
             this.toolstripHelpDiscord.Text = "Discord Server";
             this.toolstripHelpDiscord.Click += this.toolstripHelpDiscord_Click;
             // 
@@ -1374,20 +1368,9 @@
             this.toolstripHelpGithub.ForeColor = Color.White;
             this.toolstripHelpGithub.Image = Properties.Resources.external_github;
             this.toolstripHelpGithub.Name = "toolstripHelpGithub";
-            this.toolstripHelpGithub.Size = new Size(200, 22);
+            this.toolstripHelpGithub.Size = new Size(247, 22);
             this.toolstripHelpGithub.Text = "Github";
             this.toolstripHelpGithub.Click += this.toolstripHelpGithub_Click;
-            // 
-            // toolstripHelpChangelog
-            // 
-            this.toolstripHelpChangelog.BackColor = Color.FromArgb(46, 46, 46);
-            this.toolstripHelpChangelog.Enabled = false;
-            this.toolstripHelpChangelog.ForeColor = Color.White;
-            this.toolstripHelpChangelog.Image = Properties.Resources.icon_copy2;
-            this.toolstripHelpChangelog.Name = "toolstripHelpChangelog";
-            this.toolstripHelpChangelog.Size = new Size(200, 22);
-            this.toolstripHelpChangelog.Text = "Changelog";
-            this.toolstripHelpChangelog.Click += this.toolstripHelpChangelog_Click;
             // 
             // toolstripHelpKofi
             // 
@@ -1395,19 +1378,19 @@
             this.toolstripHelpKofi.ForeColor = Color.White;
             this.toolstripHelpKofi.Image = Properties.Resources.external_kofi;
             this.toolstripHelpKofi.Name = "toolstripHelpKofi";
-            this.toolstripHelpKofi.Size = new Size(200, 22);
+            this.toolstripHelpKofi.Size = new Size(247, 22);
             this.toolstripHelpKofi.Text = "Donate && Tip (ko-fi)";
             this.toolstripHelpKofi.Click += this.toolstripHelpKofi_Click;
             // 
             // toolstripHelp
             // 
             this.toolstripHelp.DropDown = this.contextmenuHelp;
-            this.toolstripHelp.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripHelp.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripHelp.ForeColor = Color.White;
             this.toolstripHelp.Margin = new Padding(0, 5, 0, 5);
             this.toolstripHelp.Name = "toolstripHelp";
             this.toolstripHelp.Padding = new Padding(3, 0, 3, 0);
-            this.toolstripHelp.Size = new Size(44, 21);
+            this.toolstripHelp.Size = new Size(47, 21);
             this.toolstripHelp.Text = "&Help";
             // 
             // toolStripMain
@@ -1501,7 +1484,7 @@
             this.panelToolStrips.Margin = new Padding(0);
             this.panelToolStrips.MaximumSize = new Size(0, 25);
             this.panelToolStrips.Name = "panelToolStrips";
-            this.panelToolStrips.Size = new Size(984, 25);
+            this.panelToolStrips.Size = new Size(1248, 25);
             this.panelToolStrips.TabIndex = 152;
             this.panelToolStrips.Visible = false;
             // 
@@ -1517,7 +1500,7 @@
             this.toolStripTitle.Name = "toolStripTitle";
             this.toolStripTitle.Padding = new Padding(0);
             this.toolStripTitle.RenderMode = ToolStripRenderMode.System;
-            this.toolStripTitle.Size = new Size(984, 31);
+            this.toolStripTitle.Size = new Size(1248, 31);
             this.toolStripTitle.TabIndex = 150;
             this.toolStripTitle.Text = "toolStripTitle";
             this.toolStripTitle.DoubleClick += this.toolStripTitle_DoubleClick;
@@ -1584,12 +1567,12 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.DropDown = this.contextmenuView;
-            this.toolStripMenuItem3.Font = new Font("Gadugi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolStripMenuItem3.Font = new Font("Futura PT Book", 11.25F);
             this.toolStripMenuItem3.ForeColor = Color.White;
             this.toolStripMenuItem3.Margin = new Padding(0, 5, 0, 5);
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Padding = new Padding(3, 0, 3, 0);
-            this.toolStripMenuItem3.Size = new Size(44, 21);
+            this.toolStripMenuItem3.Size = new Size(47, 21);
             this.toolStripMenuItem3.Text = "&View";
             // 
             // contextmenuView
@@ -1771,12 +1754,12 @@
             this.toolstripLevelName.BackColor = Color.FromArgb(110, 110, 110);
             this.toolstripLevelName.BackgroundImage = Properties.Resources.pixel;
             this.toolstripLevelName.BackgroundImageLayout = ImageLayout.None;
-            this.toolstripLevelName.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolstripLevelName.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripLevelName.ForeColor = Color.White;
             this.toolstripLevelName.Image = Properties.Resources.difficulty_D0;
             this.toolstripLevelName.Margin = new Padding(10, 5, 10, 5);
             this.toolstripLevelName.Name = "toolstripLevelName";
-            this.toolstripLevelName.Size = new Size(144, 21);
+            this.toolstripLevelName.Size = new Size(140, 21);
             this.toolstripLevelName.Text = "<no level loaded>";
             this.toolstripLevelName.Click += this.toolstripLevelName_Click;
             // 
@@ -1787,12 +1770,13 @@
             // 
             // toolstripStopAudio
             // 
+            this.toolstripStopAudio.Font = new Font("Futura PT Book", 11.25F);
             this.toolstripStopAudio.ForeColor = Color.Red;
             this.toolstripStopAudio.Image = Properties.Resources.icon_stop;
             this.toolstripStopAudio.ImageTransparentColor = Color.Magenta;
             this.toolstripStopAudio.Margin = new Padding(10, 1, 0, 2);
             this.toolstripStopAudio.Name = "toolstripStopAudio";
-            this.toolstripStopAudio.Size = new Size(86, 28);
+            this.toolstripStopAudio.Size = new Size(94, 28);
             this.toolstripStopAudio.Text = "Stop Audio";
             this.toolstripStopAudio.ToolTipText = "EMERGENCY STOP ALL AUDIO";
             this.toolstripStopAudio.Click += this.toolstripStopAudio_Click;
@@ -1817,10 +1801,12 @@
             // btnVolumeMixer
             // 
             this.btnVolumeMixer.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnVolumeMixer.ForeColor = Color.White;
             this.btnVolumeMixer.Image = Properties.Resources.icon_audio;
             this.btnVolumeMixer.ImageTransparentColor = Color.Magenta;
             this.btnVolumeMixer.Name = "btnVolumeMixer";
             this.btnVolumeMixer.Size = new Size(23, 28);
+            this.btnVolumeMixer.Text = "Volume Mixer";
             this.btnVolumeMixer.ToolTipText = "Mix volume levels for playback items";
             this.btnVolumeMixer.Click += this.btnVolumeMixer_Click;
             // 
@@ -1835,7 +1821,7 @@
             this.panelFill.Dock = DockStyle.Fill;
             this.panelFill.Location = new Point(0, 56);
             this.panelFill.Name = "panelFill";
-            this.panelFill.Size = new Size(984, 444);
+            this.panelFill.Size = new Size(1248, 518);
             this.panelFill.TabIndex = 153;
             // 
             // panelIntroTips
@@ -1844,10 +1830,10 @@
             this.panelIntroTips.BorderStyle = BorderStyle.FixedSingle;
             this.panelIntroTips.Controls.Add(this.label2);
             this.panelIntroTips.Controls.Add(this.label1);
-            this.panelIntroTips.Location = new Point(605, 7);
+            this.panelIntroTips.Location = new Point(15, 15);
             this.panelIntroTips.MinimumSize = new Size(60, 60);
             this.panelIntroTips.Name = "panelIntroTips";
-            this.panelIntroTips.Size = new Size(350, 205);
+            this.panelIntroTips.Size = new Size(450, 205);
             this.panelIntroTips.TabIndex = 158;
             this.panelIntroTips.Tag = "editorpanel";
             // 
@@ -1855,23 +1841,24 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = DockStyle.Fill;
-            this.label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.label2.Font = new Font("Futura PT Book", 11.25F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.label2.ForeColor = Color.SkyBlue;
-            this.label2.Location = new Point(0, 60);
+            this.label2.Location = new Point(0, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new Size(337, 30);
+            this.label2.Size = new Size(418, 38);
             this.label2.TabIndex = 143;
-            this.label2.Text = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor\r\n/wiki/TCLE-3.0#first-time-in-tcle";
+            this.label2.Text = "https://github.com/CocoaMix86/Thumper-Custom-Level-Editor/wiki\r\n/TCLE-3.0#first-time-in-tcle";
             this.label2.Click += this.label2_Click;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = DockStyle.Top;
+            this.label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.label1.ForeColor = Color.White;
             this.label1.Location = new Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new Size(334, 60);
+            this.label1.Size = new Size(438, 84);
             this.label1.TabIndex = 142;
             this.label1.Text = "Welcome to TCLE 3.0!\r\n\r\nIf you'd like to learn how the interface works, please check out\r\nthe documentation on the wiki here:\r\n";
             // 
@@ -1885,7 +1872,7 @@
             this.panelLoadingMessage.Controls.Add(this.lblLoadingLvl);
             this.panelLoadingMessage.Controls.Add(this.pictureBeeble);
             this.panelLoadingMessage.Controls.Add(this.lblLoadingPlayback);
-            this.panelLoadingMessage.Location = new Point(147, 121);
+            this.panelLoadingMessage.Location = new Point(55, 226);
             this.panelLoadingMessage.Name = "panelLoadingMessage";
             this.panelLoadingMessage.Size = new Size(399, 124);
             this.panelLoadingMessage.TabIndex = 157;
@@ -2103,7 +2090,7 @@
             this.pictureEasing.BorderStyle = BorderStyle.Fixed3D;
             this.pictureEasing.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.pictureEasing.ForeColor = Color.White;
-            this.pictureEasing.Location = new Point(350, 108);
+            this.pictureEasing.Location = new Point(57, 454);
             this.pictureEasing.Margin = new Padding(4, 0, 4, 0);
             this.pictureEasing.MinimumSize = new Size(115, 85);
             this.pictureEasing.Name = "pictureEasing";
@@ -2116,11 +2103,10 @@
             this.AutoScaleMode = AutoScaleMode.None;
             this.BackColor = Color.FromArgb(64, 0, 0);
             this.BackgroundImageLayout = ImageLayout.Center;
-            this.ClientSize = new Size(984, 500);
+            this.ClientSize = new Size(1248, 574);
             this.ControlBox = false;
             this.Controls.Add(this.pictureEasing);
             this.Controls.Add(this.panelRecentFiles);
-            this.Controls.Add(this.panelChangelog);
             this.Controls.Add(this.panelFill);
             this.Controls.Add(this.panelToolStrips);
             this.Controls.Add(this.toolStripTitle);
@@ -2138,6 +2124,7 @@
             this.FormClosed += this.TCLE_FormClosed;
             this.Load += this.TCLEMain_Load;
             this.LocationChanged += this.TCLE_LocationChanged;
+            this.SizeChanged += this.TCLE_SizeChanged;
             this.KeyDown += this.TCLE_KeyDown;
             this.Resize += this.TCLE_Resize;
             this.panelRecentFiles.ResumeLayout(false);
@@ -2145,12 +2132,11 @@
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).EndInit();
             this.toolstripRecentFiles.ResumeLayout(false);
             this.toolstripRecentFiles.PerformLayout();
-            this.panelChangelog.ResumeLayout(false);
-            this.panelChangelog.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.toolStripChangelog.ResumeLayout(false);
-            this.toolStripChangelog.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.pictureOptions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.pictureProjectNew).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.pictureProjectOpen).EndInit();
             this.contextMenuFormRightClick.ResumeLayout(false);
             this.contextmenuFile.ResumeLayout(false);
             this.contextMenuRecentProjects.ResumeLayout(false);
@@ -2186,17 +2172,7 @@
         private System.Windows.Forms.Panel panelRecentFiles;
         private System.Windows.Forms.ToolStrip toolstripRecentFiles;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
-        private System.Windows.Forms.ToolStripButton btnRecentClose;
         private System.Windows.Forms.DataGridView dgvRecentFiles;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripButton btnLevelFolder2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.Panel panelChangelog;
-        private System.Windows.Forms.ToolStrip toolStripChangelog;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-        private System.Windows.Forms.ToolStripButton lblChangelogClose;
-        private System.Windows.Forms.Label lblChangelog;
-        private System.Windows.Forms.Panel panel8;
         private Thumper_Custom_Level_Editor.ToolStripEx toolStripTitle;
         private System.Windows.Forms.ToolStripMenuItem toolstripFile;
         private System.Windows.Forms.ToolStripMenuItem toolstripEdit;
@@ -2262,7 +2238,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpAbout;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpDiscord;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpGithub;
-        private System.Windows.Forms.ToolStripMenuItem toolstripHelpChangelog;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpKofi;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
         private System.Windows.Forms.ToolStripMenuItem toolstripEditPreferences;
@@ -2362,6 +2337,14 @@
         private Label label1;
         private Label label2;
         private ToolStripMenuItem leafoptionPlaybackScroll;
+        private Panel panel1;
+        private PictureBox pictureOptions;
+        private PictureBox pictureProjectNew;
+        private PictureBox pictureProjectOpen;
+        private ToolStripLabel toolStripLabel1;
+        private Label labelProjectOpen;
+        private Label labelOptions;
+        private Label labelProjectNew;
     }
 }
 

@@ -49,7 +49,11 @@ namespace Thumper_Custom_Level_Editor
             this.toolTip1 = new ToolTip(this.components);
             this.pictureDifficulty = new PictureBox();
             this.lblNameError = new Label();
+            this.toolStripTitle = new ToolStripEx();
+            this.toolStripSeparator1 = new ToolStripSeparator();
+            this.toolStripLabel1 = new ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)this.pictureDifficulty).BeginInit();
+            this.toolStripTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtCustomPath
@@ -58,7 +62,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomPath.Enabled = false;
             this.txtCustomPath.Font = new Font("Arial", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
             this.txtCustomPath.ForeColor = Color.White;
-            this.txtCustomPath.Location = new Point(14, 29);
+            this.txtCustomPath.Location = new Point(14, 62);
             this.txtCustomPath.Margin = new Padding(4, 3, 4, 3);
             this.txtCustomPath.Name = "txtCustomPath";
             this.txtCustomPath.Size = new Size(438, 25);
@@ -70,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
             this.label1.AutoSize = true;
             this.label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label1.ForeColor = Color.White;
-            this.label1.Location = new Point(14, 12);
+            this.label1.Location = new Point(14, 45);
             this.label1.Margin = new Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new Size(234, 13);
@@ -84,7 +88,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomFolder.Font = new Font("Consolas", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.btnCustomFolder.ForeColor = Color.Black;
             this.btnCustomFolder.Image = Properties.Resources.icon_folder;
-            this.btnCustomFolder.Location = new Point(453, 29);
+            this.btnCustomFolder.Location = new Point(453, 62);
             this.btnCustomFolder.Margin = new Padding(4, 3, 4, 3);
             this.btnCustomFolder.Name = "btnCustomFolder";
             this.btnCustomFolder.Size = new Size(24, 24);
@@ -97,10 +101,10 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.btnCustomCancel.BackColor = Color.Red;
             this.btnCustomCancel.FlatStyle = FlatStyle.Popup;
-            this.btnCustomCancel.Font = new Font("Arial", 9.75F, FontStyle.Bold | FontStyle.Underline);
+            this.btnCustomCancel.Font = new Font("Futura PT Heavy", 9.749998F, FontStyle.Bold | FontStyle.Underline);
             this.btnCustomCancel.ForeColor = Color.White;
             this.btnCustomCancel.ImageAlign = ContentAlignment.TopCenter;
-            this.btnCustomCancel.Location = new Point(252, 335);
+            this.btnCustomCancel.Location = new Point(252, 368);
             this.btnCustomCancel.Margin = new Padding(4, 3, 4, 3);
             this.btnCustomCancel.Name = "btnCustomCancel";
             this.btnCustomCancel.Size = new Size(104, 28);
@@ -112,13 +116,13 @@ namespace Thumper_Custom_Level_Editor
             // 
             // btnCustomSave
             // 
-            this.btnCustomSave.BackColor = Color.Green;
+            this.btnCustomSave.BackColor = Color.Gray;
             this.btnCustomSave.Enabled = false;
             this.btnCustomSave.FlatStyle = FlatStyle.Popup;
-            this.btnCustomSave.Font = new Font("Arial", 9.75F, FontStyle.Bold | FontStyle.Underline);
+            this.btnCustomSave.Font = new Font("Futura PT Heavy", 9.749998F, FontStyle.Bold | FontStyle.Underline);
             this.btnCustomSave.ForeColor = Color.White;
             this.btnCustomSave.ImageAlign = ContentAlignment.TopCenter;
-            this.btnCustomSave.Location = new Point(150, 335);
+            this.btnCustomSave.Location = new Point(150, 368);
             this.btnCustomSave.Margin = new Padding(4, 3, 4, 3);
             this.btnCustomSave.Name = "btnCustomSave";
             this.btnCustomSave.Size = new Size(98, 28);
@@ -126,6 +130,7 @@ namespace Thumper_Custom_Level_Editor
             this.btnCustomSave.Text = "Create";
             this.btnCustomSave.TextAlign = ContentAlignment.TopCenter;
             this.btnCustomSave.UseVisualStyleBackColor = false;
+            this.btnCustomSave.EnabledChanged += this.btnCustomSave_EnabledChanged;
             this.btnCustomSave.Click += this.btnCustomSave_Click;
             // 
             // label2
@@ -144,7 +149,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomAuthor.BackColor = Color.FromArgb(40, 40, 40);
             this.txtCustomAuthor.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.txtCustomAuthor.ForeColor = Color.White;
-            this.txtCustomAuthor.Location = new Point(14, 123);
+            this.txtCustomAuthor.Location = new Point(14, 156);
             this.txtCustomAuthor.Margin = new Padding(4, 3, 4, 3);
             this.txtCustomAuthor.Name = "txtCustomAuthor";
             this.txtCustomAuthor.Size = new Size(223, 26);
@@ -157,7 +162,7 @@ namespace Thumper_Custom_Level_Editor
             this.label3.AutoSize = true;
             this.label3.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label3.ForeColor = Color.White;
-            this.label3.Location = new Point(14, 107);
+            this.label3.Location = new Point(14, 140);
             this.label3.Margin = new Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new Size(84, 13);
@@ -169,7 +174,7 @@ namespace Thumper_Custom_Level_Editor
             this.label4.AutoSize = true;
             this.label4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label4.ForeColor = Color.White;
-            this.label4.Location = new Point(14, 60);
+            this.label4.Location = new Point(14, 93);
             this.label4.Margin = new Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new Size(78, 13);
@@ -181,7 +186,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomName.BackColor = Color.FromArgb(40, 40, 40);
             this.txtCustomName.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.txtCustomName.ForeColor = Color.White;
-            this.txtCustomName.Location = new Point(14, 76);
+            this.txtCustomName.Location = new Point(14, 109);
             this.txtCustomName.Margin = new Padding(4, 3, 4, 3);
             this.txtCustomName.Name = "txtCustomName";
             this.txtCustomName.Size = new Size(223, 26);
@@ -195,7 +200,7 @@ namespace Thumper_Custom_Level_Editor
             this.label5.AutoSize = true;
             this.label5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label5.ForeColor = Color.White;
-            this.label5.Location = new Point(14, 154);
+            this.label5.Location = new Point(14, 187);
             this.label5.Margin = new Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new Size(114, 13);
@@ -212,7 +217,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtCustomDiff.ForeColor = Color.White;
             this.txtCustomDiff.FormattingEnabled = true;
             this.txtCustomDiff.Items.AddRange(new object[] { "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7" });
-            this.txtCustomDiff.Location = new Point(14, 171);
+            this.txtCustomDiff.Location = new Point(14, 204);
             this.txtCustomDiff.Margin = new Padding(4, 3, 4, 3);
             this.txtCustomDiff.Name = "txtCustomDiff";
             this.txtCustomDiff.Size = new Size(146, 27);
@@ -227,7 +232,7 @@ namespace Thumper_Custom_Level_Editor
             this.lblCustomDiffHelp.Cursor = Cursors.Help;
             this.lblCustomDiffHelp.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.lblCustomDiffHelp.ForeColor = Color.DodgerBlue;
-            this.lblCustomDiffHelp.Location = new Point(127, 152);
+            this.lblCustomDiffHelp.Location = new Point(127, 185);
             this.lblCustomDiffHelp.Margin = new Padding(4, 0, 4, 0);
             this.lblCustomDiffHelp.Name = "lblCustomDiffHelp";
             this.lblCustomDiffHelp.Size = new Size(15, 16);
@@ -240,7 +245,7 @@ namespace Thumper_Custom_Level_Editor
             this.label6.AutoSize = true;
             this.label6.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.label6.ForeColor = Color.White;
-            this.label6.Location = new Point(14, 203);
+            this.label6.Location = new Point(14, 236);
             this.label6.Margin = new Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new Size(106, 13);
@@ -252,7 +257,7 @@ namespace Thumper_Custom_Level_Editor
             this.txtDesc.BackColor = Color.FromArgb(40, 40, 40);
             this.txtDesc.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.txtDesc.ForeColor = Color.White;
-            this.txtDesc.Location = new Point(14, 219);
+            this.txtDesc.Location = new Point(14, 252);
             this.txtDesc.Margin = new Padding(4, 3, 4, 3);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new Size(466, 110);
@@ -266,7 +271,7 @@ namespace Thumper_Custom_Level_Editor
             this.label8.Cursor = Cursors.Help;
             this.label8.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.label8.ForeColor = Color.DodgerBlue;
-            this.label8.Location = new Point(247, 10);
+            this.label8.Location = new Point(247, 43);
             this.label8.Margin = new Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new Size(15, 16);
@@ -285,7 +290,7 @@ namespace Thumper_Custom_Level_Editor
             // 
             this.pictureDifficulty.BackgroundImageLayout = ImageLayout.None;
             this.pictureDifficulty.Image = Properties.Resources.difficulty_D0;
-            this.pictureDifficulty.Location = new Point(164, 145);
+            this.pictureDifficulty.Location = new Point(164, 178);
             this.pictureDifficulty.Margin = new Padding(4, 3, 4, 3);
             this.pictureDifficulty.Name = "pictureDifficulty";
             this.pictureDifficulty.Size = new Size(75, 74);
@@ -297,7 +302,7 @@ namespace Thumper_Custom_Level_Editor
             this.lblNameError.AutoSize = true;
             this.lblNameError.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.lblNameError.ForeColor = Color.Red;
-            this.lblNameError.Location = new Point(112, 60);
+            this.lblNameError.Location = new Point(112, 93);
             this.lblNameError.Margin = new Padding(4, 0, 4, 0);
             this.lblNameError.Name = "lblNameError";
             this.lblNameError.Size = new Size(58, 13);
@@ -305,13 +310,43 @@ namespace Thumper_Custom_Level_Editor
             this.lblNameError.Text = "error text";
             this.lblNameError.Visible = false;
             // 
-            // ProjectPropertiesForm
+            // toolStripTitle
+            // 
+            this.toolStripTitle.BackColor = Color.FromArgb(80, 0, 0);
+            this.toolStripTitle.GripMargin = new Padding(0);
+            this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolStripSeparator1, this.toolStripLabel1 });
+            this.toolStripTitle.Location = new Point(0, 0);
+            this.toolStripTitle.MaximumSize = new Size(0, 31);
+            this.toolStripTitle.Name = "toolStripTitle";
+            this.toolStripTitle.Padding = new Padding(0);
+            this.toolStripTitle.RenderMode = ToolStripRenderMode.System;
+            this.toolStripTitle.Size = new Size(496, 25);
+            this.toolStripTitle.TabIndex = 151;
+            this.toolStripTitle.MouseDown += this.toolStripTitle_MouseDown;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Margin = new Padding(0, 0, 181, 0);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new Font("Futura PT Book", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.toolStripLabel1.ForeColor = Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new Size(131, 22);
+            this.toolStripLabel1.Text = "New Project Details";
+            // 
+            // MenuProjectNew
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
             this.BackColor = Color.FromArgb(55, 55, 55);
-            this.ClientSize = new Size(496, 375);
+            this.ClientSize = new Size(496, 403);
             this.ControlBox = false;
+            this.Controls.Add(this.toolStripTitle);
             this.Controls.Add(this.txtCustomName);
             this.Controls.Add(this.lblNameError);
             this.Controls.Add(this.label8);
@@ -333,10 +368,11 @@ namespace Thumper_Custom_Level_Editor
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "ProjectPropertiesForm";
+            this.Name = "MenuProjectNew";
             this.ShowInTaskbar = false;
-            this.Text = "Custom Level Details";
             ((System.ComponentModel.ISupportInitialize)this.pictureDifficulty).EndInit();
+            this.toolStripTitle.ResumeLayout(false);
+            this.toolStripTitle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -361,5 +397,8 @@ namespace Thumper_Custom_Level_Editor
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.PictureBox pictureDifficulty;
         private System.Windows.Forms.Label lblNameError;
+        private ToolStripEx toolStripTitle;
+        private ToolStripLabel toolStripLabel1;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

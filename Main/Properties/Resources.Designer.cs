@@ -2049,6 +2049,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mousebeeble {
+            get {
+                object obj = ResourceManager.GetObject("mousebeeble", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] mousebeeble1 {
+            get {
+                object obj = ResourceManager.GetObject("mousebeeble1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] obj_def_customlevel {
@@ -2109,6 +2129,26 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string objects_defaultcolors {
             get {
                 return ResourceManager.GetString("objects_defaultcolors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap options {
+            get {
+                object obj = ResourceManager.GetObject("options", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap options_gray {
+            get {
+                object obj = ResourceManager.GetObject("options_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -3836,6 +3876,46 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap projectnew {
+            get {
+                object obj = ResourceManager.GetObject("projectnew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap projectnew_gray {
+            get {
+                object obj = ResourceManager.GetObject("projectnew_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap projectopen {
+            get {
+                object obj = ResourceManager.GetObject("projectopen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap projectopen_gray {
+            get {
+                object obj = ResourceManager.GetObject("projectopen_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{
@@ -4343,6 +4423,16 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string spn_default {
             get {
                 return ResourceManager.GetString("spn_default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thisisforberry {
+            get {
+                object obj = ResourceManager.GetObject("thisisforberry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
