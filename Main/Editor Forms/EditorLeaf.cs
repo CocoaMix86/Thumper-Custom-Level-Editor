@@ -419,6 +419,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height));
+            //e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, 5, 5));
             if (e.RowIndex == -1) {
                 //draw column headers (beat #s)
                 LeafCellPainting.DrawText(e);
@@ -2904,7 +2905,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates column highlighting in the DGV based on time sig
         public void TrackTimeSigHighlighting()
         {
-            if (_leafproperties == null || EditorIsLoading || SimpleLoad)
+            if (_leafproperties == null || SimpleLoad)
                 return;
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
@@ -2915,12 +2916,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //whenever `i` is a multiple of the time sig, switch colors
                 if ((i) % timesigbeats == 0)
                     _switch = !_switch;
-                trackEditor.Columns[i + FrozenColumnOffset].DefaultCellStyle.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
+                for (int row = 0; row < trackEditor.RowCount; row++) {
+                    trackEditor.Rows[row].Cells[i + FrozenColumnOffset].Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
+                }
                 trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
             }
 
             if (AltSequencer != null)
                 TrackLeafDividerHighlighting((LvlProperties)AltSequencer);
+
+            trackEditor.Invalidate();
         }
 
         public void TrackLeafDividerHighlighting(LvlProperties Lvl)

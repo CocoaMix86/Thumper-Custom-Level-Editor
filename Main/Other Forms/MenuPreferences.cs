@@ -105,6 +105,7 @@ namespace Thumper_Custom_Level_Editor
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
+                leaf.TrackTimeSigHighlighting();
             }
 
             //save mute to settings
