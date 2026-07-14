@@ -3015,7 +3015,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (textEditor.Focused)
                 return;
             ///copies selected cells
-            IEnumerable<SeqDataPoint> _selected = trackEditor.SelectedCells.Cast<SeqDataPoint>();
+            IEnumerable<SeqDataPoint> _selected = trackEditor.SelectedCells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset);
             List<SeqDataPoint> lanecells = new();
             foreach (SeqDataPoint dgvc in _selected) {
                 if (SequencerObjects[dgvc.RowIndex].friendly_lane == "lane center" && SequencerObjects[dgvc.RowIndex].expandlanes == false) {
