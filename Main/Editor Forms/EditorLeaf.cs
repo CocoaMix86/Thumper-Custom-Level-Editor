@@ -827,6 +827,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SelectedRows = trackEditor.SelectedCells.Cast<DataGridViewCell>()
                 .Select(cell => cell.RowIndex)
                 .Distinct().ToList();
+
+            //get all selected cells and display them grouped together in the propertygrid
+            //this allows for mass editing
+            SelectedDPs.Clear();
+            if (trackEditor.SelectedCells.Count == 0)
+                return;
+            foreach (DataGridViewCell dgvc in trackEditor.SelectedCells) {
+                //check if index out of bounds
+                if (dgvc.ColumnIndex < FrozenColumnOffset)
+                    continue;
+                SelectedDPs.Add(SequencerObjects[dgvc.RowIndex][dgvc.ColumnIndex]);
+            }
+            //update the properties panel to show the selected object
+            _leafproperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
+            TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
+            TCLE.dockProjectProperties.propertyGridProject.Refresh();
+            propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
+            propertyGridLeaf.Refresh();
         }
 
         private void trackEditor_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -852,7 +870,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CurrentRow = e.RowIndex;
             ShowRawTrackData(SequencerObjects[e.RowIndex]);
             LeafProperties.selectedobj = SequencerObjects[e.RowIndex];
-            propertyGridLeaf.Refresh();
         }
 
         //Cell value changed
