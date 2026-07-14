@@ -48,12 +48,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dgvMasterView_SelectionChanged(object sender, EventArgs e)
         {
+            trackEditor.SelectionChanged -= trackEditor_SelectionChanged;
             trackEditor.ClearSelection();
             foreach (int column in dgvMasterView.SelectedCells.Cast<DataGridViewCell>().Select(x => x.ColumnIndex).Distinct()) {
                 foreach (DataGridViewRow dgvr in trackEditor.Rows) {
                     dgvr.Cells[column + FrozenColumnOffset].Selected = true;
                 }
             }
+            trackEditor.SelectionChanged += trackEditor_SelectionChanged;
             trackEditor.Invalidate();
         }
         private void dgvMasterView_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
