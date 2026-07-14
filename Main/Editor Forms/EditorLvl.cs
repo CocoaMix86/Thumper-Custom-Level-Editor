@@ -834,7 +834,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (this.WorkingFile == null)
                 return;
-            TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
+            if (Control.ModifierKeys == Keys.Shift)
+                TCLE.ClipboardPaths = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
+            else
+                TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
             //enable the paste button everywhere
             foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
                 lvl.btnLvlPasteTunnel.Enabled = true;
