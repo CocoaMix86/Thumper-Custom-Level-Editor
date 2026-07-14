@@ -513,7 +513,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
                         e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion + 3, e.RowBounds.Top + 3, (int)Math.Floor(cellwidth * samp.beats) - 6, e.RowBounds.Height - 6);
-                        e.Graphics.DrawRoundedRectangle(PenWhite, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion + 2, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats) - 4, e.RowBounds.Height - 4), 10);
+                        e.Graphics.DrawRoundedRectangle(PenWhite, new Rectangle(((sdp.beat - columnindex) * cellwidth) + offsetportion + 2, e.RowBounds.Top + 2, (int)Math.Floor(cellwidth * samp.beats) - 4, e.RowBounds.Height - 4), Math.Min(10, (e.RowBounds.Height - 4)/2));
                     }
                 }
             skipwaveform:;
@@ -782,27 +782,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void trackEditor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //I think this doesn't have a purpose anymore
-        }
-
-        private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            /*
-            if (EditorIsProcessing)
-                return;
-            if (e.RowIndex == -1 || e.ColumnIndex == -1)
-                return;
-            if (e.ColumnIndex is 0) {
-                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Enable/Disable";
-            }
-            else if (e.ColumnIndex is 1) {
-                trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Mute/Unmute";
-            }
-            else if (e.ColumnIndex is 2) {
-                //only add tooltip if the object can have lanes
-                if (SequencerObjects[e.RowIndex].friendly_lane != "none")
-                    trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide Lanes";
-            }
-            */
         }
 
         ///DATAGRIDVIEW - TRACK EDITOR

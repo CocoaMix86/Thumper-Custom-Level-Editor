@@ -54,6 +54,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 //paint nothing
             }
 
+            //paint the row top and bottom borders
             e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Top, e.CellBounds.Right + 4, e.CellBounds.Top);
             e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Bottom, e.CellBounds.Right + 4, e.CellBounds.Bottom);
         }
