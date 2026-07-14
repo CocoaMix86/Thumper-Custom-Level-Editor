@@ -63,7 +63,8 @@ namespace Thumper_Custom_Level_Editor
         {
             if (TCLE.GlobalActiveDocument is EditorRawText)
                 return;
-            TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
+            if (TCLE.GlobalActiveDocument != null)
+                TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
         }
 
         public static void ClearReloadUndo(dynamic _load)
