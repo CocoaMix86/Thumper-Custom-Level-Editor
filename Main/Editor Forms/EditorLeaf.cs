@@ -18,6 +18,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         ///Load LEAF
+        public EditorLeaf()
+        {
+            InitializeComponent();
+        }
+
         public EditorLeaf(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
@@ -263,6 +268,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             for (int x = e.RowIndex; x < e.RowIndex + e.RowCount; x++)
                 trackEditor.Rows[x].Height = trackZoomVert.Value;
             vscrollbarTrackEditor_Resize();
+
+            trackEditor[0, e.RowIndex].ToolTipText = "Enable/Disable";
+            trackEditor[1, e.RowIndex].ToolTipText = "Mute/Unmute";
+            //only add tooltip if the object can have lanes
+            if (((Sequencer_Object)trackEditor.Rows[e.RowIndex]).friendly_lane != "none")
+                trackEditor[2, e.RowIndex].ToolTipText = "Show/Hide Lanes";
         }
 
         private void trackEditor_Scroll(object sender, ScrollEventArgs e)
@@ -775,6 +786,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackEditor_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            /*
             if (EditorIsProcessing)
                 return;
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
@@ -790,6 +802,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (SequencerObjects[e.RowIndex].friendly_lane != "none")
                     trackEditor[e.ColumnIndex, e.RowIndex].ToolTipText = "Show/Hide Lanes";
             }
+            */
         }
 
         ///DATAGRIDVIEW - TRACK EDITOR

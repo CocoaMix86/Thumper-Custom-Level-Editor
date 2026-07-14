@@ -5,6 +5,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public class EditorBase : DockContent
     {
+        public EditorBase()
+        { 
+            
+        }
+
         public EditorBase(FileInfo _filetolock, bool rawtext = false, bool nolock = false)
         {
             if (_filetolock == null)
