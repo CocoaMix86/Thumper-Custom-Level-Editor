@@ -13,7 +13,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variable
         //Static
-        public static string VersionNumber = "3.0.0-a66";
+        public static string VersionNumber = "3.0.0-a67";
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
         public static decimal LeafQuickValue3 = 1.000m;
