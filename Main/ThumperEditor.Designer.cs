@@ -1141,7 +1141,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(294, 252);
+            this.contextmenuWindow.Size = new Size(294, 230);
             // 
             // toolStripWindowCloseTab
             // 

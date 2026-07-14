@@ -1771,7 +1771,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase)))
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)))
                 leaf.btnTrackPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
