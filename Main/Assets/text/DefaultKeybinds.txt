@@ -46,3 +46,5 @@ Move Tab to Next Workspace;PageUp, Control, Alt
 Move Tab to Prev Workspace;PageDown, Control, Alt
 Next Tab;Tab, Control
 Previous Tab;Tab, Control, Shift
+Close Current Tab;W, Control
+Close Current Workspace;W, Control, Shift

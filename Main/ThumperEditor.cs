@@ -286,6 +286,8 @@ namespace Thumper_Custom_Level_Editor
             toolstripWindowFloatAll.ShortcutKeys = Keybinds["Float All Tabs"];
             toolstripWindowDock.ShortcutKeys = Keybinds["Dock Floating Tab"];
             toolstripWindowWorkspace.ShortcutKeys = Keybinds["Add New Worksapce"];
+            toolStripWindowCloseTab.ShortcutKeys = Keybinds["Close Current Tab"];
+            toolStripWindowCloseWorkspace.ShortcutKeys = Keybinds["Close Current Workspace"];
             ///
             toolstripTabSave.ShortcutKeys = Keybinds["Save File"];
             ///
@@ -881,6 +883,18 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         private void toolstripWindowDock_Click(object sender, EventArgs e) => TCLE.GlobalActiveDocument.DockHandler.DockState = DockState.Document;
+
+        private void toolStripWindowCloseWorkspace_Click(object sender, EventArgs e)
+        {
+            if (ActiveWorkspace == null)
+                return;
+            if (AnyUnsaved(ActiveWorkspace)) {
+                if (MessageBox.Show("Some files are unsaved. Are you sure you want to close them?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                    return;
+                }
+            }
+            ActiveWorkspace.DockHandler.Dispose();
+        }
 
         private void toolstripWindowCloseAll_Click(object sender, EventArgs e)
         {
