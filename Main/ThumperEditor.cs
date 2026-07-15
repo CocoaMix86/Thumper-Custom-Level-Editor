@@ -297,11 +297,11 @@ namespace Thumper_Custom_Level_Editor
         #region Form Moving and Control buttons
         private void toolStripTitle_DoubleClick(object sender, EventArgs e)
         {
-            toolstripFormRestore.PerformClick();
+            //toolstripFormRestore.PerformClick();
         }
         private void toolStripTitle_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            toolstripFormRestore.PerformClick();
+            //toolstripFormRestore.PerformClick();
         }
         private void toolstripFormRestore_Click(object sender, EventArgs e)
         {
