@@ -207,7 +207,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
-            if (TCLE.rng.Next(0, 1001) == 1000) {
+            if (!Properties.Settings.Default.muteduck && TCLE.rng.Next(0, 1001) == 1000) {
                 MemoryStream tempstream = new();
                 byte[] duckbytes = Properties.Resources.duck;
                 PlaySampleOneOff("duck", duckbytes, out _);
