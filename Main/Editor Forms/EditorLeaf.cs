@@ -1550,7 +1550,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             trackEditor.SuspendLayout();
             //If multiple rows are selected, get all of them in a list. Then loop over list, deleting each one
-            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => SequencerObjects[x.Index]).ToList();
+            List<Sequencer_Object> selectedrows = trackEditor.SelectedCells.Cast<DataGridViewCell>().Where(cell => cell.OwningRow.Visible).Select(cell => cell.RowIndex).Distinct().Select(x => SequencerObjects[x]).ToList();
             if (MessageBox.Show($"{selectedrows.Count} Sequencer objects selected.\nAre you sure you want to delete them?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
             while (selectedrows.Count > 0) {
