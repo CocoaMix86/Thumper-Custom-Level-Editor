@@ -872,7 +872,9 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Window
         private void toolstripWindowFloat_Click(object sender, EventArgs e)
         {
-            if (GlobalActiveDocument.DockHandler.DockState != DockState.Float)
+            if (GlobalActiveDocument is null)
+                return;
+            if (!string.IsNullOrEmpty(GlobalActiveDocument.Text) && GlobalActiveDocument.DockHandler.DockState != DockState.Float)
                 GlobalActiveDocument.DockHandler.DockState = DockState.Float;
             //ActiveWorkspace.dockMain.ActiveDocument.DockHandler.DockState = DockState.Float;
         }
@@ -893,6 +895,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
             }
+            ActiveWorkspace.Close();
             ActiveWorkspace.DockHandler.Dispose();
         }
 
@@ -903,8 +906,9 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
             }
-            while (dockMain.Documents.Any())
-                dockMain.Documents.First().DockHandler.Dispose();
+            while (dockMain.Documents.Any()) {
+                dockMain.Documents.First().DockHandler.Close();
+            }
         }
 
         private void toolstripWindowCloseEditors_Click(object sender, EventArgs e)
@@ -917,7 +921,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             while (ActiveWorkspace.dockMain.Documents.Any())
-                ActiveWorkspace.dockMain.Documents.First().DockHandler.Dispose();
+                ActiveWorkspace.dockMain.Documents.First().DockHandler.Close();
         }
 
         private void toolstripWindowCloseFiletype_Click(object sender, EventArgs e)
@@ -931,7 +935,7 @@ namespace Thumper_Custom_Level_Editor
             }
             foreach (IDockContent document in ActiveWorkspace.dockMain.Documents.ToList()) {
                 if (document != GlobalActiveDocument && document.GetType() == GlobalActiveDocument.GetType())
-                    document.DockHandler.Dispose();
+                    document.DockHandler.Close();
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using WeifenLuo.WinFormsUI.Docking;
+﻿using System.Windows.Controls;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -20,6 +21,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{configtoload}.config", m_deserializeDockContent);
                 } catch { }
             }
+
+            //
+            TCLE.Instance.toolStripWindowCloseWorkspace.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseAll.Enabled = true;
         }
 
         private EditorBase? GetContentFromPersistString(string persistString)
@@ -43,6 +48,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.IsLoadingProject)
                 return;
             dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
+
+            TCLE.Instance.toolStripWindowCloseTab.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseEditors.Enabled = true;
+            TCLE.Instance.toolStripMenuItem7.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseFiletype.Enabled = true;
+            TCLE.Instance.toolstripWindowFloat.Enabled = true;
+            TCLE.Instance.toolstripWindowFloatAll.Enabled = true;
+            TCLE.Instance.toolstripWindowDock.Enabled = true;
         }
 
         private void dockMain_ContentRemoved(object sender, DockContentEventArgs e)
@@ -112,32 +125,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             //When workspace closes, close the file lock on all the files inside it
-            /*
-    foreach (EditorBase doc in this.dockMain.Documents) {
-        FileInfo filetoclose = null;
-        if (!TCLE.Instance.Disposing) {
-            filetoclose = doc.WorkingFile;
-            doc.Dispose();
-            if (doc.GetType() == typeof(Form_MasterEditor))
-                filetoclose = (doc as Form_MasterEditor).MasterProperties.LoadedMaster;
-            else if (doc.GetType() == typeof(Form_GateEditor))
-                filetoclose = (doc as Form_GateEditor).loadedgate;
-            else if (doc.GetType() == typeof(Form_LvlEditor))
-                filetoclose = (doc as Form_LvlEditor).loadedlvl;
-            else if (doc.GetType() == typeof(Form_SampleEditor))
-                filetoclose = (doc as Form_SampleEditor).loadedsample;
-            else if (doc.GetType() == typeof(Form_LeafEditor))
-                filetoclose = (doc as Form_LeafEditor).LeafProperties.LoadedLeaf;
-            else if (doc.GetType() == typeof(Form_RawText))
-                filetoclose = (doc as Form_RawText).loadedfile;
-
-            if (filetoclose == null)
-                continue;
-
-            TCLE.CloseFileLock(filetoclose);
-        }
-        }
-            */
+            for (int x = 0; x < this.dockMain.Documents.Count(); x++) {
+                if (!TCLE.Instance.Disposing)
+                    this.dockMain.Documents.First().DockHandler.Close();
+            }
         }
 
         private void Form_WorkSpace_FormClosed(object sender, FormClosedEventArgs e)
@@ -145,6 +136,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 File.Delete($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
             } catch { }
+
+            if (TCLE.Workspaces.Count() == 1) {
+                TCLE.Instance.toolStripWindowCloseTab.Enabled = false;
+                TCLE.Instance.toolstripWindowCloseEditors.Enabled = false;
+                TCLE.Instance.toolStripMenuItem7.Enabled = false;
+                TCLE.Instance.toolstripWindowCloseFiletype.Enabled = false;
+                TCLE.Instance.toolstripWindowFloat.Enabled = false;
+                TCLE.Instance.toolstripWindowFloatAll.Enabled = false;
+                TCLE.Instance.toolstripWindowDock.Enabled = false;
+                //
+                TCLE.Instance.toolStripWindowCloseWorkspace.Enabled = false;
+                TCLE.Instance.toolstripWindowCloseAll.Enabled = false;
+            }
         }
     }
 }

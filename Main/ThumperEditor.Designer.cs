@@ -117,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripWindowCloseTab = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -981,9 +981,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1105,6 +1104,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1126,14 +1133,6 @@
             this.toolstripProject.Size = new Size(58, 21);
             this.toolstripProject.Text = "&Project";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // contextmenuWindow
             // 
             this.contextmenuWindow.BackColor = Color.FromArgb(46, 46, 46);
@@ -1141,11 +1140,12 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(294, 230);
+            this.contextmenuWindow.Size = new Size(294, 252);
             // 
             // toolStripWindowCloseTab
             // 
             this.toolStripWindowCloseTab.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripWindowCloseTab.Enabled = false;
             this.toolStripWindowCloseTab.ForeColor = Color.White;
             this.toolStripWindowCloseTab.Image = Properties.Resources.icon_remove2;
             this.toolStripWindowCloseTab.Name = "toolStripWindowCloseTab";
@@ -1156,6 +1156,7 @@
             // 
             // toolstripWindowCloseEditors
             // 
+            this.toolstripWindowCloseEditors.Enabled = false;
             this.toolstripWindowCloseEditors.ForeColor = Color.White;
             this.toolstripWindowCloseEditors.Image = Properties.Resources.icon_remove2;
             this.toolstripWindowCloseEditors.Name = "toolstripWindowCloseEditors";
@@ -1166,6 +1167,7 @@
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.BackColor = Color.FromArgb(46, 46, 46);
+            this.toolStripMenuItem7.Enabled = false;
             this.toolStripMenuItem7.ForeColor = Color.White;
             this.toolStripMenuItem7.Image = Properties.Resources.icon_remove2;
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
@@ -1175,6 +1177,7 @@
             // 
             // toolstripWindowCloseFiletype
             // 
+            this.toolstripWindowCloseFiletype.Enabled = false;
             this.toolstripWindowCloseFiletype.ForeColor = Color.White;
             this.toolstripWindowCloseFiletype.Image = Properties.Resources.icon_remove2;
             this.toolstripWindowCloseFiletype.Name = "toolstripWindowCloseFiletype";
@@ -1184,6 +1187,7 @@
             // 
             // toolstripWindowFloat
             // 
+            this.toolstripWindowFloat.Enabled = false;
             this.toolstripWindowFloat.ForeColor = Color.White;
             this.toolstripWindowFloat.Image = Properties.Resources.icon_feather;
             this.toolstripWindowFloat.Name = "toolstripWindowFloat";
@@ -1193,6 +1197,7 @@
             // 
             // toolstripWindowFloatAll
             // 
+            this.toolstripWindowFloatAll.Enabled = false;
             this.toolstripWindowFloatAll.ForeColor = Color.White;
             this.toolstripWindowFloatAll.Image = Properties.Resources.icon_feather;
             this.toolstripWindowFloatAll.Name = "toolstripWindowFloatAll";
@@ -1202,6 +1207,7 @@
             // 
             // toolstripWindowDock
             // 
+            this.toolstripWindowDock.Enabled = false;
             this.toolstripWindowDock.ForeColor = Color.White;
             this.toolstripWindowDock.Name = "toolstripWindowDock";
             this.toolstripWindowDock.Size = new Size(293, 22);
@@ -1226,6 +1232,7 @@
             // 
             // toolStripWindowCloseWorkspace
             // 
+            this.toolStripWindowCloseWorkspace.Enabled = false;
             this.toolStripWindowCloseWorkspace.ForeColor = Color.White;
             this.toolStripWindowCloseWorkspace.Image = Properties.Resources.icon_remove2;
             this.toolStripWindowCloseWorkspace.Name = "toolStripWindowCloseWorkspace";
@@ -1235,6 +1242,7 @@
             // 
             // toolstripWindowCloseAll
             // 
+            this.toolstripWindowCloseAll.Enabled = false;
             this.toolstripWindowCloseAll.ForeColor = Color.White;
             this.toolstripWindowCloseAll.Image = Properties.Resources.icon_remove2;
             this.toolstripWindowCloseAll.Name = "toolstripWindowCloseAll";
@@ -2227,12 +2235,7 @@
         private System.Windows.Forms.ContextMenuStrip contextmenuEdit;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ContextMenuStrip contextmenuWindow;
-        private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloat;
-        private System.Windows.Forms.ToolStripMenuItem toolstripWindowFloatAll;
-        private System.Windows.Forms.ToolStripMenuItem toolstripWindowDock;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem toolstripWindowCloseAll;
-        private System.Windows.Forms.ToolStripMenuItem toolstripWindowCloseEditors;
         private System.Windows.Forms.ContextMenuStrip contextmenuHelp;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
         private System.Windows.Forms.ToolStripMenuItem toolstripHelpTentacles;
@@ -2309,11 +2312,8 @@
         private ToolStripButton toolstripStopAudio;
         private ToolStripSeparator toolStripSeparator20;
         private ToolStripSeparator toolStripSeparator21;
-        private ToolStripMenuItem toolStripWindowCloseTab;
-        private ToolStripMenuItem toolStripMenuItem7;
         private ToolStripSeparator toolStripSeparator22;
         private ToolStripButton btnVolumeMixer;
-        private ToolStripMenuItem toolstripWindowCloseFiletype;
         private ToolStripMenuItem toolStripMenuItem5;
         public Label pictureTunnelViewer;
         public Label lblLoadingPlayback;
@@ -2351,7 +2351,15 @@
         private Label labelProjectOpen;
         private Label labelOptions;
         private Label labelProjectNew;
-        private ToolStripMenuItem toolStripWindowCloseWorkspace;
+        public ToolStripMenuItem toolstripWindowFloat;
+        public ToolStripMenuItem toolstripWindowFloatAll;
+        public ToolStripMenuItem toolstripWindowDock;
+        public ToolStripMenuItem toolstripWindowCloseAll;
+        public ToolStripMenuItem toolstripWindowCloseEditors;
+        public ToolStripMenuItem toolStripWindowCloseTab;
+        public ToolStripMenuItem toolStripMenuItem7;
+        public ToolStripMenuItem toolstripWindowCloseFiletype;
+        public ToolStripMenuItem toolStripWindowCloseWorkspace;
     }
 }
 
