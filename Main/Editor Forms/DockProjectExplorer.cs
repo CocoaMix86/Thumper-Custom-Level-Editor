@@ -308,11 +308,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 FileInfo filetocopy = new(ofd.FileName);
-                if (File.Exists($"{ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName}\\{filetocopy.Name}")) {
+                if (ProjectExplorer.Files.Any(x => x.Name == filetocopy.Name)) {
+                    if (MessageBox.Show($"A file named {filetocopy.Name} already exists in this project. Do you still want to add it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
+                        return;
+                    }
+                }
+                if (File.Exists($"{ProjectExplorer.AllFiles[selectedNodes[0]].Folder.FullName}\\{filetocopy.Name}")) {
                     MessageBox.Show($"A filed named {filetocopy.Name} already exists in folder {selectedNodes[0].Text}.", "Thumper Custom Level Editor");
                     return;
                 }
-                FileInfo projectfile = new($"{ProjectExplorer.AllFiles[selectedNodes[0]].File.FullName}\\{filetocopy.Name}");
+                FileInfo projectfile = new($"{ProjectExplorer.AllFiles[selectedNodes[0]].Folder.FullName}\\{filetocopy.Name}");
                 File.Copy(ofd.FileName, projectfile.FullName);
 
                 if (TCLE.fileextensions.Any(x => projectfile.Name.StartsWith(x))) {
