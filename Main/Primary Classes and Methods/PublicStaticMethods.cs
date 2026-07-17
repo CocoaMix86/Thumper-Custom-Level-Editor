@@ -306,6 +306,14 @@ namespace Thumper_Custom_Level_Editor
             else if (filepath.Extension == ".samp") {
                 OpenFile = new EditorSample(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
             }
+
+            TCLE.Instance.toolStripWindowCloseTab.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseEditors.Enabled = true;
+            TCLE.Instance.toolStripMenuItem7.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseFiletype.Enabled = true;
+            TCLE.Instance.toolstripWindowFloat.Enabled = true;
+            TCLE.Instance.toolstripWindowFloatAll.Enabled = true;
+            TCLE.Instance.toolstripWindowDock.Enabled = true;
             //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return OpenFile;
