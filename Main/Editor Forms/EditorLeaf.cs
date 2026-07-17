@@ -1367,6 +1367,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             seq.expandlanes = seq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
 
+            if (SequencerObjects.Any(x => x.obj_name == seq.obj_name && x.param_path == seq.param_path)) {
+                if (MessageBox.Show($"WARNING\nThis leaf already has a {seq.obj_name}-{seq.param_path} object. Do you still want to add another one?", "TCLEEEEEEEEEEEEEEE", MessageBoxButtons.YesNo) == DialogResult.No)
+                    return;
+            }
             if (seq.friendly_lane == "lane center") {
                 LoadMultiLanes(seq, SequencerObjects, trackEditor);
             }
