@@ -66,7 +66,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             this.BackColor = Properties.Settings.Default.ColorGateBG;
             gateLvlList.BackgroundColor = Properties.Settings.Default.ColorGateLvlBG;
@@ -134,7 +134,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
         public List<SaveState> UndoList = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public EditorBase contentPropertyGrid = new(null) {
+        public EditorBaseSub contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -142,7 +142,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMain = new(null) {
+        public EditorBaseSub contentMain = new() {
             TabText = "Lvl Phases",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -560,7 +560,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_gate.config");
         }
 
-        private EditorBase? GetContentFromPersistString(string persistString)
+        private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Properties")

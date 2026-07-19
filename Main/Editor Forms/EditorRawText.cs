@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             this.BackColor = Properties.Settings.Default.ColorRawBG;
             textEditor.BackColor = Properties.Settings.Default.ColorRawBG;

@@ -76,6 +76,9 @@ namespace Thumper_Custom_Level_Editor
 
             TCLE.Explorer?.ColorFormElements();
 
+            foreach (EditorBase editor in TCLE.Documents.Values)
+                editor.ColorFormElements();
+            /*
             foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
                 leaf.ColorFormElements();
             foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl)))
@@ -88,6 +91,7 @@ namespace Thumper_Custom_Level_Editor
                 sample.ColorFormElements();
             foreach (EditorRawText raw in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorRawText)))
                 raw.ColorFormElements();
+            */
         }
 
         public void MenusVisible(bool visible)
@@ -282,7 +286,7 @@ namespace Thumper_Custom_Level_Editor
             //this finds a pane in the active workspace that has matching extensions already open on it
             DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
 
-            EditorBase OpenFile = new(null) { DockAreas = DockAreas.Document | DockAreas.Float };
+            DockContent OpenFile = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             if (filepath.Extension == ".master") {
                 OpenFile = new EditorMaster(_load, filepath);
             }
@@ -308,7 +312,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.Instance.toolstripWindowDock.Enabled = true;
             //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
-                return OpenFile;
+                return (EditorBase)OpenFile;
             if (OpenHere != null) OpenFile.Show(OpenHere, null);
             else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
 
@@ -529,9 +533,9 @@ namespace Thumper_Custom_Level_Editor
                 { "author", _properties.authornames },
                 { "bpm", _properties.BPM },
                 { "level_sections", new JArray() {_properties.LevelSections} },
-                { "rails_color", new JArray() { (float)_properties.rail.R / 255, (float)_properties.rail.G / 255, (float)_properties.rail.B / 255, 1 } },
-                { "rails_glow_color", new JArray() { (float)_properties.railglow.R / 255, (float)_properties.railglow.G / 255, (float)_properties.railglow.B / 255, 1}},
-                { "path_color", new JArray() { (float)_properties.path.R / 255, (float)_properties.path.G / 255, (float)_properties.path.B / 255, 1 }},
+                { "rails_color", new JArray() { _properties.rail.R / 255f, _properties.rail.G / 255f, _properties.rail.B / 255f, 1 } },
+                { "rails_glow_color", new JArray() { _properties.railglow.R / 255f, _properties.railglow.G / 255f, _properties.railglow.B / 255f, 1}},
+                { "path_color", new JArray() { _properties.path.R / 255f, _properties.path.G / 255f, _properties.path.B / 255f, 1 }},
                 { "joy_color", new JArray() { 1f, 1f, 1f, 1f } }
             };
             return _save;

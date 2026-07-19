@@ -17,6 +17,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridProject.SelectedObject = TCLE.ProjectProperties;
             propertyGridProject.PropertyValueChanged += propertyGridProject_PropertyValueChanged;
         }
+
+        public override void ColorFormElements()
+        {
+            
+        }
         #endregion
 
         private void propertyGridProject_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)

@@ -63,7 +63,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             this.BackColor = Properties.Settings.Default.ColorMasterBG;
             masterLvlList.BackgroundColor = Properties.Settings.Default.ColorMasterLvlBG;
@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public EditorBase contentPropertyGrid = new(null) {
+        public EditorBaseSub contentPropertyGrid = new() {
             TabText = "Sublevel Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMain = new(null) {
+        public EditorBaseSub contentMain = new() {
             TabText = "Sublevels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -641,7 +641,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_master.config");
         }
 
-        private EditorBase? GetContentFromPersistString(string persistString)
+        private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Sublevel Props.")

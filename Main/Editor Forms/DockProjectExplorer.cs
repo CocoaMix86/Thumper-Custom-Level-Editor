@@ -796,7 +796,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ProjectExplorer.CreateTreeView();
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             this.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;
             toolstripExplorer.BackColor = Properties.Settings.Default.ColorProjectExplorerBG;

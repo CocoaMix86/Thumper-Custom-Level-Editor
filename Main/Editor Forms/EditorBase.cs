@@ -3,7 +3,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public class EditorBase : DockContent
+    public abstract class EditorBase : DockContent
     {
         public EditorBase()
         { 
@@ -49,24 +49,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
-        /*
-        protected override void OnGotFocus(EventArgs e)
-        {
-            base.OnGotFocus(e);
-            if (this.WorkingFile != null && TCLE.GlobalActiveDocument != this) {
-                TCLE.GlobalActiveDocument = this;
-                TCLE.Instance.toolstripLevelName.Text = TCLE.GlobalActiveDocument.WorkingFile.Name;
-            }
-        }
-        
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-            if (this.WorkingFile != null && TCLE.GlobalActiveDocument != this) {
-                TCLE.GlobalActiveDocument = this;
-            }
-        }
-        */
+
+        public abstract void ColorFormElements();
+
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);

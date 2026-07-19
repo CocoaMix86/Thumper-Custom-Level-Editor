@@ -137,7 +137,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             if (SimpleLoad)
                 return;
@@ -212,7 +212,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public List<int> SelectedRows = new();
         public Dictionary<string, Sequencer_Object> LeafLanes { get; private set; }
         private DeserializeDockContent m_deserializeDockContent;
-        public EditorBase contentPropertyGrid = new(null) {
+        public EditorBaseSub contentPropertyGrid = new() {
             TabText = "Data Point Props.",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -220,7 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMain = new(null) {
+        public EditorBaseSub contentMain = new() {
             TabText = "Advanced Editor",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -228,7 +228,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentObjects = new(null) {
+        public EditorBaseSub contentObjects = new() {
             TabText = "Objects",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -236,7 +236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMasterView = new(null) {
+        public EditorBaseSub contentMasterView = new() {
             TabText = "Basic Editor",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = false,
@@ -246,7 +246,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         };
         #endregion
 
-        private EditorBase? GetContentFromPersistString(string persistString)
+        private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Data Point Props.")

@@ -277,6 +277,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Editor Forms\EditorBaseSub.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Editor Forms\Form_DrawScene.cs">
       <SubType>Form</SubType>
     </Compile>

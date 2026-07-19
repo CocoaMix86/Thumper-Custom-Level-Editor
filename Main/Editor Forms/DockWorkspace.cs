@@ -27,6 +27,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.Instance.toolstripWindowCloseAll.Enabled = true;
         }
 
+        public override void ColorFormElements() { }
+
         private EditorBase? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];

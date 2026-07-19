@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             if (SimpleLoad)
                 return;
@@ -102,7 +102,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();
         private DeserializeDockContent m_deserializeDockContent;
-        public EditorBase contentPropertyGrid = new(null) {
+        public EditorBaseSub contentPropertyGrid = new() {
             TabText = "Properties",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -110,7 +110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMain = new(null) {
+        public EditorBaseSub contentMain = new() {
             TabText = "Samples",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -118,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentWave = new(null) {
+        public EditorBaseSub contentWave = new() {
             TabText = "Waveform",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -455,7 +455,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_sample.config");
         }
 
-        private EditorBase? GetContentFromPersistString(string persistString)
+        private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString is "Properties")

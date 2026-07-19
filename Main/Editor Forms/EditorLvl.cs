@@ -71,7 +71,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPasteTunnel.Enabled = true;
         }
 
-        public void ColorFormElements()
+        public override void ColorFormElements()
         {
             this.BackColor = Properties.Settings.Default.ColorLvlBG;
             lvlLeafList.BackgroundColor = Properties.Settings.Default.ColorLvlLeafBG;
@@ -115,7 +115,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public ObservableCollection<LvlLeafData> LvlLeafs => LvlProperties.lvlleafs;
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
-        public EditorBase contentTunnel = new(null) {
+        public EditorBaseSub contentTunnel = new() {
             TabText = "Paths/Tunnels",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -123,7 +123,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentMain = new(null) {
+        public EditorBaseSub contentMain = new() {
             TabText = "Leaf List",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -131,7 +131,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             CloseButtonVisible = false,
             CloseButton = false,
         };
-        public EditorBase contentLoop = new(null) {
+        public EditorBaseSub contentLoop = new() {
             TabText = "Loop Tracks",
             DockAreas = DockAreas.Document | DockAreas.DockLeft | DockAreas.DockRight | DockAreas.DockTop | DockAreas.DockBottom,
             HideOnClose = true,
@@ -918,7 +918,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_lvl.config");
         }
 
-        private EditorBase? GetContentFromPersistString(string persistString)
+        private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
             persistString = persistString.Split(';')[1];
             if (persistString.Contains("Paths/Tunnels"))
