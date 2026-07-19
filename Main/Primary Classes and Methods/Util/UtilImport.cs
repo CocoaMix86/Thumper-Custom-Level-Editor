@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,33 +20,29 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static void ImportQuickValues()
         {
-            if (!File.Exists($@"{TCLE.AppLocation}\settings\quickvalues.txt"))
+            string path = Path.Combine(TCLE.AppLocation, "settings", "quickvalues.txt");
+            if (!File.Exists(path))
                 return;
-            string[] _load = File.ReadAllLines($@"{TCLE.AppLocation}\settings\quickvalues.txt");
 
-            TCLE.LeafQuickValue0 = decimal.TryParse(_load[0], out decimal result) ? result : 1.000m;
-            TCLE.LeafQuickValue1 = decimal.TryParse(_load[1], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue2 = decimal.TryParse(_load[2], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue3 = decimal.TryParse(_load[3], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue4 = decimal.TryParse(_load[4], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue5 = decimal.TryParse(_load[5], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue6 = decimal.TryParse(_load[6], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue7 = decimal.TryParse(_load[7], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue8 = decimal.TryParse(_load[8], out result) ? result : 1.000m;
-            TCLE.LeafQuickValue9 = decimal.TryParse(_load[9], out result) ? result : 1.000m;
+            string[] lines = File.ReadAllLines(path);
+
+            for (int i = 0; i < TCLE.LeafQuickValues.Length; i++) {
+                TCLE.LeafQuickValues[i] = i < lines.Length && decimal.TryParse(lines[i], System.Globalization.NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value) ? value : 1.000m;
+            }
         }
 
         public static void ImportObjects()
         {
             TCLE.LeafObjects.Clear();
             //check if the track_objects exists or not, but do not overwrite it
-            if (!File.Exists($@"{TCLE.AppLocation}\settings\track_objects_v4.txt")) {
-                using (StreamWriter sw = File.CreateText($@"{TCLE.AppLocation}\settings\track_objects_v4.txt")) {
+            string _trackobjectspath = Path.Combine(TCLE.AppLocation, "settings", "track_objects_v4.txt");
+            if (!File.Exists(_trackobjectspath)) {
+                using (StreamWriter sw = File.CreateText(_trackobjectspath)) {
                     sw.Write(Properties.Resources.trackobjects_v4);
                 }
             }
             //import selectable objects from file and parse them into lists for manipulation
-            string[] _importedObjects = File.ReadAllLines($@"{TCLE.AppLocation}\settings\track_objects_v4.txt");
+            string[] _importedObjects = File.ReadAllLines(_trackobjectspath);
             TCLE.LeafObjects = _importedObjects.Select(x => x.Split(';'))
                                         .Select(x => new KeyValuePair<string, Object_Params>(x[1] + ";" + x[3], new Object_Params {
                                             category = x[0],
@@ -54,8 +51,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                                             param_path = x[3],
                                             trait_type = x[4],
                                             step = x[5] == "True",
-                                            default_value = decimal.TryParse(x[6], out decimal _result) ? _result : 0,
-                                            footer = x[7].Replace("[", "").Replace("]", ""),
+                                            default_value = decimal.TryParse(x[6], NumberStyles.Number, CultureInfo.InvariantCulture, out decimal _result) ? _result : 0,
+                                            footer = x[7].Trim('[', ']'),
                                             defaultcolor = Color.Purple
                                         })).ToDictionary();
 

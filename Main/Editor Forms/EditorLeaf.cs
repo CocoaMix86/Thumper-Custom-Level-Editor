@@ -1216,43 +1216,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnTrackPlayback.PerformClick();
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 0"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue0;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[0];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 1"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue1;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[1];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 2"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue2;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[2];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 3"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue3;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[3];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 4"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue4;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[4];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 5"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue5;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[5];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 6"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue6;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[6];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 7"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue7;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[7];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 8"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue8;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[8];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 9"]) {
-                trackEditor.CurrentCell.Value = TCLE.LeafQuickValue9;
+                trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[9];
                 CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex]);
             }
         }

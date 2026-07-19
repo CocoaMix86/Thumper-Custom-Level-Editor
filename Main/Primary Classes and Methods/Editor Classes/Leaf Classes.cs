@@ -613,61 +613,61 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Quick 0")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue0 { get => TCLE.LeafQuickValue0; set => TCLE.LeafQuickValue0 = value; }
+        public decimal quickvalue0 { get => TCLE.LeafQuickValues[0]; set => TCLE.LeafQuickValues[0] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 1")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue1 { get => TCLE.LeafQuickValue1; set => TCLE.LeafQuickValue1 = value; }
+        public decimal quickvalue1 { get => TCLE.LeafQuickValues[1]; set => TCLE.LeafQuickValues[1] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 2")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue2 { get => TCLE.LeafQuickValue2; set => TCLE.LeafQuickValue2 = value; }
+        public decimal quickvalue2 { get => TCLE.LeafQuickValues[2]; set => TCLE.LeafQuickValues[2] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 3")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue3 { get => TCLE.LeafQuickValue3; set => TCLE.LeafQuickValue3 = value; }
+        public decimal quickvalue3 { get => TCLE.LeafQuickValues[3]; set => TCLE.LeafQuickValues[3] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 4")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue4 { get => TCLE.LeafQuickValue4; set => TCLE.LeafQuickValue4 = value; }
+        public decimal quickvalue4 { get => TCLE.LeafQuickValues[4]; set => TCLE.LeafQuickValues[4] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 5")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue5 { get => TCLE.LeafQuickValue5; set => TCLE.LeafQuickValue5 = value; }
+        public decimal quickvalue5 { get => TCLE.LeafQuickValues[5]; set => TCLE.LeafQuickValues[5] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 6")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue6 { get => TCLE.LeafQuickValue6; set => TCLE.LeafQuickValue6 = value; }
+        public decimal quickvalue6 { get => TCLE.LeafQuickValues[6]; set => TCLE.LeafQuickValues[6] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 7")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue7 { get => TCLE.LeafQuickValue7; set => TCLE.LeafQuickValue7 = value; }
+        public decimal quickvalue7 { get => TCLE.LeafQuickValues[7]; set => TCLE.LeafQuickValues[7] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 8")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue8 { get => TCLE.LeafQuickValue8; set => TCLE.LeafQuickValue8 = value; }
+        public decimal quickvalue8 { get => TCLE.LeafQuickValues[8]; set => TCLE.LeafQuickValues[8] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 9")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue9 { get => TCLE.LeafQuickValue9; set => TCLE.LeafQuickValue9 = value; }
+        public decimal quickvalue9 { get => TCLE.LeafQuickValues[9]; set => TCLE.LeafQuickValues[9] = value; }
     }
 
     public class LeafTimeSignatures : StringConverter

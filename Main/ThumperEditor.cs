@@ -241,7 +241,7 @@ namespace Thumper_Custom_Level_Editor
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //write quick values to file
-            File.WriteAllText($@"{TCLE.AppLocation}\settings\quickvalues.txt", $"{TCLE.LeafQuickValue0}\n{TCLE.LeafQuickValue1}\n{TCLE.LeafQuickValue2}\n{TCLE.LeafQuickValue3}\n{TCLE.LeafQuickValue4}\n{TCLE.LeafQuickValue5}\n{TCLE.LeafQuickValue6}\n{TCLE.LeafQuickValue7}\n{TCLE.LeafQuickValue8}\n{TCLE.LeafQuickValue9}");
+            File.WriteAllText($@"{TCLE.AppLocation}\settings\quickvalues.txt", string.Join('\n', TCLE.LeafQuickValues));
             Properties.Settings.Default.Save();
         }
 
