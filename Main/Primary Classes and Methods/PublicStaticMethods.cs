@@ -45,28 +45,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             DoubleBufferedProperty?.SetValue(grid, true);
         }
-        /*
-        public static void GenerateColumnStyle(IEnumerable<DataGridViewColumn> columns, int offset = 0)
-        {
-            foreach (DataGridViewColumn dgvc in columns) {
-                dgvc.CellTemplate = new SeqDataPoint();
-                dgvc.Name = (dgvc.Index - offset).ToString();
-                dgvc.HeaderText = (dgvc.Index - offset).ToString();
-                dgvc.Resizable = DataGridViewTriState.False;
-                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgvc.DividerWidth = 0;
-                dgvc.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                dgvc.Frozen = false;
-                dgvc.MinimumWidth = 2;
-                dgvc.ReadOnly = false;
-                dgvc.ValueType = typeof(decimal?);
-                dgvc.DefaultCellStyle.Format = "0.###";
-                dgvc.FillWeight = 0.001F;
-                dgvc.DefaultCellStyle.Font = EditorLeaf.TuningFont;
-                dgvc.Width = Properties.Settings.Default.ZoomHoriz;
-            }
-        }        
-        */
+
         ///Color elements based on set properties
         public static void ColorFormElements(TCLE MainForm)
         {

@@ -27,6 +27,45 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             { 10,96_000 }
         };
 
+        public static Dictionary<string, byte[]> SoundEffects = new() {
+            ["UIaddrandom"] = Properties.Resources.UIaddrandom,
+            ["UIbeetleclick1"] = Properties.Resources.UIbeetleclick1,
+            ["UIbeetleclick2"] = Properties.Resources.UIbeetleclick2,
+            ["UIbeetleclick3"] = Properties.Resources.UIbeetleclick3,
+            ["UIbeetleclick4"] = Properties.Resources.UIbeetleclick4,
+            ["UIbeetleclick5"] = Properties.Resources.UIbeetleclick5,
+            ["UIbeetleclick6"] = Properties.Resources.UIbeetleclick6,
+            ["UIbeetleclick7"] = Properties.Resources.UIbeetleclick7,
+            ["UIbeetleclick8"] = Properties.Resources.UIbeetleclick8,
+            ["UIbeetleclickGOLD"] = Properties.Resources.UIbeetleclickGOLD,
+            ["UIboot"] = Properties.Resources.UIboot,
+            ["UIcolorapply"] = Properties.Resources.UIcolorapply,
+            ["UIcoloropen"] = Properties.Resources.UIcoloropen,
+            ["UIdataerase"] = Properties.Resources.UIdataerase,
+            ["UIdelete"] = Properties.Resources.UIdelete,
+            ["UIdock"] = Properties.Resources.UIdock,
+            ["UIdockun"] = Properties.Resources.UIdockun,
+            ["UIfolderclose"] = Properties.Resources.UIfolderclose,
+            ["UIfolderopen"] = Properties.Resources.UIfolderopen,
+            ["UIinterpolate"] = Properties.Resources.UIinterpolate,
+            ["UIinterpolatewindow"] = Properties.Resources.UIinterpolatewindow,
+            ["UIkcopy"] = Properties.Resources.UIkcopy,
+            ["UIkpaste"] = Properties.Resources.UIkpaste,
+            ["UIleafsplit"] = Properties.Resources.UIleafsplit,
+            ["UIobjectadd"] = Properties.Resources.UIobjectadd,
+            ["UIobjectremove"] = Properties.Resources.UIobjectremove,
+            ["UIrefresh"] = Properties.Resources.UIrefresh,
+            ["UIrevertchanges"] = Properties.Resources.UIrevertchanges,
+            ["UIrevertnew"] = Properties.Resources.UIrevertnew,
+            ["UIsave"] = Properties.Resources.UIsave,
+            ["UIselect"] = Properties.Resources.UIselect,
+            ["UItunneladd"] = Properties.Resources.UItunneladd,
+            ["UItunnelremove"] = Properties.Resources.UItunnelremove,
+            ["UIwindowclose"] = Properties.Resources.UIwindowclose,
+            ["UIwindowopen"] = Properties.Resources.UIwindowopen,
+            ["duck"] = Properties.Resources.duck
+        };
+
         public static void CalculateSampleRuntimes()
         {
             foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.time == 0)) {
@@ -41,7 +80,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     else
                         filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
 
-                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.Open, FileAccess.ReadWrite, FileShare.Read))) {
+                    using (BinaryReader reader = new(new FileStream(filetoread, FileMode.Open, FileAccess.Read, FileShare.Read))) {
                         reader.ReadUInt32(); //pc header
                         reader.ReadUInt32(); //fsb5 header
                         reader.ReadUInt32(); //version
@@ -63,7 +102,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                         samp.time = (double)(samples) / (double)freq;
                     }
                 } catch (Exception ex) {
-                    samp.time = 0;
+                    samp.time = -1;
                 }
             }
         }
@@ -113,7 +152,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
                     _bytes = _bytes.Skip(4).ToArray();
                 } catch {
-                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
+                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
                     return null;
                 }
             }
@@ -122,8 +161,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 return null;
             }
             //check if file has been converted already. Ready the path if true
-            if (Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).Any()) {
-                _samp.TempFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).First();
+            string existingFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).FirstOrDefault();
+            if (existingFile != null) {
+                _samp.TempFile = existingFile;
                 return _samp.TempFile;
             }
             ///
@@ -163,6 +203,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //Vorbis (ogg)
             else if (type is 15) {
                 samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
+            }
+            else {
+                _samp.message = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for {_samp.obj_name} is an unsupported audio type. Not PCM or Vorbis.";
+                return null;
             }
 
             string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
@@ -207,28 +251,27 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             if (Properties.Settings.Default.muteapplication)
                 return;
-            if (!Properties.Settings.Default.muteduck && TCLE.rng.Next(0, 1001) == 1000) {
-                MemoryStream tempstream = new();
-                byte[] duckbytes = Properties.Resources.duck;
-                PlaySampleOneOff("duck", duckbytes, out _);
-            }
+            if (!Properties.Settings.Default.muteduck && TCLE.rng.Next(1000) == 0) 
+                PlaySampleOneOff("duck", SoundEffects["duck"], out _);            
             else
-                PlaySampleOneOff(audiofile, (byte[])Properties.Resources.ResourceManager.GetObject(audiofile), out _);
+                PlaySampleOneOff(audiofile, SoundEffects[audiofile], out _);
             TCLE.alzheimer();
         }
+
         public static List<Tuple<DataGridView, string, int>> PlayingChannels = new();
         public static int LastChannel;
-        public static float initialfreq;
         public static SYNCPROC EndingProc = new(OnEnding);
         public static bool PlaySampleOneOff(DataGridViewCell cell, SampleData _samp, out int SampChannel)
         {
-            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString())?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
+            string _sampleName = cell.DataGridView[1, cell.RowIndex].Value.ToString();
+            if (Bass.BASS_ChannelIsActive(PlayingChannels.FirstOrDefault(x => x.Item1 == cell.DataGridView && x.Item2 == _sampleName)?.Item3 ?? 0) == BASSActive.BASS_ACTIVE_STOPPED) {
                 string SampleToPlay = PCtoAudioFile(_samp);
                 if (String.IsNullOrEmpty(SampleToPlay)) {
                     SampChannel = 0;
                     return false;
                 }
 
+                float initialfreq = 0;
                 //initialize the player and load the sample
                 SampChannel = Bass.BASS_StreamCreateFile($@"{SampleToPlay}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT | BASSFlag.BASS_STREAM_PRESCAN);
                 _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
@@ -244,7 +287,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 }
                 //play the sample
                 if (SampChannel != 0 && Bass.BASS_ChannelPlay(SampChannel, false)) {
-                    PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, cell.DataGridView[1, cell.RowIndex].Value.ToString(), SampChannel));
+                    PlayingChannels.Add(new Tuple<DataGridView, string, int>(cell.DataGridView, _sampleName, SampChannel));
                     return true;
                 }
                 else {
@@ -252,7 +295,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 }
             }
             else {
-                Tuple<DataGridView, string, int> ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == cell.DataGridView[1, cell.RowIndex].Value.ToString());
+                Tuple<DataGridView, string, int> ItemToRemove = PlayingChannels.First(x => x.Item1 == cell.DataGridView && x.Item2 == _sampleName);
                 SampChannel = ItemToRemove.Item3;
                 Bass.BASS_ChannelStop(ItemToRemove.Item3);
                 Bass.BASS_ChannelFree(ItemToRemove.Item3);
