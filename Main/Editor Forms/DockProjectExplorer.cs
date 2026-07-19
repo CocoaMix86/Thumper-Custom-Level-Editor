@@ -683,8 +683,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            if (selectedNodes[0].FullPath == TCLE.WorkingFolder.Name)
+            if (selectedNodes[0].FullPath == TCLE.WorkingFolder.Name) {
                 return;
+            }
             if (selectedNodes[0].ImageKey is "folder")
                 return;
             TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File);
@@ -692,6 +693,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeView1_Click(object sender, EventArgs e)
         {
+            if (selectedNodes[0].FullPath == TCLE.WorkingFolder.Name) {
+                TCLE.dockProjectProperties.propertyGridProject.SelectedObject = TCLE.ProjectProperties;
+                TCLE.dockProjectProperties.TabText = $"Project Properties";
+                UtilAudio.PlaySound("UIfolderopen");
+                return;
+            }
             if (btnOpenOnClick.Checked)
                 TCLE.OpenFile(ProjectExplorer.AllFiles[selectedNodes[0]].File);
         }
