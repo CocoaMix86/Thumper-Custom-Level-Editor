@@ -220,7 +220,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 167);
+            this.btnRawImport.Size = new Size(54, 168);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -236,7 +236,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 277);
+            this.labelCollapsePanel2.Location = new Point(0, 276);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -307,7 +307,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 262);
+            this.vScrollBarTrackEditor.Size = new Size(15, 261);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -410,13 +410,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 262);
+            this.trackEditor.Size = new Size(491, 261);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
             this.trackEditor.CellBeginEdit += this.trackEditor_CellBeginEdit;
             this.trackEditor.CellEndEdit += this.trackEditor_CellEndEdit;
-            this.trackEditor.CellFormatting += this.trackEditor_CellFormatting;
             this.trackEditor.CellMouseClick += this.trackEditor_CellMouseClick;
             this.trackEditor.CellMouseDown += this.trackEditor_CellMouseDown;
             this.trackEditor.CellMouseEnter += this.trackEditor_CellMouseEnter;
@@ -504,7 +503,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 262);
+            this.leafToolStrip.Size = new Size(24, 261);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -978,7 +977,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 292;
+            this.splitContainerLeafSide.SplitterDistance = 291;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1029,7 +1028,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
-            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -1041,7 +1039,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 167);
+            this.textEditor.Size = new Size(476, 168);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
@@ -1184,7 +1182,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.dgvMasterView.GridColor = Color.Black;
             this.dgvMasterView.Location = new Point(100, 0);
             this.dgvMasterView.Margin = new Padding(4, 3, 4, 3);
-            this.dgvMasterView.MasterBG = new(1, 1);
+            this.dgvMasterView.MasterBG = (Bitmap)resources.GetObject("dgvMasterView.MasterBG");
             this.dgvMasterView.Name = "dgvMasterView";
             this.dgvMasterView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -1563,7 +1561,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem16.Tag = "jump_high.ent";
             this.toolStripMenuItem16.Text = "Spikes Length 8";
             // 
-            // Form_LeafEditor
+            // EditorLeaf
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -1580,7 +1578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "Form_LeafEditor";
+            this.Name = "EditorLeaf";
             this.Text = "Leaf Editor";
             this.Shown += this.Form_LeafEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).EndInit();

@@ -105,10 +105,12 @@ namespace Thumper_Custom_Level_Editor
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
+                leaf.TrackTimeSigHighlighting();
             }
 
             //save mute to settings
             Properties.Settings.Default.muteapplication = checkMuteApp.Checked;
+            Properties.Settings.Default.muteduck = checkAntiDuck.Checked;
 
             //write keybinds to txt file
             ///File.WriteAllLines($@"{TCLE.AppLocation}\settings\keybinds.txt", keybindfromfile.Select(x => $"{x.Key};{x.Value}"));
@@ -151,6 +153,13 @@ namespace Thumper_Custom_Level_Editor
         {
             if (!checkMuteApp.Checked) {
                 UtilAudio.PlaySound("UIselect");
+            }
+        }
+
+        private void checkAntiDuck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkAntiDuck.Checked) {
+                UtilAudio.PlaySound("duck");
             }
         }
         #endregion

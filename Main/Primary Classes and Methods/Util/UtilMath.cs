@@ -185,5 +185,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
             return _beatcount;
         }
+
+        public static int GetTrackOffset(DataGridView trackEditor)
+        {
+            return (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3) + 4;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using Thumper_Custom_Level_Editor.Properties;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
@@ -25,35 +26,18 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void SetCellBorders(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor)
         {
-            ///If showing grid AND connected bars
-            if (Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
-                //if previous cell value is different than this cell, put in a divider
-                //otherwise remove left border to "merge" cells
-                if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
-                }
-                else if (e.Value != null)
-                    e.Graphics.DrawLine(PenWhite2, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-                else
-                    e.Graphics.DrawLine(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+            bool showGrid = Settings.Default.LeafOptionShowGrid;
+            bool connectBars = Settings.Default.LeafOptionConnectBars;
+            //DrawDivider is true if any of these evaluate true
+            // > connected bars enabled
+            // > current value is null
+            // > current value and previous value are NOT the same
+            bool drawDivider = !connectBars || e.Value == null || !Equals(e.Value, trackEditor[e.ColumnIndex - 1, e.RowIndex].Value);
+            if (showGrid && drawDivider) {
+                //Use a white line if the current value is different than previous
+                e.Graphics.DrawLine(e.Value != null ? PenWhite2 : Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
             }
-            ///If showing grid and NOT connected bats
-            else if (Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
-                e.Graphics.DrawLine(Pens.Black, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-            }
-            ///If NOT showing grid AND connected bars
-            else if (!Properties.Settings.Default.LeafOptionShowGrid && Properties.Settings.Default.LeafOptionConnectBars) {
-                //if previous cell value is different than this cell, put in a divider
-                //otherwise remove left border to "merge" cells
-                if (e.Value != null && e.Value.ToString() == trackEditor[e.ColumnIndex - 1, e.RowIndex].Value?.ToString()) {
-                }
-                else if (e.Value != null)
-                    e.Graphics.DrawLine(PenWhite2, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-            }
-            ///If NOT showing grid and NOT connected bars
-            else if (!Properties.Settings.Default.LeafOptionShowGrid && !Properties.Settings.Default.LeafOptionConnectBars) {
-                //paint nothing
-            }
-
+            //paint the row top and bottom borders
             e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Top, e.CellBounds.Right + 4, e.CellBounds.Top);
             e.Graphics.DrawLine(PenRowBorder, e.CellBounds.Left - 2, e.CellBounds.Bottom, e.CellBounds.Right + 4, e.CellBounds.Bottom);
         }
@@ -81,33 +65,34 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawColors(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
         {
+            var seq = SequencerObjects[e.RowIndex];
             //grey out the track if disabled
-            if (SequencerObjects[e.RowIndex].ReadOnly) {
+            if (seq.ReadOnly) {
                 e.Graphics.FillRectangle(Brushes.Gray, e.CellBounds);
             }
             //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
-            else if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
+            else if (Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false) {
                 if (SequencerObjects[e.RowIndex - 2][e.ColumnIndex].Value != null)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
                 if (SequencerObjects[e.RowIndex - 1][e.ColumnIndex].Value != null)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + e.CellBounds.Height / 5, e.CellBounds.Width, e.CellBounds.Height / 5);
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + e.CellBounds.Height / 5, e.CellBounds.Width, e.CellBounds.Height / 5);
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 2), e.CellBounds.Width, e.CellBounds.Height / 5);
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 2), e.CellBounds.Width, e.CellBounds.Height / 5);
                 if (SequencerObjects[e.RowIndex + 1][e.ColumnIndex].Value != null)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 3), e.CellBounds.Width, e.CellBounds.Height / 5);
                 if (SequencerObjects[e.RowIndex + 2][e.ColumnIndex].Value != null) {
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 5 * 4), e.CellBounds.Width, e.CellBounds.Height / 5);
                 }
             }
             //if a color object, convert the cell value to ARGB and use that
-            else if (SequencerObjects[e.RowIndex].trait_type is "kTraitColor") {
+            else if (seq.trait_type is "kTraitColor") {
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
             }
             //paint the whole cell with the highlighting color
-            else if (SequencerObjects[e.RowIndex].obj_name != "_TuningLayerX" && SequencerObjects[e.RowIndex].category != "PLAY SAMPLE") {
-                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)SequencerObjects[e.RowIndex].highlight_value)
-                    e.Graphics.FillRectangle(SequencerObjects[e.RowIndex].HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
+            else if (seq.obj_name != "_TuningLayerX" && seq.category != "PLAY SAMPLE") {
+                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)seq.highlight_value)
+                    e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
         }
 
@@ -157,63 +142,51 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawText(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq = null)
         {
-            if (e.Value is not null and not "") {
-                //skips a bunch of objects since they display their values differently
-                if (e.RowIndex == -1)
-                    goto skipchecks;
-                if (seq.category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
-                    return;
-                else if (seq.trait_type is "kTraitColor")
-                    return;
-                else if ((Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false))
-                    return;
-                else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex > FrozenColumnOffset && (decimal?)e.Value == (decimal?)seq[e.ColumnIndex - 1].Value)
-                    return;
+            if (e.Value is null or "")
+                return;
+            //skips a bunch of objects since they display their values differently
+            if (e.RowIndex == -1)
+                goto skipchecks;
+            if (seq.category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+                return;
+            else if (seq.trait_type is "kTraitColor")
+                return;
+            else if ((Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false))
+                return;
+            else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex > FrozenColumnOffset && (decimal?)e.Value == (decimal?)seq[e.ColumnIndex - 1].Value)
+                return;
 
-                //Tests highlight color contrast. If low, text color is set to white.
-                if (seq.highlight_color.R < 150 && seq.highlight_color.G < 150 && seq.highlight_color.B < 150)
-                    e.CellStyle.ForeColor = Color.White;
-                else
-                    e.CellStyle.ForeColor = Color.Black;
-                skipchecks:
-                string cellText = e.Value.ToString();
-                //if using vertical text, string width needs to be tested against cell height instead of width
-                //hence why this is in 2 blocks that do almost identical things
-                if (Properties.Settings.Default.LeafOptionVerticalCells) {
-                    Font font = new(TCLE.ImportedFonts.Families[0], 10);
-                    SizeF RealSize = e.Graphics.MeasureString(cellText, font);
-                    if (seq?.friendly_param is "turn" or "turn_auto") {
-                        Rectangle smallbounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
-                        float WidthScaleRatio = (smallbounds.Height + 4) / RealSize.Width;
-                        float HeightScaleRatio = (smallbounds.Width + 4) / RealSize.Height;
-                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), smallbounds, CellFormatVert);
-                    }
-                    else {
-                        float WidthScaleRatio = (e.CellBounds.Height + 4) / RealSize.Width;
-                        float HeightScaleRatio = (e.CellBounds.Width + 4) / RealSize.Height;
-                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormatVert);
-                    }
-                }
-                else {
-                    Font font = new(TCLE.ImportedFonts.Families[0], 10);
-                    SizeF RealSize = e.Graphics.MeasureString(cellText, font);
-                    if (seq?.friendly_param is "turn" or "turn_auto") {
-                        Rectangle smallbounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
-                        float HeightScaleRatio = (smallbounds.Height + 4) / RealSize.Height;
-                        float WidthScaleRatio = (smallbounds.Width + 4) / RealSize.Width;
-                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), smallbounds, CellFormat);
-                    }
-                    else {
-                        float HeightScaleRatio = (e.CellBounds.Height + 4) / RealSize.Height;
-                        float WidthScaleRatio = (e.CellBounds.Width + 4) / RealSize.Width;
-                        float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
-                        e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), new SolidBrush(e.CellStyle.ForeColor), e.CellBounds, CellFormat);
-                    }
-                }
-
+            //Tests highlight color contrast. If low, text color is set to white.
+            if (seq.highlight_color.R < 150 && seq.highlight_color.G < 150 && seq.highlight_color.B < 150)
+                e.CellStyle.ForeColor = Color.White;
+            else
+                e.CellStyle.ForeColor = Color.Black;
+        skipchecks:
+            using var BrushTextColor = new SolidBrush(e.CellStyle.ForeColor);
+            string cellText = e.Value.ToString();
+            //if using vertical text, string width needs to be tested against cell height instead of width
+            //hence why this is in 2 blocks that do almost identical things
+            if (Properties.Settings.Default.LeafOptionVerticalCells) {
+                using Font font = new(TCLE.ImportedFonts.Families[0], 10);
+                SizeF RealSize = e.Graphics.MeasureString(cellText, font);
+                Rectangle bounds = e.CellBounds;
+                if (seq?.friendly_param is "turn" or "turn_auto")
+                    bounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
+                float WidthScaleRatio = (bounds.Height + 4) / RealSize.Width;
+                float HeightScaleRatio = (bounds.Width + 4) / RealSize.Height;
+                float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), BrushTextColor, bounds, CellFormatVert);
+            }
+            else {
+                using Font font = new(TCLE.ImportedFonts.Families[0], 10);
+                SizeF RealSize = e.Graphics.MeasureString(cellText, font);
+                Rectangle bounds = e.CellBounds;
+                if (seq?.friendly_param is "turn" or "turn_auto")
+                    bounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
+                float HeightScaleRatio = (bounds.Height + 4) / RealSize.Height;
+                float WidthScaleRatio = (bounds.Width + 4) / RealSize.Width;
+                float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+                e.Graphics.DrawString(cellText, new Font(TCLE.ImportedFonts.Families[0], ScaleFontSize, GraphicsUnit.Pixel), BrushTextColor, bounds, CellFormat);
             }
         }
 
@@ -226,33 +199,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             int y = e.CellBounds.Top + ((e.CellBounds.Height - IconHeight) / 2);
             //paint the image
             //Object Toggle
-            if (e.ColumnIndex == 0) {
-                if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(Leaf.GlobalDisable ? Properties.Resources.icon_toggle_off : Properties.Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
-                }
-                else {
-                    e.Graphics.DrawImage(seq.enabled ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
-                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
-            }
-            //Audio Mute/Unmute
-            else if (e.ColumnIndex == 1) {
-                if (e.RowIndex == -1) {
-                    e.Graphics.DrawImage(Leaf.GlobalMute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
-                }
-                else {
-                    e.Graphics.DrawImage(seq.mute ? Properties.Resources.icon_audio_mute : Properties.Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
-                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
-            }
-            //Lane Expand
-            else if (e.ColumnIndex == 2) {
-                if (e.RowIndex == -1)
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
-                else if (seq.friendly_lane == "lane center") {
-                    e.Graphics.DrawImage(Properties.Settings.Default.LeafOptionShowLane ? Properties.Resources.icon_lanesgray : Properties.Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
-                    Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
-                }
+            switch (e.ColumnIndex) {
+                case 0:
+                    if (e.RowIndex == -1) {
+                        e.Graphics.DrawImage(Leaf.GlobalDisable ? Resources.icon_toggle_off : Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
+                    }
+                    else {
+                        e.Graphics.DrawImage(seq.enabled ? Resources.icon_toggle_on : Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
+                        Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                    }
+                    break;
+                //Audio Mute/Unmute
+                case 1:
+                    if (e.RowIndex == -1) {
+                        e.Graphics.DrawImage(Leaf.GlobalMute ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                    }
+                    else {
+                        e.Graphics.DrawImage(seq.mute ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                        Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                    }
+                    break;
+                //Lane Expand
+                case 2:
+                    if (e.RowIndex == -1)
+                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                    else if (seq.friendly_lane == "lane center") {
+                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                        Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
+                    }
+                    break;
             }
         }
 
@@ -327,129 +302,119 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void DrawLaneEnds(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq, List<Sequencer_Object> SequencerObjects)
+        public static void DrawLaneEnds(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq, Dictionary<string, Sequencer_Object> lanes)
         {
-            if (seq.friendly_param == "lane center") {
-                if (seq[e.ColumnIndex].InGameValue == 1) {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+            switch (seq.friendly_param) {
+                case "lane center":
+                    if (seq[e.ColumnIndex].InGameValue == 1) {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                            if (lanes.GetValueOrDefault("lane left 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartUp(e);
+                            if (lanes.GetValueOrDefault("lane right 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartDown(e);
                         }
                     }
-                }
-                else {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
+                    else {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                            if (lanes.GetValueOrDefault("lane left 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndUp(e);
+                            if (lanes.GetValueOrDefault("lane right 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndDown(e);
                         }
                     }
-                }
+                    break;
+                case "lane left 1":
+                    if (seq[e.ColumnIndex].InGameValue == 1) {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                            if (lanes.GetValueOrDefault("lane left 2")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartUp(e);
+                            if (lanes.GetValueOrDefault("lane center")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartDown(e);
+                        }
+                    }
+                    else {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                            if (lanes.GetValueOrDefault("lane left 2")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndUp(e);
+                            if (lanes.GetValueOrDefault("lane center")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndDown(e);
+                        }
+                    }
+                    break;
+                case "lane left 2":
+                    if (seq[e.ColumnIndex].InGameValue == 1) {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                            if (lanes.GetValueOrDefault("lane left 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartDown(e);
+                        }
+                    }
+                    else {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                            if (lanes.GetValueOrDefault("lane left 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndDown(e);
+                        }
+                    }
+                    break;
+                case "lane right 1":
+                    if (seq[e.ColumnIndex].InGameValue == 1) {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                            if (lanes.GetValueOrDefault("lane center")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartUp(e);
+                            if (lanes.GetValueOrDefault("lane right 2")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartDown(e);
+                        }
+                    }
+                    else {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                            if (lanes.GetValueOrDefault("lane center")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndUp(e);
+                            if (lanes.GetValueOrDefault("lane right 2")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndDown(e);
+                        }
+                    }
+                    break;
+                case "lane right 2":
+                    if (seq[e.ColumnIndex].InGameValue == 1) {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 0) {
+                            if (lanes.GetValueOrDefault("lane right 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneStartUp(e);
+                        }
+                    }
+                    else {
+                        if (seq[e.ColumnIndex - 1].InGameValue == 1) {
+                            if (lanes.GetValueOrDefault("lane right 1")?[e.ColumnIndex].InGameValue == 1)
+                                DrawLaneEndUp(e);
+                        }
+                    }
+                    break;
             }
-            else if (seq.friendly_param == "lane left 1") {
-                if (seq[e.ColumnIndex].InGameValue == 1) {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
-                        }
-                    }
-                }
-                else {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 2")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
-                        }
-                    }
-                }
-            }
-            else if (seq.friendly_param == "lane left 2") {
-                if (seq[e.ColumnIndex].InGameValue == 1) {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
-                        }
-                    }
-                }
-                else {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane left 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
-                        }
-                    }
-                }
-            }
-            else if (seq.friendly_param == "lane right 1") {
-                if (seq[e.ColumnIndex].InGameValue == 1) {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
-                        }
-                    }
-                }
-                else {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane center")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
-                        }
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 2")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
-                        }
-                    }
-                }
-            }
-            else if (seq.friendly_param == "lane right 2") {
-                if (seq[e.ColumnIndex].InGameValue == 1) {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 0) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
-                            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
-                        }
-                    }
-                }
-                else {
-                    if (seq[e.ColumnIndex - 1].InGameValue == 1) {
-                        if (SequencerObjects.FirstOrDefault(x => x.friendly_param == "lane right 1")?[e.ColumnIndex].InGameValue == 1) {
-                            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
-                            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
-                        }
-                    }
-                }
-            }
+        }
+        public static void DrawLaneStartUp(DataGridViewCellPaintingEventArgs e)
+        {
+            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
+            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Top, e.CellBounds.Left + 6, e.CellBounds.Bottom);
+        }
+        public static void DrawLaneStartDown(DataGridViewCellPaintingEventArgs e)
+        {
+            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left - (e.CellBounds.Width / 3), e.CellBounds.Bottom, e.CellBounds.Left, e.CellBounds.Top);
+            e.Graphics.DrawLine(PenGreen6, e.CellBounds.Left - (e.CellBounds.Width / 3) + 6, e.CellBounds.Bottom, e.CellBounds.Left + 6, e.CellBounds.Top);
+        }
+        public static void DrawLaneEndUp(DataGridViewCellPaintingEventArgs e)
+        {
+            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Top);
+            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Top);
+        }
+        public static void DrawLaneEndDown(DataGridViewCellPaintingEventArgs e)
+        {
+            e.Graphics.DrawLine(PenBlack6, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3), e.CellBounds.Bottom);
+            e.Graphics.DrawLine(PenRed6, e.CellBounds.Left - 6, e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 3) - 6, e.CellBounds.Bottom);
         }
 
         public static Pen ArrowHighlight = new(Brushes.White, 5) { EndCap = LineCap.Triangle, CustomEndCap = new AdjustableArrowCap(3, 1) };
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                using Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
@@ -459,24 +424,25 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 float endX = (e.CellBounds.Left + (e.CellBounds.Width / 2)) + (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Cos(angleRadians));
                 float endY = (e.CellBounds.Top + (e.CellBounds.Height / 3)) - (float)((Math.Min(e.CellBounds.Width / 2, e.CellBounds.Height / 3)) * Math.Sin(angleRadians));
 
+                decimal angle = UtilMath.mod((decimal)e.Value, 360);
                 if ((decimal)e.Value > 0) {
-                    if (UtilMath.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                    if (angle is (> 0 and <= 45) or (> 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                    else if (angle is (> 45 and <= 135))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                    else if (angle is (> 135 and <= 225))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                    else if (angle is (> 225 and <= 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
                 }
                 else if ((decimal)e.Value < 0) {
-                    if (UtilMath.mod((decimal)e.Value, 360) is (> 0 and <= 45) or (> 315))
+                    if (angle is (> 0 and <= 45) or (> 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) + 1, endX, endY + 1);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 45 and <= 135))
+                    else if (angle is (> 45 and <= 135))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) + 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX + 1, endY);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 135 and <= 225))
+                    else if (angle is (> 135 and <= 225))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3) - 1, endX, endY - 1);
-                    else if (UtilMath.mod((decimal)e.Value, 360) is (> 225 and <= 315))
+                    else if (angle is (> 225 and <= 315))
                         e.Graphics.DrawLine(ArrowHighlight, e.CellBounds.Left + (e.CellBounds.Width / 2) - 1, e.CellBounds.Top + (e.CellBounds.Height / 3), endX - 1, endY);
                 }
                 e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3), endX, endY);

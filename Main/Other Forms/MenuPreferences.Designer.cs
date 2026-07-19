@@ -48,6 +48,7 @@ namespace Thumper_Custom_Level_Editor
             this.toolStripTitle = new ToolStripEx();
             this.toolStripLabel1 = new ToolStripLabel();
             this.toolstripFormClose = new ToolStripButton();
+            this.checkAntiDuck = new CheckBox();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabUIColors.SuspendLayout();
@@ -240,6 +241,7 @@ namespace Thumper_Custom_Level_Editor
             // tabAudio
             // 
             this.tabAudio.BackColor = Color.FromArgb(55, 55, 55);
+            this.tabAudio.Controls.Add(this.checkAntiDuck);
             this.tabAudio.Controls.Add(this.checkMuteApp);
             this.tabAudio.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
             this.tabAudio.Location = new Point(124, 4);
@@ -339,6 +341,19 @@ namespace Thumper_Custom_Level_Editor
             this.toolstripFormClose.ToolTipText = "Close";
             this.toolstripFormClose.Click += this.toolstripFormClose_Click;
             // 
+            // checkAntiDuck
+            // 
+            this.checkAntiDuck.AutoSize = true;
+            this.checkAntiDuck.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.checkAntiDuck.ForeColor = Color.White;
+            this.checkAntiDuck.Location = new Point(40, 73);
+            this.checkAntiDuck.Name = "checkAntiDuck";
+            this.checkAntiDuck.Size = new Size(97, 19);
+            this.checkAntiDuck.TabIndex = 1;
+            this.checkAntiDuck.Text = "Disable duck";
+            this.checkAntiDuck.UseVisualStyleBackColor = true;
+            this.checkAntiDuck.CheckedChanged += this.checkAntiDuck_CheckedChanged;
+            // 
             // MenuPreferences
             // 
             this.AutoScaleDimensions = new SizeF(6F, 13F);
@@ -392,5 +407,6 @@ namespace Thumper_Custom_Level_Editor
         private ToolStripEx toolStripTitle;
         private ToolStripLabel toolStripLabel1;
         private ToolStripButton toolstripFormClose;
+        public CheckBox checkAntiDuck;
     }
 }

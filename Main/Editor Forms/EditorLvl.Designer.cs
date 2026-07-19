@@ -500,7 +500,7 @@
             this.btnLvlCopyTunnel.ImageTransparentColor = Color.Magenta;
             this.btnLvlCopyTunnel.Name = "btnLvlCopyTunnel";
             this.btnLvlCopyTunnel.Size = new Size(24, 22);
-            this.btnLvlCopyTunnel.ToolTipText = "Copy selected paths/tunnels";
+            this.btnLvlCopyTunnel.ToolTipText = "Copy selected paths/tunnels.\r\nHold SHIFT to copy all.";
             this.btnLvlCopyTunnel.Click += this.btnLvlCopyTunnel_Click;
             // 
             // btnLvlPasteTunnel
@@ -735,7 +735,7 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += this.timer1_Tick;
             // 
-            // Form_LvlEditor
+            // EditorLvl
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -751,7 +751,7 @@
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "Form_LvlEditor";
+            this.Name = "EditorLvl";
             this.Text = "Lvl Editor";
             this.Shown += this.Form_LvlEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).EndInit();

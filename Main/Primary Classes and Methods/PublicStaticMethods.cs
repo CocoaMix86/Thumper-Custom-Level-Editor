@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using NAudio.Wave;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
@@ -13,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variable
         //Static
-        public static string VersionNumber = "3.0.0-a66";
+        public static string VersionNumber = "3.0.0-a68";
         public static decimal LeafQuickValue1 = 1.000m;
         public static decimal LeafQuickValue2 = 1.000m;
         public static decimal LeafQuickValue3 = 1.000m;
@@ -37,15 +38,12 @@ namespace Thumper_Custom_Level_Editor
         //
         #endregion
 
+        private static readonly PropertyInfo? DoubleBufferedProperty = typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
         public static void DoubleBufferDGV(DataGridView grid)
         {
-            //double buffering for DGV, found here: https://10tec.com/articles/why-datagridview-slow.aspx
-            //used to significantly improve rendering performance
-            if (!SystemInformation.TerminalServerSession) {
-                Type dgvType = grid.GetType();
-                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-                pi.SetValue(grid, true, null);
-            }
+            if (SystemInformation.TerminalServerSession)
+                return;
+            DoubleBufferedProperty?.SetValue(grid, true);
         }
         /*
         public static void GenerateColumnStyle(IEnumerable<DataGridViewColumn> columns, int offset = 0)
@@ -216,20 +214,21 @@ namespace Thumper_Custom_Level_Editor
         public static void UpdateEditorsWithSamples()
         {
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            var _samples = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
 
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
-            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl))) {
+            foreach (EditorLvl lvl in TCLE.Documents.Values.OfType<EditorLvl>()) {
                 //load loop track names and paths to lvlLoopTracks DGV
-                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = _samples;
             }
         }
 
         //check if at least 1 master file exists
         public static bool CheckForMaster()
         {
-            return ProjectExplorer.Files.Any(x => x.Extension is ".master");
+            return ProjectExplorer.Files.Any(x => string.Equals(x.Extension, ".master", StringComparison.OrdinalIgnoreCase));
         }
 
         public static EditorBase OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
@@ -237,15 +236,8 @@ namespace Thumper_Custom_Level_Editor
             if (filepath == null)
                 return null;
             //if item is an image, open in image viewer instead of a DockContent
-            if (ImageExtensions.Contains(filepath.Extension.ToLower())) {
-                Image theimage = null;
-                using (FileStream fs = new(filepath.FullName, FileMode.Open)) {
-                    theimage = Image.FromStream(fs);
-                }
-                ImageViewer image = new(theimage) { Text = filepath.Name };
-                image.Show();
+            if (TryOpenImage(filepath))
                 return null;
-            }
             //if item is not an editor type, open raw
             if (!ProjectExtensions.Contains(filepath.Extension.ToLower())) {
                 openraw = true;
@@ -290,22 +282,30 @@ namespace Thumper_Custom_Level_Editor
             //this finds a pane in the active workspace that has matching extensions already open on it
             DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
 
-            EditorBase OpenFile = new(null);
+            EditorBase OpenFile = new(null) { DockAreas = DockAreas.Document | DockAreas.Float };
             if (filepath.Extension == ".master") {
-                OpenFile = new EditorMaster(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorMaster(_load, filepath);
             }
             else if (filepath.Extension == ".lvl") {
-                OpenFile = new EditorLvl(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorLvl(_load, filepath);
             }
             else if (filepath.Extension == ".gate") {
-                OpenFile = new EditorGate(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorGate(_load, filepath);
             }
             else if (filepath.Extension == ".leaf") {
-                OpenFile = new EditorLeaf(_load, filepath, Playback.Generating) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);
             }
             else if (filepath.Extension == ".samp") {
-                OpenFile = new EditorSample(_load, filepath) { DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorSample(_load, filepath);
             }
+
+            TCLE.Instance.toolStripWindowCloseTab.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseEditors.Enabled = true;
+            TCLE.Instance.toolStripMenuItem7.Enabled = true;
+            TCLE.Instance.toolstripWindowCloseFiletype.Enabled = true;
+            TCLE.Instance.toolstripWindowFloat.Enabled = true;
+            TCLE.Instance.toolstripWindowFloatAll.Enabled = true;
+            TCLE.Instance.toolstripWindowDock.Enabled = true;
             //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return OpenFile;
@@ -313,6 +313,20 @@ namespace Thumper_Custom_Level_Editor
             else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
 
             return null;
+        }
+
+        public static bool TryOpenImage(FileInfo file)
+        {
+            if (!ImageExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase))
+                return false;
+
+            Image theimage = null;
+            using (FileStream fs = new(file.FullName, FileMode.Open)) {
+                theimage = Image.FromStream(fs);
+            }
+            new ImageViewer(theimage) { Text = file.Name }.Show();
+            
+            return true;
         }
 
         public static void CloseFile(FileInfo filepath)
@@ -361,42 +375,33 @@ namespace Thumper_Custom_Level_Editor
             */
         }
 
-        public static void FindEditorRunMethod(Type editor, string method)
+        public static void FindEditorRunMethod(Type editorType, string methodName)
         {
-            foreach (IDockContent document in TCLE.Documents.Values.Where(x => x.GetType() == editor)) {
-                document.GetType().GetMethod(method).Invoke(document, null);
+            var method = editorType.GetMethod(methodName);
+            if (method == null)
+                return;
+
+            foreach (var document in TCLE.Documents.Values.Where(x => editorType.IsInstanceOfType(x))) {
+                method.Invoke(document, null);
             }
         }
 
         public static bool AnyUnsaved(DockWorkspace work = null, Type type = null)
         {
-            //Different save check method depending on what files are to be closed
-
-            //closing an entire workspace
+            IEnumerable<EditorBase> _documentsToCheck;
+            //if closing 1 specific workspace, compile the documents in it
             if (work != null) {
-                //closing a specific file type
-                if (type != null) {
-                    foreach (EditorBase document in work.dockMain.Documents.Where(x => x.GetType() == type)) {
-                        if (!document.Saved)
-                            return true;
-                    }
-                }
-                //closing all in workspace
-                else {
-                    foreach (EditorBase document in work.dockMain.Documents) {
-                        if (!document.Saved)
-                            return true;
-                    }
-                }
+                _documentsToCheck = work.dockMain.Documents.Cast<EditorBase>();
+                //if closing 1 specific file type, filter the documents to just that type.
+                if (type != null)
+                    _documentsToCheck = _documentsToCheck.Where(d => d.GetType() == type);
             }
-            //closing everything
+            //otherwise compile all documents currently open
             else {
-                foreach (EditorBase document in TCLE.Documents.Values) {
-                    if (!document.Saved)
-                        return true;
-                }
+                _documentsToCheck = TCLE.Documents.Values;
             }
-            return false;
+            //returns true if ANY is NOT saved
+            return _documentsToCheck.Any(d => !d.Saved);
         }
 
         public void ConvertProjectToNew()

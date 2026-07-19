@@ -78,7 +78,7 @@ namespace Thumper_Custom_Level_Editor
 
         public string obj_name { get; set; }
         public string param_path { get; set; }
-        public string param_path_lane => this.param_path.Contains('.') ? this.param_path.Split('.')[1] : "none";
+        public string param_path_lane => this.param_path == null ? "none" : (this.param_path.Contains('.') ? this.param_path.Split('.')[1] : "none");
         public string friendly_lane => TCLE.TrackLaneFriendly[this.param_path_lane];
         public string trait_type { get; set; }
         public bool step { get; set; } = true;
