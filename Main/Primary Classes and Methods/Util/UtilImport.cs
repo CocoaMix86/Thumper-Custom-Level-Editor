@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Thumper_Custom_Level_Editor.Properties;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
@@ -79,27 +81,31 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static void ImportDefaultColors()
         {
+            String _pathdefaultcolors = Path.Combine(TCLE.AppLocation, "settings", "objects_defaultcolors_v3.txt");
             Dictionary<string, Color> ObjectColors = new();
-            if (!File.Exists($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt")) {
-                File.WriteAllText($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
+            if (!File.Exists(_pathdefaultcolors)) {
+                File.WriteAllText(_pathdefaultcolors, Resources.objects_defaultcolors);
             }
-            ObjectColors = File.ReadAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt").ToDictionary(g => g.Split(';')[0], g => Color.FromArgb(int.Parse(g.Split(';')[1])));
+            ObjectColors = File.ReadAllLines(_pathdefaultcolors).Select(line => line.Split(';')).ToDictionary(part => part[0], part => Color.FromArgb(int.Parse(part[1])));
 
             ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //once all the colors are processed, assign them directly to the objects
             foreach (Object_Params obj in TCLE.LeafObjects.Select(x => x.Value)) {
                 obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
-                Bitmap color = new(16, 16);
-                using (Graphics g = Graphics.FromImage(color)) {
-                    g.Clear(value);
+                string _colorkey = obj.defaultcolor.ToArgb().ToString();
+                if (!TCLE.ColorIcons.ContainsKey(_colorkey)) {
+                    Bitmap color = new(16, 16);
+                    using (Graphics g = Graphics.FromImage(color)) {
+                        g.Clear(obj.defaultcolor);
+                    }
+                    TCLE.ColorIcons[_colorkey] = color;
                 }
-                TCLE.ColorIcons.TryAdd(value.ToArgb().ToString(), color);
             }
         }
 
         public static void GetThumperCacheFolder(bool init = false)
         {
-            if (init && Properties.Settings.Default.game_dir != "none")
+            if (init && Settings.Default.game_dir != "none")
                 return;
 
             CommonOpenFileDialog cfd_lvl = new() {
@@ -108,16 +114,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 Title = "Select the folder where Thumper is installed (NOT the cache folder)"
             };
             //check if the game_dir has been set before. It'll be empty if starting for the first time
-            if (Properties.Settings.Default.game_dir == "none")
+            if (Settings.Default.game_dir == "none")
                 cfd_lvl.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
             else
                 //if it's not empty, initialize the FolderBrowser to be whatever was selected last
-                cfd_lvl.InitialDirectory = Properties.Settings.Default.game_dir;
+                cfd_lvl.InitialDirectory = Settings.Default.game_dir;
             //show FolderBrowser, and then set "game_dir" to whatever is chosen
             if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
-                Properties.Settings.Default.game_dir = cfd_lvl.FileName;
+                Settings.Default.game_dir = cfd_lvl.FileName;
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
     }
 }

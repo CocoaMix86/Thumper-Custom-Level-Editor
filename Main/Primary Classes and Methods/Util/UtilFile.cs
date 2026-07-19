@@ -10,73 +10,53 @@ using System.Threading.Tasks;
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
     public static class UtilFile
-    {/*
-        public static void AddFileLock(FileInfo file)
-        {
-            if (file == null)
-                return;
-            if (!TCLE.lockedfiles.Any(x => x.Key.FullName == file.FullName)) {
-                lockedfiles.Add(file, new FileStream(file.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite));
-            }
-        }*/
-
-        public static void WriteFileLock(FileStream fs, JObject _save)
-        {
-            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
-                fs.SetLength(0);
-                sr.Write(tosave);
-            }
-        }
-
+    {
         public static void WriteFileLock(string fs, string _save)
         {
-            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, _save.Length, true)) {
+            using (StreamWriter sr = new(new FileStream(fs, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, _save.Length, true)) {
                 sr.Write(_save);
             }
         }
 
         public static void WriteFileLock(FileStream fs, string _save)
         {
-            string tosave = _save;
-            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, tosave.Length, true)) {
+            using (StreamWriter sr = new(fs, System.Text.Encoding.UTF8, _save.Length, true)) {
+                fs.Position = 0;
                 fs.SetLength(0);
-                sr.Write(tosave);
+                sr.Write(_save);
             }
         }
 
         public static void WriteFileLock(string fs, JObject _save)
         {
-            string tosave = JsonConvert.SerializeObject(_save, Formatting.Indented);
-            File.Delete(fs);
-            using (StreamWriter sr = new(new FileStream(fs, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite), System.Text.Encoding.UTF8, tosave.Length, true)) {
-                sr.Write(tosave);
-            }
+            WriteFileLock(fs, JsonConvert.SerializeObject(_save, Formatting.Indented));
+        }
+
+        public static void WriteFileLock(FileStream fs, JObject _save)
+        {
+            WriteFileLock(fs, JsonConvert.SerializeObject(_save, Formatting.Indented));
         }
 
         public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
         {
-            object _load;
             if (!File.Exists(_selectedfilename))
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
                 if (LoadText) {
-                    _load = textReader.ReadToEnd();
+                    return textReader.ReadToEnd();
                 }
                 else {
                     try {
-                        _load = JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                        return JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
                     } catch (Exception) {
                         MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
-                        _load = null;
+                        return null;
                     }
                 }
             }
-
-            return _load;
         }
         /*
         public static void DeleteFileLock(FileInfo filetodelete)
@@ -172,7 +152,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             string referencefiles = "";
             //search all files in the project folder
-            foreach (FileInfo file in TCLE.WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => TCLE.ProjectExtensions.Contains(x.Extension))) {
+            //looking only in approved extensions as to not search massive audio files
+            foreach (FileInfo file in TCLE.WorkingFolder.GetFiles("*", SearchOption.AllDirectories).Where(x => TCLE.ProjectExtensions.Contains(x.Extension, StringComparer.OrdinalIgnoreCase))) {
                 //skip self to not include self
                 if (file.Name == searchreference)
                     continue;
