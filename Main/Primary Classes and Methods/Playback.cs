@@ -3,7 +3,6 @@ using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Midi;
-using static System.Windows.Forms.DataFormats;
 
 namespace Thumper_Custom_Level_Editor
 { 
@@ -49,6 +48,7 @@ namespace Thumper_Custom_Level_Editor
         public static int GlobalCurrentOffset = -1;
         public static int GlobalCurrentOffsetLvl = -1;
         public static int GlobalCurrentOffsetGate = -1;
+        public static Dictionary<int, int> VolumeKeys = new();
 
         public static void Initialize(string _Type)
         {
@@ -88,6 +88,30 @@ namespace Thumper_Custom_Level_Editor
             //load soundfont
             MidiSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2", BASSFlag.BASS_MIDI_FONT_MMAP);
             MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0)};
+            //cache volumes
+            VolumeKeys = new() {
+                [1] = Properties.Settings.Default.VolKey1,
+                [2] = Properties.Settings.Default.VolKey2,
+                [3] = Properties.Settings.Default.VolKey3,
+                [4] = Properties.Settings.Default.VolKey4,
+                [5] = Properties.Settings.Default.VolKey5,
+                [6] = Properties.Settings.Default.VolKey6,
+                [7] = Properties.Settings.Default.VolKey7,
+                [8] = Properties.Settings.Default.VolKey8,
+                [9] = Properties.Settings.Default.VolKey9,
+                [10] = Properties.Settings.Default.VolKey10,
+                [11] = Properties.Settings.Default.VolKey11,
+                [12] = Properties.Settings.Default.VolKey12,
+                [13] = Properties.Settings.Default.VolKey13,
+                [14] = Properties.Settings.Default.VolKey14,
+                [15] = Properties.Settings.Default.VolKey15,
+                [16] = Properties.Settings.Default.VolKey16,
+                [17] = Properties.Settings.Default.VolKey17,
+                [18] = Properties.Settings.Default.VolKey18,
+                [19] = Properties.Settings.Default.VolKey19,
+                [20] = Properties.Settings.Default.VolKey20,
+                [21] = Properties.Settings.Default.VolKey21
+            };
         }
 
         ///SOUNDFONT DETAILS
@@ -415,7 +439,6 @@ namespace Thumper_Custom_Level_Editor
         }
 
         /// Key and Channel are the same thing
-        public static int Pitch = 8192;
         public static int CallOffset = 8;
         public static int BeatOffset = 0;
         public static void AddNoteToChannel(double beat, int key, int call, int callkey, bool mute = false)
@@ -425,17 +448,18 @@ namespace Thumper_Custom_Level_Editor
             beat = (beat + CallOffset + BeatOffset) * 100;
             call *= 100;
             if (call > 0) {
-                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{callkey}"])), callkey, (int)beat - call, 0));
+                SequencerEvents[callkey].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)callkey, (byte)(mute ? 0 : VolumeKeys[callkey])), callkey, (int)beat - call, 0));
             }
-
+            //key is -1 if there's no note to play
             if (key != -1) {
-                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), key, (int)beat, 0));
-                //bar collect also plays ring collect noise
+                SequencerEvents[key].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)key, (byte)(mute ? 0 : VolumeKeys[key])), key, (int)beat, 0));
+                //bar collect key 20 also needs to play ring collect sound
                 if (key == 20)
-                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(mute ? 0 : (int)Properties.Settings.Default[$"VolKey{key}"])), 19, (int)beat, 0));
+                    SequencerEvents[19].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)19, (byte)(mute ? 0 : VolumeKeys[key])), 19, (int)beat, 0));
             }
         }
 
+        public static int Pitch = 8192;
         enum BeetleState { Normal, Grind, Fly, FlyGrind, LongFly, LongFlyGrind };
         public static void PitchShiftingBarsRings()
         {
@@ -533,77 +557,98 @@ namespace Thumper_Custom_Level_Editor
             GlobalSequencerEvents[20].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
         }
 
+        public enum TurnState { None, Left, LongLeft, Right, LongRight };
         public static void MidiEventsForTurns(Sequencer_Object Seq)
         {
-            int IsTurning = 0;
-            SeqDataPoint lastprocessed = null;
+            //int _IsTurning = 0;
+            TurnState _turnstate = TurnState.None;
+            SeqDataPoint _lastprocessedbeat = null;
             for (int x = EditorLeaf.FrozenColumnOffset; x < LeafLastBeat + EditorLeaf.FrozenColumnOffset; x++)
             {
-                lastprocessed = Seq[x];
+                _lastprocessedbeat = Seq[x];
                 //account for default value being +-15
-                decimal valuetotest = Seq[x].Value == null ? (decimal)Seq.defaultvalue : (decimal)Seq[x].Value;
-                if (valuetotest >= 15) {
-                    if (IsTurning == -1) {
+                decimal _turndegree = (decimal?)Seq[x].Value ?? Seq.defaultvalue;
+                //current beat turning left
+                if (_turndegree >= 15) {
+                    //-1 = previous beat was turning the otherway. Play the turn left appear sound
+                    if (_turnstate is TurnState.Right or TurnState.LongRight) {
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 10);
-                        IsTurning = 1;
+                        _turnstate = TurnState.Left;
                     }
-                    else if (IsTurning == 1) {
-                        IsTurning = 2;
+                    //1 = turn is ongoing. Play the long turn sound
+                    else if (_turnstate == TurnState.Left) {
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 11);
+                        _turnstate = TurnState.LongLeft;
                     }
-                    else if (IsTurning == 2) {
+                    //2 = long turn still going. Add blank note
+                    else if (_turnstate == TurnState.LongLeft) {
                         AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
                     }
-                    else if (IsTurning == 0)
-                        IsTurning = 1;
+                    //0 = turn has not started. Update to 1 to trigger on next loop
+                    else if (_turnstate == TurnState.None)
+                        _turnstate = TurnState.Left;
                 }
-                else if (valuetotest <= -15) {
-                    if (IsTurning == 1) {
+                //current beat turning right
+                else if (_turndegree <= -15) {
+                    //1 = previous beat was turning the otherway. Play the turn left appear sound
+                    if (_turnstate is TurnState.Left or TurnState.LongLeft) {
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 12);
-                        IsTurning = -1;
+                        _turnstate = TurnState.Right;
                     }
-                    else if (IsTurning == -1) {
-                        IsTurning = -2;
+                    else if (_turnstate == TurnState.Right) {
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 11);
+                        _turnstate = TurnState.LongRight;
                     }
-                    else if (IsTurning == -2) {
+                    else if (_turnstate == TurnState.LongRight) {
                         AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
                     }
-                    else if (IsTurning == 0)
-                        IsTurning = -1;
+                    else if (_turnstate == TurnState.None)
+                        _turnstate = TurnState.Right;
                 }
+                //current beat not turning
                 else {
-                    if (IsTurning == -1)
+                    //if last beat turned, play the turn right sound
+                    if (_turnstate == TurnState.Left)
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 10);
-                    else if (IsTurning == 1)
+                    //if last beat turned, play the turn left sound
+                    else if (_turnstate == TurnState.Right)
                         AddNoteToChannel(Seq[x].beat - 1, 13, 8, 12);
-                    else if (IsTurning is 2 or -2)
+                    //if last beat was long turning, do nothing
+                    else if (_turnstate is TurnState.LongRight or TurnState.LongLeft)
                         AddNoteToChannel(Seq[x].beat - 1, 22, 0, 0, true);
-                    IsTurning = 0;
+                    //reset turning tracker
+                    _turnstate = TurnState.None;
                 }
             }
             //handle last beat
-            if (IsTurning == -1)
-                AddNoteToChannel(lastprocessed.beat, 13, 8, 10);
-            else if (IsTurning == 1)
-                AddNoteToChannel(lastprocessed.beat, 13, 8, 12);
-            else if (IsTurning is 2 or -2)
-                AddNoteToChannel(lastprocessed.beat, 22, 0, 0, true);
+            if (_turnstate == TurnState.Left)
+                AddNoteToChannel(_lastprocessedbeat.beat, 13, 8, 10);
+            else if (_turnstate == TurnState.Right)
+                AddNoteToChannel(_lastprocessedbeat.beat, 13, 8, 12);
+            else if (_turnstate is TurnState.LongRight or TurnState.LongLeft)
+                AddNoteToChannel(_lastprocessedbeat.beat, 22, 0, 0, true);
         }
 
         public static void MidiEventsForLanes(Sequencer_Object Seq)
         {
+            //All Seqs that come through here will always be lanes. I don't have to test for other things.
             for (int x = 1; x < LeafLastBeat; x++)
             {
-                decimal? value = (decimal?)Seq[x].Value;
+                //get the current beat value
+                decimal? _laneState = (decimal?)Seq[x].Value;
+                //switch logic depending if the default per beat is 0 or 1.
+                //if lane's default is off...
                 if (Seq.defaultvalue == 0) {
-                    if (value is 0 or null) {
+                    //if the current value is default (0) and the beat BEHIND was filled (1), play the lane end sound.
+                    if (_laneState is 0 or null) {
                         if ((decimal?)Seq[x - 1].Value == 1)
                             AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
                 }
+                //if lane's default is on...
                 else if (Seq.defaultvalue == 1) {
-                    if (value is 0) {
+                    //if the current value is 0 the beat BEHIND is default, play the lane end sound.
+                    if (_laneState is 0) {
                         if ((decimal?)Seq[x - 1].Value is 1 or null)
                             AddNoteToChannel(Seq[x].beat - 1, -1, 8, 21);
                     }
@@ -639,22 +684,23 @@ namespace Thumper_Custom_Level_Editor
                         length = 150;
                         break;
                 }
-
-                foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
-                    //find events that fall inside the sentry activation time
+                //Get all datapoints for the sentry that are 1
+                foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.InGameValue == 1)) {
+                    //find thump events that fall inside the sentry activation time
                     foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > ((sdp.beat + BeatOffset + CallOffset) *100) && x.tick <= (sdp.beat + length + BeatOffset + CallOffset) *100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
                         if (!EventsToAdd15.Any(x => x.tick == _event.tick - 400)) {
                             //Sentry call happens 4 beats ahead (400 ticks)
-                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)(int)Properties.Settings.Default[$"VolKey16"]), 16, _event.tick - 400, 0));
+                            EventsToAdd15.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)16, (byte)VolumeKeys[16]), 16, _event.tick - 400, 0));
                         }
                     }
+                    //if the sentry's end time is within the playback bounds, add the sentry exit sound
                     if (sdp.beat + length < LeafLastBeat) {
-                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)(int)Properties.Settings.Default[$"VolKey15"]), 15, (sdp.beat + length + CallOffset + BeatOffset) * 100, 0));
+                        EventsToAdd16.Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)15, (byte)VolumeKeys[15]), 15, (sdp.beat + length + CallOffset + BeatOffset) * 100, 0));
                     }
                 }
             }
-
+            //sort all the added events, as sometimes the get added out of order with repeated calls to this function
             SequencerEvents[15] = EventsToAdd15;
             SequencerEvents[15].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             SequencerEvents[16] = EventsToAdd16;
@@ -664,6 +710,7 @@ namespace Thumper_Custom_Level_Editor
         private static int SpeedPitch = 8192;
         public static void MidiEventsForSpeed(Sequencer_Object Seq)
         {
+            //skipping for now since the logic doesn't quite work
             return;
             if (Seq == null)
                 return;
@@ -693,15 +740,18 @@ namespace Thumper_Custom_Level_Editor
                 GlobalSamplesToPlay.Add(Seq.obj_name);
                 GlobalSampleEvents.Add(new());
             }
+            int _sampleIndex = GlobalSamplesToPlay.IndexOf(Seq.obj_name);
             //get the sampledata to calculate the volume it should be played at
             SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == Seq.obj_name);
+            //default to 100 if volume is somehow not set
             int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+            //then further tune velocity using the master volume setting
             velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
-            if (velocity > 127)
-                velocity = 127;
+            //clamp
+            velocity = Math.Clamp(velocity, 0, 127);
             //write each data point as a sample event
             foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null && x.beat < LeafLastBeat)) {
-                GlobalSampleEvents[GlobalSamplesToPlay.IndexOf(Seq.obj_name)].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(GlobalSamplesToPlay.IndexOf(Seq.obj_name) + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
+                GlobalSampleEvents[_sampleIndex].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(_sampleIndex + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
             }
         }
 

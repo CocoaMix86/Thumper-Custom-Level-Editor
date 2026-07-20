@@ -19,7 +19,8 @@ namespace Thumper_Custom_Level_Editor
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public static Dictionary<string, Object_Params> LeafObjects = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
-        public static List<SampleData> ProjectSamples = new();
+        //public static List<SampleData> ProjectSamples = new();
+        public static Dictionary<string, SampleData> ProjectSamples = new();
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
@@ -113,7 +114,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             ProjectSamples.Clear();
             //add default empty sample
-            ProjectSamples.Add(new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
+            ProjectSamples.Add("", new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
             string warning = "";
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "?!?!default?!?!?!?.samp")) {
@@ -122,7 +123,7 @@ namespace Thumper_Custom_Level_Editor
             }
             if (warning.Length > 2)
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
-            ProjectSamples = ProjectSamples.OrderBy(w => w.obj_name).ToList();
+            ProjectSamples = ProjectSamples.OrderBy(w => w.Value.obj_name).ToDictionary();
             //
             if (Properties.Settings.Default.RuntimeAsk) {
                 CheckboxDialog Ask = new();
@@ -147,7 +148,9 @@ namespace Thumper_Custom_Level_Editor
         public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, bool updateeditors, out string warning)
         {
             //remove samples that match the incoming sample file, so that they're rewritten
-            ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            foreach (var _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
+                ProjectSamples.Remove(_samp.Key);
+            //ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //parse file to JSON
             dynamic _in = UtilFile.LoadFileLock(SampFile.FullName);
             warning = "";
@@ -156,13 +159,14 @@ namespace Thumper_Custom_Level_Editor
                 return;
             //iterate over items:[] list to get each sample and add names to list
             foreach (dynamic _samp in _in["items"]) {
-                if (ProjectSamples.Any(x => x.obj_name == (string)_samp["obj_name"])) {
+                //if (ProjectSamples.Any(x => x.Value.obj_name == (string)_samp["obj_name"])) {
+                if (ProjectSamples.ContainsKey((string)_samp["obj_name"])) {
                     if (!preserveSamples)
-                        warning += $"{_samp["obj_name"]} in {SampFile.FullName}\n{_samp["obj_name"]} in {ProjectSamples.First(x => x.obj_name == (string)_samp["obj_name"]).File.FullName}\n";
+                        warning += $"{_samp["obj_name"]} in {SampFile.FullName}\n{_samp["obj_name"]} in {ProjectSamples[(string)_samp["obj_name"]].File.FullName}\n";
                     else
                         continue;
                 }
-                ProjectSamples.Add(new SampleData {
+                ProjectSamples.Add((string)_samp["obj_name"], new SampleData {
                     obj_name = ((string)_samp["obj_name"]),
                     path = _samp["path"],
                     volume = _samp["volume"],
@@ -181,21 +185,24 @@ namespace Thumper_Custom_Level_Editor
 
         public static void RemoveProjectSamples(FileInfo SampFile)
         {
-            TCLE.ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            //TCLE.ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
+            //remove samples that match the incoming sample file, so that they're rewritten
+            foreach (var _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
+                ProjectSamples.Remove(_samp.Key);
             UpdateEditorsWithSamples();
         }
 
         public static void UpdateEditorsWithSamples()
         {
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            var _samples = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
+            //var _samples = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
 
             foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
             }
             foreach (EditorLvl lvl in TCLE.Documents.Values.OfType<EditorLvl>()) {
                 //load loop track names and paths to lvlLoopTracks DGV
-                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = _samples;
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = ProjectSamples;
             }
         }
 
