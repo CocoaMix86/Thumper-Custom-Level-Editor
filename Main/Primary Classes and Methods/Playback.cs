@@ -742,7 +742,7 @@ namespace Thumper_Custom_Level_Editor
             }
             int _sampleIndex = GlobalSamplesToPlay.IndexOf(Seq.obj_name);
             //get the sampledata to calculate the volume it should be played at
-            SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == Seq.obj_name);
+            SampleData SampToPlay = TCLE.ProjectSamples[Seq.obj_name];
             //default to 100 if volume is somehow not set
             int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
             //then further tune velocity using the master volume setting
@@ -762,7 +762,7 @@ namespace Thumper_Custom_Level_Editor
                 GlobalLoopTracks.Add(new(Lvl.ParentEditor.WorkingFile.Name, loop.sample, loop.beats));
                 GlobalLoopEvents.Add(new());
                 //get sample data and its volume
-                SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.sample);
+                SampleData SampToPlay = TCLE.ProjectSamples[loop.sample];
                 int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
                 velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
                 if (velocity > 127)
@@ -786,12 +786,12 @@ namespace Thumper_Custom_Level_Editor
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             string _outloops = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             foreach (string sample in GlobalSamplesToPlay) {
-                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == sample));
+                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples[sample]);
                 _out += $"<region> sample={Path.GetFileName(FileName)} key={GlobalSamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
 
             foreach (Tuple<string, string, decimal> loop in GlobalLoopTracks) {
-                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == loop.Item2));
+                string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples[loop.Item2]);
                 _outloops += $"<region> sample={Path.GetFileName(FileName)} key={GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
             }
 

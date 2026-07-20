@@ -503,7 +503,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int offsetportion = UtilMath.GetTrackOffset(trackEditor);
             int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1;
             Sequencer_Object seqref = SequencerObjects[e.RowIndex];
-            SampleData samp = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == seqref.obj_name);
+            SampleData samp = TCLE.ProjectSamples[seqref.obj_name];
             if (samp == null) {
                 if (!SequencerObjects[e.RowIndex].HasShownError) {
                     RowPrePaintError = $@"{SequencerObjects[e.RowIndex].obj_name} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
@@ -1402,7 +1402,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void treeObjects_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space && treeObjects.SelectedNode.Nodes.Count == 0 && treeObjects.SelectedNode.Text.EndsWith(".samp")) {
-                SampleData SampToPlay = TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == treeObjects.SelectedNode.Text);
+                SampleData SampToPlay = TCLE.ProjectSamples[treeObjects.SelectedNode.Text];
                 if (SampToPlay == null || SamplePlaying == SampToPlay)
                     return;
 
@@ -2252,7 +2252,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             Sequencer_Object seq = new() {
                 ParentLeaf = LeafProperties,
-                obj_name = category == "PLAY SAMPLE" ? TCLE.ProjectSamples[TCLE.rng.Next(0, TCLE.ProjectSamples.Count)].obj_name : obj.obj_name,
+                obj_name = category == "PLAY SAMPLE" ? TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name : obj.obj_name,
                 category = obj.category,
                 param_path = obj.param_path,
                 friendly_param = obj.param_displayname,

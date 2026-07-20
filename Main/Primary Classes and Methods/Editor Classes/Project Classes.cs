@@ -109,8 +109,8 @@ namespace Thumper_Custom_Level_Editor
                         (tab as EditorLeaf).trackEditor.Invalidate();
                     }
                 }
-                foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Editor != null)) {
-                    samp.UpdateRuntime();
+                foreach (var samp in TCLE.ProjectSamples.Where(x => x.Value.Editor != null)) {
+                    samp.Value.UpdateRuntime();
                 }
             }
         }

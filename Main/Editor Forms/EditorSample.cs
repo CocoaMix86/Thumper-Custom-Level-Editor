@@ -512,7 +512,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     offset = _samp["offset"],
                     channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
                     Editor = this,
-                    time = TCLE.ProjectSamples.First(x => x.obj_name == (string)_samp["obj_name"]).time
+                    time = TCLE.ProjectSamples[(string)_samp["obj_name"]].time
                 });
             }
             SampleList.CollectionChanged += _samplelist_CollectionChanged;
@@ -717,8 +717,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             string _filename = Path.GetFileNameWithoutExtension(filepath);
             //check if a sample with the same name already exists
-            if (TCLE.ProjectSamples.Any(x => x.obj_name == $"{_filename}.samp")) {
-                MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples.First(x => x.obj_name == $"{_filename}.samp").File.FullName}", "Thumper Custom Level Editor");
+            if (TCLE.ProjectSamples.ContainsKey($"{_filename}.samp")) {
+                MessageBox.Show($"A sample with the name \"{_filename}\" already exists in {TCLE.ProjectSamples[$"{_filename}.samp"].File.FullName}", "Thumper Custom Level Editor");
                 return;
             }
 

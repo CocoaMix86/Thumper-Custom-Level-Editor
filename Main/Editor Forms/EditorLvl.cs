@@ -968,7 +968,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs.Clear();
 
             //load loop track names and paths to lvlLoopTracks DGV
-            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DataSource = new BindingSource(TCLE.ProjectSamples, null)/*.Select(x => x.obj_name).ToList()*/;
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).DisplayMember = "Key";
+            ((DataGridViewComboBoxColumn)lvlLoopTracks.Columns[1]).ValueMember = "Value";
             foreach (dynamic samp in _load["loops"]) {
                 LvlProperties.lvlloops.Add(new LvlLoop() {
                     sample = (string)samp["samp_name"],
@@ -1413,7 +1415,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void AudioPlayback(DataGridViewCell CellToPlay)
         {
-            if (UtilAudio.PlaySampleOneOff(CellToPlay, TCLE.ProjectSamples.FirstOrDefault(x => x.obj_name == (string)CellToPlay.OwningRow.Cells[1].Value), out SampChannel)) {
+            if (UtilAudio.PlaySampleOneOff(CellToPlay, TCLE.ProjectSamples[(string)CellToPlay.OwningRow.Cells[1].Value], out SampChannel)) {
                 lvlLoopTracks.InvalidateCell(CellToPlay);
             }
             else {

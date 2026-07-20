@@ -1130,7 +1130,7 @@ namespace Thumper_Custom_Level_Editor
         private void toolstripProjectPreload_Click(object sender, EventArgs e)
         {
             UtilAudio.CalculateSampleRuntimes();
-            foreach (SampleData samp in ProjectSamples) {
+            foreach (SampleData samp in ProjectSamples.Values) {
                 UtilAudio.PCtoAudioFile(samp);
             }
         }

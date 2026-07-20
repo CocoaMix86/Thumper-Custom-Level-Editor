@@ -99,7 +99,7 @@ namespace Thumper_Custom_Level_Editor
                 if (category == "PLAY SAMPLE") {
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
-                    foreach (string file in TCLE.ProjectSamples.Select(x => x.File?.Name).Distinct()) {
+                    foreach (string file in TCLE.ProjectSamples.Select(x => x.Value.File?.Name).Distinct()) {
                         if (string.IsNullOrEmpty(file))
                             continue;
                         TreeNode sampfile = new() {
@@ -107,12 +107,12 @@ namespace Thumper_Custom_Level_Editor
                             ImageKey = "samp",
                             SelectedImageKey = "samp"
                         };
-                        foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.File?.Name == file)) {
+                        foreach (var samp in TCLE.ProjectSamples.Where(x => x.Value.File?.Name == file)) {
                             TreeNode _param = new() {
-                                Text = samp.obj_name,
+                                Text = samp.Value.obj_name,
                                 ImageKey = "none",
                                 SelectedImageKey = "none",
-                                ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
+                                ToolTipText = $"Pitch: {samp.Value.pitch}\nPan: {samp.Value.pan}\nOffset: {samp.Value.offset}\nSelect sample and then hold SPACE to play it",
                                 Tag = "sample.samp;play"
                             };
                             sampfile.Nodes.Add(_param);

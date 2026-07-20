@@ -68,7 +68,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static void CalculateSampleRuntimes()
         {
-            foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.time == 0)) {
+            foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Value.time == 0).Select(x => x.Value)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
                 string _hashedname = UtilMath.HashPCName($"A{samp.path}");
