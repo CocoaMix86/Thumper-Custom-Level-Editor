@@ -1440,7 +1440,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
-                timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
+                timer1.Interval = 30;
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("lvl");
                 Playback.CreatePlaybackFromLvl(LvlProperties);
@@ -1476,8 +1476,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
                     _playingleafform.dgvMasterView.Invalidate();
-                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
-                        _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll) {
+                        int playheadx = (int)Math.Round((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                        int margin = _playingleafform.trackEditor.Width / 3;
+                        if (playheadx > _playingleafform.trackEditor.HorizontalScrollingOffset + margin)
+                            _playingleafform.trackEditor.HorizontalScrollingOffset = playheadx - margin;
+                    }
                 }
             }
             else {

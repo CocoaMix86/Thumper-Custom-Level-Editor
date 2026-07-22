@@ -890,6 +890,7 @@ namespace Thumper_Custom_Level_Editor
             if (Loop) {
                 Bass.BASS_ChannelFlags(MidiStream, BASSFlag.BASS_SAMPLE_LOOP, BASSFlag.BASS_SAMPLE_LOOP);
                 IsLooping = true;
+                //adding +6 to skip call sounds before the first beat
                 if (StartTime > -1)
                     LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime + 6);
                 else

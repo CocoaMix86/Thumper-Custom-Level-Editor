@@ -1038,8 +1038,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _playingleafform.trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                     _playingleafform.trackEditor.Invalidate();
                     _playingleafform.dgvMasterView.Invalidate();
-                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
-                        _playingleafform.trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll) {
+                        int playheadx = (int)Math.Round((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * _playingleafform.trackZoom.Value);
+                        int margin = _playingleafform.trackEditor.Width / 3;
+                        if (playheadx > _playingleafform.trackEditor.HorizontalScrollingOffset + margin)
+                            _playingleafform.trackEditor.HorizontalScrollingOffset = playheadx - margin;
+                    }
                 }
                 //show the lvl that's playing
                 if (_playinglvl != Playback.GlobalCurrentLvl) {

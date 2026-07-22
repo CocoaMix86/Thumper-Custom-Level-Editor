@@ -3473,12 +3473,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 //timer interval twice as small as the bpm (*500ms, instead of *1000ms), so it can keep up with the Playback threading timer
                 //timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
-                timer1.Interval = 10;
+                timer1.Interval = 30;
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(_leafproperties, PlaybackEnd - FrozenColumnOffset);
                 Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll) 
+                        trackEditor.HorizontalScrollingOffset = (int)Math.Round((Math.Max(0, Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat)) * trackZoom.Value);                    
                     timer1.Enabled = true;
                 }
                 else {
@@ -3498,8 +3500,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.PlaybackPosition = (double)(Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat);
                 trackEditor.Invalidate();
                 dgvMasterView.Invalidate();
-                if (Properties.Settings.Default.LeafOptionPlaybackScroll)
-                    trackEditor.HorizontalScrollingOffset = (int)((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
+                if (Properties.Settings.Default.LeafOptionPlaybackScroll) {
+                    int playheadx = (int)Math.Round((Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat) * trackZoom.Value);
+                    int margin = trackEditor.Width / 3;
+                    if (playheadx > trackEditor.HorizontalScrollingOffset + margin)
+                        trackEditor.HorizontalScrollingOffset = playheadx - margin;
+                }
             }
             else {
                 if (PlaybackLoop && !ForceStop)
