@@ -471,129 +471,93 @@ namespace Thumper_Custom_Level_Editor
             //concat turn and thump hits, as they contribute to keeping a combo going
             ComboList = ComboList.Concat(GlobalSequencerEvents[8]).Concat(GlobalSequencerEvents[13]).Concat(GlobalSequencerEvents[20]).Concat(GlobalSequencerEvents[22]).ToList();
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
+            //if no events to pitch shift for, skip method
+            if (ComboList.Count == 0)
+                return;
+            //precompute all unique ring events to lookup later
+            HashSet<int> ringTicks = GlobalSequencerEvents[20].Select(x => x.tick).ToHashSet();
 
             int TimerGrindState = 0;
             int TimerCombo = 0;
-            List<int> PitchShiftsToProcess = new();
+            bool resetPitch = false;
+            HashSet<int> PitchShiftsToProcess = new();
 
             //8 = thump, 13 = turn, 19 = bar, 20 = ring, 22 = turn long
-            for (int x = 0; x < ComboList.Last().tick; x+=100) {
+            int currentTickStart = 0;
+            int eventIndex = 0;
+            int lastTick = ComboList.Last().tick;
+
+            while (currentTickStart <= lastTick) {
                 //go over list in 100 tick increments to simulate progressing beats
-                foreach (BASS_MIDI_EVENT _thisbeat in ComboList.Where(_event => _event.tick >= x && _event.tick < x + 100 ).ToList()) {
+                while (eventIndex < ComboList.Count && ComboList[eventIndex].tick < currentTickStart + 100) {
                     //thumps
-                    if (_thisbeat.chan is 8) {
+                    //can initiate the grind state. And if combo is active, re-ups the timer
+                    if (ComboList[eventIndex].chan is 8) {
                         TimerGrindState = 11;
                         if (TimerCombo > 0)
                             TimerCombo = 3;
                     }
                     //turns and long turns
-                    else if (_thisbeat.chan is 13 or 22) {
+                    //re-ups grindstate and combo timers
+                    else if (ComboList[eventIndex].chan is 13 or 22) {
                         if (TimerGrindState > 0)
                             TimerGrindState = 11;
                         if (TimerCombo > 0)
                             TimerCombo = 3;
                     }
                     //find bar only (since rings also play bar sound)
-                    else if (_thisbeat.chan is 19 && !ComboList.Any(_event => _event.chan == 20 && _event.tick == _thisbeat.tick)) {
+                    //starts the combo timer if in grindstate, and re-ups grindstate
+                    else if (ComboList[eventIndex].chan is 19 && !ringTicks.Contains(ComboList[eventIndex].tick)) {
                         if (TimerGrindState > 0) {
                             TimerGrindState = 11;
                             TimerCombo = 3;
-                            PitchShiftsToProcess.Add(_thisbeat.tick);
+                            PitchShiftsToProcess.Add(ComboList[eventIndex].tick);
                         }
                         else if (TimerCombo > 0) {
                             TimerCombo = 3;
-                            PitchShiftsToProcess.Add(_thisbeat.tick);
+                            PitchShiftsToProcess.Add(ComboList[eventIndex].tick);
                         }
                     }
                     //rings
-                    else if (_thisbeat.chan is 20) {
+                    //stops grindstate and starts combo timer no matter what
+                    else if (ComboList[eventIndex].chan is 20) {
                         TimerGrindState = 0;
                         TimerCombo = 3;
-                        PitchShiftsToProcess.Add(_thisbeat.tick);
+                        PitchShiftsToProcess.Add(ComboList[eventIndex].tick);
                     }
-                }
-            }
-            /*
-            bool InCombo = false;
-            bool Smashing = false;
-            bool RaisePitch = false;
-            int LastRingBar = 0;
-            int LastTurn = 0;
-            int LastThump = 0;
-            BeetleState state = BeetleState.Normal;
-            for (int x = 0; x < ComboList.Count; x++) {
-                //8 = thump, 13 = turn, 19 = bar, 20 = ring, 22 = turn long
-                if (ComboList[x].chan is 8 or 13 or 20 or 22) {
-                    if (ComboList[x].chan is 8) {
-                        LastThump = ComboList[x].tick;
-                        if (state is BeetleState.Normal or BeetleState.Grind)
-                            state = BeetleState.FlyGrind;
-                        else if (state is BeetleState.FlyGrind or BeetleState.Fly or BeetleState.LongFly)
-                            state = BeetleState.LongFlyGrind;
 
-                        if (InCombo && LastThump - LastRingBar > 300) {
-                            InCombo = false;
-                        }
-                    }
-                    else if (ComboList[x].chan is 13) {
-                        LastTurn = ComboList[x].tick;
-                        if (state is BeetleState.Fly or BeetleState.FlyGrind)
-                            state = BeetleState.LongFlyGrind;
-
-                        if (InCombo && LastTurn - LastRingBar > 300) {
-                            InCombo = false;
-                        }
-                    }
-                    else if (ComboList[x].chan is 22) {
-                        LastTurn = ComboList[x].tick;
-                        if (state is not BeetleState.Normal)
-                            state = BeetleState.Grind;
-                    }
-                    continue;
-                }
-                LastRingBar = ComboList[x].tick;
-
-                if (InCombo) {
-                    if (ComboList[x].tick - ComboList[x - 1].tick is <= 300 and not 0) {
-                        RaisePitch = true;
-                    }
-                    else {
-                        InCombo = false;
-                    }
-                }
-                else {
-                    if (state is BeetleState.Grind or BeetleState.FlyGrind or BeetleState.LongFlyGrind && LastRingBar - LastThump <= 1100)
-                        InCombo = true;
-                    //check if hit corresponds with a ring. If not and not in combo, play bar breaking at half speed
-                    else if (!GlobalSequencerEvents[20].Any(y => y.tick == LastRingBar)) {
-                        Smashing = true;
-                    }
+                    eventIndex++;
                 }
 
-                if (RaisePitch) {
+                if (TimerGrindState > 0) 
+                    TimerGrindState--;
+                //if combo reaches 0, reset pitch
+                if (TimerCombo > 0) 
+                    TimerCombo--;
+                else if (resetPitch) {
+                    Pitch = 8192;
+                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, currentTickStart - 1, 0));
+                    EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, currentTickStart - 1, 0));
+                    resetPitch = false;
+                }
+
+                foreach (int tick in PitchShiftsToProcess) {
+                    resetPitch = true;
                     if (Pitch < 9824) {
                         Pitch += 136;
-                        EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, LastRingBar - 1, 0));
-                        EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, LastRingBar - 1, 0));
+                        EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, tick - 1, 0));
+                        EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, tick - 1, 0));
                     }
                 }
-                else if (Smashing) {
-                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192 - (136 * 12), 19, LastRingBar - 1, 0));
-                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192, 19, LastRingBar + 50, 0));
-                }
-                //else, reset pitch and start again
-                else {
-                    Pitch = 8192;
-                    EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 19, LastRingBar - 1, 0));
-                    EventsToAdd20.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, Pitch, 20, LastRingBar - 1, 0));
-                }
-                Smashing = false;
-                RaisePitch = false;
-            }*/
+
+                PitchShiftsToProcess.Clear();
+                currentTickStart += 100;
+            }
+            
             //concat new events into lists, then sort by tick to make them chronological
-            GlobalSequencerEvents[19] = GlobalSequencerEvents[19].Concat(EventsToAdd19).ToList();
+            GlobalSequencerEvents[19].AddRange(EventsToAdd19);
             GlobalSequencerEvents[19].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
-            GlobalSequencerEvents[20] = GlobalSequencerEvents[20].Concat(EventsToAdd20).ToList();
+            GlobalSequencerEvents[20].AddRange(EventsToAdd20);
             GlobalSequencerEvents[20].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
         }
 
@@ -958,8 +922,8 @@ namespace Thumper_Custom_Level_Editor
             Application.DoEvents();
             //
             EndBeat += 8; //+ call offset
-            RemoveNegativeTickEvents();
             PitchShiftingBarsRings();
+            RemoveNegativeTickEvents();
             ChannelEnd(EndBeat);
             CreateSampleSoundfont();
 
