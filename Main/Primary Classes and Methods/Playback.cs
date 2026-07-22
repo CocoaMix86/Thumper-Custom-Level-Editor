@@ -469,11 +469,51 @@ namespace Thumper_Custom_Level_Editor
             //combine ring and bar hit events to get a single track of events, in choronological order
             List<BASS_MIDI_EVENT> ComboList = GlobalSequencerEvents[19];//.Concat(SequencerEvents[20]).ToList();
             //concat turn and thump hits, as they contribute to keeping a combo going
-            ComboList = ComboList.Concat(GlobalSequencerEvents[8]).ToList();
-            ComboList = ComboList.Concat(GlobalSequencerEvents[13]).ToList();
-            ComboList = ComboList.Concat(GlobalSequencerEvents[22]).ToList();
+            ComboList = ComboList.Concat(GlobalSequencerEvents[8]).Concat(GlobalSequencerEvents[13]).Concat(GlobalSequencerEvents[20]).Concat(GlobalSequencerEvents[22]).ToList();
             ComboList.Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
 
+            int TimerGrindState = 0;
+            int TimerCombo = 0;
+            List<int> PitchShiftsToProcess = new();
+
+            //8 = thump, 13 = turn, 19 = bar, 20 = ring, 22 = turn long
+            for (int x = 0; x < ComboList.Last().tick; x+=100) {
+                //go over list in 100 tick increments to simulate progressing beats
+                foreach (BASS_MIDI_EVENT _thisbeat in ComboList.Where(_event => _event.tick >= x && _event.tick < x + 100 ).ToList()) {
+                    //thumps
+                    if (_thisbeat.chan is 8) {
+                        TimerGrindState = 11;
+                        if (TimerCombo > 0)
+                            TimerCombo = 3;
+                    }
+                    //turns and long turns
+                    else if (_thisbeat.chan is 13 or 22) {
+                        if (TimerGrindState > 0)
+                            TimerGrindState = 11;
+                        if (TimerCombo > 0)
+                            TimerCombo = 3;
+                    }
+                    //find bar only (since rings also play bar sound)
+                    else if (_thisbeat.chan is 19 && !ComboList.Any(_event => _event.chan == 20 && _event.tick == _thisbeat.tick)) {
+                        if (TimerGrindState > 0) {
+                            TimerGrindState = 11;
+                            TimerCombo = 3;
+                            PitchShiftsToProcess.Add(_thisbeat.tick);
+                        }
+                        else if (TimerCombo > 0) {
+                            TimerCombo = 3;
+                            PitchShiftsToProcess.Add(_thisbeat.tick);
+                        }
+                    }
+                    //rings
+                    else if (_thisbeat.chan is 20) {
+                        TimerGrindState = 0;
+                        TimerCombo = 3;
+                        PitchShiftsToProcess.Add(_thisbeat.tick);
+                    }
+                }
+            }
+            /*
             bool InCombo = false;
             bool Smashing = false;
             bool RaisePitch = false;
@@ -549,7 +589,7 @@ namespace Thumper_Custom_Level_Editor
                 }
                 Smashing = false;
                 RaisePitch = false;
-            }
+            }*/
             //concat new events into lists, then sort by tick to make them chronological
             GlobalSequencerEvents[19] = GlobalSequencerEvents[19].Concat(EventsToAdd19).ToList();
             GlobalSequencerEvents[19].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
@@ -942,7 +982,7 @@ namespace Thumper_Custom_Level_Editor
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat < 0)) {
                 //SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
                 SyncTimer?.Dispose();
-                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 10);
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 15);
                 IsPlaying = true;
             }
             else {
@@ -997,7 +1037,7 @@ namespace Thumper_Custom_Level_Editor
         {
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
             PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
-            PlaybackSubBeat = (PlaybackTick % 100) / 100;
+            PlaybackSubBeat = (PlaybackTick % 100) / 100.0d;
 
             while (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
                 GlobalCurrentOffset = GlobalLeafQueue[0].Item2 / 100;
