@@ -750,7 +750,9 @@ namespace Thumper_Custom_Level_Editor
             //clamp
             velocity = Math.Clamp(velocity, 0, 127);
             //write each data point as a sample event
-            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null && x.beat < LeafLastBeat)) {
+            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>()) {
+                if (sdp.Value == null || sdp.beat >= LeafLastBeat)
+                    continue;
                 GlobalSampleEvents[_sampleIndex].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(_sampleIndex + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
             }
         }
@@ -758,6 +760,9 @@ namespace Thumper_Custom_Level_Editor
         public static void MidiEventLoopTracks(LvlProperties Lvl, int offset = 0, int lvloffset = 0)
         {
             foreach (LvlLoop loop in Lvl.lvlloops) {
+                //skip loops with no lnegth, or less than 0.
+                if (loop.beats <= 0)
+                    continue;
                 //add new entry to the loops
                 GlobalLoopTracks.Add(new(Lvl.ParentEditor.WorkingFile.Name, loop.sample, loop.beats));
                 GlobalLoopEvents.Add(new());
@@ -765,11 +770,9 @@ namespace Thumper_Custom_Level_Editor
                 SampleData SampToPlay = TCLE.ProjectSamples[loop.sample];
                 int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
                 velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
-                if (velocity > 127)
-                    velocity = 127;
+                //clamp
+                velocity = Math.Clamp(velocity, 0, 127);
                 //
-                if (200 + GlobalLoopEvents.Count - 1 == 316)
-                    ;
                 for (decimal x = 0; x < Lvl.beats + Lvl.approachbeats; x += loop.beats) {
                     GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50 + GlobalLoopEvents.Count - 1, (int)((x + CallOffset - offset + lvloffset) * 100), 0));
                 }
@@ -778,49 +781,50 @@ namespace Thumper_Custom_Level_Editor
 
         public static void CreateSampleSoundfont()
         {
-            //skip this if there are no samples
-            //if (SamplesToPlay.Count == 0)
-            //    return;
-
             string path = $@"{TCLE.AppLocation}\temp\";
+            //initialize file beginnings
             string _out = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
             string _outloops = $"<control>\r\ndefault_path={path}\r\n\r\n<group>\r\n\r\n";
+            //output every pc file to a playable audio file
             foreach (string sample in GlobalSamplesToPlay) {
                 string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples[sample]);
                 _out += $"<region> sample={Path.GetFileName(FileName)} key={GlobalSamplesToPlay.IndexOf(sample) + 1}\r\n";
             }
-
+            //same for loop tracks
             foreach (Tuple<string, string, decimal> loop in GlobalLoopTracks) {
                 string FileName = UtilAudio.PCtoAudioFile(TCLE.ProjectSamples[loop.Item2]);
                 _outloops += $"<region> sample={Path.GetFileName(FileName)} key={GlobalLoopTracks.IndexOf(loop) + 1}\r\n";
             }
-
+            //close out files
             _out += "\r\n\r\n";
             _outloops += "\r\n\r\n";
+            //write sound fonts to file
             File.WriteAllText($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz", _out);
             File.WriteAllText($@"{TCLE.AppLocation}\temp\SamplesSoundfontLoops.sfz", _outloops);
-
+            //import sound fonts to BASS.Midi for playback
             int SamplesSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfont.sfz");
             int SamplesLoopsSoundfontHandle = BassMidi.BASS_MIDI_FontInit($@"{TCLE.AppLocation}\temp\SamplesSoundfontLoops.sfz");
-
+            //depending on what sound fonts are loaded, the MidiSoundFonts array is loaded differently
             if (GlobalSamplesToPlay.Count > 0 && GlobalLoopTracks.Count > 0)
                 MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 2, 0) };
             else if (GlobalSamplesToPlay.Count > 0)
                 MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesSoundfontHandle, 1, 0) };
             else if (GlobalLoopTracks.Count > 0)
                 MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0), new BASS_MIDI_FONT(SamplesLoopsSoundfontHandle, 1, 0) };
+            else
+                MidiSoundFonts = new[] { new BASS_MIDI_FONT(MidiSoundfontHandle, 0, 0) };
         }
 
         public static void RemoveNegativeTickEvents()
         {
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
-                GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Where(x => x.tick > -1).ToList();
+                GlobalSequencerEvents[x].RemoveAll(x => x.tick < 0);
             }
             for (int x = 0; x < GlobalSampleEvents.Count; x++) {
-                GlobalSampleEvents[x] = GlobalSampleEvents[x].Where(x => x.tick > -1).ToList();
+                GlobalSampleEvents[x].RemoveAll(x => x.tick < 0);
             }
             for (int x = 0; x < GlobalLoopEvents.Count; x++) {
-                GlobalLoopEvents[x] = GlobalLoopEvents[x].Where(x => x.tick > -1).ToList();
+                GlobalLoopEvents[x].RemoveAll(x => x.tick < 0);
             }
         }
 
@@ -833,10 +837,9 @@ namespace Thumper_Custom_Level_Editor
             GlobalSequencerEvents[0].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)Microseconds, 0, 0, 0));
             //cap off each channel with an END event
             for (int x = 0; x < GlobalSequencerEvents.Length; x++) {
+                //add pitch range as first event to the sample channelw
                 GlobalSequencerEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, x, 2, 0));
-                if (GlobalSequencerEvents[x].Count > 0) {
-                    GlobalSequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (EndBeat + 1) * 100, 0));
-                }
+                GlobalSequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, x, (EndBeat * 100) + 1, 0));
                 //make sure all events are in proper tick order
                 GlobalSequencerEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
@@ -847,9 +850,7 @@ namespace Thumper_Custom_Level_Editor
                 GlobalSampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
                 GlobalSampleEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
-                if (GlobalSampleEvents[x].Count > 0) {
-                    GlobalSampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (EndBeat + 1) * 100, 0));
-                }
+                GlobalSampleEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (EndBeat * 100) + 1, 0));
                 //make sure all events are in proper tick order
                 GlobalSampleEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
@@ -860,69 +861,92 @@ namespace Thumper_Custom_Level_Editor
                 GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PROGRAM, GlobalSampleEvents.Count > 0 ? 2 : 1, channeloffset, 0, 0));
                 //add pitch range as first event to the sample channel
                 GlobalLoopEvents[x].Insert(0, new(BASSMIDIEvent.MIDI_EVENT_PITCHRANGE, 60, channeloffset, 2, 0));
-                if (GlobalLoopEvents[x].Count > 0) {
-                    GlobalLoopEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (EndBeat + 1) * 100, 0));
-                }
+                GlobalLoopEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_END_TRACK, 0, channeloffset, (EndBeat * 100) + 1, 0));
                 //make sure all events are in proper tick order
                 GlobalLoopEvents[x].Sort((event1, event2) => event1.tick.CompareTo(event2.tick));
             }
         }
 
-        public static int channelsync;
-        public static void Play(double StartTime, int EndBeat, bool Loop = false, int _ApproachBeats = 0)
+        public static List<BASS_MIDI_EVENT> MergeAllEvents()
         {
-            EndBeat += 8; //+ call offset
-            RemoveNegativeTickEvents();
-            PitchShiftingBarsRings();
-            ChannelEnd(EndBeat);
-            CreateSampleSoundfont();
-            Generating = false;
-            TCLE.Instance.panelLoadingMessage.Visible = false;
             //merge all channels to a single array of events
             List<BASS_MIDI_EVENT> _SequencerEvents = Playback.GlobalSequencerEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleEvents = Playback.GlobalSampleEvents.SelectMany(x => x).Distinct().ToList();
             List<BASS_MIDI_EVENT> _SampleLoopEvents = Playback.GlobalLoopEvents.SelectMany(x => x).Distinct().ToList();
-            List<BASS_MIDI_EVENT> AllEvents = _SequencerEvents.Concat(_SampleEvents).Concat(_SampleLoopEvents).ToList();
-            //the very last midi event needs to be EVENT_END
-            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, ((EndBeat + 1) * 100), 0));
+            return _SequencerEvents.Concat(_SampleEvents)
+                .Concat(_SampleLoopEvents)
+                .OrderBy(e => e.tick)
+                .ToList();
+        }
+
+        public static void SetupPlaybackStream(List<BASS_MIDI_EVENT> AllEvents, double StartTime, bool Loop)
+        {
             //create the stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
-            Error = Bass.BASS_ErrorGetCode();
-            List<BASS_MIDI_EVENT> BadTick = AllEvents.Where(x => x.tick > (EndBeat + 1)*100).ToList();
+            ///List<BASS_MIDI_EVENT> BadTick = AllEvents.Where(x => x.tick > (EndBeat + 1)*100).ToList();
+            //set ending sync
             channelsync = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
             //setup channel for looping
             if (Loop) {
                 Bass.BASS_ChannelFlags(MidiStream, BASSFlag.BASS_SAMPLE_LOOP, BASSFlag.BASS_SAMPLE_LOOP);
                 IsLooping = true;
                 if (StartTime > -1)
-                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime - 3 + 9);
+                    LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime + 6);
                 else
                     LoopingStartTime = (60 / (double)TCLE.BPM) * (StartTime);
             }
             else {
                 IsLooping = false;
             }
-            Error = Bass.BASS_ErrorGetCode();
             //apply soundfonts
             BassMidi.BASS_MIDI_StreamSetFonts(MidiStream, MidiSoundFonts.ToArray(), MidiSoundFonts.Length);
-            //set ending sync
+            //apply master volume level to playback
             Bass.BASS_ChannelSetAttribute(MidiStream, BASSAttribute.BASS_ATTRIB_VOL, (int)Properties.Settings.Default.VolKey100 / 100f);
+        }
+
+        public static int channelsync;
+        public static void Play(double StartTime, int EndBeat, bool Loop = false, int _ApproachBeats = 0)
+        {
+            //show the loading message
+            TCLE.Instance.lblLoadingLeaf.Text = $"";
+            TCLE.Instance.lblLoadingLvl.Text = $"Finalizing";
+            TCLE.Instance.lblLoadingGate.Text = $"";
+            TCLE.Instance.panelLoadingMessage.Invalidate();
+            TCLE.Instance.panelLoadingMessage.Update();
+            TCLE.Instance.panelLoadingMessage.Refresh();
+            Application.DoEvents();
+            //
+            EndBeat += 8; //+ call offset
+            RemoveNegativeTickEvents();
+            PitchShiftingBarsRings();
+            ChannelEnd(EndBeat);
+            CreateSampleSoundfont();
+
+            List<BASS_MIDI_EVENT> AllEvents = MergeAllEvents();
+            //the very last midi event needs to be EVENT_END
+            AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (EndBeat * 100) + 1, 0));
+
+            SetupPlaybackStream(AllEvents, StartTime, Loop);
+            //at this point we can clear the generating flag and hide the loading screen
+            Generating = false;
+            TCLE.Instance.panelLoadingMessage.Visible = false;            
             //calculate where playback should start
             PlaybackBeat = -9;
             if (StartTime > -1) {
                 PlaybackBeat = (int)StartTime - 3;
                 Bass.BASS_ChannelSetPosition(MidiStream, (60 / (double)TCLE.BPM) * (PlaybackBeat + CallOffset));
-                Error = Bass.BASS_ErrorGetCode();
             }
             ApproachBeats = _ApproachBeats;
             //play the sequence
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat < 0)) {
                 //SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
+                SyncTimer?.Dispose();
                 SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 10);
                 IsPlaying = true;
             }
-            else
-                Error = Bass.BASS_ErrorGetCode();
+            else {
+                ///Error = Bass.BASS_ErrorGetCode();
+            }
         }
 
         private static uint MakeWord(byte low, byte high)
@@ -938,7 +962,7 @@ namespace Thumper_Custom_Level_Editor
             }
             else {
                 IsPlaying = false;
-                SyncTimer.Dispose();
+                SyncTimer?.Dispose();
                 //SyncTimer.Change(Timeout.Infinite, Timeout.Infinite);
                 _ = Bass.BASS_ChannelStop(channel);
                 _ = Bass.BASS_ChannelFree(channel);
@@ -949,7 +973,8 @@ namespace Thumper_Custom_Level_Editor
         public static void StopPlayback()
         {
             Playback.IsPlaying = false;
-            Bass.BASS_ChannelStop(Playback.MidiStream);
+            _ = Bass.BASS_ChannelStop(Playback.MidiStream);
+            _ = Bass.BASS_ChannelFree(Playback.MidiStream);
             _ = Bass.BASS_ErrorGetCode();
             Playback.SyncTimer?.Dispose();
             Playback.PlaybackTick = -1;
