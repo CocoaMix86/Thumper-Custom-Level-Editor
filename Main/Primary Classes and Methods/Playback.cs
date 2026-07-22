@@ -493,7 +493,7 @@ namespace Thumper_Custom_Level_Editor
                     //thumps
                     //can initiate the grind state. And if combo is active, re-ups the timer
                     if (ComboList[eventIndex].chan is 8) {
-                        TimerGrindState = 11;
+                        TimerGrindState = 12;
                         if (TimerCombo > 0)
                             TimerCombo = 3;
                     }
@@ -501,7 +501,7 @@ namespace Thumper_Custom_Level_Editor
                     //re-ups grindstate and combo timers
                     else if (ComboList[eventIndex].chan is 13 or 22) {
                         if (TimerGrindState > 0)
-                            TimerGrindState = 11;
+                            TimerGrindState = 12;
                         if (TimerCombo > 0)
                             TimerCombo = 3;
                     }
@@ -509,13 +509,18 @@ namespace Thumper_Custom_Level_Editor
                     //starts the combo timer if in grindstate, and re-ups grindstate
                     else if (ComboList[eventIndex].chan is 19 && !ringTicks.Contains(ComboList[eventIndex].tick)) {
                         if (TimerGrindState > 0) {
-                            TimerGrindState = 11;
+                            TimerGrindState = 12;
                             TimerCombo = 3;
                             PitchShiftsToProcess.Add(ComboList[eventIndex].tick);
                         }
                         else if (TimerCombo > 0) {
                             TimerCombo = 3;
                             PitchShiftsToProcess.Add(ComboList[eventIndex].tick);
+                        }
+                        //if not grinding or combo, play bad breaking sound. Requires pitch shifting the normal sound down an octave, and then reset to normal
+                        else {
+                            EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192 - (136 * 12), 19, ComboList[eventIndex].tick - 1, 0));
+                            EventsToAdd19.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, 8192, 19, ComboList[eventIndex].tick + 50, 0));
                         }
                     }
                     //rings

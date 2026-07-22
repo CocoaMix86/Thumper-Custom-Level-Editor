@@ -51,6 +51,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         public abstract void ColorFormElements();
+        public abstract void Save(bool updateUI);
+        public abstract void Copy();
+        public abstract void Cut();
+        public abstract void Paste();
 
         protected override void OnClosing(CancelEventArgs e)
         {
