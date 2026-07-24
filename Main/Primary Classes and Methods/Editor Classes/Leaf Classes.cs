@@ -109,6 +109,12 @@ namespace Thumper_Custom_Level_Editor
         public string footer { get; set; }
         public string category { get; set; }
         public string friendly_param { get; set; }
+        public int GetTrailLength()
+        {
+            if (int.TryParse(friendly_param.Split('[')[1].Split(' ')[0], out int length))
+                return length;
+            return 0;
+        }
         public Color highlight_color
         {
             get => HighCol;

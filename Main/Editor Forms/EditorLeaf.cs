@@ -107,8 +107,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
-            btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
-            btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
+            UpdateInterpTooltip(InterpLastUsed);
             this.dockPanel1.ResumeLayout();
             this.ResumeLayout();
         }
@@ -551,7 +550,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
-            if (!int.TryParse(SequencerObjects[e.RowIndex].friendly_param.Split('[')[1].Split(' ')[0], out int LengthOfObject))
+            int LengthOfObject = SequencerObjects[e.RowIndex].GetTrailLength();
+            if (LengthOfObject == 0)
                 return;
             LengthOfObject--;
             int offsetportion = UtilMath.GetTrackOffset(trackEditor);
@@ -1883,9 +1883,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             set {
                 Properties.Settings.Default.LeafOptionInterp = value;
                 Properties.Settings.Default.Save();
-                foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals("leaf", StringComparison.OrdinalIgnoreCase))) {
-                    leaf.btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{InterpLastUsed.Replace(" ", "_")}");
-                    leaf.btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {InterpLastUsed}\n";
+                foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase))) {
+                    leaf.UpdateInterpTooltip(InterpLastUsed);
                 }
             }
         }
@@ -1921,13 +1920,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.Instance.pictureEasing.Visible = false;
         }
 
+        private void UpdateInterpTooltip(string LastUsed)
+        {
+            btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{LastUsed.Replace(" ", "_")}");
+            btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {LastUsed}\n";
+        }
+
         private void Interpolate(string interpOption)
         {
             if (interpOption == null)
                 return;
             InterpLastUsed = interpOption;
-            btnLeafInterpLinear.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject($"ease_{interpOption.Replace(" ", "_")}");
-            btnLeafInterpLinear.ToolTipText = $"Interpolate values between 2 selected cells in the same row.\nUse the drop down to select different easing styles.\n=======\nLast Used: {interpOption}\n";
+            UpdateInterpTooltip(interpOption);
             TCLE.Instance.pictureEasing.Visible = false;
             //
             DataGridViewSelectedCellCollection SelectedCells = trackEditor.SelectedCells;
@@ -1942,13 +1946,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //sort cells so they are in order according to column index
-            List<DataGridViewCell> InterpCells = new() { SelectedCells[0], SelectedCells[1] };
-            InterpCells.Sort((cell1, cell2) => cell1.ColumnIndex.CompareTo(cell2.ColumnIndex));
+            DataGridViewCell first = SelectedCells[0].ColumnIndex < SelectedCells[1].ColumnIndex ? SelectedCells[0] : SelectedCells[1];
+            DataGridViewCell second = first == SelectedCells[0] ? SelectedCells[1] : SelectedCells[0];
             Sequencer_Object interpobject = SequencerObjects[SelectedCells[0].RowIndex];
 
             //get start and end values, and how many beats separate them
-            double _start = (double)((decimal?)InterpCells[0].Value ?? (decimal)interpobject.defaultvalue);
-            double _end = (double)((decimal?)InterpCells[1].Value ?? (decimal)interpobject.defaultvalue);
+            double _start = (double)((decimal?)first.Value ?? (decimal)interpobject.defaultvalue);
+            double _end = (double)((decimal?)second.Value ?? (decimal)interpobject.defaultvalue);
             double max = Math.Max(_start, _end);
             double min = Math.Min(_start, _end);
             double max2 = 0, max3 = 0, min2 = 0, min3 = 0;
@@ -1957,14 +1961,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (interpobject.trait_type == "kTraitColor") {
                 startcolor = Color.FromArgb((int)_start);
                 endcolor = Color.FromArgb((int)_end);
-                max = Math.Max(Color.FromArgb((int)_start).R, Color.FromArgb((int)_end).R);
-                max2 = Math.Max(Color.FromArgb((int)_start).G, Color.FromArgb((int)_end).G);
-                max3 = Math.Max(Color.FromArgb((int)_start).B, Color.FromArgb((int)_end).B);
-                min = Math.Min(Color.FromArgb((int)_start).R, Color.FromArgb((int)_end).R);
-                min2 = Math.Min(Color.FromArgb((int)_start).G, Color.FromArgb((int)_end).G);
-                min3 = Math.Min(Color.FromArgb((int)_start).B, Color.FromArgb((int)_end).B);
+                max = Math.Max(startcolor.R, endcolor.R);
+                max2 = Math.Max(startcolor.G, endcolor.G);
+                max3 = Math.Max(startcolor.B, endcolor.B);
+                min = Math.Min(startcolor.R, endcolor.R);
+                min2 = Math.Min(startcolor.G, endcolor.G);
+                min3 = Math.Min(startcolor.B, endcolor.B);
             }
-            int _beats = InterpCells[1].ColumnIndex - InterpCells[0].ColumnIndex + 1;
+            int _beats = second.ColumnIndex - first.ColumnIndex + 1;
             //initialize array = to beats, fill with linear values between 0 and 1
             //these will be transformed by the formulas below
             double[] interp = new double[_beats];
@@ -2058,9 +2062,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 double valR, valG, valB = 0;
                 //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
-                    valR = ((max == startcolor.R ? 1 - interp[x] : interp[x]) / 1) * (max - min) + min;
-                    valG = ((max2 == startcolor.G ? 1 - interp[x] : interp[x]) / 1) * (max2 - min2) + min2;
-                    valB = ((max3 == startcolor.B ? 1 - interp[x] : interp[x]) / 1) * (max3 - min3) + min3;
+                    valR = (max == startcolor.R ? 1 - interp[x] : interp[x]) * (max - min) + min;
+                    valG = (max2 == startcolor.G ? 1 - interp[x] : interp[x]) * (max2 - min2) + min2;
+                    valB = (max3 == startcolor.B ? 1 - interp[x] : interp[x]) * (max3 - min3) + min3;
                     interp[x] = Color.FromArgb((int)valR, (int)valG, (int)valB).ToArgb();
                 }
             }
@@ -2072,13 +2076,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
-                    interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+                    interp[x] = interp[x] * (max - min) + min;
                 }
             }
             //assign new values back to the data points
             EditorIsInterpolating = true;
             for (int x = 0; x < _beats; x++) {
-                interpobject[InterpCells[0].ColumnIndex + x].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
+                interpobject[first.ColumnIndex + x].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
             }
             EditorIsInterpolating = false;
             //
@@ -2089,7 +2093,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void exampleswebLinkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new ProcessStartInfo { FileName = "https://easings.net/", UseShellExecute = true });
+            Process.Start(new ProcessStartInfo { FileName = "https://easings.net/", UseShellExecute = true });
         }
 
         private void btnLeafColors_Click(object sender, EventArgs e)
@@ -2101,7 +2105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
                 UtilAudio.PlaySound("UIcolorapply");
                 trackEditor.SelectedCells[0].Value = (decimal)TCLE.colorDialogNew.Color.ToArgb();
-                CellValueChanged(trackEditor[trackEditor.SelectedCells[0].ColumnIndex, trackEditor.SelectedCells[0].RowIndex]);
+                CellValueChanged(trackEditor.SelectedCells[0]);
             }
         }
 
@@ -2140,30 +2144,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             EditorIsInterpolating = true;
-            File.Copy(this.WorkingFile.FullName, SplitFile.FullName);
-            EditorLeaf LeafSplitAfter = (EditorLeaf)TCLE.OpenFile(SplitFile, false, true);
-            //remove columns from the beginning to shift all cells backwards until they get to beat 0
-            for (int x = 0; x < splitindex; x++) {
-                LeafSplitAfter.trackEditor.Columns.RemoveAt(0);
-            }
-            //need to rename Track Effect objects to point to the new leaf name
-            foreach (Sequencer_Object _seq in LeafSplitAfter.SequencerObjects) {
-                if (_seq.obj_name == this.WorkingFile.Name)
-                    _seq.obj_name = LeafSplitAfter.WorkingFile.Name;
-            }
-            //reduce split leafs beat count and save
-            LeafSplitAfter._leafproperties.Beats = _leafproperties.Beats - splitindex;
-            LeafSplitAfter.SaveCheckAndWrite(true, "");
-            LeafSplitAfter.Dispose();
+            try {
+                File.Copy(this.WorkingFile.FullName, SplitFile.FullName);
+                EditorLeaf LeafSplitAfter = (EditorLeaf)TCLE.OpenFile(SplitFile, false, true);
+                //remove columns from the beginning to shift all cells backwards until they get to beat 0
+                for (int x = 0; x < splitindex; x++) {
+                    LeafSplitAfter.trackEditor.Columns.RemoveAt(0);
+                }
+                //need to rename Track Effect objects to point to the new leaf name
+                foreach (Sequencer_Object _seq in LeafSplitAfter.SequencerObjects) {
+                    if (_seq.obj_name == this.WorkingFile.Name)
+                        _seq.obj_name = LeafSplitAfter.WorkingFile.Name;
+                }
+                //reduce split leafs beat count and save
+                LeafSplitAfter._leafproperties.Beats = _leafproperties.Beats - splitindex;
+                LeafSplitAfter.SaveCheckAndWrite(true, "");
+                LeafSplitAfter.Dispose();
 
-            //reduce beat count of the leaf that was just split and save it
-            LeafProperties.Beats = splitindex;
-            SaveCheckAndWrite(true, "");
-            UtilAudio.PlaySound("UIleafsplit");
-            ProjectExplorer.CreateTreeView();
-            //load new leaf that was just split
-            TCLE.OpenFile(SplitFile);
-            EditorIsInterpolating = false;
+                //reduce beat count of the leaf that was just split and save it
+                LeafProperties.Beats = splitindex;
+                SaveCheckAndWrite(true, "");
+                UtilAudio.PlaySound("UIleafsplit");
+                //load new leaf that was just split
+                ProjectExplorer.CreateTreeView();
+                TCLE.OpenFile(SplitFile);
+            } finally {
+                EditorIsInterpolating = false;
+            }
         }
 
         private void btnLeafObjRefresh_Click(object sender, EventArgs e)
@@ -3022,7 +3029,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void RandomizeRowValues(Sequencer_Object seq)
         {
-            Random rng = new();
             int rngchance;
             int rnglimit;
             int randomtype = 0;
@@ -3056,31 +3062,33 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     randomtype = 6;
             }
-            foreach (SeqDataPoint dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+            foreach (SeqDataPoint dgvc in seq.Cells) {
+                if (dgvc.ColumnIndex < FrozenColumnOffset)
+                    continue;
                 switch (randomtype) {
                     case 2:
-                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(TCLE.rng.NextDouble() * 100) + 0.01m, 3) % 4;
                         break;
                     case 3:
-                        valueiftrue = UtilMath.TruncateDecimal((decimal)rng.NextDouble(), 3);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)TCLE.rng.NextDouble(), 3);
                         break;
                     case 4:
-                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3) * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(TCLE.rng.NextDouble() * 100), 3) * (TCLE.rng.Next(2) == 0 ? 1 : -1);
                         break;
                     case 5:
-                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100), 3);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(TCLE.rng.NextDouble() * 100), 3);
                         break;
                     case 6:
-                        valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 1000), 3) % 200 * (rng.Next(0, 1) == 0 ? 1 : -1);
+                        valueiftrue = UtilMath.TruncateDecimal((decimal)(TCLE.rng.NextDouble() * 1000), 3) % 200 * (TCLE.rng.Next(2) == 0 ? 1 : -1);
                         break;
                     case 7:
-                        valueiftrue = Color.FromArgb(rng.Next(256), rng.Next(256), rng.Next(256)).ToArgb();
+                        valueiftrue = Color.FromArgb(TCLE.rng.Next(256), TCLE.rng.Next(256), TCLE.rng.Next(256)).ToArgb();
                         break;
                     default:
                         break;
                 }
 
-                object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
+                object _out = TCLE.rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
                 //dgvc.Value = _out;
                 dgvc.Value = (decimal?)_out;// new() { ParentSeqObj = seq, Value = (decimal?)_out, Ease = "Ease In Out", Interpolation = "Linear" };
                 dgvc.Ease = "Ease In Out";

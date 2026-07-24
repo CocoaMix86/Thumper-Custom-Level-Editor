@@ -280,7 +280,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == "JUMPS/SPIKES")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        bool success = int.TryParse(seq.friendly_param.Split('[')[1].Split(' ')[0], out int beats);
+                        int beats = seq.GetTrailLength();
                         DrawSpikeIcons(g, beat, Middle + OffsetsDict[seq.param_path_lane], beats);
                     }
                 }
