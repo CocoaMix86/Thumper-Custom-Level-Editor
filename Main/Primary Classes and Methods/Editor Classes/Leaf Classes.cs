@@ -52,6 +52,7 @@ namespace Thumper_Custom_Level_Editor
         public JObject ConvertToJson()
         {
             //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
+            //Object should NEVER be named leafname.
             if (this.ObjName == "leafname" || this.ObjName.Contains(".leaf") || string.IsNullOrEmpty(this.ObjName))
                 this.ObjName = this.ParentLeaf.ParentEditor.WorkingFile.Name;
             //add all the required fields to the json object
@@ -114,11 +115,11 @@ namespace Thumper_Custom_Level_Editor
             get => _highlightcolor;
             set {
                 _highlightcolor = value;
-                HighlightBrush = new(value);
+                HighlightBrush.Color = value;
             }
         }
         private Color _highlightcolor;
-        public SolidBrush HighlightBrush;
+        public SolidBrush HighlightBrush = new(Color.Purple);
         public float highlight_value { get; set; }
         public bool EnabledInEditor
         {
@@ -131,8 +132,16 @@ namespace Thumper_Custom_Level_Editor
         }
         private bool _enabledineditor = true;
         public bool IsDefault { get; set; }
+        public Bitmap WaveBitmap
+        {
+            get => _waveBitmap;
+            set {
+                _waveBitmap?.Dispose();
+                _waveBitmap = value;
+            }
+        }
 
-        public Bitmap WaveBitmap;
+        private Bitmap _waveBitmap;
         public int id { get; set; }
         public bool MuteInEditor { get; set; }
         public bool ExpandLanesInEditor
@@ -164,10 +173,14 @@ namespace Thumper_Custom_Level_Editor
 
         public void ClearDataPoints()
         {
-            foreach (SeqDataPoint sdp in this.Cells) {
-                sdp.Value = null;
-                sdp.Ease = "Ease In Out";
-                sdp.Interpolation = "Linear";
+            //set EditorIsLoading to prevent every SDP from triggering recalcs
+            ParentLeaf.ParentEditor.EditorIsLoading = true;
+            try {
+                foreach (SeqDataPoint sdp in this.Cells)
+                    sdp.Reset();
+            }
+            finally {
+                ParentLeaf.ParentEditor.EditorIsLoading = false;
             }
         }
 

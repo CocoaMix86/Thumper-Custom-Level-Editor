@@ -3063,6 +3063,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     randomtype = 6;
             }
             foreach (SeqDataPoint dgvc in seq.Cells.Cast<SeqDataPoint>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                if (rng.Next(0, rngchance) < rnglimit) {
+                    dgvc.Value = null;
+                    continue;
+                }
                 switch (randomtype) {
                     case 2:
                         valueiftrue = UtilMath.TruncateDecimal((decimal)(rng.NextDouble() * 100) + 0.01m, 3) % 4;
@@ -3085,10 +3089,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     default:
                         break;
                 }
-
-                object _out = rng.Next(0, rngchance) >= rnglimit ? valueiftrue : null;
-                //dgvc.Value = _out;
-                dgvc.Value = (decimal?)_out;// new() { ParentSeqObj = seq, Value = (decimal?)_out, Ease = "Ease In Out", Interpolation = "Linear" };
+                dgvc.Value = (decimal?)valueiftrue;
                 dgvc.Ease = "Ease In Out";
                 dgvc.Interpolation = "Linear";
             }
@@ -3136,162 +3137,171 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             int count = 1;
             List<Sequencer_Object> TuningLayers = new();
-            while (_properties.SequencerObjects[seq.Index - count].ObjName == "_TuningLayerX") {
+            while (seq.Index - count >= 0 && _properties.SequencerObjects[seq.Index - count].ObjName == "_TuningLayerX") {
                 count++;
             }
-            Sequencer_Object Main = _properties.SequencerObjects[seq.Index - count];
+            //return if the tuning layer is at the top
+            if (seq.Index - count == 0 && _properties.SequencerObjects[seq.Index - count].ObjName == "_TuningLayerX")
+                return;
+            Sequencer_Object TargetTuningLayer = _properties.SequencerObjects[seq.Index - count];
             count = 1;
-            while (Main.Index + count < _properties.SequencerObjects.Count && _properties.SequencerObjects[Main.Index + count].ObjName == "_TuningLayerX") {
-                TuningLayers.Add(_properties.SequencerObjects[Main.Index + count]);
+            while (TargetTuningLayer.Index + count < _properties.SequencerObjects.Count && _properties.SequencerObjects[TargetTuningLayer.Index + count].ObjName == "_TuningLayerX") {
+                TuningLayers.Add(_properties.SequencerObjects[TargetTuningLayer.Index + count]);
                 count++;
             }
 
-            _properties.ParentEditor.LogUndo = false;
-            _properties.ParentEditor.EditorIsTuning = true;
-            Sequencer_Object _temp2 = new() { ParentLeaf = _properties };
-            _properties.ParentEditor.trackEditor.Rows.Add(_temp2);
+            try {
+                _properties.ParentEditor.LogUndo = false;
+                _properties.ParentEditor.EditorIsTuning = true;
+                Sequencer_Object SumOfLayers = new() { ParentLeaf = _properties };
+                _properties.ParentEditor.trackEditor.Rows.Add(SumOfLayers);
 
-            foreach (Sequencer_Object _layer in TuningLayers) {
-                Sequencer_Object _temp = new() { ParentLeaf = _properties };
-                _properties.ParentEditor.trackEditor.Rows.Add(_temp);
-                SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
+                foreach (Sequencer_Object _layer in TuningLayers) {
+                    Sequencer_Object InterpolationCalc = new() { ParentLeaf = _properties };
+                    _properties.ParentEditor.trackEditor.Rows.Add(InterpolationCalc);
+                    SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
-                for (int n = 0; n < _datapoints.Length - 1; n++) {
-                    //sort cells so they are in order according to column index
-                    List<SeqDataPoint> InterpCells = new() { _datapoints[n], _datapoints[n + 1] };
-                    InterpCells.Sort((cell1, cell2) => cell1.beat.CompareTo(cell2.beat));
-                    //get start and end values, and how many beats separate them
-                    double _start = (double)(decimal)InterpCells[0].Value;
-                    double _end = (double)(decimal)InterpCells[1].Value;
-                    double max = Math.Max(_start, _end);
-                    double min = Math.Min(_start, _end);
-                    int _beats = InterpCells[1].beat - InterpCells[0].beat + 1;
-                    //initialize array = to beats, fill with linear values between 0 and 1
-                    //these will be transformed by the formulas below
-                    double[] interp = new double[_beats];
-                    for (int x = 0; x < interp.Length; x++) {
-                        interp[x] = (double)(x) / (double)(interp.Length - 1);
+                    for (int n = 0; n < _datapoints.Length - 1; n++) {
+                        //sort cells so they are in order according to column index
+                        SeqDataPoint start = _datapoints[n];
+                        SeqDataPoint end = _datapoints[n + 1];
+                        if (start.beat > end.beat)
+                            (start, end) = (end, start);
+                        //get start and end values, and how many beats separate them
+                        double _start = (double)(decimal)start.Value;
+                        double _end = (double)(decimal)end.Value;
+                        double max = Math.Max(_start, _end);
+                        double min = Math.Min(_start, _end);
+                        int _beats = end.beat - start.beat + 1;
+                        //initialize array = to beats, fill with linear values between 0 and 1
+                        //these will be transformed by the formulas below
+                        double[] interp = new double[_beats];
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = (double)(x) / (double)(interp.Length - 1);
+                        }
+                        //change interpolation formula based on settings on the datapoint
+                        switch ($"{start.Interpolation} {start.Ease}") {
+                            case "Linear Ease In":
+                            case "Linear Ease Out":
+                            case "Linear Ease In Out":
+                                break;
+                            case "Step Ease In":
+                            case "Step Ease Out":
+                            case "Step Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 0;
+                                }
+                                interp[^1] = 1;
+                                break;
+                            case "Quadratic Ease In":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] * interp[x];
+                                }
+                                break;
+                            case "Quadratic Ease Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
+                                }
+                                break;
+                            case "Quadratic Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
+                                }
+                                break;
+                            case "Cubic Ease In":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] * interp[x] * interp[x];
+                                }
+                                break;
+                            case "Cubic Ease Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 1 - Math.Pow(1 - interp[x], 3);
+                                }
+                                break;
+                            case "Cubic Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
+                                }
+                                break;
+                            case "Quartic Ease In":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
+                                }
+                                break;
+                            case "Quartic Ease Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 1 - Math.Pow(1 - interp[x], 4);
+                                }
+                                break;
+                            case "Quartic Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
+                                }
+                                break;
+                            case "Quintic Ease In":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
+                                }
+                                break;
+                            case "Quintic Ease Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 1 - Math.Pow(1 - interp[x], 5);
+                                }
+                                break;
+                            case "Quintic Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
+                                }
+                                break;
+                            case "Sine Ease In":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
+                                }
+                                break;
+                            case "Sine Ease Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
+                                }
+                                break;
+                            case "Sine Ease In Out":
+                                for (int x = 0; x < interp.Length; x++) {
+                                    interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
+                                }
+                                break;
+                        }
+                        //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                        if (_start == max) {
+                            for (int x = 0; x < interp.Length; x++)
+                                interp[x] = 1 - interp[x];
+                        }
+                        //convert interp[] range of 0 to 1 into range between selected beats
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
+                        }
+                        //write the datapoints to a temp object to store them
+                        for (int x = 0; x < _beats; x++) {
+                            InterpolationCalc[start.beat + x + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
+                        }
                     }
-                    //change interpolation formula based on settings on the datapoint
-                    switch ($"{InterpCells[0].Interpolation} {InterpCells[0].Ease}") {
-                        case "Linear Ease In":
-                        case "Linear Ease Out":
-                        case "Linear Ease In Out":
-                            break;
-                        case "Step Ease In":
-                        case "Step Ease Out":
-                        case "Step Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 0;
-                            }
-                            interp[^1] = 1;
-                            break;
-                        case "Quadratic Ease In":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] * interp[x];
-                            }
-                            break;
-                        case "Quadratic Ease Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
-                            }
-                            break;
-                        case "Quadratic Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
-                            }
-                            break;
-                        case "Cubic Ease In":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] * interp[x] * interp[x];
-                            }
-                            break;
-                        case "Cubic Ease Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 1 - Math.Pow(1 - interp[x], 3);
-                            }
-                            break;
-                        case "Cubic Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
-                            }
-                            break;
-                        case "Quartic Ease In":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
-                            }
-                            break;
-                        case "Quartic Ease Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 1 - Math.Pow(1 - interp[x], 4);
-                            }
-                            break;
-                        case "Quartic Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
-                            }
-                            break;
-                        case "Quintic Ease In":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
-                            }
-                            break;
-                        case "Quintic Ease Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 1 - Math.Pow(1 - interp[x], 5);
-                            }
-                            break;
-                        case "Quintic Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
-                            }
-                            break;
-                        case "Sine Ease In":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
-                            }
-                            break;
-                        case "Sine Ease Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
-                            }
-                            break;
-                        case "Sine Ease In Out":
-                            for (int x = 0; x < interp.Length; x++) {
-                                interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
-                            }
-                            break;
+                    //transfer temp data points to another temp as the first one will be cleared
+                    //this second one with sum together the tuning layers
+                    for (int m = FrozenColumnOffset; m < SumOfLayers.Cells.Count; m++) {
+                        if (SumOfLayers[m].Value == null)
+                            SumOfLayers[m].Value = 0m;
+                        SumOfLayers[m].Value = (decimal)SumOfLayers[m].Value + (decimal)(InterpolationCalc[m].Value ?? 0m);
                     }
-                    //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
-                    if (_start == max) {
-                        for (int x = 0; x < interp.Length; x++)
-                            interp[x] = 1 - interp[x];
-                    }
-                    //convert interp[] range of 0 to 1 into range between selected beats
-                    for (int x = 0; x < interp.Length; x++) {
-                        interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
-                    }
-                    //write the datapoints to a temp object to store them
-                    for (int x = 0; x < _beats; x++) {
-                        _temp[InterpCells[0].beat + x + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
-                    }
+                    _properties.ParentEditor.trackEditor.Rows.Remove(InterpolationCalc);
                 }
-                //transfer temp data points to another temp as the first one will be cleared
-                //this second one with sum together the tuning layers
-                for (int m = FrozenColumnOffset; m < _temp2.Cells.Count; m++) {
-                    if (_temp2[m].Value == null)
-                        _temp2[m].Value = 0m;
-                    _temp2[m].Value = (decimal)_temp2[m].Value + (decimal)(_temp[m].Value ?? 0m);
+                //write temp2 to the real object
+                for (int m = FrozenColumnOffset; m < TargetTuningLayer.Cells.Count; m++) {
+                    TargetTuningLayer[m].Value = (decimal)(SumOfLayers[m].Value ?? 0m);
                 }
-                _properties.ParentEditor.trackEditor.Rows.Remove(_temp);
+                _properties.ParentEditor.trackEditor.Rows.Remove(SumOfLayers);
             }
-            //write temp2 to the real object
-            for (int m = FrozenColumnOffset; m < Main.Cells.Count; m++) {
-                Main[m].Value = (decimal)(_temp2[m].Value ?? 0m);
+            finally {
+                _properties.ParentEditor.LogUndo = true;
+                _properties.ParentEditor.EditorIsTuning = false;
             }
-            _properties.ParentEditor.trackEditor.Rows.Remove(_temp2);
-            _properties.ParentEditor.LogUndo = true;
-            _properties.ParentEditor.EditorIsTuning = false;
 
             _properties.ParentEditor.SaveCheckAndWrite(false, "Interpolated values from tuning layer");
         }
