@@ -12,10 +12,6 @@ namespace Thumper_Custom_Level_Editor
         public string Name => File?.Name ?? Folder.Name;
         public string FullPath => File?.FullName ?? Folder.FullName;
 
-        public FileOrFolder()
-        {
-        }
-
         public FileOrFolder(DirectoryInfo _dir = null)
         {
             File = null;
@@ -51,9 +47,17 @@ namespace Thumper_Custom_Level_Editor
 
         public static TreeNodeCollection ProjectTree => TCLE.Explorer.treeView1.Nodes;
         public static TreeNode ProjectRoot => ProjectTree[0];
+        //
         public static Dictionary<TreeNode, FileOrFolder> AllFiles = new();
-        public static IEnumerable<FileInfo> Files => AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
-        public static IEnumerable<DirectoryInfo> Folders => AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
+        public static Dictionary<string, FileInfo> Files = new(StringComparer.OrdinalIgnoreCase);
+        public static Dictionary<string, DirectoryInfo> Folders = new(StringComparer.OrdinalIgnoreCase);
+        public static bool TryGetFile(string name, out FileInfo file) => Files.TryGetValue(name, out file);
+        public static FileInfo? GetFile(string name) => Files.GetValueOrDefault(name);
+        public static bool TryGetFolder(string name, out DirectoryInfo folder) => Folders.TryGetValue(name, out folder);
+        public static List<FileInfo> GetFilesByExtension(string extension) => Files.Values.Where(x => x.Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)).ToList();
+        //public static IEnumerable<FileInfo> Files => AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
+        //public static IEnumerable<DirectoryInfo> Folders => AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
+        //
         public static List<string> expandednodes = new();
         public static bool filterenabled;
         public static bool filtersearch;
@@ -69,12 +73,13 @@ namespace Thumper_Custom_Level_Editor
             if (TCLE.WorkingFolder == null) return;
             expandednodes.Clear();
             expandednodes = GetExpandedNodes(ProjectTree);
-            //clear existing treeview
             Point LastScrollPosition = GetTreeViewScrollPos(TCLE.Explorer.treeView1);
+            //clear existing treeview
             ProjectTree.Clear();
             AllFiles.Clear();
-            ///projectfiles.Clear();
-            ///projectfolders.Clear();
+            Files.Clear();
+            Folders.Clear();
+            //
             if (TCLE.WorkingFolder.Exists) {
                 //Build the tree
                 BuildTree(TCLE.WorkingFolder, ProjectTree);
@@ -119,6 +124,7 @@ namespace Thumper_Custom_Level_Editor
             };
             addInMe.Add(folder);
             AllFiles.Add(folder, new(directoryInfo));
+            Folders[directoryInfo.Name] = directoryInfo;
             ///projectfolders.Add(folder.FullPath, directoryInfo);
 
             //Build subtree for each folder inside this folder
@@ -142,6 +148,7 @@ namespace Thumper_Custom_Level_Editor
                     ForeColor = Properties.Settings.Default.ColorProjExpText
                 };
                 AllFiles.Add(_tn, new(file));
+                Files[file.Name] = file;
                 ///projectfiles.Add(_tn.FullPath, file);
                 //check for various filters being used
                 if (filtersearch && !file.Name.Contains(SearchString)) { }

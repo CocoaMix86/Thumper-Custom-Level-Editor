@@ -5,11 +5,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public abstract class EditorBase : DockContent
     {
-        public EditorBase()
-        { 
-            
-        }
-
+        public EditorBase() { }
         public EditorBase(FileInfo _filetolock, bool rawtext = false, bool nolock = false)
         {
             if (_filetolock == null)
@@ -19,6 +15,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             WorkingFile = _filetolock;
         }
 
+        public List<SaveState> UndoList = new();
         public bool RawText { get; set; }
         public bool NoLock { get; set; }
         public FileInfo WorkingFile { 
@@ -51,10 +48,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         public abstract void ColorFormElements();
-        public abstract void Save(bool updateUI);
+        public abstract void Save(bool playsound);
+        public abstract FileInfo SaveAs(bool FileIsNew, string InitialDir);
         public abstract void Copy();
         public abstract void Cut();
         public abstract void Paste();
+        public abstract object GetProperties();
 
         protected override void OnClosing(CancelEventArgs e)
         {
@@ -75,6 +74,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void Dispose(bool disposing)
         {
+            if (disposing) {
+                FileLock?.Dispose();
+                FileLock = null;
+            }
             base.Dispose(disposing);
         }
     }

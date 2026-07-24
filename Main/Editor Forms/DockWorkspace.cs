@@ -3,12 +3,12 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class DockWorkspace : EditorBase
+    public partial class DockWorkspace : EditorBaseSub
     {
         private DeserializeDockContent m_deserializeDockContent;
 
         #region Form Construction
-        public DockWorkspace(string configtoload) : base(null)
+        public DockWorkspace(string configtoload)
         {
             InitializeComponent();
             this.Text = configtoload;
@@ -35,12 +35,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool raw = persistString.Contains(" [Raw]");
             persistString = persistString.Replace(" [Raw]", "");
 
-            FileInfo _topopen = ProjectExplorer.Files.FirstOrDefault(x => x.Name.Equals(persistString, StringComparison.OrdinalIgnoreCase));
-            if (_topopen != null)
-                return TCLE.OpenFile(_topopen, raw, true);
+            if (ProjectExplorer.TryGetFile(persistString, out FileInfo _toopen))
+                return TCLE.OpenFile(_toopen, raw, true);
             return null;
-
-            throw new NotImplementedException();
         }
         #endregion
 

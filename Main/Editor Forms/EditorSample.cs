@@ -476,7 +476,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             pictureWave.Height = contentWave.Height / 2;
         }
 
-        public object GetProperties()
+        public override object GetProperties()
         {
             return SampleProperties;
         }
@@ -555,15 +555,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile);
             LoadSample(_load);
             this.Invalidate();
-        }
-
-        public List<SaveState> UndoList = new();
-        public List<SaveState> GetUndoList()
-        {
-            return UndoList;
         }
 
         public void PerformUndo(int undolistindex)
@@ -583,7 +577,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             //if _loadedgate is somehow not set, force Save As instead
             if (this.WorkingFile == null) {
@@ -593,7 +587,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -831,6 +825,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //TCLE.UpdateProjectSamplesFromFile(SampleEditor.LoadedSample, true, out string _);
         }
+
+        public override void Cut() { }
+        public override void Copy() { }
+        public override void Paste() { }
         #endregion
     }
 }

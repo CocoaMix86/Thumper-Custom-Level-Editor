@@ -174,7 +174,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{GateLvls[e.RowIndex].Lvlname}")));
+            TCLE.OpenFile(ProjectExplorer.GetFile(GateLvls[e.RowIndex].Lvlname));
         }
 
         bool MouseDown;
@@ -336,7 +336,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IsAddingItems = true;
 
             if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                AddFileToGate($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
+                AddFileToGate(new FileInfo($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}"), TargetRowToPaint);
             }
             else if (LvlsToMove != null) {
                 LogUndo = true;
@@ -352,8 +352,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
-                foreach (string leaf in sublevels2)
-                    AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
+                foreach (string lvl in sublevels2)
+                    AddFileToGate(ProjectExplorer.GetFile(lvl), TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Phases");
             }
@@ -573,7 +573,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             throw new NotImplementedException();
         }
 
-        public object GetProperties()
+        public override object GetProperties()
         {
             return _gateproperties;
         }
@@ -646,11 +646,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
         }
 
-        public List<SaveState> GetUndoList()
-        {
-            return UndoList;
-        }
-
         public void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
@@ -668,7 +663,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             //if LoadedGate is somehow not set, force Save As instead
             if (this.WorkingFile == null)
@@ -677,7 +672,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
         {
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
@@ -737,10 +732,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void AddFileToGate(string path, int index = -1)
+        public void AddFileToGate(FileInfo FileToAdd, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = UtilFile.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel") {
                 MessageBox.Show("That does not appear to be a lvl.\nItem not added to gate.", "Bumper Custom Level Editor");
@@ -749,10 +744,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
             //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-            if (!Path.GetDirectoryName(path).Contains(TCLE.WorkingFolder.FullName)) {
+            if (FileToAdd.FullName.Contains(TCLE.WorkingFolder.FullName)) {
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}")) {
-                        File.Copy(path, $@"{TCLE.WorkingFolder}\{Path.GetFileName(path)}");
+                    if (!File.Exists($@"{TCLE.WorkingFolder}\{FileToAdd.Name}")) {
+                        FileToAdd.CopyTo($@"{TCLE.WorkingFolder}\{FileToAdd.Name}");
                         ProjectExplorer.CreateTreeView();
                     }
                     else
@@ -795,9 +790,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
-            _gateproperties.prebeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.prelvl)?.FullName);
+            _gateproperties.prebeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_gateproperties.prelvl));
             //calc post lvl beats
-            _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _gateproperties.postlvl)?.FullName);
+            _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_gateproperties.postlvl));
             //loop over each lvl and update the grid with runtime or a warning
             foreach (GateLvlData _lvl in GateLvls) {
                 RecalculateRuntimeSublevel(_lvl);
@@ -821,13 +816,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorLoading)
                 return 0;
 
-            FileInfo lvlfile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_lvl.Lvlname}"));
-            lvlfile?.Refresh();
-
-            if (lvlfile == null || !lvlfile.Exists)
+            if (!ProjectExplorer.TryGetFile(_lvl.Lvlname, out FileInfo lvlfile) || !lvlfile.Exists)
                 _lvl.beats = -1;
             else
-                _lvl.beats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.Lvlname)?.FullName);
+                _lvl.beats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.Lvlname));
+            lvlfile?.Refresh();
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
             if (!Playback.Generating)
@@ -942,7 +935,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        public void Cut()
+        public override void Cut()
         {
             Copy();
 
@@ -955,7 +948,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Cut Sublevels");
         }
 
-        public void Copy()
+        public override void Copy()
         {
             List<int> selectedrows = gateLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
@@ -968,7 +961,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UtilAudio.PlaySound("UIkcopy");
         }
 
-        public void Paste()
+        public override void Paste()
         {
             int _in = gateLvlList.CurrentRow?.Index + 1 ?? 0;
 

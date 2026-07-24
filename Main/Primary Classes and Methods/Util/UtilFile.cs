@@ -39,11 +39,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
         {
-            if (!File.Exists(_selectedfilename))
+            return LoadFileLock(new FileInfo(_selectedfilename), LoadText);
+        }
+
+        public static dynamic LoadFileLock(FileInfo _selectedfilename, bool LoadText = false)
+        {
+            if (_selectedfilename is null || !_selectedfilename.Exists)
                 return null;
             ///reference:
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
-            using (FileStream fileStream = new(_selectedfilename, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream fileStream = new(_selectedfilename.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
                 if (LoadText) {
                     return textReader.ReadToEnd();
@@ -52,7 +57,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     try {
                         return JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
                     } catch (Exception) {
-                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename}.", "File load error");
+                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename.FullName}.", "File load error");
                         return null;
                     }
                 }
@@ -157,7 +162,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 //skip self to not include self
                 if (file.Name == searchreference)
                     continue;
-                string text = ((JObject)UtilFile.LoadFileLock(file.FullName)).ToString(Formatting.None);
+                string text = ((JObject)UtilFile.LoadFileLock(file)).ToString(Formatting.None);
                 //check if the file we're searching contains the obj_name
                 if (text.Contains(searchreference)) {
                     referencefiles += file.Name + '\n';

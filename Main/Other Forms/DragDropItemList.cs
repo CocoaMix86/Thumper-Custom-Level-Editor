@@ -74,13 +74,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 }
             }
             else if (Items == "leaf") {
-                TCLE.GlobalLastLvl?.AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                TCLE.GlobalLastLvl?.AddFiletoLvl(ProjectExplorer.GetFile(cellval));
             }
             else if (Items == "lvl") {
-                TCLE.GlobalLastGate?.AddFileToGate(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                TCLE.GlobalLastGate?.AddFileToGate(ProjectExplorer.GetFile(cellval));
             }
             else if (Items == "lvlgate") {
-                TCLE.GlobalLastMaster?.AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == cellval)?.FullName);
+                TCLE.GlobalLastMaster?.AddFiletoMaster(ProjectExplorer.GetFile(cellval));
             }
         }
 
@@ -158,7 +158,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl";
-                foreach (FileInfo lvl in ProjectExplorer.Files) {
+                foreach (FileInfo lvl in ProjectExplorer.Files.Values) {
                     if (lvl.Extension is ".lvl")
                         dgvPathsList.Rows.Add(lvl.Name);
                 }
@@ -168,7 +168,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlGateList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl/Gate";
-                foreach (FileInfo lvl in ProjectExplorer.Files) {
+                foreach (FileInfo lvl in ProjectExplorer.Files.Values) {
                     if (lvl.Extension is ".lvl") {
                         dgvPathsList.Rows.Add(lvl.Name);
                         dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Green;
@@ -184,7 +184,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LeafList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Leaf";
-                foreach (FileInfo leaf in ProjectExplorer.Files) {
+                foreach (FileInfo leaf in ProjectExplorer.Files.Values) {
                     if (leaf.Extension is ".leaf")
                         dgvPathsList.Rows.Add(leaf.Name);
                 }

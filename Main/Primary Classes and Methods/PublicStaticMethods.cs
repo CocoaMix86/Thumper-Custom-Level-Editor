@@ -49,20 +49,6 @@ namespace Thumper_Custom_Level_Editor
 
             foreach (EditorBase editor in TCLE.Documents.Values)
                 editor.ColorFormElements();
-            /*
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
-                leaf.ColorFormElements();
-            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLvl)))
-                lvl.ColorFormElements();
-            foreach (EditorGate gate in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorGate)))
-                gate.ColorFormElements();
-            foreach (EditorMaster master in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorMaster)))
-                master.ColorFormElements();
-            foreach (EditorSample sample in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorSample)))
-                sample.ColorFormElements();
-            foreach (EditorRawText raw in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorRawText)))
-                raw.ColorFormElements();
-            */
         }
 
         public void MenusVisible(bool visible)
@@ -91,6 +77,82 @@ namespace Thumper_Custom_Level_Editor
             toolstripViewProperties.Enabled = true;
 
             MainBeeble.Visible = visible;
+        }
+
+        public void InitializeUI()
+        {
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            dockMain.Theme = DockTheme;
+            TabRightClickMenu = contextmenuTabClick;
+            MainBeeble.Owner = this;
+            DragDropItems.Owner = this;
+            MenusVisible(false);
+            //set custom renderer
+            toolStripTitle.Renderer = new ToolStripMainForm();
+            toolStripMain.Renderer = new ToolStripOverride();
+            contextmenuFile.Renderer = new ContextMenuColors();
+            contextmenuEdit.Renderer = new ContextMenuColors();
+            contextmenuView.Renderer = new ContextMenuColors();
+            contextMenuProject.Renderer = new ContextMenuColors();
+            contextmenuWindow.Renderer = new ContextMenuColors();
+            contextmenuHelp.Renderer = new ContextMenuColors();
+            contextmenuTabClick.Renderer = new ContextMenuColors();
+            contextmenuSampPacks.Renderer = new ContextMenuColors();
+            contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
+            contextMenuRecentProjects.Renderer = new ContextMenuColors();
+            //set check states from saved settings
+            leafoptionShowCategory.Checked = Properties.Settings.Default.LeafOptionShowCategory;
+            leafoptionShowGrid.Checked = Properties.Settings.Default.LeafOptionShowGrid;
+            leafoptionConnectBars.Checked = Properties.Settings.Default.LeafOptionConnectBars;
+            leafoptionShowLanes.Checked = Properties.Settings.Default.LeafOptionShowLane;
+            leafoptionEaseDots.Checked = Properties.Settings.Default.LeafOptionEaseDots;
+            leafoptionThinValues.Checked = Properties.Settings.Default.LeafOptionThinBars;
+            leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
+            leafoptionVerticalCells.Checked = Properties.Settings.Default.LeafOptionVerticalCells;
+            leafoptionPlaybackScroll.Checked = Properties.Settings.Default.LeafOptionPlaybackScroll;
+        }
+
+        public static void InitializeFolders()
+        {
+            try {
+                if (Properties.Settings.Default.version != TCLE.VersionNumber) {
+                    Properties.Settings.Default.version = TCLE.VersionNumber;
+                    if (UtilPaths.DirTemp.Exists)
+                        UtilPaths.DirTemp.Delete(true);
+                    if (UtilPaths.DirSettings.Exists)
+                        UtilPaths.DirSettings.Delete(true);
+                }
+                //Create directory for leaf templates and other default files
+                if (!UtilPaths.DirTemplates.Exists) {
+                    InitializeTemplateFiles();
+                }
+                if (!UtilPaths.DirTemp.Exists) {
+                    UtilPaths.DirTemp.Create();
+                }
+                if (!UtilPaths.DirSettings.Exists) {
+                    UtilPaths.DirSettings.Create();
+                }
+                //load fonts
+                if (!File.Exists($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf"))
+                    File.WriteAllBytes($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
+                ImportedFonts.AddFontFile($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf");
+            } catch (Exception ex) {
+                MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
+            }
+        }
+
+        public static void InitializeTemplateFiles()
+        {
+            if (!UtilPaths.DirTemplates.Exists)
+                UtilPaths.DirTemplates.Create();
+            if (!UtilPaths.DirSettings.Exists)
+                UtilPaths.DirSettings.Create();
+            //write out default templates and settings files
+            File.WriteAllText($@"{UtilPaths.Templates}\singletrack.leaf", Properties.Resources.leaf_singletrack);
+            File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
+            File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
+            File.WriteAllText($@"{UtilPaths.Settings}\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
+            File.WriteAllText($@"{UtilPaths.Settings}\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
         }
 
         public static void ResizeHeaders(DataGridView dgv)
@@ -152,7 +214,7 @@ namespace Thumper_Custom_Level_Editor
                 ProjectSamples.Remove(_samp.Key);
             //ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //parse file to JSON
-            dynamic _in = UtilFile.LoadFileLock(SampFile.FullName);
+            dynamic _in = UtilFile.LoadFileLock(SampFile);
             warning = "";
             //skip if somehow empty
             if (_in == null || !_in.ContainsKey("items"))
@@ -209,7 +271,7 @@ namespace Thumper_Custom_Level_Editor
         //check if at least 1 master file exists
         public static bool CheckForMaster()
         {
-            return ProjectExplorer.Files.Any(x => string.Equals(x.Extension, ".master", StringComparison.OrdinalIgnoreCase));
+            return ProjectExplorer.Files.Values.Any(x => string.Equals(x.Extension, ".master", StringComparison.OrdinalIgnoreCase));
         }
 
         public static EditorBase OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
@@ -224,7 +286,7 @@ namespace Thumper_Custom_Level_Editor
                 openraw = true;
             }
 
-            object _load = UtilFile.LoadFileLock(filepath.FullName, openraw);
+            object _load = UtilFile.LoadFileLock(filepath, openraw);
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
@@ -339,7 +401,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (WorkingFolder == null)
                 return;
-            lvlsinworkfolder = ProjectExplorer.Files.Where(x => x.Extension == ".lvl").Select(x => x.Name).ToList();
+            lvlsinworkfolder = ProjectExplorer.GetFilesByExtension(".lvl").Select(x => x.Name).ToList();
             lvlsinworkfolder.Add("<none>");
             lvlsinworkfolder.Sort();
         }
@@ -354,6 +416,49 @@ namespace Thumper_Custom_Level_Editor
                 (document as Form_RawText).Reload();
             }
             */
+        }
+
+        private static void SwitchTab(int direction)
+        {
+            if (!ActiveWorkspace.dockMain.Documents.Any())
+                return;
+
+            List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
+            int index = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
+
+            docs[UtilMath.mod(index + direction, docs.Count)].DockHandler.Activate();
+        }
+
+        private static void MoveTabToWorkspace(int direction)
+        {
+            if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
+                return;
+            List<IDockContent> docs = DockMain.Documents.ToList();
+            //index of next workspace +1 or -1
+            int docind = docs.IndexOf(ActiveWorkspace) + direction;
+            (GlobalActiveDocument as DockContent).Show((docs[UtilMath.mod(docind, docs.Count)] as DockWorkspace).dockMain, DockState.Document);
+            docs[UtilMath.mod(docind, docs.Count)].DockHandler.Activate();
+            docs[UtilMath.mod(docind, docs.Count)].DockHandler.Form.Focus();
+        }
+
+        private static void SwitchWorkspace(int direction)
+        {
+            List<IDockContent> docs = DockMain.Documents.ToList();
+            int docind = docs.IndexOf(ActiveWorkspace) + direction;
+            docs[UtilMath.mod(docind, docs.Count)].DockHandler.Activate();
+        }
+
+        public static void RefreshLeafEditors(bool ExpandLanes = false)
+        {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
+                if (ExpandLanes && Properties.Settings.Default.LeafOptionShowLane) {
+                    foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
+                        seq.expandlanes = true;
+                    }
+                }
+                leaf.trackEditor.Invalidate();
+                leaf.dgvMasterView.Invalidate();
+            }
         }
 
         public static void FindEditorRunMethod(Type editorType, string methodName)
@@ -414,8 +519,8 @@ namespace Thumper_Custom_Level_Editor
             bool sort = MessageBox.Show($"Sort files into subfolders?\n{countleaf} leaf files\n{countlvl} lvl files\n{countgate} gate files\n{countsamp} samp files\n{countmaster} master files", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes;
 
             //load the properties of the TCL and create projectProperties
-            dynamic ProjectJson = UtilFile.LoadFileLock(LevelDetails.FullName);
-            dynamic ProjectConfig = UtilFile.LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault()?.FullName);
+            dynamic ProjectJson = UtilFile.LoadFileLock(LevelDetails);
+            dynamic ProjectConfig = UtilFile.LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault());
             ProjectProperties Convert = new() {
                 ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
                 difficulty = (string)ProjectJson["difficulty"] ?? "D0",
@@ -462,25 +567,25 @@ namespace Thumper_Custom_Level_Editor
                 //resave leafs and lvls to properly convert the datapoints
                 JObject _save = null;
                 if (newfile.Extension == ".leaf") {
-                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile);
                     EditorLeaf _leaf = new(_load, newfile, true);
                     _save = _leaf.LeafProperties.ConvertToJson();
                     //_leaf.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".lvl") {
-                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile);
                     EditorLvl _lvl = new(_load, newfile, true);
                     _save = EditorLvl.BuildSave(_lvl.LvlProperties);
                     //_lvl.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".master") {
-                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile);
                     EditorMaster _master = new(_load, newfile, true);
                     _save = EditorMaster.BuildSave(_master.MasterProperties);
                     //_master.SaveCheckAndWrite(true, "");
                 }
                 else if (newfile.Extension == ".samp") {
-                    dynamic _load = UtilFile.LoadFileLock(newfile.FullName);
+                    dynamic _load = UtilFile.LoadFileLock(newfile);
                     EditorSample _samp = new(_load, newfile, true);
                     _save = EditorSample.BuildSave(_samp.SampleProperties);
                     //_samp.SaveCheckAndWrite(true, "");

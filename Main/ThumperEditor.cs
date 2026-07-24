@@ -10,7 +10,6 @@ using System.Linq;
 using System.Drawing.Text;
 using System.Security.Permissions;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -24,7 +23,6 @@ namespace Thumper_Custom_Level_Editor
         public static DockPanel DockMain => Instance.dockMain;
         public static DockWorkspace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
-        //public static IEnumerable<IDockContent> Documents => Instance.dockMain.Documents.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents.Concat((x as Form_WorkSpace).dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents)));
         public static Dictionary<string, EditorBase> Documents = new();
         public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
         public static ContextMenuStrip TabRightClickMenu;
@@ -32,9 +30,8 @@ namespace Thumper_Custom_Level_Editor
         public static decimal BPM => ProjectProperties.BPM;
         public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
-        public static string AppLocation = Path.GetDirectoryName(Application.ExecutablePath);
-        public static Dictionary<string, Keys> Keybinds = Properties.Resources.DefaultKeybinds.Split('\n').ToDictionary(g => g.Split(';')[0], g => (Keys)Enum.Parse(typeof(Keys), g.Split(';')[1], true));
-        //public static Dictionary<FileInfo, FileStream> lockedfiles = new();
+        public static string AppLocation => Path.GetDirectoryName(Application.ExecutablePath);
+        public static Dictionary<string, Keys> Keybinds = new();
         public static ProjectProperties ProjectProperties;
         public static SettingsUITheme settingsUITheme = new();
         public static bool Fullscreen;
@@ -55,7 +52,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 _GAD = value;
                 //for testing -> TCLE.Instance.toolstripLevelName.Text = GlobalActiveDocument.WorkingFile.Name;
-                dockProjectProperties.propertyGridProject.SelectedObject = GlobalActiveDocument.GetType().GetMethod("GetProperties").Invoke(GlobalActiveDocument, null);
+                dockProjectProperties.propertyGridProject.SelectedObject = GlobalActiveDocument.GetProperties();
                 dockProjectProperties.TabText = $"{GlobalActiveDocument.DockHandler.TabText} Properties";
 
                 if (GlobalActiveDocument.GetType() == typeof(EditorLvl)) {
@@ -93,12 +90,7 @@ namespace Thumper_Custom_Level_Editor
         public TCLE(string LevelFromArg)
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            dockMain.Theme = DockTheme;
             Instance = this;
-            TabRightClickMenu = contextmenuTabClick;
-            MainBeeble.Owner = this;
-            DragDropItems.Owner = this;
             ProjectProperties = new() {
                 ProjectName = "",
                 description = "",
@@ -106,61 +98,13 @@ namespace Thumper_Custom_Level_Editor
                 BPM = 0,
                 WorkingFile = null
             };
-            MenusVisible(false);
-
+            InitializeUI();
             // Initialize Sound library
             Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_LATENCY, this.Handle);
-            //set custom renderer
-            toolStripTitle.Renderer = new ToolStripMainForm();
-            toolStripMain.Renderer = new ToolStripOverride();
-            contextmenuFile.Renderer = new ContextMenuColors();
-            contextmenuEdit.Renderer = new ContextMenuColors();
-            contextmenuView.Renderer = new ContextMenuColors();
-            contextMenuProject.Renderer = new ContextMenuColors();
-            contextmenuWindow.Renderer = new ContextMenuColors();
-            contextmenuHelp.Renderer = new ContextMenuColors();
-            contextmenuTabClick.Renderer = new ContextMenuColors();
-            contextmenuSampPacks.Renderer = new ContextMenuColors();
-            contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
-            contextMenuRecentProjects.Renderer = new ContextMenuColors();
-            //set check states from saved settings
-            leafoptionShowCategory.Checked = Properties.Settings.Default.LeafOptionShowCategory;
-            leafoptionShowGrid.Checked = Properties.Settings.Default.LeafOptionShowGrid;
-            leafoptionConnectBars.Checked = Properties.Settings.Default.LeafOptionConnectBars;
-            leafoptionShowLanes.Checked = Properties.Settings.Default.LeafOptionShowLane;
-            leafoptionEaseDots.Checked = Properties.Settings.Default.LeafOptionEaseDots;
-            leafoptionThinValues.Checked = Properties.Settings.Default.LeafOptionThinBars;
-            leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
-            leafoptionVerticalCells.Checked = Properties.Settings.Default.LeafOptionVerticalCells;
-            leafoptionPlaybackScroll.Checked = Properties.Settings.Default.LeafOptionPlaybackScroll;
-            //
+            // Initialize recent files list. Set empty list if there are none
             Properties.Settings.Default.Recentfiles ??= new List<string>();
             //
-            try {
-                if (Properties.Settings.Default.version != TCLE.VersionNumber) {
-                    Properties.Settings.Default.version = TCLE.VersionNumber;
-                    if (Directory.Exists($@"{AppLocation}\temp"))
-                        Directory.Delete($@"{AppLocation}\temp", true);
-                    if (Directory.Exists($@"{AppLocation}\settings"))
-                        Directory.Delete($@"{AppLocation}\settings", true);
-                }
-                //Create directory for leaf templates and other default files
-                if (!Directory.Exists($@"{AppLocation}\templates")) {
-                    toolstripFileTemplateRegen_Click(null, null);
-                }
-                if (!Directory.Exists($@"{AppLocation}\temp")) {
-                    Directory.CreateDirectory($@"{AppLocation}\temp");
-                }
-                if (!Directory.Exists($@"{AppLocation}\settings")) {
-                    Directory.CreateDirectory($@"{AppLocation}\settings");
-                }
-                //load fonts
-                if (!File.Exists($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf"))
-                    File.WriteAllBytes($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
-                ImportedFonts.AddFontFile($@"{AppLocation}\temp\JetBrainsMono_Medium.ttf");
-            } catch (Exception ex) {
-                MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
-            }
+            InitializeFolders();
             //call methods to initialize various aspects of the editors
             UtilImport.ImportInit();
             ColorFormElements(TCLE.Instance);
@@ -241,7 +185,7 @@ namespace Thumper_Custom_Level_Editor
             //colors
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             //write quick values to file
-            File.WriteAllText($@"{TCLE.AppLocation}\settings\quickvalues.txt", string.Join('\n', TCLE.LeafQuickValues));
+            File.WriteAllText($@"{UtilPaths.Settings}\quickvalues.txt", string.Join('\n', TCLE.LeafQuickValues));
             Properties.Settings.Default.Save();
         }
 
@@ -251,8 +195,11 @@ namespace Thumper_Custom_Level_Editor
             alzheimer();
             //
             try {
-                Directory.Delete($@"{AppLocation}\temp\", true);
-            } catch (Exception) { }
+                UtilPaths.DirTemp.Delete(true);
+            } catch (Exception) {
+                //this will always fail, as the font file and sequencer .sf2 will still be open
+                //this is ok.
+            }
         }
 
         public void SetKeyBinds()
@@ -261,7 +208,7 @@ namespace Thumper_Custom_Level_Editor
             //check if custom keybinds set
             if (Properties.Settings.Default.UserKeybinds != "-") {
                 Dictionary<string, Keys> _user = Properties.Settings.Default.UserKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
-                //once user keys are loaded, iterate each and copy values over to _default
+                //once user keys are loaded, iterate each and copy values over to _default, overwriting defaults
                 _user.ToList().ForEach(x => _default[x.Key] = x.Value);
             }
             Keybinds = _default;
@@ -290,8 +237,6 @@ namespace Thumper_Custom_Level_Editor
             toolStripWindowCloseWorkspace.ShortcutKeys = Keybinds["Close Current Workspace"];
             ///
             toolstripTabSave.ShortcutKeys = Keybinds["Save File"];
-            ///
-            ///btnUndoLeaf.ToolTipText = $"Undo ({String.Join("+", defaultkeybinds["leafundo"].ToString().Split(new[] { ", " }, StringSplitOptions.None).ToList().Reverse<string>())})";
         }
         #endregion
         #region Form Moving and Control buttons
@@ -347,7 +292,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private void TCLE_LocationChanged(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal && this.Location.Y == 0 && (Control.MouseButtons & MouseButtons.Left) == 0)
+            if (this.WindowState == FormWindowState.Normal && this.Location.Y <= 1 && (Control.MouseButtons & MouseButtons.Left) == 0)
                 MaximizeScreenBounds();
         }
         private void toolstripFormMinimize_Click(object sender, EventArgs e)
@@ -394,55 +339,34 @@ namespace Thumper_Custom_Level_Editor
         #region Form Key Press
         private void TCLE_KeyDown(object sender, KeyEventArgs e)
         {
-            if (dockMain.ActiveContent == (IDockContent)Explorer || dockMain.ActiveContent == (IDockContent)dockProjectProperties)
+            if (dockMain.ActiveContent is DockProjectExplorer or DockProjectProperties)
                 return;
 
-            if (e.KeyData == Keybinds["Cut"]) {
-                toolstripEditCut_Click(null, null);
-            }
-            else if (e.KeyData == Keybinds["Copy"]) {
-                toolstripEditCopy_Click(null, null);
-            }
-            else if (e.KeyData == Keybinds["Paste"]) {
-                toolstripEditPaste_Click(null, null);
-            }
+            if (e.KeyData == Keybinds["Cut"]) 
+                GlobalActiveDocument.Cut();            
+            else if (e.KeyData == Keybinds["Copy"]) 
+                GlobalActiveDocument.Copy();            
+            else if (e.KeyData == Keybinds["Paste"]) 
+                GlobalActiveDocument.Paste();            
             //tab switch next
-            else if (e.KeyData == Keybinds["Next Tab"]) {
-                if (!ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
-                docs[(docind + 1) % docs.Count].DockHandler.Activate();
-            }
+            else if (e.KeyData == Keybinds["Next Tab"]) 
+                SwitchTab(1);            
             //tab switch previous
-            else if (e.KeyData == Keybinds["Previous Tab"]) {
-                if (!ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = ActiveWorkspace.dockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace.dockMain.ActiveDocument);
-                docs[UtilMath.mod(docind - 1, docs.Count)].DockHandler.Activate();
-            }
+            else if (e.KeyData == Keybinds["Previous Tab"]) 
+                SwitchTab(-1);            
             //move document to next/previous workspace
-            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"] || e.KeyData == Keybinds["Move Tab to Prev Workspace"]) {
-                if (GlobalActiveDocument == null || !ActiveWorkspace.dockMain.Documents.Any())
-                    return;
-                List<IDockContent> docs = DockMain.Documents.ToList();
-                //index of next workspace +1 or -1
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyData == Keybinds["Move Tab to Next Workspace"] ? 1 : -1);
-                (GlobalActiveDocument as DockContent).Show((docs[UtilMath.mod(docind, docs.Count)] as DockWorkspace).dockMain, DockState.Document);
-                docs[UtilMath.mod(docind, docs.Count)].DockHandler.Activate();
-                docs[UtilMath.mod(docind, docs.Count)].DockHandler.Form.Focus();
-            }
+            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"]) 
+                MoveTabToWorkspace(1);            
+            else if (e.KeyData == Keybinds["Move Tab to Prev Workspace"]) 
+                MoveTabToWorkspace(-1);            
             //workspace switch next/previous
-            else if (e.KeyData == Keybinds["Next Workspace"] || e.KeyData == Keybinds["Previous Workspace"]) {
-                List<IDockContent> docs = DockMain.Documents.ToList();
-                int docind = docs.IndexOf(ActiveWorkspace) + (e.KeyData == Keybinds["Next Workspace"] ? 1 : -1);
-                docs[UtilMath.mod(docind, docs.Count)].DockHandler.Activate();
-            }
+            else if (e.KeyData == Keybinds["Next Workspace"]) 
+                SwitchWorkspace(1);            
+            else if (e.KeyData == Keybinds["Previous Workspace"])
+                SwitchWorkspace(-1);
             //Undo
-            else if (e.KeyData == Keybinds["Undo"]) {
-                UndoSystem.UndoFunction(1);
-            }
+            else if (e.KeyData == Keybinds["Undo"]) 
+                UndoSystem.UndoFunction(1);            
             //e.Handled = true;
         }
         #endregion
@@ -454,14 +378,13 @@ namespace Thumper_Custom_Level_Editor
             draw.Show(dockMain, DockState.Document);
         }
 
-        VolumeMaster volma;
+        private VolumeMaster? VolumeMaster;
         private void btnVolumeMixer_Click(object sender, EventArgs e)
         {
-            if (volma == null || volma.IsDisposed)
-                volma = new();
-            volma.Show();
-            volma.BringToFront();
-            volma.Focus();
+            if (VolumeMaster == null || VolumeMaster.IsDisposed)
+                VolumeMaster = new();
+            VolumeMaster.Show();
+            VolumeMaster.Activate();
         }
 
         private void toolstripLevelName_Click(object sender, EventArgs e)
@@ -535,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
             //load the properties of the TCL and create projectProperties
-            dynamic ProjectJson = UtilFile.LoadFileLock(TCL.FullName);
+            dynamic ProjectJson = UtilFile.LoadFileLock(TCL);
             Image Thumbnail = null;
             if (File.Exists($@"{TCL.Directory}\thumbnail.png")) {
                 using (FileStream fs = new($@"{TCL.Directory}\thumbnail.png", FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -584,21 +507,21 @@ namespace Thumper_Custom_Level_Editor
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
             IsLoadingProject = true;
-            if (!Directory.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}"))
-                Directory.CreateDirectory($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}");
+            if (!UtilPaths.DirCurrentProjectSettings.Exists)
+                UtilPaths.DirCurrentProjectSettings.Create();
             DeserializeDockContent m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             try {
-                dockMain.LoadFromXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config", m_deserializeDockContent);
+                dockMain.LoadFromXml($@"{UtilPaths.CurrentProjectSettings}\layout_workspace.config", m_deserializeDockContent);
             } catch {
                 DockWorkspace workspace1 = new($"Workspace {Workspaces.Count() + 1}");
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
-                OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
+                OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
             }
             foreach (DockWorkspace _ws in TCLE.Workspaces) {
-                if (File.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{_ws.Text}.config"))
-                    _ws.dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{_ws.Text}.config");
+                if (File.Exists($@"{UtilPaths.CurrentProjectSettings}\layout_{_ws.Text}.config"))
+                    _ws.dockMain.SaveAsXml($@"{UtilPaths.CurrentProjectSettings}\layout_{_ws.Text}.config");
             }
             IsLoadingProject = false;
             //this will be the loading sound :D
@@ -633,14 +556,14 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
-            GlobalActiveDocument.GetType().GetMethod("SaveAs").Invoke(GlobalActiveDocument, new object[] { false, null });
+            GlobalActiveDocument.SaveAs(false, null);
             TCLE.SaveTCL();
         }
 
         private void toolstripFileTemplateFolder_Click(object sender, EventArgs e)
         {
             ProcessStartInfo startInfo = new() {
-                Arguments = $@"{Path.GetDirectoryName(Application.ExecutablePath)}\templates",
+                Arguments = UtilPaths.Temp,
                 FileName = "explorer.exe"
             };
             Process.Start(startInfo);
@@ -648,17 +571,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void toolstripFileTemplateRegen_Click(object sender, EventArgs e)
         {
-            if (!Directory.Exists($@"{AppLocation}\templates")) {
-                Directory.CreateDirectory($@"{AppLocation}\templates");
-            }
-            if (!Directory.Exists($@"{AppLocation}\settings")) {
-                Directory.CreateDirectory($@"{AppLocation}\settings");
-            }
-            File.WriteAllText($@"{AppLocation}\templates\singletrack.leaf", Properties.Resources.leaf_singletrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
-            File.WriteAllText($@"{AppLocation}\templates\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText($@"{AppLocation}\settings\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
-            File.WriteAllText($@"{AppLocation}\settings\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
+            InitializeTemplateFiles();
         }
 
         private void toolstripFileRecent_Click(object sender, EventArgs e)
@@ -669,12 +582,17 @@ namespace Thumper_Custom_Level_Editor
         private void contextMenuRecentProjects_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             contextMenuRecentProjects.Items.Clear();
+            //clear projects that no longer exist
+            Properties.Settings.Default.Recentfiles.RemoveAll(path => !File.Exists(path));
+            //build the menu
             foreach (string path in Properties.Settings.Default.Recentfiles) {
                 FileInfo tcl = new(path);
                 ToolStripMenuItem item = new() {
                     Text = $"{tcl.Name} ({tcl.FullName})",
                     ForeColor = Color.White,
-                    Image = Properties.Resources.icon_tcle
+                    Image = Properties.Resources.icon_tcle,
+                    //tag is set to 'tcl' (the actual FileInfo) here so it's easy to grab later
+                    Tag = tcl
                 };
                 contextMenuRecentProjects.Items.Add(item);
             }
@@ -682,8 +600,9 @@ namespace Thumper_Custom_Level_Editor
 
         private void contextMenuRecentProjects_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            FileInfo tcl = new(e.ClickedItem.Text.Split('(')[1].TrimEnd(')'));
-            OpenProject(tcl);
+            //FileInfo tcl = new(e.ClickedItem.Text.Split('(')[1].TrimEnd(')'));
+            if (e.ClickedItem.Tag is FileInfo tcl)
+                OpenProject(tcl);
         }
 
         private void toolstripFileClearTemp_Click(object sender, EventArgs e)
@@ -691,7 +610,7 @@ namespace Thumper_Custom_Level_Editor
             if (MessageBox.Show("Are you sure you want to clear all temp files?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No)
                 return;
 
-            foreach (string file in Directory.GetFiles($@"{TCLE.AppLocation}\temp\", "*.*"))
+            foreach (string file in Directory.GetFiles(UtilPaths.Temp, "*.*"))
                 File.Delete(file);
         }
 
@@ -711,19 +630,19 @@ namespace Thumper_Custom_Level_Editor
         #region Toolstrip Edit
         private void toolstripEditCut_Click(object sender, EventArgs e)
         {
-            GlobalActiveDocument.GetType().GetMethod("Cut").Invoke(GlobalActiveDocument, null);
+            GlobalActiveDocument.Cut();
         }
 
         private void toolstripEditCopy_Click(object sender, EventArgs e)
         {
-            GlobalActiveDocument.GetType().GetMethod("Copy").Invoke(GlobalActiveDocument, null);
+            GlobalActiveDocument.Copy();
         }
 
         private void toolstripEditPaste_Click(object sender, EventArgs e)
         {
             if (GlobalActiveDocument is EditorRawText)
                 return;
-            GlobalActiveDocument.GetType().GetMethod("Paste").Invoke(GlobalActiveDocument, null);
+            GlobalActiveDocument.Paste();
         }
 
         private void toolstripEditPreferences_Click(object sender, EventArgs e)
@@ -754,65 +673,43 @@ namespace Thumper_Custom_Level_Editor
         private void leafoptionShowGrid_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-                leaf.dgvMasterView.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionConnectBars_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionConnectBars = leafoptionConnectBars.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionShowLanes_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowLane = leafoptionShowLanes.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                if (Properties.Settings.Default.LeafOptionShowLane) {
-                    foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
-                        seq.expandlanes = true;
-                    }
-                    leaf.trackEditor.Invalidate();
-                }
-                else
-                    leaf.trackEditor.InvalidateColumn(2);
-            }
+            RefreshLeafEditors(true);
         }
 
         private void leafoptionEaseDots_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionEaseDots = leafoptionEaseDots.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionThinValues_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionThinBars = leafoptionThinValues.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionShowWave_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowWave = leafoptionShowWave.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionVerticalCells_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionVerticalCells = leafoptionVerticalCells.Checked;
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
-                leaf.trackEditor.Invalidate();
-            }
+            RefreshLeafEditors();
         }
 
         private void leafoptionPlaybackScroll_CheckedChanged(object sender, EventArgs e)
@@ -1141,7 +1038,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
-            GlobalActiveDocument.GetType().GetMethod("Save").Invoke(GlobalActiveDocument, new object[] { true });
+            GlobalActiveDocument.Save(true);
             //FindEditorRunMethod(GlobalActiveDocument.GetType(), "Save");
             TCLE.SaveTCL();
         }
@@ -1151,8 +1048,8 @@ namespace Thumper_Custom_Level_Editor
             if (GlobalActiveDocument == null)
                 return;
             foreach (DockWorkspace workspace in Workspaces) {
-                foreach (IDockContent document in workspace.dockMain.Documents) {
-                    document.GetType().GetMethod("Save").Invoke(document, new object[] { false });
+                foreach (EditorBase document in workspace.dockMain.Documents) {
+                    document.Save(false);
                     //FindEditorRunMethod(document.GetType(), "Save");
                 }
             }
@@ -1186,9 +1083,9 @@ namespace Thumper_Custom_Level_Editor
         {
             if (TCLE.IsLoadingProject)
                 return;
-            if (!Directory.Exists($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}"))
-                Directory.CreateDirectory($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}");
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_workspace.config");
+            if (!UtilPaths.DirCurrentProjectSettings.Exists)
+                UtilPaths.DirCurrentProjectSettings.Create();
+            dockMain.SaveAsXml($@"{UtilPaths.CurrentProjectSettings}\layout_workspace.config");
         }
         #endregion
         #region Dock Tab Rightclick
@@ -1247,7 +1144,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument is EditorRawText)
                 return;
-            toolstripMainUndo.DropDown = UndoSystem.CreateUndoMenu((List<SaveState>)TCLE.GlobalActiveDocument.GetType().GetMethod("GetUndoList").Invoke(TCLE.GlobalActiveDocument, null));
+            toolstripMainUndo.DropDown = UndoSystem.CreateUndoMenu(TCLE.GlobalActiveDocument.UndoList);
         }
 
         private void toolstripMainUndo_DropDownOpened(object sender, EventArgs e)
@@ -1265,6 +1162,7 @@ namespace Thumper_Custom_Level_Editor
             _ = SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
 
+        //this handles the taskbar button
         protected override CreateParams CreateParams
         {
             get {

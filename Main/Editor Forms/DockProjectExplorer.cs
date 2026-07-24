@@ -5,10 +5,10 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public partial class DockProjectExplorer : EditorBase
+    public partial class DockProjectExplorer : EditorBaseSub
     {
         #region Form Construction
-        public DockProjectExplorer() : base(null)
+        public DockProjectExplorer()
         {
             InitializeComponent();
             //set custom renderer for some controls
@@ -259,7 +259,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //
                     //need to update the name in every other file that references it too
                     foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
-                        dynamic _loadfile = UtilFile.LoadFileLock(file.FullName);
+                        dynamic _loadfile = UtilFile.LoadFileLock(file);
                         //if load fails, skip
                         if (_loadfile == null)
                             continue;
@@ -308,7 +308,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ofd.InitialDirectory = TCLE.WorkingFolder?.FullName ?? Application.StartupPath;
             if (ofd.ShowDialog() == DialogResult.OK) {
                 FileInfo filetocopy = new(ofd.FileName);
-                if (ProjectExplorer.Files.Any(x => x.Name == filetocopy.Name)) {
+                if (ProjectExplorer.TryGetFile(filetocopy.Name, out FileInfo foundfile)) {
                     if (MessageBox.Show($"A file named {filetocopy.Name} already exists in this project. Do you still want to add it?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                         return;
                     }
@@ -809,6 +809,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
 
         }
+
+
     }
 
     public static class SOExtension

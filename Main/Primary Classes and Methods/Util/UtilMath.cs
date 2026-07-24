@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
+﻿namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
     public static class UtilMath
     {
@@ -100,9 +94,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             int _beatcount = 0;
             if (_masterlvl.Type == "lvl") {
-                FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.name}"));
-                if (lvl != null) _beatcount += CalculateLvlRuntime(lvl.FullName);
-                else return -1;
+                if (!ProjectExplorer.TryGetFile(_masterlvl.name, out FileInfo lvl))
+                    return -1;
+                _beatcount += CalculateLvlRuntime(lvl);
             }
             //this section handles gate
             else {
@@ -112,8 +106,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 else
                     _beatcount += gatebeats;
             }
-            FileInfo lvlrest = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_masterlvl.rest}"));
-            if (lvlrest != null) _beatcount += CalculateLvlRuntime(lvlrest.FullName);
+            if (ProjectExplorer.TryGetFile(_masterlvl.rest, out FileInfo lvlrest))
+                _beatcount += CalculateLvlRuntime(lvlrest);
 
             return _beatcount;
         }
@@ -125,60 +119,54 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            FileInfo gate = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{gatename}"));
-            if (gate != null) {
-                _load = UtilFile.LoadFileLock(gate.FullName);
-                //if gate not found, _load is null. Return -1 to denote this
-                if (_load == null)
-                    return -1;
-                //check if random is enabled on this gate
-                israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
-                //loop through each lvl in gate
-                foreach (dynamic _lvl in _load["boss_patterns"]) {
-                    //attempt to load lvl
-                    FileInfo lvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_lvl["lvl_name"]}"));
-                    if (lvl != null) {
-                        //if random is enabled, count only the first entry in each bucket
-                        if (israndom) {
-                            if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
-                                bucketscounted.Add((int)_lvl["bucket_num"]);
-                                _beatcount += CalculateLvlRuntime(lvl.FullName);
-                            }
+            if (!ProjectExplorer.TryGetFile(gatename, out FileInfo gate))
+                return -1;
+
+            _load = UtilFile.LoadFileLock(gate);
+            //if gate not found, _load is null. Return -1 to denote this
+            if (_load == null)
+                return -1;
+            //check if random is enabled on this gate
+            israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
+            //loop through each lvl in gate
+            foreach (dynamic _lvl in _load["boss_patterns"]) {
+                //attempt to load lvl
+                if (ProjectExplorer.TryGetFile((string)_lvl["lvl_name"], out FileInfo lvl)) { 
+                    //if random is enabled, count only the first entry in each bucket
+                    if (israndom) {
+                        if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
+                            bucketscounted.Add((int)_lvl["bucket_num"]);
+                            _beatcount += CalculateLvlRuntime(lvl);
                         }
-                        //otherwise count each lvl
-                        else
-                            _beatcount += CalculateLvlRuntime(lvl.FullName);
                     }
-                }
-                //need to also count pre and post lvl
-                FileInfo prelvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["pre_lvl_name"]}"));
-                if (prelvl != null) {
-                    _beatcount += CalculateLvlRuntime(prelvl.FullName);
-                }
-                FileInfo postlvl = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(string)_load["post_lvl_name"]}"));
-                if (postlvl != null) {
-                    _beatcount += CalculateLvlRuntime(postlvl.FullName);
+                    //otherwise count each lvl
+                    else
+                        _beatcount += CalculateLvlRuntime(lvl);
                 }
             }
-            else
-                return -1;
+            //need to also count pre and post lvl
+            if (ProjectExplorer.TryGetFile((string)_load["pre_lvl_name"], out FileInfo prelvl))
+                _beatcount += CalculateLvlRuntime(prelvl);
+            if (ProjectExplorer.TryGetFile((string)_load["post_lvl_name"], out FileInfo postlvl))
+                _beatcount += CalculateLvlRuntime(postlvl);            
 
             return _beatcount;
         }
 
-        public static int CalculateLvlRuntime(string path)
+        public static int CalculateLvlRuntime(FileInfo lvl)
         {
             int _beatcount = 0;
 
             //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = UtilFile.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(lvl);
             if (_load == null)
                 return 0;
             foreach (dynamic leaf in _load["leaf_seq"]) {
-                FileInfo _leaf = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{(leaf["leaf_name"])}"));
-                if (_leaf != null && _leaf.Exists)
-                    _beatcount += (int)UtilFile.LoadFileLock(_leaf.FullName)["beat_cnt"];
-                ///_beatcount += (int)leaf["beat_cnt"];
+                if (ProjectExplorer.TryGetFile((string)leaf["leaf_name"], out FileInfo _leaf) && _leaf.Exists) {
+                    dynamic _loeadleaf = UtilFile.LoadFileLock(_leaf);
+                    if (_loeadleaf != null)
+                        _beatcount += (int)_loeadleaf["beat_cnt"];
+                }
             }
             //every lvl has an approach beats to consider too
             //_beatcount += (int)_load["approach_beats"];

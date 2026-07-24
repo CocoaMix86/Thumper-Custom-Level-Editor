@@ -110,7 +110,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
         private LvlProperties _lvlproperties;
-        public List<SaveState> UndoList = new();
         private List<DataGridViewRow> SelectedRows = new();
         public ObservableCollection<LvlLeafData> LvlLeafs => LvlProperties.lvlleafs;
         public int SampChannel;
@@ -204,7 +203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.Name == LvlLeafs[e.RowIndex].leafname));
+            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].leafname));
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -334,7 +333,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             rowIndexOfItemUnderMouseToDrop = lvlLeafList.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
 
             if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                AddFiletoLvl($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
+                AddFiletoLvl(new FileInfo($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}"), TargetRowToPaint);
             }
             else if (LeafsToMove != null) {
                 LogUndo = true;
@@ -347,7 +346,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
                 foreach (string leaf in leafs2)
-                    AddFiletoLvl(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
+                    AddFiletoLvl(ProjectExplorer.GetFile(leaf), TargetRowToPaint);
             }
             TargetRowToPaint = -3;
             previousDragOver = -2;
@@ -740,8 +739,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
-            List<FileInfo> leafs = ProjectExplorer.Files.Where(x => x.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)).ToList();
-            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].FullName);
+            List<FileInfo> leafs = ProjectExplorer.GetFilesByExtension(".leaf");
+            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)]);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
 
@@ -933,7 +932,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             throw new NotImplementedException();
         }
 
-        public object GetProperties()
+        public override object GetProperties()
         {
             return LvlProperties;
         }
@@ -1032,17 +1031,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
         }
 
-        public void AddFiletoLvl(string path, int index = -1)
+        public void AddFiletoLvl(FileInfo FileToAdd, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = UtilFile.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] != "SequinLeaf") {
                 MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            UtilFile.CopyToWorkingFolderCheck(path);
+            UtilFile.CopyToWorkingFolderCheck(FileToAdd.FullName);
             //Setup list of tunnels if copy check is enabled
             List<string> copytunnels = new();
             if (chkTunnelCopy.Checked) 
@@ -1093,11 +1092,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlUpdatePaths(LvlProperties.sublevel);
         }
 
-        public List<SaveState> GetUndoList()
-        {
-            return UndoList;
-        }
-
         public void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
@@ -1114,7 +1108,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (this.WorkingFile == null) {
@@ -1124,7 +1118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -1202,13 +1196,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorIsLoading || SimpleLoad)
                 return 0;
 
-            FileInfo leaffile = ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{_leaf.leafname}"));
-            leaffile?.Refresh();
-
-            if (leaffile == null || !leaffile.Exists)
+            if (!ProjectExplorer.TryGetFile(_leaf.leafname, out FileInfo leaffile) || !leaffile.Exists)
                 _leaf.beats = -1;
             else
-                _leaf.beats = (int?)UtilFile.LoadFileLock(leaffile.FullName)["beat_cnt"] ?? -1;
+                _leaf.beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
+            leaffile?.Refresh();
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
             if (!Playback.Generating)
@@ -1341,7 +1333,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        public void Copy()
+        public override void Copy()
         {
             List<int> selectedrows = lvlLeafList.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
@@ -1354,7 +1346,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UtilAudio.PlaySound("UIkcopy");
         }
 
-        public void Cut()
+        public override void Cut()
         {
             Copy();
 
@@ -1368,7 +1360,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Cut Leafs");
         }
 
-        public void Paste()
+        public override void Paste()
         {
             int _in = lvlLeafList.CurrentRow?.Index + 1 ?? 0;
             foreach (LvlLeafData lld in TCLE.ClipboardLvl)

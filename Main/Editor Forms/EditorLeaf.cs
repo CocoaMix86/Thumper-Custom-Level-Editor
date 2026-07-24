@@ -1,17 +1,10 @@
-﻿using ICSharpCode.TextEditor.Actions;
-using ICSharpCode.TextEditor.Document;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Runtime.Intrinsics.Arm;
-using System.Windows.Documents;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
-using Windows.Devices.Lights;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -19,11 +12,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         ///Load LEAF
-        public EditorLeaf()
-        {
-            InitializeComponent();
-        }
-
+        public EditorLeaf() { InitializeComponent(); }
         public EditorLeaf(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             this.SimpleLoad = simpleload;
@@ -207,7 +196,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         public object AltSequencer;
         private List<Sequencer_Object> SequencerObjects => _leafproperties?.SequencerObjects;
-        public List<SaveState> UndoList = new();
         private List<SeqDataPoint> SelectedDPs = new();
         public List<int> SelectedRows = new();
         public Dictionary<string, Sequencer_Object> LeafLanes { get; private set; }
@@ -2357,7 +2345,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Methods
-        public object GetProperties()
+        public override object GetProperties()
         {
             return _leafproperties;
         }
@@ -2590,7 +2578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void Reload()
         {
-            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile);
 
             LoadLeaf(_load);
             LoadSequencer(_load["seq_objs"], LeafProperties, trackEditor);
@@ -2674,7 +2662,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Converted object to tuning layer");
         }
 
-        public List<SaveState> GetUndoList() => UndoList;
         public void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
@@ -2709,7 +2696,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             //if _loadedlvl is somehow not set, force Save As instead
             if (this.WorkingFile == null) {
@@ -2719,20 +2706,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool FileIsNew = false, string InitialDir = null)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Editor Leaf File (*.leaf)|*.leaf";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            sfd.InitialDirectory = InitialDir ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 this.WorkingFile = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
                 if (_leafproperties == null) {
                     LeafProperties = new(this) {
                         timesignature = "4/4",
-                        _beats = isnew ? 32 : LeafProperties.Beats
+                        _beats = FileIsNew ? 32 : LeafProperties.Beats
                     };
                 } //else
                   //leafProperties.FilePath = loadedleaf;
@@ -2775,8 +2762,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                     //need to update leaf beat count in every lvl that references this file
                     if (_leafproperties.BeatsChangedSinceSave) {
-                        foreach (FileInfo lvl in ProjectExplorer.Files.Where(x => x.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))) {
-                            dynamic _loadfile = UtilFile.LoadFileLock(lvl.FullName);
+                        foreach (FileInfo lvl in ProjectExplorer.GetFilesByExtension(".lvl")) {
+                            dynamic _loadfile = UtilFile.LoadFileLock(lvl);
                             //if load fails, skip
                             if (_loadfile == null)
                                 continue;
@@ -2996,7 +2983,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         #region Cut Copy Paste
-        public void Copy()
+        public override void Copy()
         {
             if (textEditor.Focused)
                 return;
@@ -3016,7 +3003,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UtilAudio.PlaySound("UIkcopy");
         }
 
-        public void Cut()
+        public override void Cut()
         {
             if (textEditor.Focused)
                 return;
@@ -3027,7 +3014,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Cut cells");
         }
 
-        public void Paste()
+        public override void Paste()
         {
             if (textEditor.Focused)
                 return;

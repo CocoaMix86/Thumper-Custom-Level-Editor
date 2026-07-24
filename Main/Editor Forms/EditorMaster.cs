@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.Files.FirstOrDefault(x => x.FullName.EndsWith($@"\{MasterLvls[e.RowIndex].name}")));
+            TCLE.OpenFile(ProjectExplorer.GetFile(MasterLvls[e.RowIndex].name));
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -328,7 +328,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IsAddingItems = true;
 
             if (e.Data.GetData(typeof(TreeNode)) is TreeNode dragdropnode) {
-                AddFiletoMaster($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}", TargetRowToPaint);
+                AddFiletoMaster(new FileInfo($@"{Path.GetDirectoryName(TCLE.WorkingFolder.FullName)}\{dragdropnode.FullPath}"), TargetRowToPaint);
             }
             else if (LvlsToMove != null) {
                 LogUndo = true;
@@ -344,8 +344,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
-                foreach (string leaf in sublevels2)
-                    AddFiletoMaster(ProjectExplorer.Files.FirstOrDefault(x => x.Name == leaf)?.FullName, TargetRowToPaint);
+                foreach (string lvl in sublevels2)
+                    AddFiletoMaster(ProjectExplorer.GetFile(lvl), TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Lvls");
             }
@@ -545,17 +545,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.DragDropItems.Hide();
         }
 
-        public void AddFiletoMaster(string path, int index = -1)
+        public void AddFiletoMaster(FileInfo FileToAdd, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = UtilFile.LoadFileLock(path);
+            dynamic _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel" and not "SequinGate") {
                 MessageBox.Show("That does not appear to be a lvl or a gate file.\nItem not added to master.", "Bumper Custom Level Editor");
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            UtilFile.CopyToWorkingFolderCheck(path);
+            UtilFile.CopyToWorkingFolderCheck(FileToAdd.FullName);
             //add lvl/gate data to the list
             MasterLvlData _import = new() {
                 Type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
@@ -654,7 +654,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             throw new NotImplementedException();
         }
 
-        public object GetProperties()
+        public override object GetProperties()
         {
             return MasterProperties;
         }
@@ -678,9 +678,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             this.Text = $"{this.WorkingFile.Name}";
             //calc intro lvl
-            MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
+            MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.introlvl));
             //calc checkpoint lvl
-            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
+            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.checkpointlvl));
 
             ///Clear form elements so new data can load
             MasterLvls.Clear();
@@ -715,11 +715,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Saved = true;
         }
 
-        public List<SaveState> GetUndoList()
-        {
-            return UndoList;
-        }
-
         public void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
@@ -737,7 +732,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         ///SAVE
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             //if LoadedMaster is somehow not set, force Save As instead
             if (this.WorkingFile == null)
@@ -746,7 +741,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
@@ -813,9 +808,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             //calc intro lvl
-            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.introlvl)?.FullName);
+            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.introlvl));
             //calc checkpoint lvl
-            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == MasterProperties.checkpointlvl)?.FullName);
+            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.checkpointlvl));
             //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
                 beattotal += RecalculateRuntimeSublevel(_lvl, false);
@@ -833,7 +828,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _lvl.Beats = UtilMath.CalculateSublevelRuntime(_lvl);
             //include rest in lvl's runtime
             if (_lvl.rest is not "<none>" and not null)
-                _lvl.restlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.Files.FirstOrDefault(x => x.Name == _lvl.rest)?.FullName);
+                _lvl.restlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.rest));
             //uptime visuals to show if lvl found or not
             ColorRow(_lvl, MasterLvls.IndexOf(_lvl));
             if (updatebeats)
@@ -912,7 +907,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _save;
         }
 
-        public void Cut()
+        public override void Cut()
         {
             Copy();
 
@@ -925,7 +920,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Cut Sublevels");
         }
 
-        public void Copy()
+        public override void Copy()
         {
             List<int> selectedrows = masterLvlList.SelectedCells.Cast<DataGridViewCell>().Select(cell => cell.OwningRow).Distinct().Select(x => x.Index).ToList();
             selectedrows.Sort((row, row2) => row.CompareTo(row2));
@@ -937,7 +932,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 master.btnMasterLvlPaste.Enabled = true;
         }
 
-        public void Paste()
+        public override void Paste()
         {
             int _in = masterLvlList.CurrentRow?.Index + 1 ?? 0;
 

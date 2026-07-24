@@ -52,19 +52,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return EditorIsSaved;
         }
 
-        public object GetProperties()
+        public override object GetProperties()
         {
             return null;
         }
 
-        public void Save(bool playsound = true)
+        public override void Save(bool playsound = true)
         {
             SaveCheckAndWrite(true, playsound);
         }
 
+        public override FileInfo SaveAs(bool FileIsNew, string InitialDir) { return null;  }
+
         public void Reload()
         {
-            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile.FullName);
+            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile);
             textEditor.TextChanged -= textEditor_TextChanged;
             textEditor.Text = JsonConvert.SerializeObject(_load, Formatting.Indented);
             textEditor.ClearUndo();
@@ -109,15 +111,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void Copy()
+        public override void Copy()
         {
             Clipboard.SetText(textEditor.SelectedText);
         }
 
-        public void Cut()
+        public override void Cut()
         {
             Clipboard.SetText(textEditor.SelectedText);
             textEditor.SelectedText = "";
+        }
+
+        public override void Paste()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

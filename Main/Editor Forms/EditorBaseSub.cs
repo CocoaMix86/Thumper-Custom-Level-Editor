@@ -11,5 +11,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
+
+        public virtual void ColorFormElements() { }
     }        
 }
