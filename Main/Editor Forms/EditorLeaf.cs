@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.Arm;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
@@ -137,6 +138,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             textEditor.ForeColor = Properties.Settings.Default.ColorLeafRawText;
             dgvMasterView.BackgroundColor = Properties.Settings.Default.ColorLeafBasicBG;
             BasicEditorPenGrid.Color = Properties.Settings.Default.ColorLeafBasicGrid;
+            //
+            BrushBG = new SolidBrush(Properties.Settings.Default.ColorTuningBG);
+            BrushText = new SolidBrush(Properties.Settings.Default.ColorTuningFont);
+            PenMaxMin = new Pen(Properties.Settings.Default.ColorTuningMaxMin, 1);
+            TuningLine = new Pen(Properties.Settings.Default.ColorTuningLine, 3);
+            TuningPoint = new SolidBrush(Properties.Settings.Default.ColorTuningPoint);
+            //
             dgvMasterView.Invalidate();
 
             foreach (var _ColorIcon in TCLE.ColorIcons)
@@ -543,85 +551,93 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
-            bool success = int.TryParse(SequencerObjects[e.RowIndex].friendly_param.Split('[')[1].Split(' ')[0], out int beats);
-            beats--;
-            if (!success)
+            if (!int.TryParse(SequencerObjects[e.RowIndex].friendly_param.Split('[')[1].Split(' ')[0], out int LengthOfObject))
                 return;
+            LengthOfObject--;
             int offsetportion = UtilMath.GetTrackOffset(trackEditor);
-            int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset + 1 - 1;
+            int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset;
             Sequencer_Object seqref = SequencerObjects[e.RowIndex];
             int cellwidth = trackZoom.Value;
             Color alpha = seqref.highlight_color;
             alpha = seqref.ReadOnly ? Color.Gray : Color.FromArgb(100, alpha.R, alpha.G, alpha.B);
+            using SolidBrush alphaBrush = new(alpha);
             //
             if (Properties.Settings.Default.LeafOptionThinBars && SequencerObjects[e.RowIndex].friendly_lane == "lane center" && SequencerObjects[e.RowIndex].expandlanes == false) {
-                int trailstop = 0;
-                foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 2].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
-                    //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
-                    if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top, beats * cellwidth, e.RowBounds.Height / 5);
-                    trailstop = sdp.beat + beats;
-                }
-                trailstop = 0;
-                foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex - 1].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
-                    //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5, beats * cellwidth, e.RowBounds.Height / 5);
-                    trailstop = sdp.beat + beats;
-                }
-                trailstop = 0;
-                foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
-                    //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 2, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 2, beats * cellwidth, e.RowBounds.Height / 5);
-                    trailstop = sdp.beat + beats;
-                }
-                trailstop = 0;
-                foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 1].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
-                    //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 3, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 3, beats * cellwidth, e.RowBounds.Height / 5);
-                    trailstop = sdp.beat + beats;
-                }
-                trailstop = 0;
-                foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + 2].Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
-                    //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 4, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
-                    else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + e.RowBounds.Height / 5 * 4, beats * cellwidth, e.RowBounds.Height / 5);
-                    trailstop = sdp.beat + beats;
-                }
+                DrawLaneTrail(e, -2, columnindex, cellwidth, offsetportion, 0, LengthOfObject, alphaBrush);
+                DrawLaneTrail(e, -1, columnindex, cellwidth, offsetportion, e.RowBounds.Height / 5, LengthOfObject, alphaBrush);
+                DrawLaneTrail(e, 0, columnindex, cellwidth, offsetportion, e.RowBounds.Height / 5 * 2, LengthOfObject, alphaBrush);
+                DrawLaneTrail(e, 1, columnindex, cellwidth, offsetportion, e.RowBounds.Height / 5 * 3, LengthOfObject, alphaBrush);
+                DrawLaneTrail(e, 2, columnindex, cellwidth, offsetportion, e.RowBounds.Height / 5 * 4, LengthOfObject, alphaBrush);
             }
             else {
                 int trailstop = 0;
                 foreach (SeqDataPoint sdp in seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                     //don't draw trail if it already has has happened from a previous one
-                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + beats < columnindex) continue;
+                    if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + LengthOfObject < columnindex) continue;
                     if (sdp.beat < trailstop)
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (beats - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height - 4);
+                        e.Graphics.FillRectangle(alphaBrush, ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, (LengthOfObject - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height - 4);
                     else
-                        e.Graphics.FillRectangle(new SolidBrush(alpha), ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, beats * cellwidth, e.RowBounds.Height - 4);
-                    trailstop = sdp.beat + beats;
+                        e.Graphics.FillRectangle(alphaBrush, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + 2, LengthOfObject * cellwidth, e.RowBounds.Height - 4);
+                    trailstop = sdp.beat + LengthOfObject;
                 }
             }
             RowPostPrePainting = true;
             e.PaintCells(e.RowBounds, e.PaintParts);
             RowPostPrePainting = false;
         }
+        private void DrawLaneTrail(DataGridViewRowPrePaintEventArgs e, int LaneOffset, int columnindex, int cellwidth, int offsetportion, int verticaloffset, int LengthOfObject, SolidBrush alphaBrush)
+        {
+            int trailstop = 0;
+            foreach (SeqDataPoint sdp in SequencerObjects[e.RowIndex + LaneOffset].Cells) {
+                if (sdp.Value == null)
+                    continue;
+                //skip datapoints that are offscreen
+                if (sdp.beat + LengthOfObject < columnindex)
+                    continue;
+                if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true))
+                    break;
+                //don't draw trail if it already has has happened from a previous one
+                if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) && sdp.beat + LengthOfObject < columnindex) continue;
+                if (sdp.beat < trailstop)
+                    e.Graphics.FillRectangle(alphaBrush, ((trailstop - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + verticaloffset, (LengthOfObject - (trailstop - sdp.beat)) * cellwidth, e.RowBounds.Height / 5);
+                else
+                    e.Graphics.FillRectangle(alphaBrush, ((sdp.beat - columnindex) * cellwidth) + offsetportion, e.RowBounds.Top + verticaloffset, LengthOfObject * cellwidth, e.RowBounds.Height / 5);
+                trailstop = sdp.beat + LengthOfObject;
+            }
+        }
+
+        private static SolidBrush BrushBG = new SolidBrush(Properties.Settings.Default.ColorTuningBG);
+        private static SolidBrush BrushText = new SolidBrush(Properties.Settings.Default.ColorTuningFont);
+        private static Pen PenMaxMin = new Pen(Properties.Settings.Default.ColorTuningMaxMin, 1);
+        private static Pen TuningLine = new Pen(Properties.Settings.Default.ColorTuningLine, 3);
+        private static SolidBrush TuningPoint = new SolidBrush(Properties.Settings.Default.ColorTuningPoint);
+        private readonly record struct BezierPreset(
+            float ControlPoint1,
+            bool Y1IsStart,
+            float ControlPoint2,
+            bool Y2IsStart);
+        private static readonly Dictionary<(string Interp, string Ease), BezierPreset> BezierLookup = new()
+        {
+            { ("Quadratic", "Ease In"),     new(0.11f, true,  0.50f, true) },
+            { ("Quadratic", "Ease Out"),    new(0.50f, false, 0.89f, false) },
+            { ("Quadratic", "Ease In Out"), new(0.45f, true,  0.55f, false) },
+
+            { ("Cubic", "Ease In"),         new(0.32f, true,  0.67f, true) },
+            { ("Cubic", "Ease Out"),        new(0.33f, false, 0.68f, false) },
+            { ("Cubic", "Ease In Out"),     new(0.65f, true,  0.35f, false) },
+
+            { ("Quartic", "Ease In"),       new(0.50f, true,  0.75f, true) },
+            { ("Quartic", "Ease Out"),      new(0.25f, false, 0.50f, false) },
+            { ("Quartic", "Ease In Out"),   new(0.76f, true,  0.24f, false) },
+
+            { ("Quintic", "Ease In"),       new(0.64f, true,  0.78f, true) },
+            { ("Quintic", "Ease Out"),      new(0.22f, false, 0.36f, false) },
+            { ("Quintic", "Ease In Out"),   new(0.83f, true,  0.17f, false) },
+
+            { ("Sine", "Ease In"),          new(0.12f, true,  0.39f, false) },
+            { ("Sine", "Ease Out"),         new(0.61f, false, 0.88f, false) },
+            { ("Sine", "Ease In Out"),      new(0.37f, true,  0.63f, false) },
+        };
         private void PaintRowTuningLayer(DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintCells(e.RowBounds, e.PaintParts);
@@ -648,12 +664,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (endX < 0 || startX > trackEditor.Width)
                 return;
             PointF[] _drawingpoints = _datapoints.Select(p => new PointF(ConvertRange(_datapoints[0].beat, _datapoints[^1].beat, startX, endX - cellwidth, p.beat) + cellwidth / 2, ConvertRange(min, max, e.RowBounds.Bottom - 7, e.RowBounds.Top + 7, (float)(decimal)p.Value))).ToArray();
-            //setup objects for drawing
-            using SolidBrush BrushBG = new SolidBrush(Properties.Settings.Default.ColorTuningBG);
-            using SolidBrush BrushText = new SolidBrush(Properties.Settings.Default.ColorTuningFont);
-            using Pen PenMaxMin = new Pen(Properties.Settings.Default.ColorTuningMaxMin, 1);
-            using Pen TuningLine = new Pen(Properties.Settings.Default.ColorTuningLine, 3);
-            using SolidBrush TuningPoint = new SolidBrush(Properties.Settings.Default.ColorTuningPoint);
             //Draw frame and boundary lines for the graphs
             e.Graphics.FillRoundedRectangle(Brushes.White, new(startX, e.RowBounds.Top, length, e.RowBounds.Height), 10);
             e.Graphics.FillRoundedRectangle(BrushBG, new(startX + 2, e.RowBounds.Top + 2, length - 4, e.RowBounds.Height - 4), 10);
@@ -672,74 +682,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 float distance = _drawingpoints[x + 1].X - _drawingpoints[x].X;
                 //calculate bezier control points to draw the proper curves
-                switch (_datapoints[x].Interpolation, _datapoints[x].Ease) {
-                    case ("Step", _):
+                switch (_datapoints[x].Interpolation) {
+                    case ("Step"):
                         e.Graphics.DrawLine(TuningLine, _drawingpoints[x], new(_drawingpoints[x + 1].X, _drawingpoints[x].Y));
                         e.Graphics.DrawLine(TuningLine, new(_drawingpoints[x + 1].X, _drawingpoints[x].Y), _drawingpoints[x + 1]);
                         break;
-                    case ("Linear", _):
+                    case ("Linear"):
                         midpoint = new PointF(_drawingpoints[x].X, _drawingpoints[x].Y);
                         midpoint2 = new PointF(_drawingpoints[x + 1].X, _drawingpoints[x + 1].Y);
                         break;
-                    case ("Quadratic", "Ease In"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.11f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x].Y);
-                        break;
-                    case ("Quadratic", "Ease Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x + 1].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.89f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Quadratic", "Ease In Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.45f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.55f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Cubic", "Ease In"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.32f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.67f), _drawingpoints[x].Y);
-                        break;
-                    case ("Cubic", "Ease Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.33f), _drawingpoints[x + 1].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.68f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Cubic", "Ease In Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.65f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.35f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Quartic", "Ease In"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.75f), _drawingpoints[x].Y);
-                        break;
-                    case ("Quartic", "Ease Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.25f), _drawingpoints[x + 1].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.5f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Quartic", "Ease In Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.76f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.24f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Quintic", "Ease In"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.64f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.78f), _drawingpoints[x].Y);
-                        break;
-                    case ("Quintic", "Ease Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.22f), _drawingpoints[x + 1].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.36f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Quintic", "Ease In Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.83f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.17f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Sine", "Ease In"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.12f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.39f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Sine", "Ease Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.61f), _drawingpoints[x + 1].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.88f), _drawingpoints[x + 1].Y);
-                        break;
-                    case ("Sine", "Ease In Out"):
-                        midpoint = new PointF(_drawingpoints[x].X + (distance * 0.37f), _drawingpoints[x].Y);
-                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * 0.63f), _drawingpoints[x + 1].Y);
+                        //if not step or linear, use the bezier lookup to get the curves
+                    default:
+                        if (!BezierLookup.TryGetValue((_datapoints[x].Interpolation, _datapoints[x].Ease), out var BezierPreset))
+                            continue;
+                        midpoint = new PointF(_drawingpoints[x].X + (distance * BezierPreset.ControlPoint1), BezierPreset.Y1IsStart ? _drawingpoints[x].Y : _drawingpoints[x + 1].Y);
+                        midpoint2 = new PointF(_drawingpoints[x].X + (distance * BezierPreset.ControlPoint2), BezierPreset.Y2IsStart ? _drawingpoints[x].Y : _drawingpoints[x + 1].Y);
                         break;
                 }
                 if (!_datapoints[x].Interpolation.Contains("step", StringComparison.OrdinalIgnoreCase) && _datapoints[x].Interpolation != "None")
