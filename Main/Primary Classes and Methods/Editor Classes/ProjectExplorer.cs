@@ -100,10 +100,10 @@ namespace Thumper_Custom_Level_Editor
                 RecurseNodesFindExpanded(ProjectTree);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (WeifenLuo.WinFormsUI.Docking.IDockContent? dock in TCLE.Instance.dockMain.Documents) {
-                if (dock.GetType() == typeof(EditorLvl)) (dock as EditorLvl).RecalculateRuntime();
-                if (dock.GetType() == typeof(EditorGate)) (dock as EditorGate).RecalculateRuntime();
-                if (dock.GetType() == typeof(EditorMaster)) (dock as EditorMaster).RecalculateRuntime();
+            foreach (EditorBase dock in TCLE.Instance.dockMain.Documents) {
+                if (dock is EditorLvl lvl) lvl.RecalculateRuntime();
+                else if (dock is EditorGate gate) gate.RecalculateRuntime();
+                else if (dock is EditorMaster master) master.RecalculateRuntime();
             }
             //repopulate dragdrop list
             TCLE.DragDropItems.Populate();

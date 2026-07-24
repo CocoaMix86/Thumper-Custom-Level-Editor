@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
@@ -2731,6 +2732,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
+        public string GetEditorTitle() => $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
         public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading || Playback.Generating)
@@ -2738,12 +2740,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
 
+            JObject _saveJSON;
+            //catch any issues with serializing the file
+            try {
+                _saveJSON = LeafProperties.ConvertToJson();
+            } catch (Exception ex) {
+                MessageBox.Show($"Problem saving data to file. Show this error to the dev.\n\n{ex}");
+                return;
+            }
             this.Saved = IsSaved;
-            JObject _saveJSON = LeafProperties.ConvertToJson();
             //
             if (!IsSaved) {
                 //denote editor tab is not saved
-                this.Text = $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}" + "*";
+                this.Text = GetEditorTitle() + "*";
                 //update the undo list
                 if (LogUndo) {
                     UndoList.Insert(0, new SaveState() {
@@ -2754,10 +2763,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafMasterView.DrawTrack(SequencerObjects, _leafproperties);
             }
             else {
-                this.Text = $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
+                this.Text = GetEditorTitle();
                 //leafProperties.revertPoint = _saveJSON;
                 //If leaf, build the JSON to write to file
-                if (this.WorkingFile.Extension == ".leaf") {
+                if (this.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
                     //write JSON to file
                     UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                     //need to update leaf beat count in every lvl that references this file
@@ -2784,7 +2793,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     if (playsound) UtilAudio.PlaySound("UIsave");
                 }
                 //else if a different sequencer, pass data back and force save
-                else if (this.WorkingFile.Extension == ".lvl") {
+                else if (this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
                     ((LvlProperties)AltSequencer).SequencerObjects = _leafproperties.SequencerObjects;
                 }
 

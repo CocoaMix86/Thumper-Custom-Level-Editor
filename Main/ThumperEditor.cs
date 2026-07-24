@@ -341,32 +341,40 @@ namespace Thumper_Custom_Level_Editor
         {
             if (dockMain.ActiveContent is DockProjectExplorer or DockProjectProperties)
                 return;
-
-            if (e.KeyData == Keybinds["Cut"]) 
-                GlobalActiveDocument.Cut();            
-            else if (e.KeyData == Keybinds["Copy"]) 
-                GlobalActiveDocument.Copy();            
-            else if (e.KeyData == Keybinds["Paste"]) 
-                GlobalActiveDocument.Paste();            
-            //tab switch next
-            else if (e.KeyData == Keybinds["Next Tab"]) 
-                SwitchTab(1);            
-            //tab switch previous
-            else if (e.KeyData == Keybinds["Previous Tab"]) 
-                SwitchTab(-1);            
-            //move document to next/previous workspace
-            else if (e.KeyData == Keybinds["Move Tab to Next Workspace"]) 
-                MoveTabToWorkspace(1);            
-            else if (e.KeyData == Keybinds["Move Tab to Prev Workspace"]) 
-                MoveTabToWorkspace(-1);            
-            //workspace switch next/previous
-            else if (e.KeyData == Keybinds["Next Workspace"]) 
-                SwitchWorkspace(1);            
-            else if (e.KeyData == Keybinds["Previous Workspace"])
-                SwitchWorkspace(-1);
-            //Undo
-            else if (e.KeyData == Keybinds["Undo"]) 
-                UndoSystem.UndoFunction(1);            
+            //get the action name from the keypress and use that in the switch instead
+            var action = Keybinds.FirstOrDefault(x => x.Value == e.KeyData).Key;
+            switch (action) {
+                case "Cut":
+                    GlobalActiveDocument.Cut();
+                    break;
+                case "Copy":
+                    GlobalActiveDocument.Copy();
+                    break;
+                case "Paste":
+                    GlobalActiveDocument.Paste();
+                    break;
+                case "Next Tab":
+                    SwitchTab(1);
+                    break;
+                case "Previous Tab":
+                    SwitchTab(-1);
+                    break;
+                case "Move Tab to Next Workspace":
+                    MoveTabToWorkspace(1);
+                    break;
+                case "Move Tab to Prev Workspace":
+                    MoveTabToWorkspace(-1);
+                    break;
+                case "Next Workspace":
+                    SwitchWorkspace(1);
+                    break;
+                case "Previous Workspace":
+                    SwitchWorkspace(-1);
+                    break;
+                case "Undo":
+                    UndoSystem.UndoFunction(1);
+                    break;
+            }
             //e.Handled = true;
         }
         #endregion
