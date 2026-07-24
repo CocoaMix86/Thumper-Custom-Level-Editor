@@ -810,10 +810,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
                 return;
             if (trackEditor.IsCurrentCellInEditMode) {
-                CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
+                ApplyCellValueChanges(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
         }
-        public void CellValueChanged(DataGridViewCell StartCell, bool setnull = false)
+        public void ApplyCellValueChanges(DataGridViewCell StartCell, bool setnull = false)
         {
             //If certain actions going on, don't bother running this method.
             if (EditorIsProcessing) return;
@@ -858,9 +858,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private static void ResetCell(SeqDataPoint sdp)
         {
-            sdp.Value = null;
-            sdp.Interpolation = "Linear";
-            sdp.Ease = "Ease In Out";
+            sdp.Reset();
         }
 
         private void trackEditor_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -1007,7 +1005,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         return;
                     LogUndo = false;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
+                    ApplyCellValueChanges(trackEditor[e.ColumnIndex, e.RowIndex]);
                     RightclickChanges = true;
                     LogUndo = true;
                     trackEditor.InvalidateCell(dgv[e.ColumnIndex, e.RowIndex]);
@@ -1073,7 +1071,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else if (dgv[e.ColumnIndex, e.RowIndex].Selected == true) {
                     LogUndo = false;
                     dgv[e.ColumnIndex, e.RowIndex].Value = null;
-                    CellValueChanged(trackEditor[e.ColumnIndex, e.RowIndex]);
+                    ApplyCellValueChanges(trackEditor[e.ColumnIndex, e.RowIndex]);
                     LogUndo = true;
                 }
             }
@@ -1096,7 +1094,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.KeyChar == (char)Keys.Back) {
                 LogUndo = false;
-                CellValueChanged(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
+                ApplyCellValueChanges(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             }
@@ -1106,7 +1104,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //delete cell value if Delete key is pressed
             if (e.KeyCode == Keys.Delete) {
                 LogUndo = false;
-                CellValueChanged(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
+                ApplyCellValueChanges(trackEditor[trackEditor.SelectedCells[^1].ColumnIndex, trackEditor.SelectedCells[^1].RowIndex], true);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Delete Cell Values");
             }
@@ -1169,43 +1167,43 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 0"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[0];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 1"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[1];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 2"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[2];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 3"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[3];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 4"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[4];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 5"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[5];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 6"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[6];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 7"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[7];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 8"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[8];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
             else if (e.KeyData == TCLE.Keybinds["Quick Value 9"]) {
                 trackEditor.CurrentCell.Value = TCLE.LeafQuickValues[9];
-                CellValueChanged(trackEditor.CurrentCell);
+                ApplyCellValueChanges(trackEditor.CurrentCell);
             }
         }
 
@@ -2107,7 +2105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (TCLE.colorDialogNew.ShowDialog() == DialogResult.OK) {
                 UtilAudio.PlaySound("UIcolorapply");
                 trackEditor.SelectedCells[0].Value = (decimal)TCLE.colorDialogNew.Color.ToArgb();
-                CellValueChanged(trackEditor[trackEditor.SelectedCells[0].ColumnIndex, trackEditor.SelectedCells[0].RowIndex]);
+                ApplyCellValueChanges(trackEditor[trackEditor.SelectedCells[0].ColumnIndex, trackEditor.SelectedCells[0].RowIndex]);
             }
         }
 
@@ -2981,7 +2979,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             Copy();
             LogUndo = false;
-            CellValueChanged(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex], true);
+            ApplyCellValueChanges(trackEditor[trackEditor.CurrentCell.ColumnIndex, trackEditor.CurrentCell.RowIndex], true);
             LogUndo = true;
             SaveCheckAndWrite(false, "Cut cells");
         }
