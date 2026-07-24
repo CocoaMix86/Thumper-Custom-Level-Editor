@@ -453,7 +453,7 @@ namespace Thumper_Custom_Level_Editor
             foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
                 if (ExpandLanes && Properties.Settings.Default.LeafOptionShowLane) {
                     foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
-                        seq.expandlanes = true;
+                        seq.ExpandLanesInEditor = true;
                     }
                 }
                 leaf.trackEditor.Invalidate();

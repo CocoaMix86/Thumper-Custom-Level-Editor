@@ -167,34 +167,34 @@ namespace Thumper_Custom_Level_Editor
             foreach (Sequencer_Object Seq in Leaf.SequencerObjects)
             {
                 //don't playback disabled items
-                if (Seq.enabled == false || Seq.mute)
+                if (Seq.EnabledInEditor == false || Seq.MuteInEditor)
                     continue;
 
                 int Key = 0;
                 int Call = 0;
                 int CallKey = 0;
-                if (Seq.obj_name.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) || Seq.obj_name == "leafname")
+                if (Seq.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) || Seq.ObjName == "leafname")
                 {
-                    if (Seq.friendly_param == "turn") {
+                    if (Seq.FriendlyParam == "turn") {
                         MidiEventsForTurns(Seq);
                     }
-                    else if (Seq.friendly_param is "lane left 2" or "lane left 1" or "lane center" or "lane right 1" or "lane right 2") {
+                    else if (Seq.FriendlyParam is "lane left 2" or "lane left 1" or "lane center" or "lane right 1" or "lane right 2") {
                         MidiEventsForLanes(Seq);
                     }
                 }
-                else if (Seq.obj_name == "avatar.lib" && Seq.friendly_param == "speed") {                    
+                else if (Seq.ObjName == "avatar.lib" && Seq.FriendlyParam == "speed") {                    
                    // MidiEventsForSpeed(Seq);
                 }
-                else if (Seq.obj_name.EndsWith(".samp", StringComparison.OrdinalIgnoreCase)) {
+                else if (Seq.ObjName.EndsWith(".samp", StringComparison.OrdinalIgnoreCase)) {
                     MidiEventPlaySample(Seq);
                 }
                 else {
-                    switch (Seq.obj_name) {
+                    switch (Seq.ObjName) {
                         case "thump.spn":
                             Key = 8;
                             Call = 8;
                             CallKey = 18;
-                            if (Seq.friendly_param == "thump[fast]")
+                            if (Seq.FriendlyParam == "thump[fast]")
                                 Call = 4;
                             break;
                         case "grindable.spn":
@@ -203,7 +203,7 @@ namespace Thumper_Custom_Level_Editor
                             CallKey = 1;
                             break;
                         case "grindable_multi.spn":
-                            if (Seq.friendly_param == "thump and bar") {
+                            if (Seq.FriendlyParam == "thump and bar") {
                                 Key = 8;
                                 Call = 8;
                                 CallKey = 18;
@@ -255,25 +255,25 @@ namespace Thumper_Custom_Level_Editor
 
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
-                    if (Seq.trait_type is "kTraitBool" or "kTraitAction" && Seq.defaultvalue is 1) {
+                    if (Seq.TraitType is "kTraitBool" or "kTraitAction" && Seq.DefaultValue is 1) {
                         for (int beat = EditorLeaf.FrozenColumnOffset; beat < LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
                             if (Seq[beat].Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
-                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
-                                if (Seq.obj_name == "grindable_multi.spn") {
-                                    if (Seq.friendly_param == "bar[double]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
+                                if (Seq.ObjName == "grindable_multi.spn") {
+                                    if (Seq.FriendlyParam == "bar[double]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "bar[triple]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                    else if (Seq.FriendlyParam == "bar[triple]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "bar[quad]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                    else if (Seq.FriendlyParam == "bar[quad]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "thump and bar") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
+                                    else if (Seq.FriendlyParam == "thump and bar") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.MuteInEditor);
                                     }
                                 }
                             }
@@ -282,22 +282,22 @@ namespace Thumper_Custom_Level_Editor
                     else {
                         for (int beat = EditorLeaf.FrozenColumnOffset; beat < LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
                             if (Seq[beat].Value != null && (decimal?)Seq[beat].Value != 0) {
-                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.mute);
-                                if (Seq.obj_name == "grindable_multi.spn") {
-                                    if (Seq.friendly_param == "bar[double]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.mute);
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
+                                if (Seq.ObjName == "grindable_multi.spn") {
+                                    if (Seq.FriendlyParam == "bar[double]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "bar[triple]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.mute);
+                                    else if (Seq.FriendlyParam == "bar[triple]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "bar[quad]") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.mute);
-                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.mute);
+                                    else if (Seq.FriendlyParam == "bar[quad]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.MuteInEditor);
                                     }
-                                    else if (Seq.friendly_param == "thump and bar") {
-                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.mute);
+                                    else if (Seq.FriendlyParam == "thump and bar") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.MuteInEditor);
                                     }
                                 }
                             }
@@ -307,7 +307,7 @@ namespace Thumper_Custom_Level_Editor
             }
 
             MidiEventsForSentry(Leaf);
-            MidiEventsForSpeed(Leaf.SequencerObjects.FirstOrDefault(x => x.obj_name == "avatar.lib" && x.friendly_param == "speed"));
+            MidiEventsForSpeed(Leaf.SequencerObjects.FirstOrDefault(x => x.ObjName == "avatar.lib" && x.FriendlyParam == "speed"));
             //copy over single leaf results to global so it doesn't get cleared
             for (int x = 0; x < SequencerEvents.Length; x++) {
                 if (SequencerEvents[x].Count > 0)
@@ -576,7 +576,7 @@ namespace Thumper_Custom_Level_Editor
             {
                 _lastprocessedbeat = Seq[x];
                 //account for default value being +-15
-                decimal _turndegree = (decimal?)Seq[x].Value ?? Seq.defaultvalue;
+                decimal _turndegree = (decimal?)Seq[x].Value ?? Seq.DefaultValue;
                 //current beat turning left
                 if (_turndegree >= 15) {
                     //-1 = previous beat was turning the otherway. Play the turn left appear sound
@@ -647,7 +647,7 @@ namespace Thumper_Custom_Level_Editor
                 decimal? _laneState = (decimal?)Seq[x].Value;
                 //switch logic depending if the default per beat is 0 or 1.
                 //if lane's default is off...
-                if (Seq.defaultvalue == 0) {
+                if (Seq.DefaultValue == 0) {
                     //if the current value is default (0) and the beat BEHIND was filled (1), play the lane end sound.
                     if (_laneState is 0 or null) {
                         if ((decimal?)Seq[x - 1].Value == 1)
@@ -655,7 +655,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
                 //if lane's default is on...
-                else if (Seq.defaultvalue == 1) {
+                else if (Seq.DefaultValue == 1) {
                     //if the current value is 0 the beat BEHIND is default, play the lane end sound.
                     if (_laneState is 0) {
                         if ((decimal?)Seq[x - 1].Value is 1 or null)
@@ -669,10 +669,10 @@ namespace Thumper_Custom_Level_Editor
         {
             List<BASS_MIDI_EVENT> EventsToAdd15 = new();
             List<BASS_MIDI_EVENT> EventsToAdd16 = new();
-            foreach (Sequencer_Object Seq in Leaf.SequencerObjects.Where(x => x.obj_name == "sentry.spn"))
+            foreach (Sequencer_Object Seq in Leaf.SequencerObjects.Where(x => x.ObjName == "sentry.spn"))
             {
                 int length = 0;
-                switch (Seq.friendly_param) {
+                switch (Seq.FriendlyParam) {
                     case "single lane [55 beats]":
                         length = 55;
                         break;
@@ -745,13 +745,13 @@ namespace Thumper_Custom_Level_Editor
 
         public static void MidiEventPlaySample(Sequencer_Object Seq)
         {
-            if (!GlobalSamplesToPlay.Contains(Seq.obj_name)) {
-                GlobalSamplesToPlay.Add(Seq.obj_name);
+            if (!GlobalSamplesToPlay.Contains(Seq.ObjName)) {
+                GlobalSamplesToPlay.Add(Seq.ObjName);
                 GlobalSampleEvents.Add(new());
             }
-            int _sampleIndex = GlobalSamplesToPlay.IndexOf(Seq.obj_name);
+            int _sampleIndex = GlobalSamplesToPlay.IndexOf(Seq.ObjName);
             //get the sampledata to calculate the volume it should be played at
-            SampleData SampToPlay = TCLE.ProjectSamples[Seq.obj_name];
+            SampleData SampToPlay = TCLE.ProjectSamples[Seq.ObjName];
             //default to 100 if volume is somehow not set
             int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
             //then further tune velocity using the master volume setting

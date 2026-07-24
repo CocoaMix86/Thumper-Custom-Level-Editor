@@ -71,7 +71,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 e.Graphics.FillRectangle(Brushes.Gray, e.CellBounds);
             }
             //if visual option "Thin Bars" and the row is collapsed, paint the rectangles as thin bars instead of taking up the whole cell.
-            else if (Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false) {
+            else if (Properties.Settings.Default.LeafOptionThinBars && seq.FriendlyLane == "lane center" && seq.ExpandLanesInEditor == false) {
                 if (SequencerObjects[e.RowIndex - 2][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height / 5);
                 if (SequencerObjects[e.RowIndex - 1][e.ColumnIndex].Value != null)
@@ -85,12 +85,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
             //if a color object, convert the cell value to ARGB and use that
-            else if (seq.trait_type is "kTraitColor") {
+            else if (seq.TraitType is "kTraitColor") {
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
             }
             //paint the whole cell with the highlighting color
-            else if (seq.obj_name != "_TuningLayerX" && seq.category != "PLAY SAMPLE") {
+            else if (seq.ObjName != "_TuningLayerX" && seq.Category != "PLAY SAMPLE") {
                 if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)seq.highlight_value)
                     e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
@@ -147,17 +147,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //skips a bunch of objects since they display their values differently
             if (e.RowIndex == -1)
                 goto skipchecks;
-            if (seq.category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+            if (seq.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 return;
-            else if (seq.trait_type is "kTraitColor")
+            else if (seq.TraitType is "kTraitColor")
                 return;
-            else if ((Properties.Settings.Default.LeafOptionThinBars && seq.friendly_lane == "lane center" && seq.expandlanes == false))
+            else if ((Properties.Settings.Default.LeafOptionThinBars && seq.FriendlyLane == "lane center" && seq.ExpandLanesInEditor == false))
                 return;
             else if (Properties.Settings.Default.LeafOptionConnectBars && e.ColumnIndex > FrozenColumnOffset && (decimal?)e.Value == (decimal?)seq[e.ColumnIndex - 1].Value)
                 return;
 
             //Tests highlight color contrast. If low, text color is set to white.
-            if (seq.highlight_color.R < 150 && seq.highlight_color.G < 150 && seq.highlight_color.B < 150)
+            if (seq.HighlightColor.R < 150 && seq.HighlightColor.G < 150 && seq.HighlightColor.B < 150)
                 e.CellStyle.ForeColor = Color.White;
             else
                 e.CellStyle.ForeColor = Color.Black;
@@ -170,7 +170,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 using Font font = new(TCLE.ImportedFonts.Families[0], 10);
                 SizeF RealSize = e.Graphics.MeasureString(cellText, font);
                 Rectangle bounds = e.CellBounds;
-                if (seq?.friendly_param is "turn" or "turn_auto")
+                if (seq?.FriendlyParam is "turn" or "turn_auto")
                     bounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
                 float WidthScaleRatio = (bounds.Height + 4) / RealSize.Width;
                 float HeightScaleRatio = (bounds.Width + 4) / RealSize.Height;
@@ -181,7 +181,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 using Font font = new(TCLE.ImportedFonts.Families[0], 10);
                 SizeF RealSize = e.Graphics.MeasureString(cellText, font);
                 Rectangle bounds = e.CellBounds;
-                if (seq?.friendly_param is "turn" or "turn_auto")
+                if (seq?.FriendlyParam is "turn" or "turn_auto")
                     bounds = new(e.CellBounds.Left, e.CellBounds.Top + (e.CellBounds.Height / 2), e.CellBounds.Width, e.CellBounds.Height / 2);
                 float HeightScaleRatio = (bounds.Height + 4) / RealSize.Height;
                 float WidthScaleRatio = (bounds.Width + 4) / RealSize.Width;
@@ -192,7 +192,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void CellPaintIcons(DataGridViewCellPaintingEventArgs e, EditorLeaf Leaf, Sequencer_Object seq = null)
         {
-            if (e.RowIndex != -1 && seq.obj_name == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
+            if (e.RowIndex != -1 && seq.ObjName == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
                 return;
             //get dimensions
             int x = e.CellBounds.Left + ((e.CellBounds.Width - IconWidth) / 2);
@@ -205,7 +205,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                         e.Graphics.DrawImage(Leaf.GlobalDisable ? Resources.icon_toggle_off : Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
                     }
                     else {
-                        e.Graphics.DrawImage(seq.enabled ? Resources.icon_toggle_on : Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(seq.EnabledInEditor ? Resources.icon_toggle_on : Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
                     break;
@@ -215,7 +215,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                         e.Graphics.DrawImage(Leaf.GlobalMute ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
                     }
                     else {
-                        e.Graphics.DrawImage(seq.mute ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(seq.MuteInEditor ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
                     break;
@@ -223,7 +223,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 case 2:
                     if (e.RowIndex == -1)
                         e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
-                    else if (seq.friendly_lane == "lane center") {
+                    else if (seq.FriendlyLane == "lane center") {
                         e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
@@ -246,20 +246,20 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //column -1 is row headers
             if (e.ColumnIndex is -1) {
                 e.Graphics.FillRectangle(Brushes.Black, e.CellBounds);
-                CellPaintingColor.Color = UtilMath.Blend(seq.highlight_color, Color.Black, 0.4);
+                CellPaintingColor.Color = UtilMath.Blend(seq.HighlightColor, Color.Black, 0.4);
                 bounds.X += 2;
                 bounds.Y += 2;
                 bounds.Width -= 4;
                 bounds.Height -= 4;
                 //Tuning Layers get an indent
-                if (seq.obj_name == "_TuningLayerX") {
+                if (seq.ObjName == "_TuningLayerX") {
                     bounds.X += 20;
                     bounds.Width -= 20;
                 }
                 //if row has a selected cell, highlight it, using a brighter color and white outline
                 if (SelectedRows.Contains(e.RowIndex)) {
                     e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 5);
-                    CellPaintingColor.Color = UtilMath.Blend(seq.highlight_color, Color.Black, 0.8);
+                    CellPaintingColor.Color = UtilMath.Blend(seq.HighlightColor, Color.Black, 0.8);
                 }
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
                 e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
@@ -282,17 +282,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 bounds.Y += 1;
                 bounds.Width -= 6;
                 bounds.Height -= 2;
-                if (seq.friendly_lane == "lane left 2") {
+                if (seq.FriendlyLane == "lane left 2") {
                     bounds.Height += 4;
                     e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
                 }
-                else if (seq.friendly_lane == "lane right 2") {
+                else if (seq.FriendlyLane == "lane right 2") {
                     bounds.Y -= 2;
                     e.Graphics.FillRoundedRectangle(CellPaintingPen, bounds, 4);
                     //this rectangle is needed to square off the top of the above rounded rectangle
                     e.Graphics.FillRectangle(CellPaintingPen, new Rectangle(bounds.X, bounds.Y, bounds.Width, 5));
                 }
-                else if (seq.friendly_lane is "lane left 1" or "lane right 1" || (seq.expandlanes && seq.friendly_lane is "lane center")) {
+                else if (seq.FriendlyLane is "lane left 1" or "lane right 1" || (seq.ExpandLanesInEditor && seq.FriendlyLane is "lane center")) {
                     bounds.Height += 3;
                     bounds.Y -= 3;
                     e.Graphics.FillRectangle(CellPaintingPen, bounds);
@@ -304,7 +304,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawLaneEnds(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq, Dictionary<string, Sequencer_Object> lanes)
         {
-            switch (seq.friendly_param) {
+            switch (seq.FriendlyParam) {
                 case "lane center":
                     if (seq[e.ColumnIndex].InGameValue == 1) {
                         if (seq[e.ColumnIndex - 1].InGameValue == 0) {
@@ -414,7 +414,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                using Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.highlight_color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                using Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.HighlightColor, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 

@@ -24,6 +24,21 @@ namespace Thumper_Custom_Level_Editor
         public bool favorite { get; set; }
     }
 
+    public static class TraitValidator
+    {
+        public static decimal Sanitize(string trait, decimal value)
+        {
+            return trait switch
+            {
+                "kTraitBool" => value is 0 or 1 ? value : 1,
+                "kTraitAction" => value is 0 or 1 ? value : 1,
+                "kTraitInt" => Math.Truncate(value),
+                "kTraitColor" => Math.Truncate(value),
+                _ => value
+            };
+        }
+    }
+
     public class Sequencer_Object : DataGridViewRow
     {
         public LeafProperties ParentLeaf;
@@ -37,18 +52,19 @@ namespace Thumper_Custom_Level_Editor
         public JObject ConvertToJson()
         {
             //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-            if (this.obj_name == "leafname" || this.obj_name.Contains(".leaf") || string.IsNullOrEmpty(this.obj_name))
-                this.obj_name = this.ParentLeaf.ParentEditor.WorkingFile.Name;
+            //Object should NEVER be named leafname.
+            if (this.ObjName == "leafname" || this.ObjName.Contains(".leaf") || string.IsNullOrEmpty(this.ObjName))
+                this.ObjName = this.ParentLeaf.ParentEditor.WorkingFile.Name;
             //add all the required fields to the json object
             JObject s = new() {
-                { "obj_name", this.obj_name },
-                { (this.param_path.StartsWith("0x") ? "param_path_hash" : "param_path"), this.param_path.Replace("0x", "") },
-                { "trait_type", this.trait_type },
-                { "step", this.step },
-                { "default", this.defaultvalue },
-                { "footer", this.footer },
-                { "editor_data", new JArray() { new object[] { this.highlight_color.ToArgb(), this.highlight_value } } },
-                { "enabled", this.enabled },
+                { "obj_name", this.ObjName },
+                { (this.ParamPath.StartsWith("0x") ? "param_path_hash" : "param_path"), this.ParamPath.Replace("0x", "") },
+                { "trait_type", this.TraitType },
+                { "step", this.Step },
+                { "default", this.DefaultValue },
+                { "footer", this.Footer },
+                { "editor_data", new JArray() { new object[] { this.HighlightColor.ToArgb(), this.highlight_value } } },
+                { "enabled", this.EnabledInEditor },
             };
             //add all the datapoints of object
             JArray datapoints = new();
@@ -76,119 +92,95 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public string obj_name { get; set; }
-        public string param_path { get; set; }
-        public string param_path_lane => this.param_path == null ? "none" : (this.param_path.Contains('.') ? this.param_path.Split('.')[1] : "none");
-        public string friendly_lane => TCLE.TrackLaneFriendly[this.param_path_lane];
-        public string trait_type { get; set; }
-        public bool step { get; set; } = true;
-        public decimal defaultvalue
+        public string ObjName { get; set; }
+        public string ParamPath { get; set; }
+        public string ParamPathLane => this.ParamPath == null ? "none" : (this.ParamPath.Contains('.') ? this.ParamPath.Split('.')[1] : "none");
+        public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
+        public string TraitType { get; set; }
+        public bool Step { get; set; } = true;
+        public decimal DefaultValue
         {
-            get => DefVal;
+            get => _defaultvalue;
             set {
                 //standardize values based on the type
-                if (this.trait_type == "kTraitBool") {
-                    if (value is not 1 and not 0)
-                        value = 1;
-                }
-                else if (this.trait_type == "kTraitColor") {
-                    value = Math.Truncate(value);
-                }
-                else if (this.trait_type == "kTraitAction") {
-                    if (value is not 1 and not 0)
-                        value = 1;
-                }
-                else if (this.trait_type == "kTraitInt") {
-                    value = Math.Truncate(value);
-                }
-
-                DefVal = value;
+                _defaultvalue = TraitValidator.Sanitize(TraitType, value);
             }
         }
-        private decimal DefVal;
-        public string footer { get; set; }
-        public string category { get; set; }
-        public string friendly_param { get; set; }
-        public int GetTrailLength()
+        private decimal _defaultvalue;
+        public string Footer { get; set; }
+        public string Category { get; set; }
+        public string FriendlyParam { get; set; }
+        public Color HighlightColor
         {
-            if (int.TryParse(friendly_param.Split('[')[1].Split(' ')[0], out int length))
-                return length;
-            return 0;
-        }
-        public Color highlight_color
-        {
-            get => HighCol;
+            get => _highlightcolor;
             set {
-                HighCol = value;
-                HighlightBrush = new(value);
+                _highlightcolor = value;
+                HighlightBrush.Color = value;
             }
         }
-        private Color HighCol;
-        public SolidBrush HighlightBrush;
+        private Color _highlightcolor;
+        public SolidBrush HighlightBrush = new(Color.Purple);
         public float highlight_value { get; set; }
-        public bool enabled
+        public bool EnabledInEditor
         {
-            get => Enabled;
+            get => _enabledineditor;
             set {
-                if (value != Enabled)
+                if (value != _enabledineditor)
                     WaveBitmap = null;
-                Enabled = value;
+                _enabledineditor = value;
             }
         }
-        private bool Enabled = true;
-        public bool isdefault { get; set; }
-
-        public Bitmap WaveBitmap;
-        public int id { get; set; }
-        public bool mute { get; set; }
-        public bool expandlanes
+        private bool _enabledineditor = true;
+        public bool IsDefault { get; set; }
+        public Bitmap WaveBitmap
         {
-            get => ExpandLanes;
+            get => _waveBitmap;
             set {
-                ExpandLanes = value;
+                _waveBitmap?.Dispose();
+                _waveBitmap = value;
+            }
+        }
+
+        private Bitmap _waveBitmap;
+        public int id { get; set; }
+        public bool MuteInEditor { get; set; }
+        public bool ExpandLanesInEditor
+        {
+            get => _expandlanes;
+            set {
+                _expandlanes = value;
                 if (Playback.Generating)
                     return;
-                if (this.friendly_lane is not "lane center" and not "none")
+                if (this.FriendlyLane is not "lane center" and not "none")
                     this.Visible = value;
-                EditorLeaf.ChangeTrackName(this, this.category);
+                EditorLeaf.ChangeTrackName(this, this.Category);
             }
         }
-        private bool ExpandLanes;
+        private bool _expandlanes;
         public bool HasShownError { get; set; }
         public Bitmap TuningLayer { get; set; }
         public List<Sequencer_Object?> Lanes
         {
             get {
-                if (friendly_lane is "none")
+                if (FriendlyLane is "none")
                     return new() { this };
                 //
-                return ParentLeaf.SequencerObjects.GetRange(this.Index + this.LaneOffsetFromTop, 5).Select(x => x.friendly_param == this.friendly_param ? x : null).ToList();
+                return ParentLeaf.SequencerObjects.GetRange(this.Index + this.LaneOffsetFromTop, 5).Select(x => x.FriendlyParam == this.FriendlyParam ? x : null).ToList();
             }
         }
-        public int LaneOffsetFromTop { 
-            get {
-                switch (param_path_lane) {
-                    case "a01":
-                        return 0;
-                    case "a02":
-                        return -1;
-                    case "ent":
-                        return -2;
-                    case "z01":
-                        return -3;
-                    case "z02":
-                        return -4;
-                }
-                return 0;
-            }
-        }
+        private static readonly Dictionary<string, int> LaneOffsets = new() { ["a01"] = 0, ["a02"] = -1, ["ent"] = -2, ["z01"] = -3, ["z02"] = -4 };
+        public int LaneOffsetFromTop => LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
 
         public void ClearDataPoints()
         {
-            foreach (SeqDataPoint sdp in this.Cells) {
-                sdp.Value = null;
-                sdp.Ease = "Ease In Out";
-                sdp.Interpolation = "Linear";
+            //set EditorIsLoading to prevent every SDP from triggering recalcs
+            ParentLeaf.ParentEditor.EditorIsLoading = true;
+            try {
+                foreach (SeqDataPoint sdp in this.Cells)
+                    sdp.Reset();
+            }
+            finally {
+                ParentLeaf.ParentEditor.EditorIsLoading = false;
             }
         }
 
@@ -197,21 +189,21 @@ namespace Thumper_Custom_Level_Editor
             //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
             Sequencer_Object clone = new() {
                 ParentLeaf = null,
-                obj_name = this.obj_name,
-                param_path = this.param_path,
-                trait_type = this.trait_type,
-                step = this.step,
-                defaultvalue = this.defaultvalue,
-                footer = this.footer,
-                category = this.category,
-                friendly_param = this.friendly_param,
-                highlight_color = this.highlight_color,
+                ObjName = this.ObjName,
+                ParamPath = this.ParamPath,
+                TraitType = this.TraitType,
+                Step = this.Step,
+                DefaultValue = this.DefaultValue,
+                Footer = this.Footer,
+                Category = this.Category,
+                FriendlyParam = this.FriendlyParam,
+                HighlightColor = this.HighlightColor,
                 highlight_value = this.highlight_value,
-                enabled = true,
-                isdefault = false,
-                mute = false,
+                EnabledInEditor = true,
+                IsDefault = false,
+                MuteInEditor = false,
                 id = TCLE.rng.Next(),
-                expandlanes = false
+                ExpandLanesInEditor = false
             };
             clone.CloneCells(this, CellsToClone);
             return clone;
@@ -238,20 +230,20 @@ namespace Thumper_Custom_Level_Editor
         {
             Sequencer_Object clone = new() {
                 ParentLeaf = this.ParentLeaf,
-                obj_name = this.obj_name,
-                param_path = this.param_path.Split('.')[0] + lane,
-                trait_type = this.trait_type,
+                ObjName = this.ObjName,
+                ParamPath = this.ParamPath.Split('.')[0] + lane,
+                TraitType = this.TraitType,
                 //skip data points
-                step = this.step,
-                defaultvalue = this.defaultvalue,
-                footer = this.footer,
-                category = this.category,
-                friendly_param = this.friendly_param,
-                highlight_color = this.highlight_color,
+                Step = this.Step,
+                DefaultValue = this.DefaultValue,
+                Footer = this.Footer,
+                Category = this.Category,
+                FriendlyParam = this.FriendlyParam,
+                HighlightColor = this.HighlightColor,
                 highlight_value = this.highlight_value,
-                enabled = true,
-                isdefault = true,
-                mute = false,
+                EnabledInEditor = true,
+                IsDefault = true,
+                MuteInEditor = false,
                 id = TCLE.rng.Next()
             };
             return clone;
@@ -270,29 +262,22 @@ namespace Thumper_Custom_Level_Editor
     {
         public void Reset()
         {
-            this.Interpolation = "Linear";
-            this.Ease = "Ease In Out";
+            this._interp = "Linear";
+            this._ease = "Ease In Out";
             this.Value = null;
         }
 
         public JObject ConvertToJson()
         {
-            if (this.ParentSeqObj.trait_type == "kTraitFloat") {
-                return new() {
-                            { "beat", this.beat },
-                            { "value", (decimal)this.Value },
-                            { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" },
-                            { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                };
-            }
-            else {
-                return new() {
-                            { "beat", this.beat },
-                            { "value", (int)(decimal)this.Value },
-                            { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" },
-                            { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" }
-                };
-            }
+            object value = ParentSeqObj.TraitType == "kTraitFloat" ? Value : Convert.ToInt32(Value);
+
+            return new()
+            {
+                ["beat"] = beat,
+                ["value"] = (JToken)value,
+                ["interp"] = $"kTraitInterp{Interpolation ?? "Linear"}",
+                ["ease"] = $"k{Ease?.Replace(" ", "") ?? "EaseInOut"}"
+            };
         }
 
         [Browsable(false)]
@@ -329,20 +314,7 @@ namespace Thumper_Custom_Level_Editor
             //sanitize inputs based on the trait type
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
-                if (ParentSeqObj.trait_type == "kTraitBool") {
-                    if ((decimal?)value is not null and not 1 and not 0)
-                        value = 1m;
-                }
-                else if (ParentSeqObj.trait_type == "kTraitColor") {
-                    value = UtilMath.TruncateDecimal((decimal?)value, 0);
-                }
-                else if (ParentSeqObj.trait_type == "kTraitAction") {
-                    if ((decimal?)value is not null or 1 or 0)
-                        value = 1m;
-                }
-                else if (ParentSeqObj.trait_type == "kTraitInt") {
-                    value = UtilMath.TruncateDecimal((decimal?)value, 0);
-                }
+                value = TraitValidator.Sanitize(ParentSeqObj.TraitType, Convert.ToDecimal(value));
             }
 
             bool _set = base.SetValue(rowIndex, value);
@@ -352,29 +324,21 @@ namespace Thumper_Custom_Level_Editor
 
             this.OwningRow.DataGridView.InvalidateRow(this.RowIndex);
 
-            if (((Sequencer_Object)this.OwningRow).category == "PLAY SAMPLE")
+            if (((Sequencer_Object)this.OwningRow).Category == "PLAY SAMPLE")
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             //if value changing on a tuning layer, recalc the values
-            if (((Sequencer_Object)this.OwningRow).obj_name == "_TuningLayerX") {
+            if (((Sequencer_Object)this.OwningRow).ObjName == "_TuningLayerX") {
                 EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             }
-            ParentSeqObj.isdefault = false;
+            ParentSeqObj.IsDefault = false;
             return _set;
         }
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("In Game Value")]
         [Description("If cell has no value, this instead shows the default value of the sequencer object")]
-        public decimal InGameValue
-        {
-            get {
-                return this.Value != null ? (decimal)this.Value : (decimal)ParentSeqObj.defaultvalue;
-            }
-            set {
-                this.Value = value;
-            }
-        }
+        public decimal InGameValue => Value != null ? Convert.ToDecimal(Value) : ParentSeqObj.DefaultValue;
 
         [CategoryAttribute("Selected Data Point(s)")]
         [DisplayName("Interp")]
@@ -385,7 +349,7 @@ namespace Thumper_Custom_Level_Editor
                 _interp = value;
                 if (ParentSeqObj == null || ParentSeqObj.ParentLeaf.ParentEditor.EditorIsLoading)
                     return;
-                if (ParentSeqObj.obj_name == "_TuningLayerX") {
+                if (ParentSeqObj.ObjName == "_TuningLayerX") {
                     EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                     ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
@@ -403,7 +367,7 @@ namespace Thumper_Custom_Level_Editor
                 _ease = value;
                 if (ParentSeqObj == null || ParentSeqObj.ParentLeaf.ParentEditor.EditorIsLoading)
                     return;
-                if (ParentSeqObj.obj_name == "_TuningLayerX") {
+                if (ParentSeqObj.ObjName == "_TuningLayerX") {
                     EditorLeaf.CalculateTuningLayers(ParentSeqObj.ParentLeaf, ParentSeqObj);
                     ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
                 }
@@ -411,17 +375,17 @@ namespace Thumper_Custom_Level_Editor
         }
         private string _ease = "Ease In Out";
 
-        public int OriginalRow;
-        public int OriginalColumn;
+        public int OriginalRow { get; set; }
+        public int OriginalColumn { get; set; }
         public SeqDataPoint Clone()
         {
             //SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
             return new() { 
-                Value = this.Value,
-                Ease = this.Ease,
-                Interpolation = this.Interpolation,
-                OriginalRow = this.RowIndex,
-                OriginalColumn = this.ColumnIndex
+                Value = Value,
+                Ease = Ease,
+                Interpolation = Interpolation,
+                OriginalRow = RowIndex,
+                OriginalColumn = ColumnIndex
             };
         }
     }
@@ -447,7 +411,7 @@ namespace Thumper_Custom_Level_Editor
             JArray seq_objs = new();
             //isdefault = true means object has not been changed in any way.
             //friendly_param = null means the object wasn't initialized properly and will have errors when it comes time to save.
-            foreach (Sequencer_Object seq_obj in this.SequencerObjects.Where(x => !x.isdefault && x.friendly_param != null)) {
+            foreach (Sequencer_Object seq_obj in this.SequencerObjects.Where(x => !x.IsDefault && x.FriendlyParam != null)) {
                 seq_objs.Add(seq_obj.ConvertToJson());
             }
             //add all seq_objs to the overall leaf
@@ -571,36 +535,36 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]
-        public string category => selectedobj.category;
+        public string category => selectedobj.Category;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Parameter")]
         [Description("")]
-        public string parameter => selectedobj.friendly_param;
+        public string parameter => selectedobj.FriendlyParam;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Trait Type")]
         [Description("BOOL: accepts values 1 (on) or 0 (off); ACTION: accepts values 1 (activate); FLOAT: accepts float values; INT: accepts integer (no decimal) values; COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.")]
-        public string traittype => selectedobj.trait_type?.Replace("kTrait", "");
+        public string traittype => selectedobj.TraitType?.Replace("kTrait", "");
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]
         [Description("FALSE: Blank cells use the last known set value. Some trait types will automatically interpolate between set values too. TRUE: Blank cells use the Default Value")]
-        public bool step { get => selectedobj.step; set => selectedobj.step = value; }
+        public bool step { get => selectedobj.Step; set => selectedobj.Step = value; }
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Default Value")]
         [Description("If Step TRUE, blank cells will use this value")]
-        public decimal defaultvalue { get => selectedobj.defaultvalue; set => selectedobj.defaultvalue = value; }
+        public decimal defaultvalue { get => selectedobj.DefaultValue; set => selectedobj.DefaultValue = value; }
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Color")]
         [Description("When Highlight Value is met, color the cell this color")]
         public Color highlightcolor
         {
-            get => selectedobj.highlight_color;
+            get => selectedobj.HighlightColor;
             set { 
-                selectedobj.highlight_color = value;
+                selectedobj.HighlightColor = value;
             }
         }
 

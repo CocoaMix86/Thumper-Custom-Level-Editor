@@ -1244,24 +1244,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             //this section adds all colume sequencer controls
             JArray seq_objs = new();
-            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.isdefault)) {
+            foreach (Sequencer_Object seq_obj in _properties.SequencerObjects.Where(x => !x.IsDefault)) {
                 //skip blank tracks
-                if (seq_obj.friendly_param == null)
+                if (seq_obj.FriendlyParam == null)
                     continue;
                 JObject s = new();
                 //if saving a leaf as a new name, obj_name's have to be updated, otherwise it saves with the old file's name
-                if (seq_obj.obj_name.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.obj_name))
-                    seq_obj.obj_name = (string)_save["obj_name"];
-                s.Add("obj_name", seq_obj.obj_name.Replace("leafname", (string)_save["obj_name"]));
+                if (seq_obj.ObjName.Contains(".leaf") || string.IsNullOrEmpty(seq_obj.ObjName))
+                    seq_obj.ObjName = (string)_save["obj_name"];
+                s.Add("obj_name", seq_obj.ObjName.Replace("leafname", (string)_save["obj_name"]));
                 //write param_path or param_path_hash
-                if (seq_obj.param_path.StartsWith("0x"))
-                    s.Add("param_path_hash", seq_obj.param_path.Replace("0x", ""));
+                if (seq_obj.ParamPath.StartsWith("0x"))
+                    s.Add("param_path_hash", seq_obj.ParamPath.Replace("0x", ""));
                 else
-                    s.Add("param_path", $"{seq_obj.param_path}");
-                s.Add("trait_type", seq_obj.trait_type);
+                    s.Add("param_path", $"{seq_obj.ParamPath}");
+                s.Add("trait_type", seq_obj.TraitType);
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>().Where(x => x != null && x.Value is not null)) {
-                    if (seq_obj.trait_type == "kTraitFloat") {
+                    if (seq_obj.TraitType == "kTraitFloat") {
                         JObject d = new() {
                             { "beat", datapoint.beat },
                             { "value", (decimal)datapoint.Value },
@@ -1283,11 +1283,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 s.Add("data_points", datapoints);
                 ///end
                 //add the rest of the keys to this seq_obj
-                s.Add("step", seq_obj.step);
-                s.Add("default", seq_obj.defaultvalue);
-                s.Add("footer", seq_obj.footer);
-                s.Add("editor_data", new JArray() { new object[] { seq_obj.highlight_color.ToArgb(), seq_obj.highlight_value } });
-                s.Add("enabled", seq_obj.enabled);
+                s.Add("step", seq_obj.Step);
+                s.Add("default", seq_obj.DefaultValue);
+                s.Add("footer", seq_obj.Footer);
+                s.Add("editor_data", new JArray() { new object[] { seq_obj.HighlightColor.ToArgb(), seq_obj.highlight_value } });
+                s.Add("enabled", seq_obj.EnabledInEditor);
 
                 seq_objs.Add(s);
             }
