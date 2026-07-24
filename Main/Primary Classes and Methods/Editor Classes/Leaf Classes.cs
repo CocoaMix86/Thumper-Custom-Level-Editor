@@ -362,8 +362,8 @@ namespace Thumper_Custom_Level_Editor
         }
         private string _ease = "Ease In Out";
 
-        public int? OriginalRow { get; set; }
-        public int? OriginalColumn { get; set; }
+        public int OriginalRow { get; set; }
+        public int OriginalColumn { get; set; }
         public SeqDataPoint Clone()
         {
             //SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
