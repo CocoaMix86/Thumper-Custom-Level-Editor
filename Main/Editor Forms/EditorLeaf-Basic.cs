@@ -160,55 +160,55 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         search:
             if (BasicEditorSelectedObject == "visible") {
                 _paramtofind = LaneNames[row];
-                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == _paramtofind);
+                _findseq = SequencerObjects.FirstOrDefault(x => x.ParamPath == _paramtofind);
             }
             else if (BasicEditorSelectedObject == "turn") {
                 _paramtofind = "turn";
-                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == "turn");
+                _findseq = SequencerObjects.FirstOrDefault(x => x.ParamPath == "turn");
             }
             else {
                 _paramtofind = $"{BasicEditorSelectedObject}";
-                _findseq = SequencerObjects.FirstOrDefault(x => x.param_path == $"{BasicEditorSelectedObject.Replace(".ent", "." + LaneParams[row])}");
+                _findseq = SequencerObjects.FirstOrDefault(x => x.ParamPath == $"{BasicEditorSelectedObject.Replace(".ent", "." + LaneParams[row])}");
             }            
 
             if (_findseq == null) {
                 Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.Value.param_path == _paramtofind).Value;
                 Sequencer_Object _importseq = new() {
                     ParentLeaf = LeafProperties,
-                    obj_name = objmatch.obj_name,
-                    category = objmatch.category,
-                    param_path = objmatch.param_path,
-                    friendly_param = objmatch.param_displayname,
-                    defaultvalue = objmatch.default_value,
-                    step = objmatch.step,
-                    trait_type = objmatch.trait_type,
-                    highlight_color = objmatch.defaultcolor,
+                    ObjName = objmatch.obj_name,
+                    Category = objmatch.category,
+                    ParamPath = objmatch.param_path,
+                    FriendlyParam = objmatch.param_displayname,
+                    DefaultValue = objmatch.default_value,
+                    Step = objmatch.step,
+                    TraitType = objmatch.trait_type,
+                    HighlightColor = objmatch.defaultcolor,
                     highlight_value = 0,
-                    footer = objmatch.footer,
-                    enabled = true
+                    Footer = objmatch.footer,
+                    EnabledInEditor = true
                 };
-                if (_importseq.obj_name == "leafname")
-                    _importseq.obj_name = this.WorkingFile.Name;
-                _importseq.expandlanes = _importseq.friendly_lane == "none" || Properties.Settings.Default.LeafOptionShowLane;
-                if (_importseq.friendly_lane == "lane center") {
+                if (_importseq.ObjName == "leafname")
+                    _importseq.ObjName = this.WorkingFile.Name;
+                _importseq.ExpandLanesInEditor = _importseq.FriendlyLane == "none" || Properties.Settings.Default.LeafOptionShowLane;
+                if (_importseq.FriendlyLane == "lane center") {
                     LoadMultiLanes(_importseq, SequencerObjects, trackEditor);
                 }
                 else {
                     SequencerObjects.Add(_importseq);
                     trackEditor.Rows.Add(_importseq);
                 }
-                ChangeTrackName(_importseq, _importseq.category);
+                ChangeTrackName(_importseq, _importseq.Category);
                 goto search;
             }
 
-            if (setvalue == null && _findseq.category != "TRACK EFFECTS") {
+            if (setvalue == null && _findseq.Category != "TRACK EFFECTS") {
                 //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
                 //just so you don't have to switch your selection to a different object to delete it.
-                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.category == _findseq.category && x.friendly_lane == _findseq.friendly_lane)) {
-                    if (seq.defaultvalue == 1 && setvalue == null) {
+                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Category == _findseq.Category && x.FriendlyLane == _findseq.FriendlyLane)) {
+                    if (seq.DefaultValue == 1 && setvalue == null) {
                         setvalue = 0;
                     }
-                    if (seq.defaultvalue == 1 && setvalue == 1) {
+                    if (seq.DefaultValue == 1 && setvalue == 1) {
                         setvalue = null;
                     }
 
@@ -216,7 +216,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             else {
-                if (_findseq.defaultvalue == 1 && setvalue == 1) {
+                if (_findseq.DefaultValue == 1 && setvalue == 1) {
                     setvalue = null;
                 }
                 _findseq[column + FrozenColumnOffset].Value = setvalue;
