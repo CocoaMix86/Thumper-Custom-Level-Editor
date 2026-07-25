@@ -255,7 +255,7 @@ namespace Thumper_Custom_Level_Editor
 
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
-                    if (Seq.TraitType is "kTraitBool" or "kTraitAction" && Seq.DefaultValue is 1) {
+                    if (Seq.TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action && Seq.DefaultValue is 1) {
                         for (int beat = EditorLeaf.FrozenColumnOffset; beat < LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
                             if (Seq[beat].Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
@@ -671,8 +671,8 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> EventsToAdd16 = new();
             foreach (Sequencer_Object Seq in Leaf.SequencerObjects.Where(x => x.ObjName == "sentry.spn"))
             {
-                int length = 0;
-                switch (Seq.FriendlyParam) {
+                int length = Seq.TrailLength;
+                /*switch (Seq.FriendlyParam) {
                     case "single lane [55 beats]":
                         length = 55;
                         break;
@@ -692,7 +692,7 @@ namespace Thumper_Custom_Level_Editor
                     case "multi lane [150 beats]":
                         length = 150;
                         break;
-                }
+                }*/
                 //Get all datapoints for the sentry that are 1
                 foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.InGameValue == 1)) {
                     //find thump events that fall inside the sentry activation time

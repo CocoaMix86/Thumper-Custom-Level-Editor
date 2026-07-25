@@ -1258,10 +1258,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path_hash", seq_obj.ParamPath.Replace("0x", ""));
                 else
                     s.Add("param_path", $"{seq_obj.ParamPath}");
-                s.Add("trait_type", seq_obj.TraitType);
+                s.Add("trait_type", seq_obj.TraitTypeString);
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>().Where(x => x != null && x.Value is not null)) {
-                    if (seq_obj.TraitType == "kTraitFloat") {
+                    if (seq_obj.TraitType is Sequencer_Object.Trait.Float) {
                         JObject d = new() {
                             { "beat", datapoint.beat },
                             { "value", (decimal)datapoint.Value },

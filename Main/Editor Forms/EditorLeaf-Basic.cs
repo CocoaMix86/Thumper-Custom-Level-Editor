@@ -181,7 +181,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     FriendlyParam = objmatch.param_displayname,
                     DefaultValue = objmatch.default_value,
                     Step = objmatch.step,
-                    TraitType = objmatch.trait_type,
+                    TraitType = Sequencer_Object.TraitLookup[objmatch.trait_type],
                     HighlightColor = objmatch.defaultcolor,
                     highlight_value = 0,
                     Footer = objmatch.footer,

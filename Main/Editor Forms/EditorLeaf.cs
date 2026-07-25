@@ -550,7 +550,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
-            int LengthOfObject = SequencerObjects[e.RowIndex].GetTrailLength();
+            int LengthOfObject = SequencerObjects[e.RowIndex].TrailLength;
             if (LengthOfObject == 0)
                 return;
             LengthOfObject--;
@@ -971,7 +971,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
-                if (SequencerObjects[e.RowIndex].TraitType is "kTraitBool" or "kTraitAction")
+                if (SequencerObjects[e.RowIndex].TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action)
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
                         dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
                     }
@@ -1266,7 +1266,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].TraitType == "kTraitFloat";
+            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].TraitType is Sequencer_Object.Trait.Float;
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1304,7 +1304,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FriendlyParam = objmatch.param_displayname,
                 DefaultValue = objmatch.default_value,
                 Step = objmatch.step,
-                TraitType = objmatch.trait_type,
+                TraitType = Sequencer_Object.TraitLookup[objmatch.trait_type],
                 HighlightColor = objmatch.defaultcolor,
                 highlight_value = 0,
                 Footer = objmatch.footer,
@@ -1483,7 +1483,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Lanes[x].Category = objmatch.category;
                 Lanes[x].ParamPath = objmatch.param_path;
                 Lanes[x].FriendlyParam = objmatch.param_displayname;
-                Lanes[x].TraitType = objmatch.trait_type;
+                Lanes[x].TraitType = Sequencer_Object.TraitLookup[objmatch.trait_type];
                 Lanes[x].Footer = objmatch.footer;
                 Lanes[x].HighlightColor = objmatch.defaultcolor;
                 if (Lanes[x].ObjName == "leafname")
@@ -1955,14 +1955,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Sequencer_Object interpobject = SequencerObjects[SelectedCells[0].RowIndex];
 
             //get start and end values, and how many beats separate them
-            double _start = (double)((decimal?)first.Value ?? (decimal)interpobject.defaultvalue);
-            double _end = (double)((decimal?)second.Value ?? (decimal)interpobject.defaultvalue);
+            double _start = (double)((decimal?)first.Value ?? (decimal)interpobject.DefaultValue);
+            double _end = (double)((decimal?)second.Value ?? (decimal)interpobject.DefaultValue);
             double max = Math.Max(_start, _end);
             double min = Math.Min(_start, _end);
             double max2 = 0, max3 = 0, min2 = 0, min3 = 0;
             Color startcolor = new();
             Color endcolor = new();
-            if (interpobject.TraitType == "kTraitColor") {
+            if (interpobject.TraitType is Sequencer_Object.Trait.Color) {
                 startcolor = Color.FromArgb((int)_start);
                 endcolor = Color.FromArgb((int)_end);
                 max = Math.Max(startcolor.R, endcolor.R);
@@ -2062,7 +2062,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
-            if (interpobject.TraitType == "kTraitColor") {
+            if (interpobject.TraitType is Sequencer_Object.Trait.Color) {
                 double valR, valG, valB = 0;
                 //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
@@ -2157,8 +2157,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //need to rename Track Effect objects to point to the new leaf name
                 foreach (Sequencer_Object _seq in LeafSplitAfter.SequencerObjects) {
-                    if (_seq.obj_name == this.WorkingFile.Name)
-                        _seq.obj_name = LeafSplitAfter.WorkingFile.Name;
+                    if (_seq.ObjName == this.WorkingFile.Name)
+                        _seq.ObjName = LeafSplitAfter.WorkingFile.Name;
                 }
                 //reduce split leafs beat count and save
                 LeafSplitAfter._leafproperties.Beats = _leafproperties.Beats - splitindex;
@@ -2215,7 +2215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FriendlyParam = obj.param_displayname,
                 DefaultValue = obj.default_value,
                 Step = obj.step,
-                TraitType = obj.trait_type,
+                TraitType = Sequencer_Object.TraitLookup[obj.trait_type],
                 HighlightColor = obj.defaultcolor,
                 highlight_value = 0,
                 Footer = obj.footer,
@@ -2426,7 +2426,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object ObjectToImport = new() {
                     ParentLeaf = ParentLeaf,
                     ObjName = ((string)seq_obj["obj_name"]),
-                    TraitType = seq_obj["trait_type"],
+                    TraitType = Sequencer_Object.TraitLookup[(string)seq_obj["trait_type"]],
                     Step = (string)seq_obj["step"] == "True",
                     DefaultValue = seq_obj["default"],
                     Footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
@@ -2582,7 +2582,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FriendlyParam = "⮝ Tuning Layer X",
                 DefaultValue = 0,
                 Step = false,
-                TraitType = "",
+                TraitType = Sequencer_Object.Trait.None,
                 HighlightColor = Color.FromArgb(40, 40, 40),
                 highlight_value = 0,
                 Footer = "",
@@ -2611,7 +2611,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.FriendlyParam = "⮝ Tuning Layer X";
             seq.DefaultValue = 0;
             seq.Step = false;
-            seq.TraitType = "";
+            seq.TraitType = Sequencer_Object.Trait.None;
             seq.HighlightColor = Color.FromArgb(40, 40, 40);
             seq.highlight_value = 0;
             seq.Footer = "";
@@ -3038,7 +3038,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int randomtype = 0;
             decimal? valueiftrue = 0;
 
-            if ((seq.TraitType is "kTraitBool" or "kTraitAction") || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+            if ((seq.TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action) || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                 valueiftrue = 1;
                 rngchance = 10;
                 rnglimit = 9;
@@ -3047,7 +3047,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     rnglimit = 54;
                 }
             }
-            else if (seq.TraitType == "kTraitColor") {
+            else if (seq.TraitType is Sequencer_Object.Trait.Color) {
                 randomtype = 7;
                 rngchance = 10;
                 rnglimit = 8;

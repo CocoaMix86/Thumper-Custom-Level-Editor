@@ -26,14 +26,14 @@ namespace Thumper_Custom_Level_Editor
 
     public static class TraitValidator
     {
-        public static decimal Sanitize(string trait, decimal value)
+        public static object Sanitize(Sequencer_Object.Trait trait, object value)
         {
             return trait switch
             {
-                "kTraitBool" => value is 0 or 1 ? value : 1,
-                "kTraitAction" => value is 0 or 1 ? value : 1,
-                "kTraitInt" => Math.Truncate(value),
-                "kTraitColor" => Math.Truncate(value),
+                Sequencer_Object.Trait.Bool => value is null || (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                Sequencer_Object.Trait.Action => value is null || (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                Sequencer_Object.Trait.Int => Math.Truncate((decimal)value),
+                Sequencer_Object.Trait.Color => Math.Truncate((decimal)value),
                 _ => value
             };
         }
@@ -59,7 +59,7 @@ namespace Thumper_Custom_Level_Editor
             JObject s = new() {
                 { "obj_name", this.ObjName },
                 { (this.ParamPath.StartsWith("0x") ? "param_path_hash" : "param_path"), this.ParamPath.Replace("0x", "") },
-                { "trait_type", this.TraitType },
+                { "trait_type", TraitTypeString },
                 { "step", this.Step },
                 { "default", this.DefaultValue },
                 { "footer", this.Footer },
@@ -76,6 +76,37 @@ namespace Thumper_Custom_Level_Editor
             s.Add("data_points", datapoints);
 
             return s;
+        }
+
+        private int? _trailLength;
+        public int TrailLength
+        {
+            get {
+                if (_trailLength.HasValue)
+                    return _trailLength.Value;
+
+                _trailLength = ParseTrailLength();
+                return _trailLength.Value;
+            }
+        }
+        public int ParseTrailLength()
+        {
+            string param = this.FriendlyParam;
+
+            int start = param.IndexOf('[');
+            if (start == -1)
+                return 0;
+
+            start++;
+
+            int end = param.IndexOf(' ', start);
+            if (end == -1)
+                end = param.IndexOf(']', start);
+
+            if (end == -1)
+                return 0;
+
+            return int.TryParse(param.AsSpan(start, end - start), out int length) ? length : 0;
         }
 
         public SeqDataPoint this[int index]
@@ -96,14 +127,25 @@ namespace Thumper_Custom_Level_Editor
         public string ParamPath { get; set; }
         public string ParamPathLane => this.ParamPath == null ? "none" : (this.ParamPath.Contains('.') ? this.ParamPath.Split('.')[1] : "none");
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
-        public string TraitType { get; set; }
+        //
+        public enum Trait { Bool, Action, Int, Color, Float, None }
+        public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
+            { "kTraitBool", Trait.Bool } ,
+            { "kTraitAction", Trait.Action } ,
+            { "kTraitInt", Trait.Int } ,
+            { "kTraitColor", Trait.Color } ,
+            { "kTraitFloat", Trait.Float } ,
+        };
+        public Trait TraitType;
+        public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
+        //
         public bool Step { get; set; } = true;
         public decimal DefaultValue
         {
             get => _defaultvalue;
             set {
                 //standardize values based on the type
-                _defaultvalue = TraitValidator.Sanitize(TraitType, value);
+                _defaultvalue = (decimal)TraitValidator.Sanitize(TraitType, value);
             }
         }
         private decimal _defaultvalue;
@@ -269,15 +311,22 @@ namespace Thumper_Custom_Level_Editor
 
         public JObject ConvertToJson()
         {
-            object value = ParentSeqObj.TraitType == "kTraitFloat" ? Value : Convert.ToInt32(Value);
-
-            return new()
-            {
-                ["beat"] = beat,
-                ["value"] = (JToken)value,
-                ["interp"] = $"kTraitInterp{Interpolation ?? "Linear"}",
-                ["ease"] = $"k{Ease?.Replace(" ", "") ?? "EaseInOut"}"
-            };
+            if (this.ParentSeqObj.TraitType == Sequencer_Object.Trait.Float) { 
+                return new() { 
+                    { "beat", this.beat }, 
+                    { "value", (decimal)this.Value }, 
+                    { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" }, 
+                    { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" } 
+                }; 
+            } 
+            else { 
+                return new() { 
+                    { "beat", this.beat }, 
+                    { "value", (int)(decimal)this.Value }, 
+                    { "interp", $"kTraitInterp{this.Interpolation ?? "Linear"}" }, 
+                    { "ease", $"k{this.Ease?.Replace(" ", "") ?? "EaseInOut"}" } 
+                }; 
+            }
         }
 
         [Browsable(false)]
@@ -314,7 +363,7 @@ namespace Thumper_Custom_Level_Editor
             //sanitize inputs based on the trait type
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
-                value = TraitValidator.Sanitize(ParentSeqObj.TraitType, Convert.ToDecimal(value));
+                value = TraitValidator.Sanitize(ParentSeqObj.TraitType, value);
             }
 
             bool _set = base.SetValue(rowIndex, value);
@@ -545,7 +594,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Trait Type")]
         [Description("BOOL: accepts values 1 (on) or 0 (off); ACTION: accepts values 1 (activate); FLOAT: accepts float values; INT: accepts integer (no decimal) values; COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.")]
-        public string traittype => selectedobj.TraitType?.Replace("kTrait", "");
+        public string traittype => selectedobj.TraitType.ToString();
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]

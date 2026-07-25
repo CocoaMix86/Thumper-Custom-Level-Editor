@@ -85,7 +85,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
             //if a color object, convert the cell value to ARGB and use that
-            else if (seq.TraitType is "kTraitColor") {
+            else if (seq.TraitType is Sequencer_Object.Trait.Color) {
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
             }
@@ -149,7 +149,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 goto skipchecks;
             if (seq.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 return;
-            else if (seq.TraitType is "kTraitColor")
+            else if (seq.TraitType is Sequencer_Object.Trait.Color)
                 return;
             else if ((Properties.Settings.Default.LeafOptionThinBars && seq.FriendlyLane == "lane center" && seq.ExpandLanesInEditor == false))
                 return;
