@@ -43,10 +43,13 @@ namespace Thumper_Custom_Level_Editor
     {
         public LeafProperties ParentLeaf;
 
-        public Sequencer_Object()
+        public Sequencer_Object(LeafProperties _parent)
         {
+            ParentLeaf = _parent;
             this.DividerHeight = 0;
             this.HeaderCell.Style.BackColor = Color.Black;
+            //for (int x = 0; x < ParentLeaf.Beats + EditorLeaf.FrozenColumnOffset; x++)
+                //this.Cells.Add(new SeqDataPoint());
         }
 
         public JObject ConvertToJson()
@@ -229,7 +232,7 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object Clone(int CellsToClone = -1)
         {
             //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
-            Sequencer_Object clone = new() {
+            Sequencer_Object clone = new(null) {
                 ParentLeaf = null,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPath,
@@ -270,7 +273,7 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object CloneAsLane(string lane, bool showlane = false)
         {
-            Sequencer_Object clone = new() {
+            Sequencer_Object clone = new(this.ParentLeaf) {
                 ParentLeaf = this.ParentLeaf,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPath.Split('.')[0] + lane,
@@ -444,7 +447,7 @@ namespace Thumper_Custom_Level_Editor
         public LeafProperties(EditorLeaf Parent)
         {
             ParentEditor = Parent;
-            selectedobj = new() { ParentLeaf = this };
+            selectedobj = new(this);
         }
 
         public JObject ConvertToJson()

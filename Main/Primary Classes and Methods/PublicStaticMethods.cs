@@ -58,6 +58,7 @@ namespace Thumper_Custom_Level_Editor
             if (WorkingFolder == null)
                 visible = false;
             panelToolStrips.Visible = visible;
+            toolStripTitle.SendToBack();
             dockMain.Visible = visible;
             foreach (object? item in toolStripTitle.Items)
                 (item as ToolStripItem).Visible = visible;
@@ -77,6 +78,10 @@ namespace Thumper_Custom_Level_Editor
             toolstripViewProperties.Enabled = true;
 
             MainBeeble.Visible = visible;
+            if (MainBeeble.Visible) {
+                MainBeeble.Size = Properties.Settings.Default.beeblesize;
+                MainBeeble.Location = Properties.Settings.Default.beebleloc;
+            }
         }
 
         public void InitializeUI()

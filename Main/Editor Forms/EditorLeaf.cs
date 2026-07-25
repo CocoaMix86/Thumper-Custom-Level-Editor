@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.Arm;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using Thumper_Custom_Level_Editor.Utility_Classes;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -1296,7 +1297,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (objmatch == null)
                 return;
 
-            Sequencer_Object seq = new() {
+            Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
                 ObjName = objmatch.category == "PLAY SAMPLE" ? e.Node.Text : objmatch.obj_name,
                 Category = objmatch.category,
@@ -2207,7 +2208,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SequencerObjects.Any(x => x.Category == category && x.ParamPath == obj.param_path))
                 goto beginrando;
 
-            Sequencer_Object seq = new() {
+            Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
                 ObjName = category == "PLAY SAMPLE" ? TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name : obj.obj_name,
                 Category = obj.category,
@@ -2319,6 +2320,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return _leafproperties;
         }
 
+        public void SetLayoutState(bool suspend)
+        {
+            if (suspend) {
+                trackEditor.SuspendLayout();
+                trackEditor.SuspendDrawing();
+                dgvMasterView.SuspendLayout();
+                dgvMasterView.SuspendDrawing();
+            }
+            else {
+                trackEditor.ResumeDrawing();
+                trackEditor.ResumeLayout();
+                dgvMasterView.ResumeDrawing();
+                dgvMasterView.ResumeLayout();
+            }
+        }
+
         ///Update DGV from _tracks
         public void LoadLeaf(dynamic _load, bool template = false)
         {
@@ -2342,6 +2359,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
+            SetLayoutState(true);
             if (this.WorkingFile.Extension == ".leaf") {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
@@ -2402,17 +2420,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 ChangeTrackName(seq, seq.Category);
             }
             TrackTimeSigHighlighting();
+            //
+            SetLayoutState(false);
             trackEditor.Invalidate();
-
             //initialize undo base state to first load
             UndoList.Add(new SaveState() {
                 reason = "",
                 savestate = savestate
             });
-
-            //mark that lvl is saved (just freshly loaded)
+            //mark leaf is saved (just freshly loaded)
             EditorIsLoading = false;
             SaveCheckAndWrite(true, "", false);
+            //
             LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);
             toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (75);
         }
@@ -2420,10 +2439,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void LoadSequencer(dynamic seqJSON, LeafProperties ParentLeaf, DataGridView dgv)
         {
             List<Sequencer_Object> LoadedObjects = new();
-
+            int audiochannels = 0;
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
-                Sequencer_Object ObjectToImport = new() {
+                Sequencer_Object ObjectToImport = new(ParentLeaf) {
                     ParentLeaf = ParentLeaf,
                     ObjName = ((string)seq_obj["obj_name"]),
                     TraitType = Sequencer_Object.TraitLookup[(string)seq_obj["trait_type"]],
@@ -2436,6 +2455,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     EnabledInEditor = ((string)seq_obj["enabled"] ?? "True").Equals("true", StringComparison.OrdinalIgnoreCase),
                     IsDefault = false
                 };
+                ObjectToImport.CreateCells(dgv);
 
                 //if object is a layer volume, we "reset" its index to x so it can be renumbered in case its out of order.
                 if (ObjectToImport.ParamPath.StartsWith("layer_volume"))
@@ -2460,9 +2480,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         ObjectToImport.HighlightColor = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : objmatch?.defaultcolor ?? Color.Purple;
                         //set audio channel numbers on load
                         if (ObjectToImport.Category == "LOOP TRACK VOLUME") {
-                            int audiochannels = LoadedObjects.Count(x => x.Category == "LOOP TRACK VOLUME");
                             ObjectToImport.ParamPath = ObjectToImport.ParamPath.Replace("x", $"{audiochannels}");
                             ObjectToImport.FriendlyParam = ObjectToImport.FriendlyParam.Replace("x", $"{audiochannels}");
+                            audiochannels++;
                         }
                     } catch (Exception) { }
                 }
@@ -2476,10 +2496,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     ObjectToImport.ExpandLanesInEditor = true;
                     LoadedObjects.Add(ObjectToImport);
-                    dgv.Rows.Add(ObjectToImport);
+                    //dgv.Rows.Add(ObjectToImport);
                 }
                 //this line exists to force the app to recognize the rows have proper indexes instead of -1
-                string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
+                //string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj);
                 RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
@@ -2489,6 +2509,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects;
+            dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
         }
 
         public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)
@@ -2497,14 +2518,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (dynamic dp in seq_obj["data_points"]) {
                 //modern data point. The save data includes interp and ease
                 if (dp is JObject data_point) {
-                    SeqDataPoint data = new() {
-                        Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear",
-                        Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"],
-                        Value = (decimal)data_point["value"]
-                    };
+                    //if imported data is greater than leaf's beat count, skip it.
+                    //but don't break, as beats could have been written in the file out of order
                     if ((int)data_point["beat"] >= ObjectToImport.ParentLeaf._beats)
                         continue;
-                    ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset] = data;
+                    SeqDataPoint data = ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset];
+                    data.Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear";
+                    data.Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"];
+                    data.Value = (decimal)data_point["value"];
+                    
+                    //ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset] = data;
                 }
                 //old data point. The save includes Value only.
                 else {
@@ -2527,22 +2550,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             if (lookup == null) {
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 LoadedObjects.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
 
                 lookup = LoadedObjects.FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
             }
             int index = LoadedObjects.IndexOf(lookup);
             LoadedObjects[index] = ObjectToImport;
-            dgv.Rows.RemoveAt(index);
-            dgv.Rows.Insert(index, LoadedObjects[index]);
+            //dgv.Rows.RemoveAt(index);
+            //dgv.Rows.Insert(index, LoadedObjects[index]);
         }
 
         public void Reload()
@@ -2574,7 +2597,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void AddSequencerLayer(int index)
         {
-            Sequencer_Object seq = new() {
+            Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
                 ObjName = "_TuningLayerX",
                 Category = "",
@@ -2787,6 +2810,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount) {
                 if (!SimpleLoad) {
+                    int _width = Properties.Settings.Default.ZoomHoriz;
                     while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
                         trackEditor.Columns.Add(new SequencerColumn() {
                             FillWeight = 0.0001f,
@@ -2802,7 +2826,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             ReadOnly = false,
                             ValueType = typeof(decimal?),
                             DefaultCellStyle = DGVCS,
-                            Width = Properties.Settings.Default.ZoomHoriz
+                            Width = _width
                         });
                 }
                 else {
@@ -3155,11 +3179,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 _properties.ParentEditor.LogUndo = false;
                 _properties.ParentEditor.EditorIsTuning = true;
-                Sequencer_Object SumOfLayers = new() { ParentLeaf = _properties };
+                Sequencer_Object SumOfLayers = new(_properties);
                 _properties.ParentEditor.trackEditor.Rows.Add(SumOfLayers);
 
                 foreach (Sequencer_Object _layer in TuningLayers) {
-                    Sequencer_Object InterpolationCalc = new() { ParentLeaf = _properties };
+                    Sequencer_Object InterpolationCalc = new(_properties);
                     _properties.ParentEditor.trackEditor.Rows.Add(InterpolationCalc);
                     SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
