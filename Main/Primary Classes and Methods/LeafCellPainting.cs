@@ -63,7 +63,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }*/
         }
 
-        public static void DrawColors(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        public static void DrawColors(DataGridViewCellPaintingEventArgs e, List<Sequencer_Object> SequencerObjects)
         {
             var seq = SequencerObjects[e.RowIndex];
             //grey out the track if disabled
@@ -96,7 +96,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void DrawSelection(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor, List<Sequencer_Object> SequencerObjects)
+        public static void DrawSelection(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor)
         {
             //if cell is selected
             if (trackEditor[e.ColumnIndex, e.RowIndex].Selected) {

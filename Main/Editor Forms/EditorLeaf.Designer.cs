@@ -518,7 +518,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnTrackAdd.Name = "btnTrackAdd";
             this.btnTrackAdd.Size = new Size(23, 24);
             this.btnTrackAdd.ToolTipText = "Change the current sequencer track object\r\ninto the current selected object in the list.\r\nThis affects all lanes of the object.";
-            this.btnTrackAdd.Click += this.btnTrackAdd_Click;
+            this.btnTrackAdd.Click += this.btnTrackConvert_Click;
             // 
             // btnTrackDelete
             // 

@@ -28,10 +28,12 @@ namespace Thumper_Custom_Level_Editor
     {
         public static object Sanitize(Sequencer_Object.Trait trait, object value)
         {
+            if (value == null)
+                return value;
             return trait switch
             {
-                Sequencer_Object.Trait.Bool => value is null || (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                Sequencer_Object.Trait.Action => value is null || (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                Sequencer_Object.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                Sequencer_Object.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
                 Sequencer_Object.Trait.Int => Math.Truncate((decimal)value),
                 Sequencer_Object.Trait.Color => Math.Truncate((decimal)value),
                 _ => value
@@ -133,11 +135,12 @@ namespace Thumper_Custom_Level_Editor
         //
         public enum Trait { Bool, Action, Int, Color, Float, None }
         public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
-            { "kTraitBool", Trait.Bool } ,
-            { "kTraitAction", Trait.Action } ,
-            { "kTraitInt", Trait.Int } ,
-            { "kTraitColor", Trait.Color } ,
-            { "kTraitFloat", Trait.Float } ,
+            { "kTraitBool", Trait.Bool },
+            { "kTraitAction", Trait.Action },
+            { "kTraitInt", Trait.Int },
+            { "kTraitColor", Trait.Color },
+            { "kTraitFloat", Trait.Float },
+            { "", Trait.None },
         };
         public Trait TraitType;
         public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
@@ -148,7 +151,7 @@ namespace Thumper_Custom_Level_Editor
             get => _defaultvalue;
             set {
                 //standardize values based on the type
-                _defaultvalue = (decimal)TraitValidator.Sanitize(TraitType, value);
+                _defaultvalue = Convert.ToDecimal(TraitValidator.Sanitize(TraitType, value));
             }
         }
         private decimal _defaultvalue;
@@ -198,7 +201,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 if (this.FriendlyLane is not "lane center" and not "none")
                     this.Visible = value;
-                EditorLeaf.ChangeTrackName(this, this.Category);
+                EditorLeaf.SetRowHeaderText(this);
             }
         }
         private bool _expandlanes;
@@ -289,6 +292,7 @@ namespace Thumper_Custom_Level_Editor
                 EnabledInEditor = true,
                 IsDefault = true,
                 MuteInEditor = false,
+                ExpandLanesInEditor = showlane,
                 id = TCLE.rng.Next()
             };
             return clone;

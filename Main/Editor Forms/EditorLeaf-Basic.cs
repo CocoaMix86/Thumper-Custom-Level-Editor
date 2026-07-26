@@ -197,7 +197,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects.Add(_importseq);
                     trackEditor.Rows.Add(_importseq);
                 }
-                ChangeTrackName(_importseq, _importseq.Category);
+                SetRowHeaderText(_importseq);
                 goto search;
             }
 
