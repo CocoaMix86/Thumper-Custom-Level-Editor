@@ -50,6 +50,7 @@ namespace Thumper_Custom_Level_Editor
             ParentLeaf = _parent;
             this.DividerHeight = 0;
             this.HeaderCell.Style.BackColor = Color.Black;
+            this.Height = ParentLeaf?.ParentEditor?.trackZoomVert?.Value ?? 0;
             //for (int x = 0; x < ParentLeaf.Beats + EditorLeaf.FrozenColumnOffset; x++)
                 //this.Cells.Add(new SeqDataPoint());
         }
@@ -461,7 +462,7 @@ namespace Thumper_Custom_Level_Editor
                 { "obj_type", "SequinLeaf" },
                 { "obj_name", this.ParentEditor.WorkingFile.Name },
                 { "beat_cnt", this.Beats },
-                { "time_sig", this.timesignature }
+                { "time_sig", this.TimeSignature }
             };
 
             JArray seq_objs = new();
@@ -555,7 +556,7 @@ namespace Thumper_Custom_Level_Editor
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         public string timeedit
         {
-            get => timesignature;
+            get => TimeSignature;
             set {
                 //check if incoming value matches time sig pattern #/#
                 Match reg = Regex.Match(value, "(^\\d+\\/\\d+$)");
@@ -566,7 +567,7 @@ namespace Thumper_Custom_Level_Editor
 
                 if (!TCLE.TimeSignatures.Contains(value))
                     TCLE.TimeSignatures.Add(value);
-                TimeSignature = value;
+                _timesig = value;
                 ParentEditor.SaveCheckAndWrite(false, "Time signature changed");
                 if (!ParentEditor.EditorIsLoading)
                     ParentEditor.TrackTimeSigHighlighting();
@@ -576,17 +577,21 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Preset Time Sigs")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
-        public string timesignature
+        public string TimeSignature
         {
-            get => TimeSignature; 
+            get => _timesig; 
             set {
-                TimeSignature = value;
-                ParentEditor.SaveCheckAndWrite(false, "Time signature changed");
+                if (!int.TryParse(value.Split('/')[0], out int timesigbeats))
+                    return;
+                _timesig = value;
+                TimeTopBeat = timesigbeats;
                 if (!ParentEditor.EditorIsLoading)
                     ParentEditor.TrackTimeSigHighlighting();
+                ParentEditor.SaveCheckAndWrite(false, "Time signature changed");
             }
         }
-        private string TimeSignature;
+        private string _timesig;
+        public int TimeTopBeat = 4;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]

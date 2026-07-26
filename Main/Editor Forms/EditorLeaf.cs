@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Thumper_Custom_Level_Editor.Utility_Classes;
@@ -264,17 +262,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Scrollbars and Zoom
         private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            for (int x = e.RowIndex; x < e.RowIndex + e.RowCount; x++)
-                trackEditor.Rows[x].Height = trackZoomVert.Value;
             vscrollbarTrackEditor_Resize();
 
             LeafLanes = SequencerObjects.Where(x => x.ObjName.EndsWith(".leaf")).ToDictionary(x => x.FriendlyParam);
 
-            trackEditor[0, e.RowIndex].ToolTipText = "Enable/Disable";
-            trackEditor[1, e.RowIndex].ToolTipText = "Mute/Unmute";
-            //only add tooltip if the object can have lanes
-            if (((Sequencer_Object)trackEditor.Rows[e.RowIndex]).FriendlyLane != "none")
-                trackEditor[2, e.RowIndex].ToolTipText = "Show/Hide Lanes";
+            for (int x = e.RowIndex; x < e.RowIndex + e.RowCount; x++) {
+                Sequencer_Object seq = SequencerObjects[x];
+                seq[0].ToolTipText = "Enable/Disable";
+                seq[1].ToolTipText = "Mute/Unmute";
+                //only add tooltip if the object can have lanes
+                if (seq.FriendlyLane != "none")
+                    seq[2].ToolTipText = "Show/Hide Lanes";
+                TimeSigHighlightSingleObject(seq, LeafProperties.TimeTopBeat);
+            }
         }
 
         private void trackEditor_Scroll(object sender, ScrollEventArgs e)
@@ -476,12 +476,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             RowPrePaintError = null;
 
-            if (SequencerObjects[e.RowIndex].Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave) 
-                PaintRowWaveforms(e);            
-            else if (SequencerObjects[e.RowIndex].FriendlyParam.Contains('[')) 
-                PaintRowLongObject(e);            
-            else if (SequencerObjects[e.RowIndex].ObjName == "_TuningLayerX") 
-                PaintRowTuningLayer(e);            
+            if (SequencerObjects[e.RowIndex].Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+                PaintRowWaveforms(e);
+            else if (SequencerObjects[e.RowIndex].TrailLength > 1)
+                PaintRowLongObject(e);
+            else if (SequencerObjects[e.RowIndex].ObjName == "_TuningLayerX")
+                PaintRowTuningLayer(e);
             else
                 PaintRowNormal(e);
 
@@ -2378,14 +2378,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (this.WorkingFile.Extension == ".leaf") {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
-                    timesignature = (string)_load["time_sig"] ?? "4/4",
+                    TimeSignature = (string)_load["time_sig"] ?? "4/4",
                     _beats = (int?)_load["beat_cnt"] ?? 1,
                 };
             }
             else if (this.WorkingFile.Extension == ".lvl") {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
-                    timesignature = "4/4",
+                    TimeSignature = "4/4",
                     _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
             }
@@ -2407,14 +2407,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (this.WorkingFile?.Extension == ".leaf") {
                 LeafProperties = new(this) {
                     SequencerType = ".leaf",
-                    timesignature = (string)_load["time_sig"] ?? "4/4",
+                    TimeSignature = (string)_load["time_sig"] ?? "4/4",
                     _beats = (int?)_load["beat_cnt"] ?? 1
                 };
             }
             else if (this.WorkingFile?.Extension is ".lvl" or null) {
                 LeafProperties = new(this) {
                     SequencerType = ".lvl",
-                    timesignature = "4/4",
+                    TimeSignature = "4/4",
                     _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
                 };
             }
@@ -2731,7 +2731,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 EditorIsLoading = true;
                 if (_leafproperties == null) {
                     LeafProperties = new(this) {
-                        timesignature = "4/4",
+                        TimeSignature = "4/4",
                         _beats = FileIsNew ? 32 : LeafProperties.Beats
                     };
                 } //else
@@ -2945,8 +2945,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
             //tryparse to see if it fails.
-            if (!int.TryParse(_leafproperties.timesignature.Split('/')[0], out int timesigbeats))
-                return;
+            foreach (Sequencer_Object Seq in SequencerObjects)
+                TimeSigHighlightSingleObject(Seq, LeafProperties.TimeTopBeat);
+            /*
             for (int i = 0; i < _leafproperties.Beats; i++) {
                 //whenever `i` is a multiple of the time sig, switch colors
                 if ((i) % timesigbeats == 0)
@@ -2955,12 +2956,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackEditor.Rows[row].Cells[i + FrozenColumnOffset].Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
                 }
                 trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
-            }
+            }*/
 
             if (AltSequencer != null)
                 TrackLeafDividerHighlighting((LvlProperties)AltSequencer);
 
             trackEditor.Invalidate();
+        }
+
+        public static void TimeSigHighlightSingleObject(Sequencer_Object Seq, int timesigbeats)
+        {
+            int doubletime = timesigbeats * 2;
+            int cellcount = Seq.Cells.Count;
+            for (int x = 0; x < cellcount - FrozenColumnOffset; x++) {
+                Seq.Cells[x + FrozenColumnOffset].Style.BackColor = x % doubletime < timesigbeats ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
+            }
         }
 
         public void TrackLeafDividerHighlighting(LvlProperties Lvl)
