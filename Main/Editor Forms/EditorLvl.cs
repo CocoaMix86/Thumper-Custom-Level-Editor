@@ -10,6 +10,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class EditorLvl : EditorBase
     {
         #region Form Construction
+        public EditorLvl()
+        {
+            InitializeComponent();
+        }
         public EditorLvl(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
             SimpleLoad = simpleload;
@@ -555,13 +559,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leaf.leafname,
                     0 });
             }*/
-
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 lvlLeafList.RowCount = 0;
             }
             //if action ADD, add new row to the lvl DGV
             //NewStartingIndex and OldStartingIndex track where the changes were made
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
                 lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] {
                     Properties.Resources.editor_leaf,
@@ -570,7 +573,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RecalculateRuntimeSublevel(LvlLeafs[_in]);
             }
             //if action REMOVE, remove row from the lvl DGV
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
             }
 
@@ -1341,7 +1344,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //We reverse the list because they will all paste at the same index. So the last one pasted would be at the top.
             TCLE.ClipboardLvl.Reverse();
             //enable the paste button everywhere
-            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
+            btnLvlLeafPaste.Enabled = true;
+            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)))
                 lvl.btnLvlLeafPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -1351,12 +1355,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             Copy();
 
             //delete the copied items from the lvl now
-            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
+            //LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (LvlLeafData leaf in TCLE.ClipboardLvl) {
                 LvlLeafs.Remove(leaf);
             }
-            LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
-            lvlleaf_CollectionChanged(null, null);
+            //LvlLeafs.CollectionChanged += lvlleaf_CollectionChanged;
+            //lvlleaf_CollectionChanged(null, null);
             SaveCheckAndWrite(false, "Cut Leafs");
         }
 
