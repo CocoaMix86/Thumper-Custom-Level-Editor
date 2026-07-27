@@ -105,26 +105,46 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             else
                 mixer.Value = 100;
         }
-
+        //Dictionary<int key, int volumelevel>
+        private Dictionary<int, int> KeyVolumes = new() {
+            { 1, 40 },
+            { 2, 35 },
+            { 3, 0 },
+            { 4, 0 },
+            { 5, 35 },
+            { 6, 70 },
+            { 7, 40 },
+            { 8, 100 },
+            { 9, 100 },
+            { 10, 65 },
+            { 11, 48 },
+            { 12, 65 },
+            { 13, 60 },
+            { 14, 55 },
+            { 15, 55 },
+            { 16, 65 },
+            { 17, 89 },
+            { 18, 50 },
+            { 19, 40 },
+            { 20, 40 },
+            { 21, 45 },
+            { 99, 60 },
+            { 100, 100 }
+        };
         private void btnVolResetAll_Click(object sender, EventArgs e)
         {
             IsResetting = true;
             foreach (TrackBar mixer in GetAll(this, typeof(TrackBar)))
             {
                 int key = int.Parse(mixer.Tag.ToString());
-                if (key is 1 or 2 or 6 or 7 or 10 or 11 or 12 or 17 or 18)
-                    mixer.Value = 50;
-                else if (key is not 100)
-                    mixer.Value = 100;
+                mixer.Value = KeyVolumes[key];
             }
-            trackMasterVolume.Value = 100;
             IsResetting = false;
             SaveVolumeLevels();
         }
 
         public void SaveVolumeLevels()
         {
-
             //set volume levels according to user saved settings
             foreach (TrackBar _mixer in GetAll(this, typeof(TrackBar)))
             {

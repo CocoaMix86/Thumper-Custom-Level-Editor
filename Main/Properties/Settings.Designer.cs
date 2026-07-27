@@ -634,7 +634,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int VolKey1 {
             get {
                 return ((int)(this["VolKey1"]));
@@ -646,7 +646,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("35")]
         public int VolKey2 {
             get {
                 return ((int)(this["VolKey2"]));
@@ -658,7 +658,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int VolKey3 {
             get {
                 return ((int)(this["VolKey3"]));
@@ -670,7 +670,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int VolKey4 {
             get {
                 return ((int)(this["VolKey4"]));
@@ -682,7 +682,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("35")]
         public int VolKey5 {
             get {
                 return ((int)(this["VolKey5"]));
@@ -694,7 +694,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("70")]
         public int VolKey6 {
             get {
                 return ((int)(this["VolKey6"]));
@@ -706,7 +706,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int VolKey7 {
             get {
                 return ((int)(this["VolKey7"]));
@@ -742,7 +742,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("65")]
         public int VolKey10 {
             get {
                 return ((int)(this["VolKey10"]));
@@ -754,7 +754,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("48")]
         public int VolKey11 {
             get {
                 return ((int)(this["VolKey11"]));
@@ -766,7 +766,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("65")]
         public int VolKey12 {
             get {
                 return ((int)(this["VolKey12"]));
@@ -778,7 +778,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public int VolKey13 {
             get {
                 return ((int)(this["VolKey13"]));
@@ -790,7 +790,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("55")]
         public int VolKey14 {
             get {
                 return ((int)(this["VolKey14"]));
@@ -802,7 +802,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("55")]
         public int VolKey15 {
             get {
                 return ((int)(this["VolKey15"]));
@@ -814,7 +814,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("65")]
         public int VolKey16 {
             get {
                 return ((int)(this["VolKey16"]));
@@ -826,7 +826,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("89")]
         public int VolKey17 {
             get {
                 return ((int)(this["VolKey17"]));
@@ -850,7 +850,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int VolKey19 {
             get {
                 return ((int)(this["VolKey19"]));
@@ -862,7 +862,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40")]
         public int VolKey20 {
             get {
                 return ((int)(this["VolKey20"]));
@@ -886,7 +886,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public int VolKey99 {
             get {
                 return ((int)(this["VolKey99"]));
@@ -909,7 +909,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        [global::System.Configuration.DefaultSettingValueAttribute("45")]
         public int VolKey21 {
             get {
                 return ((int)(this["VolKey21"]));
