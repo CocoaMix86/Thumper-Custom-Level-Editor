@@ -140,8 +140,9 @@ namespace Thumper_Custom_Level_Editor
         public static void BuildTreeFavorites(TreeView _tree, string txtSearch)
         {
             bool filtersearch = txtSearch is not "" and not "Search Objects (Ctrl+;)";
-
+            //clear the favorites node
             _tree.Nodes[0].Nodes.Clear();
+            //get all favorites and sort alphabetically
             foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).OrderBy(x => x.param_displayname)) {
                 TreeNode _param = new() {
                     Text = obj.param_displayname,
@@ -150,6 +151,7 @@ namespace Thumper_Custom_Level_Editor
                     ContextMenuStrip = contextMenuFavRemove,
                     Tag = obj.obj_name + ";" + obj.param_path
                 };
+                //check name against the filter if active
                 if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
                     _tree.Nodes[0].Nodes.Add(_param);
             }
@@ -157,10 +159,14 @@ namespace Thumper_Custom_Level_Editor
 
         public static void FilterTree(TreeView _tree, string txtSearch)
         {
-            List<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToList();
+            bool filtersearch = !string.IsNullOrWhiteSpace(txtSearch) && txtSearch != "Search Objects (Ctrl+;)";
+            //store which node names were expanded before we clear the list
+            HashSet<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToHashSet();
+            _tree.BeginUpdate();
             _tree.Nodes.Clear();
+            //clone the existing tree, then filter out nodes that dont match the search string
             List<TreeNode> filternodes = GlobalObjectTree.Nodes.Cast<TreeNode>().Select(x => (TreeNode)x.Clone()).ToList();
-            if (txtSearch is not "" and not "Search Objects (Ctrl+;)") {
+            if (filtersearch) {
                 for (int x = 0; x < filternodes.Count; x++) {
                     if (!FilterNode(filternodes[x], txtSearch)) {
                         filternodes.RemoveAt(x);
@@ -168,9 +174,11 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
             }
+            //add the remaining nodes back to the tree
             _tree.Nodes.AddRange(filternodes.ToArray());
             _tree.Refresh();
-            if (txtSearch is not "" and not "Search Objects (Ctrl+;)")
+            //re-expand the nodes
+            if (filtersearch)
                 _tree.ExpandAll();
             else {
                 foreach (TreeNode tn in _tree.Nodes) {
@@ -179,6 +187,7 @@ namespace Thumper_Custom_Level_Editor
                 }
                 _tree.Nodes[0].Expand();
             }
+            _tree.EndUpdate();
         }
 
         public static void UpdateFavorites(TreeView _tree)
@@ -192,23 +201,18 @@ namespace Thumper_Custom_Level_Editor
         public static bool FilterNode(TreeNode _node, string txtSearch)
         {
             if (_node.Nodes.Count == 0) {
-                if (_node.Text.Contains(txtSearch))
-                    return true;
-                return false;
+                return _node.Text.Contains(txtSearch, StringComparison.OrdinalIgnoreCase);
             }
+
             bool keepthisnode = false;
-            for (int x = 0; x < _node.Nodes.Count; x++) {
-                bool found = FilterNode(_node.Nodes[x], txtSearch);
-                if (found)
+            for (int i = _node.Nodes.Count - 1; i >= 0; i--) {
+                if (!FilterNode(_node.Nodes[i], txtSearch))
+                    _node.Nodes[i].Remove();
+                else
                     keepthisnode = true;
-                else {
-                    _node.Nodes[x].Remove();
-                    x--;
-                }
             }
-            if (keepthisnode) 
-                return true;
-            return false;            
+
+            return keepthisnode;
         }
 
         public static TreeNode FindNode(string search, TreeNodeCollection nodes)
