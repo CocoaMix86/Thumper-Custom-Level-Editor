@@ -52,6 +52,9 @@
             this.trackBar3 = new TrackBar();
             this.label1 = new Label();
             this.panel3 = new Panel();
+            this.button20 = new Button();
+            this.label27 = new Label();
+            this.trackBar21 = new TrackBar();
             this.button8 = new Button();
             this.button9 = new Button();
             this.button6 = new Button();
@@ -111,9 +114,6 @@
             this.panel8 = new Panel();
             this.label28 = new Label();
             this.label29 = new Label();
-            this.button20 = new Button();
-            this.label27 = new Label();
-            this.trackBar21 = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)this.trackMix1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar1).BeginInit();
             this.panel1.SuspendLayout();
@@ -123,6 +123,7 @@
             ((System.ComponentModel.ISupportInitialize)this.trackBar2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar3).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)this.trackBar21).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar8).BeginInit();
@@ -144,7 +145,6 @@
             ((System.ComponentModel.ISupportInitialize)this.trackMasterVolume).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar17).BeginInit();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.trackBar21).BeginInit();
             this.SuspendLayout();
             // 
             // trackMix1
@@ -550,6 +550,57 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new Size(177, 210);
             this.panel3.TabIndex = 101;
+            // 
+            // button20
+            // 
+            this.button20.BackColor = Color.Black;
+            this.button20.Cursor = Cursors.Hand;
+            this.button20.FlatStyle = FlatStyle.Flat;
+            this.button20.Image = Properties.Resources.icon_reset_8;
+            this.button20.Location = new Point(131, 167);
+            this.button20.Margin = new Padding(0);
+            this.button20.Name = "button20";
+            this.button20.Size = new Size(12, 12);
+            this.button20.TabIndex = 110;
+            this.button20.Tag = "21";
+            this.toolTip1.SetToolTip(this.button20, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
+            this.button20.UseVisualStyleBackColor = false;
+            this.button20.Click += this.btnMixerReset_Click;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = Color.FromArgb(10, 10, 10);
+            this.label27.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.label27.ForeColor = Color.White;
+            this.label27.Location = new Point(139, 167);
+            this.label27.Margin = new Padding(4, 0, 4, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new Size(25, 13);
+            this.label27.TabIndex = 109;
+            this.label27.Tag = "21";
+            this.label27.Text = "100";
+            this.label27.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // trackBar21
+            // 
+            this.trackBar21.AutoSize = false;
+            this.trackBar21.Cursor = Cursors.Hand;
+            this.trackBar21.Location = new Point(139, -2);
+            this.trackBar21.Margin = new Padding(5);
+            this.trackBar21.Maximum = 120;
+            this.trackBar21.Name = "trackBar21";
+            this.trackBar21.Orientation = Orientation.Vertical;
+            this.trackBar21.Size = new Size(22, 176);
+            this.trackBar21.TabIndex = 108;
+            this.trackBar21.Tag = "21";
+            this.trackBar21.TickFrequency = 10;
+            this.trackBar21.TickStyle = TickStyle.TopLeft;
+            this.toolTip1.SetToolTip(this.trackBar21, "Lane End Turn Call");
+            this.trackBar21.Value = 100;
+            this.trackBar21.ValueChanged += this.VolumeChanged;
+            this.trackBar21.MouseDown += this.MouseDownJumpToValue;
+            this.trackBar21.MouseUp += this.PlayKeyAtVolume;
             // 
             // button8
             // 
@@ -1363,6 +1414,7 @@
             this.button19.Tag = "100";
             this.toolTip1.SetToolTip(this.button19, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
             this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += this.btnMixerReset_Click;
             // 
             // label26
             // 
@@ -1523,57 +1575,6 @@
             this.label29.Text = "SAMPLES";
             this.label29.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // button20
-            // 
-            this.button20.BackColor = Color.Black;
-            this.button20.Cursor = Cursors.Hand;
-            this.button20.FlatStyle = FlatStyle.Flat;
-            this.button20.Image = Properties.Resources.icon_reset_8;
-            this.button20.Location = new Point(131, 167);
-            this.button20.Margin = new Padding(0);
-            this.button20.Name = "button20";
-            this.button20.Size = new Size(12, 12);
-            this.button20.TabIndex = 110;
-            this.button20.Tag = "21";
-            this.toolTip1.SetToolTip(this.button20, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
-            this.button20.UseVisualStyleBackColor = false;
-            this.button20.Click += this.btnMixerReset_Click;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.BackColor = Color.FromArgb(10, 10, 10);
-            this.label27.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.label27.ForeColor = Color.White;
-            this.label27.Location = new Point(139, 167);
-            this.label27.Margin = new Padding(4, 0, 4, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new Size(25, 13);
-            this.label27.TabIndex = 109;
-            this.label27.Tag = "21";
-            this.label27.Text = "100";
-            this.label27.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // trackBar21
-            // 
-            this.trackBar21.AutoSize = false;
-            this.trackBar21.Cursor = Cursors.Hand;
-            this.trackBar21.Location = new Point(139, -2);
-            this.trackBar21.Margin = new Padding(5);
-            this.trackBar21.Maximum = 120;
-            this.trackBar21.Name = "trackBar21";
-            this.trackBar21.Orientation = Orientation.Vertical;
-            this.trackBar21.Size = new Size(22, 176);
-            this.trackBar21.TabIndex = 108;
-            this.trackBar21.Tag = "21";
-            this.trackBar21.TickFrequency = 10;
-            this.trackBar21.TickStyle = TickStyle.TopLeft;
-            this.toolTip1.SetToolTip(this.trackBar21, "Lane End Turn Call");
-            this.trackBar21.Value = 100;
-            this.trackBar21.ValueChanged += this.VolumeChanged;
-            this.trackBar21.MouseDown += this.MouseDownJumpToValue;
-            this.trackBar21.MouseUp += this.PlayKeyAtVolume;
-            // 
             // VolumeMaster
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1606,6 +1607,7 @@
             ((System.ComponentModel.ISupportInitialize)this.trackBar3).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)this.trackBar21).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar6).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar7).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackBar8).EndInit();
@@ -1632,7 +1634,6 @@
             ((System.ComponentModel.ISupportInitialize)this.trackBar17).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.trackBar21).EndInit();
             this.ResumeLayout(false);
         }
 
