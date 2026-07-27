@@ -157,8 +157,8 @@ namespace Thumper_Custom_Level_Editor
             }
 
             LeafLastBeat = Leaf.Beats;
-            if (BeatStop > 0) {
-                BeatStop += 1;
+            if (BeatStop >= 0) {
+                //BeatStop += 1;
                 LeafLastBeat = Math.Min(Leaf.Beats, BeatStop);
             }
             if (Leaf.ParentEditor.WorkingFile != null)
@@ -256,8 +256,8 @@ namespace Thumper_Custom_Level_Editor
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
                     if (Seq.TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action && Seq.DefaultValue is 1) {
-                        for (int beat = EditorLeaf.FrozenColumnOffset; beat < LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
-                            if (Seq[beat].Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
+                        for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
+                            if (Seq[beat]?.Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
                                 if (Seq.ObjName == "grindable_multi.spn") {
                                     if (Seq.FriendlyParam == "bar[double]") {
@@ -280,8 +280,8 @@ namespace Thumper_Custom_Level_Editor
                         }
                     }
                     else {
-                        for (int beat = EditorLeaf.FrozenColumnOffset; beat < LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
-                            if (Seq[beat].Value != null && (decimal?)Seq[beat].Value != 0) {
+                        for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
+                            if (Seq[beat]?.Value != null && (decimal?)Seq[beat].Value != 0) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
                                 if (Seq.ObjName == "grindable_multi.spn") {
                                     if (Seq.FriendlyParam == "bar[double]") {
@@ -926,7 +926,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.Instance.panelLoadingMessage.Refresh();
             Application.DoEvents();
             //
-            EndBeat += 8; //+ call offset
+            EndBeat += 7; //+ call offset
             PitchShiftingBarsRings();
             RemoveNegativeTickEvents();
             ChannelEnd(EndBeat);

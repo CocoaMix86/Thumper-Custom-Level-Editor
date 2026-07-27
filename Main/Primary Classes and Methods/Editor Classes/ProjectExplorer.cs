@@ -100,7 +100,7 @@ namespace Thumper_Custom_Level_Editor
                 RecurseNodesFindExpanded(ProjectTree);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (EditorBase dock in TCLE.Instance.dockMain.Documents) {
+            foreach (EditorBase dock in TCLE.Documents.Values) {
                 if (dock is EditorLvl lvl) lvl.RecalculateRuntime();
                 else if (dock is EditorGate gate) gate.RecalculateRuntime();
                 else if (dock is EditorMaster master) master.RecalculateRuntime();
