@@ -142,7 +142,7 @@ namespace Thumper_Custom_Level_Editor
             bool filtersearch = txtSearch is not "" and not "Search Objects (Ctrl+;)";
 
             _tree.Nodes[0].Nodes.Clear();
-            foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).Order()) {
+            foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).OrderBy(x => x.param_displayname)) {
                 TreeNode _param = new() {
                     Text = obj.param_displayname,
                     ImageKey = "fav",

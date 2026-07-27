@@ -1298,7 +1298,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void treeObjects_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
+            if (e.Node.Text == "*FAVORITES*" || e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
 
             Object_Params objmatch = TCLE.LeafObjects[(string)e.Node.Tag];
