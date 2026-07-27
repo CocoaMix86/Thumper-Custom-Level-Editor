@@ -156,8 +156,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
-            LvlProperties.sublevel = LvlLeafs[e.RowIndex];
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlProperties.SelectedLeaf = LvlLeafs[e.RowIndex];
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
         }
 
         bool MouseDown;
@@ -176,8 +176,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (lvlLeafList.RowCount < 1 || lvlLeafList.SelectedRows.Count == 0)
                 return;
-            LvlProperties.sublevel = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlProperties.SelectedLeaf = LvlLeafs[lvlLeafList.SelectedRows[^1].Index];
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
         }
 
         private void lvlLeafList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -207,7 +207,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].leafname));
+            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].LeafName));
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -407,12 +407,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 if (RowsToMove != null && targetRow != -1 && targetRow != previousDragOver) {
                     foreach (string path in RowsToMove) {
-                        LvlProperties.sublevel.paths.Remove(path);
-                        LvlProperties.sublevel.paths.Insert(targetRow, path);
+                        LvlProperties.SelectedLeaf.Paths.Remove(path);
+                        LvlProperties.SelectedLeaf.Paths.Insert(targetRow, path);
                         previousDragOver = targetRow;
                         lvlLeafPaths.Rows[targetRow].Selected = true;
                     }
-                    LvlUpdatePaths(LvlProperties.sublevel);
+                    LvlUpdatePaths(LvlProperties.SelectedLeaf);
                 }
             }
         }
@@ -445,14 +445,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 if (e.Data.GetData(typeof(List<string>)) is List<string>) {
                     foreach (string path in e.Data.GetData(typeof(List<string>)) as List<string>) {
-                        LvlProperties.sublevel.paths.Remove(path);
-                        if (TargetRowToPaint >= LvlProperties.sublevel.paths.Count)
-                            LvlProperties.sublevel.paths.Add(path);
+                        LvlProperties.SelectedLeaf.Paths.Remove(path);
+                        if (TargetRowToPaint >= LvlProperties.SelectedLeaf.Paths.Count)
+                            LvlProperties.SelectedLeaf.Paths.Add(path);
                         else
-                            LvlProperties.sublevel.paths.Insert(TargetRowToPaint, path);
+                            LvlProperties.SelectedLeaf.Paths.Insert(TargetRowToPaint, path);
                     }
 
-                    LvlUpdatePaths(LvlProperties.sublevel);
+                    LvlUpdatePaths(LvlProperties.SelectedLeaf);
                     SaveCheckAndWrite(false, "Reorder Paths on Leaf");
                 }
             }
@@ -492,11 +492,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
             }
 
-            if (Playback.IsPlaying) {
+            if (Playback.IsPlaying && this.WorkingFile.Name == Playback.GlobalCurrentLvl) {
                 //if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0) && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0)) < LvlLeafs[e.RowIndex].beats)
-                if (LvlLeafs[e.RowIndex].leafname == Playback.GlobalCurrentLeaf) {
-                    double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].beats;
-                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl - LvlLeafs[e.RowIndex].beatstart + (Playback.Type != "lvl" ? LvlProperties.approachbeats : 0) + Playback.PlaybackSubBeat;
+                if (LvlLeafs[e.RowIndex].LeafName == Playback.GlobalCurrentLeaf) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].Beats;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl - LvlLeafs[e.RowIndex].BeatStart + (Playback.Type != "lvl" ? LvlProperties.approachbeats : 0) + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
             }
@@ -549,8 +549,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///_LVLLEAF - Triggers when the collection changes
         public void lvlleaf_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (LvlProperties.LeafReload)
-                return;
             /*
             lvlLeafList.Rows.Clear();
             foreach (LvlLeafData leaf in LvlLeafs) {
@@ -559,22 +557,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     leaf.leafname,
                     0 });
             }*/
-            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset) {
                 lvlLeafList.RowCount = 0;
             }
             //if action ADD, add new row to the lvl DGV
             //NewStartingIndex and OldStartingIndex track where the changes were made
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add) {
                 int _in = e.NewStartingIndex;
-                lvlLeafList.Rows.Insert(e.NewStartingIndex, new object[] {
-                    Properties.Resources.editor_leaf,
-                    LvlLeafs[_in].leafname,
-                    0 });
-                RecalculateRuntimeSublevel(LvlLeafs[_in]);
+                lvlLeafList.Rows.Insert(e.NewStartingIndex, LvlLeafs[_in]);
+                UpdateBeatPosition();
             }
             //if action REMOVE, remove row from the lvl DGV
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove) {
                 lvlLeafList.Rows.RemoveAt(e.OldStartingIndex);
+                RecalculateRuntime();
             }
 
             //enable certain buttons if there are enough items for them
@@ -750,9 +746,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlPathDelete_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow dgvr in lvlLeafPaths.SelectedRows) {
-                LvlProperties.sublevel.paths.Remove(dgvr.Cells[0].Value.ToString());
+                LvlProperties.SelectedLeaf.Paths.Remove(dgvr.Cells[0].Value.ToString());
             }
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
             UtilAudio.PlaySound("UItunnelremove");
             SaveCheckAndWrite(false, "Remove Tunnel");
         }
@@ -778,10 +774,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                LvlProperties.sublevel.paths.Insert(dgvr - 1, LvlProperties.sublevel.paths[dgvr]);
-                LvlProperties.sublevel.paths.RemoveAt(dgvr + 1);
+                LvlProperties.SelectedLeaf.Paths.Insert(dgvr - 1, LvlProperties.SelectedLeaf.Paths[dgvr]);
+                LvlProperties.SelectedLeaf.Paths.RemoveAt(dgvr + 1);
             }
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] - 1];
             lvlLeafPaths.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -797,10 +793,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<int> selectedrows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => x.Index).ToList();
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                LvlProperties.sublevel.paths.Insert(dgvr + 2, LvlProperties.sublevel.paths[dgvr]);
-                LvlProperties.sublevel.paths.RemoveAt(dgvr);
+                LvlProperties.SelectedLeaf.Paths.Insert(dgvr + 2, LvlProperties.SelectedLeaf.Paths[dgvr]);
+                LvlProperties.SelectedLeaf.Paths.RemoveAt(dgvr);
             }
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
             lvlLeafPaths.CurrentCell = lvlLeafPaths[0, selectedrows[0] + 1];
             lvlLeafPaths.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -811,12 +807,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathClear_Click(object sender, EventArgs e)
         {
-            if (LvlProperties.sublevel.paths.Count > 0) {
+            if (LvlProperties.SelectedLeaf.Paths.Count > 0) {
                 if (MessageBox.Show("Are you sure you want to clear all?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
-            LvlProperties.sublevel.paths.Clear();
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlProperties.SelectedLeaf.Paths.Clear();
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
             UtilAudio.PlaySound("UIdataerase");
             SaveCheckAndWrite(false, "Clear Tunnels on Leaf");
         }
@@ -848,8 +844,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPasteTunnel_Click(object sender, EventArgs e)
         {
-            LvlLeafs[lvlLeafList.CurrentRow.Index].paths.AddRange(TCLE.ClipboardPaths);
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlLeafs[lvlLeafList.CurrentRow.Index].Paths.AddRange(TCLE.ClipboardPaths);
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
             UtilAudio.PlaySound("UIkpaste");
             SaveCheckAndWrite(false, "Paste Tunnels");
         }
@@ -982,10 +978,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load leafs associated with this lvl
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
-                    leafname = (string)leaf["leaf_name"],
-                    beats = (int)leaf["beat_cnt"],
-                    paths = leaf["sub_paths"].ToObject<List<string>>(),
-                    id = TCLE.rng.Next(0, 1000000)
+                    LeafName = (string)leaf["leaf_name"],
+                    Beats = (int)leaf["beat_cnt"],
+                    Paths = leaf["sub_paths"].ToObject<List<string>>(),
+                    id = TCLE.rng.Next()
                 });
             }
 
@@ -1021,10 +1017,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
-                    leafname = (string)leaf["leaf_name"],
-                    beats = (int)leaf["beat_cnt"],
-                    paths = leaf["sub_paths"].ToObject<List<string>>(),
-                    id = TCLE.rng.Next(0, 1000000)
+                    LeafName = (string)leaf["leaf_name"],
+                    Beats = (int)leaf["beat_cnt"],
+                    Paths = leaf["sub_paths"].ToObject<List<string>>(),
+                    id = TCLE.rng.Next()
                 });
             }
 
@@ -1048,12 +1044,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Setup list of tunnels if copy check is enabled
             List<string> copytunnels = new();
             if (chkTunnelCopy.Checked) 
-                copytunnels = new List<string>(LvlLeafs.Last().paths);            
+                copytunnels = new List<string>(LvlLeafs.Last().Paths);            
             //add leaf data to the list
             LvlLeafData _toadd = new LvlLeafData() {
-                leafname = (string)_load["obj_name"],
-                beats = (int)_load["beat_cnt"],
-                paths = new List<string>(copytunnels),
+                LeafName = (string)_load["obj_name"],
+                Beats = (int)_load["beat_cnt"],
+                Paths = new List<string>(copytunnels),
                 id = TCLE.rng.Next()
             };
             if (index is -1)
@@ -1068,9 +1064,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LvlUpdatePaths(LvlLeafData leaf)
         {
             lvlLeafPaths.Rows.Clear();
-            contentTunnel.TabText = $"Paths/Tunnels - {leaf.leafname}";
+            contentTunnel.TabText = $"Paths/Tunnels - {leaf.LeafName}";
             //for each path in the selected leaf, populate the paths DGV
-            foreach (string path in leaf.paths) {
+            foreach (string path in leaf.Paths) {
                 //path may have been manually added and could not exist
                 if (TCLE.LvlPaths.Contains(path))
                     lvlLeafPaths.Rows.Add(path);
@@ -1090,9 +1086,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LvlBuildPathList()
         {
-            LvlProperties.sublevel.paths.Clear();
-            LvlProperties.sublevel.paths = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
-            LvlUpdatePaths(LvlProperties.sublevel);
+            LvlProperties.SelectedLeaf.Paths.Clear();
+            LvlProperties.SelectedLeaf.Paths = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
+            LvlUpdatePaths(LvlProperties.SelectedLeaf);
         }
 
         public void PerformUndo(int undolistindex)
@@ -1187,54 +1183,34 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return 0;
             int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                beattotal += RecalculateRuntimeSublevel(_leaf);
+                beattotal += RecalculateRuntimeLeaf(_leaf);
             }
             if (!Playback.Generating)
                 lvlLeafList.Refresh();
+            UpdateBeatPosition();
             return beattotal;
         }
 
-        public int RecalculateRuntimeSublevel(LvlLeafData _leaf)
+        public int RecalculateRuntimeLeaf(LvlLeafData _leaf)
         {
             if (EditorIsLoading || SimpleLoad)
                 return 0;
 
-            if (!ProjectExplorer.TryGetFile(_leaf.leafname, out FileInfo leaffile) || !leaffile.Exists)
-                _leaf.beats = -1;
+            if (!ProjectExplorer.TryGetFile(_leaf.LeafName, out FileInfo leaffile) || !leaffile.Exists)
+                _leaf.Beats = -1;
             else
-                _leaf.beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
-            leaffile?.Refresh();
-            //if playback generating, this was reached during generation, and the form won't exist
-            //ColorRow calls form objects which won't be initialized yet.
-            if (!Playback.Generating)
-                ColorRow(_leaf, LvlLeafs.IndexOf(_leaf));
-            UpdateBeatPosition();
+                _leaf.Beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
 
-            return _leaf.beats;
+            return _leaf.Beats;
         }
 
         public void UpdateBeatPosition()
         {
             int beatpos = LvlProperties.approachbeats;
             foreach (LvlLeafData _leaf in LvlLeafs) {
-                _leaf.beatstart = beatpos;
-                beatpos += _leaf.beats;
+                _leaf.BeatStart = beatpos;
+                beatpos += _leaf.Beats;
             }
-        }
-
-        public void ColorRow(LvlLeafData _leaf, int index)
-        {
-            if (lvlLeafList.RowCount == 0)
-                return;
-            if (_leaf.beats is -1) {
-                lvlLeafList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
-                lvlLeafList.Rows[index].Cells[2].Value = $"file not found";
-            }
-            else {
-                lvlLeafList.Rows[index].DefaultCellStyle = null;
-                lvlLeafList.Rows[index].Cells[2].Value = $"{_leaf.beats} beats -- {_leaf.runtime}";
-            }
-            lvlLeafList.InvalidateRow(LvlLeafs.IndexOf(_leaf));
         }
 
         public static JObject BuildSave(LvlProperties _properties)
@@ -1300,10 +1276,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray leaf_seq = new();
             foreach (LvlLeafData _leaf in _properties.lvlleafs) {
                 JObject s = new() {
-                    { "beat_cnt", _leaf.beats },
-                    { "leaf_name", _leaf.leafname },
+                    { "beat_cnt", _leaf.Beats },
+                    { "leaf_name", _leaf.LeafName },
                     { "main_path", "default.path" },
-                    { "sub_paths", JArray.FromObject(_leaf.paths) },
+                    { "sub_paths", JArray.FromObject(_leaf.Paths) },
                     { "pos", new JArray() { 0, 0, 0 } },
                     { "rot_x", new JArray() { 1, 0, 0 } },
                     { "rot_y", new JArray() { 0, 1, 0 } },
@@ -1440,7 +1416,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnLvlPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("lvl");
                 Playback.CreatePlaybackFromLvl(LvlProperties);
-                Playback.Play(lvlLeafList.SelectedRows.Count > 0 ? LvlLeafs[lvlLeafList.SelectedRows[^1].Index].beatstart : -1, LvlProperties.beats + LvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
+                Playback.Play(lvlLeafList.SelectedRows.Count > 0 ? LvlLeafs[lvlLeafList.SelectedRows[^1].Index].BeatStart : -1, LvlProperties.beats + LvlProperties.approachbeats, PlaybackLoop, LvlProperties.approachbeats);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }

@@ -68,8 +68,8 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             string cellval = dgvPathsList[e.ColumnIndex, e.RowIndex].Value.ToString();
             if (Items == "path") {
                 if (TCLE.GlobalLastLvl != null) {
-                    TCLE.GlobalLastLvl.LvlProperties.sublevel.paths.Add(cellval);
-                    TCLE.GlobalLastLvl.LvlUpdatePaths(TCLE.GlobalLastLvl.LvlProperties.sublevel);
+                    TCLE.GlobalLastLvl.LvlProperties.SelectedLeaf.Paths.Add(cellval);
+                    TCLE.GlobalLastLvl.LvlUpdatePaths(TCLE.GlobalLastLvl.LvlProperties.SelectedLeaf);
                     TCLE.GlobalLastLvl.SaveCheckAndWrite(false, "Added path/tunnel");
                 }
             }

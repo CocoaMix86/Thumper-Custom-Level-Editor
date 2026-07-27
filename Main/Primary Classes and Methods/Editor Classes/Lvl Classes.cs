@@ -7,30 +7,53 @@ using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public class LvlLeafData
+    public class LvlLeafData : DataGridViewRow
     {
-        public string leafname { get; set; }
-        public int beats { get; set; }
-        public List<string> paths { get; set; }
-        public int id { get; set; }
-        [Browsable(false)]
-        public string runtime
-        {
-            get {
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-            }
-        }
-        public int beatstart;
-
         public LvlLeafData()
         {
-
+            this.Height = 20;
+            this.Cells.Add(new DataGridViewImageCell());
+            this.Cells.Add(new DataGridViewTextBoxCell());
+            this.Cells.Add(new DataGridViewTextBoxCell());
+            Cells[0].Value = Properties.Resources.editor_lvl;
         }
+
+        public string LeafName { 
+            get => _leafname;
+            set {
+                _leafname = value;
+                Cells[1].Value = LeafName;
+            } 
+        }
+        private string _leafname;
+        //
+        public int Beats { 
+            get => _beats;
+            set {
+                _beats = value;
+                if (_beats == -1) {
+                    Runtime = "file not found";
+                    this.DefaultCellStyle.BackColor = Color.Maroon;
+                }
+                else {
+                    Runtime = $"{Beats} beats -- " + TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    this.DefaultCellStyle = null;
+                }
+                Cells[2].Value = Runtime;
+            } 
+        }
+        private int _beats;
+        [Browsable(false)]
+        public string Runtime;
+        //
+        public List<string> Paths { get; set; }
+        public int id { get; set; }
+        public int BeatStart;
 
         public LvlLeafData Clone()
         {
             LvlLeafData leaf = (LvlLeafData)MemberwiseClone();
-            leaf.paths = new List<string>(paths);
+            leaf.Paths = new List<string>(Paths);
             return leaf;
         }
     }
@@ -57,7 +80,7 @@ namespace Thumper_Custom_Level_Editor
         public LvlProperties(EditorLvl Parent)
         {
             ParentEditor = Parent;
-            sublevel = new();
+            SelectedLeaf = new();
             SequencerObjects = new();
             lvlleafs = new();
             lvlleafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
@@ -83,17 +106,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public ObservableCollection<LvlLoop> lvlloops { get; set; }
         [Browsable(false)]
-        public LvlLeafData sublevel { get; set; }
-        [Browsable(false)]
-        public bool LeafReload
-        {
-            get => _leafreload; set {
-                if (value)
-                    lvlleafs.CollectionChanged -= ParentEditor.lvlleaf_CollectionChanged;
-                _leafreload = value;
-            }
-        }
-        private bool _leafreload;
+        public LvlLeafData SelectedLeaf { get; set; }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
@@ -134,7 +147,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => lvlleafs.Sum(x => x.beats);
+        public int beats => lvlleafs.Sum(x => x.Beats);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]

@@ -2387,7 +2387,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
                     TimeSignature = "4/4",
-                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
+                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.Beats == -1) * 2)
                 };
             }
             //check for template or regular file
@@ -2416,7 +2416,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties = new(this) {
                     SequencerType = ".lvl",
                     TimeSignature = "4/4",
-                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.beats == -1) * 2)
+                    _beats = ((LvlProperties)AltSequencer).lvlleafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).approachbeats + (((LvlProperties)AltSequencer).lvlleafs.Count(x => x.Beats == -1) * 2)
                 };
             }
 
@@ -2988,9 +2988,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Columns[index].DefaultCellStyle.BackColor = Color.LightGray;
                 trackEditor.Columns[index].HeaderCell.Style.BackColor = Color.LightGray;
                 trackEditor.Columns[index].HeaderCell.Style.ForeColor = Color.Black;
-                trackEditor.Columns[index].HeaderText = leaf.leafname;
+                trackEditor.Columns[index].HeaderText = leaf.LeafName;
                 //trackEditor.Columns[index].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-                index += leaf.beats != -1 ? leaf.beats : 1;
+                index += leaf.Beats != -1 ? leaf.Beats : 1;
             }
         }
 

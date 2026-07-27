@@ -336,11 +336,11 @@ namespace Thumper_Custom_Level_Editor
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.lvlleafs) {
-                EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.leafname), false, true);
+                EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.LeafName), false, true);
                 if (leaftoplay == null)
                     continue;
                 Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.Beats + EditorLeaf.FrozenColumnOffset, beatoffset);
-                beatoffset += leaf.beats;
+                beatoffset += leaf.Beats;
                 leaftoplay.Dispose();
             }
             //create midi events for the loop tracks
