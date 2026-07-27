@@ -3079,8 +3079,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if copied beat is pasted beyond beatcount, skip it
                 if (pastingcol + (sdp.OriginalColumn - coloffset) >= LeafProperties.Beats + FrozenColumnOffset)
                     continue;
-                SeqDataPoint clone = sdp.Clone();
-                SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)][pastingcol + (sdp.OriginalColumn - coloffset)] = clone;
+                SeqDataPoint target = SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)][pastingcol + (sdp.OriginalColumn - coloffset)];
+                target.Value = sdp.Value;
+                target.Ease = sdp.Ease;
+                target.Interpolation = sdp.Interpolation;
                 if (!pastedrows.Contains(SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)]))
                     pastedrows.Add(SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)]);
             }
