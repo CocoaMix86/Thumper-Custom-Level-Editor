@@ -130,8 +130,15 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public string ObjName { get; set; }
-        public string ParamPath { get; set; }
-        public string ParamPathLane => this.ParamPath == null ? "none" : (this.ParamPath.Contains('.') ? this.ParamPath.Split('.')[1] : "none");
+        public string ParamPath { 
+            get => _parampath;
+            set {
+                _parampath = value;
+                ParamPathLane = this.ParamPath == null ? "none" : (this.ParamPath.Contains('.') ? this.ParamPath.Split('.')[1] : "none");
+            }
+        }
+        private string _parampath;
+        public string ParamPathLane;
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
         //
         public enum Trait { Bool, Action, Int, Color, Float, None }

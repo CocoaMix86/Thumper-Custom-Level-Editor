@@ -448,5 +448,15 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 3), endX, endY);
             }
         }
+
+        public static void DrawLaneDividers(DataGridViewCellPaintingEventArgs e, string lane)
+        {
+            if (lane == "a01") {
+                e.Graphics.DrawLine(PenVioletThick, e.CellBounds.Left - 3, e.CellBounds.Top, e.CellBounds.Right + 3, e.CellBounds.Top);
+            }
+            else if (lane == "z02") {
+                e.Graphics.DrawLine(PenVioletThick, e.CellBounds.Left - 3, e.CellBounds.Bottom - 2, e.CellBounds.Right + 3, e.CellBounds.Bottom - 2);
+            }
+        }
     }
 }

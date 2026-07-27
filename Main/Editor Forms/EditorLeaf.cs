@@ -440,6 +440,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafCellPainting.DrawInterpEase(e, seqref);
             //specifically paint border seperately so it appears above everything and cleans up edges a bit.
             LeafCellPainting.SetCellBorders(e, trackEditor);
+            //
+            LeafCellPainting.DrawLaneDividers(e, seqref.ParamPathLane);
             //Painting playback head and end
             LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, this.WorkingFile.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
@@ -612,7 +614,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trailstop = sdp.beat + LengthOfObject;
             }
         }
-
         private static SolidBrush BrushBG = new SolidBrush(Properties.Settings.Default.ColorTuningBG);
         private static SolidBrush BrushText = new SolidBrush(Properties.Settings.Default.ColorTuningFont);
         private static Pen PenMaxMin = new Pen(Properties.Settings.Default.ColorTuningMaxMin, 1);
