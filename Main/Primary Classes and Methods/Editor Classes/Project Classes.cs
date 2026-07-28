@@ -97,16 +97,16 @@ namespace Thumper_Custom_Level_Editor
                 if (value > 999999.99m)
                     value = 999999.99m;
                 _bpm = value;
-                foreach ((string name, EditorBase tab) in TCLE.Documents) {
-                    if (name.EndsWith(".lvl")) (tab as EditorLvl).RecalculateRuntime();
-                    else if (name.EndsWith(".gate")) (tab as EditorGate).RecalculateRuntime();
-                    else if (name.EndsWith(".master")) (tab as EditorMaster).RecalculateRuntime();
-                    else if (name.EndsWith(".leaf")) {
-                        foreach (Sequencer_Object seq in (tab as EditorLeaf).LeafProperties.SequencerObjects) {
+                foreach (EditorBase _tab in TCLE.Documents.Values) {
+                    if (_tab is EditorLvl lvl) lvl.RecalculateRuntime();
+                    else if (_tab is EditorGate gate) gate.RecalculateRuntime();
+                    else if (_tab is EditorMaster master) master.RecalculateRuntime();
+                    else if (_tab is EditorLeaf leaf) {
+                        foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
                             seq.WaveBitmap = null;
                         }
                         TCLE.alzheimer();
-                        (tab as EditorLeaf).trackEditor.Invalidate();
+                        leaf.trackEditor.Invalidate();
                     }
                 }
                 foreach (var samp in TCLE.ProjectSamples.Where(x => x.Value.Editor != null)) {

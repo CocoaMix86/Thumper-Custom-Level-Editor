@@ -462,7 +462,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///
 
         private static SolidBrush ClearColor = new(Color.Black);
-        private static SolidBrush BrushWhite = new(Color.White);
         private static Pen PenGreen = new(Color.Green, 4);
         private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void lvlLeafList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -477,7 +476,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             DataGridView dgv = sender as DataGridView;
 
             if (dgv.Rows[e.RowIndex].Selected)
-                e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
+                e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
 
             if (sender == lvlLeafPaths)
