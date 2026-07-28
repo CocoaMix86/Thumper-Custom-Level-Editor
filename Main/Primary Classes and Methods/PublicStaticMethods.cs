@@ -269,7 +269,9 @@ namespace Thumper_Custom_Level_Editor
             }
             foreach (EditorLvl lvl in TCLE.Documents.Values.OfType<EditorLvl>()) {
                 //load loop track names and paths to lvlLoopTracks DGV
-                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = ProjectSamples;
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DataSource = new BindingSource(TCLE.ProjectSamples, null);
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).DisplayMember = "Key";
+                ((DataGridViewComboBoxColumn)lvl.lvlLoopTracks.Columns[1]).ValueMember = "Value";
             }
         }
 
