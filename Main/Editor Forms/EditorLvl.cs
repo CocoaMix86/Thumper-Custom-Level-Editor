@@ -1102,7 +1102,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LvlBuildPathList()
         {
-            LvlProperties.SelectedLeaf.Paths.Clear();
             LvlProperties.SelectedLeaf.Paths = lvlLeafPaths.Rows.Cast<DataGridViewRow>().Select(x => x.Cells[0].Value.ToString()).ToList();
             LvlUpdatePaths(LvlProperties.SelectedLeaf);
         }
