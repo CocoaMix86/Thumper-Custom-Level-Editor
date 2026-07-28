@@ -58,21 +58,36 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class LvlLoop
+    public class LvlLoop : DataGridViewRow
     {
-        public string sample { get; set; }
-        public decimal beats
+        public LvlLoop()
         {
-            get => Beats;
+            this.Cells.Add(new DataGridViewTextBoxCell());
+            this.Cells.Add(new DataGridViewTextBoxCell());
+        }
+
+        public string SampleName
+        {
+            get => _samplename;
+            set {
+                _samplename = value;
+                Cells[0].Value = _samplename;
+            }
+        }
+        private string _samplename;
+        public decimal Beats
+        {
+            get => _beats;
             set {
                 if (value < 1)
                     value = 1;
                 if (value > 99999)
                     value = 99999;
-                Beats = value;
+                _beats = value;
+                Cells[1].Value = _beats;
             }
         }
-        private decimal Beats;
+        private decimal _beats;
     }
 
     public class LvlProperties
@@ -82,16 +97,16 @@ namespace Thumper_Custom_Level_Editor
             ParentEditor = Parent;
             SelectedLeaf = new();
             SequencerObjects = new();
-            lvlleafs = new();
-            lvlleafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
-            lvlloops = new();
-            lvlloops.CollectionChanged += ParentEditor.lvlloop_CollectionChanged;
+            Leafs = new();
+            Leafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
+            LvlLoops = new();
+            LvlLoops.CollectionChanged += ParentEditor.lvlloop_CollectionChanged;
         }
 
         [Browsable(false)]
         public EditorLvl ParentEditor;
         [Browsable(false)]
-        public ObservableCollection<LvlLeafData> lvlleafs;
+        public ObservableCollection<LvlLeafData> Leafs;
         [Browsable(false)]
         public dynamic seqJSON;
         [Browsable(false)]
@@ -104,7 +119,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private List<Sequencer_Object> _seqobjs;
         [Browsable(false)]
-        public ObservableCollection<LvlLoop> lvlloops { get; set; }
+        public ObservableCollection<LvlLoop> LvlLoops { get; set; }
         [Browsable(false)]
         public LvlLeafData SelectedLeaf { get; set; }
 
@@ -116,43 +131,43 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Options")]
         [DisplayName("Approach Beats")]
         [Description("How many beats ahead of this lvl starting do the loops start playing.")]
-        public int approachbeats
+        public int ApproachBeats
         {
-            get => ApproachBeats;
+            get => _approachBeats;
             set
             {
                 if (value < 0)
                     value = 0;
-                ApproachBeats = value;
+                _approachBeats = value;
             }
         }
-        private int ApproachBeats;
+        private int _approachBeats;
 
         [CategoryAttribute("Options")]
         [DisplayName("Volume")]
         [Description("1.0 is default. Affects all loops.")]
-        public decimal volume { get; set; }
+        public decimal Volume { get; set; }
 
         [CategoryAttribute("Options")]
         [DisplayName("Allow Input")]
         [Description("Enable/disable player input")]
-        public bool allowinput { get; set; }
+        public bool AllowInput { get; set; }
 
         [CategoryAttribute("Options")]
         [DisplayName("Tutorial Type")]
         [Description("Shows on-screen input hints for different objects as they approach.")]
         [TypeConverter(typeof(LvlTutorialType))]
-        public string tutorialtype { get; set; }
+        public string TutorialType { get; set; }
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => lvlleafs.Sum(x => x.Beats);
+        public int Beats => Leafs.Sum(x => x.Beats);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
 
     }
 

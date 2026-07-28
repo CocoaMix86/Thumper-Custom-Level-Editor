@@ -329,13 +329,13 @@ namespace Thumper_Custom_Level_Editor
             Playback.CallOffset = 0;
             int beatoffset = _BeatOffset;
             if (_BeatOffset == 0)
-                beatoffset = Lvl.approachbeats < 8 ? 8 : Lvl.approachbeats;
+                beatoffset = Lvl.ApproachBeats < 8 ? 8 : Lvl.ApproachBeats;
             //create playback of the lvl sequencer
             EditorLeaf lvlseq = new(Lvl, null, true);
-            Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.Beats + EditorLeaf.FrozenColumnOffset, beatoffset - Lvl.approachbeats);
+            Playback.CreatePlaybackFromLeaf(lvlseq.LeafProperties, lvlseq.LeafProperties.Beats + EditorLeaf.FrozenColumnOffset, beatoffset - Lvl.ApproachBeats);
             lvlseq.Dispose();
             //create playback for each leaf
-            foreach (LvlLeafData leaf in Lvl.lvlleafs) {
+            foreach (LvlLeafData leaf in Lvl.Leafs) {
                 EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.LeafName), false, true);
                 if (leaftoplay == null)
                     continue;
@@ -344,7 +344,7 @@ namespace Thumper_Custom_Level_Editor
                 leaftoplay.Dispose();
             }
             //create midi events for the loop tracks
-            Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.approachbeats), _BeatOffset);
+            Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.ApproachBeats), _BeatOffset);
         }
 
         public static void CreatePlaybackFromGate(GateProperties Gate, int BeatStop = -1, int _BeatOffset = 0)
@@ -363,21 +363,21 @@ namespace Thumper_Custom_Level_Editor
             //create playback of the pre lvl
             EditorLvl lvlpre = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(Gate.prelvl), false, true);
             if (lvlpre != null) {
-                Playback.CreatePlaybackFromLvl(lvlpre.LvlProperties, lvlpre.LvlProperties.beats, beatoffset);
-                beatoffset += lvlpre.LvlProperties.beats;
+                Playback.CreatePlaybackFromLvl(lvlpre.LvlProperties, lvlpre.LvlProperties.Beats, beatoffset);
+                beatoffset += lvlpre.LvlProperties.Beats;
                 lvlpre.Dispose();
             }
             //create playback of the pre lvl
             EditorLvl lvlpost = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(Gate.postlvl), false, true);
             if (lvlpost != null) {
-                Playback.CreatePlaybackFromLvl(lvlpost.LvlProperties, lvlpost.LvlProperties.beats, beatoffset);
-                beatoffset += lvlpost.LvlProperties.beats;
+                Playback.CreatePlaybackFromLvl(lvlpost.LvlProperties, lvlpost.LvlProperties.Beats, beatoffset);
+                beatoffset += lvlpost.LvlProperties.Beats;
                 lvlpost.Dispose();
             }
             //create playback for each lvl phase
             foreach (GateLvlData lvl in Gate.gatelvls) {
                 EditorLvl lvltoplay = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.Lvlname), false, true);
-                Playback.CreatePlaybackFromLvl(lvltoplay.LvlProperties, lvltoplay.LvlProperties.beats, beatoffset);
+                Playback.CreatePlaybackFromLvl(lvltoplay.LvlProperties, lvltoplay.LvlProperties.Beats, beatoffset);
                 beatoffset += lvl.beats;
                 lvltoplay.Dispose();
             }
@@ -401,7 +401,7 @@ namespace Thumper_Custom_Level_Editor
             EditorLvl lvlintro = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(Master.introlvl), false, true);
             if (lvlintro != null) {
                 Playback.CreatePlaybackFromLvl(lvlintro.LvlProperties);
-                beatoffset += lvlintro.LvlProperties.beats + (lvlintro.LvlProperties.approachbeats < 8 ? 8 : lvlintro.LvlProperties.approachbeats);
+                beatoffset += lvlintro.LvlProperties.Beats + (lvlintro.LvlProperties.ApproachBeats < 8 ? 8 : lvlintro.LvlProperties.ApproachBeats);
                 lvlintro.Dispose();
             }
             //create playback for each lvl
@@ -409,9 +409,9 @@ namespace Thumper_Custom_Level_Editor
                 //load rest lvl first
                 EditorLvl lvlrest = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.rest), false, true);
                 if (lvlrest != null) {
-                    Playback.CreatePlaybackFromLvl(lvlrest.LvlProperties, lvlrest.LvlProperties.beats, beatoffset);
+                    Playback.CreatePlaybackFromLvl(lvlrest.LvlProperties, lvlrest.LvlProperties.Beats, beatoffset);
                     if (beatoffset == 0)
-                        beatoffset += (lvlrest.LvlProperties.approachbeats < 8 ? 8 : lvlrest.LvlProperties.approachbeats);
+                        beatoffset += (lvlrest.LvlProperties.ApproachBeats < 8 ? 8 : lvlrest.LvlProperties.ApproachBeats);
                     beatoffset += lvl.restlevelbeats;
                     lvlrest.Dispose();
                 }
@@ -424,16 +424,16 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     EditorLvl lvltoplay = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.name), false, true);
-                    Playback.CreatePlaybackFromLvl(lvltoplay.LvlProperties, lvltoplay.LvlProperties.beats, beatoffset);
+                    Playback.CreatePlaybackFromLvl(lvltoplay.LvlProperties, lvltoplay.LvlProperties.Beats, beatoffset);
                     if (beatoffset == 0)
-                        beatoffset += (lvltoplay.LvlProperties.approachbeats < 8 ? 8 : lvltoplay.LvlProperties.approachbeats);
-                    beatoffset += lvltoplay.LvlProperties.beats;
+                        beatoffset += (lvltoplay.LvlProperties.ApproachBeats < 8 ? 8 : lvltoplay.LvlProperties.ApproachBeats);
+                    beatoffset += lvltoplay.LvlProperties.Beats;
                     lvltoplay.Dispose();
                 }
                 //load checkpoint
                 if (lvl.checkpoint && lvlcheckpoint != null) {
-                    Playback.CreatePlaybackFromLvl(lvlcheckpoint.LvlProperties, lvlcheckpoint.LvlProperties.beats, beatoffset);
-                    beatoffset += lvlcheckpoint.LvlProperties.beats;
+                    Playback.CreatePlaybackFromLvl(lvlcheckpoint.LvlProperties, lvlcheckpoint.LvlProperties.Beats, beatoffset);
+                    beatoffset += lvlcheckpoint.LvlProperties.Beats;
                 }
             }
         }
@@ -768,21 +768,21 @@ namespace Thumper_Custom_Level_Editor
 
         public static void MidiEventLoopTracks(LvlProperties Lvl, int offset = 0, int lvloffset = 0)
         {
-            foreach (LvlLoop loop in Lvl.lvlloops) {
+            foreach (LvlLoop loop in Lvl.LvlLoops) {
                 //skip loops with no lnegth, or less than 0.
-                if (loop.beats <= 0)
+                if (loop.Beats <= 0)
                     continue;
                 //add new entry to the loops
-                GlobalLoopTracks.Add(new(Lvl.ParentEditor.WorkingFile.Name, loop.sample, loop.beats));
+                GlobalLoopTracks.Add(new(Lvl.ParentEditor.WorkingFile.Name, loop.SampleName, loop.Beats));
                 GlobalLoopEvents.Add(new());
                 //get sample data and its volume
-                SampleData SampToPlay = TCLE.ProjectSamples[loop.sample];
+                SampleData SampToPlay = TCLE.ProjectSamples[loop.SampleName];
                 int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
                 velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
                 //clamp
                 velocity = Math.Clamp(velocity, 0, 127);
                 //
-                for (decimal x = 0; x < Lvl.beats + Lvl.approachbeats; x += loop.beats) {
+                for (decimal x = 0; x < Lvl.Beats + Lvl.ApproachBeats; x += loop.Beats) {
                     GlobalLoopEvents[^1].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)GlobalLoopTracks.Count, (byte)velocity), 50 + GlobalLoopEvents.Count - 1, (int)((x + CallOffset - offset + lvloffset) * 100), 0));
                 }
             }
