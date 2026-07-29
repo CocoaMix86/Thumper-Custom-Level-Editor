@@ -32,8 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
@@ -42,12 +40,11 @@
             DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorLvl));
             this.toolTip1 = new ToolTip(this.components);
             this.lvlLeafList = new DataGridView();
-            this.lvlLeafIcon = new DataGridViewImageColumn();
-            this.Leaf = new DataGridViewTextBoxColumn();
-            this.Beats = new DataGridViewTextBoxColumn();
             this.btnLvlSequencer = new Button();
             this.lvlToolStrip = new ToolStrip();
             this.btnLvlLeafAdd = new ToolStripButton();
@@ -83,6 +80,9 @@
             this.panelLoop = new Panel();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lvlLeafIcon = new DataGridViewImageColumn();
+            this.LeafName = new DataGridViewTextBoxColumn();
+            this.Runtime = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafList).BeginInit();
             this.lvlToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.lvlLeafPaths).BeginInit();
@@ -114,7 +114,7 @@
             this.lvlLeafList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.lvlLeafList.ColumnHeadersHeight = 20;
             this.lvlLeafList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.lvlLeafList.Columns.AddRange(new DataGridViewColumn[] { this.lvlLeafIcon, this.Leaf, this.Beats });
+            this.lvlLeafList.Columns.AddRange(new DataGridViewColumn[] { this.lvlLeafIcon, this.LeafName, this.Runtime });
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle4.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -167,40 +167,6 @@
             this.lvlLeafList.KeyDown += this.lvlLeafList_KeyDown;
             this.lvlLeafList.MouseDown += this.lvlLeafList_MouseDown;
             this.lvlLeafList.MouseMove += this.lvlLeafList_MouseMove;
-            // 
-            // lvlLeafIcon
-            // 
-            this.lvlLeafIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            this.lvlLeafIcon.HeaderText = "";
-            this.lvlLeafIcon.Image = Properties.Resources.editor_leaf;
-            this.lvlLeafIcon.MinimumWidth = 16;
-            this.lvlLeafIcon.Name = "lvlLeafIcon";
-            this.lvlLeafIcon.ReadOnly = true;
-            this.lvlLeafIcon.Width = 16;
-            // 
-            // Leaf
-            // 
-            this.Leaf.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.ForeColor = Color.Black;
-            this.Leaf.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Leaf.FillWeight = 50F;
-            this.Leaf.HeaderText = "Leaf";
-            this.Leaf.Name = "Leaf";
-            this.Leaf.ReadOnly = true;
-            this.Leaf.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Beats
-            // 
-            this.Beats.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            this.Beats.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Beats.FillWeight = 50F;
-            this.Beats.HeaderText = "Runtime";
-            this.Beats.Name = "Beats";
-            this.Beats.ReadOnly = true;
-            this.Beats.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // btnLvlSequencer
             // 
@@ -735,6 +701,40 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += this.timer1_Tick;
             // 
+            // lvlLeafIcon
+            // 
+            this.lvlLeafIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.lvlLeafIcon.HeaderText = "";
+            this.lvlLeafIcon.Image = Properties.Resources.editor_leaf;
+            this.lvlLeafIcon.MinimumWidth = 16;
+            this.lvlLeafIcon.Name = "lvlLeafIcon";
+            this.lvlLeafIcon.ReadOnly = true;
+            this.lvlLeafIcon.Width = 16;
+            // 
+            // LeafName
+            // 
+            this.LeafName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.ForeColor = Color.Black;
+            this.LeafName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.LeafName.FillWeight = 50F;
+            this.LeafName.HeaderText = "Leaf";
+            this.LeafName.Name = "LeafName";
+            this.LeafName.ReadOnly = true;
+            this.LeafName.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Runtime
+            // 
+            this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            this.Runtime.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Runtime.FillWeight = 50F;
+            this.Runtime.HeaderText = "Runtime";
+            this.Runtime.Name = "Runtime";
+            this.Runtime.ReadOnly = true;
+            this.Runtime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
             // EditorLvl
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
@@ -799,9 +799,6 @@
         private ToolStripButton btnLvlLeafCopy;
         private ToolStripButton btnLvlLeafPaste;
         private ToolStripButton btnLvlLeafRandom;
-        private DataGridViewImageColumn lvlLeafIcon;
-        private DataGridViewTextBoxColumn Leaf;
-        private DataGridViewTextBoxColumn Beats;
         public DataGridView lvlLeafPaths;
         private Panel panelMain;
         private Panel panelTunnel;
@@ -810,5 +807,8 @@
         private ToolStripButton btnLvlPlayback;
         private System.Windows.Forms.Timer timer1;
         public DataGridView lvlLeafList;
+        private DataGridViewImageColumn lvlLeafIcon;
+        private DataGridViewTextBoxColumn LeafName;
+        private DataGridViewTextBoxColumn Runtime;
     }
 }
