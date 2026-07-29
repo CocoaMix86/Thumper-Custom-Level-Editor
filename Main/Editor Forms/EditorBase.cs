@@ -3,7 +3,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
-    public abstract class EditorBase : DockContent
+    public class EditorBase : DockContent
     {
         public EditorBase() { }
         public EditorBase(FileInfo _filetolock, bool rawtext = false, bool nolock = false)
@@ -47,13 +47,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
         }
 
-        public abstract void ColorFormElements();
-        public abstract void Save(bool playsound);
-        public abstract FileInfo SaveAs(bool FileIsNew, string InitialDir);
-        public abstract void Copy();
-        public abstract void Cut();
-        public abstract void Paste();
-        public abstract object GetProperties();
+        public virtual void ColorFormElements() { }
+        public virtual void Save(bool playsound) { }
+        public virtual FileInfo SaveAs(bool FileIsNew, string InitialDir) { return null; }
+        public virtual void Copy() { }
+        public virtual void Cut() { }
+        public virtual void Paste() { }
+        public virtual object GetProperties() { return null; }
 
         protected override void OnClosing(CancelEventArgs e)
         {

@@ -18,11 +18,11 @@ namespace Thumper_Custom_Level_Editor
             Cells[0].Value = Properties.Resources.editor_lvl;
         }
 
-        public string LeafName { 
+        public string Leaf { 
             get => _leafname;
             set {
                 _leafname = value;
-                Cells[1].Value = LeafName;
+                Cells[1].Value = Leaf;
             } 
         }
         private string _leafname;
@@ -43,7 +43,6 @@ namespace Thumper_Custom_Level_Editor
             } 
         }
         private int _beats;
-        [Browsable(false)]
         public string Runtime;
         //
         public List<string> Paths { get; set; }

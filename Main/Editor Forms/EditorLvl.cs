@@ -35,6 +35,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
 
+            lvlLeafList.AutoGenerateColumns = false;
             lvlLeafList.DataSource = new BindingSource(LvlLeafs, null);
         }
 
@@ -211,7 +212,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].LeafName));
+            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].Leaf));
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -497,7 +498,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (Playback.IsPlaying && this.WorkingFile.Name == Playback.GlobalCurrentLvl) {
                 //if (Playback.PlaybackBeat > LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0) && (Playback.PlaybackBeat - LvlLeafs[e.RowIndex].beatstart + (LvlProperties.approachbeats < 8 ? 8 : 0)) < LvlLeafs[e.RowIndex].beats)
-                if (LvlLeafs[e.RowIndex].LeafName == Playback.GlobalCurrentLeaf) {
+                if (LvlLeafs[e.RowIndex].Leaf == Playback.GlobalCurrentLeaf) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)LvlLeafs[e.RowIndex].Beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl - LvlLeafs[e.RowIndex].BeatStart + (Playback.Type != "lvl" ? LvlProperties.ApproachBeats : 0) + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
@@ -995,7 +996,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load leafs associated with this lvl
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
-                    LeafName = (string)leaf["leaf_name"],
+                    Leaf = (string)leaf["leaf_name"],
                     Beats = (int)leaf["beat_cnt"],
                     Paths = leaf["sub_paths"].ToObject<List<string>>(),
                     id = TCLE.rng.Next()
@@ -1033,7 +1034,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
-                    LeafName = (string)leaf["leaf_name"],
+                    Leaf = (string)leaf["leaf_name"],
                     Beats = (int)leaf["beat_cnt"],
                     Paths = leaf["sub_paths"].ToObject<List<string>>(),
                     id = TCLE.rng.Next()
@@ -1063,7 +1064,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 copytunnels = new List<string>(LvlLeafs.Last().Paths);            
             //add leaf data to the list
             LvlLeafData _toadd = new LvlLeafData() {
-                LeafName = (string)_load["obj_name"],
+                Leaf = (string)_load["obj_name"],
                 Beats = (int)_load["beat_cnt"],
                 Paths = new List<string>(copytunnels),
                 id = TCLE.rng.Next()
@@ -1080,7 +1081,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LvlUpdatePaths(LvlLeafData leaf)
         {
             lvlLeafPaths.Rows.Clear();
-            contentTunnel.TabText = $"Paths/Tunnels - {leaf.LeafName}";
+            contentTunnel.TabText = $"Paths/Tunnels - {leaf.Leaf}";
             //for each path in the selected leaf, populate the paths DGV
             foreach (string path in leaf.Paths) {
                 //path may have been manually added and could not exist
@@ -1132,13 +1133,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool FileIsNew = false, string InitialDir = null)
         {
             using SaveFileDialog sfd = new();
             //filter .txt only
             sfd.Filter = "Thumper Editor Lvl File (*.lvl)|*.lvl";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            sfd.InitialDirectory = InitialDir ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 this.WorkingFile = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
@@ -1214,7 +1215,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorIsLoading || SimpleLoad)
                 return 0;
 
-            if (!ProjectExplorer.TryGetFile(_leaf.LeafName, out FileInfo leaffile) || !leaffile.Exists)
+            if (!ProjectExplorer.TryGetFile(_leaf.Leaf, out FileInfo leaffile) || !leaffile.Exists)
                 _leaf.Beats = -1;
             else
                 _leaf.Beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
@@ -1295,7 +1296,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData _leaf in _properties.Leafs) {
                 JObject s = new() {
                     { "beat_cnt", _leaf.Beats },
-                    { "leaf_name", _leaf.LeafName },
+                    { "leaf_name", _leaf.Leaf },
                     { "main_path", "default.path" },
                     { "sub_paths", JArray.FromObject(_leaf.Paths) },
                     { "pos", new JArray() { 0, 0, 0 } },

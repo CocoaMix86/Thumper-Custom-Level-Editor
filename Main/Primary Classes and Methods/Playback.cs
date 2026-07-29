@@ -336,7 +336,7 @@ namespace Thumper_Custom_Level_Editor
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.Leafs) {
-                EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.LeafName), false, true);
+                EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.Leaf), false, true);
                 if (leaftoplay == null)
                     continue;
                 Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.Beats + EditorLeaf.FrozenColumnOffset, beatoffset);
