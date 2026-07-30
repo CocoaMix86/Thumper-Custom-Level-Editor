@@ -504,7 +504,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
                 SampleList.Add(new SampleData() {
-                    obj_name = ((string)_samp["obj_name"]).Replace(".wav", ".samp"),
+                    obj_name = ((string)_samp["obj_name"]),
                     path = _samp["path"],
                     volume = _samp["volume"],
                     pitch = _samp["pitch"],
@@ -539,7 +539,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
                 SampleList.Add(new SampleData() {
-                    obj_name = ((string)_samp["obj_name"]).Replace(".wav", ".samp"),
+                    obj_name = ((string)_samp["obj_name"]),
                     path = _samp["path"],
                     volume = _samp["volume"],
                     pitch = _samp["pitch"],

@@ -656,6 +656,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///_LVLLEAF - Triggers when the collection changes
         public void LvlLeaf_CollectionChanged(object sender, ListChangedEventArgs e)
         {
+            if (EditorIsLoading)
+                return;
             //enable certain buttons if there are enough items for them
             btnLvlLeafDelete.Enabled = LvlLeafs.Count > 0;
             btnLvlLeafUp.Enabled = LvlLeafs.Count > 1;
@@ -678,22 +680,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void LvlLoop_CollectionChanged(object sender, ListChangedEventArgs e)
         {
-            /*
-            lvlLoopTracks.RowCount = 0;
-            lvlLoopTracks.Rows.AddRange(LvlProperties.LvlLoops.ToArray());
-            foreach (LvlLoop loop in LvlProperties.lvlloops) {
-                lvlLoopTracks.Rows.Add(new object[] {
-                    null,
-                    loop.SampleName,
-                    loop.Beats
-                });
-            }
-            */
+            if (EditorIsLoading)
+                return;
             UpdateLoopHeaders();
         }
 
         public void LvlPaths_ListChanged(object sender, ListChangedEventArgs e)
         {
+            if (EditorIsLoading)
+                return;
             int _paths = LvlProperties.SelectedLeaf.Paths.Count;
             //enable a bunch of buttons based on if paths exist or not
             btnLvlPathAdd.Enabled = true;
@@ -1131,7 +1126,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LvlLeafs.Add(new LvlLeafData(LvlProperties) {
                     Leaf = (string)leaf["leaf_name"],
                     Beats = (int)leaf["beat_cnt"],
-                    ImportPaths = leaf["sub_paths"].ToObject<BindingList<string>>(),
+                    ImportPaths = leaf["sub_paths"].ToObject<List<string>>(),
                     id = TCLE.rng.Next()
                 });
             }
@@ -1139,7 +1134,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             this.Saved = true;
-            RecalculateRuntime();
+            //RecalculateRuntime();
         }
 
         public void AddFiletoLvl(FileInfo FileToAdd, int index = -1)
@@ -1410,7 +1405,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_loop.SampleName == null)
                     continue;
                 JObject s = new() {
-                    { "samp_name", $"{_loop.SampleName.Replace(".wav", ".samp")}"},
+                    { "samp_name", $"{_loop.SampleName}"},
                     { "beats_per_loop", _loop.Beats }
                 };
 

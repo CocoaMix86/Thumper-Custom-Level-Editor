@@ -233,7 +233,7 @@ namespace Thumper_Custom_Level_Editor
                     else
                         continue;
                 }
-                ProjectSamples.Add((string)_samp["obj_name"], new SampleData {
+                ProjectSamples.TryAdd((string)_samp["obj_name"], new SampleData {
                     obj_name = ((string)_samp["obj_name"]),
                     path = _samp["path"],
                     volume = _samp["volume"],
@@ -571,6 +571,14 @@ namespace Thumper_Custom_Level_Editor
 
                 FileInfo newfile = new($@"{file.DirectoryName}\{(sort ? splitextension[0] + "\\" : "")}{splitextension[1]}.{splitextension[0].ToLower()}");
                 File.Move(file.FullName, newfile.FullName);
+                //show the loading message
+                TCLE.Instance.panelLoadingMessage.Visible = true;
+                TCLE.Instance.lblLoadingLeaf.Text = $"Processing: {newfile.Name}";
+                TCLE.Instance.lblLoadingLeaf.Invalidate();
+                TCLE.Instance.lblLoadingLeaf.Update();
+                TCLE.Instance.lblLoadingLeaf.Refresh();
+                Application.DoEvents();
+                //
                 //resave leafs and lvls to properly convert the datapoints
                 JObject _save = null;
                 if (newfile.Extension == ".leaf") {
@@ -601,6 +609,12 @@ namespace Thumper_Custom_Level_Editor
                     UtilFile.WriteFileLock(newfile.FullName, _save);
                 }
             }
+            //
+            TCLE.Instance.lblLoadingLeaf.Text = $"Finalizing";
+            TCLE.Instance.lblLoadingLeaf.Invalidate();
+            TCLE.Instance.lblLoadingLeaf.Update();
+            TCLE.Instance.lblLoadingLeaf.Refresh();
+            Application.DoEvents();
             //build the JSON to write to file
             JObject _saveJSON = BuildSave(Convert);
             //write JSON to file
@@ -609,6 +623,7 @@ namespace Thumper_Custom_Level_Editor
             FileInfo pyramid = LevelDetails.Directory.GetFiles("pyramid_outro.leaf", SearchOption.AllDirectories).FirstOrDefault();
             if (pyramid != null)
                 UtilFile.WriteFileLock(pyramid.FullName, Properties.Resources.leaf_pyramid_outro);
+            TCLE.Instance.panelLoadingMessage.Visible = false;
 
             OpenProject(new FileInfo($@"{LevelDetails.DirectoryName}\{Convert.ProjectName}.TCL"));
         }

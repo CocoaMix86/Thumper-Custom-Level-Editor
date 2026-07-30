@@ -2522,12 +2522,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadDataPoints(ObjectToImport, seq_obj);
                 RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
             }
-
-            //this line exists to force the app to recognize the rows have proper indexes instead of -1
-            string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects;
             dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
+            //this line exists to force the app to recognize the rows have proper indexes instead of -1
+            string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
         }
 
         public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)

@@ -643,7 +643,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             EditorLoading = false;
             this.Saved = true;
-            RecalculateRuntime();
+            //RecalculateRuntime();
         }
 
         public void PerformUndo(int undolistindex)
