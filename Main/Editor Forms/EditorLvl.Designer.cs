@@ -397,12 +397,16 @@
             this.lvlLeafPaths.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.lvlLeafPaths.Size = new Size(305, 194);
             this.lvlLeafPaths.TabIndex = 160;
+            this.lvlLeafPaths.CellClick += this.lvlLeafPaths_CellClick;
+            this.lvlLeafPaths.CellMouseDown += this.lvlLeafPaths_CellMouseDown;
             this.lvlLeafPaths.CellMouseEnter += this.lvlLeafPaths_CellMouseEnter;
             this.lvlLeafPaths.CellMouseLeave += this.lvlLeafPaths_CellMouseLeave;
+            this.lvlLeafPaths.CellMouseUp += this.lvlLeafPaths_CellMouseUp;
             this.lvlLeafPaths.CellPainting += this.lvlLeafList_CellPainting;
             this.lvlLeafPaths.CellValueChanged += this.lvlLeafPaths_CellValueChanged;
             this.lvlLeafPaths.DataError += this.lvlLoopTracks_DataError;
             this.lvlLeafPaths.RowPrePaint += this.lvlLeafList_RowPrePaint;
+            this.lvlLeafPaths.SelectionChanged += this.lvlLeafPaths_SelectionChanged;
             this.lvlLeafPaths.DragDrop += this.lvlLeafPaths_DragDrop;
             this.lvlLeafPaths.DragEnter += this.lvlLeafPaths_DragEnter;
             this.lvlLeafPaths.DragOver += this.lvlLeafPaths_DragOver;
@@ -618,6 +622,7 @@
             this.lvlLoopTracks.CellPainting += this.lvlLoopTracks_CellPainting;
             this.lvlLoopTracks.CellValueChanged += this.lvlLoopTracks_CellValueChanged;
             this.lvlLoopTracks.DataError += this.lvlLoopTracks_DataError;
+            this.lvlLoopTracks.RowPostPaint += this.lvlLoopTracks_RowPostPaint;
             // 
             // LvlLoopPlay
             // 

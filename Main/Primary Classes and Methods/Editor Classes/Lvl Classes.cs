@@ -7,9 +7,12 @@ namespace Thumper_Custom_Level_Editor
 {
     public class LvlLeafData : NotifyBase
     {
-        public LvlLeafData()
+        public LvlLeafData(LvlProperties _parent)
         {
+            Parent = _parent;
+            Paths.ListChanged += Parent.ParentEditor.LvlPaths_ListChanged;
         }
+        LvlProperties Parent;
 
         private string _leafname;
         public string Leaf { 
@@ -36,35 +39,52 @@ namespace Thumper_Custom_Level_Editor
         public string Runtime { get; set; } = "file not found";
         public Color BackColor { get; set; } = Color.Green;
         //
-        public List<string> Paths { get; set; }
+        public List<string> ImportPaths { 
+            set {
+                Paths.ListChanged -= Parent.ParentEditor.LvlPaths_ListChanged;
+                foreach (string path in value) {
+                    Paths.Add(new(path));
+                }
+                Paths.ListChanged += Parent.ParentEditor.LvlPaths_ListChanged;
+            } 
+        }
+        public BindingList<LvlPath> Paths { get; set; } = new();
         public int id { get; set; }
         public int BeatStart;
 
         public LvlLeafData Clone()
         {
             LvlLeafData leaf = (LvlLeafData)MemberwiseClone();
-            leaf.Paths = new List<string>(Paths);
+            leaf.Paths = new BindingList<LvlPath>(Paths);
             return leaf;
         }
     }
 
-    public class LvlLoop : DataGridViewRow
+    public class LvlPath : NotifyBase
+    {
+        public LvlPath(string name) { Name = name; }
+
+        private string _name;
+        public string Name { get => _name; set => SetField(ref _name, value);  }
+    }
+
+    public class LvlLoop : NotifyBase
     {
         public LvlLoop()
         {
-            this.Cells.Add(new DataGridViewTextBoxCell());
-            this.Cells.Add(new DataGridViewTextBoxCell());
         }
 
+        private string _samplename;
         public string SampleName
         {
             get => _samplename;
             set {
+                SetField(ref _samplename, value);
                 _samplename = value;
-                Cells[0].Value = _samplename;
             }
         }
-        private string _samplename;
+        //
+        private decimal _beats;
         public decimal Beats
         {
             get => _beats;
@@ -73,11 +93,9 @@ namespace Thumper_Custom_Level_Editor
                     value = 1;
                 if (value > 99999)
                     value = 99999;
-                _beats = value;
-                Cells[1].Value = _beats;
+                SetField(ref _beats, value);
             }
         }
-        private decimal _beats;
     }
 
     public class LvlProperties
@@ -85,12 +103,12 @@ namespace Thumper_Custom_Level_Editor
         public LvlProperties(EditorLvl Parent)
         {
             ParentEditor = Parent;
-            SelectedLeaf = new();
+            SelectedLeaf = null;
             SequencerObjects = new();
             Leafs = new();
-            //Leafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
+            Leafs.ListChanged += ParentEditor.LvlLeaf_CollectionChanged;
             LvlLoops = new();
-            LvlLoops.CollectionChanged += ParentEditor.lvlloop_CollectionChanged;
+            LvlLoops.ListChanged += ParentEditor.LvlLoop_CollectionChanged;
         }
 
         [Browsable(false)]
@@ -109,7 +127,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private List<Sequencer_Object> _seqobjs;
         [Browsable(false)]
-        public ObservableCollection<LvlLoop> LvlLoops { get; set; }
+        public BindingList<LvlLoop> LvlLoops { get; set; }
         [Browsable(false)]
         public LvlLeafData SelectedLeaf { get; set; }
 

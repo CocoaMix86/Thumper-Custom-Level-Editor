@@ -76,7 +76,7 @@ namespace Thumper_Custom_Level_Editor
         public static List<MasterLvlData> ClipboardMaster = new();
         public static List<LvlLeafData> ClipboardLvl = new();
         public static List<GateLvlData> ClipboardGate = new();
-        public static List<string> ClipboardPaths = new();
+        public static List<LvlPath> ClipboardPaths = new();
         //Beeble things
         public static Beeble MainBeeble = new() { Visible = false };
         public static List<Beeble> ExistingBeebles = new();
