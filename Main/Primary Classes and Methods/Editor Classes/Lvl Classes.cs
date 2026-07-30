@@ -1,49 +1,40 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.WebSockets;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using Un4seen.Bass;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public class LvlLeafData : DataGridViewRow
+    public class LvlLeafData : NotifyBase
     {
         public LvlLeafData()
         {
-            this.Height = 20;
-            this.Cells.Add(new DataGridViewImageCell());
-            this.Cells.Add(new DataGridViewTextBoxCell());
-            this.Cells.Add(new DataGridViewTextBoxCell());
-            Cells[0].Value = Properties.Resources.editor_lvl;
         }
 
+        private string _leafname;
         public string Leaf { 
             get => _leafname;
-            set {
-                _leafname = value;
-                Cells[1].Value = Leaf;
-            } 
+            set => SetField(ref _leafname, value);
         }
-        private string _leafname;
         //
+        private int _beats;
         public int Beats { 
             get => _beats;
             set {
-                _beats = value;
+                SetField(ref _beats, value);
                 if (_beats == -1) {
                     Runtime = "file not found";
-                    this.DefaultCellStyle.BackColor = Color.Maroon;
+                    BackColor = Color.Maroon;
                 }
                 else {
                     Runtime = $"{Beats} beats -- " + TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                    this.DefaultCellStyle = null;
+                    BackColor = Color.Green;
                 }
-                Cells[2].Value = Runtime;
             } 
         }
-        private int _beats;
-        public string Runtime;
+        //
+        public string Runtime { get; set; } = "file not found";
+        public Color BackColor { get; set; } = Color.Green;
         //
         public List<string> Paths { get; set; }
         public int id { get; set; }
@@ -97,7 +88,7 @@ namespace Thumper_Custom_Level_Editor
             SelectedLeaf = new();
             SequencerObjects = new();
             Leafs = new();
-            Leafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
+            //Leafs.CollectionChanged += ParentEditor.lvlleaf_CollectionChanged;
             LvlLoops = new();
             LvlLoops.CollectionChanged += ParentEditor.lvlloop_CollectionChanged;
         }
@@ -105,7 +96,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public EditorLvl ParentEditor;
         [Browsable(false)]
-        public ObservableCollection<LvlLeafData> Leafs;
+        public BindingList<LvlLeafData> Leafs;
         [Browsable(false)]
         public dynamic seqJSON;
         [Browsable(false)]

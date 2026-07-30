@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -34,9 +35,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     savestate = load
                 });
             }
-
-            lvlLeafList.AutoGenerateColumns = false;
-            lvlLeafList.DataSource = new BindingSource(LvlLeafs, null);
         }
 
         public void RenderForm()
@@ -120,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LvlProperties _lvlproperties;
         private List<DataGridViewRow> SelectedRows = new();
-        public ObservableCollection<LvlLeafData> LvlLeafs => LvlProperties.Leafs;
+        public BindingList<LvlLeafData> LvlLeafs => LvlProperties.Leafs;
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
         public EditorBaseSub contentTunnel = new() {
@@ -1007,6 +1005,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsLoading = false;
             this.Saved = true;
             btnLvlSequencer.Enabled = true;
+
+            lvlLeafList.AutoGenerateColumns = false;
+            lvlLeafList.Columns[1].DataPropertyName = "Leaf";
+            lvlLeafList.Columns[2].DataPropertyName = "Runtime";
+            lvlLeafList.DataSource = new BindingSource(LvlLeafs, null);
             RecalculateRuntime();
         }
 
@@ -1031,7 +1034,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
             //load leafs associated with this lvl
-            LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
+            //LvlLeafs.CollectionChanged -= lvlleaf_CollectionChanged;
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData() {
                     Leaf = (string)leaf["leaf_name"],
