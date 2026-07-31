@@ -95,7 +95,7 @@ namespace Thumper_Custom_Level_Editor
         private void btnCustomizeApply_Click(object sender, EventArgs e)
         {
             //save colors to settings
-            TCLE.settingsUITheme.SaveSettings();
+            TCLE.settingsUITheme.Save();
             TCLE.ColorFormElements(TCLE.Instance);
 
             //write sequencer colors to txt file
