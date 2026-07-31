@@ -262,7 +262,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void UpdateEditorsWithSamples()
         {
-            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            SeqObjTreeBuilder.BuildMasterObjectTree();
             //var _samples = TCLE.ProjectSamples.Select(x => x.obj_name).ToList();
 
             foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {

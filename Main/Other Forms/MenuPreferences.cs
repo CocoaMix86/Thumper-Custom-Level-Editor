@@ -102,8 +102,8 @@ namespace Thumper_Custom_Level_Editor
             File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.Value.param_displayname};{x.Value.defaultcolor.ToArgb()}"));
             UtilImport.ImportDefaultColors();
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
-            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
+            SeqObjTreeBuilder.BuildMasterObjectTree();
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.txtSearch.Text);
                 leaf.TrackTimeSigHighlighting();
             }

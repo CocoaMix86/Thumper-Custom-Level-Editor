@@ -6,7 +6,15 @@ namespace Thumper_Custom_Level_Editor
 { 
     public static class SeqObjTreeBuilder
     {
-        public static TreeView GlobalObjectTree = new();
+        public static Dictionary<string, TreeNode> ObjectNodes = new();
+        public static Dictionary<string, TreeNode> CategoryNodes = new();
+        public static TreeNode FavoritesNode = new()
+        {
+            Text = "*FAVORITES*",
+            ImageKey = "fav",
+            SelectedImageKey = "fav",
+            ContextMenuStrip = contextMenuFavClear
+        };
         //
         public static ContextMenuStrip contextMenuFav = new();
         public static ToolStripMenuItem toolStripFavAdd = new();
@@ -17,87 +25,50 @@ namespace Thumper_Custom_Level_Editor
 
         public static void Initialize()
         {
-            BuildObjectTree(GlobalObjectTree, "");
-            // 
-            // contextMenuFav
-            // 
-            contextMenuFav.BackColor = Color.FromArgb(46, 46, 46);
-            contextMenuFav.Items.AddRange(new ToolStripItem[] { toolStripFavAdd });
-            contextMenuFav.Name = "workingfolderRightClick";
-            contextMenuFav.RenderMode = ToolStripRenderMode.System;
-            contextMenuFav.Size = new Size(162, 26);
-            // 
-            // toolStripFavAdd
-            // 
-            toolStripFavAdd.ForeColor = Color.White;
-            toolStripFavAdd.Image = Properties.Resources.icon_fav;
-            toolStripFavAdd.Name = "toolStripFavAdd";
-            toolStripFavAdd.Size = new Size(161, 22);
-            toolStripFavAdd.Text = "Add To Favorites";
-            toolStripFavAdd.Click += toolStripFavAdd_Click;
-            // 
-            // contextMenuFavRemove
-            // 
-            contextMenuFavRemove.BackColor = Color.FromArgb(46, 46, 46);
-            contextMenuFavRemove.Items.AddRange(new ToolStripItem[] { toolStripFavRemove });
-            contextMenuFavRemove.Name = "workingfolderRightClick";
-            contextMenuFavRemove.RenderMode = ToolStripRenderMode.System;
-            contextMenuFavRemove.Size = new Size(199, 26);
-            // 
-            // toolStripFavRemove
-            // 
-            toolStripFavRemove.ForeColor = Color.White;
-            toolStripFavRemove.Image = Properties.Resources.icon_remove2;
-            toolStripFavRemove.Name = "toolStripFavRemove";
-            toolStripFavRemove.Size = new Size(198, 22);
-            toolStripFavRemove.Text = "Remove From Favorites";
-            toolStripFavRemove.Click += toolStripFavRemove_Click;
-            // 
-            // contextMenuFavClear
-            // 
-            contextMenuFavClear.BackColor = Color.FromArgb(46, 46, 46);
-            contextMenuFavClear.Items.AddRange(new ToolStripItem[] { toolStripFavClear });
-            contextMenuFavClear.Name = "workingfolderRightClick";
-            contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
-            contextMenuFavClear.Size = new Size(152, 26);
-            // 
-            // toolStripFavClear
-            // 
-            toolStripFavClear.ForeColor = Color.White;
-            toolStripFavClear.Image = Properties.Resources.icon_remove2;
-            toolStripFavClear.Name = "toolStripFavClear";
-            toolStripFavClear.Size = new Size(151, 22);
-            toolStripFavClear.Text = "Clear Favorites";
-            toolStripFavClear.Click += toolStripFavClear_Click;
+            CreateRightclickMenus(contextMenuFav, toolStripFavAdd);
+            CreateRightclickMenus(contextMenuFavRemove, toolStripFavRemove);
+            CreateRightclickMenus(contextMenuFavClear, toolStripFavClear);
             //
-            contextMenuFav.Renderer = new ContextMenuColors();
-            contextMenuFavClear.Renderer = new ContextMenuColors();
-            contextMenuFavRemove.Renderer = new ContextMenuColors();
+            CreateMenuItems(toolStripFavAdd, Properties.Resources.icon_fav, "toolStripFavAdd", "Add To Favorites", toolStripFavAdd_Click);
+            CreateMenuItems(toolStripFavRemove, Properties.Resources.icon_remove2, "toolStripFavRemove", "Remove From Favorites", toolStripFavRemove_Click);
+            CreateMenuItems(toolStripFavClear, Properties.Resources.icon_remove2, "toolStripFavClear", "Clear Favorites", toolStripFavClear_Click);
+            //
+            BuildMasterObjectTree();
         }
 
-        public static TreeNode FavoritesNode = new() {
-            Text = "*FAVORITES*",
-            ImageKey = "fav",
-            SelectedImageKey = "fav",
-            ContextMenuStrip = contextMenuFavClear
-        };
-        public static void BuildObjectTree(TreeView TreeToBuild, string txtSearch)
+        private static void CreateRightclickMenus(ContextMenuStrip Menu, ToolStripItem Item)
         {
-            TreeToBuild.BeginUpdate();
-            TreeToBuild.Nodes.Clear();
+            Menu.BackColor = Color.FromArgb(46, 46, 46);
+            Menu.Items.Add(Item);
+            Menu.Name = "workingfolderRightClick";
+            Menu.RenderMode = ToolStripRenderMode.System;
+            Menu.Size = new Size(152, 26);
+            Menu.Renderer = new ContextMenuColors();
+        }
+        private static void CreateMenuItems(ToolStripItem Item, Image Icon, string Name, string Text, EventHandler Handler)
+        {
+            Item.ForeColor = Color.White;
+            Item.Image = Icon;
+            Item.Name = Name;
+            Item.Size = new Size(151, 22);
+            Item.Text = Text;
+            Item.Click += Handler;
+        }
+
+        private static void BuildMasterObjectTree()
+        {
+            ObjectNodes.Clear();
+            CategoryNodes.Clear();
             //Add Favorites right at the top
-            TreeToBuild.Nodes.Add(FavoritesNode);
             BuildTreeFavorites();
             //BuildTreeFavorites(TreeToBuild, txtSearch);
 
             var categories = TCLE.LeafObjects.Values.GroupBy(x => x.category).OrderBy(x => x.Key);
             //make each category of objects its own node
             foreach (var category in categories) {
-                TreeNode CategoryNode = new() {
-                    Text = category.Key.ToUpper(),
-                    ImageKey = $"{category.Key.ToUpper().Replace("/", "")}.png",
-                    SelectedImageKey = $"{category.Key.ToUpper().Replace("/", "")}.png"
-                };
+                TreeNode CategoryNode = BuildNode(category.Key.ToUpper(), $"{category.Key.ToUpper().Replace("/", "")}.png");
+                CategoryNodes.Add(category.Key, CategoryNode);
+                //
                 if (category.Key == "PLAY SAMPLE") {
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
@@ -105,40 +76,39 @@ namespace Thumper_Custom_Level_Editor
                     foreach (var file in sampleGroups) {
                         if (string.IsNullOrEmpty(file.Key))
                             continue;
-                        TreeNode sampfile = new() {
-                            Text = file.Key,
-                            ImageKey = "samp",
-                            SelectedImageKey = "samp"
-                        };
+                        TreeNode sampfile = BuildNode(file.Key, "samp");
+                        ObjectNodes.Add(file.Key, sampfile);
+                        CategoryNode.Nodes.Add(sampfile);
+
                         foreach (var samp in file) {
-                            TreeNode _param = new() {
-                                Text = samp.obj_name,
-                                ImageKey = "none",
-                                SelectedImageKey = "none",
-                                ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
-                                Tag = "sample.samp;play"
-                            };
+                            TreeNode _param = BuildNode(samp.obj_name, "none", $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
                             sampfile.Nodes.Add(_param);
+                            ObjectNodes.Add(samp.obj_name, _param);
                         }
-                         CategoryNode.Nodes.Add(sampfile);
                     }
                 }
                 else {
                     //each object becomes its own node
                     foreach (Object_Params obj in category) {
-                        TreeNode _param = new() {
-                            Text = obj.param_displayname,
-                            ImageKey = obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            SelectedImageKey = obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}",
-                            ContextMenuStrip = obj.favorite ? contextMenuFavRemove : contextMenuFav,
-                            Tag = obj.obj_name + ";" + obj.param_path
-                        };
+                        TreeNode _param = BuildNode(obj.param_displayname, obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}", null, obj.favorite ? contextMenuFavRemove : contextMenuFav, obj);
                         CategoryNode.Nodes.Add(_param);
+                        ObjectNodes.Add(obj.obj_name + ";" + obj.param_path, _param);
                     }
                 }
-                TreeToBuild.Nodes.Add(CategoryNode);
             }
-            TreeToBuild.EndUpdate();
+        }
+
+        public static TreeNode BuildNode(string Text, string ImageKey, string ToolTip = null, ContextMenuStrip ContextMenu = null, object Tag = null)
+        {
+            return new TreeNode()
+            {
+                Text = Text,
+                ImageKey = ImageKey,
+                SelectedImageKey = ImageKey,
+                ToolTipText = ToolTip,
+                ContextMenuStrip = ContextMenu,
+                Tag = Tag
+            };
         }
 
         public static void BuildTreeFavorites()
@@ -152,13 +122,20 @@ namespace Thumper_Custom_Level_Editor
                     ImageKey = "fav",
                     SelectedImageKey = "fav",
                     ContextMenuStrip = contextMenuFavRemove,
-                    Tag = obj.obj_name + ";" + obj.param_path
+                    Tag = obj
                 };
                 FavoritesNode.Nodes.Add(_param);
-                //check name against the filter if active
-                //if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
-                // _tree.Nodes[0].Nodes.Add(_param);
             }
+        }
+
+        public static void SetNodeFavorite(TreeNode FavNode, bool Favorite)
+        {
+            Object_Params obj = (Object_Params)FavNode.Tag;
+            obj.favorite = Favorite;
+
+            FavNode.ImageKey = Favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}";
+            FavNode.SelectedImageKey = FavNode.ImageKey;
+            FavNode.ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
         }
 
         public static void FilterTree(TreeView _tree, string txtSearch)
@@ -168,19 +145,19 @@ namespace Thumper_Custom_Level_Editor
             HashSet<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToHashSet();
             _tree.BeginUpdate();
             _tree.Nodes.Clear();
+            _tree.Nodes.Add(FavoritesNode);
             //clone the existing tree, then filter out nodes that dont match the search string
-            List<TreeNode> filternodes = GlobalObjectTree.Nodes.Cast<TreeNode>().Select(x => (TreeNode)x.Clone()).ToList();
-            if (filtersearch) {
-                for (int x = 0; x < filternodes.Count; x++) {
-                    if (!FilterNode(filternodes[x], txtSearch)) {
-                        filternodes.RemoveAt(x);
-                        x--;
-                    }
+            foreach (TreeNode Category in CategoryNodes.Values) {
+                TreeNode _clonecategory = CloneCategoryNode(Category);
+
+                foreach (TreeNode Object in Category.Nodes) {
+                    if (!Object.Text.Contains(txtSearch))
+                        continue;
+                    _clonecategory.Nodes.Add(CloneObjectNode(Object));
                 }
+                if (_clonecategory.Nodes.Count > 0)
+                    _tree.Nodes.Add(_clonecategory);
             }
-            //add the remaining nodes back to the tree
-            _tree.Nodes.AddRange(filternodes.ToArray());
-            _tree.Refresh();
             //re-expand the nodes
             if (filtersearch)
                 _tree.ExpandAll();
@@ -193,15 +170,28 @@ namespace Thumper_Custom_Level_Editor
             }
             _tree.EndUpdate();
         }
-
-        public static void UpdateFavorites(TreeView _tree)
+        private static TreeNode CloneCategoryNode(TreeNode Node)
         {
-            bool expand = _tree.Nodes[0].IsExpanded;
-            _tree.Nodes[0] = (TreeNode)GlobalObjectTree.Nodes[0].Clone();
-            if (expand)
-                _tree.Nodes[0].Expand();
+            return new TreeNode
+            {
+                Text = Node.Text,
+                ImageKey = Node.ImageKey,
+                SelectedImageKey = Node.SelectedImageKey,
+            };
         }
-
+        private static TreeNode CloneObjectNode(TreeNode Node)
+        {
+            return new TreeNode
+            {
+                Text = Node.Text,
+                ImageKey = Node.ImageKey,
+                SelectedImageKey = Node.SelectedImageKey,
+                ContextMenuStrip = Node.ContextMenuStrip,
+                ToolTipText = Node.ToolTipText,
+                Tag = Node.Tag
+            };
+        }
+        /*
         public static bool FilterNode(TreeNode _node, string txtSearch)
         {
             if (_node.Nodes.Count == 0) {
@@ -231,7 +221,7 @@ namespace Thumper_Custom_Level_Editor
             }
             return foundnode;
         }
-
+        */
         public static void UpdateTrees(bool IsDelete)
         {
             //SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
@@ -247,14 +237,14 @@ namespace Thumper_Custom_Level_Editor
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             if (Source.SelectedNode.ImageKey == "fav")
                 return;
-            TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = true;
+            SetNodeFavorite(Source.SelectedNode, true);
             UpdateTrees(false);
         }
 
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = false;
+            SetNodeFavorite(Source.SelectedNode, false);
             UpdateTrees(false);
         }
 
