@@ -7,7 +7,6 @@ namespace Thumper_Custom_Level_Editor
     public static class SeqObjTreeBuilder
     {
         public static TreeView GlobalObjectTree = new();
-        public static List<TreeNode> GlobalObjectTreeNodes = new();
         //
         public static ContextMenuStrip contextMenuFav = new();
         public static ToolStripMenuItem toolStripFavAdd = new();
@@ -89,6 +88,7 @@ namespace Thumper_Custom_Level_Editor
             _tree.Nodes.Add(fav);
             BuildTreeFavorites(_tree, txtSearch);
 
+            var categories = TCLE.LeafObjects.Values.GroupBy(x => x.category).OrderBy(x => x.Key);
             //make each category of objects its own node
             foreach (string category in TCLE.LeafObjects.Select(x => x.Value.category).Distinct().Order()) {
                 TreeNode _node = new() {
