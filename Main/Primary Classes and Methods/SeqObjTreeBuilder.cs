@@ -75,54 +75,57 @@ namespace Thumper_Custom_Level_Editor
             contextMenuFavRemove.Renderer = new ContextMenuColors();
         }
 
-        public static void BuildObjectTree(TreeView _tree, string txtSearch)
+        public static TreeNode FavoritesNode = new() {
+            Text = "*FAVORITES*",
+            ImageKey = "fav",
+            SelectedImageKey = "fav",
+            ContextMenuStrip = contextMenuFavClear
+        };
+        public static void BuildObjectTree(TreeView TreeToBuild, string txtSearch)
         {
-            _tree.Nodes.Clear();
+            TreeToBuild.BeginUpdate();
+            TreeToBuild.Nodes.Clear();
             //Add Favorites right at the top
-            TreeNode fav = new() {
-                Text = "*FAVORITES*",
-                ImageKey = "fav",
-                SelectedImageKey = "fav",
-                ContextMenuStrip = contextMenuFavClear
-            };
-            _tree.Nodes.Add(fav);
-            BuildTreeFavorites(_tree, txtSearch);
+            TreeToBuild.Nodes.Add(FavoritesNode);
+            BuildTreeFavorites();
+            //BuildTreeFavorites(TreeToBuild, txtSearch);
 
             var categories = TCLE.LeafObjects.Values.GroupBy(x => x.category).OrderBy(x => x.Key);
             //make each category of objects its own node
-            foreach (string category in TCLE.LeafObjects.Select(x => x.Value.category).Distinct().Order()) {
-                TreeNode _node = new() {
-                    Text = category.ToUpper(),
-                    ImageKey = $"{category.ToUpper().Replace("/", "")}.png",
-                    SelectedImageKey = $"{category.ToUpper().Replace("/", "")}.png"
+            foreach (var category in categories) {
+                TreeNode CategoryNode = new() {
+                    Text = category.Key.ToUpper(),
+                    ImageKey = $"{category.Key.ToUpper().Replace("/", "")}.png",
+                    SelectedImageKey = $"{category.Key.ToUpper().Replace("/", "")}.png"
                 };
-                if (category == "PLAY SAMPLE") {
+                if (category.Key == "PLAY SAMPLE") {
                     //samples are not stored in LeafObjects, so we loop over a different list to find them
                     //seperate samples into sub-nodes by the file they came from
-                    foreach (string file in TCLE.ProjectSamples.Select(x => x.Value.File?.Name).Distinct()) {
-                        if (string.IsNullOrEmpty(file))
+                    var sampleGroups = TCLE.ProjectSamples.Values.Where(x => x.File != null).GroupBy(x => x.File.Name);
+                    foreach (var file in sampleGroups) {
+                        if (string.IsNullOrEmpty(file.Key))
                             continue;
                         TreeNode sampfile = new() {
-                            Text = file,
+                            Text = file.Key,
                             ImageKey = "samp",
                             SelectedImageKey = "samp"
                         };
-                        foreach (var samp in TCLE.ProjectSamples.Where(x => x.Value.File?.Name == file)) {
+                        foreach (var samp in file) {
                             TreeNode _param = new() {
-                                Text = samp.Value.obj_name,
+                                Text = samp.obj_name,
                                 ImageKey = "none",
                                 SelectedImageKey = "none",
-                                ToolTipText = $"Pitch: {samp.Value.pitch}\nPan: {samp.Value.pan}\nOffset: {samp.Value.offset}\nSelect sample and then hold SPACE to play it",
+                                ToolTipText = $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it",
                                 Tag = "sample.samp;play"
                             };
                             sampfile.Nodes.Add(_param);
                         }
-                         _node.Nodes.Add(sampfile);
+                         CategoryNode.Nodes.Add(sampfile);
                     }
                 }
                 else {
                     //each object becomes its own node
-                    foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value)) {
+                    foreach (Object_Params obj in category) {
                         TreeNode _param = new() {
                             Text = obj.param_displayname,
                             ImageKey = obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}",
@@ -130,18 +133,18 @@ namespace Thumper_Custom_Level_Editor
                             ContextMenuStrip = obj.favorite ? contextMenuFavRemove : contextMenuFav,
                             Tag = obj.obj_name + ";" + obj.param_path
                         };
-                        _node.Nodes.Add(_param);
+                        CategoryNode.Nodes.Add(_param);
                     }
                 }
-                _tree.Nodes.Add(_node);
+                TreeToBuild.Nodes.Add(CategoryNode);
             }
+            TreeToBuild.EndUpdate();
         }
 
-        public static void BuildTreeFavorites(TreeView _tree, string txtSearch)
+        public static void BuildTreeFavorites()
         {
-            bool filtersearch = txtSearch is not "" and not "Search Objects (Ctrl+;)";
             //clear the favorites node
-            _tree.Nodes[0].Nodes.Clear();
+            FavoritesNode.Nodes.Clear();
             //get all favorites and sort alphabetically
             foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).OrderBy(x => x.param_displayname)) {
                 TreeNode _param = new() {
@@ -151,9 +154,10 @@ namespace Thumper_Custom_Level_Editor
                     ContextMenuStrip = contextMenuFavRemove,
                     Tag = obj.obj_name + ";" + obj.param_path
                 };
+                FavoritesNode.Nodes.Add(_param);
                 //check name against the filter if active
-                if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
-                    _tree.Nodes[0].Nodes.Add(_param);
+                //if ((filtersearch && _param.Text.Contains(txtSearch)) || !filtersearch)
+                // _tree.Nodes[0].Nodes.Add(_param);
             }
         }
 
@@ -228,28 +232,30 @@ namespace Thumper_Custom_Level_Editor
             return foundnode;
         }
 
+        public static void UpdateTrees(bool IsDelete)
+        {
+            //SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
+            BuildTreeFavorites();
+            UtilAudio.PlaySound(IsDelete ? "UIdelete" : "UIselect");
+
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>())
+                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
+        }
+
         public static void toolStripFavAdd_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             if (Source.SelectedNode.ImageKey == "fav")
                 return;
             TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = true;
-            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            UtilAudio.PlaySound("UIselect");
-
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
-                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
+            UpdateTrees(false);
         }
 
         public static void toolStripFavRemove_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             TCLE.LeafObjects[(string)Source.SelectedNode.Tag].favorite = false;
-            SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
-            UtilAudio.PlaySound("UIselect");
-
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
-                SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
+            UpdateTrees(false);
         }
 
         public static void toolStripFavClear_Click(object sender, EventArgs e)
@@ -257,11 +263,14 @@ namespace Thumper_Custom_Level_Editor
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
             foreach (Object_Params obj in TCLE.LeafObjects.Values)
                 obj.favorite = false;
+            UpdateTrees(true);
+            /*
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");
             UtilAudio.PlaySound("UIdelete");
 
             foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf)))
                 SeqObjTreeBuilder.FilterTree(leaf.treeObjects, leaf.treeObjects.Tag.ToString());
+            */
         }
     }
 }

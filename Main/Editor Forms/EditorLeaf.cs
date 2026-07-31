@@ -1436,9 +1436,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (treeObjects.SelectedNode.ImageKey != "none")
                 return;
             TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = true;
-            SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
-            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
-            UtilAudio.PlaySound("UIselect");
+            SeqObjTreeBuilder.UpdateTrees(false);
         }
 
         private void toolStripFavRemove_Click(object sender, EventArgs e)
@@ -1449,7 +1447,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 treeObjects.SelectedNode.SelectedImageKey = "none";
                 treeObjects.SelectedNode.ImageKey = "none";
                 treeObjects.SelectedNode.ContextMenuStrip = contextMenuFav;
-                SeqObjTreeBuilder.BuildTreeFavorites(SeqObjTreeBuilder.GlobalObjectTree, "");
             }
             else {
                 TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = false;
@@ -1461,16 +1458,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     node.ContextMenuStrip = contextMenuFav;
                 }
             }
-            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
-            UtilAudio.PlaySound("UIselect");
+            SeqObjTreeBuilder.UpdateTrees(false);
         }
 
         private void toolStripFavClear_Click(object sender, EventArgs e)
         {
             foreach (Object_Params obj in TCLE.LeafObjects.Values)
                 obj.favorite = false;
-            UtilAudio.PlaySound("UIdelete");
-            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
+            SeqObjTreeBuilder.UpdateTrees(true);
         }
         #endregion
 
