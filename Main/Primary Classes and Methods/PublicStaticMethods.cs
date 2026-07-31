@@ -27,6 +27,7 @@ namespace Thumper_Custom_Level_Editor
         public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
+        public static Dictionary<string, int> CachedRuntimes = new();
         //
         #endregion
 

@@ -24,6 +24,8 @@ namespace Thumper_Custom_Level_Editor
         public int Beats { 
             get => _beats;
             set {
+                if (value == _beats)
+                    return;
                 SetField(ref _beats, value);
                 if (_beats == -1) {
                     Runtime = "file not found";
@@ -41,11 +43,7 @@ namespace Thumper_Custom_Level_Editor
         //
         public List<string> ImportPaths { 
             set {
-                Paths.ListChanged -= Parent.ParentEditor.LvlPaths_ListChanged;
-                foreach (string path in value) {
-                    Paths.Add(new(path));
-                }
-                Paths.ListChanged += Parent.ParentEditor.LvlPaths_ListChanged;
+                Paths = new BindingList<LvlPath>(value.Select(x => new LvlPath(x)).ToList());
             } 
         }
         public BindingList<LvlPath> Paths { get; set; } = new();
@@ -55,7 +53,7 @@ namespace Thumper_Custom_Level_Editor
         public LvlLeafData Clone()
         {
             LvlLeafData leaf = (LvlLeafData)MemberwiseClone();
-            leaf.Paths = new BindingList<LvlPath>(Paths);
+            leaf.Paths = new BindingList<LvlPath>(Paths.Select(p => new LvlPath(p.Name)).ToList());
             return leaf;
         }
     }
@@ -80,7 +78,6 @@ namespace Thumper_Custom_Level_Editor
             get => _samplename;
             set {
                 SetField(ref _samplename, value);
-                _samplename = value;
             }
         }
         //

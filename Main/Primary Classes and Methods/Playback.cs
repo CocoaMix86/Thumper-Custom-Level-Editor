@@ -375,10 +375,10 @@ namespace Thumper_Custom_Level_Editor
                 lvlpost.Dispose();
             }
             //create playback for each lvl phase
-            foreach (GateLvlData lvl in Gate.gatelvls) {
+            foreach (GateLvlData lvl in Gate.GateLvls) {
                 EditorLvl lvltoplay = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.Lvlname), false, true);
                 Playback.CreatePlaybackFromLvl(lvltoplay.LvlProperties, lvltoplay.LvlProperties.Beats, beatoffset);
-                beatoffset += lvl.beats;
+                beatoffset += lvl.Beats;
                 lvltoplay.Dispose();
             }
             //clear the gate name after loading it
@@ -405,7 +405,7 @@ namespace Thumper_Custom_Level_Editor
                 lvlintro.Dispose();
             }
             //create playback for each lvl
-            foreach (MasterLvlData lvl in Master.masterlvls) {
+            foreach (MasterLvlData lvl in Master.MasterLvls) {
                 //load rest lvl first
                 EditorLvl lvlrest = (EditorLvl)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.rest), false, true);
                 if (lvlrest != null) {
@@ -418,8 +418,8 @@ namespace Thumper_Custom_Level_Editor
                 //load main lvl
                 if (lvl.Type == "gate") {
                     EditorGate gatetoplay = (EditorGate)TCLE.OpenFile(ProjectExplorer.GetFile(lvl.name), false, true);
-                    Playback.CreatePlaybackFromGate(gatetoplay.GateProperties, gatetoplay.GateProperties.beats, beatoffset);
-                    beatoffset += gatetoplay.GateProperties.beats;
+                    Playback.CreatePlaybackFromGate(gatetoplay.GateProperties, gatetoplay.GateProperties.Beats, beatoffset);
+                    beatoffset += gatetoplay.GateProperties.Beats;
                     gatetoplay.Dispose();
                 }
                 else {
@@ -431,7 +431,7 @@ namespace Thumper_Custom_Level_Editor
                     lvltoplay.Dispose();
                 }
                 //load checkpoint
-                if (lvl.checkpoint && lvlcheckpoint != null) {
+                if (lvl.Checkpoint && lvlcheckpoint != null) {
                     Playback.CreatePlaybackFromLvl(lvlcheckpoint.LvlProperties, lvlcheckpoint.LvlProperties.Beats, beatoffset);
                     beatoffset += lvlcheckpoint.LvlProperties.Beats;
                 }

@@ -17,25 +17,20 @@ namespace Thumper_Custom_Level_Editor
         [DisplayName("Sentry")]
         [Description("Does this sublevel use a sentry. The multilane option is wider than the single lane")]
         [TypeConverter(typeof(GateSentryList))]
-        public string sentrytype { get; set; }
+        public string SentryType { get; set; }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Bucket #")]
         [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
         [TypeConverter(typeof(GateBucket))]
-        public int bucket { get; set; }
+        public int Bucket { get; set; }
 
         [Browsable(false)]
-        public int beats { get; set; } = 0;
+        public int Beats { get; set; } = 0;
         [Browsable(false)]
-        public int beatstart { get; set; } = 0;
+        public int BeatStart { get; set; } = 0;
         [Browsable(false)]
-        public string runtime
-        {
-            get {
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-            }
-        }
+        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
 
         public GateLvlData Clone()
         {
@@ -55,19 +50,19 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public EditorGate ParentEditor;
         [Browsable(false)]
-        public ObservableCollection<GateLvlData> gatelvls;
+        public ObservableCollection<GateLvlData> GateLvls;
 
         public GateProperties(EditorGate Parent)
         {
             ParentEditor = Parent;
-            gatelvls = new();
-            gatelvls.CollectionChanged += ParentEditor.gatelvls_CollectionChanged;
+            GateLvls = new();
+            GateLvls.CollectionChanged += ParentEditor.gatelvls_CollectionChanged;
         }
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => this.ParentEditor.WorkingFile.FullName;
+        public string Filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Boss")]
@@ -120,26 +115,26 @@ namespace Thumper_Custom_Level_Editor
         {
             get => _random;
             set {
-                if (value == true) {
+                _random = value;
+                if (_random == true) {
                     Boss = "Level 6 - spirograph";
                 }
-                _random = value;
                 ParentEditor.RecalculateRuntime();
             }
         }
         private bool _random;
         [Browsable(false)]
-        public int MaximumRows;
+        public int MaximumLvls;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int beats => gatelvls.Sum(x => x.beats) + prebeats + postbeats;
+        public int Beats => GateLvls.Sum(x => x.Beats) + prebeats + postbeats;
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
     }
 
     public class GateBossList : StringConverter

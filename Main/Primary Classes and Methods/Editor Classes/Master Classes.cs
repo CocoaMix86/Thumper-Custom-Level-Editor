@@ -3,16 +3,18 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 using Windows.ApplicationModel.Calls;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public class MasterLvlData
+    public class MasterLvlData : NotifyBase
     {
-        public MasterLvlData()
-        { 
-
+        public MasterLvlData(MasterProperties parent)
+        {
+            Parent = parent;
         }
+        public MasterProperties Parent;
 
         [Browsable(false)]
         public string name
@@ -35,17 +37,20 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Selected Sublevel(s)")]
         [DisplayName("Play Plus")]
         [Description("When True, the sublevel shows up in Play+. Useful to have a tutorial sublevel in Play and then have it not show up in Play+.")]
-        public bool playplus { get; set; }
+        public bool Playplus { get => _playplus; set => SetField(ref _playplus, value); }
+        private bool _playplus;
 
         [CategoryAttribute("Selected Sublevel(s)")]
         [DisplayName("Checkpoint")]
         [Description("Enables the checkpoint that follows this sublevel.")]
-        public bool checkpoint { get; set; }
+        public bool Checkpoint { get => _checkpoint; set => SetField(ref _checkpoint, value); }
+        private bool _checkpoint;
 
         [CategoryAttribute("Selected Sublevel(s)")]
         [DisplayName("Isolate")]
         [Description("If True, only isolated sublevels will play in game. Mainly used for testing your level.")]
-        public bool isolate { get; set; }
+        public bool Isolate { get => _isolate; set => SetField(ref _isolate, value); }
+        private bool _isolate;
 
         [CategoryAttribute("Selected Sublevel(s)")]
         [DisplayName("Rest Lvl")]
@@ -60,23 +65,47 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public int id { get; set; }
 
+        private string _sublevelnum;
+        public string SublevelNumber
+        {
+            get => _sublevelnum;
+            set {
+                string levelnum;
+                if (this.gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
+                    levelnum = "Ω";
+                else if (this.gatesectiontype is "SECTION_BOSS_PYRAMID")
+                    levelnum = "∞";
+                else
+                    levelnum = $"{Parent.MasterLvls.IndexOf(this) + 1}";
+                _sublevelnum = levelnum;
+                //SetField(ref _sublevelnum, levelnum);
+            }
+        }
+
         [Browsable(false)]
         public int Beats
         {
             get => _beats;
-            set { _beats = value; }
-        }
-        [Browsable(false)]
-        private int _beats;
-        [Browsable(false)]
-        public string runtime
-        {
-            get {
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+            set {
+                if (_beats != value) {
+                    _beats = value;
+                    if (_beats == -1) {
+                        Runtime = "file not found";
+                        RowColor = Color.Maroon;
+                    }
+                    else
+                        Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
+                    RowColor = Color.Green;
+                }
             }
         }
+        private int _beats;
+        public string Runtime { get => _runtime; set => SetField(ref _runtime, value); }
+        private string _runtime;
+
+        public Color RowColor = Color.Green;
         [Browsable(false)]
-        public int beatstart;
+        public int BeatStart;
         [Browsable(false)]
         public int restlevelbeats = 0;
         [Browsable(false)]
@@ -93,25 +122,25 @@ namespace Thumper_Custom_Level_Editor
         public MasterProperties(EditorMaster Parent)
         {
             ParentEditor = Parent;
-            masterlvls = new();
-            masterlvls.CollectionChanged += ParentEditor.masterlvls_CollectionChanged;
+            MasterLvls = new();
+            MasterLvls.ListChanged += ParentEditor.masterlvls_CollectionChanged;
         }
 
         [Browsable(false)]
         public EditorMaster ParentEditor;
         [Browsable(false)]
-        public ObservableCollection<MasterLvlData> masterlvls;
+        public BindingList<MasterLvlData> MasterLvls;
 
         [CategoryAttribute("General")]
         [DisplayName("File Path")]
         [Description("The full path to this file.")]
-        public string filepath => ParentEditor.WorkingFile.FullName;
+        public string Filepath => ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
         [Description("")]
         [TypeConverter(typeof(SkyboxList))]
-        public string skybox { get; set; } = "skybox_cube";
+        public string Skybox { get; set; } = "skybox_cube";
 
         [CategoryAttribute("Options")]
         [DisplayName("Intro Lvl")]
@@ -132,17 +161,12 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int Beats => introlevelbeats + masterlvls.Sum(x => x.Beats) + masterlvls.Sum(x => x.restlevelbeats) + (masterlvls.Count(x => x.checkpoint) * checkpointbeats);
+        public int Beats => introlevelbeats + MasterLvls.Sum(x => x.Beats) + MasterLvls.Sum(x => x.restlevelbeats) + (MasterLvls.Count(x => x.Checkpoint) * checkpointbeats);
 
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string runtime { 
-            get {
-                //parent.RecalculateRuntime();
-                return TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-            }
-        }
+        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
     }
 
     public class LvlList : StringConverter

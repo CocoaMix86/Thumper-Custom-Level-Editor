@@ -118,7 +118,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorLoading;
         private bool LogUndo = true;
         private bool IsAddingItems;
-        public bool IsAllowedToAddLvl => !((GateProperties.gatelvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.gatelvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.gatelvls.Count >= 16 && GateProperties.Random));
+        public bool IsAllowedToAddLvl => !((GateProperties.GateLvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.GateLvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.GateLvls.Count >= 16 && GateProperties.Random));
         //
         //Local custom class vars
         public GateProperties GateProperties
@@ -131,7 +131,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private GateProperties _gateproperties;
         private List<DataGridViewRow> SelectedRows = new();
-        public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.gatelvls; } set { GateProperties.gatelvls = value; } }
+        public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.GateLvls; } set { GateProperties.GateLvls = value; } }
         public List<SaveState> UndoList = new();
         private DeserializeDockContent m_deserializeDockContent;
         public EditorBaseSub contentPropertyGrid = new() {
@@ -405,7 +405,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (Playback.IsPlaying) {
                 if (this.WorkingFile.Name == Playback.GlobalCurrentGate && GateLvls[e.RowIndex].Lvlname == Playback.GlobalCurrentLvl) {
-                    double pixelsperbeat = (double)e.RowBounds.Width / (double)GateLvls[e.RowIndex].beats;
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)GateLvls[e.RowIndex].Beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
@@ -439,7 +439,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int _in = e.NewStartingIndex;
                 //get the runtime of the object
                 gateLvlList.Rows.Insert(_in, new object[] {
-                    _gateproperties.Random ? GateLvls[_in].bucket : GateLvls.IndexOf(GateLvls[_in]),
+                    _gateproperties.Random ? GateLvls[_in].Bucket : GateLvls.IndexOf(GateLvls[_in]),
                     Properties.Resources.editor_lvl,
                     GateLvls[_in].Lvlname,
                     0
@@ -453,9 +453,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
-            btnGateLvlDelete.Enabled = _gateproperties.gatelvls.Count > 0;
-            btnGateLvlUp.Enabled = _gateproperties.gatelvls.Count > 1;
-            btnGateLvlDown.Enabled = _gateproperties.gatelvls.Count > 1;
+            btnGateLvlDelete.Enabled = _gateproperties.GateLvls.Count > 0;
+            btnGateLvlUp.Enabled = _gateproperties.GateLvls.Count > 1;
+            btnGateLvlDown.Enabled = _gateproperties.GateLvls.Count > 1;
 
             //limit how many phases can be added
             btnGateLvlAdd.Enabled = IsAllowedToAddLvl;
@@ -475,11 +475,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<GateLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in gateLvlList.SelectedRows) {
-                todelete.Add(_gateproperties.gatelvls[dgvr.Index]);
+                todelete.Add(_gateproperties.GateLvls[dgvr.Index]);
             }
             LogUndo = false;
             foreach (GateLvlData gld in todelete)
-                _gateproperties.gatelvls.Remove(gld);
+                _gateproperties.GateLvls.Remove(gld);
             LogUndo = true;
             SaveCheckAndWrite(false, "Remove Phase");
             UtilAudio.PlaySound("UIobjectremove");
@@ -513,8 +513,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row1.CompareTo(row2));
             foreach (int dgvr in selectedrows) {
-                _gateproperties.gatelvls.Insert(dgvr - 1, _gateproperties.gatelvls[dgvr]);
-                _gateproperties.gatelvls.RemoveAt(dgvr + 1);
+                _gateproperties.GateLvls.Insert(dgvr - 1, _gateproperties.GateLvls[dgvr]);
+                _gateproperties.GateLvls.RemoveAt(dgvr + 1);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -530,8 +530,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             selectedrows.Sort((row1, row2) => row2.CompareTo(row1));
             foreach (int dgvr in selectedrows) {
-                _gateproperties.gatelvls.Insert(dgvr + 2, _gateproperties.gatelvls[dgvr]);
-                _gateproperties.gatelvls.RemoveAt(dgvr);
+                _gateproperties.GateLvls.Insert(dgvr + 2, _gateproperties.GateLvls[dgvr]);
+                _gateproperties.GateLvls.RemoveAt(dgvr);
             }
             gateLvlList.ClearSelection();
             foreach (int dgvr in selectedrows) {
@@ -606,10 +606,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             GateLvls.Clear();
             ///load lvls associated with this master
             foreach (dynamic _lvl in _load["boss_patterns"]) {
-                _gateproperties.gatelvls.Add(new GateLvlData() {
+                _gateproperties.GateLvls.Add(new GateLvlData() {
                     _lvlname = _lvl["lvl_name"],
-                    sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
-                    bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
+                    SentryType = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
+                    Bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
             }
 
@@ -634,10 +634,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             GateLvls.CollectionChanged -= gatelvls_CollectionChanged;
             foreach (dynamic _lvl in _load["boss_patterns"]) {
-                _gateproperties.gatelvls.Add(new GateLvlData() {
+                _gateproperties.GateLvls.Add(new GateLvlData() {
                     _lvlname = _lvl["lvl_name"],
-                    sentrytype = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
-                    bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
+                    SentryType = gatesentrynames.First(x => x.Value == (string)_lvl["sentry_type"]).Key,
+                    Bucket = (int)_lvl["bucket_num"] is < 0 or > 3 ? 0 : (int)_lvl["bucket_num"]
                 });
             }
 
@@ -672,12 +672,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(true, "", playsound);
         }
         ///SAVE AS
-        public override FileInfo SaveAs(bool isnew = false, string startpath = null)
+        public override FileInfo SaveAs(bool FileIsNew = false, string InitialDir = null)
         {
             using SaveFileDialog sfd = new();
             sfd.Filter = "Thumper Gate File (*.gate)|*.gate";
             sfd.FilterIndex = 1;
-            sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
+            sfd.InitialDirectory = InitialDir ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
                 this.WorkingFile = new FileInfo(sfd.FileName);
 
@@ -758,15 +758,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (index == -1) {
                 GateLvls.Add(new GateLvlData() {
                     _lvlname = (string)_load["obj_name"],
-                    sentrytype = "None",
-                    bucket = 0
+                    SentryType = "None",
+                    Bucket = 0
                 });
             }
             else {
                 GateLvls.Insert(index, new GateLvlData() {
                     _lvlname = (string)_load["obj_name"],
-                    sentrytype = "None",
-                    bucket = 0
+                    SentryType = "None",
+                    Bucket = 0
                 });
             }
             if (!IsAddingItems)
@@ -779,13 +779,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorLoading || _gateproperties == null)
                 return 0;
             //depending on the gate configuration, it can have a different amount of lvls in it
-            _gateproperties.MaximumRows = 0;
-            if (_gateproperties.Boss != "Level 9 - pyramid" && !_gateproperties.Random)
-                _gateproperties.MaximumRows = 4;
-            else if (_gateproperties.Boss == "Level 9 - pyramid")
-                _gateproperties.MaximumRows = 5;
+            _gateproperties.MaximumLvls = 4;
+            if (_gateproperties.Boss == "Level 9 - pyramid")
+                _gateproperties.MaximumLvls = 5;
             else if (_gateproperties.Random)
-                _gateproperties.MaximumRows = 16;
+                _gateproperties.MaximumLvls = 16;
 
             int beattotal = 0;
             List<int> bucketscounted = new();
@@ -794,72 +792,74 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //calc post lvl beats
             _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_gateproperties.postlvl));
             //loop over each lvl and update the grid with runtime or a warning
-            foreach (GateLvlData _lvl in GateLvls) {
-                RecalculateRuntimeSublevel(_lvl);
+            for (int i = 0; i < GateLvls.Count; i++) {
+                GateLvlData _lvl = GateLvls[i];
+                RecalculateRuntimeSublevel(_lvl, i);
                 if (_gateproperties.Random) {
-                    if (!bucketscounted.Contains(_lvl.bucket)) {
-                        beattotal += _lvl.beats;
-                        bucketscounted.Add(_lvl.bucket);
+                    if (!bucketscounted.Contains(_lvl.Bucket)) {
+                        beattotal += _lvl.Beats;
+                        bucketscounted.Add(_lvl.Bucket);
                     }
                 }
                 else
-                    beattotal += _lvl.beats;
+                    beattotal += _lvl.Beats;
             }
 
+            UpdateBeatPosition();
             if (!Playback.Generating)
-                gateLvlList.Refresh();
+                gateLvlList.Invalidate();
             return beattotal;
         }
 
-        public int RecalculateRuntimeSublevel(GateLvlData _lvl)
+        public int RecalculateRuntimeSublevel(GateLvlData _lvl, int index)
         {
             if (EditorLoading)
                 return 0;
 
             if (!ProjectExplorer.TryGetFile(_lvl.Lvlname, out FileInfo lvlfile) || !lvlfile.Exists)
-                _lvl.beats = -1;
+                _lvl.Beats = -1;
             else
-                _lvl.beats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.Lvlname));
+                _lvl.Beats = UtilMath.CalculateLvlRuntime(lvlfile);
             lvlfile?.Refresh();
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
             if (!Playback.Generating)
-                ColorRow(_lvl, GateLvls.IndexOf(_lvl));
-            UpdateBeatPosition();
+                ColorRow(_lvl, index);
 
-            return _lvl.beats;
+            return _lvl.Beats;
         }
 
         public void UpdateBeatPosition()
         {
             int beatpos = _gateproperties.prebeats + _gateproperties.postbeats;
             foreach (GateLvlData _lvl in GateLvls) {
-                _lvl.beatstart = beatpos;
-                beatpos += _lvl.beats;
+                _lvl.BeatStart = beatpos;
+                beatpos += _lvl.Beats;
             }
         }
 
         public void ColorRow(GateLvlData _lvl, int index)
         {
+            var row = gateLvlList.Rows[index];
             //if random, the phase counter will instead show bucket numbers
-            gateLvlList.Rows[index].Cells[0].Value = _gateproperties.Random ? _lvl.bucket + 1 : index + 1;
-            if (index >= _gateproperties.MaximumRows) {
-                gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
-                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in list (max. {_gateproperties.MaximumRows})";
+            row.Cells[0].Value = _gateproperties.Random ? _lvl.Bucket + 1 : index + 1;
+            if (index >= _gateproperties.MaximumLvls) {
+                row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                row.Cells[3].Value = $"too many lvls in list (max. {_gateproperties.MaximumLvls})";
             }
             //each bucket can have 4 lvls only. Show warning if more than 4.
-            else if (_gateproperties.Random && GateLvls.Where(x => x.bucket == _lvl.bucket).Count() > 4) {
-                gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.DarkOrange;
-                gateLvlList.Rows[index].Cells[3].Value = $"too many lvls in bucket {_lvl.bucket + 1} (max. 4)";
+            else if (_gateproperties.Random && GateLvls.Where(x => x.Bucket == _lvl.Bucket).Count() > 4) {
+                row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                row.Cells[3].Value = $"too many lvls in bucket {_lvl.Bucket + 1} (max. 4)";
             }
             else {
-                if (_lvl.beats == -1) {
-                    gateLvlList.Rows[index].DefaultCellStyle.BackColor = Color.Maroon;
-                    gateLvlList.Rows[index].Cells[3].Value = $"file not found";
+                if (_lvl.Beats == -1) {
+                    row.DefaultCellStyle.BackColor = Color.Maroon;
+                    row.Cells[3].Value = $"file not found";
                 }
                 else {
-                    gateLvlList.Rows[index].DefaultCellStyle = null;
-                    gateLvlList.Rows[index].Cells[3].Value = $"{_lvl.beats} beats -- {_lvl.runtime}";
+                    row.DefaultCellStyle = null;
+                    row.Cells[3].Value = $"{_lvl.Beats} beats -- {_lvl.Runtime}";
                 }
             }
         }
@@ -884,15 +884,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             //setup boss_patterns
             JArray boss_patterns = new();
-            for (int x = 0; x < _properties.gatelvls.Count; x++) {
+            for (int x = 0; x < _properties.GateLvls.Count; x++) {
                 JObject s = new() {
-                    { "lvl_name", _properties.gatelvls[x].Lvlname },
-                    { "sentry_type", $"{gatesentrynames[_properties.gatelvls[x].sentrytype]}"},
-                    { "bucket_num", _properties.gatelvls[x].bucket }
+                    { "lvl_name", _properties.GateLvls[x].Lvlname },
+                    { "sentry_type", $"{gatesentrynames[_properties.GateLvls[x].SentryType]}"},
+                    { "bucket_num", _properties.GateLvls[x].Bucket }
                 };
                 //if using RANDOM, the buckets and hashes are all different per entry in each bucket
                 if (_properties.Random) {
-                    switch (_properties.gatelvls[x].bucket) {
+                    switch (_properties.GateLvls[x].Bucket) {
                         case 0:
                             s.Add("node_name_hash", _bucket0[bucket0]);
                             bucket0 = (bucket0 + 1) % 4;
@@ -997,7 +997,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnGatePlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("gate");
                 Playback.CreatePlaybackFromGate(_gateproperties);
-                Playback.Play(gateLvlList.SelectedRows.Count > 0 ? GateLvls[gateLvlList.SelectedRows[^1].Index].beatstart : -1, _gateproperties.beats, PlaybackLoop);
+                Playback.Play(gateLvlList.SelectedRows.Count > 0 ? GateLvls[gateLvlList.SelectedRows[^1].Index].BeatStart : -1, _gateproperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }

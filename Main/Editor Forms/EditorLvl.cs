@@ -1307,8 +1307,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (!ProjectExplorer.TryGetFile(_leaf.Leaf, out FileInfo leaffile) || !leaffile.Exists)
                 _leaf.Beats = -1;
-            else
-                _leaf.Beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
+            else {
+                if (!TCLE.CachedRuntimes.TryGetValue(leaffile.Name, out int runtime) || runtime == -1) {
+                    _leaf.Beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
+                    TCLE.CachedRuntimes[leaffile.Name] = runtime;
+                }
+                else
+                    _leaf.Beats = runtime;
+            }
 
             return _leaf.Beats;
         }
