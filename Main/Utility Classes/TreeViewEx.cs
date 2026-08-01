@@ -6,6 +6,8 @@ namespace Thumper_Custom_Level_Editor
     [DesignerCategory("Code")]
     public partial class TreeViewEx : TreeView
     {
+        //This overrides the node renaming for treeviews. Instead of selecting the entire node,
+        //this will select just the filename portion and not the extension.
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -24,7 +26,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
         }
-
+        //this is all boilerplate required constants and stuff needed for the windows events
         private const int WM_REFLECT_NOTIFY = 0x204E;
         private const int TVM_GETEDITCONTROL = 0x0000110F;
         private const int TVN_BEGINLABELEDITW = 0 - 400 - 59;

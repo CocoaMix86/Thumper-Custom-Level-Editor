@@ -8,8 +8,8 @@ namespace Thumper_Custom_Level_Editor
 {
     public partial class MenuProjectNew : Form
     {
-        public readonly CommonOpenFileDialog cfd_lvl = new() { IsFolderPicker = true, Multiselect = false, InitialDirectory = Application.StartupPath, Title = "Choose where to save the custom level" };
-        private string[] illegalchars = new[] { "\\", "/", ":", "*", "?", "<", ">", "|" };
+        public static readonly CommonOpenFileDialog FolderDialog = new() { IsFolderPicker = true, Multiselect = false, InitialDirectory = Application.StartupPath, Title = "Choose where to save the custom level" };
+        private readonly static char[] IllegalChars = Path.GetInvalidFileNameChars();
         public FileInfo ProjectToLoad;
         private nint WindowHandle => this.Handle;
 
@@ -18,13 +18,13 @@ namespace Thumper_Custom_Level_Editor
             InitializeComponent();
             pictureDifficulty.SizeMode = PictureBoxSizeMode.StretchImage;
         }
-
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
+        //this handles dragging the window by the toolbar along the top
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HT_CAPTION = 0x2;
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
+        private static extern bool ReleaseCapture();
         private void toolStripTitle_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
@@ -32,18 +32,20 @@ namespace Thumper_Custom_Level_Editor
                 _ = SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
+        //
 
         private void btnCustomFolder_Click(object sender, EventArgs e)
         {
-            if (cfd_lvl.ShowDialog(WindowHandle) == CommonFileDialogResult.Ok) {
-                if (cfd_lvl.FileName.Length > 255) {
-                    MessageBox.Show("Folder path too long, due to Windows limits. Max length 255.\nChoose a different path.", "Thumper Custom Level Editor");
-                    return;
-                }
-                txtCustomPath.Text = cfd_lvl.FileName;
-                txtCustomName_TextChanged(null, null);
-                SaveButtonCheck();
+            if (FolderDialog.ShowDialog(WindowHandle) != CommonFileDialogResult.Ok)
+                return;
+
+            if (FolderDialog.FileName.Length > 255) {
+                MessageBox.Show("Folder path too long, due to Windows limits. Max length 255.\nChoose a different path.", "Thumper Custom Level Editor");
+                return;
             }
+            txtCustomPath.Text = FolderDialog.FileName;
+            txtCustomName_TextChanged(null, null);
+            SaveButtonCheck();
         }
 
         private void lblCustomDiffHelp_Click(object sender, EventArgs e)
@@ -53,8 +55,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void txtCustomDiff_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Image diff = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{txtCustomDiff.Text}");
-            pictureDifficulty.Image = diff;
+            pictureDifficulty.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{txtCustomDiff.Text}");
             SaveButtonCheck();
         }
 
@@ -82,7 +83,8 @@ namespace Thumper_Custom_Level_Editor
 
         public FileInfo CreateCustomLevelFolder()
         {
-            FileInfo NewProject = new($@"{txtCustomPath.Text}\{txtCustomName.Text}\{txtCustomName.Text}.TCL");
+            string projectpath = Path.Join(txtCustomPath.Text, txtCustomName.Text, $"{txtCustomName.Text}.TCL");
+            FileInfo NewProject = new(projectpath);
             if (!NewProject.Directory.Exists)
                 NewProject.Directory.Create();
 
@@ -98,47 +100,35 @@ namespace Thumper_Custom_Level_Editor
                 WorkingFile = NewProject
             };
 
-
-            ///Initialize lists based on checkboxes and the new levelpath
-            Dictionary<string, FileInfo> defaultFiles = new() {
-                {"defaultsamp", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.samp")},
-                {"defaultspn", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.spn")},
-                {"defaultxfm", new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm")}
-            };
-
-            ///these 4 files below are required defaults of new levels.
-            ///create them if they don't exist
-            if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["defaultsamp"].Name, SearchOption.AllDirectories).Any()) {
-                using (StreamWriter sw = defaultFiles["defaultsamp"].CreateText()) {
-                    sw.Write(Properties.Resources.samp_default);
-                }
-            }
-            if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["defaultspn"].Name, SearchOption.AllDirectories).Any()) {
-                using (StreamWriter sw = defaultFiles["defaultspn"].CreateText()) {
-                    sw.Write(Properties.Resources.spn_default);
-                }
-            }
-            if (!NewProjectProperties.WorkingFolder.GetFiles(defaultFiles["defaultxfm"].Name, SearchOption.AllDirectories).Any()) {
-                using (StreamWriter sw = defaultFiles["defaultxfm"].CreateText()) {
-                    sw.Write(Properties.Resources.xfm_default);
-                }
-            }
-
+            //Setup default files
+            FileInfo defaultsamp = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.samp");
+            FileInfo defaultspn = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.spn");
+            FileInfo defaultxfm = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm");
+            CreateDefaultFile(defaultsamp, Properties.Resources.samp_default);
+            CreateDefaultFile(defaultspn, Properties.Resources.spn_default);
+            CreateDefaultFile(defaultxfm, Properties.Resources.xfm_default);
+            //
             JObject save = TCLE.BuildSave(NewProjectProperties);
             UtilFile.WriteFileLock(NewProjectProperties.FileLock, save);
             NewProjectProperties.FileLock.Close();
-            //File.WriteAllText(NewProject.FullName, JsonConvert.SerializeObject(save, Formatting.Indented));
 
             return NewProject;
         }
+        private static void CreateDefaultFile(FileInfo file, string contents)
+        {
+            if (file.Exists)
+                return;
+            using StreamWriter sw = file.CreateText();
+            sw.Write(contents);
+        }
 
-        bool nameok;
+        bool ProjectNameValid;
         private void txtCustomName_TextChanged(object sender, EventArgs e)
         {
             lblNameError.Visible = false;
             btnCustomSave.Enabled = false;
-            nameok = false;
-            bool illegal = illegalchars.Any(c => txtCustomName.Text.Contains(c));
+            ProjectNameValid = false;
+            bool illegal = txtCustomName.Text.IndexOfAny(IllegalChars) >= 0;
             bool exists = Directory.Exists($@"{txtCustomPath}\{txtCustomName.Text}") && txtCustomName.Text != TCLE.WorkingFolder.Name;
             bool endsindot = txtCustomName.Text.TrimEnd().EndsWith('.');
             bool endsinspace = txtCustomName.Text.EndsWith(' ');
@@ -159,22 +149,19 @@ namespace Thumper_Custom_Level_Editor
                 lblNameError.Visible = true;
                 lblNameError.Text = "A level name cannot end with ' ' (space)";
             }
-            else if (txtCustomName.Text.Length + txtCustomPath.Text.Length > 255) {
+            else if (txtCustomName.TextLength + txtCustomPath.TextLength > 255) {
                 lblNameError.Visible = true;
                 lblNameError.Text = "The folder path + level name is longer than 256 characters (Windows limit).";
             }
             else {
-                nameok = true;
+                ProjectNameValid = true;
                 SaveButtonCheck();
             }
         }
 
         private void SaveButtonCheck()
         {
-            if (nameok && txtCustomDiff.Text.Length > 1 && txtCustomPath.Text.Length > 1)
-                btnCustomSave.Enabled = true;
-            else
-                btnCustomSave.Enabled = false;
+            btnCustomSave.Enabled = ProjectNameValid && txtCustomDiff.Text.Length > 1 && txtCustomPath.Text.Length > 1;
         }
 
         private void combobox_DrawItem(object sender, DrawItemEventArgs e)
