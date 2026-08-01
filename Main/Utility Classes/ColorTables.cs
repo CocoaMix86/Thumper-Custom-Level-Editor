@@ -53,6 +53,9 @@
 
     public class ToolStripOverride : ToolStripProfessionalRenderer
     {
+        public static readonly SolidBrush SplitBtnBG = new(Color.FromArgb(46, 46, 46));
+        public static readonly Pen SplitBtnBorder = new(Color.FromArgb(113, 96, 232));
+
         public ToolStripOverride() : base(new EditorToolstripColorTable()) { }
         protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e) { }
         protected override void OnRenderSplitButtonBackground(ToolStripItemRenderEventArgs e)
@@ -66,8 +69,8 @@
                 button.Width--;
                 button.Height--;
 
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), button);
-                e.Graphics.DrawRectangle(new Pen(Color.FromArgb(113, 96, 232)), button);
+                e.Graphics.FillRectangle(SplitBtnBG, button);
+                e.Graphics.DrawRectangle(SplitBtnBorder, button);
 
                 OnRenderArrow(new ToolStripArrowRenderEventArgs(
                     e.Graphics, e.Item, sb.DropDownButtonBounds, e.Item.ForeColor,
@@ -80,8 +83,8 @@
                 Rectangle bounds = new(Point.Empty, e.Item.Size);
                 bounds.Width--;
                 bounds.Height--;
-                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(46, 46, 46)), bounds);
-                e.Graphics.DrawRectangle(new Pen(Color.FromArgb(113, 96, 232)), bounds);
+                e.Graphics.FillRectangle(SplitBtnBG, bounds);
+                e.Graphics.DrawRectangle(SplitBtnBorder, bounds);
             }
             else
                 base.OnRenderButtonBackground(e);

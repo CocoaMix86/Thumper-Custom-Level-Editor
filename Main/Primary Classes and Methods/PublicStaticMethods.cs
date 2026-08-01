@@ -40,6 +40,9 @@ namespace Thumper_Custom_Level_Editor
         ///Color elements based on set properties
         public static void ColorFormElements(TCLE MainForm)
         {
+            EditorLeaf.CellBackColorCache.TryAdd(Properties.Settings.Default.ColorLeafTimeSig1, new(Properties.Settings.Default.ColorLeafTimeSig1));
+            EditorLeaf.CellBackColorCache.TryAdd(Properties.Settings.Default.ColorLeafTimeSig2, new(Properties.Settings.Default.ColorLeafTimeSig2));
+
             MainForm.toolStripTitle.BackColor = Properties.Settings.Default.ColorMainMenuBar;
             MainForm.panelToolStrips.BackColor = Properties.Settings.Default.ColorMainSubMenubar;
             MainForm.dockMain.BackColor = Properties.Settings.Default.ColorMainBG;

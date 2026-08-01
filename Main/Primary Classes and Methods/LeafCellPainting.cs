@@ -1,4 +1,5 @@
 ﻿using System.Drawing.Drawing2D;
+using System.Security.Cryptography;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Thumper_Custom_Level_Editor.Properties;
@@ -401,10 +402,18 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         }
 
         public static Pen ArrowHighlight = new(Brushes.White, 5) { EndCap = LineCap.Triangle, CustomEndCap = new AdjustableArrowCap(3, 1) };
+        public static Dictionary<Color, Pen> TurnArrowPenCache = new();
+        public static Pen GetArrowPen(Color color)
+        {
+            if (!TurnArrowPenCache.TryGetValue(color, out Pen pen)) {
+                TurnArrowPenCache[color] = new(new SolidBrush(UtilMath.Blend(color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+            }
+            return pen; 
+        }
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                using Pen ArrowPen = new(new SolidBrush(UtilMath.Blend(seq.HighlightColor, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                using Pen ArrowPen = GetArrowPen(seq.HighlightColor);
                 ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 

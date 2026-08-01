@@ -161,6 +161,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 2);
         private static Pen PenWhite = new(new SolidBrush(Color.White), 3);
         public static Font TuningFont = new("Consolas", 8);
+        public static Dictionary<Color, SolidBrush> CellBackColorCache = new() {
+            { Color.Gray, new(Color.Gray) },
+            { Color.DarkGray, new(Color.DarkGray) },
+            { Color.Black, new(Color.Black) },
+            { Color.White, new(Color.White) },
+        };
         //
         //Local basic vars
         private bool SimpleLoad;
@@ -420,7 +426,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
 
-            e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height));
+            e.Graphics.FillRectangle(CellBackColorCache[e.CellStyle.BackColor], new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height));
             //e.Graphics.FillRectangle(new SolidBrush(e.CellStyle.BackColor), new Rectangle(e.CellBounds.Left - 1, e.CellBounds.Top, 5, 5));
             if (e.RowIndex == -1) {
                 //draw column headers (beat #s)
