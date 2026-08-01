@@ -497,14 +497,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show(RowPrePaintError, "Lumper Eustum Tevel Cditor");
             }
         }
+        private void PaintForeground(DataGridViewRowPrePaintEventArgs e)
+        {
+            RowCellPaintForeground = true;
+            e.PaintCells(e.RowBounds, e.PaintParts);
+            RowCellPaintForeground = false;
+        }
         private void PaintRowWaveforms(DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintCells(e.RowBounds, e.PaintParts);
 
             if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
-                RowCellPaintForeground = true;
-                e.PaintCells(e.RowBounds, e.PaintParts);
-                RowCellPaintForeground = false;
+                PaintForeground(e);
                 return;
             }
             //setup variables to reference later when needed
@@ -517,6 +521,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     RowPrePaintError = $@"{seqref.ObjName} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
                     seqref.HasShownError = true;
                 }
+                PaintForeground(e);
                 return;
             }
             //export pc file to playable file
@@ -546,9 +551,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            RowCellPaintForeground = true;
-            e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = false;
+            PaintForeground(e);
             if (samp.message != null) {
                 RowPrePaintError = samp.message;
                 samp.message = null;
@@ -593,9 +596,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trailstop = sdp.beat + LengthOfObject;
                 }
             }
-            RowCellPaintForeground = true;
-            e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = false;
+            PaintForeground(e);
         }
         private void DrawLaneTrail(DataGridViewRowPrePaintEventArgs e, int LaneOffset, int columnindex, int cellwidth, int offsetportion, int verticaloffset, int LengthOfObject, SolidBrush alphaBrush)
         {
@@ -715,16 +716,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
             }
             //
-            RowCellPaintForeground = true;
-            e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = false;
+            PaintForeground(e);
         }
         private void PaintRowNormal(DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = true;
-            e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = false;
+            PaintForeground(e);
         }
         private void PaintRowPlayback(DataGridViewRowPrePaintEventArgs e)
         {
