@@ -178,5 +178,100 @@
         {
             return (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3) + 4;
         }
+
+        public static double[] CalculateTuning(double[] interp, string Type)
+        {
+            switch (Type) {
+                case "Linear Ease In":
+                case "Linear Ease Out":
+                case "Linear Ease In Out":
+                    break;
+                case "Step Ease In":
+                case "Step Ease Out":
+                case "Step Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 0;
+                    }
+                    interp[^1] = 1;
+                    break;
+                case "Quadratic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x];
+                    }
+                    break;
+                case "Quadratic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
+                    }
+                    break;
+                case "Quadratic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
+                    }
+                    break;
+                case "Cubic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Cubic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 3);
+                    }
+                    break;
+                case "Cubic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
+                    }
+                    break;
+                case "Quartic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Quartic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 4);
+                    }
+                    break;
+                case "Quartic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
+                    }
+                    break;
+                case "Quintic Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
+                    }
+                    break;
+                case "Quintic Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Pow(1 - interp[x], 5);
+                    }
+                    break;
+                case "Quintic Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
+                    }
+                    break;
+                case "Sine Ease In":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
+                    }
+                    break;
+                case "Sine Ease Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
+                    }
+                    break;
+                case "Sine Ease In Out":
+                    for (int x = 0; x < interp.Length; x++) {
+                        interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
+                    }
+                    break;
+            }
+
+            return interp;
+        }
     }
 }
