@@ -8,13 +8,6 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, TreeNode> ObjectNodes = new();
         public static Dictionary<string, TreeNode> CategoryNodes = new();
         public static Dictionary<string, TreeNode> SampleNodes = new();
-        public static TreeNode FavoritesNode = new()
-        {
-            Text = "*FAVORITES*",
-            ImageKey = "fav",
-            SelectedImageKey = "fav",
-            ContextMenuStrip = contextMenuFavClear
-        };
         //
         public static ContextMenuStrip contextMenuFav = new();
         public static ToolStripMenuItem toolStripFavAdd = new();
@@ -22,6 +15,13 @@ namespace Thumper_Custom_Level_Editor
         public static ToolStripMenuItem toolStripFavRemove = new();
         public static ContextMenuStrip contextMenuFavClear = new();
         public static ToolStripMenuItem toolStripFavClear = new();
+        //
+        public static TreeNode FavoritesNode = new() {
+            Text = "*FAVORITES*",
+            ImageKey = "fav",
+            SelectedImageKey = "fav",
+            ContextMenuStrip = contextMenuFavClear
+        };
 
         public static void Initialize()
         {
@@ -139,20 +139,25 @@ namespace Thumper_Custom_Level_Editor
         {
             Object_Params obj = (Object_Params)FavNode.Tag;
             obj.favorite = Favorite;
+            string ImageKey = Favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}";
 
-            FavNode.ImageKey = Favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}";
-            FavNode.SelectedImageKey = FavNode.ImageKey;
+            FavNode.ImageKey = ImageKey;
+            FavNode.SelectedImageKey = ImageKey;
             FavNode.ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
+            //also set the node in the master tree to show favorite star
+            ObjectNodes[obj.obj_name + ";" + obj.param_path].ImageKey = ImageKey;
+            ObjectNodes[obj.obj_name + ";" + obj.param_path].SelectedImageKey = ImageKey;
+            ObjectNodes[obj.obj_name + ";" + obj.param_path].ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
         }
 
         public static void FilterTree(TreeView _tree, string txtSearch)
         {
             bool filtersearch = !string.IsNullOrWhiteSpace(txtSearch) && txtSearch != "Search Objects (Ctrl+;)";
             //store which node names were expanded before we clear the list
-            HashSet<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToHashSet();
+            //HashSet<string> ExpandNodes = _tree.Nodes.Cast<TreeNode>().Where(x => x.IsExpanded).Select(x => x.Text).ToHashSet();
             _tree.BeginUpdate();
             _tree.Nodes.Clear();
-            _tree.Nodes.Add(FavoritesNode);
+            _tree.Nodes.Add(CloneObjectNode(FavoritesNode, true));
             //clone the existing tree, then filter out nodes that dont match the search string
             foreach (TreeNode Category in CategoryNodes.Values) {
                 TreeNode _clonecategory = CloneCategoryNode(Category);
@@ -170,10 +175,10 @@ namespace Thumper_Custom_Level_Editor
             if (filtersearch)
                 _tree.ExpandAll();
             else {
-                foreach (TreeNode tn in _tree.Nodes) {
+                /*foreach (TreeNode tn in _tree.Nodes) {
                     if (ExpandNodes.Contains(tn.Text))
                         tn.Expand();
-                }
+                }*/
                 _tree.Nodes[0].Expand();
             }
             _tree.EndUpdate();
