@@ -119,25 +119,15 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
-        public static void DrawPlaybackBars(DataGridViewCellPaintingEventArgs e, int PlaybackStart, int PlaybackEnd, bool PlaybackLoop, string LoadedLeaf)
+        public static void DrawPlaybackBars(DataGridViewCellPaintingEventArgs e, int PlaybackStart, int PlaybackEnd, bool PlaybackLoop)
         {
             if (e.ColumnIndex == PlaybackStart) {
-                e.Graphics.DrawLine(PenCorn, new Point(e.CellBounds.Left, e.CellBounds.Top), new Point(e.CellBounds.Left, e.CellBounds.Bottom));
+                e.Graphics.DrawLine(PenCorn, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Left, e.CellBounds.Bottom);
             }
 
             if (e.ColumnIndex == PlaybackEnd) {
-                e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, new Point(e.CellBounds.Right - 3, e.CellBounds.Top), new Point(e.CellBounds.Right - 3, e.CellBounds.Bottom));
+                e.Graphics.DrawLine(PlaybackLoop ? PenGreen : PenRed, e.CellBounds.Right - 3, e.CellBounds.Top, e.CellBounds.Right - 3, e.CellBounds.Bottom);
             }
-            /*
-            if (Playback.IsPlaying && Playback.GlobalCurrentLeaf == LoadedLeaf && e.ColumnIndex == Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset)
-            {
-                e.Graphics.DrawLine(PenVioletThick, 
-                    e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), 
-                    -500, 
-                    e.CellBounds.Left + (int)(e.CellBounds.Width * Playback.PlaybackSubBeat), 
-                    e.CellBounds.Bottom);
-                
-            }*/
         }
 
         public static void DrawText(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq = null)

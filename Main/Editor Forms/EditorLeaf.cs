@@ -262,6 +262,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Scrollbars and Zoom
         private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            if (EditorIsTuning)
+                return;
             vscrollbarTrackEditor_Resize();
 
             LeafLanes = SequencerObjects.Where(x => x.ObjName.EndsWith(".leaf")).ToDictionary(x => x.FriendlyParam);
@@ -442,8 +444,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafCellPainting.SetCellBorders(e, trackEditor);
             //
             LeafCellPainting.DrawLaneDividers(e, seqref.ParamPathLane);
-            //Painting playback head and end
-            LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, this.WorkingFile.Name);
             //This block handles font scaling to draw the value in the cell bigger/smaller
             if (seqref.FriendlyParam is "lane center" or "lane left 1" or "lane left 2" or "lane right 1" or "lane right 2")
                 LeafCellPainting.DrawLaneEnds(e, seqref, LeafLanes);
@@ -459,14 +459,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.ColumnIndex < FrozenColumnOffset) {
                 LeafCellPainting.CellPaintFancy(e, trackEditor, SelectedRows, seqref);
                 LeafCellPainting.CellPaintIcons(e, this, seqref);
-                if (Playback.IsPlaying)
-                    LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop, this.WorkingFile.Name);
             }
             //draw a vertical line inside tuning layer row to show where selected cell is.
             else {
+                //Painting playback head and end
+                LeafCellPainting.DrawPlaybackBars(e, PlaybackStart, PlaybackEnd, PlaybackLoop);
+                //
                 LeafCellPainting.DrawSelection(e, trackEditor);
-                if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell && (seqref.Category == "PLAY SAMPLE" || seqref.ObjName == "_TuningLayerX"))
-                    e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
+                //if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell && (seqref.Category == "PLAY SAMPLE" || seqref.ObjName == "_TuningLayerX"))
+                    //e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
             }
         }
 
@@ -488,8 +489,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 PaintRowNormal(e);
 
             PaintForeground(e);
-            if (Playback.IsPlaying && e.RowIndex == SequencerObjects.Last(x => x.Visible).Index) 
-                PaintRowPlayback(e);
+            //if (Playback.IsPlaying && e.RowIndex == SequencerObjects.Last(x => x.Visible).Index) 
+                //PaintRowPlayback(e);
 
             RowCellPaintForeground = true;
             e.PaintHeader(true);
@@ -2577,7 +2578,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FriendlyParam = "⮝ Tuning Layer X",
                 DefaultValue = 0,
                 Step = false,
-                TraitType = Sequencer_Object.Trait.None,
+                TraitType = Sequencer_Object.Trait.Float,
                 HighlightColor = Color.FromArgb(40, 40, 40),
                 highlight_value = 0,
                 Footer = "",
@@ -2606,7 +2607,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.FriendlyParam = "⮝ Tuning Layer X";
             seq.DefaultValue = 0;
             seq.Step = false;
-            seq.TraitType = Sequencer_Object.Trait.None;
+            seq.TraitType = Sequencer_Object.Trait.Float;
             seq.HighlightColor = Color.FromArgb(40, 40, 40);
             seq.highlight_value = 0;
             seq.Footer = "";
@@ -3173,12 +3174,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 _properties.ParentEditor.LogUndo = false;
                 _properties.ParentEditor.EditorIsTuning = true;
-                Sequencer_Object SumOfLayers = new(_properties);
+                Sequencer_Object SumOfLayers = new(_properties) { TraitType = Sequencer_Object.Trait.Float };
                 _properties.ParentEditor.trackEditor.Rows.Add(SumOfLayers);
+                int _ = _properties.ParentEditor.trackEditor.Rows[^1].Index;
 
                 foreach (Sequencer_Object _layer in TuningLayers) {
-                    Sequencer_Object InterpolationCalc = new(_properties);
+                    Sequencer_Object InterpolationCalc = new(_properties) { TraitType = Sequencer_Object.Trait.Float};
                     _properties.ParentEditor.trackEditor.Rows.Add(InterpolationCalc);
+                    _ = _properties.ParentEditor.trackEditor.Rows[^1].Index;
                     SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
                     for (int n = 0; n < _datapoints.Length - 1; n++) {
