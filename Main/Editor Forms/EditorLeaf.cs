@@ -3203,7 +3203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             interp[x] = (double)(x) / (double)(interp.Length - 1);
                         }
                         //change interpolation formula based on settings on the datapoint
-                        interp = UtilMath.CalculateTuning(interp, $"{start.Interpolation} {start.Ease}");
+                        UtilMath.CalculateTuning(interp, $"{start.Interpolation} {start.Ease}");
                         
                         //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
                         if (_start == max) {

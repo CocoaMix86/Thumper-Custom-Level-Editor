@@ -179,7 +179,7 @@
             return (trackEditor.Columns[3].Width - trackEditor.FirstDisplayedScrollingColumnHiddenWidth) + trackEditor.RowHeadersWidth + (trackEditor.Columns[0].Width * 3) + 4;
         }
 
-        public static double[] CalculateTuning(double[] interp, string Type)
+        public static void CalculateTuning(double[] interp, string Type)
         {
             switch (Type) {
                 case "Linear Ease In":
@@ -270,8 +270,6 @@
                     }
                     break;
             }
-
-            return interp;
         }
     }
 }

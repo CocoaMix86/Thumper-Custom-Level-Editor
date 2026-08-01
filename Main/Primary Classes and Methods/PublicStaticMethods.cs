@@ -1,6 +1,4 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
-using NAudio.Wave;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
