@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using static System.Windows.Forms.DataFormats;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 {
@@ -37,7 +38,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         //Ring Colors
         public static Pen PenRings = new(new SolidBrush(Color.SkyBlue), 3);
         //
-        public static List<Pen> PenRailColors;
+        public static Dictionary<Color, Pen> RailPens = new();
+        public static List<Pen> PenRailColors = new();
         #endregion
         #region Functions
         public static void InitializeAndResize(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -91,17 +93,25 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void GetRailColors(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            PenRailColors = new();
+            PenRailColors.Clear();
             if (SequencerObjects.FirstOrDefault(x => x.FriendlyParam == "rail_color") is Sequencer_Object seq) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    PenRailColors.Add(new(Color.FromArgb((int)seq[beat].InGameValue), 2));
+                    PenRailColors.Add(GetRailPen(Color.FromArgb((int)seq[beat].InGameValue)));
                 }
             }
             else {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
-                    PenRailColors.Add(new(Color.FromArgb(147, 255, 80), 2));
+                    PenRailColors.Add(GetRailPen(Color.FromArgb(147, 255, 80)));
                 }
             }
+        }
+        static Pen GetRailPen(Color color)
+        {
+            if (!RailPens.TryGetValue(color, out var pen)) {
+                pen = new Pen(color, 2);
+                RailPens[color] = pen;
+            }
+            return pen;
         }
         public static void GetLanes(List<Sequencer_Object> SequencerObjects)
         {
@@ -243,17 +253,27 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         }        
         public static void DrawRailGlow(Graphics g, int beat, int offset, Point[] points, bool normal = false)
         {
-            LinearGradientBrush lgb = new(new Rectangle(beat * Width, offset, Width, Height), Color.Black, Color.Black, 90);
-            ColorBlend cblend = new(3) {
-                Colors = new Color[3] { Color.FromArgb(50, PenRailColors[beat].Color), Color.Transparent, Color.FromArgb(50, PenRailColors[beat].Color) },
-                Positions = new float[3] { 0f, 0.5f, 1f }
-            };
-            lgb.InterpolationColors = cblend;
-
+            LinearGradientBrush lgb = GetRailGlowBrush(Color.FromArgb(50, PenRailColors[beat].Color));
             if (normal)
-                g.FillRectangle(lgb, new Rectangle(beat * Width, offset, Width, Height));
+                g.FillRectangle(lgb, beat * Width, offset, Width, Height);
             else
                 g.FillPolygon(lgb, points);
+            
+        }
+        public static Dictionary<Color, LinearGradientBrush> RailGlows = new();
+        public static LinearGradientBrush GetRailGlowBrush(Color color)
+        {
+            if (!RailGlows.TryGetValue(color, out var brush)) {
+                brush = new(new Rectangle(0, 0, Width, Height), Color.Black, Color.Black, 90);
+                ColorBlend cblend = new(3) {
+                    Colors = new Color[3] { color, Color.Transparent, color },
+                    Positions = new float[3] { 0f, 0.5f, 1f }
+                };
+                brush.InterpolationColors = cblend;
+
+                RailGlows[color] = brush;
+            }
+            return brush;
         }
 
         public static void DrawThumps(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)

@@ -58,7 +58,7 @@ namespace Thumper_Custom_Level_Editor
         public void Load()
         {
             var settings = Properties.Settings.Default;
-
+            //iterates over each property in this class and gets the saved Settings.Default value for it, and sets it so it can be used.
             foreach (var property in GetType().GetProperties()) {
                 var attr = property.GetCustomAttribute<SettingNameAttribute>();
                 if (attr == null)

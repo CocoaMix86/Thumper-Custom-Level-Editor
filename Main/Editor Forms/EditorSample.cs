@@ -28,8 +28,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null) {
                 LoadSample(load);
                 UndoList.Add(new SaveState() {
-                    reason = "",
-                    savestate = load
+                    Reason = "",
+                    State = load
                 });
             }
             propertyGridSample.SelectedObject = SampleProperties;
@@ -560,12 +560,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Invalidate();
         }
 
-        public void PerformUndo(int undolistindex)
+        public override void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = this.Saved;
-            LoadSample(UndoList[undolistindex].savestate);
+            LoadSample(UndoList[undolistindex].State);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridSample.Refresh();
 
@@ -623,8 +623,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
-                    reason = Reason,
-                    savestate = _saveJSON
+                    Reason = Reason,
+                    State = _saveJSON
                 });
             }
             else {

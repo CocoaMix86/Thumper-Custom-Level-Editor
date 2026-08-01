@@ -2394,8 +2394,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Invalidate();
             //initialize undo base state to first load
             UndoList.Add(new SaveState() {
-                reason = "",
-                savestate = savestate
+                Reason = "",
+                State = savestate
             });
             //mark leaf is saved (just freshly loaded)
             EditorIsLoading = false;
@@ -2627,7 +2627,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Converted object to tuning layer");
         }
 
-        public void PerformUndo(int undolistindex)
+        public override void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
@@ -2636,9 +2636,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Sequencer_Object> _expanded = SequencerObjects.Where(x => x.ExpandLanesInEditor == true).ToList();
             List<Tuple<int, int>> _selection = trackEditor.SelectedCells.Cast<DataGridViewCell>().Select(x => new Tuple<int, int>(x.ColumnIndex, x.RowIndex)).ToList();
             //
-            LoadLeaf(UndoList[undolistindex].savestate);
-            LoadSequencer(UndoList[undolistindex].savestate["seq_objs"], LeafProperties, trackEditor);
-            LoadEnd(UndoList[undolistindex].savestate);
+            LoadLeaf(UndoList[undolistindex].State);
+            LoadSequencer(UndoList[undolistindex].State["seq_objs"], LeafProperties, trackEditor);
+            LoadEnd(UndoList[undolistindex].State);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridLeaf.Refresh();
             //restore expanded lanes
@@ -2720,8 +2720,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //update the undo list
                 if (LogUndo) {
                     UndoList.Insert(0, new SaveState() {
-                        reason = Reason,
-                        savestate = _saveJSON
+                        Reason = Reason,
+                        State = _saveJSON
                     });
                 }
                 LeafMasterView.DrawTrack(SequencerObjects, _leafproperties);

@@ -54,6 +54,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public virtual void Cut() { }
         public virtual void Paste() { }
         public virtual object GetProperties() { return null; }
+        public virtual void PerformUndo(int undolistindex) { }
 
         protected override void OnClosing(CancelEventArgs e)
         {

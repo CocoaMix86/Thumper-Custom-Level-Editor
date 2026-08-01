@@ -713,8 +713,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadEnd(dynamic savestate)
         {
             UndoList.Add(new SaveState() {
-                reason = "",
-                savestate = savestate
+                Reason = "",
+                State = savestate
             });
 
             TCLE.ProjectProperties.LevelSections = new() { "SECTION_LINEAR" };
@@ -726,12 +726,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Saved = true;
         }
 
-        public void PerformUndo(int undolistindex)
+        public override void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = this.Saved;
-            LoadMaster(UndoList[undolistindex].savestate);
+            LoadMaster(UndoList[undolistindex].State);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridMaster.Refresh();
 
@@ -790,8 +790,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
-                    reason = Reason,
-                    savestate = _saveJSON
+                    Reason = Reason,
+                    State = _saveJSON
                 });
             }
             else {

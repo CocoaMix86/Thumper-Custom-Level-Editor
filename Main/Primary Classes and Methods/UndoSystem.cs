@@ -5,35 +5,39 @@ namespace Thumper_Custom_Level_Editor
 {
     public class SaveState
     {
-        public string reason { get; set; }
-        public dynamic savestate { get; set; }
+        public string Reason { get; set; }
+        public dynamic State { get; set; }
     }
 
     public static class UndoSystem
     {
-        public static List<SaveState> UndoList;
-
-        private static readonly ToolStripDropDownMenu undomenu = new() {
+        /*private static readonly ToolStripDropDownMenu undomenu = new() {
             BackColor = Color.FromArgb(40, 40, 40),
             ShowCheckMargin = false,
             ShowImageMargin = false,
             ShowItemToolTips = false,
             MaximumSize = new Size(2000, 500)
-        };
+        };*/
 
         public static ToolStripDropDown CreateUndoMenu(List<SaveState> undolist)
         {
-            undomenu.Items.Clear();
-            UndoList = undolist;
+            ToolStripDropDownMenu undomenu = new() {
+                BackColor = Color.FromArgb(40, 40, 40),
+                ShowCheckMargin = false,
+                ShowImageMargin = false,
+                ShowItemToolTips = false,
+                MaximumSize = new Size(2000, 500)
+            };
 
-            foreach (SaveState s in UndoList) {
+            foreach (SaveState s in undolist) {
                 ToolStripMenuItem tmsi = new() {
-                    Text = s.reason
+                    Text = s.Reason
                 };
                 tmsi.MouseEnter += undoMenu_MouseEnter;
                 tmsi.Click += undoItem_Click;
                 tmsi.BackColor = Color.FromArgb(40, 40, 40);
                 tmsi.ForeColor = Color.White;
+                tmsi.Tag = undomenu.Items.Count;
                 undomenu.Items.Add(tmsi);
             }
             undomenu.Items.RemoveAt(undomenu.Items.Count - 1);
@@ -54,26 +58,16 @@ namespace Thumper_Custom_Level_Editor
         public static void undoItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tmsi = (ToolStripMenuItem)sender;
-            int index = tmsi.Owner.Items.IndexOf(tmsi);
+            int index = (int)tmsi.Tag;//Owner.Items.IndexOf(tmsi);
             UndoFunction(index + 1);
             UtilAudio.PlaySound("UIrevertchanges");
         }
 
         public static void UndoFunction(int undoindex)
         {
-            if (TCLE.GlobalActiveDocument is EditorRawText)
+            if (TCLE.GlobalActiveDocument is null or EditorRawText)
                 return;
-            if (TCLE.GlobalActiveDocument != null)
-                TCLE.GlobalActiveDocument.GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
-        }
-
-        public static void ClearReloadUndo(dynamic _load)
-        {
-            UndoList.Clear();
-            UndoList.Insert(0, new SaveState() {
-                reason = $"No changes",
-                savestate = null
-            });
+            TCLE.GlobalActiveDocument.PerformUndo(undoindex);// GetType().GetMethod("PerformUndo").Invoke(TCLE.GlobalActiveDocument, new object[] {undoindex});
         }
     }
 }

@@ -24,8 +24,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (load != null) {
                 LoadGate(load, filepath);
                 UndoList.Add(new SaveState() {
-                    reason = "",
-                    savestate = load
+                    Reason = "",
+                    State = load
                 });
             }
         }
@@ -651,7 +651,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (undolistindex > UndoList.Count - 1)
                 return;
             bool _trackNotSaved = this.Saved;
-            LoadGate(UndoList[undolistindex].savestate, this.WorkingFile);
+            LoadGate(UndoList[undolistindex].State, this.WorkingFile);
             UndoList.RemoveRange(0, undolistindex);
             propertyGridGate.Refresh();
 
@@ -712,8 +712,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 this.Text = this.WorkingFile.Name + "*";
                 //update the undo list
                 UndoList.Insert(0, new SaveState() {
-                    reason = Reason,
-                    savestate = _saveJSON
+                    Reason = Reason,
+                    State = _saveJSON
                 });
             }
             else {
