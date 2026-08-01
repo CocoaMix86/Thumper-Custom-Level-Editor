@@ -502,6 +502,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.PaintCells(e.RowBounds, e.PaintParts);
 
             if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
+                RowCellPaintForeground = true;
+                e.PaintCells(e.RowBounds, e.PaintParts);
+                RowCellPaintForeground = false;
                 return;
             }
             //setup variables to reference later when needed
@@ -1301,7 +1304,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Node.Text == "*FAVORITES*" || e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
 
-            Object_Params objmatch = TCLE.LeafObjects[(string)e.Node.Tag];
+            Object_Params objmatch = e.Node.Tag is Object_Params _obj ? _obj : TCLE.LeafObjects[(string)e.Node.Tag];
             if (e.Node.Text.EndsWith(".samp"))
                 objmatch = TCLE.LeafObjects["sample.samp;play"];
             if (objmatch == null)
