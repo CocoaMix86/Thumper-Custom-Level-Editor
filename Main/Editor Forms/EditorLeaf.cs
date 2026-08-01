@@ -487,6 +487,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 PaintRowNormal(e);
 
+            PaintForeground(e);
             if (Playback.IsPlaying && e.RowIndex == SequencerObjects.Last(x => x.Visible).Index) 
                 PaintRowPlayback(e);
 
@@ -508,7 +509,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.PaintCells(e.RowBounds, e.PaintParts);
 
             if (!SequencerObjects[e.RowIndex].Cells.Cast<SeqDataPoint>().Any(x => x.Value != null)) {
-                PaintForeground(e);
                 return;
             }
             //setup variables to reference later when needed
@@ -521,7 +521,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     RowPrePaintError = $@"{seqref.ObjName} does not exist in any .samp file in this project. Please add it, or remove the object in this leaf.";
                     seqref.HasShownError = true;
                 }
-                PaintForeground(e);
                 return;
             }
             //export pc file to playable file
@@ -551,7 +550,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            PaintForeground(e);
             if (samp.message != null) {
                 RowPrePaintError = samp.message;
                 samp.message = null;
@@ -566,8 +564,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
             int LengthOfObject = SequencerObjects[e.RowIndex].TrailLength;
-            if (LengthOfObject == 0)
+            if (LengthOfObject == 0) {
                 return;
+            }
             LengthOfObject--;
             int offsetportion = UtilMath.GetTrackOffset(trackEditor);
             int columnindex = trackEditor.FirstDisplayedScrollingColumnIndex - FrozenColumnOffset;
@@ -596,7 +595,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trailstop = sdp.beat + LengthOfObject;
                 }
             }
-            PaintForeground(e);
         }
         private void DrawLaneTrail(DataGridViewRowPrePaintEventArgs e, int LaneOffset, int columnindex, int cellwidth, int offsetportion, int verticaloffset, int LengthOfObject, SolidBrush alphaBrush)
         {
@@ -715,13 +713,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawBezier(TuningLine, _drawingpoints[x], midpoint, midpoint2, _drawingpoints[x + 1]);
                 e.Graphics.FillRectangle(TuningPoint, _drawingpoints[x].X - 4, _drawingpoints[x].Y - 4, 9, 9);
             }
-            //
-            PaintForeground(e);
         }
         private void PaintRowNormal(DataGridViewRowPrePaintEventArgs e)
         {
             e.PaintCells(e.RowBounds, e.PaintParts);
-            PaintForeground(e);
         }
         private void PaintRowPlayback(DataGridViewRowPrePaintEventArgs e)
         {
@@ -730,9 +725,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 -130,
                 e.RowBounds.Left + ((Playback.PlaybackBeat + FrozenColumnOffset - Playback.GlobalCurrentOffset + 7) * trackZoom.Value) + (int)(trackZoom.Value * Playback.PlaybackSubBeat) - trackEditor.HorizontalScrollingOffset,
                 e.RowBounds.Bottom);*/
-            RowCellPaintForeground = true;
-            e.PaintCells(e.RowBounds, e.PaintParts);
-            RowCellPaintForeground = false;
+            PaintForeground(e);
         }
         #endregion
 
