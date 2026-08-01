@@ -48,8 +48,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnRawImport = new Button();
             this.labelCollapsePanel2 = new Label();
             this.imageList1 = new ImageList(this.components);
-            this.contextMenuFav = new ContextMenuStrip(this.components);
-            this.toolStripFavAdd = new ToolStripMenuItem();
             this.vScrollBarTrackEditor = new VScrollBar();
             this.panelZoom = new Panel();
             this.labelScrollH = new Label();
@@ -107,10 +105,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerLeafSide = new SplitContainer();
             this.splitContainerTopbar = new SplitContainer();
             this.textEditor = new FastColoredTextBoxNS.FastColoredTextBox();
-            this.contextMenuFavRemove = new ContextMenuStrip(this.components);
-            this.toolStripFavRemove = new ToolStripMenuItem();
-            this.contextMenuFavClear = new ContextMenuStrip(this.components);
-            this.toolStripFavClear = new ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.panelObjects = new Panel();
@@ -153,7 +147,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.toolStripMenuItem16 = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).BeginInit();
-            this.contextMenuFav.SuspendLayout();
             this.panelZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).BeginInit();
             this.leafToolStrip.SuspendLayout();
@@ -167,8 +160,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerTopbar.Panel2.SuspendLayout();
             this.splitContainerTopbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.textEditor).BeginInit();
-            this.contextMenuFavRemove.SuspendLayout();
-            this.contextMenuFavClear.SuspendLayout();
             this.panelObjects.SuspendLayout();
             this.contextMenuObj.SuspendLayout();
             this.panelMasterView.SuspendLayout();
@@ -220,7 +211,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.btnRawImport.Location = new Point(0, 0);
             this.btnRawImport.Margin = new Padding(0);
             this.btnRawImport.Name = "btnRawImport";
-            this.btnRawImport.Size = new Size(54, 168);
+            this.btnRawImport.Size = new Size(54, 169);
             this.btnRawImport.TabIndex = 44;
             this.btnRawImport.Text = "Import Raw";
             this.toolTip1.SetToolTip(this.btnRawImport, "Imports all data in the textbox to\r\nthe current selected sequencer object.");
@@ -236,7 +227,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.labelCollapsePanel2.FlatStyle = FlatStyle.Popup;
             this.labelCollapsePanel2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             this.labelCollapsePanel2.ForeColor = Color.White;
-            this.labelCollapsePanel2.Location = new Point(0, 276);
+            this.labelCollapsePanel2.Location = new Point(0, 275);
             this.labelCollapsePanel2.Margin = new Padding(4, 0, 4, 0);
             this.labelCollapsePanel2.MaximumSize = new Size(16, 16);
             this.labelCollapsePanel2.MinimumSize = new Size(16, 16);
@@ -285,29 +276,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.imageList1.Images.SetKeyName(30, "TRACK FX.png");
             this.imageList1.Images.SetKeyName(31, "WIN & MISC.png");
             // 
-            // contextMenuFav
-            // 
-            this.contextMenuFav.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuFav.Items.AddRange(new ToolStripItem[] { this.toolStripFavAdd });
-            this.contextMenuFav.Name = "workingfolderRightClick";
-            this.contextMenuFav.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFav.Size = new Size(162, 26);
-            // 
-            // toolStripFavAdd
-            // 
-            this.toolStripFavAdd.ForeColor = Color.White;
-            this.toolStripFavAdd.Image = Properties.Resources.icon_fav;
-            this.toolStripFavAdd.Name = "toolStripFavAdd";
-            this.toolStripFavAdd.Size = new Size(161, 22);
-            this.toolStripFavAdd.Text = "Add To Favorites";
-            this.toolStripFavAdd.Click += this.toolStripFavAdd_Click;
-            // 
             // vScrollBarTrackEditor
             // 
             this.vScrollBarTrackEditor.Dock = DockStyle.Left;
             this.vScrollBarTrackEditor.Location = new Point(24, 30);
             this.vScrollBarTrackEditor.Name = "vScrollBarTrackEditor";
-            this.vScrollBarTrackEditor.Size = new Size(15, 261);
+            this.vScrollBarTrackEditor.Size = new Size(15, 260);
             this.vScrollBarTrackEditor.TabIndex = 144;
             this.vScrollBarTrackEditor.Visible = false;
             this.vScrollBarTrackEditor.Scroll += this.vScrollBarTrackEditor_Scroll;
@@ -410,7 +384,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.trackEditor.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.trackEditor.ShowCellErrors = false;
             this.trackEditor.ShowRowErrors = false;
-            this.trackEditor.Size = new Size(491, 261);
+            this.trackEditor.Size = new Size(491, 260);
             this.trackEditor.TabIndex = 40;
             this.trackEditor.Tag = "editorpaneldgv";
             this.trackEditor.RowHeadersWidthChanged += this.trackEditor_RowHeadersWidthChanged;
@@ -503,7 +477,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.leafToolStrip.Name = "leafToolStrip";
             this.leafToolStrip.Padding = new Padding(0);
             this.leafToolStrip.RenderMode = ToolStripRenderMode.System;
-            this.leafToolStrip.Size = new Size(24, 261);
+            this.leafToolStrip.Size = new Size(24, 260);
             this.leafToolStrip.Stretch = true;
             this.leafToolStrip.TabIndex = 142;
             // 
@@ -977,7 +951,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.splitContainerLeafSide.Panel2.Controls.Add(this.textEditor);
             this.splitContainerLeafSide.Panel2.Controls.Add(this.btnRawImport);
             this.splitContainerLeafSide.Size = new Size(530, 464);
-            this.splitContainerLeafSide.SplitterDistance = 291;
+            this.splitContainerLeafSide.SplitterDistance = 290;
             this.splitContainerLeafSide.SplitterWidth = 5;
             this.splitContainerLeafSide.TabIndex = 120;
             // 
@@ -1028,6 +1002,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.DisabledColor = Color.FromArgb(100, 180, 180, 180);
             this.textEditor.Dock = DockStyle.Fill;
             this.textEditor.FindForm = null;
+            this.textEditor.Font = new Font("Courier New", 9.75F);
             this.textEditor.ForeColor = Color.White;
             this.textEditor.GoToForm = null;
             this.textEditor.Hotkeys = resources.GetString("textEditor.Hotkeys");
@@ -1039,46 +1014,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.textEditor.ReplaceForm = null;
             this.textEditor.SelectionColor = Color.FromArgb(60, 0, 0, 255);
             this.textEditor.ServiceColors = (FastColoredTextBoxNS.ServiceColors)resources.GetObject("textEditor.ServiceColors");
-            this.textEditor.Size = new Size(476, 168);
+            this.textEditor.Size = new Size(476, 169);
             this.textEditor.TabIndex = 45;
             this.textEditor.Text = "sequencer object data";
             this.textEditor.ToolTipDelay = 100;
             this.textEditor.WordWrap = true;
             this.textEditor.Zoom = 100;
-            // 
-            // contextMenuFavRemove
-            // 
-            this.contextMenuFavRemove.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuFavRemove.Items.AddRange(new ToolStripItem[] { this.toolStripFavRemove });
-            this.contextMenuFavRemove.Name = "workingfolderRightClick";
-            this.contextMenuFavRemove.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFavRemove.Size = new Size(199, 26);
-            // 
-            // toolStripFavRemove
-            // 
-            this.toolStripFavRemove.ForeColor = Color.White;
-            this.toolStripFavRemove.Image = Properties.Resources.icon_remove2;
-            this.toolStripFavRemove.Name = "toolStripFavRemove";
-            this.toolStripFavRemove.Size = new Size(198, 22);
-            this.toolStripFavRemove.Text = "Remove From Favorites";
-            this.toolStripFavRemove.Click += this.toolStripFavRemove_Click;
-            // 
-            // contextMenuFavClear
-            // 
-            this.contextMenuFavClear.BackColor = Color.FromArgb(46, 46, 46);
-            this.contextMenuFavClear.Items.AddRange(new ToolStripItem[] { this.toolStripFavClear });
-            this.contextMenuFavClear.Name = "workingfolderRightClick";
-            this.contextMenuFavClear.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuFavClear.Size = new Size(152, 26);
-            // 
-            // toolStripFavClear
-            // 
-            this.toolStripFavClear.ForeColor = Color.White;
-            this.toolStripFavClear.Image = Properties.Resources.icon_remove2;
-            this.toolStripFavClear.Name = "toolStripFavClear";
-            this.toolStripFavClear.Size = new Size(151, 22);
-            this.toolStripFavClear.Text = "Clear Favorites";
-            this.toolStripFavClear.Click += this.toolStripFavClear_Click;
             // 
             // timer1
             // 
@@ -1583,7 +1524,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             this.Shown += this.Form_LeafEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.trackZoomVert).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.trackZoom).EndInit();
-            this.contextMenuFav.ResumeLayout(false);
             this.panelZoom.ResumeLayout(false);
             this.panelZoom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)this.trackEditor).EndInit();
@@ -1600,8 +1540,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ((System.ComponentModel.ISupportInitialize)this.splitContainerTopbar).EndInit();
             this.splitContainerTopbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)this.textEditor).EndInit();
-            this.contextMenuFavRemove.ResumeLayout(false);
-            this.contextMenuFavClear.ResumeLayout(false);
             this.panelObjects.ResumeLayout(false);
             this.panelObjects.PerformLayout();
             this.contextMenuObj.ResumeLayout(false);
@@ -1645,12 +1583,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripSplitButton btnLeafInterpLinear;
         private ContextMenuStrip contextMenuInterps;
-        private ContextMenuStrip contextMenuFav;
-        private ToolStripMenuItem toolStripFavAdd;
-        private ContextMenuStrip contextMenuFavRemove;
-        private ToolStripMenuItem toolStripFavRemove;
-        private ContextMenuStrip contextMenuFavClear;
-        private ToolStripMenuItem toolStripFavClear;
         private ToolStripMenuItem linearToolStripMenuItem;
         private ToolStripMenuItem quadraticToolStripMenuItem1;
         private ToolStripMenuItem quadraticEaseOutToolStripMenuItem;

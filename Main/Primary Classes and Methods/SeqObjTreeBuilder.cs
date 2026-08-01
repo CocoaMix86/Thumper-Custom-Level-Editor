@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor 
@@ -8,6 +7,7 @@ namespace Thumper_Custom_Level_Editor
     {
         public static Dictionary<string, TreeNode> ObjectNodes = new();
         public static Dictionary<string, TreeNode> CategoryNodes = new();
+        public static Dictionary<string, TreeNode> SampleNodes = new();
         public static TreeNode FavoritesNode = new()
         {
             Text = "*FAVORITES*",
@@ -55,7 +55,7 @@ namespace Thumper_Custom_Level_Editor
             Item.Click += Handler;
         }
 
-        private static void BuildMasterObjectTree()
+        public static void BuildMasterObjectTree()
         {
             ObjectNodes.Clear();
             CategoryNodes.Clear();
@@ -70,22 +70,7 @@ namespace Thumper_Custom_Level_Editor
                 CategoryNodes.Add(category.Key, CategoryNode);
                 //
                 if (category.Key == "PLAY SAMPLE") {
-                    //samples are not stored in LeafObjects, so we loop over a different list to find them
-                    //seperate samples into sub-nodes by the file they came from
-                    var sampleGroups = TCLE.ProjectSamples.Values.Where(x => x.File != null).GroupBy(x => x.File.Name);
-                    foreach (var file in sampleGroups) {
-                        if (string.IsNullOrEmpty(file.Key))
-                            continue;
-                        TreeNode sampfile = BuildNode(file.Key, "samp");
-                        ObjectNodes.Add(file.Key, sampfile);
-                        CategoryNode.Nodes.Add(sampfile);
-
-                        foreach (var samp in file) {
-                            TreeNode _param = BuildNode(samp.obj_name, "none", $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
-                            sampfile.Nodes.Add(_param);
-                            ObjectNodes.Add(samp.obj_name, _param);
-                        }
-                    }
+                    BuildSampleNodes();
                 }
                 else {
                     //each object becomes its own node
@@ -94,6 +79,28 @@ namespace Thumper_Custom_Level_Editor
                         CategoryNode.Nodes.Add(_param);
                         ObjectNodes.Add(obj.obj_name + ";" + obj.param_path, _param);
                     }
+                }
+            }
+        }
+
+        public static void BuildSampleNodes()
+        {
+            CategoryNodes["PLAY SAMPLE"].Nodes.Clear();
+            //
+            //samples are not stored in LeafObjects, so we loop over a different list to find them
+            //seperate samples into sub-nodes by the file they came from
+            var sampleGroups = TCLE.ProjectSamples.Values.Where(x => x.File != null).GroupBy(x => x.File.Name);
+            foreach (var file in sampleGroups) {
+                if (string.IsNullOrEmpty(file.Key))
+                    continue;
+                TreeNode sampfile = BuildNode(file.Key, "samp");
+                //ObjectNodes.Add(file.Key, sampfile);
+                CategoryNodes["PLAY SAMPLE"].Nodes.Add(sampfile);
+
+                foreach (var samp in file) {
+                    TreeNode _param = BuildNode(samp.obj_name, "none", $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
+                    sampfile.Nodes.Add(_param);
+                    //ObjectNodes.Add(samp.obj_name, _param);
                 }
             }
         }
@@ -149,11 +156,12 @@ namespace Thumper_Custom_Level_Editor
             //clone the existing tree, then filter out nodes that dont match the search string
             foreach (TreeNode Category in CategoryNodes.Values) {
                 TreeNode _clonecategory = CloneCategoryNode(Category);
+                bool PlaySample = _clonecategory.Text == "PLAY SAMPLE";
 
                 foreach (TreeNode Object in Category.Nodes) {
-                    if (!Object.Text.Contains(txtSearch))
+                    if (filtersearch && !Object.Text.Contains(txtSearch))
                         continue;
-                    _clonecategory.Nodes.Add(CloneObjectNode(Object));
+                    _clonecategory.Nodes.Add(CloneObjectNode(Object, PlaySample));
                 }
                 if (_clonecategory.Nodes.Count > 0)
                     _tree.Nodes.Add(_clonecategory);
@@ -179,10 +187,9 @@ namespace Thumper_Custom_Level_Editor
                 SelectedImageKey = Node.SelectedImageKey,
             };
         }
-        private static TreeNode CloneObjectNode(TreeNode Node)
+        private static TreeNode CloneObjectNode(TreeNode Node, bool CloneSubNodes)
         {
-            return new TreeNode
-            {
+            TreeNode NewNode = new() {
                 Text = Node.Text,
                 ImageKey = Node.ImageKey,
                 SelectedImageKey = Node.SelectedImageKey,
@@ -190,6 +197,12 @@ namespace Thumper_Custom_Level_Editor
                 ToolTipText = Node.ToolTipText,
                 Tag = Node.Tag
             };
+            if (CloneSubNodes) {
+                foreach (TreeNode Object in Node.Nodes) {
+                    NewNode.Nodes.Add(CloneObjectNode(Object, false));
+                }
+            }
+            return NewNode;
         }
         /*
         public static bool FilterNode(TreeNode _node, string txtSearch)

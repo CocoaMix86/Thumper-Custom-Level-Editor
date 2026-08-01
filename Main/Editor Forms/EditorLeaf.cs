@@ -1430,43 +1430,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 txtSearch.TextChanged += txtSearch_TextChanged;
             }
         }
-
-        private void toolStripFavAdd_Click(object sender, EventArgs e)
-        {
-            if (treeObjects.SelectedNode.ImageKey != "none")
-                return;
-            TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = true;
-            SeqObjTreeBuilder.UpdateTrees(false);
-        }
-
-        private void toolStripFavRemove_Click(object sender, EventArgs e)
-        {
-            string find = treeObjects.SelectedNode.Text;
-            if (treeObjects.SelectedNode.ImageKey == "fav") {
-                TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = false;
-                treeObjects.SelectedNode.SelectedImageKey = "none";
-                treeObjects.SelectedNode.ImageKey = "none";
-                treeObjects.SelectedNode.ContextMenuStrip = contextMenuFav;
-            }
-            else {
-                TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag].favorite = false;
-                treeObjects.SelectedNode.Remove();
-                TreeNode node = SeqObjTreeBuilder.FindNode(find, treeObjects.Nodes);
-                if (node != null) {
-                    node.SelectedImageKey = "none";
-                    node.ImageKey = "none";
-                    node.ContextMenuStrip = contextMenuFav;
-                }
-            }
-            SeqObjTreeBuilder.UpdateTrees(false);
-        }
-
-        private void toolStripFavClear_Click(object sender, EventArgs e)
-        {
-            foreach (Object_Params obj in TCLE.LeafObjects.Values)
-                obj.favorite = false;
-            SeqObjTreeBuilder.UpdateTrees(true);
-        }
         #endregion
 
         #region Buttons
