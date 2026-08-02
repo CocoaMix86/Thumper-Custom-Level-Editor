@@ -93,8 +93,8 @@ namespace Thumper_Custom_Level_Editor
             Instance = this;
             ProjectProperties = new() {
                 ProjectName = "",
-                description = "",
-                authornames = "",
+                Description = "",
+                AuthorNames = "",
                 BPM = 0,
                 WorkingFile = null
             };
@@ -475,9 +475,9 @@ namespace Thumper_Custom_Level_Editor
             }
             ProjectProperties = new() {
                 ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
-                difficulty = (string)ProjectJson["difficulty"] ?? "D0",
-                description = (string)ProjectJson["description"] ?? "Please add a description",
-                authornames = (string)ProjectJson["author"] ?? "a person",
+                Difficulty = (string)ProjectJson["difficulty"] ?? "D0",
+                Description = (string)ProjectJson["description"] ?? "Please add a description",
+                AuthorNames = (string)ProjectJson["author"] ?? "a person",
                 BPM = (decimal?)ProjectJson["bpm"] ?? 400m,
                 WorkingFile = TCL,
                 Thumbnail = Thumbnail
@@ -487,19 +487,19 @@ namespace Thumper_Custom_Level_Editor
             //load colors, with failover to White
             try {
                 dynamic railcolor = ProjectJson["rails_color"];
-                ProjectProperties.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                ProjectProperties.RailColor = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
                 dynamic railglowcolor = ProjectJson["rails_glow_color"];
-                ProjectProperties.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                ProjectProperties.RailGlowColor = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
                 dynamic pathcolor = ProjectJson["path_color"];
-                ProjectProperties.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+                ProjectProperties.PathColor = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
             } catch (Exception) {
-                ProjectProperties.rail = Color.White;
-                ProjectProperties.railglow = Color.White;
-                ProjectProperties.path = Color.White;
+                ProjectProperties.RailColor = Color.White;
+                ProjectProperties.RailGlowColor = Color.White;
+                ProjectProperties.PathColor = Color.White;
             }
             //update some visual elements
             toolstripLevelName.Text = ProjectProperties.ProjectName;
-            toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{ProjectProperties.difficulty}");
+            toolstripLevelName.Image = (Image)Properties.Resources.ResourceManager.GetObject($"difficulty_{ProjectProperties.Difficulty}");
             //add to recent files
             Properties.Settings.Default.Recentfiles.Remove(TCL.FullName);
             Properties.Settings.Default.Recentfiles.Insert(0, TCL.FullName);

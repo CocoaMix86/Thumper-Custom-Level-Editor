@@ -117,24 +117,17 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class MasterProperties
+    public class MasterProperties : EditorPropertiesBase
     {
         public MasterProperties(EditorMaster Parent)
         {
             ParentEditor = Parent;
             MasterLvls = new();
-            MasterLvls.ListChanged += ParentEditor.masterlvls_CollectionChanged;
+            MasterLvls.ListChanged += ((EditorMaster)ParentEditor).masterlvls_CollectionChanged;
         }
 
         [Browsable(false)]
-        public EditorMaster ParentEditor;
-        [Browsable(false)]
         public BindingList<MasterLvlData> MasterLvls;
-
-        [CategoryAttribute("General")]
-        [DisplayName("File Path")]
-        [Description("The full path to this file.")]
-        public string Filepath => ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Skybox")]
@@ -157,16 +150,6 @@ namespace Thumper_Custom_Level_Editor
         public string checkpointlvl { get; set; }
         [Browsable(false)]
         public int checkpointbeats;
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Beats")]
-        [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int Beats => introlevelbeats + MasterLvls.Sum(x => x.Beats) + MasterLvls.Sum(x => x.restlevelbeats) + (MasterLvls.Count(x => x.Checkpoint) * checkpointbeats);
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Runtime")]
-        [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
     }
 
     public class LvlList : StringConverter

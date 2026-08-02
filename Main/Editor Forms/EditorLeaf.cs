@@ -169,16 +169,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         };
         //
         //Local basic vars
-        private bool SimpleLoad;
-        public bool EditorIsLoading;
-        private bool EditorIsRandomizing;
-        private bool EditorIsMoving;
-        private bool EditorIsFinding;
-        private bool EditorIsPasting;
-        private bool EditorIsInterpolating;
-        private bool EditorIsTuning;
-        public bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
-        private bool LogUndo = true;
         public bool GlobalMute;
         public bool GlobalDisable;
         public bool GlobalExpand;
@@ -1744,7 +1734,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsPasting = true;
             //add copied Sequencer_Object to main _tracks list
             foreach (Sequencer_Object _newtrack in TCLE.ClipboardSequencer) {
-                Sequencer_Object clone = _newtrack.Clone(_leafproperties.Beats);
+                Sequencer_Object clone = _newtrack.Clone(_leafproperties.LeafLength);
                 clone.ParentLeaf = LeafProperties;
                 clone.ExpandLanesInEditor = GlobalExpand;
                 SequencerObjects.Insert(_index, clone);
@@ -2135,12 +2125,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         _seq.ObjName = LeafSplitAfter.WorkingFile.Name;
                 }
                 //reduce split leafs beat count and save
-                LeafSplitAfter._leafproperties.Beats = _leafproperties.Beats - splitindex;
+                LeafSplitAfter._leafproperties.LeafLength = _leafproperties.LeafLength - splitindex;
                 LeafSplitAfter.SaveCheckAndWrite(true, "");
                 LeafSplitAfter.Dispose();
 
                 //reduce beat count of the leaf that was just split and save it
-                LeafProperties.Beats = splitindex;
+                LeafProperties.LeafLength = splitindex;
                 SaveCheckAndWrite(true, "");
                 UtilAudio.PlaySound("UIleafsplit");
                 //load new leaf that was just split
@@ -2338,14 +2328,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
                     TimeSignature = (string)_load["time_sig"] ?? "4/4",
-                    _beats = (int?)_load["beat_cnt"] ?? 1,
+                    LeafLength = (int?)_load["beat_cnt"] ?? 1,
                 };
             }
             else if (this.WorkingFile.Extension == ".lvl") {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
                     TimeSignature = "4/4",
-                    _beats = ((LvlProperties)AltSequencer).Leafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).ApproachBeats + (((LvlProperties)AltSequencer).Leafs.Count(x => x.Beats == -1) * 2)
+                    LeafLength = ((LvlProperties)AltSequencer).Leafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).ApproachBeats + (((LvlProperties)AltSequencer).Leafs.Count(x => x.Beats == -1) * 2)
                 };
             }
             //check for template or regular file
@@ -2367,14 +2357,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LeafProperties = new(this) {
                     SequencerType = ".leaf",
                     TimeSignature = (string)_load["time_sig"] ?? "4/4",
-                    _beats = (int?)_load["beat_cnt"] ?? 1
+                    LeafLength = (int?)_load["beat_cnt"] ?? 1
                 };
             }
             else if (this.WorkingFile?.Extension is ".lvl" or null) {
                 LeafProperties = new(this) {
                     SequencerType = ".lvl",
                     TimeSignature = "4/4",
-                    _beats = ((LvlProperties)AltSequencer).Leafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).ApproachBeats + (((LvlProperties)AltSequencer).Leafs.Count(x => x.Beats == -1) * 2)
+                    LeafLength = ((LvlProperties)AltSequencer).Leafs.Select(x => x.Beats).Sum() + ((LvlProperties)AltSequencer).ApproachBeats + (((LvlProperties)AltSequencer).Leafs.Count(x => x.Beats == -1) * 2)
                 };
             }
 
@@ -2495,7 +2485,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (dp is JObject data_point) {
                     //if imported data is greater than leaf's beat count, skip it.
                     //but don't break, as beats could have been written in the file out of order
-                    if ((int)data_point["beat"] >= ObjectToImport.ParentLeaf._beats)
+                    if ((int)data_point["beat"] >= ObjectToImport.ParentLeaf.LeafLength)
                         continue;
                     SeqDataPoint data = ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset];
                     data.Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear";
@@ -2511,7 +2501,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Interpolation = "Linear",
                         Ease = TCLE.Easings["kEaseInOut"]
                     };
-                    if (int.Parse(((JProperty)dp).Name) >= ObjectToImport.ParentLeaf._beats)
+                    if (int.Parse(((JProperty)dp).Name) >= ObjectToImport.ParentLeaf.LeafLength)
                         continue;
                     ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset] = data;
                     ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
@@ -2690,7 +2680,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (_leafproperties == null) {
                     LeafProperties = new(this) {
                         TimeSignature = "4/4",
-                        _beats = FileIsNew ? 32 : LeafProperties.Beats
+                        LeafLength = FileIsNew ? 32 : LeafProperties.LeafLength
                     };
                 } //else
                   //leafProperties.FilePath = loadedleaf;
@@ -2703,7 +2693,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         public string GetEditorTitle() => $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
-        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
+        public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading || Playback.Generating)
                 return;
@@ -2751,7 +2741,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             //also force editor to reload the document
                             foreach (dynamic leafseq in _loadfile["leaf_seq"]) {
                                 if (leafseq["leaf_name"] == this.WorkingFile.Name) {
-                                    leafseq["beat_cnt"] = _leafproperties.Beats;
+                                    leafseq["beat_cnt"] = _leafproperties.LeafLength;
                                     changes = true;
                                 }
                             }
@@ -2787,10 +2777,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             int data = trackEditor.ColumnCount - FrozenColumnOffset;
 
-            if (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount) {
+            if (_leafproperties.LeafLength + FrozenColumnOffset > trackEditor.ColumnCount) {
                 if (!SimpleLoad) {
                     int _width = Properties.Settings.Default.ZoomHoriz;
-                    while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
+                    while (_leafproperties.LeafLength + FrozenColumnOffset > trackEditor.ColumnCount)
                         trackEditor.Columns.Add(new SequencerColumn() {
                             FillWeight = 0.0001f,
                             CellTemplate = new SeqDataPoint(),
@@ -2809,7 +2799,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         });
                 }
                 else {
-                    while (_leafproperties.Beats + FrozenColumnOffset > trackEditor.ColumnCount)
+                    while (_leafproperties.LeafLength + FrozenColumnOffset > trackEditor.ColumnCount)
                         trackEditor.Columns.Add(new SequencerColumn() {
                             FillWeight = 0.0001f,
                             CellTemplate = new SeqDataPoint(),
@@ -2819,7 +2809,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //TCLE.GenerateColumnStyle(Columns, FrozenColumnOffset);
             }
             else {
-                trackEditor.ColumnCount = _leafproperties.Beats + FrozenColumnOffset;
+                trackEditor.ColumnCount = _leafproperties.LeafLength + FrozenColumnOffset;
             }
 
             dgvMasterView.ColumnCount = trackEditor.ColumnCount - FrozenColumnOffset;
@@ -2829,13 +2819,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //make sure new cells follow the time sig
             TrackTimeSigHighlighting();
             //sets flag that leaf has unsaved changes
-            SaveCheckAndWrite(false, $"Leaf length changed {data} -> {_leafproperties.Beats}");
+            SaveCheckAndWrite(false, $"Leaf length changed {data} -> {_leafproperties.LeafLength}");
         }
 
         ///Import raw text from rich text box to selected row
         public static void TrackRawImport(Sequencer_Object seq, List<SeqDataPoint> data_points, LeafProperties _properties)
         {
-            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.Value is not null && x.beat < _properties.Beats).ToList();
+            List<SeqDataPoint> DataNotNull = data_points.Where(x => x.Value is not null && x.beat < _properties.LeafLength).ToList();
             //iterate over each data point, and fill cells
             foreach (SeqDataPoint data_point in DataNotNull) {
                 try {
@@ -3035,7 +3025,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (pastingrow + (sdp.OriginalRow - rowoffset) >= SequencerObjects.Count)
                     break;
                 //if copied beat is pasted beyond beatcount, skip it
-                if (pastingcol + (sdp.OriginalColumn - coloffset) >= LeafProperties.Beats + FrozenColumnOffset)
+                if (pastingcol + (sdp.OriginalColumn - coloffset) >= LeafProperties.LeafLength + FrozenColumnOffset)
                     continue;
                 SeqDataPoint target = SequencerObjects[pastingrow + (sdp.OriginalRow - rowoffset)][pastingcol + (sdp.OriginalColumn - coloffset)];
                 target.Value = sdp.Value;
@@ -3181,13 +3171,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _properties.ParentEditor.LogUndo = false;
                 _properties.ParentEditor.EditorIsTuning = true;
                 Sequencer_Object SumOfLayers = new(_properties) { TraitType = Sequencer_Object.Trait.Float };
-                _properties.ParentEditor.trackEditor.Rows.Add(SumOfLayers);
-                int _ = _properties.ParentEditor.trackEditor.Rows[^1].Index;
+                ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(SumOfLayers);
+                int _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
 
                 foreach (Sequencer_Object _layer in TuningLayers) {
                     Sequencer_Object InterpolationCalc = new(_properties) { TraitType = Sequencer_Object.Trait.Float};
-                    _properties.ParentEditor.trackEditor.Rows.Add(InterpolationCalc);
-                    _ = _properties.ParentEditor.trackEditor.Rows[^1].Index;
+                    ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(InterpolationCalc);
+                    _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
                     SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
 
                     for (int n = 0; n < _datapoints.Length - 1; n++) {
@@ -3232,13 +3222,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             SumOfLayers[m].Value = 0m;
                         SumOfLayers[m].Value = (decimal)SumOfLayers[m].Value + (decimal)(InterpolationCalc[m].Value ?? 0m);
                     }
-                    _properties.ParentEditor.trackEditor.Rows.Remove(InterpolationCalc);
+                    ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Remove(InterpolationCalc);
                 }
                 //write temp2 to the real object
                 for (int m = FrozenColumnOffset; m < TargetTuningLayer.Cells.Count; m++) {
                     TargetTuningLayer[m].Value = (decimal)(SumOfLayers[m].Value ?? 0m);
                 }
-                _properties.ParentEditor.trackEditor.Rows.Remove(SumOfLayers);
+                ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Remove(SumOfLayers);
             }
             finally {
                 _properties.ParentEditor.LogUndo = true;
@@ -3388,7 +3378,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(_leafproperties, PlaybackEnd - FrozenColumnOffset);
-                Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.Beats, PlaybackLoop);
+                Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.LeafLength, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll) 
                         trackEditor.HorizontalScrollingOffset = (int)Math.Round((Math.Max(0, Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat)) * trackZoom.Value);                    

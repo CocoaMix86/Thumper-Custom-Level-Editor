@@ -90,13 +90,13 @@ namespace Thumper_Custom_Level_Editor
 
             ProjectProperties NewProjectProperties = new() {
                 ProjectName = txtCustomName.Text,
-                difficulty = txtCustomDiff.Text,
-                description = txtDesc.Text,
-                authornames = txtCustomAuthor.Text,
+                Difficulty = txtCustomDiff.Text,
+                Description = txtDesc.Text,
+                AuthorNames = txtCustomAuthor.Text,
                 BPM = 400,
-                rail = Color.White,
-                railglow = Color.White,
-                path = Color.White,
+                RailColor = Color.White,
+                RailGlowColor = Color.White,
+                PathColor = Color.White,
                 WorkingFile = NewProject
             };
 

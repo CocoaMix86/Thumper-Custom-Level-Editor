@@ -95,8 +95,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool EditorLoading;
-        public bool SimpleLoad;
         public SampleProperties SampleProperties;
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         public BASSTimer _updateTimer = new(50);
@@ -493,7 +491,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set some visual elements
             this.Text = this.WorkingFile.Name;
             //set flag that load is in progress. This skips Save method
-            EditorLoading = true;
+            EditorIsLoading = true;
 
             SampleProperties = new(this);
             propertyGridSample.SelectedObject = SampleProperties;
@@ -521,7 +519,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///set save flag (samples just loaded, has no changes)
             SaveCheckAndWrite(true, "");
-            EditorLoading = false;
+            EditorIsLoading = false;
             this.Saved = true;
         }
         public void LoadSampleSimple(dynamic _load)
@@ -531,7 +529,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //set flag that load is in progress. This skips Save method
-            EditorLoading = true;
+            EditorIsLoading = true;
             SampleProperties = new(this);
             ///Clear form elements so new data can load
             SampleList.CollectionChanged -= _samplelist_CollectionChanged;
@@ -549,7 +547,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     Editor = this,
                 });
             }
-            EditorLoading = false;
+            EditorIsLoading = false;
             this.Saved = true;
         }
 
@@ -608,9 +606,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
+        public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorLoading)
+            if (EditorIsLoading)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();

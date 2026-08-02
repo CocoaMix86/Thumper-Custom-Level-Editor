@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
@@ -72,13 +71,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        public bool EditorLoading;
-        private bool SimpleLoad;
         private bool IsAddingItems;
         private bool GlobalCheckpoint;
         private bool GlobalPlayPlus;
         private bool GlobalIsolate;
-        private bool LogUndo = true;
         public BindingList<MasterLvlData> MasterLvls => MasterProperties.MasterLvls;
         public MasterProperties MasterProperties;
         private List<DataGridViewRow> SelectedRows = new();
@@ -665,7 +661,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MessageBox.Show("This does not appear to be a master file!");
                 return;
             }
-            EditorLoading = true;
+            EditorIsLoading = true;
 
             //setup new master properties
             masterLvlList.Rows.Clear();
@@ -722,7 +718,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.ProjectProperties.LevelSections.Add("SECTION_LINEAR");
             }
             ///set save flag (master just loaded, has no changes)
-            EditorLoading = false;
+            EditorIsLoading = false;
             this.Saved = true;
         }
 
@@ -775,9 +771,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
+        public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorLoading || !LogUndo || Playback.Generating)
+            if (EditorIsLoading || !LogUndo || Playback.Generating)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();

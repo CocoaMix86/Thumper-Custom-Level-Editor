@@ -114,9 +114,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         };
         //
         //Local basic vars
-        public bool SimpleLoad;
-        public bool EditorLoading;
-        private bool LogUndo = true;
         private bool IsAddingItems;
         public bool IsAllowedToAddLvl => !((GateProperties.GateLvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.GateLvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.GateLvls.Count >= 16 && GateProperties.Random));
         //
@@ -132,7 +129,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private GateProperties _gateproperties;
         private List<DataGridViewRow> SelectedRows = new();
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.GateLvls; } set { GateProperties.GateLvls = value; } }
-        public List<SaveState> UndoList = new();
         private DeserializeDockContent m_deserializeDockContent;
         public EditorBaseSub contentPropertyGrid = new() {
             TabText = "Properties",
@@ -588,7 +584,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //set flag that load is in progress. This skips Save method
-            EditorLoading = true;
+            EditorIsLoading = true;
 
             GateProperties = new(this) {
                 Boss = bossdata.FirstOrDefault(x => x.boss_spn == (string)_load["spn_name"])?.boss_name ?? bossdata[0].boss_name,
@@ -613,14 +609,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
 
-            EditorLoading = false;
+            EditorIsLoading = false;
             this.Saved = true;
             RecalculateRuntime();
         }
 
         public void LoadGateSimple(dynamic _load, FileInfo filepath)
         {
-            EditorLoading = true;
+            EditorIsLoading = true;
 
             GateProperties = new(this) {
                 Boss = bossdata.First(x => x.boss_spn == (string)_load["spn_name"]).boss_name,
@@ -641,12 +637,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 });
             }
 
-            EditorLoading = false;
+            EditorIsLoading = false;
             this.Saved = true;
             //RecalculateRuntime();
         }
 
-        public void PerformUndo(int undolistindex)
+        public override void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
@@ -697,9 +693,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
+        public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorLoading || !LogUndo)
+            if (EditorIsLoading || !LogUndo)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -776,7 +772,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntime()
         {
-            if (EditorLoading || _gateproperties == null)
+            if (EditorIsLoading || _gateproperties == null)
                 return 0;
             //depending on the gate configuration, it can have a different amount of lvls in it
             _gateproperties.MaximumLvls = 4;
@@ -813,7 +809,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public int RecalculateRuntimeSublevel(GateLvlData _lvl, int index)
         {
-            if (EditorLoading)
+            if (EditorIsLoading)
                 return 0;
 
             if (!ProjectExplorer.TryGetFile(_lvl.Lvlname, out FileInfo lvlfile) || !lvlfile.Exists)

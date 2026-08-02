@@ -2,9 +2,7 @@
 using System.ComponentModel.Design;
 using System.Drawing.Design;
 using System.Drawing.Imaging;
-using System.Reflection.Metadata;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -53,19 +51,19 @@ namespace Thumper_Custom_Level_Editor
 
         [Category("General Project Info")]
         [DisplayName("Author(s)")]
-        public string authornames { get; set; }
+        public string AuthorNames { get; set; }
 
         [Category("General Project Info")]
         [DisplayName("Difficulty")]
         [Description("")]
         [DefaultValue("D0")]
         [TypeConverter(typeof(DifficultyOptions))]
-        public string difficulty { get; set; }
+        public string Difficulty { get; set; }
 
         [Category("General Project Info")]
         [DisplayName("Description")]
         [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Category("General Project Info")]
         [DisplayName("Thumbnail")]
@@ -119,17 +117,17 @@ namespace Thumper_Custom_Level_Editor
         [Category("Level Properties")]
         [DisplayName("Rail Color")]
         [Description("Affects the rail color on the title screen.")]
-        public Color rail { get; set; }
+        public Color RailColor { get; set; }
 
         [Category("Level Properties")]
         [DisplayName("Rail Glow Color")]
         [Description("Affects the rail color on the title screen.")]
-        public Color railglow { get; set; }
+        public Color RailGlowColor { get; set; }
 
         [Category("Level Properties")]
         [DisplayName("Path Color")]
         [Description("Affects the rail color on the title screen.")]
-        public Color path { get; set; }
+        public Color PathColor { get; set; }
 
         [Browsable(false)]
         public List<string> LevelSections = new();

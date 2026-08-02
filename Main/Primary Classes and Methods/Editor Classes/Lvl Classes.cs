@@ -10,7 +10,7 @@ namespace Thumper_Custom_Level_Editor
         public LvlLeafData(LvlProperties _parent)
         {
             Parent = _parent;
-            Paths.ListChanged += Parent.ParentEditor.LvlPaths_ListChanged;
+            Paths.ListChanged += ((EditorLvl)Parent.ParentEditor).LvlPaths_ListChanged;
         }
         LvlProperties Parent;
 
@@ -27,6 +27,7 @@ namespace Thumper_Custom_Level_Editor
                 if (value == _beats)
                     return;
                 SetField(ref _beats, value);
+                Parent.Beats = Parent.Leafs.Sum(x => x.Beats);
                 if (_beats == -1) {
                     Runtime = "file not found";
                     BackColor = Color.Maroon;
@@ -95,7 +96,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class LvlProperties
+    public class LvlProperties : EditorPropertiesBase
     {
         public LvlProperties(EditorLvl Parent)
         {
@@ -103,13 +104,11 @@ namespace Thumper_Custom_Level_Editor
             SelectedLeaf = null;
             SequencerObjects = new();
             Leafs = new();
-            Leafs.ListChanged += ParentEditor.LvlLeaf_CollectionChanged;
+            Leafs.ListChanged += ((EditorLvl)ParentEditor).LvlLeaf_CollectionChanged;
             LvlLoops = new();
-            LvlLoops.ListChanged += ParentEditor.LvlLoop_CollectionChanged;
+            LvlLoops.ListChanged += ((EditorLvl)ParentEditor).LvlLoop_CollectionChanged;
         }
 
-        [Browsable(false)]
-        public EditorLvl ParentEditor;
         [Browsable(false)]
         public BindingList<LvlLeafData> Leafs;
         [Browsable(false)]
@@ -127,11 +126,6 @@ namespace Thumper_Custom_Level_Editor
         public BindingList<LvlLoop> LvlLoops { get; set; }
         [Browsable(false)]
         public LvlLeafData SelectedLeaf { get; set; }
-
-        [CategoryAttribute("General")]
-        [DisplayName("File Path")]
-        [Description("The full path to this file.")]
-        public string filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Approach Beats")]
@@ -163,17 +157,6 @@ namespace Thumper_Custom_Level_Editor
         [Description("Shows on-screen input hints for different objects as they approach.")]
         [TypeConverter(typeof(LvlTutorialType))]
         public string TutorialType { get; set; }
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Beats")]
-        [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int Beats => Leafs.Sum(x => x.Beats);
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Runtime")]
-        [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-
     }
 
     public class LvlTutorialType : StringConverter

@@ -37,12 +37,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             WriteFileLock(fs, JsonConvert.SerializeObject(_save, Formatting.Indented));
         }
 
-        public static dynamic LoadFileLock(string _selectedfilename, bool LoadText = false)
+        public static dynamic LoadFileLock(string _selectedfilename)
         {
-            return LoadFileLock(new FileInfo(_selectedfilename), LoadText);
+            return LoadFileLock(new FileInfo(_selectedfilename));
         }
 
-        public static dynamic LoadFileLock(FileInfo _selectedfilename, bool LoadText = false)
+        public static dynamic LoadFileLock(FileInfo _selectedfilename)
         {
             if (_selectedfilename is null || !_selectedfilename.Exists)
                 return null;
@@ -50,51 +50,25 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             ///https://stackoverflow.com/questions/1389155/easiest-way-to-read-text-file-which-is-locked-by-another-application
             using (FileStream fileStream = new(_selectedfilename.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader textReader = new(fileStream)) {
-                if (LoadText) {
-                    return textReader.ReadToEnd();
-                }
-                else {
-                    try {
-                        return JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
-                    } catch (Exception) {
-                        MessageBox.Show($"Failed to parse JSON in {_selectedfilename.FullName}.", "File load error");
-                        return null;
-                    }
+                try {
+                    return JsonConvert.DeserializeObject(textReader.ReadToEnd());
+                    //return JsonConvert.DeserializeObject(Regex.Replace(textReader.ReadToEnd(), "#.*", ""));
+                } catch (Exception) {
+                    MessageBox.Show($"Failed to parse JSON in {_selectedfilename.FullName}.", "File load error");
+                    return null;
                 }
             }
         }
-        /*
-        public static void DeleteFileLock(FileInfo filetodelete)
+
+        public static string LoadFileLockRaw(FileInfo _selectedfilename)
         {
-            if (lockedfiles.TryGetValue(filetodelete, out FileStream? value)) {
-                value.Close();
-                lockedfiles.Remove(filetodelete);
+            if (_selectedfilename is null || !_selectedfilename.Exists)
+                return null;
+            using (FileStream fileStream = new(_selectedfilename.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (StreamReader textReader = new(fileStream)) {
+                return textReader.ReadToEnd();
             }
-            filetodelete.Delete();
-            TCLE.FindEditorRunMethod(typeof(Form_LvlEditor), "RecalculateRuntime");
-            TCLE.FindEditorRunMethod(typeof(Form_GateEditor), "RecalculateRuntime");
-            TCLE.FindEditorRunMethod(typeof(Form_MasterEditor), "RecalculateRuntime");
-        }*/
-        /*
-        public static void CloseFileLock(FileInfo filetoclose)
-        {
-            if (filetoclose == null)
-                return;
-            if (lockedfiles.TryGetValue(filetoclose, out FileStream? value)) {
-                value.Close();
-                lockedfiles.Remove(filetoclose);
-            }
-        }*/
-        /*
-        public static void ClearFileLock()
-        {
-            //clear previously locked files
-            foreach (KeyValuePair<FileInfo, FileStream> i in lockedfiles) {
-                i.Value.Close();
-            }
-            lockedfiles.Clear();
-        }*/
-        /// 
+        }
 
         public static string CopyToWorkingFolderCheck(string filepath)
         {

@@ -22,6 +22,7 @@ namespace Thumper_Custom_Level_Editor
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
+        public static readonly Dictionary<string, int> LaneOffsets = new() { ["a01"] = 0, ["a02"] = -1, ["ent"] = -2, ["z01"] = -3, ["z02"] = -4 };
         public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
@@ -291,11 +292,11 @@ namespace Thumper_Custom_Level_Editor
             if (TryOpenImage(filepath))
                 return null;
             //if item is not an editor type, open raw
-            if (!ProjectExtensions.Contains(filepath.Extension.ToLower())) {
+            if (!ProjectExtensions.Contains(filepath.Extension, StringComparer.OrdinalIgnoreCase)) {
                 openraw = true;
             }
 
-            object _load = UtilFile.LoadFileLock(filepath, openraw);
+            object _load = openraw ? UtilFile.LoadFileLockRaw(filepath) : UtilFile.LoadFileLock(filepath);
             if (_load == null)
                 return null;
             //if there are no workspaces, add one
@@ -322,7 +323,7 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
                 //open document in raw viewer if that option was selected
-                if (openraw || !ProjectExtensions.Contains(filepath.Extension)) {
+                if (openraw || !ProjectExtensions.Contains(filepath.Extension, StringComparer.OrdinalIgnoreCase)) {
                     EditorRawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                     if (ReturnContent)
                         return rawtext;
@@ -532,24 +533,24 @@ namespace Thumper_Custom_Level_Editor
             dynamic ProjectConfig = UtilFile.LoadFileLock(LevelDetails.Directory.GetFiles("config_*.txt").FirstOrDefault());
             ProjectProperties Convert = new() {
                 ProjectName = (string)ProjectJson["level_name"] ?? "New Project",
-                difficulty = (string)ProjectJson["difficulty"] ?? "D0",
-                description = (string)ProjectJson["description"] ?? "Please add a description",
-                authornames = (string)ProjectJson["author"] ?? "a person",
+                Difficulty = (string)ProjectJson["difficulty"] ?? "D0",
+                Description = (string)ProjectJson["description"] ?? "Please add a description",
+                AuthorNames = (string)ProjectJson["author"] ?? "a person",
                 BPM = (decimal?)ProjectConfig["bpm"] ?? 400m
             };
             //load colors, with failover to White
             try {
                 Convert.BPM = (decimal?)ProjectConfig["bpm"] ?? 400m;
                 dynamic railcolor = ProjectConfig["rails_color"];
-                Convert.rail = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
+                Convert.RailColor = Color.FromArgb((int)(railcolor[0] * 255), (int)(railcolor[1] * 255), (int)(railcolor[2] * 255));
                 dynamic railglowcolor = ProjectConfig["rails_glow_color"];
-                Convert.railglow = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
+                Convert.RailGlowColor = Color.FromArgb((int)(railglowcolor[0] * 255), (int)(railglowcolor[1] * 255), (int)(railglowcolor[2] * 255));
                 dynamic pathcolor = ProjectConfig["path_color"];
-                Convert.path = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
+                Convert.PathColor = Color.FromArgb((int)(pathcolor[0] * 255), (int)(pathcolor[1] * 255), (int)(pathcolor[2] * 255));
             } catch (Exception) {
-                Convert.rail = Color.White;
-                Convert.railglow = Color.White;
-                Convert.path = Color.White;
+                Convert.RailColor = Color.White;
+                Convert.RailGlowColor = Color.White;
+                Convert.PathColor = Color.White;
             }
 
             foreach (FileInfo file in LevelDetails.Directory.GetFiles("*", SearchOption.AllDirectories)) {
@@ -634,14 +635,14 @@ namespace Thumper_Custom_Level_Editor
         {
             JObject _save = new() {
                 { "level_name", _properties.ProjectName },
-                { "difficulty", _properties.difficulty },
-                { "description", _properties.description },
-                { "author", _properties.authornames },
+                { "difficulty", _properties.Difficulty },
+                { "description", _properties.Description },
+                { "author", _properties.AuthorNames },
                 { "bpm", _properties.BPM },
                 { "level_sections", new JArray() {_properties.LevelSections} },
-                { "rails_color", new JArray() { _properties.rail.R / 255f, _properties.rail.G / 255f, _properties.rail.B / 255f, 1 } },
-                { "rails_glow_color", new JArray() { _properties.railglow.R / 255f, _properties.railglow.G / 255f, _properties.railglow.B / 255f, 1}},
-                { "path_color", new JArray() { _properties.path.R / 255f, _properties.path.G / 255f, _properties.path.B / 255f, 1 }},
+                { "rails_color", new JArray() { _properties.RailColor.R / 255f, _properties.RailColor.G / 255f, _properties.RailColor.B / 255f, 1 } },
+                { "rails_glow_color", new JArray() { _properties.RailGlowColor.R / 255f, _properties.RailGlowColor.G / 255f, _properties.RailGlowColor.B / 255f, 1}},
+                { "path_color", new JArray() { _properties.PathColor.R / 255f, _properties.PathColor.G / 255f, _properties.PathColor.B / 255f, 1 }},
                 { "joy_color", new JArray() { 1f, 1f, 1f, 1f } }
             };
             return _save;

@@ -15,6 +15,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             WorkingFile = _filetolock;
         }
 
+        public bool SimpleLoad;
+        public bool LogUndo = true;
+        public bool EditorIsLoading;
+        public bool EditorIsRandomizing;
+        public bool EditorIsMoving;
+        public bool EditorIsFinding;
+        public bool EditorIsPasting;
+        public bool EditorIsInterpolating;
+        public bool EditorIsTuning;
+        public bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
+
         public List<SaveState> UndoList = new();
         public bool RawText { get; set; }
         public bool NoLock { get; set; }
@@ -55,6 +66,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public virtual void Paste() { }
         public virtual object GetProperties() { return null; }
         public virtual void PerformUndo(int undolistindex) { }
+        public virtual void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false) { }
 
         protected override void OnClosing(CancelEventArgs e)
         {

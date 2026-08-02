@@ -44,20 +44,20 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         #region Functions
         public static void InitializeAndResize(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            if (Leaf == null || Leaf.ParentEditor.EditorIsProcessing || TCLE.IsClosing)
+            if (Leaf == null || ((EditorLeaf)Leaf.ParentEditor).EditorIsProcessing || TCLE.IsClosing)
                 return;
             //set size of picture to draw
-            Size pic = new(Width * Leaf.Beats, (Height * 5) + (Gap * 4) + 4);
+            Size pic = new(Width * Leaf.LeafLength, (Height * 5) + (Gap * 4) + 4);
             LayerTrack = new(pic.Width, pic.Height);
             Master = new(pic.Width, pic.Height);
             //initialize variables needed
             Middle = (pic.Height / 2) - (Height / 2);
             OffsetsDict = new() { { "a01", -1 * ((Height * 2) + (Gap * 2)) }, { "a02", -1 * (Height + Gap) }, { "ent", 0 }, { "z01", Height + Gap }, { "z02", ((Height * 2) + (Gap * 2)) } };
 
-            Leaf.ParentEditor.dgvMasterView.ColumnCount = Leaf.Beats;
-            foreach (DataGridViewColumn dgvc in Leaf.ParentEditor.dgvMasterView.Columns)
+            ((EditorLeaf)Leaf.ParentEditor).dgvMasterView.ColumnCount = Leaf.LeafLength;
+            foreach (DataGridViewColumn dgvc in ((EditorLeaf)Leaf.ParentEditor).dgvMasterView.Columns)
                 dgvc.Width = Width;
-            Leaf.ParentEditor.dgvMasterView.RowCount = 5;
+            ((EditorLeaf)Leaf.ParentEditor).dgvMasterView.RowCount = 5;
 
             DrawTrack(SequencerObjects, Leaf, false);
             DrawMaster(Leaf);
@@ -87,8 +87,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 g.Clear(Color.Black);
                 g.DrawImage(LayerTrack, 0, 0);
             }
-            Leaf.ParentEditor.dgvMasterView.MasterBG = Master;
-            Leaf.ParentEditor.dgvMasterView.Invalidate();
+            ((EditorLeaf)Leaf.ParentEditor).dgvMasterView.MasterBG = Master;
+            ((EditorLeaf)Leaf.ParentEditor).dgvMasterView.Invalidate();
         }
 
         public static void GetRailColors(List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
@@ -278,7 +278,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawThumps(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("thump_rails") || x.ParamPath.StartsWith("thump_boss_bonus") || x.ParamPath.StartsWith("thump_checkpoint") || x.ParamPath.StartsWith("thump_rails_fast_activat") || x.ParamPath.StartsWith("grindable_with_thump")))
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "thump_rails" or "thump_boss_bonus" or "thump_checkpoint" or "thump_rails_fast_activat" or "grindable_with_thump"))
             {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
@@ -300,7 +300,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Category == "JUMPS/SPIKES")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        int beats = seq.ParseTrailLength();
+                        int beats = seq.TrailLength;
                         DrawSpikeIcons(g, beat, Middle + OffsetsDict[seq.ParamPathLane], beats);
                     }
                 }

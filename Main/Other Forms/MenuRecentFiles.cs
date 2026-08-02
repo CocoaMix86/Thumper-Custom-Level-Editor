@@ -14,7 +14,7 @@ namespace Thumper_Custom_Level_Editor
             panelRecentFiles.BringToFront();
             foreach (string _projectpath in recentfiles) {
                 FileInfo tcl = new(_projectpath);
-                dynamic _tclinfo = UtilFile.LoadFileLock(_projectpath);
+                dynamic _tclinfo = UtilFile.LoadFileLock(tcl);
                 if (_tclinfo is null) {
                     dgvRecentFiles.Rows.Add("D0", Path.GetFileName(_projectpath), "some error occurred when trying to load the project details.");
                 }

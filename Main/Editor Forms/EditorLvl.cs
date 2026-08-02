@@ -102,13 +102,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #endregion
 
         #region Variables
-        private bool EditorIsLoading
-        {
-            get;
-            set;
-        }
-        public bool LogUndo = true;
-        private bool SimpleLoad;
         public LvlProperties LvlProperties
         {
             get { return _lvlproperties; }
@@ -1247,7 +1240,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return this.WorkingFile;
         }
 
-        public void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
+        public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
             if (EditorIsLoading || !LogUndo || Playback.Generating)
                 return;

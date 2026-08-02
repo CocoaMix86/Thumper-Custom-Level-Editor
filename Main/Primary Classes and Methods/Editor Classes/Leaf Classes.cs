@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
@@ -44,13 +45,12 @@ namespace Thumper_Custom_Level_Editor
     public class Sequencer_Object : DataGridViewRow
     {
         public LeafProperties ParentLeaf;
-
         public Sequencer_Object(LeafProperties _parent)
         {
             ParentLeaf = _parent;
             this.DividerHeight = 0;
             this.HeaderCell.Style.BackColor = Color.Black;
-            this.Height = ParentLeaf?.ParentEditor?.trackZoomVert?.Value ?? 0;
+            this.Height = ((EditorLeaf)ParentLeaf?.ParentEditor)?.trackZoomVert?.Value ?? 0;
             //for (int x = 0; x < ParentLeaf.Beats + EditorLeaf.FrozenColumnOffset; x++)
                 //this.Cells.Add(new SeqDataPoint());
         }
@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
             };
             //add all the datapoints of object
             JArray datapoints = new();
-            for (int _in = EditorLeaf.FrozenColumnOffset; _in < this.ParentLeaf.Beats + EditorLeaf.FrozenColumnOffset; _in++) {
+            for (int _in = EditorLeaf.FrozenColumnOffset; _in < this.ParentLeaf.LeafLength + EditorLeaf.FrozenColumnOffset; _in++) {
                 if (this[_in]?.Value == null)
                     continue;
                 datapoints.Add(this[_in].ConvertToJson());
@@ -130,16 +130,26 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public string ObjName { get; set; }
+
+        private string _parampath;
         public string ParamPath { 
             get => _parampath;
             set {
+                if (value == null)
+                    return;
                 _parampath = value;
-                ParamPathLane = this.ParamPath == null ? "none" : (this.ParamPath.Contains('.') ? this.ParamPath.Split('.')[1] : "none");
+                string[] _split = ParamPath.Split('.');
+                ParamPathBase = _split[0];
+                if (this.ParamPath.Contains('.'))
+                    ParamPathLane = _split[1];
+                else
+                    ParamPathLane = "none";
             }
         }
-        private string _parampath;
-        public string ParamPathLane;
+        public string ParamPathBase { get; set; }
+        public string ParamPathLane { get; set; } = "none";
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
+        public int LaneOffsetFromTop => TCLE.LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
         //
         public enum Trait { Bool, Action, Int, Color, Float, None }
         public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
@@ -154,6 +164,8 @@ namespace Thumper_Custom_Level_Editor
         public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
         //
         public bool Step { get; set; } = true;
+
+        private decimal _defaultvalue;
         public decimal DefaultValue
         {
             get => _defaultvalue;
@@ -162,10 +174,12 @@ namespace Thumper_Custom_Level_Editor
                 _defaultvalue = Convert.ToDecimal(TraitValidator.Sanitize(TraitType, value));
             }
         }
-        private decimal _defaultvalue;
+
         public string Footer { get; set; }
         public string Category { get; set; }
         public string FriendlyParam { get; set; }
+
+        private Color _highlightcolor;
         public Color HighlightColor
         {
             get => _highlightcolor;
@@ -174,9 +188,10 @@ namespace Thumper_Custom_Level_Editor
                 HighlightBrush.Color = value;
             }
         }
-        private Color _highlightcolor;
         public SolidBrush HighlightBrush = new(Color.Purple);
         public float highlight_value { get; set; }
+
+        private bool _enabledineditor = true;
         public bool EnabledInEditor
         {
             get => _enabledineditor;
@@ -186,8 +201,10 @@ namespace Thumper_Custom_Level_Editor
                 _enabledineditor = value;
             }
         }
-        private bool _enabledineditor = true;
+
         public bool IsDefault { get; set; }
+
+        private Bitmap _waveBitmap;
         public Bitmap WaveBitmap
         {
             get => _waveBitmap;
@@ -197,9 +214,8 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        private Bitmap _waveBitmap;
-        public int id { get; set; }
         public bool MuteInEditor { get; set; }
+        private bool _expandlanes;
         public bool ExpandLanesInEditor
         {
             get => _expandlanes;
@@ -212,20 +228,8 @@ namespace Thumper_Custom_Level_Editor
                 EditorLeaf.SetRowHeaderText(this);
             }
         }
-        private bool _expandlanes;
         public bool HasShownError { get; set; }
         public Bitmap TuningLayer { get; set; }
-        public List<Sequencer_Object?> Lanes
-        {
-            get {
-                if (FriendlyLane is "none")
-                    return new() { this };
-                //
-                return ParentLeaf.SequencerObjects.GetRange(this.Index + this.LaneOffsetFromTop, 5).Select(x => x.FriendlyParam == this.FriendlyParam ? x : null).ToList();
-            }
-        }
-        private static readonly Dictionary<string, int> LaneOffsets = new() { ["a01"] = 0, ["a02"] = -1, ["ent"] = -2, ["z01"] = -3, ["z02"] = -4 };
-        public int LaneOffsetFromTop => LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
 
         public void ClearDataPoints()
         {
@@ -258,7 +262,6 @@ namespace Thumper_Custom_Level_Editor
                 EnabledInEditor = true,
                 IsDefault = false,
                 MuteInEditor = false,
-                id = TCLE.rng.Next(),
                 ExpandLanesInEditor = false
             };
             clone.CloneCells(this, CellsToClone);
@@ -300,8 +303,7 @@ namespace Thumper_Custom_Level_Editor
                 EnabledInEditor = true,
                 IsDefault = true,
                 MuteInEditor = false,
-                ExpandLanesInEditor = showlane,
-                id = TCLE.rng.Next()
+                ExpandLanesInEditor = showlane
             };
             return clone;
         }
@@ -353,26 +355,7 @@ namespace Thumper_Custom_Level_Editor
                 return this.ColumnIndex - EditorLeaf.FrozenColumnOffset; 
             } 
         }
-        /*
-        [CategoryAttribute("Selected Data Point(s)")]
-        [DisplayName("Value")]
-        public object Value
-        {
-            get => _value;
-            set {
-                _value = value;
-                if (ParentSeqObj == null)
-                    return;
-                //if value changing on a tuning layer, recalc the values
-                if (((Sequencer_Object)this.OwningRow).obj_name == "_TuningLayerX") {
-                    Form_LeafEditor.CalculateTuningLayers(ParentSeqObj.parent, ParentSeqObj);
-                    ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
-                }
 
-                ParentSeqObj.isdefault = false;
-            }
-        }
-        private object _value;*/
         protected override bool SetValue(int rowIndex, object value)
         {
             //sanitize inputs based on the trait type
@@ -443,7 +426,6 @@ namespace Thumper_Custom_Level_Editor
         public int OriginalColumn { get; set; }
         public SeqDataPoint Clone()
         {
-            //SeqDataPoint sdp = (SeqDataPoint)MemberwiseClone();
             return new() { 
                 Value = Value,
                 Ease = Ease,
@@ -454,7 +436,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class LeafProperties
+    public class LeafProperties : EditorPropertiesBase
     {
         public LeafProperties(EditorLeaf Parent)
         {
@@ -468,7 +450,7 @@ namespace Thumper_Custom_Level_Editor
             JObject _save = new() {
                 { "obj_type", "SequinLeaf" },
                 { "obj_name", this.ParentEditor.WorkingFile.Name },
-                { "beat_cnt", this.Beats },
+                { "beat_cnt", this.LeafLength },
                 { "time_sig", this.TimeSignature }
             };
 
@@ -485,15 +467,11 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [Browsable(false)]
-        public EditorLeaf ParentEditor;
-        [Browsable(false)]
-        public DataGridView trackEditor => ParentEditor.trackEditor;
-        [Browsable(false)]
         public List<Sequencer_Object> SequencerObjects {
             get => _seqobjs;
             set {
                 _seqobjs = value;
-                ParentEditor.EnableLeafButtons();
+                ((EditorLeaf)ParentEditor).EnableLeafButtons();
             }
         }
         private List<Sequencer_Object> _seqobjs = new();
@@ -502,39 +480,13 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public string SequencerType { get; set; } = ".leaf";
 
-        [CategoryAttribute("General")]
-        [DisplayName("File Path")]
-        [Description("The full path to this file.")]
-        public string filepath => this.ParentEditor.WorkingFile.FullName;
-        /*
-        [Browsable(false)]
-        public FileInfo LoadedLeaf
-        {
-            get => _loadedleaf;
-            set {
-                if (_loadedleaf != value) {
-                    if (_loadedleaf != null)
-                        TCLE.CloseFileLock(_loadedleaf);
-                    _loadedleaf = value;
-                    if (!_loadedleaf.Exists) {
-                        using (StreamWriter sw = _loadedleaf.CreateText()) {
-                            sw.Write(' ');
-                            sw.Close();
-                        }
-                    }
-                    TCLE.AddFileLock(_loadedleaf);
-                }
-            }
-        }
-        private FileInfo _loadedleaf;
-        */
         [CategoryAttribute("Leaf Options")]
         [DisplayName("Leaf Length")]
         [Description("How many beats long this sequencer/leaf is.")]
         [Editor(typeof(LeafBeatLength), typeof(UITypeEditor))]
-        public int Beats
+        public int LeafLength
         {
-            get => _beats;
+            get => Beats;
             set {
                 if (SequencerType == ".leaf") {
                     if (value > 255)
@@ -543,44 +495,41 @@ namespace Thumper_Custom_Level_Editor
                         value = 1;
                 }
                 //cannot change beats if editing a non-leaf sequencer
+                else if (Beats == value)
+                    return;
                 else
                     return;
-                _beats = (int)value;
+                Beats = (int)value;
                 BeatsChangedSinceSave = true;
                 if (!ParentEditor.EditorIsLoading)
-                    ParentEditor.LeafLengthChanged();
+                    ((EditorLeaf)ParentEditor).LeafLengthChanged();
             }
         }
         [Browsable(false)]
-        public int _beats;
-        [Browsable(false)]
-        public int BeatsAndFrozen => _beats + EditorLeaf.FrozenColumnOffset;
+        public int BeatsAndFrozen => Beats + EditorLeaf.FrozenColumnOffset;
         [Browsable(false)]
         public bool BeatsChangedSinceSave = false;
 
-        [Category​Attribute("Editor")]
+        [CategoryAttribute("Editor")]
         [DisplayName("Set Time Sig")]
-        [Description("Editor only. Affects the column highlighting so you can see the measuers")]
-        public string timeedit
+        [Description("Editor only. Affects the column highlighting so you can see the measures")]
+        public string TimeEdit
         {
             get => TimeSignature;
             set {
                 //check if incoming value matches time sig pattern #/#
                 Match reg = Regex.Match(value, "(^\\d+\\/\\d+$)");
                 if (!reg.Success) {
-                    MessageBox.Show("Time signature input was not in a valid form.\nIt should follow \"#/#\".", "Custom Editor Thumper Level");
+                    MessageBox.Show("Time signature input was not in a valid form.\nIt should follow the pattern: \"#/#\".", "Custom Editor Thumper Level");
                     return;
                 }
 
                 if (!TCLE.TimeSignatures.Contains(value))
                     TCLE.TimeSignatures.Add(value);
-                _timesig = value;
-                ParentEditor.SaveCheckAndWrite(false, "Time signature changed");
-                if (!ParentEditor.EditorIsLoading)
-                    ParentEditor.TrackTimeSigHighlighting();
+                TimeSignature = value;
             }
         }
-        [Category​Attribute("Editor")]
+        [CategoryAttribute("Editor")]
         [DisplayName("Preset Time Sigs")]
         [Description("Editor only. Affects the column highlighting so you can see the measuers")]
         [TypeConverter(typeof(LeafTimeSignatures))]
@@ -593,8 +542,8 @@ namespace Thumper_Custom_Level_Editor
                 _timesig = value;
                 TimeTopBeat = timesigbeats;
                 if (!ParentEditor.EditorIsLoading)
-                    ParentEditor.TrackTimeSigHighlighting();
-                ParentEditor.SaveCheckAndWrite(false, "Time signature changed");
+                    ((EditorLeaf)ParentEditor).TrackTimeSigHighlighting();
+                ((EditorLeaf)ParentEditor).SaveCheckAndWrite(false, "Time signature changed");
             }
         }
         private string _timesig;
@@ -648,64 +597,64 @@ namespace Thumper_Custom_Level_Editor
         }
 
         [CategoryAttribute("Values (use hotkeys)")]
-        [DisplayName("Quick 0")]
-        [Description("Use hotkey to insert this value into selected cells.")]
-        [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue0 { get => TCLE.LeafQuickValues[0]; set => TCLE.LeafQuickValues[0] = value; }
-
-        [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 1")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue1 { get => TCLE.LeafQuickValues[1]; set => TCLE.LeafQuickValues[1] = value; }
+        public decimal QuickValue1 { get => TCLE.LeafQuickValues[1]; set => TCLE.LeafQuickValues[1] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 2")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue2 { get => TCLE.LeafQuickValues[2]; set => TCLE.LeafQuickValues[2] = value; }
+        public decimal QuickValue2 { get => TCLE.LeafQuickValues[2]; set => TCLE.LeafQuickValues[2] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 3")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue3 { get => TCLE.LeafQuickValues[3]; set => TCLE.LeafQuickValues[3] = value; }
+        public decimal QuickValue3 { get => TCLE.LeafQuickValues[3]; set => TCLE.LeafQuickValues[3] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 4")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue4 { get => TCLE.LeafQuickValues[4]; set => TCLE.LeafQuickValues[4] = value; }
+        public decimal QuickValue4 { get => TCLE.LeafQuickValues[4]; set => TCLE.LeafQuickValues[4] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 5")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue5 { get => TCLE.LeafQuickValues[5]; set => TCLE.LeafQuickValues[5] = value; }
+        public decimal QuickValue5 { get => TCLE.LeafQuickValues[5]; set => TCLE.LeafQuickValues[5] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 6")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue6 { get => TCLE.LeafQuickValues[6]; set => TCLE.LeafQuickValues[6] = value; }
+        public decimal QuickValue6 { get => TCLE.LeafQuickValues[6]; set => TCLE.LeafQuickValues[6] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 7")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue7 { get => TCLE.LeafQuickValues[7]; set => TCLE.LeafQuickValues[7] = value; }
+        public decimal QuickValue7 { get => TCLE.LeafQuickValues[7]; set => TCLE.LeafQuickValues[7] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 8")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue8 { get => TCLE.LeafQuickValues[8]; set => TCLE.LeafQuickValues[8] = value; }
+        public decimal QuickValue8 { get => TCLE.LeafQuickValues[8]; set => TCLE.LeafQuickValues[8] = value; }
 
         [CategoryAttribute("Values (use hotkeys)")]
         [DisplayName("Quick 9")]
         [Description("Use hotkey to insert this value into selected cells.")]
         [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
-        public decimal quickvalue9 { get => TCLE.LeafQuickValues[9]; set => TCLE.LeafQuickValues[9] = value; }
+        public decimal QuickValue9 { get => TCLE.LeafQuickValues[9]; set => TCLE.LeafQuickValues[9] = value; }
+
+        [CategoryAttribute("Values (use hotkeys)")]
+        [DisplayName("Quick 0")]
+        [Description("Use hotkey to insert this value into selected cells.")]
+        [Editor(typeof(LeafDecimalQuickValues), typeof(UITypeEditor))]
+        public decimal QuickValue0 { get => TCLE.LeafQuickValues[0]; set => TCLE.LeafQuickValues[0] = value; }
     }
 
     public class LeafTimeSignatures : StringConverter

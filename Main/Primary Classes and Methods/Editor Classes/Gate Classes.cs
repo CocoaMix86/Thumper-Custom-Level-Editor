@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 using Un4seen.Bass;
 
 namespace Thumper_Custom_Level_Editor
@@ -45,10 +46,8 @@ namespace Thumper_Custom_Level_Editor
         public string boss_ent { get; set; }
     }
 
-    public class GateProperties
+    public class GateProperties : EditorPropertiesBase
     {
-        [Browsable(false)]
-        public EditorGate ParentEditor;
         [Browsable(false)]
         public ObservableCollection<GateLvlData> GateLvls;
 
@@ -56,13 +55,8 @@ namespace Thumper_Custom_Level_Editor
         {
             ParentEditor = Parent;
             GateLvls = new();
-            GateLvls.CollectionChanged += ParentEditor.gatelvls_CollectionChanged;
+            GateLvls.CollectionChanged += ((EditorGate)ParentEditor).gatelvls_CollectionChanged;
         }
-
-        [CategoryAttribute("General")]
-        [DisplayName("File Path")]
-        [Description("The full path to this file.")]
-        public string Filepath => this.ParentEditor.WorkingFile.FullName;
 
         [CategoryAttribute("Options")]
         [DisplayName("Boss")]
@@ -74,8 +68,8 @@ namespace Thumper_Custom_Level_Editor
                 if (Random)
                     return;
                 _boss = value;
-                ParentEditor.RecalculateRuntime();
-                if (_boss == "Level 9 - pyramid" && !ParentEditor.EditorLoading)
+                ((EditorGate)ParentEditor).RecalculateRuntime();
+                if (_boss == "Level 9 - pyramid" && !ParentEditor.EditorIsLoading)
                     MessageBox.Show("Pyramid requires 5 phases to function. 4 for the fight, 1 for the death sequence. Otherwise the level will crash.", "Thumper Custom Level Editor");
             } }
         private string _boss;
@@ -119,22 +113,12 @@ namespace Thumper_Custom_Level_Editor
                 if (_random == true) {
                     Boss = "Level 6 - spirograph";
                 }
-                ParentEditor.RecalculateRuntime();
+                ((EditorGate)ParentEditor).RecalculateRuntime();
             }
         }
         private bool _random;
         [Browsable(false)]
         public int MaximumLvls;
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Beats")]
-        [Description("Total number of beats across all lvls and gates included in the master.")]
-        public int Beats => GateLvls.Sum(x => x.Beats) + prebeats + postbeats;
-
-        [CategoryAttribute("Runtime")]
-        [DisplayName("Runtime")]
-        [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
-        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
     }
 
     public class GateBossList : StringConverter
