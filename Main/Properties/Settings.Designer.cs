@@ -1122,5 +1122,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["muteduck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafOptionCategoryIcon {
+            get {
+                return ((bool)(this["LeafOptionCategoryIcon"]));
+            }
+            set {
+                this["LeafOptionCategoryIcon"] = value;
+            }
+        }
     }
 }

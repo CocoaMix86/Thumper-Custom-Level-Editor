@@ -112,6 +112,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private LvlProperties _lvlproperties;
         private List<DataGridViewRow> SelectedRows = new();
+        private List<DataGridViewRow> SelectedRowsPaths = new();
         public BindingList<LvlLeafData> LvlLeafs => LvlProperties.Leafs;
         public int SampChannel;
         private DeserializeDockContent m_deserializeDockContent;
@@ -225,7 +226,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (ModifierKeys.HasFlag(Keys.Control) || e.RowIndex == LastRow)
                 return;
             if (lvlLeafPaths.Rows[e.RowIndex].Selected) {
-                SelectedRows = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
+                SelectedRowsPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().ToList();
                 MouseDown = true;
             }
             else {
@@ -238,7 +239,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (ModifierKeys.HasFlag(Keys.Control) || !MouseDown)
                 return;
-            SelectedRows = new() { lvlLeafPaths.Rows[e.RowIndex] };
+            SelectedRowsPaths = new() { lvlLeafPaths.Rows[e.RowIndex] };
             lvlLeafPaths.ClearSelection();
             MouseDown = false;
         }
@@ -250,7 +251,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (MouseDown) {
                 lvlLeafPaths.SelectionChanged -= lvlLeafPaths_SelectionChanged;
                 lvlLeafPaths.ClearSelection();
-                foreach (DataGridViewRow dgvr in SelectedRows) {
+                foreach (DataGridViewRow dgvr in SelectedRowsPaths) {
                     if (dgvr.Index is not -1)
                         lvlLeafPaths.Rows[dgvr.Index].Selected = true;
                 }
@@ -925,7 +926,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else
                 TCLE.ClipboardPaths = lvlLeafPaths.SelectedRows.Cast<DataGridViewRow>().Select(x => LvlProperties.SelectedLeaf.Paths[x.Index]).ToList();
             //enable the paste button everywhere
-            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Name.EndsWith(".lvl")))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.OfType<EditorLvl>())
                 lvl.btnLvlPasteTunnel.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
@@ -1429,7 +1430,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ClipboardLvl.Reverse();
             //enable the paste button everywhere
             btnLvlLeafPaste.Enabled = true;
-            foreach (EditorLvl lvl in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)))
+            foreach (EditorLvl lvl in TCLE.Documents.Values.OfType<EditorLvl>())
                 lvl.btnLvlLeafPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }

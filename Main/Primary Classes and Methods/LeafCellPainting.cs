@@ -191,31 +191,36 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //paint the image
             //Object Toggle
             switch (e.ColumnIndex) {
+                case -1:
+                    if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.CategoryIcon != null) {
+                        e.Graphics.DrawImage(seq.CategoryIcon, e.CellBounds.Left + 10, y, 16, 16);
+                    }
+                    break;
                 case 0:
                     if (e.RowIndex == -1) {
-                        e.Graphics.DrawImage(Leaf.GlobalDisable ? Resources.icon_toggle_off : Resources.icon_toggle_on, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(Leaf.GlobalDisable ? Resources.icon_toggle_off : Resources.icon_toggle_on, x, y, IconWidth, IconHeight);
                     }
                     else {
-                        e.Graphics.DrawImage(seq.EnabledInEditor ? Resources.icon_toggle_on : Resources.icon_toggle_off, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(seq.EnabledInEditor ? Resources.icon_toggle_on : Resources.icon_toggle_off, x, y, IconWidth, IconHeight);
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
                     break;
                 //Audio Mute/Unmute
                 case 1:
                     if (e.RowIndex == -1) {
-                        e.Graphics.DrawImage(Leaf.GlobalMute ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(Leaf.GlobalMute ? Resources.icon_audio_mute : Resources.icon_audio, x, y, IconWidth, IconHeight);
                     }
                     else {
-                        e.Graphics.DrawImage(seq.MuteInEditor ? Resources.icon_audio_mute : Resources.icon_audio, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(seq.MuteInEditor ? Resources.icon_audio_mute : Resources.icon_audio, x, y, IconWidth, IconHeight);
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
                     break;
                 //Lane Expand
                 case 2:
                     if (e.RowIndex == -1)
-                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, x, y, IconWidth, IconHeight);
                     else if (seq.FriendlyLane == "lane center") {
-                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, new Rectangle(x, y, IconWidth, IconHeight));
+                        e.Graphics.DrawImage(Settings.Default.LeafOptionShowLane ? Resources.icon_lanesgray : Resources.icon_lanes, x, y, IconWidth, IconHeight);
                         Leaf.trackEditor[e.ColumnIndex, e.RowIndex].Selected = false;
                     }
                     break;
@@ -406,15 +411,20 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Pen GetArrowPen(Color color)
         {
             if (!TurnArrowPenCache.TryGetValue(color, out Pen pen)) {
-                TurnArrowPenCache[color] = new(new SolidBrush(UtilMath.Blend(color, Color.Black, 0.2)), 5) { EndCap = LineCap.Triangle };
+                TurnArrowPenCache[color] = new(new SolidBrush(UtilMath.Blend(color, Color.Black, 0.2)), 5) { 
+                    Color = UtilMath.Blend(color, Color.Black, 0.2),
+                    EndCap = LineCap.Triangle,
+                    CustomEndCap = new AdjustableArrowCap(3, 1)
+                };
+                pen = TurnArrowPenCache[color];
             }
             return pen; 
         }
         public static void DrawTurnAngles(DataGridViewCellPaintingEventArgs e, Sequencer_Object seq)
         {
             if (e.Value != null) {
-                using Pen ArrowPen = GetArrowPen(seq.HighlightColor);
-                ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
+                Pen ArrowPen = GetArrowPen(seq.HighlightColor);
+                //ArrowPen.CustomEndCap = new AdjustableArrowCap(3, 1);
                 //e.Graphics.DrawLine(ArrowPen, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top + (e.CellBounds.Height / 2));
 
                 // Convert the angle from degrees to radians, as Math.Cos and Math.Sin use radians

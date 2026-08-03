@@ -282,8 +282,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
-                        DrawThumpIcon(g, beat, Middle + OffsetsDict[seq.ParamPathLane], seq.ParamPath.StartsWith("thump_boss_bonus"));
-                        if (seq.ParamPath.StartsWith("grindable_with_thump"))
+                        DrawThumpIcon(g, beat, Middle + OffsetsDict[seq.ParamPathLane], seq.ParamPathBase is "thump_boss_bonus");
+                        if (seq.ParamPathBase is "grindable_with_thump")
                             DrawBarIcons(g, beat, (beat * Width) + Width, Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
                     }
                 }
@@ -315,35 +315,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawBars(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("grindable_still"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "grindable_still")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("center_multi"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "center_multi")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane], Middle + OffsetsDict[seq.ParamPathLane] + Height);
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("left_multi"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "left_multi")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + (Height / 2));
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("right_multi"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "right_multi")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] + (Height / 2), Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("grindable_double"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "grindable_double")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
@@ -351,7 +351,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("grindable_thirds"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "grindable_thirds")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
@@ -360,7 +360,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     }
                 }
             }
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("grindable_quarters"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "grindable_quarters")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawBarIcons(g, beat, (beat * Width) + (Width / 2), Middle + OffsetsDict[seq.ParamPathLane] - 6, Middle + OffsetsDict[seq.ParamPathLane] + Height + 5);
@@ -379,7 +379,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawRings(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPath.StartsWith("ducker_crak"))) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.ParamPathBase is "ducker_crak")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         DrawRingIcons(g, beat, Middle + OffsetsDict[seq.ParamPathLane]);

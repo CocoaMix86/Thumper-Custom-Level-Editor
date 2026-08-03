@@ -8,6 +8,7 @@ using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using Un4seen.Bass.AddOn.Cd;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -176,7 +177,15 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public string Footer { get; set; }
-        public string Category { get; set; }
+        public string Category { 
+            get => _category;
+            set {
+                _category = value;
+                CategoryIcon = ((EditorLeaf)ParentLeaf.ParentEditor).imageListCategoryIcons.Images[$"{value}.png"];
+            } 
+        }
+        private string _category;
+        public Image CategoryIcon;
         public string FriendlyParam { get; set; }
 
         private Color _highlightcolor;

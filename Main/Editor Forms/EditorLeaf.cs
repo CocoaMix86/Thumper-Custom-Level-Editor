@@ -1245,6 +1245,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //Clicking row headers to select the row
         private void trackEditor_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex == -1)
+                return;
             int lastpos = trackEditor.FirstDisplayedScrollingColumnIndex;
             if (trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                 return;
@@ -2857,7 +2859,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             SuspendDataGrids(true);
             foreach (Sequencer_Object seq in SequencerObjects) {
-                EditorLeaf.SetRowHeaderText(seq);
+                SetRowHeaderText(seq);
             }
             TCLE.ResizeHeaders(trackEditor);
             SuspendDataGrids(false);
@@ -2867,6 +2869,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void SetRowHeaderText(Sequencer_Object seq)
         {
             string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Category}] " : "";
+            ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $"    {ShowCategory}" : ShowCategory; 
             string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{seq.FriendlyParam}, {seq.FriendlyLane}" : seq.FriendlyParam;
             if (seq.Category == "PLAY SAMPLE")
                 //show the sample name instead

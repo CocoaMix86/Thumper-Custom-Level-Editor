@@ -675,6 +675,14 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private void leafoptionShowCategoryIcon_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.LeafOptionCategoryIcon = leafoptionShowCategoryIcon.Checked;
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
+                leaf.RefreshHeaders();
+            }
+        }
+
         private void leafoptionShowGrid_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.LeafOptionShowGrid = leafoptionShowGrid.Checked;

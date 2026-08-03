@@ -50,6 +50,12 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
             }
         }
 
+        protected override void OnCellMouseDown(DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex == -1) return;
+            base.OnCellMouseDown(e);
+        }
+
         public void ResetPlayback()
         {
             this.PlaybackPosition = -1;
