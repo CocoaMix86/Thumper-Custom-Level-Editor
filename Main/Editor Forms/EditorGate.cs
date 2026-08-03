@@ -802,6 +802,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             UpdateBeatPosition();
+            GateProperties.Beats = beattotal;
             if (!Playback.Generating)
                 gateLvlList.Invalidate();
             return beattotal;

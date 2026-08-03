@@ -837,6 +837,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 beattotal += RecalculateRuntimeSublevel(_lvl, false);
             }
             UpdateBeatPosition();
+            MasterProperties.Beats = beattotal;
             masterLvlList.Invalidate();
             return beattotal + MasterProperties.introlevelbeats;
         }

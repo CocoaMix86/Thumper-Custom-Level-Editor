@@ -181,7 +181,8 @@ namespace Thumper_Custom_Level_Editor
             get => _category;
             set {
                 _category = value;
-                CategoryIcon = ((EditorLeaf)ParentLeaf.ParentEditor).imageListCategoryIcons.Images[$"{value}.png"];
+                if (!Playback.Generating)
+                    CategoryIcon = ((EditorLeaf)ParentLeaf.ParentEditor).imageListCategoryIcons.Images[$"{value}.png"];
             } 
         }
         private string _category;
@@ -357,7 +358,7 @@ namespace Thumper_Custom_Level_Editor
 
         [Browsable(false)]
         public Sequencer_Object ParentSeqObj => (Sequencer_Object)this.OwningRow;
-        [CategoryAttribute("Selected Data Point(s)")]
+        [CategoryAttribute(" Selected Data Point(s)")]
         [DisplayName("Beat #")]
         public int beat { 
             get {
@@ -391,12 +392,12 @@ namespace Thumper_Custom_Level_Editor
             return _set;
         }
 
-        [CategoryAttribute("Selected Data Point(s)")]
+        [CategoryAttribute(" Selected Data Point(s)")]
         [DisplayName("In Game Value")]
         [Description("If cell has no value, this instead shows the default value of the sequencer object")]
         public decimal InGameValue => Value != null ? Convert.ToDecimal(Value) : ParentSeqObj.DefaultValue;
 
-        [CategoryAttribute("Selected Data Point(s)")]
+        [CategoryAttribute(" Selected Data Point(s)")]
         [DisplayName("Interp")]
         [TypeConverter(typeof(LeafInterpolations))]
         public string Interpolation { 
@@ -413,7 +414,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private string _interp = "Linear";
 
-        [CategoryAttribute("Selected Data Point(s)")]
+        [CategoryAttribute(" Selected Data Point(s)")]
         [DisplayName("Easing")]
         [TypeConverter(typeof(LeafEasings))]
         public string Ease
@@ -431,7 +432,9 @@ namespace Thumper_Custom_Level_Editor
         }
         private string _ease = "Ease In Out";
 
+        [Browsable(false)]
         public int OriginalRow { get; set; }
+        [Browsable(false)]
         public int OriginalColumn { get; set; }
         public SeqDataPoint Clone()
         {

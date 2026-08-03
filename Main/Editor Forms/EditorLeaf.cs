@@ -166,6 +166,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             { Color.DarkGray, new(Color.DarkGray) },
             { Color.Black, new(Color.Black) },
             { Color.White, new(Color.White) },
+            { Color.FromArgb(40, 40, 40), new(Color.FromArgb(40, 40, 40)) }
         };
         //
         //Local basic vars
@@ -2869,7 +2870,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void SetRowHeaderText(Sequencer_Object seq)
         {
             string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Category}] " : "";
-            ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $"    {ShowCategory}" : ShowCategory; 
+            ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $" {ShowCategory}" : ShowCategory; 
             string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{seq.FriendlyParam}, {seq.FriendlyLane}" : seq.FriendlyParam;
             if (seq.Category == "PLAY SAMPLE")
                 //show the sample name instead

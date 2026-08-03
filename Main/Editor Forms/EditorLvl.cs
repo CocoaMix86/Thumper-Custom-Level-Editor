@@ -1291,6 +1291,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!Playback.Generating)
                 lvlLeafList.Refresh();
             UpdateBeatPosition();
+            LvlProperties.Beats = beattotal;
             return beattotal;
         }
 
@@ -1304,7 +1305,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 if (!TCLE.CachedRuntimes.TryGetValue(leaffile.Name, out int runtime) || runtime == -1) {
                     _leaf.Beats = (int?)UtilFile.LoadFileLock(leaffile)["beat_cnt"] ?? -1;
-                    TCLE.CachedRuntimes[leaffile.Name] = runtime;
+                    TCLE.CachedRuntimes[leaffile.Name] = _leaf.Beats;
                 }
                 else
                     _leaf.Beats = runtime;
