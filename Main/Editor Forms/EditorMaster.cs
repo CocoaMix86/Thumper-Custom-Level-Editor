@@ -672,9 +672,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             this.Text = $"{this.WorkingFile.Name}";
             //calc intro lvl
-            MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.introlvl));
+            //MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(MasterProperties.introlvl, out FileInfo intro) ? intro : null);
             //calc checkpoint lvl
-            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(MasterProperties.checkpointlvl));
+            //MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo chk) ? chk : null);
 
             ///Clear form elements so new data can load
             MasterLvls.Clear();
@@ -817,21 +817,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //calc intro lvl
             if (!ProjectExplorer.TryGetFile(MasterProperties.introlvl, out FileInfo _introlvl))
                 MasterProperties.introlevelbeats = 0;
-            else if (!TCLE.CachedRuntimes.TryGetValue(_introlvl.Name, out int runtime)) {
-                MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl);
-                TCLE.CachedRuntimes[_introlvl.Name] = MasterProperties.introlevelbeats;
-            }
-            else
-                MasterProperties.introlevelbeats = runtime;
+            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl);            
             //calc checkpoint lvl
             if (!ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo _checkpointlvl))
                 MasterProperties.checkpointbeats = 0;
-            else if (!TCLE.CachedRuntimes.TryGetValue(_checkpointlvl.Name, out int runtime)) {
-                MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(_checkpointlvl);
-                TCLE.CachedRuntimes[_checkpointlvl.Name] = MasterProperties.checkpointbeats;
-            }
-            else
-                MasterProperties.checkpointbeats = runtime;
+            MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(_checkpointlvl);
             //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
                 beattotal += RecalculateRuntimeSublevel(_lvl, false);

@@ -121,6 +121,8 @@
             //load the gate to then loop through all lvls in it
             if (!ProjectExplorer.TryGetFile(gatename, out FileInfo gate))
                 return -1;
+            if (TCLE.CachedRuntimes.TryGetValue(gate.Name, out int runtime))
+                return runtime;
 
             _load = UtilFile.LoadFileLock(gate);
             //if gate not found, _load is null. Return -1 to denote this
@@ -150,13 +152,18 @@
             if (ProjectExplorer.TryGetFile((string)_load["post_lvl_name"], out FileInfo postlvl))
                 _beatcount += CalculateLvlRuntime(postlvl);            
 
+            TCLE.CachedRuntimes[gate.Name] = _beatcount;
             return _beatcount;
         }
 
         public static int CalculateLvlRuntime(FileInfo lvl)
         {
-            int _beatcount = 0;
+            if (lvl is null)
+                return 0;
+            if (TCLE.CachedRuntimes.TryGetValue(lvl.Name, out int runtime))
+                return runtime;
 
+            int _beatcount = 0;
             //load the lvl and then loop through its leafs to get beat counts
             dynamic _load = UtilFile.LoadFileLock(lvl);
             if (_load == null)
@@ -170,7 +177,7 @@
             }
             //every lvl has an approach beats to consider too
             //_beatcount += (int)_load["approach_beats"];
-
+            TCLE.CachedRuntimes[lvl.Name] = _beatcount;
             return _beatcount;
         }
 

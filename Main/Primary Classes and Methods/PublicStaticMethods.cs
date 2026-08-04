@@ -340,10 +340,10 @@ namespace Thumper_Custom_Level_Editor
                 OpenFile = new EditorMaster(_load, filepath);
             }
             else if (filepath.Extension == ".lvl") {
-                OpenFile = new EditorLvl(_load, filepath);
+                OpenFile = new EditorLvl(_load, filepath, Playback.Generating);
             }
             else if (filepath.Extension == ".gate") {
-                OpenFile = new EditorGate(_load, filepath);
+                OpenFile = new EditorGate(_load, filepath, Playback.Generating);
             }
             else if (filepath.Extension == ".leaf") {
                 OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);

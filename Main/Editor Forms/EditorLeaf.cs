@@ -188,6 +188,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private string RowPrePaintError;
         //
         //Local custom class vars
+        private LeafProperties _leafproperties;
         public LeafProperties LeafProperties
         {
             get { return _leafproperties; }
@@ -196,7 +197,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SaveCheckAndWrite(false, "Leaf Property Change");
             }
         }
-        private LeafProperties _leafproperties;
         private IEnumerable<DataGridViewColumn> Columns => trackEditor.Columns.Cast<DataGridViewColumn>().Where(x => x.Index >= FrozenColumnOffset);
         public object AltSequencer;
         private List<Sequencer_Object> SequencerObjects => _leafproperties?.SequencerObjects;

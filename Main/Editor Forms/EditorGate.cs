@@ -639,7 +639,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             EditorIsLoading = false;
             this.Saved = true;
-            //RecalculateRuntime();
+            RecalculateRuntime();
         }
 
         public override void PerformUndo(int undolistindex)
@@ -784,9 +784,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
-            _gateproperties.prebeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_gateproperties.prelvl));
+            _gateproperties.prebeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.prelvl, out FileInfo pre) ? pre : null);
             //calc post lvl beats
-            _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_gateproperties.postlvl));
+            _gateproperties.postbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.postlvl, out FileInfo post) ? post : null);
             //loop over each lvl and update the grid with runtime or a warning
             for (int i = 0; i < GateLvls.Count; i++) {
                 GateLvlData _lvl = GateLvls[i];

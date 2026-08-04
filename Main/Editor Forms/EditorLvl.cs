@@ -1128,7 +1128,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
             this.Saved = true;
-            //RecalculateRuntime();
+            RecalculateRuntime();
         }
 
         public void AddFiletoLvl(FileInfo FileToAdd, int index = -1)
