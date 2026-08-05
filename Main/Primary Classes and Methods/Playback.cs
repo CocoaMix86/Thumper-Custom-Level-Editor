@@ -314,6 +314,178 @@ namespace Thumper_Custom_Level_Editor
                     GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Concat(SequencerEvents[x]).ToList();
             }
         }
+        public static void CreatePlaybackFromLeaf(SimpleLeafProperties Leaf, int BeatStop = -1, int _BeatOffset = 0)
+        {
+            //show the loading message
+            TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.LeafName}";
+            TCLE.Instance.lblLoadingLeaf.Invalidate();
+            TCLE.Instance.lblLoadingLeaf.Update();
+            TCLE.Instance.lblLoadingLeaf.Refresh();
+            Application.DoEvents();
+            //
+            Generating = true;
+            BeatOffset = _BeatOffset;
+            SequencerEvents = new List<BASS_MIDI_EVENT>[23];
+            for (int x = 0; x < SequencerEvents.Length; x++) {
+                SequencerEvents[x] = new(Leaf.LeafLength + CallOffset);
+            }
+
+            LeafLastBeat = Leaf.LeafLength;
+            if (BeatStop >= 0) {
+                //BeatStop += 1;
+                LeafLastBeat = Math.Min(Leaf.LeafLength, BeatStop);
+            }
+            //if (Leaf.ParentEditor.WorkingFile != null)
+                GlobalLeafQueue.Add(new Tuple<string, int>(Leaf.LeafName, (BeatOffset) * 100));
+
+            foreach (SimpleSequencerObject Seq in Leaf.SequencerObjects) {
+                //don't playback disabled items
+                if (Seq.EnabledInEditor == false || Seq.MuteInEditor)
+                    continue;
+
+                int Key = 0;
+                int Call = 0;
+                int CallKey = 0;
+                if (Seq.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) || Seq.ObjName == "leafname") {
+                    if (Seq.FriendlyParam == "turn") {
+                        MidiEventsForTurns(Seq);
+                    }
+                    else if (Seq.FriendlyParam is "lane left 2" or "lane left 1" or "lane center" or "lane right 1" or "lane right 2") {
+                        MidiEventsForLanes(Seq);
+                    }
+                }
+                else if (Seq.ObjName == "avatar.lib" && Seq.FriendlyParam == "speed") {
+                    // MidiEventsForSpeed(Seq);
+                }
+                else if (Seq.ObjName.EndsWith(".samp", StringComparison.OrdinalIgnoreCase)) {
+                    MidiEventPlaySample(Seq);
+                }
+                else {
+                    switch (Seq.ObjName) {
+                        case "thump.spn":
+                            Key = 8;
+                            Call = 8;
+                            CallKey = 18;
+                            if (Seq.FriendlyParam == "thump[fast]")
+                                Call = 4;
+                            break;
+                        case "grindable.spn":
+                            Key = 19;
+                            Call = 8;
+                            CallKey = 1;
+                            break;
+                        case "grindable_multi.spn":
+                            if (Seq.FriendlyParam == "thump and bar") {
+                                Key = 8;
+                                Call = 8;
+                                CallKey = 18;
+                            }
+                            else {
+                                Key = 19;
+                                Call = 8;
+                                CallKey = 1;
+                            }
+                            break;
+                        case "ducker.spn":
+                            Key = 20;
+                            Call = 8;
+                            CallKey = 7;
+                            break;
+                        case "sentry.spn":
+                            Key = 14;
+                            Call = 0;
+                            CallKey = 0;
+                            break;
+                        case "millipede_quarter.spn":
+                            Key = 4;
+                            Call = 8;
+                            CallKey = 2;
+                            break;
+                        case "millipede_half.spn":
+                        case "millipede_half_decorative.spn":
+                        case "millipede_half_decorative_b.spn":
+                            Key = 5;
+                            Call = 8;
+                            CallKey = 2;
+                            break;
+                        case "jump.spn":
+                            Key = -1;
+                            Call = 8;
+                            CallKey = 6;
+                            break;
+                        case "jump_high.spn":
+                        case "jump_high_big_trees_set.spn":
+                        case "jump_high_spikes.spn":
+                            Key = -1;
+                            Call = 8;
+                            CallKey = 17;
+                            break;
+                    }
+
+                    if (Key == 0)
+                        continue;
+
+                    //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
+                    //instead, check for any beat set to 0.
+                    if (Seq.TraitType is SimpleSequencerObject.Trait.Bool or SimpleSequencerObject.Trait.Action && Seq.DefaultValue is 1) {
+                        for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
+                            if (Seq[beat]?.Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
+                                if (Seq.ObjName == "grindable_multi.spn") {
+                                    if (Seq.FriendlyParam == "bar[double]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "bar[triple]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "bar[quad]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "thump and bar") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.MuteInEditor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
+                            if (Seq[beat]?.Value != null && (decimal?)Seq[beat].Value != 0) {
+                                AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
+                                if (Seq.ObjName == "grindable_multi.spn") {
+                                    if (Seq.FriendlyParam == "bar[double]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "bar[triple]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.3333d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.6666d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "bar[quad]") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.25d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.50d, Key, Call, CallKey, Seq.MuteInEditor);
+                                        AddNoteToChannel(Seq[beat].beat + 0.75d, Key, Call, CallKey, Seq.MuteInEditor);
+                                    }
+                                    else if (Seq.FriendlyParam == "thump and bar") {
+                                        AddNoteToChannel(Seq[beat].beat + 0.5d, 19, 8, 1, Seq.MuteInEditor);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            MidiEventsForSentry(Leaf);
+            MidiEventsForSpeed(Leaf.SequencerObjects.FirstOrDefault(x => x.ObjName == "avatar.lib" && x.FriendlyParam == "speed"));
+            //copy over single leaf results to global so it doesn't get cleared
+            for (int x = 0; x < SequencerEvents.Length; x++) {
+                if (SequencerEvents[x].Count > 0)
+                    GlobalSequencerEvents[x] = GlobalSequencerEvents[x].Concat(SequencerEvents[x]).ToList();
+            }
+        }
 
         public static void CreatePlaybackFromLvl(LvlProperties Lvl, int BeatStop = -1, int _BeatOffset = 0)
         {
@@ -336,12 +508,18 @@ namespace Thumper_Custom_Level_Editor
             lvlseq.Dispose();
             //create playback for each leaf
             foreach (LvlLeafData leaf in Lvl.Leafs) {
+                SimpleLeafProperties _leafload = UtilCreate.SimpleLeaf(UtilFile.LoadFileLock(ProjectExplorer.TryGetFile(leaf.Leaf, out FileInfo _file) ? _file : null), _file);
+                Playback.CreatePlaybackFromLeaf(_leafload, _leafload.LeafLength + EditorLeaf.FrozenColumnOffset, beatoffset);
+                /*
                 EditorLeaf leaftoplay = (EditorLeaf)TCLE.OpenFile(ProjectExplorer.GetFile(leaf.Leaf), false, true);
                 if (leaftoplay == null)
                     continue;
                 Playback.CreatePlaybackFromLeaf(leaftoplay.LeafProperties, leaftoplay.LeafProperties.LeafLength + EditorLeaf.FrozenColumnOffset, beatoffset);
+                
                 beatoffset += leaf.Beats;
                 leaftoplay.Dispose();
+                */
+                beatoffset += _leafload.LeafLength;
             }
             //create midi events for the loop tracks
             Playback.MidiEventLoopTracks(Lvl, (_BeatOffset == 0 ? 0 : Lvl.ApproachBeats), _BeatOffset);
@@ -567,11 +745,11 @@ namespace Thumper_Custom_Level_Editor
         }
 
         public enum TurnState { None, Left, LongLeft, Right, LongRight };
-        public static void MidiEventsForTurns(Sequencer_Object Seq)
+        public static void MidiEventsForTurns(SimpleSequencerObject Seq)
         {
             //int _IsTurning = 0;
             TurnState _turnstate = TurnState.None;
-            SeqDataPoint _lastprocessedbeat = null;
+            SimpleSeqDataPoint _lastprocessedbeat = null;
             for (int x = EditorLeaf.FrozenColumnOffset; x < LeafLastBeat + EditorLeaf.FrozenColumnOffset; x++)
             {
                 _lastprocessedbeat = Seq[x];
@@ -638,7 +816,7 @@ namespace Thumper_Custom_Level_Editor
                 AddNoteToChannel(_lastprocessedbeat.beat, 22, 0, 0, true);
         }
 
-        public static void MidiEventsForLanes(Sequencer_Object Seq)
+        public static void MidiEventsForLanes(SimpleSequencerObject Seq)
         {
             //All Seqs that come through here will always be lanes. I don't have to test for other things.
             for (int x = 1; x < LeafLastBeat; x++)
@@ -665,11 +843,11 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void MidiEventsForSentry(LeafProperties Leaf)
+        public static void MidiEventsForSentry(SimpleLeafProperties Leaf)
         {
             List<BASS_MIDI_EVENT> EventsToAdd15 = new();
             List<BASS_MIDI_EVENT> EventsToAdd16 = new();
-            foreach (Sequencer_Object Seq in Leaf.SequencerObjects.Where(x => x.ObjName == "sentry.spn"))
+            foreach (SimpleSequencerObject Seq in Leaf.SequencerObjects.Where(x => x.ObjName == "sentry.spn"))
             {
                 int length = Seq.TrailLength;
                 /*switch (Seq.FriendlyParam) {
@@ -694,7 +872,7 @@ namespace Thumper_Custom_Level_Editor
                         break;
                 }*/
                 //Get all datapoints for the sentry that are 1
-                foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.InGameValue == 1)) {
+                foreach (SimpleSeqDataPoint sdp in Seq.Cells.Cast<SimpleSeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.InGameValue == 1)) {
                     //find thump events that fall inside the sentry activation time
                     foreach (BASS_MIDI_EVENT _event in SequencerEvents[8].Where(x => x.tick > ((sdp.beat + BeatOffset + CallOffset) *100) && x.tick <= (sdp.beat + length + BeatOffset + CallOffset) *100)) {
                         //if the sentry call event doesn't exist yet, add it (so we don't duplicate on sounds)
@@ -717,7 +895,7 @@ namespace Thumper_Custom_Level_Editor
         }
 
         private static int SpeedPitch = 8192;
-        public static void MidiEventsForSpeed(Sequencer_Object Seq)
+        public static void MidiEventsForSpeed(SimpleSequencerObject Seq)
         {
             //skipping for now since the logic doesn't quite work
             return;
@@ -743,7 +921,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public static void MidiEventPlaySample(Sequencer_Object Seq)
+        public static void MidiEventPlaySample(SimpleSequencerObject Seq)
         {
             if (!GlobalSamplesToPlay.Contains(Seq.ObjName)) {
                 GlobalSamplesToPlay.Add(Seq.ObjName);
@@ -759,7 +937,7 @@ namespace Thumper_Custom_Level_Editor
             //clamp
             velocity = Math.Clamp(velocity, 0, 127);
             //write each data point as a sample event
-            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>()) {
+            foreach (SimpleSeqDataPoint sdp in Seq.Cells.Cast<SimpleSeqDataPoint>()) {
                 if (sdp.Value == null || sdp.beat >= LeafLastBeat)
                     continue;
                 GlobalSampleEvents[_sampleIndex].Add(new(BASSMIDIEvent.MIDI_EVENT_NOTE, (int)MakeWord((byte)(_sampleIndex + 1), (byte)velocity), SequencerEvents.Length + GlobalSamplesToPlay.Count - 1, (sdp.beat + CallOffset + BeatOffset) * 100, 0));

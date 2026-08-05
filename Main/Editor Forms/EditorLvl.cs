@@ -1124,6 +1124,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next()
                 });
             }
+            LvlProperties.Beats = LvlProperties.Leafs.Sum(x => x.Beats);
 
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;

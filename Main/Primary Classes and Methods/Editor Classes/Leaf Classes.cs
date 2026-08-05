@@ -41,12 +41,24 @@ namespace Thumper_Custom_Level_Editor
                 _ => value
             };
         }
+        public static object Sanitize(SimpleSequencerObject.Trait trait, object value)
+        {
+            if (value == null)
+                return value;
+            return trait switch {
+                SimpleSequencerObject.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                SimpleSequencerObject.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                SimpleSequencerObject.Trait.Int => Math.Truncate((decimal)value),
+                SimpleSequencerObject.Trait.Color => Math.Truncate((decimal)value),
+                _ => value
+            };
+        }
     }
 
-    public class Sequencer_Object : DataGridViewRow
+    public class Sequencer_Object : SimpleSequencerObject
     {
         public LeafProperties ParentLeaf;
-        public Sequencer_Object(LeafProperties _parent)
+        public Sequencer_Object(LeafProperties _parent) : base(_parent)
         {
             ParentLeaf = _parent;
             this.DividerHeight = 0;
@@ -448,7 +460,7 @@ namespace Thumper_Custom_Level_Editor
         }
     }
 
-    public class LeafProperties : EditorPropertiesBase
+    public class LeafProperties : SimpleLeafProperties
     {
         public LeafProperties(EditorLeaf Parent)
         {
@@ -512,9 +524,10 @@ namespace Thumper_Custom_Level_Editor
                 else
                     return;
                 Beats = (int)value;
-                BeatsChangedSinceSave = true;
-                if (!ParentEditor.EditorIsLoading)
+                if (!ParentEditor.EditorIsLoading) {
+                    BeatsChangedSinceSave = true;
                     ((EditorLeaf)ParentEditor).LeafLengthChanged();
+                }
             }
         }
         [Browsable(false)]
