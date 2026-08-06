@@ -3380,8 +3380,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 timer1.Interval = 30;
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
+                SimpleLeafProperties _leafload = UtilCreate.SimpleLeaf(UtilFile.LoadFileLock(ProjectExplorer.TryGetFile(WorkingFile.Name, out FileInfo _file) ? _file : null), _file);
                 Playback.Initialize("leaf");
-                Playback.CreatePlaybackFromLeaf(_leafproperties, PlaybackEnd - FrozenColumnOffset);
+                Playback.CreatePlaybackFromLeaf(_leafload, PlaybackEnd);
                 Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.LeafLength, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     if (Properties.Settings.Default.LeafOptionPlaybackScroll) 
