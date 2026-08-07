@@ -254,6 +254,7 @@
     <PackageReference Include="Microsoft-Windows10-APICodePack-Shell">
       <Version>1.1.8</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.Memory" Version="10.0.10" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.4</Version>
