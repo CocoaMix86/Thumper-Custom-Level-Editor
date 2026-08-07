@@ -1,5 +1,4 @@
-﻿using Cyotek.Windows.Forms;
-using Thumper_Custom_Level_Editor.Editor_Panels;
+﻿using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
@@ -26,7 +25,9 @@ namespace Thumper_Custom_Level_Editor
         }
 
         #region Variables
-        private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        //private ColorPickerDialog colorDialog = new() { BackColor = Color.FromArgb(40, 40, 40), ForeColor = Color.White };
+        //public static AdamsLair.WinForms.ColorControls.ColorPickerDialog colorDialog = new();
+        public ColorDialog colorDialog = new();
         private Dictionary<string, Keys> DictKeybind = new();
         private Dictionary<string, Keys> DictRandomization = new();
         #endregion

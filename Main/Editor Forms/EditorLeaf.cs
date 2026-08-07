@@ -6,6 +6,7 @@ using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Thumper_Custom_Level_Editor.Utility_Classes;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
+using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -189,6 +190,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         //
         //Local custom class vars
         private LeafProperties _leafproperties;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public LeafProperties LeafProperties
         {
             get { return _leafproperties; }

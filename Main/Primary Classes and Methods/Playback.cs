@@ -1,4 +1,6 @@
 ﻿using System.IO.Compression;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.Arm;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
@@ -6,6 +8,15 @@ using Un4seen.Bass.AddOn.Midi;
 
 namespace Thumper_Custom_Level_Editor
 { 
+    public class SpeedEvent
+    {
+        public BASSMIDIEvent EventType { get; set; }
+        public int Value { get; set; }
+        public int Tick { get; set; }
+        public int Channel { get; set; }
+        public string Interpolation { get; set; }
+    }
+
     public static class Playback
     {
         public static bool IsPlaying {
@@ -80,6 +91,8 @@ namespace Thumper_Custom_Level_Editor
                 // +8 for lead time
                 GlobalSequencerEvents[x] = new();
             }
+            SpeedPitchEvents.Clear();
+            SpeedTempoEvents.Clear();
             //write soundfont to file if it doesn't exist
             if (!File.Exists($@"{TCLE.AppLocation}\temp\Thumper Sequencer.sf2")) {
                 File.WriteAllBytes($@"{TCLE.AppLocation}\temp\Thumper Sequencer.zip", Properties.Resources.ThumperSequencerZip);
@@ -895,21 +908,40 @@ namespace Thumper_Custom_Level_Editor
         }
 
         private static int SpeedPitch = 8192;
+        private static List<SpeedEvent> SpeedTempoEvents = new();
+        private static List<SpeedEvent> SpeedPitchEvents = new();
         public static void MidiEventsForSpeed(SimpleSequencerObject Seq)
         {
             //skipping for now since the logic doesn't quite work
-            return;
+            //return;
             if (Seq == null)
                 return;
 
-            foreach (SeqDataPoint sdp in Seq.Cells.Cast<SeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
-                SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.Value), 0, (sdp.beat + CallOffset) * 100, 0));
+            foreach (SimpleSeqDataPoint sdp in Seq.Cells.Cast<SimpleSeqDataPoint>().Where(x => x.beat < LeafLastBeat && x.Value != null)) {
                 //log 2 speed value to get octaves, times 12 for semitones
                 double semitones = Math.Log2((double)(decimal)sdp.Value) * 12;
                 //each semitone takes 136.5 units on the pitchwheel
                 double pitchadjust = semitones * 136.5;
+                //
+                SpeedTempoEvents.Add(new() {
+                    EventType = BASSMIDIEvent.MIDI_EVENT_TEMPO,
+                    Value = (int)(Microseconds / (double)(decimal)sdp.Value),
+                    Channel = 0,
+                    Tick = (sdp.beat + CallOffset + BeatOffset) * 100,
+                    Interpolation = $"{sdp.Interpolation} {sdp.Ease}"
+                });
+                SpeedPitchEvents.Add(new() {
+                    EventType = BASSMIDIEvent.MIDI_EVENT_PITCH,
+                    Value = (int)(SpeedPitch + pitchadjust),
+                    Channel = -1,
+                    Tick = (sdp.beat + CallOffset + BeatOffset) * 100,
+                    Interpolation = $"{sdp.Interpolation} {sdp.Ease}"
+                });
+                /*
+                SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_TEMPO, (int)(Microseconds / (double)(decimal)sdp.Value), 0, (sdp.beat + CallOffset + BeatOffset) * 100, 0));
+                SpeedEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), 0, ((sdp.beat + CallOffset + BeatOffset) * 100) - 1, 0));
                 foreach (List<BASS_MIDI_EVENT> listevents in GlobalSampleEvents) {
-                    listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), SequencerEvents.Length + GlobalSampleEvents.IndexOf(listevents), ((sdp.beat + CallOffset) * 100) - 1, 0));
+                    listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), SequencerEvents.Length + GlobalSampleEvents.IndexOf(listevents), ((sdp.beat + CallOffset + BeatOffset) * 100) - 1, 0));
                 }
                 for (int x = 1; x < SequencerEvents.Length; x++) {
                     //skip pitch shifting thumps
@@ -918,7 +950,151 @@ namespace Thumper_Custom_Level_Editor
                     SequencerEvents[x].Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, (int)(SpeedPitch + pitchadjust), x, ((sdp.beat + CallOffset) * 100) - 1, 0));
                 }
                 //SequencerEvents[0].Add(new(BASSMIDIEvent.MIDI_EVENT_SPEED, (int)(10_000 * (decimal)sdp.Value), 0, (sdp.beat + CallOffset) * 100, 0));
+                */
             }
+        }
+
+        public static void ApplySpeedEvents()
+        {
+            if (SpeedPitchEvents.Count < 2 || SpeedTempoEvents.Count < 2)
+                return;
+            List<BASS_MIDI_EVENT> TempoInterp = InterpolateSpeedEvents(SpeedTempoEvents);
+            GlobalSequencerEvents[0].AddRange(TempoInterp);
+
+            //List<BASS_MIDI_EVENT> PitchInterp = InterpolateSpeedEvents(SpeedPitchEvents);            
+            for (int x = 0; x < TempoInterp.Count; x++) {
+                BASS_MIDI_EVENT _speedevent = TempoInterp[x];
+                double basevalue = Microseconds / _speedevent.param;
+                //log 2 speed value to get octaves, times 12 for semitones
+                double semitones = Math.Log2(basevalue) * 12;
+                //each semitone takes 136.5 units on the pitchwheel
+                double pitchadjust = semitones * 136.5;
+                foreach (List<BASS_MIDI_EVENT> listevents in GlobalSampleEvents) {
+                    listevents.Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, SpeedPitch+(int)pitchadjust, SequencerEvents.Length + GlobalSampleEvents.IndexOf(listevents), _speedevent.tick, 0));
+                }
+                for (int y = 1; y < SequencerEvents.Length; y++) {
+                    //skip pitch shifting thumps
+                    if (y == 8)
+                        continue;
+                    GlobalSequencerEvents[y].Add(new(BASSMIDIEvent.MIDI_EVENT_PITCH, SpeedPitch + (int)pitchadjust, y, _speedevent.tick, 0));
+                }
+            }            
+        }
+
+        public static List<BASS_MIDI_EVENT> InterpolateSpeedEvents(List<SpeedEvent> EventsToInterp)
+        {
+            List<BASS_MIDI_EVENT> AllInterps = new();
+            for (int _eventind = 0; _eventind < EventsToInterp.Count - 1; _eventind++) {
+                SpeedEvent _event = EventsToInterp[_eventind];
+                double _start = _event.Value;
+                double _end = EventsToInterp[_eventind + 1].Value;
+                double max = Math.Max(_start, _end);
+                double min = Math.Min(_start, _end);
+                int _beats = (EventsToInterp[_eventind + 1].Tick - _event.Tick) / 10;
+                //initialize array = to beats, fill with linear values between 0 and 1
+                //these will be transformed by the formulas below
+                double[] interp = new double[_beats];
+                for (int x = 0; x < interp.Length; x++) {
+                    interp[x] = (double)(x) / (double)(interp.Length - 1);
+                }
+
+                //depending on interp option chosen, run a different calculation per value in interp[]
+                switch (_event.Interpolation) {
+                    case "Linear":
+                        //no changes needed
+                        break;
+                    case "Quadratic Ease In":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] * interp[x];
+                        }
+                        break;
+                    case "Quadratic Ease Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = 1 - (1 - interp[x]) * (1 - interp[x]);
+                        }
+                        break;
+                    case "Quadratic Ease In Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] < 0.5 ? (2 * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 2) / 2));
+                        }
+                        break;
+                    case "Cubic Ease In":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] * interp[x] * interp[x];
+                        }
+                        break;
+                    case "Cubic Ease Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = 1 - Math.Pow(1 - interp[x], 3);
+                        }
+                        break;
+                    case "Cubic Ease In Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] < 0.5 ? (4 * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 3) / 2));
+                        }
+                        break;
+                    case "Quartic Ease In":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] * interp[x] * interp[x] * interp[x];
+                        }
+                        break;
+                    case "Quartic Ease Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = 1 - Math.Pow(1 - interp[x], 4);
+                        }
+                        break;
+                    case "Quartic Ease In Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] < 0.5 ? (8 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 4) / 2));
+                        }
+                        break;
+                    case "Quintic Ease In":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] * interp[x] * interp[x] * interp[x] * interp[x];
+                        }
+                        break;
+                    case "Quintic Ease Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = 1 - Math.Pow(1 - interp[x], 5);
+                        }
+                        break;
+                    case "Quintic Ease In Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = interp[x] < 0.5 ? (16 * interp[x] * interp[x] * interp[x] * interp[x]) : (1 - (Math.Pow(-2 * interp[x] + 2, 5) / 2));
+                        }
+                        break;
+                    case "Sine Ease In":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = 1 - Math.Cos((interp[x] * Math.PI) / 2);
+                        }
+                        break;
+                    case "Sine Ease Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = Math.Sin((interp[x] * Math.PI) / 2);
+                        }
+                        break;
+                    case "Sine Ease In Out":
+                        for (int x = 0; x < interp.Length; x++) {
+                            interp[x] = -(Math.Cos(Math.PI * interp[x]) - 1) / 2;
+                        }
+                        break;
+                }
+
+                //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                if (_start == max) {
+                    for (int x = 0; x < interp.Length; x++)
+                        interp[x] = 1 - interp[x];
+                }
+                //convert interp[] range of 0 to 1 into range between selected beats
+                for (int x = 0; x < interp.Length; x++) {
+                    interp[x] = interp[x] * (max - min) + min;
+                }
+
+                for (int x = 0; x < _beats; x++) {
+                    AllInterps.Add(new(_event.EventType, (int)interp[x], 0, _event.Tick + (x * 10), 0));
+                }
+            }
+            return AllInterps;
         }
 
         public static void MidiEventPlaySample(SimpleSequencerObject Seq)
@@ -1106,6 +1282,7 @@ namespace Thumper_Custom_Level_Editor
             //
             EndBeat += 7; //+ call offset
             PitchShiftingBarsRings();
+            ApplySpeedEvents();
             RemoveNegativeTickEvents();
             ChannelEnd(EndBeat);
             CreateSampleSoundfont();

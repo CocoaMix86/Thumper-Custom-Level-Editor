@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Windows.Shell;
-using Cyotek.Windows.Forms;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Un4seen.Bass; 
@@ -24,7 +23,9 @@ namespace Thumper_Custom_Level_Editor
         public static DockWorkspace ActiveWorkspace;
         public static IEnumerable<IDockContent> Workspaces => Instance.dockMain.Documents;
         public static Dictionary<string, EditorBase> Documents = new();
-        public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        //public static ColorPickerDialog colorDialogNew = new() { BackColor = Color.FromArgb(60, 60, 60), ForeColor = Color.Black };
+        //public static AdamsLair.WinForms.ColorControls.ColorPickerDialog colorDialogNew = new();
+        public static ColorDialog colorDialogNew = new();
         public static ContextMenuStrip TabRightClickMenu;
         public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
         public static decimal BPM => ProjectProperties.BPM;

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -118,6 +119,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool IsAllowedToAddLvl => !((GateProperties.GateLvls.Count >= 4 && GateProperties.Boss != "Level 9 - pyramid" && !GateProperties.Random) || (GateProperties.GateLvls.Count >= 5 && GateProperties.Boss == "Level 9 - pyramid") || (GateProperties.GateLvls.Count >= 16 && GateProperties.Random));
         //
         //Local custom class vars
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public GateProperties GateProperties
         {
             get { return _gateproperties; }
@@ -128,6 +130,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private GateProperties _gateproperties;
         private List<DataGridViewRow> SelectedRows = new();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ObservableCollection<GateLvlData> GateLvls { get { return GateProperties.GateLvls; } set { GateProperties.GateLvls = value; } }
         private DeserializeDockContent m_deserializeDockContent;
         public EditorBaseSub contentPropertyGrid = new() {
