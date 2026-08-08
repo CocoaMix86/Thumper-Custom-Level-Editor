@@ -150,7 +150,7 @@ namespace Thumper_Custom_Level_Editor
             ObjectNodes[obj.obj_name + ";" + obj.param_path].ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
         }
 
-        public static void FilterTree(TreeView _tree, string txtSearch)
+        public static void FilterTree(TreeView _tree, string txtSearch, bool Startup = false)
         {
             bool filtersearch = !string.IsNullOrWhiteSpace(txtSearch) && txtSearch != "Search Objects (Ctrl+;)";
             //store which node names were expanded before we clear the list

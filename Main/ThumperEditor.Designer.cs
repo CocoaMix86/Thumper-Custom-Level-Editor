@@ -117,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripWindowCloseTab = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -167,6 +167,7 @@
             this.toolStripMenuItem11 = new ToolStripMenuItem();
             this.contextMenuLeafOptions = new ContextMenuStrip(this.components);
             this.leafoptionShowCategory = new ToolStripMenuItem();
+            this.leafoptionShowCategoryIcon = new ToolStripMenuItem();
             this.leafoptionShowGrid = new ToolStripMenuItem();
             this.leafoptionConnectBars = new ToolStripMenuItem();
             this.leafoptionShowLanes = new ToolStripMenuItem();
@@ -213,7 +214,6 @@
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
             this.pictureEasing = new Label();
-            this.leafoptionShowCategoryIcon = new ToolStripMenuItem();
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -982,8 +982,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
+            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1105,14 +1106,6 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
-            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1133,6 +1126,14 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(58, 21);
             this.toolstripProject.Text = "&Project";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -1598,7 +1599,7 @@
             this.contextmenuView.Name = "contextmenuEdit";
             this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuView.Size = new Size(215, 126);
+            this.contextmenuView.Size = new Size(215, 104);
             // 
             // toolStripMenuItem11
             // 
@@ -1616,7 +1617,7 @@
             this.contextMenuLeafOptions.Name = "contextmenuHelp";
             this.contextMenuLeafOptions.OwnerItem = this.toolStripMenuItem11;
             this.contextMenuLeafOptions.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuLeafOptions.Size = new Size(255, 246);
+            this.contextMenuLeafOptions.Size = new Size(255, 224);
             // 
             // leafoptionShowCategory
             // 
@@ -1629,6 +1630,17 @@
             this.leafoptionShowCategory.Size = new Size(254, 22);
             this.leafoptionShowCategory.Text = "Show Category Text";
             this.leafoptionShowCategory.CheckedChanged += this.leafoptionShowCategory_CheckedChanged;
+            // 
+            // leafoptionShowCategoryIcon
+            // 
+            this.leafoptionShowCategoryIcon.Checked = true;
+            this.leafoptionShowCategoryIcon.CheckOnClick = true;
+            this.leafoptionShowCategoryIcon.CheckState = CheckState.Checked;
+            this.leafoptionShowCategoryIcon.ForeColor = Color.White;
+            this.leafoptionShowCategoryIcon.Name = "leafoptionShowCategoryIcon";
+            this.leafoptionShowCategoryIcon.Size = new Size(254, 22);
+            this.leafoptionShowCategoryIcon.Text = "Show Category Icons";
+            this.leafoptionShowCategoryIcon.Click += this.leafoptionShowCategoryIcon_Click;
             // 
             // leafoptionShowGrid
             // 
@@ -2113,17 +2125,6 @@
             this.pictureEasing.Size = new Size(115, 85);
             this.pictureEasing.TabIndex = 156;
             this.pictureEasing.Visible = false;
-            // 
-            // leafoptionShowCategoryIcon
-            // 
-            this.leafoptionShowCategoryIcon.Checked = true;
-            this.leafoptionShowCategoryIcon.CheckOnClick = true;
-            this.leafoptionShowCategoryIcon.CheckState = CheckState.Checked;
-            this.leafoptionShowCategoryIcon.ForeColor = Color.White;
-            this.leafoptionShowCategoryIcon.Name = "leafoptionShowCategoryIcon";
-            this.leafoptionShowCategoryIcon.Size = new Size(254, 22);
-            this.leafoptionShowCategoryIcon.Text = "Show Category Icons";
-            this.leafoptionShowCategoryIcon.Click += this.leafoptionShowCategoryIcon_Click;
             // 
             // TCLE
             // 

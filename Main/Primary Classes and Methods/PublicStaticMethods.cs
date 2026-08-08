@@ -194,7 +194,7 @@ namespace Thumper_Custom_Level_Editor
             if (warning.Length > 2)
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
             ProjectSamples = ProjectSamples.OrderBy(w => w.Value.obj_name).ToDictionary();
-            //
+            /*
             if (Properties.Settings.Default.RuntimeAsk) {
                 CheckboxDialog Ask = new();
                 if (Ask.ShowDialog() == DialogResult.Yes) {
@@ -209,7 +209,7 @@ namespace Thumper_Custom_Level_Editor
             if (!Properties.Settings.Default.RuntimeSkip) {
                 UtilAudio.CalculateSampleRuntimes();
                 UtilAudio.StopAudio();
-            }
+            }*/
 
             UpdateEditorsWithSamples();
             //File.WriteAllLines($@"{AppLocation}\templates\{TCLE.WorkingFolder.Name}_sample_runtimes.temp", ProjectSamples.Select(x => $"{x.obj_name};{x.time}"));

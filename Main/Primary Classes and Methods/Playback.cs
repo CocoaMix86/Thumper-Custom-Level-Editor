@@ -63,6 +63,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void Initialize(string _Type)
         {
+            TCLE.Instance.lblLoadingPlayback.Text = "Generating Playback";
             CallOffset = 9;
             GlobalCurrentLeaf = "???";
             GlobalCurrentLvl = "???";

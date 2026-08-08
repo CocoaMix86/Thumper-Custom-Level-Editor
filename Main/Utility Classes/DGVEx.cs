@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Windows.Media.Playback;
 
@@ -6,6 +7,7 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
 {
     public class DGVEx : DataGridView
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Bitmap MasterBG { 
             get; 
             set; }
@@ -35,6 +37,7 @@ namespace Thumper_Custom_Level_Editor.Utility_Classes
 
     public class DGVPlayback : DataGridView
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PlaybackPosition { get; set; } = -1;
         private int _positionpixels => this.RowHeadersWidth + 80 - this.HorizontalScrollingOffset + (int)(PlaybackPosition * this.Columns[3].Width);
         public DGVPlayback()

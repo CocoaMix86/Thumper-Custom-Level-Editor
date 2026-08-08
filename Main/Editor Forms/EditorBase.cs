@@ -27,8 +27,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public bool EditorIsProcessing => (EditorIsLoading || EditorIsRandomizing || EditorIsMoving || EditorIsFinding || EditorIsPasting || EditorIsInterpolating || EditorIsTuning);
 
         public List<SaveState> UndoList = new();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RawText { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool NoLock { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public FileInfo WorkingFile { 
             get => _workfile; 
             set {
@@ -50,7 +53,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             } 
         }
         private FileInfo _workfile;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public FileStream FileLock { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Saved { get; set; }
 
         protected override string GetPersistString()

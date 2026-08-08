@@ -7,6 +7,7 @@ using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using WeifenLuo.WinFormsUI.Docking;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -96,6 +97,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         #region Variables
         public SampleProperties SampleProperties;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ObservableCollection<SampleData> SampleList { get => SampleProperties.samplelist; set => SampleProperties.samplelist = value; }
         public BASSTimer _updateTimer = new(50);
         public Visuals _vis = new();

@@ -1,14 +1,15 @@
-﻿using System.Diagnostics;
+﻿using NAudio.Wave;
+using System.Diagnostics;
+using System.Drawing.Text;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Windows.Shell;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using WeifenLuo.WinFormsUI.Docking;
-using Un4seen.Bass; 
-using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Other_Forms;
-using System.Linq;
-using System.Drawing.Text;
-using System.Security.Permissions;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
+using Un4seen.Bass; 
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -516,6 +517,8 @@ namespace Thumper_Custom_Level_Editor
             dockProjectProperties.LoadProjectProperties();
             //create a workspace
             IsLoadingProject = true;
+            TCLE.Instance.lblLoadingPlayback.Text = "Loading Project";
+            TCLE.Instance.panelLoadingMessage.Visible = true;
             if (!UtilPaths.DirCurrentProjectSettings.Exists)
                 UtilPaths.DirCurrentProjectSettings.Create();
             DeserializeDockContent m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
@@ -528,10 +531,12 @@ namespace Thumper_Custom_Level_Editor
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
                 OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
             }
+            TCLE.Instance.panelLoadingMessage.Visible = false;
+            /*
             foreach (DockWorkspace _ws in TCLE.Workspaces) {
                 if (File.Exists($@"{UtilPaths.CurrentProjectSettings}\layout_{_ws.Text}.config"))
                     _ws.dockMain.SaveAsXml($@"{UtilPaths.CurrentProjectSettings}\layout_{_ws.Text}.config");
-            }
+            }*/
             IsLoadingProject = false;
             //this will be the loading sound :D
             UtilAudio.PlaySound($"UIbeetleclick{rng.Next(1, 9)}");

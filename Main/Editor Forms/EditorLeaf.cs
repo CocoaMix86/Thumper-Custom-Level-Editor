@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             //
             treeObjects.Tag = txtSearch.Text;
-            SeqObjTreeBuilder.FilterTree(treeObjects, txtSearch.Text);
+            SeqObjTreeBuilder.FilterTree(treeObjects, "");
             //
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;

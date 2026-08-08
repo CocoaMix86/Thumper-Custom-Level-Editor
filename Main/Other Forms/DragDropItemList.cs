@@ -1,10 +1,12 @@
-﻿using System.Data;
+﻿using System.ComponentModel;
+using System.Data;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor.Other_Forms
 {
     public partial class DragDropItemList : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Items
         {
             get => _items;
