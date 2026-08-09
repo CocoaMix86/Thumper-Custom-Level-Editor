@@ -101,6 +101,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     TCLE.ColorIcons[_colorkey] = color;
                 }
             }
+
+            foreach (var _ColorIcon in TCLE.ColorIcons) {
+                TCLE.Instance.imageListCategoryIcons.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
+            }
         }
 
         public static void GetThumperCacheFolder(bool init = false)

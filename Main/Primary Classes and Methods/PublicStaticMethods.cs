@@ -19,6 +19,8 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, Bitmap> ColorIcons = new();
         //public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, SampleData> ProjectSamples = new();
+        public static ToolStripOverride LeafToolStripOverride = new ToolStripOverride();
+        public static ContextMenuColors LeafContextMenuColors = new ContextMenuColors();
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };

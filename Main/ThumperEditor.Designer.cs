@@ -117,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripWindowCloseTab = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -214,6 +214,7 @@
             this.contextmenuMoveWorkspace = new ContextMenuStrip(this.components);
             this.eToolStripMenuItem = new ToolStripMenuItem();
             this.pictureEasing = new Label();
+            this.imageListCategoryIcons = new ImageList(this.components);
             this.panelRecentFiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)this.dgvRecentFiles).BeginInit();
             this.toolstripRecentFiles.SuspendLayout();
@@ -619,7 +620,6 @@
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolstripFileRecent, this.toolStripMenuItem63, this.toolstripFileClearTemp, this.toolStripSeparator4, this.toolstripFileExit, this.toolstripFileRestart });
             this.contextmenuFile.Name = "contextmenuFile";
-            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
             this.contextmenuFile.Size = new Size(293, 264);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
@@ -982,9 +982,8 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
-            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem;
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.RightToLeft = RightToLeft.Inherit;
             this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
@@ -1106,6 +1105,14 @@
             this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
             // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
+            // 
             // toolstripProjectPreload
             // 
             this.toolstripProjectPreload.ForeColor = Color.White;
@@ -1126,14 +1133,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(58, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -2126,6 +2125,44 @@
             this.pictureEasing.TabIndex = 156;
             this.pictureEasing.Visible = false;
             // 
+            // imageListCategoryIcons
+            // 
+            this.imageListCategoryIcons.ColorDepth = ColorDepth.Depth32Bit;
+            this.imageListCategoryIcons.ImageStream = (ImageListStreamer)resources.GetObject("imageListCategoryIcons.ImageStream");
+            this.imageListCategoryIcons.TransparentColor = Color.Transparent;
+            this.imageListCategoryIcons.Images.SetKeyName(0, "category");
+            this.imageListCategoryIcons.Images.SetKeyName(1, "none");
+            this.imageListCategoryIcons.Images.SetKeyName(2, "samp");
+            this.imageListCategoryIcons.Images.SetKeyName(3, "fav");
+            this.imageListCategoryIcons.Images.SetKeyName(4, "play");
+            this.imageListCategoryIcons.Images.SetKeyName(5, "BARS - MULTI.png");
+            this.imageListCategoryIcons.Images.SetKeyName(6, "BARS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(7, "BOSS EFFECTS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(8, "BOSS SHIELDS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(9, "CAMERA.png");
+            this.imageListCategoryIcons.Images.SetKeyName(10, "CONTROLLER.png");
+            this.imageListCategoryIcons.Images.SetKeyName(11, "DECORATIVE MILLIPEDES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(12, "DISSONANT_BURSTS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(13, "EXPERIMENTAL.png");
+            this.imageListCategoryIcons.Images.SetKeyName(14, "FX.png");
+            this.imageListCategoryIcons.Images.SetKeyName(15, "GAMMA.png");
+            this.imageListCategoryIcons.Images.SetKeyName(16, "INTROFLOW.png");
+            this.imageListCategoryIcons.Images.SetKeyName(17, "JUMPSSPIKES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(18, "LOOP TRACK VOLUME.png");
+            this.imageListCategoryIcons.Images.SetKeyName(19, "MILLIPEDES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(20, "PLAY SAMPLE.png");
+            this.imageListCategoryIcons.Images.SetKeyName(21, "POST PROCESSING.png");
+            this.imageListCategoryIcons.Images.SetKeyName(22, "RAIL COLORS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(23, "RINGS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(24, "SENTRY.png");
+            this.imageListCategoryIcons.Images.SetKeyName(25, "SKYBOX_COLORS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(26, "SMOKE FX.png");
+            this.imageListCategoryIcons.Images.SetKeyName(27, "TENTACLES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(28, "THUMPS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(29, "TRACK EFFECTS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(30, "TRACK FX.png");
+            this.imageListCategoryIcons.Images.SetKeyName(31, "WIN & MISC.png");
+            // 
             // TCLE
             // 
             this.AutoScaleMode = AutoScaleMode.None;
@@ -2374,6 +2411,7 @@
         public ToolStripMenuItem toolstripWindowCloseFiletype;
         public ToolStripMenuItem toolStripWindowCloseWorkspace;
         private ToolStripMenuItem leafoptionShowCategoryIcon;
+        public ImageList imageListCategoryIcons;
     }
 }
 

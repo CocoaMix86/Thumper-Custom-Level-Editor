@@ -194,7 +194,7 @@ namespace Thumper_Custom_Level_Editor
             set {
                 _category = value;
                 if (!Playback.Generating)
-                    CategoryIcon = ((EditorLeaf)ParentLeaf.ParentEditor).imageListCategoryIcons.Images[$"{value}.png"];
+                    CategoryIcon = TCLE.Instance.imageListCategoryIcons.Images[$"{value}.png"];
             } 
         }
         private string _category;

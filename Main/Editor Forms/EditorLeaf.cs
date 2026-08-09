@@ -7,6 +7,7 @@ using Thumper_Custom_Level_Editor.Utility_Classes;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using System.ComponentModel;
+using Windows.Graphics.Printing.PrintTicket;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -23,17 +24,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadSequencer(load["seq_objs"], _leafproperties, SimpleTrackEditor);
                 return;
             }
-
+            Stopwatch sw = Stopwatch.StartNew();
+            Stopwatch sw2 = Stopwatch.StartNew();
+            Debug.WriteLine($"============START LOADING NEW LEAF: {WorkingFile.Name}============");
             InitializeComponent();
+            Debug.WriteLine($"InitializeComponent: {sw.ElapsedMilliseconds} ms");
+            sw.Restart();
             RenderForm();
+            Debug.WriteLine($"RenderForm: {sw.ElapsedMilliseconds} ms");
+            sw.Restart();
             ColorFormElements();
+            Debug.WriteLine($"ColorForm: {sw.ElapsedMilliseconds} ms");
+            sw.Restart();
 
             if (load == null)
                 return;
 
             LoadLeaf(load);
+            Debug.WriteLine($"LoadLead: {sw.ElapsedMilliseconds} ms");
+            sw.Restart();
             LoadSequencer(load["seq_objs"], _leafproperties, trackEditor);
+            Debug.WriteLine($"LoadSequencer: {sw.ElapsedMilliseconds} ms");
+            sw.Restart();
             LoadEnd(load);
+            Debug.WriteLine($"LoadEnd: {sw.ElapsedMilliseconds} ms");
+            Debug.WriteLine($"Total Time: {sw2.ElapsedMilliseconds} ms");
         }
         ///Load LVL Sequencer
         public EditorLeaf(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
@@ -87,10 +102,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 contentMasterView.Show(contentMain.Pane, DockAlignment.Top, 0.2);
             }
             //
-            leaftoolsToolStrip.Renderer = new ToolStripOverride();
-            toolstripMasterView.Renderer = new ToolStripOverride();
-            leafToolStrip.Renderer = new ToolStripOverride();
-            contextMenuInterps.Renderer = new ContextMenuColors();
+            leaftoolsToolStrip.Renderer = TCLE.LeafToolStripOverride;
+            toolstripMasterView.Renderer = TCLE.LeafToolStripOverride;
+            leafToolStrip.Renderer = TCLE.LeafToolStripOverride;
+            contextMenuInterps.Renderer = TCLE.LeafContextMenuColors;
             trackEditor.MouseWheel += new MouseEventHandler(trackEditor_MouseWheel);
             dgvMasterView.MouseWheel += new MouseEventHandler(dgvMasterView_MouseWheel);
             TCLE.DoubleBufferDGV(trackEditor);
@@ -146,12 +161,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             dgvMasterView.Invalidate();
 
-            foreach (var _ColorIcon in TCLE.ColorIcons)
-                treeObjects.ImageList.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
+            treeObjects.ImageList = TCLE.Instance.imageListCategoryIcons;
+            //foreach (var _ColorIcon in TCLE.ColorIcons)
+            //    treeObjects.ImageList.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
         }
 
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
+            if (TCLE.IsLoadingProject)
+                return;
             dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_leaf.config");
         }
         #endregion
@@ -2472,17 +2490,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //this line exists to force the app to recognize the rows have proper indexes instead of -1
                 //string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
                 //import data points to the row cells.
-                LoadDataPoints(ObjectToImport, seq_obj);
-                RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
+                LoadDataPoints(ObjectToImport, seq_obj["data_points"]);
+                //RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
             }
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects;
             dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
-            string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
+            //string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
         }
 
-        public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)
+        /*public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)
         {
             //There are 2 methods here for backwards compat
             foreach (dynamic dp in seq_obj["data_points"]) {
@@ -2510,6 +2528,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         continue;
                     ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset] = data;
                     ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
+                }
+            }
+        }*/
+        public static void LoadDataPoints(Sequencer_Object ObjectToImport, JToken dataPoints)
+        {
+            foreach (JToken dp in dataPoints) {
+                if (dp is JObject dataPoint) {
+                    int beat = (int)dataPoint["beat"];
+                    if (beat >= ObjectToImport.ParentLeaf.LeafLength)
+                        continue;
+
+                    SeqDataPoint data = ObjectToImport[beat + FrozenColumnOffset];
+                    data.Interpolation = ((string)dataPoint["interp"])?.Replace("kTraitInterp", "") ?? "Linear";
+                    data.Ease = TCLE.Easings[(string)dataPoint["ease"] ?? "kEaseInOut"];
+                    data.Value = (decimal)dataPoint["value"];
+                }
+                else {
+                    JProperty property = (JProperty)dp;
+                    int beat = int.Parse(property.Name);
+                    if (beat >= ObjectToImport.ParentLeaf.LeafLength)
+                        continue;
+
+                    SeqDataPoint data = ObjectToImport[beat + FrozenColumnOffset];
+                    data.Value = UtilMath.TruncateDecimal((decimal)property.Value, 3);
                 }
             }
         }
@@ -2541,29 +2583,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return null;
             }
         }
-
-        public void Reload()
-        {
-            dynamic _load = UtilFile.LoadFileLock(this.WorkingFile);
-
-            LoadLeaf(_load);
-            LoadSequencer(_load["seq_objs"], LeafProperties, trackEditor);
-            LoadEnd(_load);
-        }
-
-        /*
-        public void LoadTracksFromSequencer(List<Sequencer_Object> Seq_Objs)
-        {
-            //clear the DGV and prep for new data
-            trackEditor.Rows.Clear();
-            trackEditor.RowHeadersVisible = true;
-            foreach (Sequencer_Object seq in Seq_Objs) {
-                trackEditor.Rows.Add(seq);
-                RowReadOnly(seq, !seq.enabled);
-            }
-            TCLE.ResizeHeaders(trackEditor);
-        }
-        */
 
         private void toolstripObjTune_Click(object sender, EventArgs e)
         {
@@ -2700,7 +2719,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public string GetEditorTitle() => $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
         public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorIsLoading || Playback.Generating)
+            if (EditorIsLoading || Playback.Generating || TCLE.IsLoadingProject )
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -2896,21 +2915,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (_leafproperties == null || SimpleLoad)
                 return;
-            bool _switch = true;
             //grab the first part of the time sig. This represents how many beats are in a bar
             //tryparse to see if it fails.
             foreach (Sequencer_Object Seq in SequencerObjects)
                 TimeSigHighlightSingleObject(Seq, LeafProperties.TimeTopBeat);
-            /*
-            for (int i = 0; i < _leafproperties.Beats; i++) {
-                //whenever `i` is a multiple of the time sig, switch colors
-                if ((i) % timesigbeats == 0)
-                    _switch = !_switch;
-                for (int row = 0; row < trackEditor.RowCount; row++) {
-                    trackEditor.Rows[row].Cells[i + FrozenColumnOffset].Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
-                }
-                trackEditor.Columns[i + FrozenColumnOffset].HeaderCell.Style.BackColor = _switch ? Properties.Settings.Default.ColorLeafTimeSig1 : Properties.Settings.Default.ColorLeafTimeSig2;
-            }*/
 
             if (AltSequencer != null)
                 TrackLeafDividerHighlighting((LvlProperties)AltSequencer);
@@ -3117,39 +3125,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvc.Interpolation = "Linear";
             }
         }
-        /*
-        private void FindMissingLaneObjects(Sequencer_Object seq)
-        {
-            if (EditorIsMoving)
-                return;
-            //don't need to find lanes for non-multi-lanes
-            if (seq.friendly_lane == "none")
-                return;
-            EditorIsFinding = true;
-
-            if (seq.Lanes[1] is null) {
-                Sequencer_Object clone = seq.CloneAsLane("a02", Properties.Settings.Default.LeafOptionShowLane);
-                trackEditor.Rows.Insert(seq.Index, clone);
-                SequencerObjects.Insert(seq.Index, clone);
-            }
-            if (seq.Lanes[3] is null) {
-                Sequencer_Object clone = seq.CloneAsLane("z01", Properties.Settings.Default.LeafOptionShowLane);
-                trackEditor.Rows.Insert(seq.Index + 1, clone);
-                SequencerObjects.Insert(seq.Index + 1, clone);
-            }
-            if (seq.Lanes[0] is null) {
-                Sequencer_Object clone = seq.CloneAsLane("a01", Properties.Settings.Default.LeafOptionShowLane);
-                trackEditor.Rows.Insert(seq.Index - 1, clone);
-                SequencerObjects.Insert(seq.Index - 1, clone);
-            }
-            if (seq.Lanes[4] is null) {
-                Sequencer_Object clone = seq.CloneAsLane("z02", Properties.Settings.Default.LeafOptionShowLane);
-                trackEditor.Rows.Insert(seq.Index + 2, clone);
-                SequencerObjects.Insert(seq.Index + 2, clone);
-            }
-
-            EditorIsFinding = false;
-        }*/
 
         public static void CalculateTuningLayers(LeafProperties _properties, Sequencer_Object seq)
         {
@@ -3206,18 +3181,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         }
                         //change interpolation formula based on settings on the datapoint
                         UtilMath.CalculateTuning(interp, $"{start.Interpolation} {start.Ease}");
-                        
-                        //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
-                        if (_start == max) {
-                            for (int x = 0; x < interp.Length; x++)
-                                interp[x] = 1 - interp[x];
-                        }
-                        //convert interp[] range of 0 to 1 into range between selected beats
+
                         for (int x = 0; x < interp.Length; x++) {
+                            //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                            if (_start == max)
+                                interp[x] = 1 - interp[x];
+                            //convert interp[] range of 0 to 1 into range between selected beats
                             interp[x] = ((interp[x] - 0) / (1 - 0)) * (max - min) + min;
-                        }
-                        //write the datapoints to a temp object to store them
-                        for (int x = 0; x < _beats; x++) {
+                            //write the datapoints to a temp object to store them
                             InterpolationCalc[start.beat + x + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)interp[x], 3);
                         }
                     }
