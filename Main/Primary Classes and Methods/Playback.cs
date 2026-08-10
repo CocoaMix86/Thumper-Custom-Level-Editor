@@ -975,7 +975,7 @@ namespace Thumper_Custom_Level_Editor
             for (int _eventind = 0; _eventind < EventsToInterp.Count - 1; _eventind++) {
                 SpeedEvent _event = EventsToInterp[_eventind];
                 //if event is Step type, do not interpolate to the next value
-                if (_event.Interpolation.Contains("Step")) {
+                if (_event.Interpolation.Contains("Step") || _event.Value == EventsToInterp[_eventind + 1].Value) {
                     AllInterps.Add(new(_event.EventType, _event.Value, 0, _event.Tick, 0));
                     continue;
                 }
