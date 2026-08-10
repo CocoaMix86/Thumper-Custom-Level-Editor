@@ -53,8 +53,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 else {
                     try {
                         string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
-                        Object_Params objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
-                        ObjectToImport.FriendlyParam = objmatch?.param_displayname ?? "";
+                        DefaultSequencerObject objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
+                        ObjectToImport.FriendlyParam = objmatch?.ParamDisplayName ?? "";
                     } catch (Exception) { }
                 }
 

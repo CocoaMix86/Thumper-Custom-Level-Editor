@@ -63,7 +63,7 @@ namespace Thumper_Custom_Level_Editor
             BuildTreeFavorites();
             //BuildTreeFavorites(TreeToBuild, txtSearch);
 
-            var categories = TCLE.LeafObjects.Values.GroupBy(x => x.category).OrderBy(x => x.Key);
+            var categories = TCLE.LeafObjects.Values.GroupBy(x => x.Category).OrderBy(x => x.Key);
             //make each category of objects its own node
             foreach (var category in categories) {
                 TreeNode CategoryNode = BuildNode(category.Key.ToUpper(), $"{category.Key.ToUpper().Replace("/", "")}.png");
@@ -74,10 +74,10 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     //each object becomes its own node
-                    foreach (Object_Params obj in category) {
-                        TreeNode _param = BuildNode(obj.param_displayname, obj.favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}", null, obj.favorite ? contextMenuFavRemove : contextMenuFav, obj);
+                    foreach (DefaultSequencerObject obj in category) {
+                        TreeNode _param = BuildNode(obj.ParamDisplayName, obj.Favorite ? "fav" : $"{obj.DefaultColor.ToArgb()}", null, obj.Favorite ? contextMenuFavRemove : contextMenuFav, obj);
                         CategoryNode.Nodes.Add(_param);
-                        ObjectNodes.Add(obj.obj_name + ";" + obj.param_path, _param);
+                        ObjectNodes.Add(obj.Name + ";" + obj.ParamPath, _param);
                     }
                 }
             }
@@ -123,9 +123,9 @@ namespace Thumper_Custom_Level_Editor
             //clear the favorites node
             FavoritesNode.Nodes.Clear();
             //get all favorites and sort alphabetically
-            foreach (Object_Params obj in TCLE.LeafObjects.Values.Where(x => x.favorite).OrderBy(x => x.param_displayname)) {
+            foreach (DefaultSequencerObject obj in TCLE.LeafObjects.Values.Where(x => x.Favorite).OrderBy(x => x.ParamDisplayName)) {
                 TreeNode _param = new() {
-                    Text = obj.param_displayname,
+                    Text = obj.ParamDisplayName,
                     ImageKey = "fav",
                     SelectedImageKey = "fav",
                     ContextMenuStrip = contextMenuFavRemove,
@@ -137,17 +137,17 @@ namespace Thumper_Custom_Level_Editor
 
         public static void SetNodeFavorite(TreeNode FavNode, bool Favorite)
         {
-            Object_Params obj = (Object_Params)FavNode.Tag;
-            obj.favorite = Favorite;
-            string ImageKey = Favorite ? "fav" : $"{obj.defaultcolor.ToArgb()}";
+            DefaultSequencerObject obj = (DefaultSequencerObject)FavNode.Tag;
+            obj.Favorite = Favorite;
+            string ImageKey = Favorite ? "fav" : $"{obj.DefaultColor.ToArgb()}";
 
             FavNode.ImageKey = ImageKey;
             FavNode.SelectedImageKey = ImageKey;
             FavNode.ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
             //also set the node in the master tree to show favorite star
-            ObjectNodes[obj.obj_name + ";" + obj.param_path].ImageKey = ImageKey;
-            ObjectNodes[obj.obj_name + ";" + obj.param_path].SelectedImageKey = ImageKey;
-            ObjectNodes[obj.obj_name + ";" + obj.param_path].ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
+            ObjectNodes[obj.Name + ";" + obj.ParamPath].ImageKey = ImageKey;
+            ObjectNodes[obj.Name + ";" + obj.ParamPath].SelectedImageKey = ImageKey;
+            ObjectNodes[obj.Name + ";" + obj.ParamPath].ContextMenuStrip = Favorite ? contextMenuFavRemove : contextMenuFav;
         }
 
         public static void FilterTree(TreeView _tree, string txtSearch, bool Startup = false)
@@ -269,8 +269,8 @@ namespace Thumper_Custom_Level_Editor
         public static void toolStripFavClear_Click(object sender, EventArgs e)
         {
             TreeViewEx? Source = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TreeViewEx);
-            foreach (Object_Params obj in TCLE.LeafObjects.Values)
-                obj.favorite = false;
+            foreach (DefaultSequencerObject obj in TCLE.LeafObjects.Values)
+                obj.Favorite = false;
             UpdateTrees(true);
             /*
             SeqObjTreeBuilder.BuildObjectTree(SeqObjTreeBuilder.GlobalObjectTree, "");

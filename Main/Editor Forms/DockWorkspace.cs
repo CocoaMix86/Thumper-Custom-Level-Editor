@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -6,6 +7,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     public partial class DockWorkspace : EditorBaseSub
     {
         private DeserializeDockContent m_deserializeDockContent;
+        //Stopwatch sw = new();
 
         #region Form Construction
         public DockWorkspace(string configtoload)
@@ -42,7 +44,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.Instance.lblLoadingLvl.Refresh();
                 Application.DoEvents();
                 //
-                return TCLE.OpenFile(_toopen, raw, true);
+                var _e = TCLE.OpenFile(_toopen, raw, true);
+                return _e;
             }
             return null;
         }

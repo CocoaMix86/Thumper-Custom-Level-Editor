@@ -1134,5 +1134,53 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["LeafOptionCategoryIcon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double ProportionLeafContentMain {
+            get {
+                return ((double)(this["ProportionLeafContentMain"]));
+            }
+            set {
+                this["ProportionLeafContentMain"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.13")]
+        public double ProportionLeafObjects {
+            get {
+                return ((double)(this["ProportionLeafObjects"]));
+            }
+            set {
+                this["ProportionLeafObjects"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public double ProportionLeafPropertyGrid {
+            get {
+                return ((double)(this["ProportionLeafPropertyGrid"]));
+            }
+            set {
+                this["ProportionLeafPropertyGrid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.2")]
+        public double ProportionLeafMasterView {
+            get {
+                return ((double)(this["ProportionLeafMasterView"]));
+            }
+            set {
+                this["ProportionLeafMasterView"] = value;
+            }
+        }
     }
 }

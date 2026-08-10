@@ -56,7 +56,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public FileStream FileLock { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool Saved { get; set; }
+        public bool Saved { get; set; } = true;
 
         protected override string GetPersistString()
         {

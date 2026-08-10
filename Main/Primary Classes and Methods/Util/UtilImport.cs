@@ -46,35 +46,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //import selectable objects from file and parse them into lists for manipulation
             string[] _importedObjects = File.ReadAllLines(_trackobjectspath);
             TCLE.LeafObjects = _importedObjects.Select(x => x.Split(';'))
-                                        .Select(x => new KeyValuePair<string, Object_Params>(x[1] + ";" + x[3], new Object_Params {
-                                            category = x[0],
-                                            obj_name = x[1],
-                                            param_displayname = x[2],
-                                            param_path = x[3],
-                                            trait_type = x[4],
-                                            step = x[5] == "True",
-                                            default_value = decimal.TryParse(x[6], NumberStyles.Number, CultureInfo.InvariantCulture, out decimal _result) ? _result : 0,
-                                            footer = x[7].Trim('[', ']'),
-                                            defaultcolor = Color.Purple
+                                        .Select(x => new KeyValuePair<string, DefaultSequencerObject>(x[1] + ";" + x[3], new DefaultSequencerObject {
+                                            Category = x[0],
+                                            Name = x[1],
+                                            ParamDisplayName = x[2],
+                                            ParamPath = x[3],
+                                            TraitType = x[4],
+                                            Step = x[5] == "True",
+                                            DefaultValue = decimal.TryParse(x[6], NumberStyles.Number, CultureInfo.InvariantCulture, out decimal _result) ? _result : 0,
+                                            Footer = x[7].Trim('[', ']'),
+                                            DefaultColor = Color.Purple
                                         })).ToDictionary();
 
-            TCLE.LeafObjects.Add("_TuningLayerX;⮝ Tuning Layer X", new Object_Params {
-                category = "",
-                obj_name = "_TuningLayerX",
-                param_displayname = "⮝ Tuning Layer X",
-                param_path = "⮝ Tuning Layer X",
-                trait_type = "",
-                step = false,
-                default_value = 0m,
-                footer = "",
-                defaultcolor = Color.FromArgb(40, 40, 40)
+            TCLE.LeafObjects.Add("_TuningLayerX;⮝ Tuning Layer X", new DefaultSequencerObject {
+                Category = "",
+                Name = "_TuningLayerX",
+                ParamDisplayName = "⮝ Tuning Layer X",
+                ParamPath = "⮝ Tuning Layer X",
+                TraitType = "",
+                Step = false,
+                DefaultValue = 0m,
+                Footer = "",
+                DefaultColor = Color.FromArgb(40, 40, 40)
             });
             //import default colors per object
             ImportDefaultColors();
             //import favorites
             if (Properties.Settings.Default.SequencerFavorites != null) {
                 foreach (string key in Properties.Settings.Default.SequencerFavorites)
-                    TCLE.LeafObjects[key].favorite = true;
+                    TCLE.LeafObjects[key].Favorite = true;
             }
             //ObjectFavorites = LeafObjects.Where(x => Properties.Settings.Default.SequencerFavorites.Contains(x.Key)).ToDictionary();
         }
@@ -90,13 +90,13 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
             ///colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
             //once all the colors are processed, assign them directly to the objects
-            foreach (Object_Params obj in TCLE.LeafObjects.Select(x => x.Value)) {
-                obj.defaultcolor = ObjectColors.TryGetValue(obj.param_displayname, out Color value) ? value : Color.Purple;
-                string _colorkey = obj.defaultcolor.ToArgb().ToString();
+            foreach (DefaultSequencerObject obj in TCLE.LeafObjects.Select(x => x.Value)) {
+                obj.DefaultColor = ObjectColors.TryGetValue(obj.ParamDisplayName, out Color value) ? value : Color.Purple;
+                string _colorkey = obj.DefaultColor.ToArgb().ToString();
                 if (!TCLE.ColorIcons.ContainsKey(_colorkey)) {
                     Bitmap color = new(16, 16);
                     using (Graphics g = Graphics.FromImage(color)) {
-                        g.Clear(obj.defaultcolor);
+                        g.Clear(obj.DefaultColor);
                     }
                     TCLE.ColorIcons[_colorkey] = color;
                 }

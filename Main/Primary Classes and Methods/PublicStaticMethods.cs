@@ -15,7 +15,7 @@ namespace Thumper_Custom_Level_Editor
         public static string VersionNumber = "3.0.0-a69";
         public static decimal[] LeafQuickValues = new[] { 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m };
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
-        public static Dictionary<string, Object_Params> LeafObjects = new();
+        public static Dictionary<string, DefaultSequencerObject> LeafObjects = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
         //public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, SampleData> ProjectSamples = new();

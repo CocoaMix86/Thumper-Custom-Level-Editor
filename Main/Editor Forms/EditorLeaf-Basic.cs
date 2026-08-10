@@ -172,26 +172,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }            
 
             if (_findseq == null) {
-                Object_Params objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.Value.param_path == _paramtofind).Value;
+                DefaultSequencerObject objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.Value.ParamPath == _paramtofind).Value;
                 Sequencer_Object _importseq = new(LeafProperties) {
                     ParentLeaf = LeafProperties,
-                    ObjName = objmatch.obj_name,
-                    Category = objmatch.category,
-                    ParamPath = objmatch.param_path,
-                    FriendlyParam = objmatch.param_displayname,
-                    DefaultValue = objmatch.default_value,
-                    Step = objmatch.step,
-                    TraitType = Sequencer_Object.TraitLookup[objmatch.trait_type],
-                    HighlightColor = objmatch.defaultcolor,
+                    ObjName = objmatch.Name,
+                    Category = objmatch.Category,
+                    ParamPath = objmatch.ParamPath,
+                    FriendlyParam = objmatch.ParamDisplayName,
+                    DefaultValue = objmatch.DefaultValue,
+                    Step = objmatch.Step,
+                    TraitType = Sequencer_Object.TraitLookup[objmatch.TraitType],
+                    HighlightColor = objmatch.DefaultColor,
                     highlight_value = 0,
-                    Footer = objmatch.footer,
+                    Footer = objmatch.Footer,
                     EnabledInEditor = true
                 };
                 if (_importseq.ObjName == "leafname")
                     _importseq.ObjName = this.WorkingFile.Name;
                 _importseq.ExpandLanesInEditor = _importseq.FriendlyLane == "none" || Properties.Settings.Default.LeafOptionShowLane;
                 if (_importseq.FriendlyLane == "lane center") {
-                    LoadMultiLanes(_importseq, SequencerObjects, trackEditor);
+                    LoadMultiLanes(_importseq, SequencerObjects);
                 }
                 else {
                     SequencerObjects.Add(_importseq);

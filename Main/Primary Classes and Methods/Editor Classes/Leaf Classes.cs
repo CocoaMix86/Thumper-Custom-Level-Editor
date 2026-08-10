@@ -2,42 +2,92 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.Design;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
-using Un4seen.Bass.AddOn.Cd;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public class Object_Params
+    public class DefaultSequencerObject
     {
-        public string category { get; set; }
-        public string obj_name { get; set; }
-        public string param_displayname { get; set; }
-        public string param_path { get; set; }
-        public string trait_type { get; set; }
-        public bool step { get; set; }
-        public decimal default_value { get; set; }
-        public string footer { get; set; }
-        public Color defaultcolor { get; set; }
-        public bool favorite { get; set; }
+        public string Name { get; set; }
+        public string ParamDisplayName { get; set; }
+        public string ParamPath { get; set; }
+        public bool Step { get; set; }
+        public decimal DefaultValue { get; set; }
+        public string Footer { get; set; }
+        public Color DefaultColor { get; set; }
+        public bool Favorite { get; set; }
+
+        public enum Trait { Bool, Action, Int, Color, Float, None }
+        public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
+            { "kTraitBool", Trait.Bool },
+            { "kTraitAction", Trait.Action },
+            { "kTraitInt", Trait.Int },
+            { "kTraitColor", Trait.Color },
+            { "kTraitFloat", Trait.Float },
+            { "", Trait.None },
+        };
+        public Trait TraitType;
+        public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
+
+        public string Category
+        {
+            get => _category;
+            set {
+                _category = value;
+                if (!Playback.Generating)
+                    CategoryIcon = TCLE.Instance.imageListCategoryIcons.Images[$"{value}.png"];
+            }
+        }
+        private string _category;
+        public Image CategoryIcon;
+
+        private int? _trailLength;
+        public int TrailLength
+        {
+            get {
+                if (_trailLength.HasValue)
+                    return _trailLength.Value;
+
+                _trailLength = ParseTrailLength();
+                return _trailLength.Value;
+            }
+        }
+        public int ParseTrailLength()
+        {
+            string param = this.ParamDisplayName;
+
+            int start = param.IndexOf('[');
+            if (start == -1)
+                return 0;
+
+            start++;
+
+            int end = param.IndexOf(' ', start);
+            if (end == -1)
+                end = param.IndexOf(']', start);
+
+            if (end == -1)
+                return 0;
+
+            return int.TryParse(param.AsSpan(start, end - start), out int length) ? length : 0;
+        }
     }
 
     public static class TraitValidator
     {
-        public static object Sanitize(Sequencer_Object.Trait trait, object value)
+        public static object Sanitize(DefaultSequencerObject.Trait trait, object value)
         {
             if (value == null)
                 return value;
             return trait switch
             {
-                Sequencer_Object.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                Sequencer_Object.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                Sequencer_Object.Trait.Int => Math.Truncate((decimal)value),
-                Sequencer_Object.Trait.Color => Math.Truncate((decimal)value),
+                DefaultSequencerObject.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                DefaultSequencerObject.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                DefaultSequencerObject.Trait.Int => Math.Truncate((decimal)value),
+                DefaultSequencerObject.Trait.Color => Math.Truncate((decimal)value),
                 _ => value
             };
         }
@@ -58,9 +108,11 @@ namespace Thumper_Custom_Level_Editor
     public class Sequencer_Object : SimpleSequencerObject
     {
         public LeafProperties ParentLeaf;
-        public Sequencer_Object(LeafProperties _parent) : base(_parent)
+        public DefaultSequencerObject Default;
+        public Sequencer_Object(LeafProperties _parent, DefaultSequencerObject _default) : base(_parent)
         {
             ParentLeaf = _parent;
+            Default = _default;
             this.DividerHeight = 0;
             this.HeaderCell.Style.BackColor = Color.Black;
             this.Height = ((EditorLeaf)ParentLeaf?.ParentEditor)?.trackZoomVert?.Value ?? 0;
@@ -81,7 +133,7 @@ namespace Thumper_Custom_Level_Editor
                 { "trait_type", TraitTypeString },
                 { "step", this.Step },
                 { "default", this.DefaultValue },
-                { "footer", this.Footer },
+                { "footer", this.Default.Footer },
                 { "editor_data", new JArray() { new object[] { this.HighlightColor.ToArgb(), this.highlight_value } } },
                 { "enabled", this.EnabledInEditor },
             };
@@ -95,38 +147,7 @@ namespace Thumper_Custom_Level_Editor
             s.Add("data_points", datapoints);
 
             return s;
-        }
-
-        private int? _trailLength;
-        public int TrailLength
-        {
-            get {
-                if (_trailLength.HasValue)
-                    return _trailLength.Value;
-
-                _trailLength = ParseTrailLength();
-                return _trailLength.Value;
-            }
-        }
-        public int ParseTrailLength()
-        {
-            string param = this.FriendlyParam;
-
-            int start = param.IndexOf('[');
-            if (start == -1)
-                return 0;
-
-            start++;
-
-            int end = param.IndexOf(' ', start);
-            if (end == -1)
-                end = param.IndexOf(']', start);
-
-            if (end == -1)
-                return 0;
-
-            return int.TryParse(param.AsSpan(start, end - start), out int length) ? length : 0;
-        }
+        }       
 
         public SeqDataPoint this[int index]
         {
@@ -164,19 +185,6 @@ namespace Thumper_Custom_Level_Editor
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
         public int LaneOffsetFromTop => TCLE.LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
         //
-        public enum Trait { Bool, Action, Int, Color, Float, None }
-        public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
-            { "kTraitBool", Trait.Bool },
-            { "kTraitAction", Trait.Action },
-            { "kTraitInt", Trait.Int },
-            { "kTraitColor", Trait.Color },
-            { "kTraitFloat", Trait.Float },
-            { "", Trait.None },
-        };
-        public Trait TraitType;
-        public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
-        //
-        public bool Step { get; set; } = true;
 
         private decimal _defaultvalue;
         public decimal DefaultValue
@@ -188,20 +196,9 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        public string Footer { get; set; }
-        public string Category { 
-            get => _category;
-            set {
-                _category = value;
-                if (!Playback.Generating)
-                    CategoryIcon = TCLE.Instance.imageListCategoryIcons.Images[$"{value}.png"];
-            } 
-        }
-        private string _category;
-        public Image CategoryIcon;
-        public string FriendlyParam { get; set; }
+        public string FriendlyParam { get; set; } = "";
 
-        private Color _highlightcolor;
+        private Color _highlightcolor = Color.Purple;
         public Color HighlightColor
         {
             get => _highlightcolor;
@@ -269,15 +266,13 @@ namespace Thumper_Custom_Level_Editor
         public Sequencer_Object Clone(int CellsToClone = -1)
         {
             //Sequencer_Object clone = (Sequencer_Object)MemberwiseClone();Sequencer_Object clone = new(this.parent) {
-            Sequencer_Object clone = new(null) {
+            Sequencer_Object clone = new(null, this.Default) {
                 ParentLeaf = null,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPath,
                 TraitType = this.TraitType,
                 Step = this.Step,
                 DefaultValue = this.DefaultValue,
-                Footer = this.Footer,
-                Category = this.Category,
                 FriendlyParam = this.FriendlyParam,
                 HighlightColor = this.HighlightColor,
                 highlight_value = this.highlight_value,
@@ -309,16 +304,14 @@ namespace Thumper_Custom_Level_Editor
 
         public Sequencer_Object CloneAsLane(string lane, bool showlane = false)
         {
-            Sequencer_Object clone = new(this.ParentLeaf) {
+            Sequencer_Object clone = new(this.ParentLeaf, this.Default) {
                 ParentLeaf = this.ParentLeaf,
                 ObjName = this.ObjName,
-                ParamPath = this.ParamPath.Split('.')[0] + lane,
+                ParamPath = this.ParamPathBase + lane,
                 TraitType = this.TraitType,
                 //skip data points
                 Step = this.Step,
                 DefaultValue = this.DefaultValue,
-                Footer = this.Footer,
-                Category = this.Category,
                 FriendlyParam = this.FriendlyParam,
                 HighlightColor = this.HighlightColor,
                 highlight_value = this.highlight_value,
@@ -393,7 +386,7 @@ namespace Thumper_Custom_Level_Editor
 
             this.OwningRow.DataGridView.InvalidateRow(this.RowIndex);
 
-            if (((Sequencer_Object)this.OwningRow).Category == "PLAY SAMPLE")
+            if (((Sequencer_Object)this.OwningRow).Default.Category == "PLAY SAMPLE")
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             //if value changing on a tuning layer, recalc the values
             if (((Sequencer_Object)this.OwningRow).ObjName == "_TuningLayerX") {
@@ -465,7 +458,7 @@ namespace Thumper_Custom_Level_Editor
         public LeafProperties(EditorLeaf Parent)
         {
             ParentEditor = Parent;
-            selectedobj = new(this);
+            selectedobj = new(this, null);
         }
 
         public JObject ConvertToJson()
@@ -577,7 +570,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]
-        public string category => selectedobj.Category;
+        public string category => selectedobj.Default.Category;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Parameter")]

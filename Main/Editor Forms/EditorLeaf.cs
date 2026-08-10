@@ -7,7 +7,6 @@ using Thumper_Custom_Level_Editor.Utility_Classes;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using System.ComponentModel;
-using Windows.Graphics.Printing.PrintTicket;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -15,6 +14,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
     {
         #region Form Construction
         ///Load LEAF
+        public static Stopwatch sw = new();
         public EditorLeaf() { InitializeComponent(); }
         public EditorLeaf(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
@@ -24,31 +24,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadSequencer(load["seq_objs"], _leafproperties, SimpleTrackEditor);
                 return;
             }
-            Stopwatch sw = Stopwatch.StartNew();
-            Stopwatch sw2 = Stopwatch.StartNew();
             Debug.WriteLine($"============START LOADING NEW LEAF: {WorkingFile.Name}============");
+            EditorIsLoading = true;
             InitializeComponent();
-            Debug.WriteLine($"InitializeComponent: {sw.ElapsedMilliseconds} ms");
-            sw.Restart();
             RenderForm();
-            Debug.WriteLine($"RenderForm: {sw.ElapsedMilliseconds} ms");
-            sw.Restart();
             ColorFormElements();
-            Debug.WriteLine($"ColorForm: {sw.ElapsedMilliseconds} ms");
-            sw.Restart();
 
             if (load == null)
                 return;
 
             LoadLeaf(load);
-            Debug.WriteLine($"LoadLead: {sw.ElapsedMilliseconds} ms");
-            sw.Restart();
+            sw.Start();
             LoadSequencer(load["seq_objs"], _leafproperties, trackEditor);
-            Debug.WriteLine($"LoadSequencer: {sw.ElapsedMilliseconds} ms");
-            sw.Restart();
             LoadEnd(load);
-            Debug.WriteLine($"LoadEnd: {sw.ElapsedMilliseconds} ms");
-            Debug.WriteLine($"Total Time: {sw2.ElapsedMilliseconds} ms");
         }
         ///Load LVL Sequencer
         public EditorLeaf(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
@@ -60,7 +48,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadSequencer(((LvlProperties)AltSequencer).seqJSON, LeafProperties, SimpleTrackEditor);
                 return;
             }
-
+            EditorIsLoading = true;
             InitializeComponent();
             RenderForm();
             ColorFormElements();
@@ -79,11 +67,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (SimpleLoad)
                 return;
-
+            Stopwatch sw = new();
+            sw.Start();
             this.SuspendLayout();
             this.dockPanel1.SuspendLayout();
+            splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 5;
+            splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
+            //
             dockPanel1.Theme = TCLE.DockTheme;
-            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            //m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             contentMain.Controls.Add(splitContainerLeafSide);
             splitContainerLeafSide.Dock = DockStyle.Fill;
             contentObjects.Controls.Add(panelObjects);
@@ -93,14 +85,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             contentMasterView.Controls.Add(panelMasterView);
             panelMasterView.Dock = DockStyle.Fill;
             //
-            try {
-                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_leaf.config", m_deserializeDockContent);
-            } catch {
-                contentMain.Show(dockPanel1, DockState.Document);
-                contentObjects.Show(contentMain.Pane, DockAlignment.Left, 0.13);
-                contentPropertyGrid.Show(contentObjects.Pane, DockAlignment.Bottom, 0.5);
-                contentMasterView.Show(contentMain.Pane, DockAlignment.Top, 0.2);
-            }
+            contentMain.Show(dockPanel1, DockState.Document);
+            contentObjects.Show(contentMain.Pane, DockAlignment.Left, Properties.Settings.Default.ProportionLeafObjects);
+            contentPropertyGrid.Show(contentObjects.Pane, DockAlignment.Bottom, Properties.Settings.Default.ProportionLeafPropertyGrid);
+            contentMasterView.Show(contentMain.Pane, DockAlignment.Top, Properties.Settings.Default.ProportionLeafMasterView);
             //
             leaftoolsToolStrip.Renderer = TCLE.LeafToolStripOverride;
             toolstripMasterView.Renderer = TCLE.LeafToolStripOverride;
@@ -117,8 +105,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
-            splitContainerLeafSide.SplitterDistance = splitContainerLeafSide.Height - 5;
-            splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
@@ -168,9 +154,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void dockPanel1_ActiveContentChanged(object sender, EventArgs e)
         {
-            if (TCLE.IsLoadingProject)
+            if (TCLE.IsLoadingProject || EditorIsLoading)
                 return;
-            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_leaf.config");
+            
+            Properties.Settings.Default.ProportionLeafObjects = contentObjects.Pane.NestedDockingStatus.Proportion;
+            Properties.Settings.Default.ProportionLeafPropertyGrid = contentPropertyGrid.Pane.NestedDockingStatus.Proportion;
+            Properties.Settings.Default.ProportionLeafMasterView = contentMasterView.Pane.NestedDockingStatus.Proportion;
+
         }
         #endregion
 
@@ -279,11 +269,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Scrollbars and Zoom
         private void trackEditor_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            if (EditorIsTuning)
+            if (EditorIsTuning || EditorIsLoading)
                 return;
             vscrollbarTrackEditor_Resize();
 
-            LeafLanes = SequencerObjects.Where(x => x.ObjName.EndsWith(".leaf")).ToDictionary(x => x.FriendlyParam);
+            LeafLanes = SequencerObjects.Where(x => x.ParamPathBase.StartsWith("visibl")).ToDictionary(x => x.FriendlyParam);
 
             for (int x = e.RowIndex; x < e.RowIndex + e.RowCount; x++) {
                 Sequencer_Object seq = SequencerObjects[x];
@@ -320,6 +310,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void trackZoom_Scroll(object sender, EventArgs e)
         {
+            if (EditorIsLoading)
+                return;
             Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
             ZoomHasChanged = true;
             int display = trackEditor.FirstDisplayedScrollingColumnIndex;
@@ -333,11 +325,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Scroll += trackEditor_Scroll;
             }
             LeafMasterView.Width = trackZoom.Value;
-            LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);
+            LeafMasterView.InitializeAndResize(SequencerObjects.ToList(), _leafproperties);
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)
         {
+            if (EditorIsLoading)
+                return;
             Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
             ZoomHasChanged = true;
             int display = trackEditor.FirstDisplayedScrollingRowIndex;
@@ -496,7 +490,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             RowPrePaintError = null;
 
-            if (SequencerObjects[e.RowIndex].Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+            if (SequencerObjects[e.RowIndex].Default.Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 PaintRowWaveforms(e);
             else if (SequencerObjects[e.RowIndex].TrailLength > 1)
                 PaintRowLongObject(e);
@@ -1314,7 +1308,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e.Node.Text == "*FAVORITES*" || e.Node.Nodes.Count > 0 || treeObjects.SelectedNode.Nodes.Count > 0 || e.Button == MouseButtons.Right)
                 return;
 
-            Object_Params objmatch = e.Node.Tag is Object_Params _obj ? _obj : TCLE.LeafObjects[(string)e.Node.Tag];
+            DefaultSequencerObject objmatch = e.Node.Tag is DefaultSequencerObject _obj ? _obj : TCLE.LeafObjects[(string)e.Node.Tag];
             if (e.Node.Text.EndsWith(".samp"))
                 objmatch = TCLE.LeafObjects["sample.samp;play"];
             if (objmatch == null)
@@ -1325,26 +1319,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UtilAudio.PlaySound("UIobjectadd");
         }
 
-        private Sequencer_Object AddToSequencer(Object_Params ObjToAdd, string SampleName = null)
+        private Sequencer_Object AddToSequencer(DefaultSequencerObject ObjToAdd, string SampleName = null)
         {
             Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
-                ObjName = ObjToAdd.category == "PLAY SAMPLE" ? SampleName : ObjToAdd.obj_name,
-                Category = ObjToAdd.category,
-                ParamPath = ObjToAdd.param_path,
-                FriendlyParam = ObjToAdd.param_displayname,
-                DefaultValue = ObjToAdd.default_value,
-                Step = ObjToAdd.step,
-                TraitType = Sequencer_Object.TraitLookup[ObjToAdd.trait_type],
-                HighlightColor = ObjToAdd.defaultcolor,
+                ObjName = ObjToAdd.Category == "PLAY SAMPLE" ? SampleName : ObjToAdd.Name,
+                Category = ObjToAdd.Category,
+                ParamPath = ObjToAdd.ParamPath,
+                FriendlyParam = ObjToAdd.ParamDisplayName,
+                DefaultValue = ObjToAdd.DefaultValue,
+                Step = ObjToAdd.Step,
+                TraitType = Sequencer_Object.TraitLookup[ObjToAdd.TraitType],
+                HighlightColor = ObjToAdd.DefaultColor,
                 highlight_value = 0,
-                Footer = ObjToAdd.footer,
+                Footer = ObjToAdd.Footer,
                 EnabledInEditor = true
             };
             if (seq.ObjName == "leafname")
                 seq.ObjName = this.WorkingFile.Name;
-            if (seq.Category == "LOOP TRACK VOLUME") {
-                int audiochannels = SequencerObjects.Count(x => x.Category == "LOOP TRACK VOLUME");
+            if (seq.Default.Category == "LOOP TRACK VOLUME") {
+                int audiochannels = SequencerObjects.Count(x => x.Default.Category == "LOOP TRACK VOLUME");
                 seq.ParamPath = seq.ParamPath.Replace("x", $"{audiochannels}");
                 seq.FriendlyParam = seq.FriendlyParam.Replace("x", $"{audiochannels}");
             }
@@ -1356,7 +1350,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //if object is multilane, need to add all its lanes
             if (seq.FriendlyLane == "lane center") {
-                var LanesToAdd = LoadMultiLanes(seq, SequencerObjects, trackEditor);
+                var LanesToAdd = LoadMultiLanes(seq, SequencerObjects);
                 SequencerObjects.AddRange(LanesToAdd);
                 trackEditor.Rows.AddRange(LanesToAdd.ToArray());
             }
@@ -1453,7 +1447,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (treeObjects.SelectedNode.Nodes.Count > 0 || trackEditor.SelectedCells.Count == 0)
                 return;
-            Object_Params objmatch = TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag];
+            DefaultSequencerObject objmatch = TCLE.LeafObjects[(string)treeObjects.SelectedNode.Tag];
             if (objmatch == null) {
                 if (treeObjects.SelectedNode.Text.EndsWith(".samp")) {
                     objmatch = TCLE.LeafObjects["sample.samp;play"];
@@ -1462,26 +1456,26 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
             }
             Sequencer_Object _currentseq = SequencerObjects[CurrentRow];
-            if (!objmatch.param_path.EndsWith(".ent") && _currentseq.FriendlyLane != "none") {
+            if (!objmatch.ParamPath.EndsWith(".ent") && _currentseq.FriendlyLane != "none") {
                 MessageBox.Show("Due to reasons, you cannot change a multi-lane object into a non-multi-lane object. Please just add a new object.", "Thumper Custom Level Editor");
                 return;
             }
             Sequencer_Object[] Lanes = SequencerObjects.GetRange(_currentseq.Index + _currentseq.LaneOffsetFromTop, (_currentseq.FriendlyLane != "none" ? 5 : 1)).ToArray();// Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
             for (int x = 0; x < Lanes.Length; x++) {
-                Lanes[x].ObjName = objmatch.category == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.obj_name;
-                Lanes[x].Category = objmatch.category;
-                Lanes[x].ParamPath = objmatch.param_path;
-                Lanes[x].FriendlyParam = objmatch.param_displayname;
-                Lanes[x].TraitType = Sequencer_Object.TraitLookup[objmatch.trait_type];
-                Lanes[x].Footer = objmatch.footer;
-                Lanes[x].HighlightColor = objmatch.defaultcolor;
+                Lanes[x].ObjName = objmatch.Category == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.Name;
+                Lanes[x].Category = objmatch.Category;
+                Lanes[x].ParamPath = objmatch.ParamPath;
+                Lanes[x].FriendlyParam = objmatch.ParamDisplayName;
+                Lanes[x].TraitType = Sequencer_Object.TraitLookup[objmatch.TraitType];
+                Lanes[x].Footer = objmatch.Footer;
+                Lanes[x].HighlightColor = objmatch.DefaultColor;
                 if (Lanes[x].ObjName == "leafname")
                     Lanes[x].ObjName = this.WorkingFile.Name;
                 SetRowHeaderText(Lanes[x]);
             }
             //
             if (Lanes.Length == 1 && Lanes[0].FriendlyLane != "none")
-                LoadMultiLanes(Lanes[0], SequencerObjects, trackEditor);
+                LoadMultiLanes(Lanes[0], SequencerObjects);
             //FindMissingLaneObjects(SequencerObjects[CurrentRow]);
             trackEditor.InvalidateRow(_currentseq.Index);
 
@@ -1848,9 +1842,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (seq.Cells.Cast<SeqDataPoint>().Any(x => x.Value != null))
                 return false;
             //locate the default object
-            if (TCLE.LeafObjects.TryGetValue($"{seq.ObjName};{seq.ParamPath.Replace(seq.ParamPathLane, "ent")}", out Object_Params? BaseObj))
+            if (TCLE.LeafObjects.TryGetValue($"{seq.ObjName};{seq.ParamPath.Replace(seq.ParamPathLane, "ent")}", out DefaultSequencerObject? BaseObj))
             //once found, compare its default value to the leaf object's. If different, data has changed, so don't delete it.
-            if (BaseObj != null && BaseObj.default_value != seq.DefaultValue)
+            if (BaseObj != null && BaseObj.DefaultValue != seq.DefaultValue)
                 return false;
 
             return true;
@@ -2185,13 +2179,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             EditorIsRandomizing = true;
             //I pick category first rather than any object, as this gives Play Sample a higher chance of being picked
             //And all the tentacles a lower chance
-            List<string> categories = TCLE.LeafObjects.Select(x => x.Value.category).Distinct().ToList();
+            List<string> categories = TCLE.LeafObjects.Select(x => x.Value.Category).Distinct().ToList();
         beginrando:
             string category = categories[TCLE.rng.Next(0, categories.Count)];
-            List<Object_Params> objects = TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value).ToList();
-            Object_Params BaseObj = objects[TCLE.rng.Next(0, objects.Count)];
+            List<DefaultSequencerObject> objects = TCLE.LeafObjects.Where(x => x.Value.Category == category).Select(x => x.Value).ToList();
+            DefaultSequencerObject BaseObj = objects[TCLE.rng.Next(0, objects.Count)];
             //check if the object exists in the leaf already. If so, pick a new one
-            if (SequencerObjects.Any(x => x.Category == category && x.ParamPath == BaseObj.param_path))
+            if (SequencerObjects.Any(x => x.Category == category && x.ParamPath == BaseObj.ParamPath))
                 goto beginrando;
 
             var seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name);
@@ -2418,7 +2412,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             });
             //mark leaf is saved (just freshly loaded)
             EditorIsLoading = false;
-            SaveCheckAndWrite(true, "", false);
+            //SaveCheckAndWrite(true, "", false);
             //
             LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);
             toolstripMasterView.Width = leafToolStrip.Width + trackEditor.RowHeadersWidth + (75);
@@ -2426,7 +2420,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void LoadSequencer(dynamic seqJSON, LeafProperties ParentLeaf, DataGridView dgv)
         {
-            List<Sequencer_Object> LoadedObjects = new();
+            Dictionary<(string, string), Sequencer_Object> LoadedObjects = new();
             int audiochannels = 0;
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
@@ -2461,30 +2455,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
+                        sw.Restart();
                         string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
-                        Object_Params objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
-                        ObjectToImport.FriendlyParam = objmatch?.param_displayname ?? "";
-                        ObjectToImport.Category = objmatch?.category ?? "";
-                        ObjectToImport.HighlightColor = seq_obj["editor_data"]?[0] != null ? Color.FromArgb((int)seq_obj["editor_data"][0]) : objmatch?.defaultcolor ?? Color.Purple;
+                        if (TCLE.LeafObjects.TryGetValue(normalizeParam, out DefaultSequencerObject objmatch)) {
+                            ObjectToImport.FriendlyParam = objmatch.ParamDisplayName;
+                            ObjectToImport.Category = objmatch.Category;
+                            ObjectToImport.HighlightColor = seq_obj["editor_data"]?[0] is int _color ? Color.FromArgb(_color) : objmatch.DefaultColor;
+                            //ObjectToImport.HighlightColor = objmatch.defaultcolor;
+                        }
                         //set audio channel numbers on load
                         if (ObjectToImport.Category == "LOOP TRACK VOLUME") {
                             ObjectToImport.ParamPath = ObjectToImport.ParamPath.Replace("x", $"{audiochannels}");
                             ObjectToImport.FriendlyParam = ObjectToImport.FriendlyParam.Replace("x", $"{audiochannels}");
                             audiochannels++;
                         }
-                    } catch (Exception) { }
+                    } catch (Exception ex) {
+                        Debug.WriteLine($"{ParentLeaf.LeafName} VERY BIG PROBLEM HERE {ex}");
+                    }
                 }
                 //deal with multilanes
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
+                sw.Restart();
                 if (ObjectToImport.FriendlyLane is not "none") {
-                    var LanesToImport = LoadMultiLanes(ObjectToImport, LoadedObjects, dgv);
-                    if (LanesToImport != null)
-                        LoadedObjects.AddRange(LanesToImport);
+                    var LanesToImport = LoadMultiLanes(ObjectToImport, LoadedObjects);
+                    //if (LanesToImport != null)
+                        //LoadedObjects.AddRange(LanesToImport);
+                    Debug.WriteLine($"LoadSequencer-LoadMultilane: {sw.ElapsedMilliseconds}ms");
+                    sw.Restart();
                 }
                 else {
                     ObjectToImport.ExpandLanesInEditor = true;
-                    LoadedObjects.Add(ObjectToImport);
+                    LoadedObjects.Add((ObjectToImport.ObjName, ObjectToImport.ParamPath), ObjectToImport);
                     //dgv.Rows.Add(ObjectToImport);
                 }
                 //this line exists to force the app to recognize the rows have proper indexes instead of -1
@@ -2493,9 +2495,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadDataPoints(ObjectToImport, seq_obj["data_points"]);
                 //RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
             }
+            sw.Restart();
             //return Seq_Objs;
-            ParentLeaf.SequencerObjects = LoadedObjects;
+            ParentLeaf.SequencerObjects = LoadedObjects.Values.ToList();
             dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
+            Debug.WriteLine($"LoadSequencer-AddRows: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
             //string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
         }
@@ -2556,29 +2561,57 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public static List<Sequencer_Object> LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects, DataGridView dgv)
+        public static Dictionary<(string, string), Sequencer_Object> LoadMultiLanes(Sequencer_Object ObjectToImport, Dictionary<(string, string), Sequencer_Object> LoadedObjects)
         {
-            List<Sequencer_Object> Lanes = new();
-            Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
+            //Dictionary<(string, string), Sequencer_Object> Lanes = new();
+            sw.Restart();
+            //Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
+            if (LoadedObjects.TryGetValue((ObjectToImport.ObjName, ObjectToImport.ParamPath), out Sequencer_Object lookup)) {
+                lookup = ObjectToImport;
+                return null;
+            }
+            Debug.WriteLine($"LoadMultiLane-Lookup: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
-            if (lookup == null) {
+            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a01"), ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
+            Debug.WriteLine($"LoadMultiLane-clone1: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
+            //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
+            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a02"), ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
+            Debug.WriteLine($"LoadMultiLane-clone2: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
+            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.ent"), ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
+            Debug.WriteLine($"LoadMultiLane-clone3: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
+            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z01"), ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
+            Debug.WriteLine($"LoadMultiLane-clone4: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
+            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z02"), ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
+            Debug.WriteLine($"LoadMultiLane-clone5: {sw.ElapsedMilliseconds}ms");
+            sw.Restart();
+
+            LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
+            //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
+            //Lanes[Lanes.IndexOf(lookup)] = ObjectToImport;
+            return null;
+        }
+        public static List<Sequencer_Object> LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects)
+        {
+            List<Sequencer_Object> Lanes = new(); Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
+            //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
+            if (lookup == null) { 
                 Lanes.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
                 //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 Lanes.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 Lanes.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 Lanes.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 Lanes.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
-
-                lookup = Lanes.FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
-
-                Lanes[Lanes.IndexOf(lookup)] = ObjectToImport;
+                
+                Lanes[(ObjectToImport.LaneOffsetFromTop * -1)] = ObjectToImport;
+                //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
+                //Lanes[Lanes.IndexOf(lookup)] = ObjectToImport;
                 return Lanes;
-            }
-            else {
+            } else { 
                 LoadedObjects[LoadedObjects.IndexOf(lookup)] = ObjectToImport;
                 return null;
             }

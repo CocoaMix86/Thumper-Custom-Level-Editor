@@ -180,7 +180,7 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save sequencer favs
-            Properties.Settings.Default.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.favorite).Select(x => $"{x.obj_name};{x.param_path}").ToList();
+            Properties.Settings.Default.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.Favorite).Select(x => $"{x.Name};{x.ParamPath}").ToList();
             //save panel sizes and locations
             Properties.Settings.Default.beeblesize = MainBeeble.Size;
             Properties.Settings.Default.beebleloc = MainBeeble.Location;

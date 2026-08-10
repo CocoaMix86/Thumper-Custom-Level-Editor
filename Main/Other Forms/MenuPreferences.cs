@@ -100,7 +100,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.ColorFormElements(TCLE.Instance);
 
             //write sequencer colors to txt file
-            File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.Value.param_displayname};{x.Value.defaultcolor.ToArgb()}"));
+            File.WriteAllLines($@"{TCLE.AppLocation}\settings\objects_defaultcolors_v3.txt", TCLE.LeafObjects.Select(x => $"{x.Value.ParamDisplayName};{x.Value.DefaultColor.ToArgb()}"));
             UtilImport.ImportDefaultColors();
             Properties.Settings.Default.colordialogcustomcolors = colorDialog1.CustomColors.ToList();
             SeqObjTreeBuilder.BuildMasterObjectTree();
@@ -178,19 +178,19 @@ namespace Thumper_Custom_Level_Editor
 
             treeObjects.Nodes.Clear();
             //make each category of objects its own node
-            foreach (string category in TCLE.LeafObjects.Select(x => x.Value.category).Distinct().Order()) {
+            foreach (string category in TCLE.LeafObjects.Select(x => x.Value.Category).Distinct().Order()) {
                 TreeNode _node = new() {
                     Text = category.ToUpper(),
                     ImageKey = category.ToUpper(),
                     SelectedImageKey = category.ToUpper()
                 };
                 //each object becomes its own node
-                foreach (Object_Params obj in TCLE.LeafObjects.Where(x => x.Value.category == category).Select(x => x.Value)) {
+                foreach (DefaultSequencerObject obj in TCLE.LeafObjects.Where(x => x.Value.Category == category).Select(x => x.Value)) {
                     TreeNode _param = new() {
-                        Text = obj.param_displayname,
-                        ImageKey = obj.defaultcolor.ToArgb().ToString(),
-                        SelectedImageKey = obj.defaultcolor.ToArgb().ToString(),
-                        Tag = obj.obj_name + ";" + obj.param_path
+                        Text = obj.ParamDisplayName,
+                        ImageKey = obj.DefaultColor.ToArgb().ToString(),
+                        SelectedImageKey = obj.DefaultColor.ToArgb().ToString(),
+                        Tag = obj.Name + ";" + obj.ParamPath
                     };
                     if ((filtersearch && _param.Text.Contains(txtSearch.Text)) || !filtersearch)
                         _node.Nodes.Add(_param);
@@ -222,8 +222,8 @@ namespace Thumper_Custom_Level_Editor
                 TCLE.ColorIcons.TryAdd(colorname, color);
                 imageList1.Images.Add(colorname, color);
                 //apply color to object
-                Object_Params param = TCLE.LeafObjects[(string)e.Node.Tag];
-                param.defaultcolor = colorDialog.Color;
+                DefaultSequencerObject param = TCLE.LeafObjects[(string)e.Node.Tag];
+                param.DefaultColor = colorDialog.Color;
                 e.Node.ImageKey = colorname;
                 e.Node.SelectedImageKey = colorname;
             }
