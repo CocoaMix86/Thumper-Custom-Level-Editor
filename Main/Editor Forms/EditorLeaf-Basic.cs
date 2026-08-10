@@ -173,18 +173,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (_findseq == null) {
                 DefaultSequencerObject objmatch = TCLE.LeafObjects.FirstOrDefault(x => x.Value.ParamPath == _paramtofind).Value;
-                Sequencer_Object _importseq = new(LeafProperties) {
+                Sequencer_Object _importseq = new(LeafProperties, objmatch) {
                     ParentLeaf = LeafProperties,
                     ObjName = objmatch.Name,
-                    Category = objmatch.Category,
                     ParamPath = objmatch.ParamPath,
                     FriendlyParam = objmatch.ParamDisplayName,
                     DefaultValue = objmatch.DefaultValue,
                     Step = objmatch.Step,
-                    TraitType = Sequencer_Object.TraitLookup[objmatch.TraitType],
                     HighlightColor = objmatch.DefaultColor,
                     highlight_value = 0,
-                    Footer = objmatch.Footer,
                     EnabledInEditor = true
                 };
                 if (_importseq.ObjName == "leafname")
@@ -201,10 +198,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 goto search;
             }
 
-            if (setvalue == null && _findseq.Category != "TRACK EFFECTS") {
+            if (setvalue == null && _findseq.Default.Category != "TRACK EFFECTS") {
                 //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
                 //just so you don't have to switch your selection to a different object to delete it.
-                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Category == _findseq.Category && x.FriendlyLane == _findseq.FriendlyLane)) {
+                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Default.Category == _findseq.Default.Category && x.FriendlyLane == _findseq.FriendlyLane)) {
                     if (seq.DefaultValue == 1 && setvalue == null) {
                         setvalue = 0;
                     }

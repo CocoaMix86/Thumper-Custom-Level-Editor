@@ -1376,7 +1376,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //add the rest of the keys to this seq_obj
                 s.Add("step", seq_obj.Step);
                 s.Add("default", seq_obj.DefaultValue);
-                s.Add("footer", seq_obj.Footer);
+                s.Add("footer", seq_obj.Default.Footer);
                 s.Add("editor_data", new JArray() { new object[] { seq_obj.HighlightColor.ToArgb(), seq_obj.highlight_value } });
                 s.Add("enabled", seq_obj.EnabledInEditor);
 

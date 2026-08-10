@@ -12,7 +12,6 @@ namespace Thumper_Custom_Level_Editor
     public class DefaultSequencerObject
     {
         public string Name { get; set; }
-        public string ParamDisplayName { get; set; }
         public string ParamPath { get; set; }
         public bool Step { get; set; }
         public decimal DefaultValue { get; set; }
@@ -44,6 +43,14 @@ namespace Thumper_Custom_Level_Editor
         private string _category;
         public Image CategoryIcon;
 
+        private string _paramdisplay;
+        public string ParamDisplayName { 
+            get => _paramdisplay;
+            set { 
+                _paramdisplay = value;
+                _ = TrailLength;
+            } 
+        }
         private int? _trailLength;
         public int TrailLength
         {
@@ -165,6 +172,7 @@ namespace Thumper_Custom_Level_Editor
 
         public string ObjName { get; set; }
 
+        public string FriendlyParam { get; set; } = "";
         private string _parampath;
         public string ParamPath { 
             get => _parampath;
@@ -195,8 +203,6 @@ namespace Thumper_Custom_Level_Editor
                 _defaultvalue = Convert.ToDecimal(TraitValidator.Sanitize(TraitType, value));
             }
         }
-
-        public string FriendlyParam { get; set; } = "";
 
         private Color _highlightcolor = Color.Purple;
         public Color HighlightColor

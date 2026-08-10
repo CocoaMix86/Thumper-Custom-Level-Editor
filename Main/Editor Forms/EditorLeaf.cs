@@ -1321,18 +1321,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private Sequencer_Object AddToSequencer(DefaultSequencerObject ObjToAdd, string SampleName = null)
         {
-            Sequencer_Object seq = new(LeafProperties) {
+            Sequencer_Object seq = new(LeafProperties, ObjToAdd) {
                 ParentLeaf = LeafProperties,
                 ObjName = ObjToAdd.Category == "PLAY SAMPLE" ? SampleName : ObjToAdd.Name,
-                Category = ObjToAdd.Category,
                 ParamPath = ObjToAdd.ParamPath,
                 FriendlyParam = ObjToAdd.ParamDisplayName,
                 DefaultValue = ObjToAdd.DefaultValue,
                 Step = ObjToAdd.Step,
-                TraitType = Sequencer_Object.TraitLookup[ObjToAdd.TraitType],
                 HighlightColor = ObjToAdd.DefaultColor,
                 highlight_value = 0,
-                Footer = ObjToAdd.Footer,
                 EnabledInEditor = true
             };
             if (seq.ObjName == "leafname")
@@ -1462,12 +1459,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             Sequencer_Object[] Lanes = SequencerObjects.GetRange(_currentseq.Index + _currentseq.LaneOffsetFromTop, (_currentseq.FriendlyLane != "none" ? 5 : 1)).ToArray();// Where(x => x.category == _currentseq.category && x.friendly_param == _currentseq.friendly_param).ToArray();
             for (int x = 0; x < Lanes.Length; x++) {
+                Lanes[x].Default = objmatch;
                 Lanes[x].ObjName = objmatch.Category == "PLAY SAMPLE" ? treeObjects.SelectedNode.Text : objmatch.Name;
-                Lanes[x].Category = objmatch.Category;
                 Lanes[x].ParamPath = objmatch.ParamPath;
                 Lanes[x].FriendlyParam = objmatch.ParamDisplayName;
-                Lanes[x].TraitType = Sequencer_Object.TraitLookup[objmatch.TraitType];
-                Lanes[x].Footer = objmatch.Footer;
                 Lanes[x].HighlightColor = objmatch.DefaultColor;
                 if (Lanes[x].ObjName == "leafname")
                     Lanes[x].ObjName = this.WorkingFile.Name;
@@ -2185,7 +2180,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<DefaultSequencerObject> objects = TCLE.LeafObjects.Where(x => x.Value.Category == category).Select(x => x.Value).ToList();
             DefaultSequencerObject BaseObj = objects[TCLE.rng.Next(0, objects.Count)];
             //check if the object exists in the leaf already. If so, pick a new one
-            if (SequencerObjects.Any(x => x.Category == category && x.ParamPath == BaseObj.ParamPath))
+            if (SequencerObjects.Any(x => x.Default.Category == category && x.ParamPath == BaseObj.ParamPath))
                 goto beginrando;
 
             var seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name);
@@ -2424,13 +2419,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int audiochannels = 0;
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
-                Sequencer_Object ObjectToImport = new(ParentLeaf) {
+                Sequencer_Object ObjectToImport = new(ParentLeaf, null) {
                     ParentLeaf = ParentLeaf,
                     ObjName = ((string)seq_obj["obj_name"]),
-                    TraitType = Sequencer_Object.TraitLookup[(string)seq_obj["trait_type"]],
+                    //TraitType = Sequencer_Object.TraitLookup[(string)seq_obj["trait_type"]],
                     Step = (string)seq_obj["step"] == "True",
                     DefaultValue = seq_obj["default"],
-                    Footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
+                    //Footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     ParamPath = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
                     highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
@@ -2445,12 +2440,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //if the object is a tuning layer, handle it here
                 if (ObjectToImport.ObjName == "_TuningLayerX") {
                     ObjectToImport.FriendlyParam = ObjectToImport.ParamPath;
-                    ObjectToImport.Category = "";
+                    ObjectToImport.Default = TCLE.LeafObjects["_TuningLayerX;⮝ Tuning Layer X"];
+                    //ObjectToImport.Category = "";
                 }
                 //if object is a .samp, set category and friendly_param since they don't exist in LeafObjects
                 else if (ObjectToImport.ObjName.EndsWith(".samp") && ObjectToImport.ParamPath == "play") {
-                    ObjectToImport.Category = "PLAY SAMPLE";
+                    //ObjectToImport.Category = "PLAY SAMPLE";
                     ObjectToImport.FriendlyParam = "play";
+                    ObjectToImport.Default = TCLE.LeafObjects["sample.samp;play"];
                 }
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
@@ -2458,13 +2455,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         sw.Restart();
                         string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
                         if (TCLE.LeafObjects.TryGetValue(normalizeParam, out DefaultSequencerObject objmatch)) {
+                            ObjectToImport.Default = objmatch;
                             ObjectToImport.FriendlyParam = objmatch.ParamDisplayName;
-                            ObjectToImport.Category = objmatch.Category;
                             ObjectToImport.HighlightColor = seq_obj["editor_data"]?[0] is int _color ? Color.FromArgb(_color) : objmatch.DefaultColor;
                             //ObjectToImport.HighlightColor = objmatch.defaultcolor;
                         }
                         //set audio channel numbers on load
-                        if (ObjectToImport.Category == "LOOP TRACK VOLUME") {
+                        if (ObjectToImport.Default.Category == "LOOP TRACK VOLUME") {
                             ObjectToImport.ParamPath = ObjectToImport.ParamPath.Replace("x", $"{audiochannels}");
                             ObjectToImport.FriendlyParam = ObjectToImport.FriendlyParam.Replace("x", $"{audiochannels}");
                             audiochannels++;
@@ -2623,18 +2620,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void AddSequencerLayer(int index)
         {
-            Sequencer_Object seq = new(LeafProperties) {
+            Sequencer_Object seq = new(LeafProperties, TCLE.LeafObjects["_TuningLayerX;⮝ Tuning Layer X"]) {
                 ParentLeaf = LeafProperties,
                 ObjName = "_TuningLayerX",
-                Category = "",
                 ParamPath = "⮝ Tuning Layer X",
                 FriendlyParam = "⮝ Tuning Layer X",
                 DefaultValue = 0,
                 Step = false,
-                TraitType = Sequencer_Object.Trait.Float,
                 HighlightColor = Color.FromArgb(40, 40, 40),
                 highlight_value = 0,
-                Footer = "",
                 EnabledInEditor = true
             };
 
@@ -2653,17 +2647,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void toolstripObjConvert_Click(object sender, EventArgs e)
         {
             Sequencer_Object seq = SequencerObjects[trackEditor.CurrentRow.Index].Clone();
+            seq.Default = TCLE.LeafObjects["_TuningLayerX;⮝ Tuning Layer X"];
             seq.ParentLeaf = _leafproperties;
             seq.ObjName = "_TuningLayerX";
-            seq.Category = "";
             seq.ParamPath = "⮝ Tuning Layer X";
             seq.FriendlyParam = "⮝ Tuning Layer X";
             seq.DefaultValue = 0;
             seq.Step = false;
-            seq.TraitType = Sequencer_Object.Trait.Float;
             seq.HighlightColor = Color.FromArgb(40, 40, 40);
             seq.highlight_value = 0;
-            seq.Footer = "";
             seq.EnabledInEditor = true;
 
             int tuninglayers = SequencerObjects.Count(x => x.ObjName == "_TuningLayerX");
@@ -2923,10 +2915,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates row headers to be the Object and Param_Path
         public static void SetRowHeaderText(Sequencer_Object seq)
         {
-            string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Category}] " : "";
+            string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Default.Category}] " : "";
             ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $" {ShowCategory}" : ShowCategory; 
             string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{seq.FriendlyParam}, {seq.FriendlyLane}" : seq.FriendlyParam;
-            if (seq.Category == "PLAY SAMPLE")
+            if (seq.Default.Category == "PLAY SAMPLE")
                 //show the sample name instead
                 seq.HeaderCell.Value = $"{ShowCategory}{seq.ObjName}";
             else if (seq.ObjName == "_TuningLayerX")
@@ -3121,9 +3113,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     randomtype = 2;
                 else if (seq.ObjName == "fade.pp")
                     randomtype = 3;
-                else if (seq.Category == "CAMERA")
+                else if (seq.Default.Category == "CAMERA")
                     randomtype = 4;
-                else if (seq.Category == "GAMMA")
+                else if (seq.Default.Category == "GAMMA")
                     randomtype = 5;
                 else
                     randomtype = 6;
@@ -3184,12 +3176,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 _properties.ParentEditor.LogUndo = false;
                 _properties.ParentEditor.EditorIsTuning = true;
-                Sequencer_Object SumOfLayers = new(_properties) { TraitType = Sequencer_Object.Trait.Float };
+                Sequencer_Object SumOfLayers = new(_properties, null) { TraitType = Sequencer_Object.Trait.Float };
                 ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(SumOfLayers);
                 int _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
 
                 foreach (Sequencer_Object _layer in TuningLayers) {
-                    Sequencer_Object InterpolationCalc = new(_properties) { TraitType = Sequencer_Object.Trait.Float};
+                    Sequencer_Object InterpolationCalc = new(_properties, null) { TraitType = Sequencer_Object.Trait.Float};
                     ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(InterpolationCalc);
                     _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
                     SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();

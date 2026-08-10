@@ -91,7 +91,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
             }
             //paint the whole cell with the highlighting color
-            else if (seq.ObjName != "_TuningLayerX" && seq.Category != "PLAY SAMPLE") {
+            else if (seq.ObjName != "_TuningLayerX" && seq.Default.Category != "PLAY SAMPLE") {
                 if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)seq.highlight_value)
                     e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
@@ -138,7 +138,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //skips a bunch of objects since they display their values differently
             if (e.RowIndex == -1)
                 goto skipchecks;
-            if (seq.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+            if (seq.Default.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 return;
             else if (seq.TraitType is Sequencer_Object.Trait.Color)
                 return;
@@ -192,8 +192,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //Object Toggle
             switch (e.ColumnIndex) {
                 case -1:
-                    if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.CategoryIcon != null) {
-                        e.Graphics.DrawImage(seq.CategoryIcon, e.CellBounds.Left + 10, y, 16, 16);
+                    if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.Default.CategoryIcon != null) {
+                        e.Graphics.DrawImage(seq.Default.CategoryIcon, e.CellBounds.Left + 10, y, 16, 16);
                     }
                     break;
                 case 0:

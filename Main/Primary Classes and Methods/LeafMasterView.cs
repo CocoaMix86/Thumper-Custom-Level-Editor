@@ -297,7 +297,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawSpikes(Graphics g, List<Sequencer_Object> SequencerObjects, LeafProperties Leaf)
         {
-            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Category == "JUMPS/SPIKES")) {
+            foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Default.Category == "JUMPS/SPIKES")) {
                 for (int beat = 0; beat < Leaf.BeatsAndFrozen; beat++) {
                     if (seq[beat].InGameValue == 1) {
                         int beats = seq.TrailLength;
