@@ -85,9 +85,9 @@ namespace Thumper_Custom_Level_Editor
 
     public static class TraitValidator
     {
-        public static object Sanitize(DefaultSequencerObject.Trait trait, object value)
+        public static object Sanitize(DefaultSequencerObject.Trait? trait, object value)
         {
-            if (value == null)
+            if (value == null || trait == null)
                 return value;
             return trait switch
             {
@@ -98,25 +98,13 @@ namespace Thumper_Custom_Level_Editor
                 _ => value
             };
         }
-        public static object Sanitize(SimpleSequencerObject.Trait trait, object value)
-        {
-            if (value == null)
-                return value;
-            return trait switch {
-                SimpleSequencerObject.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                SimpleSequencerObject.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                SimpleSequencerObject.Trait.Int => Math.Truncate((decimal)value),
-                SimpleSequencerObject.Trait.Color => Math.Truncate((decimal)value),
-                _ => value
-            };
-        }
     }
 
     public class Sequencer_Object : SimpleSequencerObject
     {
         public LeafProperties ParentLeaf;
         public DefaultSequencerObject Default;
-        public Sequencer_Object(LeafProperties _parent, DefaultSequencerObject _default) : base(_parent)
+        public Sequencer_Object(LeafProperties _parent, DefaultSequencerObject _default) : base(_parent, _default)
         {
             ParentLeaf = _parent;
             Default = _default;
@@ -137,7 +125,7 @@ namespace Thumper_Custom_Level_Editor
             JObject s = new() {
                 { "obj_name", this.ObjName },
                 { (this.ParamPath.StartsWith("0x") ? "param_path_hash" : "param_path"), this.ParamPath.Replace("0x", "") },
-                { "trait_type", TraitTypeString },
+                { "trait_type", Default.TraitTypeString },
                 { "step", this.Step },
                 { "default", this.DefaultValue },
                 { "footer", this.Default.Footer },
@@ -193,6 +181,7 @@ namespace Thumper_Custom_Level_Editor
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
         public int LaneOffsetFromTop => TCLE.LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
         //
+        public bool Step { get; set; }
 
         private decimal _defaultvalue;
         public decimal DefaultValue
@@ -200,7 +189,7 @@ namespace Thumper_Custom_Level_Editor
             get => _defaultvalue;
             set {
                 //standardize values based on the type
-                _defaultvalue = Convert.ToDecimal(TraitValidator.Sanitize(TraitType, value));
+                _defaultvalue = Convert.ToDecimal(TraitValidator.Sanitize(Default?.TraitType, value));
             }
         }
 
@@ -276,7 +265,6 @@ namespace Thumper_Custom_Level_Editor
                 ParentLeaf = null,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPath,
-                TraitType = this.TraitType,
                 Step = this.Step,
                 DefaultValue = this.DefaultValue,
                 FriendlyParam = this.FriendlyParam,
@@ -314,7 +302,6 @@ namespace Thumper_Custom_Level_Editor
                 ParentLeaf = this.ParentLeaf,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPathBase + lane,
-                TraitType = this.TraitType,
                 //skip data points
                 Step = this.Step,
                 DefaultValue = this.DefaultValue,
@@ -349,7 +336,7 @@ namespace Thumper_Custom_Level_Editor
 
         public JObject ConvertToJson()
         {
-            if (this.ParentSeqObj.TraitType == Sequencer_Object.Trait.Float) { 
+            if (this.ParentSeqObj.Default.TraitType == DefaultSequencerObject.Trait.Float) { 
                 return new() { 
                     { "beat", this.beat }, 
                     { "value", (decimal)this.Value }, 
@@ -382,7 +369,7 @@ namespace Thumper_Custom_Level_Editor
             //sanitize inputs based on the trait type
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
-                value = TraitValidator.Sanitize(ParentSeqObj.TraitType, value);
+                value = TraitValidator.Sanitize(ParentSeqObj.Default?.TraitType, value);
             }
 
             bool _set = base.SetValue(rowIndex, value);
@@ -576,7 +563,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Category")]
         [Description("")]
-        public string category => selectedobj.Default.Category;
+        public string category => selectedobj.Default?.Category;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Parameter")]
@@ -586,7 +573,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Trait Type")]
         [Description("BOOL: accepts values 1 (on) or 0 (off); ACTION: accepts values 1 (activate); FLOAT: accepts float values; INT: accepts integer (no decimal) values; COLOR: accepts an integer representation of an ARGB color. Use the color wheel button to insert colors.")]
-        public string traittype => selectedobj.TraitType.ToString();
+        public string traittype => selectedobj.Default?.TraitTypeString;
 
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Step")]

@@ -26,10 +26,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             int audiochannels = 0;
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in LeafToLoad) {
-                SimpleSequencerObject ObjectToImport = new(LeafProps) {
+                SimpleSequencerObject ObjectToImport = new(LeafProps, null) {
                     ObjName = ((string)seq_obj["obj_name"]),
-                    TraitType = SimpleSequencerObject.TraitLookup[(string)seq_obj["trait_type"]],
-                    Step = (string)seq_obj["step"] == "True",
                     DefaultValue = seq_obj["default"],
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     ParamPath = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
@@ -44,16 +42,19 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 //if the object is a tuning layer, handle it here
                 if (ObjectToImport.ObjName == "_TuningLayerX") {
                     ObjectToImport.FriendlyParam = ObjectToImport.ParamPath;
+                    ObjectToImport.Default = TCLE.LeafObjects["_TuningLayerX;⮝ Tuning Layer X"];
                 }
                 //if object is a .samp, set category and friendly_param since they don't exist in LeafObjects
                 else if (ObjectToImport.ObjName.EndsWith(".samp") && ObjectToImport.ParamPath == "play") {
                     ObjectToImport.FriendlyParam = "play";
+                    ObjectToImport.Default = TCLE.LeafObjects["sample.samp;play"];
                 }
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
                         string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
                         DefaultSequencerObject objmatch = TCLE.LeafObjects[$"{normalizeParam}"]/* && obj.obj_name == ObjectToImport.obj_name.Replace(ParentLeaf.FilePath.Name, "leafname")*/;
+                        ObjectToImport.Default = objmatch;
                         ObjectToImport.FriendlyParam = objmatch?.ParamDisplayName ?? "";
                     } catch (Exception) { }
                 }
@@ -120,41 +121,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
     public class SimpleSequencerObject : DataGridViewRow
     {
         public SimpleLeafProperties ParentLeaf;
-        public SimpleSequencerObject(SimpleLeafProperties _parent)
+        public DefaultSequencerObject Default;
+        public SimpleSequencerObject(SimpleLeafProperties _parent, DefaultSequencerObject _default)
         {
             ParentLeaf = _parent;
-        }
-
-        private int? _trailLength;
-        public int TrailLength
-        {
-            get {
-                if (_trailLength.HasValue)
-                    return _trailLength.Value;
-
-                _trailLength = ParseTrailLength();
-                return _trailLength.Value;
-            }
-        }
-        public int ParseTrailLength()
-        {
-            string param = this.FriendlyParam;
-
-            int start = param.IndexOf('[');
-            if (start == -1)
-                return 0;
-
-            start++;
-
-            int end = param.IndexOf(' ', start);
-            if (end == -1)
-                end = param.IndexOf(']', start);
-
-            if (end == -1)
-                return 0;
-
-            return int.TryParse(param.AsSpan(start, end - start), out int length) ? length : 0;
-        }
+            Default = _default;
+        }        
 
         public SimpleSeqDataPoint this[int index]
         {
@@ -192,20 +164,6 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         public string ParamPathLane { get; set; } = "none";
         public string FriendlyLane => TCLE.TrackLaneFriendly[this.ParamPathLane];
         public int LaneOffsetFromTop => TCLE.LaneOffsets.TryGetValue(ParamPathLane, out int offset) ? offset : 0;
-        //
-        public enum Trait { Bool, Action, Int, Color, Float, None }
-        public static readonly Dictionary<string, Trait> TraitLookup = new(StringComparer.OrdinalIgnoreCase) {
-            { "kTraitBool", Trait.Bool },
-            { "kTraitAction", Trait.Action },
-            { "kTraitInt", Trait.Int },
-            { "kTraitColor", Trait.Color },
-            { "kTraitFloat", Trait.Float },
-            { "", Trait.None },
-        };
-        public Trait TraitType;
-        public string TraitTypeString => TraitType == Trait.None ? string.Empty : $"kTrait{TraitType}";
-        //
-        public bool Step { get; set; } = true;
 
         private decimal _defaultvalue;
         public decimal DefaultValue
@@ -229,13 +187,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public SimpleSequencerObject CloneAsLane(string lane, bool showlane = false)
         {
-            SimpleSequencerObject clone = new(this.ParentLeaf) {
+            SimpleSequencerObject clone = new(this.ParentLeaf, this.Default) {
                 ParentLeaf = this.ParentLeaf,
                 ObjName = this.ObjName,
                 ParamPath = this.ParamPath.Split('.')[0] + lane,
-                TraitType = this.TraitType,
                 //skip data points
-                Step = this.Step,
                 DefaultValue = this.DefaultValue,
                 FriendlyParam = this.FriendlyParam,
                 EnabledInEditor = true,
@@ -256,7 +212,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //sanitize inputs based on the trait type
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
-                value = TraitValidator.Sanitize(ParentSeqObj.TraitType, value);
+                value = TraitValidator.Sanitize(ParentSeqObj.Default.TraitType, value);
             }
             bool _set = base.SetValue(rowIndex, value);
             return _set;

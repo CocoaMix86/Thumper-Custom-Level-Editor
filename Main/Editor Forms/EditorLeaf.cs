@@ -492,7 +492,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (SequencerObjects[e.RowIndex].Default.Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 PaintRowWaveforms(e);
-            else if (SequencerObjects[e.RowIndex].TrailLength > 1)
+            else if (SequencerObjects[e.RowIndex].Default.TrailLength > 1)
                 PaintRowLongObject(e);
             else if (SequencerObjects[e.RowIndex].ObjName == "_TuningLayerX")
                 PaintRowTuningLayer(e);
@@ -575,7 +575,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
-            int LengthOfObject = SequencerObjects[e.RowIndex].TrailLength;
+            int LengthOfObject = SequencerObjects[e.RowIndex].Default.TrailLength;
             if (LengthOfObject == 0) {
                 return;
             }
@@ -987,7 +987,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
-                if (SequencerObjects[e.RowIndex].TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action)
+                if (SequencerObjects[e.RowIndex].Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action)
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
                         dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
                     }
@@ -1284,7 +1284,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].TraitType is Sequencer_Object.Trait.Float;
+            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].Default.TraitType is DefaultSequencerObject.Trait.Float;
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1938,7 +1938,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             double max2 = 0, max3 = 0, min2 = 0, min3 = 0;
             Color startcolor = new();
             Color endcolor = new();
-            if (interpobject.TraitType is Sequencer_Object.Trait.Color) {
+            if (interpobject.Default.TraitType is DefaultSequencerObject.Trait.Color) {
                 startcolor = Color.FromArgb((int)_start);
                 endcolor = Color.FromArgb((int)_end);
                 max = Math.Max(startcolor.R, endcolor.R);
@@ -2038,7 +2038,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
-            if (interpobject.TraitType is Sequencer_Object.Trait.Color) {
+            if (interpobject.Default.TraitType is DefaultSequencerObject.Trait.Color) {
                 double valR, valG, valB = 0;
                 //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
@@ -2452,7 +2452,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
-                        sw.Restart();
                         string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
                         if (TCLE.LeafObjects.TryGetValue(normalizeParam, out DefaultSequencerObject objmatch)) {
                             ObjectToImport.Default = objmatch;
@@ -2473,13 +2472,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //deal with multilanes
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
-                sw.Restart();
                 if (ObjectToImport.FriendlyLane is not "none") {
-                    var LanesToImport = LoadMultiLanes(ObjectToImport, LoadedObjects);
-                    //if (LanesToImport != null)
-                        //LoadedObjects.AddRange(LanesToImport);
-                    Debug.WriteLine($"LoadSequencer-LoadMultilane: {sw.ElapsedMilliseconds}ms");
-                    sw.Restart();
+                    LoadMultiLanes(ObjectToImport, LoadedObjects);
                 }
                 else {
                     ObjectToImport.ExpandLanesInEditor = true;
@@ -2492,47 +2486,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadDataPoints(ObjectToImport, seq_obj["data_points"]);
                 //RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
             }
-            sw.Restart();
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects.Values.ToList();
             dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
-            Debug.WriteLine($"LoadSequencer-AddRows: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
             //string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
         }
 
-        /*public static void LoadDataPoints(Sequencer_Object ObjectToImport, dynamic seq_obj)
-        {
-            //There are 2 methods here for backwards compat
-            foreach (dynamic dp in seq_obj["data_points"]) {
-                //modern data point. The save data includes interp and ease
-                if (dp is JObject data_point) {
-                    //if imported data is greater than leaf's beat count, skip it.
-                    //but don't break, as beats could have been written in the file out of order
-                    if ((int)data_point["beat"] >= ObjectToImport.ParentLeaf.LeafLength)
-                        continue;
-                    SeqDataPoint data = ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset];
-                    data.Interpolation = ((string)data_point["interp"])?.Replace("kTraitInterp", "") ?? "Linear";
-                    data.Ease = TCLE.Easings[(string)data_point["ease"] ?? "kEaseInOut"];
-                    data.Value = (decimal)data_point["value"];
-                    
-                    //ObjectToImport[(int)data_point["beat"] + FrozenColumnOffset] = data;
-                }
-                //old data point. The save includes Value only.
-                else {
-                    SeqDataPoint data = new() {
-                        //Beat = int.Parse(((JProperty)dp).Name),
-                        Interpolation = "Linear",
-                        Ease = TCLE.Easings["kEaseInOut"]
-                    };
-                    if (int.Parse(((JProperty)dp).Name) >= ObjectToImport.ParentLeaf.LeafLength)
-                        continue;
-                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset] = data;
-                    ObjectToImport[int.Parse(((JProperty)dp).Name) + FrozenColumnOffset].Value = UtilMath.TruncateDecimal((decimal)((JProperty)dp).Value, 3);
-                }
-            }
-        }*/
         public static void LoadDataPoints(Sequencer_Object ObjectToImport, JToken dataPoints)
         {
             foreach (JToken dp in dataPoints) {
@@ -2558,14 +2518,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public static Dictionary<(string, string), Sequencer_Object> LoadMultiLanes(Sequencer_Object ObjectToImport, Dictionary<(string, string), Sequencer_Object> LoadedObjects)
+        public static void LoadMultiLanes(Sequencer_Object ObjectToImport, Dictionary<(string, string), Sequencer_Object> LoadedObjects)
         {
             //Dictionary<(string, string), Sequencer_Object> Lanes = new();
             sw.Restart();
             //Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
             if (LoadedObjects.TryGetValue((ObjectToImport.ObjName, ObjectToImport.ParamPath), out Sequencer_Object lookup)) {
-                lookup = ObjectToImport;
-                return null;
+                LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
+                return;
             }
             Debug.WriteLine($"LoadMultiLane-Lookup: {sw.ElapsedMilliseconds}ms");
             sw.Restart();
@@ -2590,7 +2550,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
             //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
             //Lanes[Lanes.IndexOf(lookup)] = ObjectToImport;
-            return null;
+            return;
         }
         public static List<Sequencer_Object> LoadMultiLanes(Sequencer_Object ObjectToImport, List<Sequencer_Object> LoadedObjects)
         {
@@ -3092,7 +3052,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int randomtype = 0;
             decimal? valueiftrue = 0;
 
-            if ((seq.TraitType is Sequencer_Object.Trait.Bool or Sequencer_Object.Trait.Action) || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+            if ((seq.Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action) || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                 valueiftrue = 1;
                 rngchance = 10;
                 rnglimit = 9;
@@ -3101,7 +3061,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     rnglimit = 54;
                 }
             }
-            else if (seq.TraitType is Sequencer_Object.Trait.Color) {
+            else if (seq.Default.TraitType is DefaultSequencerObject.Trait.Color) {
                 randomtype = 7;
                 rngchance = 10;
                 rnglimit = 8;
@@ -3176,12 +3136,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             try {
                 _properties.ParentEditor.LogUndo = false;
                 _properties.ParentEditor.EditorIsTuning = true;
-                Sequencer_Object SumOfLayers = new(_properties, null) { TraitType = Sequencer_Object.Trait.Float };
+                Sequencer_Object SumOfLayers = new(_properties, null);
                 ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(SumOfLayers);
                 int _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
 
                 foreach (Sequencer_Object _layer in TuningLayers) {
-                    Sequencer_Object InterpolationCalc = new(_properties, null) { TraitType = Sequencer_Object.Trait.Float};
+                    Sequencer_Object InterpolationCalc = new(_properties, null);
                     ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Add(InterpolationCalc);
                     _ = ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows[^1].Index;
                     SeqDataPoint[] _datapoints = _layer.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null).ToArray();
