@@ -1,7 +1,15 @@
-﻿namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
+﻿using System.Diagnostics;
+
+namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
     public static class UtilMath
     {
+        public static void OutputStopwatch(Stopwatch sw, string reason)
+        {
+            Debug.WriteLine($"{reason}: {sw.ElapsedTicks} ticks");
+            sw.Restart();
+        }
+
         /// This also works for negative numbers
         public static int mod(int x, int m)
         {

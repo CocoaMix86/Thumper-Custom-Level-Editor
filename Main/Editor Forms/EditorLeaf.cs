@@ -7,14 +7,52 @@ using Thumper_Custom_Level_Editor.Utility_Classes;
 using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class EditorLeaf : EditorBase
     {
+        #region Timing Stuff
+        public static Stopwatch sw = new();
+        public static Stopwatch sw2 = new();
+        public static void WriteTimings(LeafProperties leaf)
+        {
+            Debug.WriteLine($"Total Objects Imported: {leaf.SequencerObjects.Count}");
+            Debug.WriteLine($"Leaf Beats: {leaf.LeafLength}");
+            Debug.WriteLine($"TimeCreateDictionary: {TimeSpan.FromTicks(TimeCreateDictionary).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeForeachIterate: {TimeSpan.FromTicks(TimeForeachIterate).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeCreateSeq: {TimeSpan.FromTicks(TimeCreateSeq).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeCreateCells: {TimeSpan.FromTicks(TimeCreateCells).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeParamPath: {TimeSpan.FromTicks(TimeParamPath).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeLoadLanes: {TimeSpan.FromTicks(TimeLoadLanes).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeLoadDataPoints: {TimeSpan.FromTicks(TimeLoadDataPoints).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeAddRowsToDGV: {TimeSpan.FromTicks(TimeAddRowsToDGV).TotalMilliseconds:F2} ms");
+            Debug.WriteLine($"TimeTotalLoad: {TimeSpan.FromTicks(TimeTotalLoad).TotalMilliseconds:F2} ms");
+        }
+        public static void ResetTimings()
+        {
+            TimeCreateDictionary = 0;
+            TimeForeachIterate = 0;
+            TimeCreateSeq = 0;
+            TimeCreateCells = 0;
+            TimeParamPath = 0;
+            TimeLoadLanes = 0;
+            TimeLoadDataPoints = 0;
+            TimeAddRowsToDGV = 0;
+        }
+        public static long TimeCreateDictionary;
+        public static long TimeForeachIterate;
+        public static long TimeCreateSeq;
+        public static long TimeCreateCells;
+        public static long TimeParamPath;
+        public static long TimeLoadLanes;
+        public static long TimeLoadDataPoints;
+        public static long TimeAddRowsToDGV;
+        public static long TimeTotalLoad;
+        #endregion
         #region Form Construction
         ///Load LEAF
-        public static Stopwatch sw = new();
         public EditorLeaf() { InitializeComponent(); }
         public EditorLeaf(dynamic load = null, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
         {
@@ -24,8 +62,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadSequencer(load["seq_objs"], _leafproperties, SimpleTrackEditor);
                 return;
             }
-            Debug.WriteLine($"============START LOADING NEW LEAF: {WorkingFile.Name}============");
             EditorIsLoading = true;
+
+            Debug.WriteLine($"============START LOADING NEW LEAF: {WorkingFile.Name}============");
+            ResetTimings();
+            sw.Start();
+            sw2.Start();
+            sw.Restart();
             InitializeComponent();
             RenderForm();
             ColorFormElements();
@@ -34,9 +77,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
 
             LoadLeaf(load);
-            sw.Start();
+
+            sw2.Restart();
             LoadSequencer(load["seq_objs"], _leafproperties, trackEditor);
+            TimeTotalLoad = sw2.ElapsedTicks;
+
             LoadEnd(load);
+            WriteTimings(LeafProperties);
         }
         ///Load LVL Sequencer
         public EditorLeaf(LvlProperties toload, FileInfo filepath = null, bool simpleload = false) : base(filepath, false, simpleload)
@@ -2415,10 +2462,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public static void LoadSequencer(dynamic seqJSON, LeafProperties ParentLeaf, DataGridView dgv)
         {
+            sw.Restart();
             Dictionary<(string, string), Sequencer_Object> LoadedObjects = new();
             int audiochannels = 0;
+            TimeCreateDictionary = sw.ElapsedTicks;
+            sw.Restart();
+
             //each object in the seq_objs[] list
             foreach (dynamic seq_obj in seqJSON) {
+                TimeForeachIterate += sw.ElapsedTicks;
+                sw.Restart();
                 Sequencer_Object ObjectToImport = new(ParentLeaf, null) {
                     ParentLeaf = ParentLeaf,
                     ObjName = ((string)seq_obj["obj_name"]),
@@ -2432,7 +2485,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     EnabledInEditor = ((string)seq_obj["enabled"] ?? "True").Equals("true", StringComparison.OrdinalIgnoreCase),
                     IsDefault = false
                 };
+                TimeCreateSeq += sw.ElapsedTicks;
+                sw.Restart();
                 ObjectToImport.CreateCells(dgv);
+                TimeCreateCells += sw.ElapsedTicks;
+                sw.Restart();
 
                 //if object is a layer volume, we "reset" its index to x so it can be renumbered in case its out of order.
                 if (ObjectToImport.ParamPath.StartsWith("layer_volume"))
@@ -2469,6 +2526,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         Debug.WriteLine($"{ParentLeaf.LeafName} VERY BIG PROBLEM HERE {ex}");
                     }
                 }
+                TimeParamPath += sw.ElapsedTicks;
+                sw.Restart();
                 //deal with multilanes
                 //if object is multilane, we will add all 5 lanes at once, as defaults
                 //then lookup the object and assign the initialized Sequencer Object created above in place of the default one
@@ -2478,17 +2537,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else {
                     ObjectToImport.ExpandLanesInEditor = true;
                     LoadedObjects.Add((ObjectToImport.ObjName, ObjectToImport.ParamPath), ObjectToImport);
-                    //dgv.Rows.Add(ObjectToImport);
                 }
+                TimeLoadLanes += sw.ElapsedTicks;
+                sw.Restart();
                 //this line exists to force the app to recognize the rows have proper indexes instead of -1
                 //string _e = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
                 //import data points to the row cells.
                 LoadDataPoints(ObjectToImport, seq_obj["data_points"]);
-                //RowReadOnly(ObjectToImport, !ObjectToImport.EnabledInEditor);
+                TimeLoadDataPoints += sw.ElapsedTicks;
+                sw.Restart();
             }
             //return Seq_Objs;
             ParentLeaf.SequencerObjects = LoadedObjects.Values.ToList();
             dgv.Rows.AddRange(ParentLeaf.SequencerObjects.ToArray());
+            TimeAddRowsToDGV = sw.ElapsedTicks;
+            sw.Restart();
             //this line exists to force the app to recognize the rows have proper indexes instead of -1
             //string _ee = string.Join(',', dgv.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
         }
@@ -2527,25 +2590,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
                 return;
             }
-            Debug.WriteLine($"LoadMultiLane-Lookup: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
             LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a01"), ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
-            Debug.WriteLine($"LoadMultiLane-clone1: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
             LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a02"), ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-            Debug.WriteLine($"LoadMultiLane-clone2: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.ent"), ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-            Debug.WriteLine($"LoadMultiLane-clone3: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z01"), ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-            Debug.WriteLine($"LoadMultiLane-clone4: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
             LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z02"), ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-            Debug.WriteLine($"LoadMultiLane-clone5: {sw.ElapsedMilliseconds}ms");
-            sw.Restart();
 
             LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
             //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
