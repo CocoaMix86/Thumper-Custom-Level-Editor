@@ -1203,7 +1203,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (!_trackNotSaved) {
                 this.Saved = false;
-                if (!this.Text.EndsWith("*"))
+                if (!this.Text.EndsWith('*'))
                     this.Text += '*';
             }
         }
@@ -1351,7 +1351,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path", $"{seq_obj.ParamPath}");
                 s.Add("trait_type", seq_obj.Default.TraitTypeString);
                 JArray datapoints = new();
-                foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>().Where(x => x != null && x.Value is not null)) {
+                foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>()) {
+                    if (datapoint is null || datapoint.Value is null)
+                        continue;
                     if (seq_obj.Default.TraitType is DefaultSequencerObject.Trait.Float) {
                         JObject d = new() {
                             { "beat", datapoint.beat },

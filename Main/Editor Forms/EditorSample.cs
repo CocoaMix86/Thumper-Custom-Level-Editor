@@ -571,7 +571,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (!_trackNotSaved) {
                 this.Saved = false;
-                if (!this.Text.EndsWith("*"))
+                if (!this.Text.EndsWith('*'))
                     this.Text += '*';
             }
         }
@@ -743,7 +743,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 int bytespersample = InputFileBytes[32];
                 int bits = (bytespersample / 2) * 8;
                 //catch non supported type
-                if (!FormatID.ContainsKey(bits)) {
+                if (!FormatID.TryGetValue(bits, out ulong value1)) {
                     MessageBox.Show("That audio format is not supported. Please export your audio in a different format like 16 or 32bit PCM.", "Thumper Custom Level Editor");
                     return;
                 }
@@ -765,7 +765,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     sw.Write((UInt32)8); //size of sample header
                     sw.Write((UInt32)0x1c); //size of header table
                     sw.Write((UInt32)InputFileBytes.Length); //sample bytes
-                    sw.Write((UInt32)FormatID[bits]); //audio type
+                    sw.Write((UInt32)value1); //audio type
                     sw.Write((UInt32)0); //always 0, unknown
                     sw.Write((UInt32)0); //flags
                     sw.Write((UInt64)0); //hash1

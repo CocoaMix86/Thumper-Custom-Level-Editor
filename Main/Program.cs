@@ -58,7 +58,7 @@ namespace Thumper_Custom_Level_Editor
                 if (stream == null)
                     return null;
                 byte[] block = new byte[stream.Length - 1 + 1];
-                stream.Read(block, 0, block.Length);
+                stream.ReadExactly(block, 0, block.Length);
                 return Assembly.Load(block);
             }
 

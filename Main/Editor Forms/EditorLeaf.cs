@@ -1178,7 +1178,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (e.KeyCode is Keys.Right or Keys.Left or Keys.Up or Keys.Down) {
                     e.Handled = true;
                     //this is used for indexing if shifting left/down or right/up
-                    int indexdirection = e.KeyCode is Keys.Right or Keys.Down ? 1 : -1;
+                    int indexdirection = (e.KeyCode is Keys.Right or Keys.Down) ? 1 : -1;
                     bool leftright = e.KeyCode is Keys.Left or Keys.Right;
                     bool shifted = false;
                     //sort cells in selection based on column. depends on direction, reverse collection.
