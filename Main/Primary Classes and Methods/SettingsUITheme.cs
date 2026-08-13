@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
+using Thumper_Custom_Level_Editor.Properties;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -57,10 +58,10 @@ namespace Thumper_Custom_Level_Editor
 
         public void Load()
         {
-            var settings = Properties.Settings.Default;
+            Settings settings = Properties.Settings.Default;
             //iterates over each property in this class and gets the saved Settings.Default value for it, and sets it so it can be used.
-            foreach (var property in GetType().GetProperties()) {
-                var attr = property.GetCustomAttribute<SettingNameAttribute>();
+            foreach (PropertyInfo property in GetType().GetProperties()) {
+                SettingNameAttribute? attr = property.GetCustomAttribute<SettingNameAttribute>();
                 if (attr == null)
                     continue;
 
@@ -70,10 +71,10 @@ namespace Thumper_Custom_Level_Editor
 
         public void Save()
         {
-            var settings = Properties.Settings.Default;
+            Settings settings = Properties.Settings.Default;
 
-            foreach (var property in GetType().GetProperties()) {
-                var attr = property.GetCustomAttribute<SettingNameAttribute>();
+            foreach (PropertyInfo property in GetType().GetProperties()) {
+                SettingNameAttribute? attr = property.GetCustomAttribute<SettingNameAttribute>();
                 if (attr == null)
                     continue;
 

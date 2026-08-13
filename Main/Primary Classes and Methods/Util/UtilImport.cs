@@ -102,7 +102,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 }
             }
 
-            foreach (var _ColorIcon in TCLE.ColorIcons) {
+            foreach (KeyValuePair<string, Bitmap> _ColorIcon in TCLE.ColorIcons) {
                 TCLE.Instance.imageListCategoryIcons.Images.Add(_ColorIcon.Key, _ColorIcon.Value);
             }
         }

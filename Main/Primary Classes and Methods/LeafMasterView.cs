@@ -107,7 +107,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         }
         static Pen GetRailPen(Color color)
         {
-            if (!RailPens.TryGetValue(color, out var pen)) {
+            if (!RailPens.TryGetValue(color, out Pen? pen)) {
                 pen = new Pen(color, 2);
                 RailPens[color] = pen;
             }
@@ -263,7 +263,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Dictionary<Color, LinearGradientBrush> RailGlows = new();
         public static LinearGradientBrush GetRailGlowBrush(Color color)
         {
-            if (!RailGlows.TryGetValue(color, out var brush)) {
+            if (!RailGlows.TryGetValue(color, out LinearGradientBrush? brush)) {
                 brush = new(new Rectangle(0, 0, Width, Height), Color.Black, Color.Black, 90);
                 ColorBlend cblend = new(3) {
                     Colors = new Color[3] { color, Color.Transparent, color },

@@ -61,7 +61,7 @@ namespace Thumper_Custom_Level_Editor
             //Get the working area of the TabControl main control
             Rectangle rec = tabControl1.ClientRectangle;
             //Create a StringFormat object to set the layout of the label text
-            StringFormat StrFormat = new StringFormat() {
+            StringFormat StrFormat = new() {
                 LineAlignment = StringAlignment.Center,
                 Alignment = StringAlignment.Center
             };

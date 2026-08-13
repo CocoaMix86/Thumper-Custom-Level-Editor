@@ -153,6 +153,15 @@ dotnet_diagnostic.CA2213.severity = none
 # IDE0220: Add explicit cast
 dotnet_diagnostic.IDE0220.severity = none
 
+# IDE0028: Simplify collection initialization
+dotnet_diagnostic.IDE0028.severity = none
+
+# IDE0305: Simplify collection initialization
+dotnet_diagnostic.IDE0305.severity = none
+
+# IDE0300: Simplify collection initialization
+dotnet_diagnostic.IDE0300.severity = none
+
 [*.{cs,vb}]
 #### Naming styles ####
 

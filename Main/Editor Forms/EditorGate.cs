@@ -840,7 +840,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void ColorRow(GateLvlData _lvl, int index)
         {
-            var row = gateLvlList.Rows[index];
+            DataGridViewRow row = gateLvlList.Rows[index];
             //if random, the phase counter will instead show bucket numbers
             row.Cells[0].Value = _gateproperties.Random ? _lvl.Bucket + 1 : index + 1;
             if (index >= _gateproperties.MaximumLvls) {

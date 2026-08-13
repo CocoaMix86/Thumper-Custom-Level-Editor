@@ -210,7 +210,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
 
             string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
-            using (var stream = File.Open(finalfilename, FileMode.Create)) {
+            using (FileStream stream = File.Open(finalfilename, FileMode.Create)) {
                 using (BinaryWriter bw = new(stream)) {
                     bw.Write(dataBytes);
                 }

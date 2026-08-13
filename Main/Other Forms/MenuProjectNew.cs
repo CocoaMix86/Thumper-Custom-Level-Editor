@@ -101,9 +101,9 @@ namespace Thumper_Custom_Level_Editor
             };
 
             //Setup default files
-            FileInfo defaultsamp = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.samp");
-            FileInfo defaultspn = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.spn");
-            FileInfo defaultxfm = new FileInfo($@"{NewProjectProperties.WorkingFolder}\default.xfm");
+            FileInfo defaultsamp = new($@"{NewProjectProperties.WorkingFolder}\default.samp");
+            FileInfo defaultspn = new($@"{NewProjectProperties.WorkingFolder}\default.spn");
+            FileInfo defaultxfm = new($@"{NewProjectProperties.WorkingFolder}\default.xfm");
             CreateDefaultFile(defaultsamp, Properties.Resources.samp_default);
             CreateDefaultFile(defaultspn, Properties.Resources.spn_default);
             CreateDefaultFile(defaultxfm, Properties.Resources.xfm_default);

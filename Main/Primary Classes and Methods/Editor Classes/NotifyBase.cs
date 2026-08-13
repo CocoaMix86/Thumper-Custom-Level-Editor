@@ -49,13 +49,13 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
 
             // Remember the current setting for RaiseListChangedEvents
             // (if it was already deactivated, we shouldn't activate it after adding!).
-            var oldRaiseEventsValue = bindingList.RaiseListChangedEvents;
+            bool oldRaiseEventsValue = bindingList.RaiseListChangedEvents;
 
             // Try adding all of the elements to the binding list.
             try {
                 bindingList.RaiseListChangedEvents = false;
 
-                foreach (var value in collection)
+                foreach (T? value in collection)
                     bindingList.Add(value);
             }
 

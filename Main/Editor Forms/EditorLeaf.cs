@@ -675,11 +675,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trailstop = sdp.beat + LengthOfObject;
             }
         }
-        private static SolidBrush BrushBG = new SolidBrush(Properties.Settings.Default.ColorTuningBG);
-        private static SolidBrush BrushText = new SolidBrush(Properties.Settings.Default.ColorTuningFont);
-        private static Pen PenMaxMin = new Pen(Properties.Settings.Default.ColorTuningMaxMin, 1);
-        private static Pen TuningLine = new Pen(Properties.Settings.Default.ColorTuningLine, 3);
-        private static SolidBrush TuningPoint = new SolidBrush(Properties.Settings.Default.ColorTuningPoint);
+        private static SolidBrush BrushBG = new(Properties.Settings.Default.ColorTuningBG);
+        private static SolidBrush BrushText = new(Properties.Settings.Default.ColorTuningFont);
+        private static Pen PenMaxMin = new(Properties.Settings.Default.ColorTuningMaxMin, 1);
+        private static Pen TuningLine = new(Properties.Settings.Default.ColorTuningLine, 3);
+        private static SolidBrush TuningPoint = new(Properties.Settings.Default.ColorTuningPoint);
         private readonly record struct BezierPreset(
             float ControlPoint1,
             bool Y1IsStart,
@@ -762,7 +762,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         break;
                         //if not step or linear, use the bezier lookup to get the curves
                     default:
-                        if (!BezierLookup.TryGetValue((_datapoints[x].Interpolation, _datapoints[x].Ease), out var BezierPreset))
+                        if (!BezierLookup.TryGetValue((_datapoints[x].Interpolation, _datapoints[x].Ease), out BezierPreset BezierPreset))
                             continue;
                         midpoint = new PointF(_drawingpoints[x].X + (distance * BezierPreset.ControlPoint1), BezierPreset.Y1IsStart ? _drawingpoints[x].Y : _drawingpoints[x + 1].Y);
                         midpoint2 = new PointF(_drawingpoints[x].X + (distance * BezierPreset.ControlPoint2), BezierPreset.Y2IsStart ? _drawingpoints[x].Y : _drawingpoints[x + 1].Y);
@@ -882,7 +882,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (EditorIsProcessing) return;
             EditorIsLoading = true;
 
-            bool _changes = false;
             object _val = null;
             if (!setnull && Decimal.TryParse(StartCell.EditedFormattedValue?.ToString(), out decimal _valtoset))
                 _val = UtilMath.TruncateDecimal(_valtoset, 3);
@@ -914,7 +913,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ResetCell(SequencerObjects[_cell.RowIndex][_cell.ColumnIndex]);
 
             if (SequencerObjects[_cell.RowIndex].ExpandLanesInEditor == false && SequencerObjects[_cell.RowIndex].FriendlyLane == "lane center") {
-                foreach (var laneoffset in new[] { -2, -1, 0, 1, 2}) {
+                foreach (int laneoffset in new[] { -2, -1, 0, 1, 2}) {
                     ResetCell(SequencerObjects[_cell.RowIndex + laneoffset][_cell.ColumnIndex]);
                 }
             }
@@ -1198,8 +1197,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         //check if at left/right edges
                         if ((leftright && sdp.ColumnIndex + indexdirection < trackEditor.ColumnCount && sdp.ColumnIndex + indexdirection >= FrozenColumnOffset) || (!leftright && sdp.RowIndex + indexdirection < trackEditor.RowCount && sdp.RowIndex + indexdirection > -1)) {
                             shifted = true;
-                            var row = SequencerObjects[sdp.RowIndex];
-                            var destCell = SequencerObjects[sdp.RowIndex + (!leftright ? indexdirection : 0)][sdp.ColumnIndex + (leftright ? indexdirection : 0)];
+                            Sequencer_Object row = SequencerObjects[sdp.RowIndex];
+                            SeqDataPoint destCell = SequencerObjects[sdp.RowIndex + (!leftright ? indexdirection : 0)][sdp.ColumnIndex + (leftright ? indexdirection : 0)];
                             //clone selected cell to new location
                             destCell.Value = sdp.Value;
                             destCell.Interpolation = sdp.Interpolation;
@@ -1394,7 +1393,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //if object is multilane, need to add all its lanes
             if (seq.FriendlyLane == "lane center") {
-                var LanesToAdd = LoadMultiLanes(seq, SequencerObjects);
+                List<Sequencer_Object> LanesToAdd = LoadMultiLanes(seq, SequencerObjects);
                 SequencerObjects.AddRange(LanesToAdd);
                 trackEditor.Rows.AddRange(LanesToAdd.ToArray());
             }
@@ -1841,7 +1840,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<Sequencer_Object> todelete = new();
             bool del;
             for (int seqindex = 0; seqindex < SequencerObjects.Count; seqindex++) {
-                del = false;
                 Sequencer_Object ObjToCheck = SequencerObjects[seqindex];
                 if (ObjToCheck.FriendlyLane is not "none" and not "lane center")
                     continue;
@@ -2096,13 +2094,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
             else {
-                //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
-                if (_start == max) {
-                    for (int x = 0; x < interp.Length; x++)
-                        interp[x] = 1 - interp[x];
-                }
-                //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
+                    //if the first cell is actually the maximum, each value needs to be flipped across the range 0 to 1
+                    if (_start == max) {
+                        interp[x] = 1 - interp[x];
+                    }
+                    //convert interp[] range of 0 to 1 into range between selected beats
                     interp[x] = interp[x] * (max - min) + min;
                 }
             }
@@ -2230,7 +2227,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SequencerObjects.Any(x => x.Default.Category == category && x.ParamPath == BaseObj.ParamPath))
                 goto beginrando;
 
-            var seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name);
+            Sequencer_Object seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name);
             /*Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
                 ObjName = category == "PLAY SAMPLE" ? TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name : BaseObj.obj_name,
@@ -2440,7 +2437,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.ResizeHeaders(trackEditor);
             foreach (Sequencer_Object seq in SequencerObjects) {
                 //update visual row properties
-                seq.ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane ? true : false;
+                seq.ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 SetRowHeaderText(seq);
             }
             TrackTimeSigHighlighting();
@@ -2586,7 +2583,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //Dictionary<(string, string), Sequencer_Object> Lanes = new();
             sw.Restart();
             //Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
-            if (LoadedObjects.TryGetValue((ObjectToImport.ObjName, ObjectToImport.ParamPath), out Sequencer_Object lookup)) {
+            if (LoadedObjects.TryGetValue((ObjectToImport.ObjName, ObjectToImport.ParamPath), out _)) {
                 LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
                 return;
             }

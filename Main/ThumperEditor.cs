@@ -38,7 +38,7 @@ namespace Thumper_Custom_Level_Editor
         public static SettingsUITheme settingsUITheme = new();
         public static bool Fullscreen;
         public static string DragSource = "none";
-        public static PrivateFontCollection ImportedFonts = new PrivateFontCollection();
+        public static PrivateFontCollection ImportedFonts = new();
         //Active File Tracking
         public static EditorBase? GlobalActiveDocument
         {
@@ -344,7 +344,7 @@ namespace Thumper_Custom_Level_Editor
             if (dockMain.ActiveContent is DockProjectExplorer or DockProjectProperties)
                 return;
             //get the action name from the keypress and use that in the switch instead
-            var action = Keybinds.FirstOrDefault(x => x.Value == e.KeyData).Key;
+            string action = Keybinds.FirstOrDefault(x => x.Value == e.KeyData).Key;
             switch (action) {
                 case "Cut":
                     GlobalActiveDocument.Cut();
@@ -455,7 +455,7 @@ namespace Thumper_Custom_Level_Editor
             //Try locking the .TCL first. If it fails, the level is already open
             //in that case, return before doing anything
             try {
-                var _testlock = new FileStream(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                FileStream _testlock = new(TCL.FullName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
                 _testlock.Close();
             } catch (Exception) {
                 MessageBox.Show($"That project is open already in another instance of the Level Editor.", "Thumper Custom Level Editor");
@@ -521,7 +521,7 @@ namespace Thumper_Custom_Level_Editor
             TCLE.Instance.panelLoadingMessage.Visible = true;
             if (!UtilPaths.DirCurrentProjectSettings.Exists)
                 UtilPaths.DirCurrentProjectSettings.Create();
-            DeserializeDockContent m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            DeserializeDockContent m_deserializeDockContent = new(GetContentFromPersistString);
             try {
                 dockMain.LoadFromXml($@"{UtilPaths.CurrentProjectSettings}\layout_workspace.config", m_deserializeDockContent);
             } catch {

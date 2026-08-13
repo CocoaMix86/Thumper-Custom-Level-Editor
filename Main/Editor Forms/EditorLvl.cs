@@ -586,7 +586,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void lvlLoopTracks_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             var grid = (DataGridView)sender;
-            Rectangle headerBounds = new Rectangle(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
+            Rectangle headerBounds = new(e.RowBounds.Left, e.RowBounds.Top, grid.RowHeadersWidth, e.RowBounds.Height);
             e.Graphics.DrawString($"Loop Track {e.RowIndex}", this.Font, Brushes.Black, headerBounds, new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
         }
 
@@ -1149,7 +1149,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (chkTunnelCopy.Checked)
                 copytunnels = new List<LvlPath>(LvlLeafs.Last().Paths);
             //add leaf data to the list
-            LvlLeafData _toadd = new LvlLeafData(LvlProperties) {
+            LvlLeafData _toadd = new(LvlProperties) {
                 Leaf = (string)_load["obj_name"],
                 Beats = (int)_load["beat_cnt"],
                 Paths = new BindingList<LvlPath>(copytunnels),

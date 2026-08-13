@@ -63,9 +63,9 @@ namespace Thumper_Custom_Level_Editor
             BuildTreeFavorites();
             //BuildTreeFavorites(TreeToBuild, txtSearch);
 
-            var categories = TCLE.LeafObjects.Values.GroupBy(x => x.Category).OrderBy(x => x.Key);
+            IOrderedEnumerable<IGrouping<string, DefaultSequencerObject>> categories = TCLE.LeafObjects.Values.GroupBy(x => x.Category).OrderBy(x => x.Key);
             //make each category of objects its own node
-            foreach (var category in categories) {
+            foreach (IGrouping<string, DefaultSequencerObject>? category in categories) {
                 TreeNode CategoryNode = BuildNode(category.Key.ToUpper(), $"{category.Key.ToUpper().Replace("/", "")}.png");
                 CategoryNodes.Add(category.Key, CategoryNode);
                 //
@@ -89,15 +89,15 @@ namespace Thumper_Custom_Level_Editor
             //
             //samples are not stored in LeafObjects, so we loop over a different list to find them
             //seperate samples into sub-nodes by the file they came from
-            var sampleGroups = TCLE.ProjectSamples.Values.Where(x => x.File != null).GroupBy(x => x.File.Name);
-            foreach (var file in sampleGroups) {
+            IEnumerable<IGrouping<string, SampleData>> sampleGroups = TCLE.ProjectSamples.Values.Where(x => x.File != null).GroupBy(x => x.File.Name);
+            foreach (IGrouping<string, SampleData> file in sampleGroups) {
                 if (string.IsNullOrEmpty(file.Key))
                     continue;
                 TreeNode sampfile = BuildNode(file.Key, "samp");
                 //ObjectNodes.Add(file.Key, sampfile);
                 CategoryNodes["PLAY SAMPLE"].Nodes.Add(sampfile);
 
-                foreach (var samp in file) {
+                foreach (SampleData? samp in file) {
                     TreeNode _param = BuildNode(samp.obj_name, "none", $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
                     sampfile.Nodes.Add(_param);
                     //ObjectNodes.Add(samp.obj_name, _param);

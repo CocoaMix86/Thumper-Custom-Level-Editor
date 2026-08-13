@@ -19,8 +19,8 @@ namespace Thumper_Custom_Level_Editor
         public static Dictionary<string, Bitmap> ColorIcons = new();
         //public static List<SampleData> ProjectSamples = new();
         public static Dictionary<string, SampleData> ProjectSamples = new();
-        public static ToolStripOverride LeafToolStripOverride = new ToolStripOverride();
-        public static ContextMenuColors LeafContextMenuColors = new ContextMenuColors();
+        public static ToolStripOverride LeafToolStripOverride = new();
+        public static ContextMenuColors LeafContextMenuColors = new();
         //Static Readonly
         public static readonly List<string> TimeSignatures = new() { "2/4", "3/4", "4/4", "5/4", "5/8", "6/8", "7/8", "8/8", "9/8" };
         public static readonly Dictionary<string, string> TrackLaneFriendly = new() { { "a01", "lane left 2" }, { "a02", "lane left 1" }, { "ent", "lane center" }, { "z01", "lane right 1" }, { "z02", "lane right 2" }, { "none", "none" } };
@@ -220,7 +220,7 @@ namespace Thumper_Custom_Level_Editor
         public static void UpdateProjectSamplesFromFile(FileInfo SampFile, bool preserveSamples, bool updateeditors, out string warning)
         {
             //remove samples that match the incoming sample file, so that they're rewritten
-            foreach (var _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
+            foreach (KeyValuePair<string, SampleData> _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
                 ProjectSamples.Remove(_samp.Key);
             //ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //parse file to JSON
@@ -259,7 +259,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //TCLE.ProjectSamples.RemoveAll(x => x.File?.FullName == SampFile.FullName);
             //remove samples that match the incoming sample file, so that they're rewritten
-            foreach (var _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
+            foreach (KeyValuePair<string, SampleData> _samp in ProjectSamples.Where(x => x.Value.File?.FullName == SampFile.FullName).ToList())
                 ProjectSamples.Remove(_samp.Key);
             UpdateEditorsWithSamples();
         }
@@ -475,11 +475,11 @@ namespace Thumper_Custom_Level_Editor
 
         public static void FindEditorRunMethod(Type editorType, string methodName)
         {
-            var method = editorType.GetMethod(methodName);
+            MethodInfo? method = editorType.GetMethod(methodName);
             if (method == null)
                 return;
 
-            foreach (var document in TCLE.Documents.Values.Where(x => editorType.IsInstanceOfType(x))) {
+            foreach (EditorBase? document in TCLE.Documents.Values.Where(x => editorType.IsInstanceOfType(x))) {
                 method.Invoke(document, null);
             }
         }

@@ -91,8 +91,8 @@ namespace Thumper_Custom_Level_Editor
                 return value;
             return trait switch
             {
-                DefaultSequencerObject.Trait.Bool => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
-                DefaultSequencerObject.Trait.Action => (decimal)value == 0 || (decimal)value == 1 ? value : 1,
+                DefaultSequencerObject.Trait.Bool => (decimal)value is 0 or 1 ? value : 1,
+                DefaultSequencerObject.Trait.Action => (decimal)value is 0 or 1 ? value : 1,
                 DefaultSequencerObject.Trait.Int => Math.Truncate((decimal)value),
                 DefaultSequencerObject.Trait.Color => Math.Truncate((decimal)value),
                 _ => value

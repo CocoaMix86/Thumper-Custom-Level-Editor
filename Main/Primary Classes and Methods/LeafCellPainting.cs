@@ -21,7 +21,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Pen PenBlack6 = new(Brushes.Black, 6);
         public static Pen PenRed6 = new(Brushes.Red, 6);
         public static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
-        public static SolidBrush SelectionColor = new SolidBrush(Color.FromArgb(180, Color.LightSkyBlue));
+        public static SolidBrush SelectionColor = new(Color.FromArgb(180, Color.LightSkyBlue));
         public static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
         public static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
 
@@ -66,7 +66,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
 
         public static void DrawColors(DataGridViewCellPaintingEventArgs e, List<Sequencer_Object> SequencerObjects)
         {
-            var seq = SequencerObjects[e.RowIndex];
+            Sequencer_Object seq = SequencerObjects[e.RowIndex];
             //grey out the track if disabled
             if (seq.ReadOnly) {
                 e.Graphics.FillRectangle(Brushes.Gray, e.CellBounds);
