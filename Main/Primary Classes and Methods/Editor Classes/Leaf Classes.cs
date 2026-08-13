@@ -327,6 +327,9 @@ namespace Thumper_Custom_Level_Editor
 
     public class SeqDataPoint : DataGridViewTextBoxCell
     {
+        [Browsable(false)]
+        public Sequencer_Object ParentSeqObj => (Sequencer_Object)this.OwningRow;
+
         public void Reset()
         {
             this._interp = "Linear";
@@ -354,16 +357,6 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
-        [Browsable(false)]
-        public Sequencer_Object ParentSeqObj => (Sequencer_Object)this.OwningRow;
-        [CategoryAttribute(" Selected Data Point(s)")]
-        [DisplayName("Beat #")]
-        public int beat { 
-            get {
-                return this.ColumnIndex - EditorLeaf.FrozenColumnOffset; 
-            } 
-        }
-
         protected override bool SetValue(int rowIndex, object value)
         {
             //sanitize inputs based on the trait type
@@ -389,6 +382,10 @@ namespace Thumper_Custom_Level_Editor
             ParentSeqObj.IsDefault = false;
             return _set;
         }
+
+        [CategoryAttribute(" Selected Data Point(s)")]
+        [DisplayName("Beat #")]
+        public int beat => this.ColumnIndex - EditorLeaf.FrozenColumnOffset;
 
         [CategoryAttribute(" Selected Data Point(s)")]
         [DisplayName("In Game Value")]

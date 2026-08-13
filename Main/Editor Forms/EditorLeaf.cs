@@ -451,13 +451,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackZoom.Value = Math.Max(1, horiz - scrollLines);
                 }
                 else if (ModifierKeys is Keys.Control && e.Delta > 0) {
-                    trackZoom.Value = Math.Min(100, horiz + scrollLines);
+                    trackZoom.Value = Math.Min(trackZoom.Maximum, horiz + scrollLines);
                 }
                 if (ModifierKeys is Keys.Shift && e.Delta < 0) {
                     trackZoomVert.Value = Math.Max(1, vert - scrollLines);
                 }
                 else if (ModifierKeys is Keys.Shift && e.Delta > 0) {
-                    trackZoomVert.Value = Math.Min(100, vert + scrollLines);
+                    trackZoomVert.Value = Math.Min(trackZoomVert.Maximum, vert + scrollLines);
                 }
             }
         }
@@ -2533,7 +2533,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     ObjectToImport.ExpandLanesInEditor = true;
-                    LoadedObjects.Add((ObjectToImport.ObjName, ObjectToImport.ParamPath), ObjectToImport);
+                    LoadedObjects.TryAdd((ObjectToImport.ObjName, ObjectToImport.ParamPath), ObjectToImport);
                 }
                 TimeLoadLanes += sw.ElapsedTicks;
                 sw.Restart();
@@ -2588,12 +2588,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
-            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a01"), ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
+            LoadedObjects.TryAdd((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a01"), ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
             //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
-            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a02"), ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
-            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.ent"), ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
-            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z01"), ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
-            LoadedObjects.Add((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z02"), ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
+            LoadedObjects.TryAdd((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.a02"), ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
+            LoadedObjects.TryAdd((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.ent"), ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
+            LoadedObjects.TryAdd((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z01"), ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
+            LoadedObjects.TryAdd((ObjectToImport.ObjName, $"{ObjectToImport.ParamPathBase}.z02"), ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
 
             LoadedObjects[(ObjectToImport.ObjName, ObjectToImport.ParamPath)] = ObjectToImport;
             //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
