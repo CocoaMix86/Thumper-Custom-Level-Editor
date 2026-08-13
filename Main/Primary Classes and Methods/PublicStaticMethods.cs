@@ -334,8 +334,6 @@ namespace Thumper_Custom_Level_Editor
                     return null;
                 }
             }
-            //this finds a pane in the active workspace that has matching extensions already open on it
-            DockPane OpenHere = ReturnContent ? null : ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
 
             DockContent OpenFile = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             if (filepath.Extension == ".master") {
@@ -364,8 +362,12 @@ namespace Thumper_Custom_Level_Editor
             //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return (EditorBase)OpenFile;
-            if (OpenHere != null) OpenFile.Show(OpenHere, null);
-            else OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
+            //this finds a pane in the active workspace that has matching extensions already open on it
+            DockPane OpenHere = ActiveWorkspace.dockMain.Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(filepath.Extension)).Any());
+            if (OpenHere != null) 
+                OpenFile.Show(OpenHere, null);
+            else 
+                OpenFile.Show(ActiveWorkspace.dockMain, DockState.Document);
 
             return null;
         }
