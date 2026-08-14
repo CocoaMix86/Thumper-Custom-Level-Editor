@@ -301,55 +301,41 @@ namespace Thumper_Custom_Level_Editor
             object _load = openraw ? UtilFile.LoadFileLockRaw(filepath) : UtilFile.LoadFileLock(filepath);
             if (_load == null)
                 return null;
-            //if there are no workspaces, add one
+            //enter this block if we're not returning the form
             if (!ReturnContent) {
+                //if there are no workspaces, add one
                 if (!Workspaces.Any()) {
                     DockWorkspace workspace1 = new($"Workspace {Workspaces.Count() + 1}") { DockAreas = DockAreas.Document };
                     workspace1.Show(TCLE.Instance.dockMain, DockState.Document);
                 }
-                //find if the document is loaded already in a tab
-                //if so, make it activate
-                IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
-                if (workspacehastab != null) {
-                    workspacehastab.DockHandler.Activate();
-                    (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
+                if (LocateTab(filepath, openraw))
                     return null;
-                }
 
-                IEnumerable<DockWorkspace> workspacewithfloats = TCLE.Workspaces.Cast<DockWorkspace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-                foreach (DockWorkspace ws in workspacewithfloats) {
-                    IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
-                    if (activate != null) {
-                        activate.DockHandler.Activate();
-                        return null;
-                    }
-                }
                 //open document in raw viewer if that option was selected
                 if (openraw || !ProjectExtensions.Contains(filepath.Extension, StringComparer.OrdinalIgnoreCase)) {
                     EditorRawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
-                    if (ReturnContent)
-                        return rawtext;
                     rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
-                    //TCLE.Documents.Add(rawtext.WorkingFile.Name + "-raw", rawtext);
                     return null;
                 }
             }
 
             DockContent OpenFile = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-            if (filepath.Extension == ".master") {
-                OpenFile = new EditorMaster(_load, filepath);
-            }
-            else if (filepath.Extension == ".lvl") {
-                OpenFile = new EditorLvl(_load, filepath, Playback.Generating);
-            }
-            else if (filepath.Extension == ".gate") {
-                OpenFile = new EditorGate(_load, filepath, Playback.Generating);
-            }
-            else if (filepath.Extension == ".leaf") {
-                OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);
-            }
-            else if (filepath.Extension == ".samp") {
-                OpenFile = new EditorSample(_load, filepath);
+            switch (filepath.Extension) {
+                case ".master":
+                    OpenFile = new EditorMaster(_load, filepath);
+                    break;
+                case ".lvl":
+                    OpenFile = new EditorLvl(_load, filepath, Playback.Generating);
+                    break;
+                case ".gate":
+                    OpenFile = new EditorGate(_load, filepath, Playback.Generating);
+                    break;
+                case ".leaf":
+                    OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);
+                    break;
+                case ".samp":
+                    OpenFile = new EditorSample(_load, filepath);
+                    break;
             }
 
             TCLE.Instance.toolStripWindowCloseTab.Enabled = true;
@@ -359,7 +345,6 @@ namespace Thumper_Custom_Level_Editor
             TCLE.Instance.toolstripWindowFloat.Enabled = true;
             TCLE.Instance.toolstripWindowFloatAll.Enabled = true;
             TCLE.Instance.toolstripWindowDock.Enabled = true;
-            //TCLE.Documents.Add(OpenFile.WorkingFile.Name, OpenFile);
             if (ReturnContent)
                 return (EditorBase)OpenFile;
             //this finds a pane in the active workspace that has matching extensions already open on it
@@ -384,6 +369,34 @@ namespace Thumper_Custom_Level_Editor
             new ImageViewer(theimage) { Text = file.Name }.Show();
             
             return true;
+        }
+
+        public static bool LocateTab(FileInfo filepath, bool openraw)
+        {
+            if (TCLE.Documents.TryGetValue($"{filepath.Name}{(openraw ? "-raw" : "")}", out EditorBase tab)) {
+                tab.DockHandler.Activate();
+                return true;
+            }
+            /*
+            //find if the document is loaded already in a tab
+            //if so, make it activate
+            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
+            if (workspacehastab != null) {
+                workspacehastab.DockHandler.Activate();
+                (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
+                return true;
+            }
+
+            IEnumerable<DockWorkspace> workspacewithfloats = TCLE.Workspaces.Cast<DockWorkspace>().Where(w => w.dockMain.FloatWindows.Count > 0);
+            foreach (DockWorkspace ws in workspacewithfloats) {
+                IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
+                if (activate != null) {
+                    activate.DockHandler.Activate();
+                    return true;
+                }
+            }
+            */
+            return false;
         }
 
         public static void CloseFile(FileInfo filepath)
