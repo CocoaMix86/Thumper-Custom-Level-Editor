@@ -75,6 +75,8 @@ namespace Thumper_Custom_Level_Editor
             toolstripFormRestore.Visible = true;
             toolstripFormIcon.Visible = true;
             toolstripExitFullscreen.Visible = TCLE.Fullscreen;
+            lblRuntime.Visible = true;
+            lblRuntime.Font = TCLE.RuntimeLabelFont;
 
             toolstripProject.Enabled = true;
             toolstripEdit.Enabled = true;
@@ -146,6 +148,7 @@ namespace Thumper_Custom_Level_Editor
                 if (!File.Exists($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf"))
                     File.WriteAllBytes($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
                 ImportedFonts.AddFontFile($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf");
+                RuntimeLabelFont = new(TCLE.ImportedFonts.Families[0], 12);
             } catch (Exception ex) {
                 MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
             }

@@ -39,6 +39,7 @@ namespace Thumper_Custom_Level_Editor
         public static bool Fullscreen;
         public static string DragSource = "none";
         public static PrivateFontCollection ImportedFonts = new();
+        public static Font RuntimeLabelFont;
         //Active File Tracking
         public static EditorBase? GlobalActiveDocument
         {
@@ -179,6 +180,8 @@ namespace Thumper_Custom_Level_Editor
                     IsClosing = false;
                 }
             }
+            //save runtimes
+            File.WriteAllLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt"), TCLE.CachedRuntimes.Select(x => $"{x.Key};;{x.Value}"));
             //save sequencer favs
             Properties.Settings.Default.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.Favorite).Select(x => $"{x.Name};{x.ParamPath}").ToList();
             //save panel sizes and locations
@@ -513,6 +516,8 @@ namespace Thumper_Custom_Level_Editor
             Explorer = new() { TabText = "Project Explorer", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectProperties = new() { TabText = "Project Properties", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             //Load the project''s files into Explorer
+            if (File.Exists(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")))
+                TCLE.CachedRuntimes = File.ReadLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")).Select(line => line.Split(";;")).ToDictionary(line => line[0], line => int.Parse(line[1]));
             Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //create a workspace

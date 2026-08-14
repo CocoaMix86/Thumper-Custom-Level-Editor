@@ -7,18 +7,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
     public partial class DockProjectExplorer : EditorBaseSub
     {
+        public static ToolStripOverride tsover = new();
+        public static ContextMenuColors contextmenucol = new();
         #region Form Construction
         public DockProjectExplorer()
         {
             InitializeComponent();
             //set custom renderer for some controls
-            toolstripExplorer.Renderer = new ToolStripOverride();
-            contextMenuAddFile.Renderer = new ContextMenuColors();
-            contextMenuFilters.Renderer = new ContextMenuColors();
-            contextMenuFileClick.Renderer = new ContextMenuColors();
-            contextMenuFolderClick.Renderer = new ContextMenuColors();
-            contextMenuMulti.Renderer = new ContextMenuColors();
-            contextMenuProject.Renderer = new ContextMenuColors();
+            toolstripExplorer.Renderer = tsover;
+            contextMenuAddFile.Renderer = contextmenucol;
+            contextMenuFilters.Renderer = contextmenucol;
+            contextMenuFileClick.Renderer = contextmenucol;
+            contextMenuFolderClick.Renderer = contextmenucol;
+            contextMenuMulti.Renderer = contextmenucol;
+            contextMenuProject.Renderer = contextmenucol;
             //add events to some controls
             txtSearch.GotFocus += txtSearch_GotFocus;
             txtSearch.LostFocus += txtSearch_LostFocus;

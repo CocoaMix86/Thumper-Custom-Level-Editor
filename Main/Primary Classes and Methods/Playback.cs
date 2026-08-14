@@ -1306,15 +1306,23 @@ namespace Thumper_Custom_Level_Editor
             GlobalCurrentOffset = -1;
             GlobalCurrentOffsetLvl = -1;
             GlobalCurrentOffsetGate = -1;
+            //
+            TCLE.Instance.lblRuntime.Text = "00h 00m 00s 000ms";
         }
 
         public static int BeatSubdivisions = 4;
+        public static long PlaybackTimeBytes;
+        public static double PlaybackTimeSec;
         public static double PlaybackTick = -1;
         public static int PlaybackBeat = -1;
         public static double PlaybackSubBeat = -1;
         public static int ApproachBeats;
         private static void SyncTimer_Tick(object sender)
         {
+            PlaybackTimeBytes = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_BYTE);
+            PlaybackTimeSec = Bass.BASS_ChannelBytes2Seconds(MidiStream, PlaybackTimeBytes);
+            TCLE.Instance.lblRuntime.Text = $"{TimeSpan.FromSeconds(PlaybackTimeSec).ToString("hh'h 'mm'm 'ss's 'fff'ms'")}";
+            //
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
             PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
             PlaybackSubBeat = (PlaybackTick % 100) / 100.0d;

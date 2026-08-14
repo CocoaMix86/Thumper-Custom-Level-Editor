@@ -188,6 +188,8 @@
             this.toolstripExitFullscreen = new ToolStripButton();
             this.toolStripSeparator22 = new ToolStripSeparator();
             this.btnVolumeMixer = new ToolStripButton();
+            this.toolStripSeparator5 = new ToolStripSeparator();
+            this.lblRuntime = new ToolStripLabel();
             this.panelFill = new Panel();
             this.panelIntroTips = new Panel();
             this.label2 = new Label();
@@ -620,6 +622,7 @@
             this.contextmenuFile.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuFile.Items.AddRange(new ToolStripItem[] { this.toolstripFileNewProject, this.toolstripFileOpenProject, this.toolstripFileConvert, this.toolStripSeparator2, this.toolstripFileSave, this.toolstripFileSaveAs, this.toolstripFileSaveAll, this.toolStripSeparator1, this.toolstripFileRecent, this.toolStripMenuItem63, this.toolstripFileClearTemp, this.toolStripSeparator4, this.toolstripFileExit, this.toolstripFileRestart });
             this.contextmenuFile.Name = "contextmenuFile";
+            this.contextmenuFile.OwnerItem = this.toolstripFile;
             this.contextmenuFile.RenderMode = ToolStripRenderMode.System;
             this.contextmenuFile.Size = new Size(293, 264);
             this.contextmenuFile.Opening += this.contextmenuFile_Opening;
@@ -1510,7 +1513,7 @@
             this.toolStripTitle.ContextMenuStrip = this.contextMenuFormRightClick;
             this.toolStripTitle.GripMargin = new Padding(0);
             this.toolStripTitle.GripStyle = ToolStripGripStyle.Hidden;
-            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolStripSeparator20, this.toolstripLevelName, this.toolStripSeparator21, this.toolstripStopAudio, this.toolstripExitFullscreen, this.toolStripSeparator22, this.btnVolumeMixer });
+            this.toolStripTitle.Items.AddRange(new ToolStripItem[] { this.toolstripFormIcon, this.toolstripFormClose, this.toolstripFormRestore, this.toolstripFormMinimize, this.toolstripFile, this.toolstripEdit, this.toolStripMenuItem3, this.toolstripProject, this.toolstripWindow, this.toolstripHelp, this.toolStripSeparator20, this.toolstripLevelName, this.toolStripSeparator21, this.toolstripStopAudio, this.toolstripExitFullscreen, this.toolStripSeparator22, this.btnVolumeMixer, this.toolStripSeparator5, this.lblRuntime });
             this.toolStripTitle.Location = new Point(0, 0);
             this.toolStripTitle.MaximumSize = new Size(0, 31);
             this.toolStripTitle.Name = "toolStripTitle";
@@ -1836,6 +1839,25 @@
             this.btnVolumeMixer.Text = "Volume Mixer";
             this.btnVolumeMixer.ToolTipText = "Mix volume levels for playback items";
             this.btnVolumeMixer.Click += this.btnVolumeMixer_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new Size(6, 31);
+            // 
+            // lblRuntime
+            // 
+            this.lblRuntime.BackColor = Color.Black;
+            this.lblRuntime.BackgroundImage = (Image)resources.GetObject("lblRuntime.BackgroundImage");
+            this.lblRuntime.BackgroundImageLayout = ImageLayout.None;
+            this.lblRuntime.Font = new Font("Consolas", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.lblRuntime.ForeColor = Color.Green;
+            this.lblRuntime.Margin = new Padding(10, 1, 0, 2);
+            this.lblRuntime.Name = "lblRuntime";
+            this.lblRuntime.Padding = new Padding(10, 0, 0, 0);
+            this.lblRuntime.Size = new Size(172, 28);
+            this.lblRuntime.Text = "00h 00m 00s 000ms";
+            this.lblRuntime.Visible = false;
             // 
             // panelFill
             // 
@@ -2412,6 +2434,8 @@
         public ToolStripMenuItem toolStripWindowCloseWorkspace;
         private ToolStripMenuItem leafoptionShowCategoryIcon;
         public ImageList imageListCategoryIcons;
+        private ToolStripSeparator toolStripSeparator5;
+        public ToolStripLabel lblRuntime;
     }
 }
 

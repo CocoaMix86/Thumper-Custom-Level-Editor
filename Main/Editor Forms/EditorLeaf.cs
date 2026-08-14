@@ -105,6 +105,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
+            LeafMasterView.Width = Properties.Settings.Default.ZoomHoriz;
+            LeafMasterView.Height = Properties.Settings.Default.ZoomVert;
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
