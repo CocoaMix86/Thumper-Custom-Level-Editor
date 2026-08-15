@@ -1262,7 +1262,7 @@ namespace Thumper_Custom_Level_Editor
             if (Bass.BASS_ChannelPlay(MidiStream, PlaybackBeat < 0)) {
                 //SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, (int)((60 / TCLE.BPM) * (1000 / BeatSubdivisions)));
                 SyncTimer?.Dispose();
-                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 15);
+                SyncTimer = new(new TimerCallback(SyncTimer_Tick), null, 0, 20);
                 IsPlaying = true;
             }
             else {
@@ -1307,7 +1307,7 @@ namespace Thumper_Custom_Level_Editor
             GlobalCurrentOffsetLvl = -1;
             GlobalCurrentOffsetGate = -1;
             //
-            TCLE.Instance.lblRuntime.Text = "00h 00m 00s 000ms";
+            TCLE.Instance.lblRuntime.Text = "00h 00m 00s 000ms - beat 0";
         }
 
         public static int BeatSubdivisions = 4;
@@ -1321,11 +1321,12 @@ namespace Thumper_Custom_Level_Editor
         {
             PlaybackTimeBytes = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_BYTE);
             PlaybackTimeSec = Bass.BASS_ChannelBytes2Seconds(MidiStream, PlaybackTimeBytes);
-            TCLE.Instance.lblRuntime.Text = $"{TimeSpan.FromSeconds(PlaybackTimeSec).ToString("hh'h 'mm'm 'ss's 'fff'ms'")}";
             //
             PlaybackTick = Bass.BASS_ChannelGetPosition(MidiStream, BASSMode.BASS_POS_MIDI_TICK);
             PlaybackBeat = (int)(PlaybackTick / 100d) - CallOffset;
             PlaybackSubBeat = (PlaybackTick % 100) / 100.0d;
+            //
+            TCLE.Instance.lblRuntime.Text = $"{TimeSpan.FromSeconds(PlaybackTimeSec).ToString("hh'h 'mm'm 'ss's 'fff'ms'")} - beat {PlaybackBeat}";
 
             while (GlobalLeafQueue.Count > 0 && PlaybackTick > GlobalLeafQueue[0].Item2) {
                 GlobalCurrentOffset = GlobalLeafQueue[0].Item2 / 100;

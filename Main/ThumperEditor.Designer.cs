@@ -1855,8 +1855,8 @@
             this.lblRuntime.Margin = new Padding(10, 1, 0, 2);
             this.lblRuntime.Name = "lblRuntime";
             this.lblRuntime.Padding = new Padding(10, 0, 0, 0);
-            this.lblRuntime.Size = new Size(172, 28);
-            this.lblRuntime.Text = "00h 00m 00s 000ms";
+            this.lblRuntime.Size = new Size(253, 28);
+            this.lblRuntime.Text = "00h 00m 00s 000ms - beat 0";
             this.lblRuntime.Visible = false;
             // 
             // panelFill

@@ -181,7 +181,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save runtimes
-            File.WriteAllLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt"), TCLE.CachedRuntimes.Select(x => $"{x.Key};;{x.Value}"));
+            if (ProjectProperties != null && ProjectProperties.WorkingFile != null)
+                File.WriteAllLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt"), TCLE.CachedRuntimes.Select(x => $"{x.Key};;{x.Value}"));
             //save sequencer favs
             Properties.Settings.Default.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.Favorite).Select(x => $"{x.Name};{x.ParamPath}").ToList();
             //save panel sizes and locations

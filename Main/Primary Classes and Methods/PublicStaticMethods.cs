@@ -75,7 +75,6 @@ namespace Thumper_Custom_Level_Editor
             toolstripFormRestore.Visible = true;
             toolstripFormIcon.Visible = true;
             toolstripExitFullscreen.Visible = TCLE.Fullscreen;
-            lblRuntime.Visible = true;
             lblRuntime.Font = TCLE.RuntimeLabelFont;
 
             toolstripProject.Enabled = true;
@@ -101,17 +100,17 @@ namespace Thumper_Custom_Level_Editor
             MenusVisible(false);
             //set custom renderer
             toolStripTitle.Renderer = new ToolStripMainForm();
-            toolStripMain.Renderer = new ToolStripOverride();
-            contextmenuFile.Renderer = new ContextMenuColors();
-            contextmenuEdit.Renderer = new ContextMenuColors();
-            contextmenuView.Renderer = new ContextMenuColors();
-            contextMenuProject.Renderer = new ContextMenuColors();
-            contextmenuWindow.Renderer = new ContextMenuColors();
-            contextmenuHelp.Renderer = new ContextMenuColors();
-            contextmenuTabClick.Renderer = new ContextMenuColors();
-            contextmenuSampPacks.Renderer = new ContextMenuColors();
-            contextmenuMoveWorkspace.Renderer = new ContextMenuColors();
-            contextMenuRecentProjects.Renderer = new ContextMenuColors();
+            toolStripMain.Renderer = LeafToolStripOverride;
+            contextmenuFile.Renderer = LeafContextMenuColors;
+            contextmenuEdit.Renderer = LeafContextMenuColors;
+            contextmenuView.Renderer = LeafContextMenuColors;
+            contextMenuProject.Renderer = LeafContextMenuColors;
+            contextmenuWindow.Renderer = LeafContextMenuColors;
+            contextmenuHelp.Renderer = LeafContextMenuColors;
+            contextmenuTabClick.Renderer = LeafContextMenuColors;
+            contextmenuSampPacks.Renderer = LeafContextMenuColors;
+            contextmenuMoveWorkspace.Renderer = LeafContextMenuColors;
+            contextMenuRecentProjects.Renderer = LeafContextMenuColors;
             //set check states from saved settings
             leafoptionShowCategory.Checked = Properties.Settings.Default.LeafOptionShowCategory;
             leafoptionShowGrid.Checked = Properties.Settings.Default.LeafOptionShowGrid;

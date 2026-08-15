@@ -960,7 +960,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 btnMasterPlayback.Image = Properties.Resources.icon_stop;
                 Playback.Initialize("master");
                 Playback.CreatePlaybackFromMaster(MasterProperties);
-                Playback.Play(masterLvlList.SelectedRows.Count > 0 ? MasterLvls[masterLvlList.SelectedRows[^1].Index].BeatStart : -1, MasterProperties.Beats, PlaybackLoop);
+                Playback.Play(masterLvlList.SelectedRows.Count == 1 ? MasterLvls[masterLvlList.SelectedRows[^1].Index].BeatStart : -1, MasterProperties.Beats, PlaybackLoop);
                 if (Playback.IsPlaying) {
                     timer1.Enabled = true;
                 }
