@@ -411,17 +411,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bounds.Height -= 4;
             e.Graphics.FillRectangle(ClearColor, e.RowBounds);
             DataGridView dgv = sender as DataGridView;
+            MasterLvlData row = MasterLvls[e.RowIndex];
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
             if (MasterLvls.Any(x => x.Isolate)) {
-                if (MasterLvls[e.RowIndex].Isolate)
-                    e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(MasterLvls[e.RowIndex].RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+                if (row.Isolate)
+                    e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(row.RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
                 else
                     e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(Color.Gray, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
             else {
-                e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(MasterLvls[e.RowIndex].RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+                e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(row.RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             }
 
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
@@ -433,15 +434,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     e.Graphics.DrawLine(PenGreen, e.RowBounds.Left, e.RowBounds.Bottom, e.RowBounds.Right, e.RowBounds.Bottom);
             }
 
-            if (Playback.IsPlaying) {
-                if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentGate && MasterLvls[e.RowIndex].BeatStart + MasterLvls[e.RowIndex].Beats > Playback.PlaybackBeat) {
-                    double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
-                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetGate + Playback.PlaybackSubBeat;//MasterLvls[e.RowIndex].beatstart - (MasterLvls[e.RowIndex].restlevelbeats) + 
+            if (Playback.IsPlaying && row.BeatStart < Playback.PlaybackBeat && row.BeatStart + row.Beats > Playback.PlaybackBeat) {
+                if (row.name == Playback.GlobalCurrentGate) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)row.Beats;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetGate + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
-                else if (MasterLvls[e.RowIndex].name == Playback.GlobalCurrentLvl) {
-                    double pixelsperbeat = (double)e.RowBounds.Width / (double)MasterLvls[e.RowIndex].Beats;
-                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;//MasterLvls[e.RowIndex].beatstart - (MasterLvls[e.RowIndex].restlevelbeats) + 
+                else if (row.name == Playback.GlobalCurrentLvl) {
+                    double pixelsperbeat = (double)e.RowBounds.Width / (double)row.Beats;
+                    double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
             }
@@ -817,7 +818,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //calc intro lvl
             if (!ProjectExplorer.TryGetFile(MasterProperties.introlvl, out FileInfo _introlvl))
                 MasterProperties.introlevelbeats = 0;
-            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl);            
+            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl, true);            
             //calc checkpoint lvl
             if (!ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo _checkpointlvl))
                 MasterProperties.checkpointbeats = 0;

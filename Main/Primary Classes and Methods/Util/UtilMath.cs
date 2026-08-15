@@ -164,11 +164,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             return _beatcount;
         }
 
-        public static int CalculateLvlRuntime(FileInfo lvl)
+        public static int CalculateLvlRuntime(FileInfo lvl, bool GetApproach = false)
         {
             if (lvl is null)
                 return 0;
-            if (TCLE.CachedRuntimes.TryGetValue(lvl.Name, out int runtime))
+            if (!GetApproach && TCLE.CachedRuntimes.TryGetValue(lvl.Name, out int runtime))
                 return runtime;
 
             int _beatcount = 0;
@@ -186,7 +186,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //every lvl has an approach beats to consider too
             //_beatcount += (int)_load["approach_beats"];
             TCLE.CachedRuntimes[lvl.Name] = _beatcount;
-            return _beatcount;
+            return _beatcount + (GetApproach ? (int)_load["approach_beats"] : 0);
         }
 
         public static int GetTrackOffset(DataGridView trackEditor)
