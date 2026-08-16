@@ -175,6 +175,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static Dictionary<Color, SolidBrush> CellBackColorCache = new() {
             { Color.Gray, new(Color.Gray) },
             { Color.DarkGray, new(Color.DarkGray) },
+            {Color.LightGray, new(Color.LightGray)  },
             { Color.Black, new(Color.Black) },
             { Color.White, new(Color.White) },
             { Color.FromArgb(40, 40, 40), new(Color.FromArgb(40, 40, 40)) }

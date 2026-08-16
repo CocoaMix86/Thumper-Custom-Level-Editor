@@ -504,8 +504,7 @@ namespace Thumper_Custom_Level_Editor
                 //cannot change beats if editing a non-leaf sequencer
                 else if (Beats == value)
                     return;
-                else
-                    return;
+
                 Beats = (int)value;
                 if (!ParentEditor.EditorIsLoading) {
                     BeatsChangedSinceSave = true;
