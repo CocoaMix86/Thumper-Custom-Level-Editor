@@ -38,6 +38,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!NoLock && value != null && _workfile != null) {
                     TCLE.Documents.Remove(_workfile.Name + (RawText ? "-raw" : ""));
                 }
+                if (value == null) {
+                    TCLE.Documents.Remove(_workfile.Name + (RawText ? "-raw" : ""));
+                    FileLock?.Close();
+                }
 
                 _workfile = value;
 
@@ -97,6 +101,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 FileLock = null;
             }
             base.Dispose(disposing);
+        }
+
+        public void ClearFileLock()
+        {
+            TCLE.Documents.Remove(_workfile.Name + (RawText ? "-raw" : ""));
+            FileLock?.Close();
         }
     }
 

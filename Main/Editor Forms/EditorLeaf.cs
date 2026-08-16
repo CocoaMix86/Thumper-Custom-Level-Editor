@@ -2663,7 +2663,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = InitialDir ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                this.NoLock = true;
                 this.WorkingFile = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
                 if (_leafproperties == null) {
@@ -2675,6 +2674,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                   //leafProperties.FilePath = loadedleaf;
                 EditorIsLoading = false;
                 SaveCheckAndWrite(true, "", true);
+                this.ClearFileLock();
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }

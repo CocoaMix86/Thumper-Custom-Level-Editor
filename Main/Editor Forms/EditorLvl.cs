@@ -46,6 +46,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //custom column containing comboboxes per cell
             lvlLoopTracks.Columns[2].ValueType = typeof(decimal);
             lvlLoopTracks.Columns[2].DefaultCellStyle.Format = "0.##";
+            btnLvlLoopAdd.Enabled = true;
             ///
             dockPanel1.Theme = TCLE.DockTheme;
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
@@ -675,6 +676,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void LvlLoop_CollectionChanged(object sender, ListChangedEventArgs e)
         {
+            btnLvlLoopDelete.Enabled = LvlProperties.LvlLoops.Count > 0;
+
             if (EditorIsLoading)
                 return;
             UpdateLoopHeaders();
@@ -1227,7 +1230,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = InitialDir ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
-                this.NoLock = true;
                 this.WorkingFile = new FileInfo(sfd.FileName);
                 EditorIsLoading = true;
                 LvlProperties ??= new(this) {
@@ -1238,6 +1240,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 };
                 EditorIsLoading = false;
                 SaveCheckAndWrite(true, "", true);
+                this.ClearFileLock();
                 //after saving new file, refresh the project explorer
                 ProjectExplorer.CreateTreeView();
             }
