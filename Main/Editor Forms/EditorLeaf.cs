@@ -106,7 +106,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackZoom.Value = Properties.Settings.Default.ZoomHoriz;
             trackZoomVert.Value = Properties.Settings.Default.ZoomVert;
             LeafMasterView.Width = Properties.Settings.Default.ZoomHoriz;
-            LeafMasterView.Height = Properties.Settings.Default.ZoomVert;
+            //LeafMasterView.Height = Properties.Settings.Default.ZoomVert;
             //
             btnLeafAutoPlace.Checked = Properties.Settings.Default.LeafOptionAutoPlace;
             btnLeafViewOptions.DropDown = TCLE.Instance.contextMenuLeafOptions;
@@ -1718,14 +1718,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)))
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>())
                 leaf.btnTrackPaste.Enabled = true;
             UtilAudio.PlaySound("UIkcopy");
         }
 
         private void btnTrackPaste_Click(object sender, EventArgs e)
         {
-            int _index = trackEditor.CurrentRow?.Index ?? -1;
+            int _index = trackEditor.CurrentRow?.Index ?? 0;
             //if pasting inside a multilane object, skip index down a few rows
             switch (SequencerObjects[_index].FriendlyLane) {
                 case "lane left 2":
@@ -2316,7 +2316,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void LoadLeaf(dynamic _load, bool template = false)
         {
             //skip certain checks if we're loading a non-leaf sequencer
-            if (this.WorkingFile.Extension == ".leaf") {
+            if (this.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
                 if (_load == null)
                     return;
                 //reset flag in case it got stuck previously
@@ -2336,14 +2336,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //set flag that load is in progress. This skips Save method
             EditorIsLoading = true;
             SuspendDataGrids(true);
-            if (this.WorkingFile.Extension == ".leaf") {
+            if (this.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
                     TimeSignature = (string)_load["time_sig"] ?? "4/4",
                     LeafLength = (int?)_load["beat_cnt"] ?? 1,
                 };
             }
-            else if (this.WorkingFile.Extension == ".lvl") {
+            else if (this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
                 LeafProperties = new(this) {
                     SequencerType = this.WorkingFile.Extension,
                     TimeSignature = "4/4",
@@ -2354,7 +2354,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (template)
                 this.WorkingFile = null;
             //Add [sequencer] tag on tab text if its a lvl sequencer
-            this.Text = $"{this.WorkingFile.Name}{(this.WorkingFile.Extension == ".lvl" ? " [Sequencer]" : "")}";
+            this.Text = $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
 
             trackEditor.Rows.Clear();
             LeafLengthChanged();
@@ -2453,7 +2453,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //otherwise, search LeafObjects for the friendly names for display purposes
                 else {
                     try {
-                        string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
+                        string normalizeParam = $"{(ObjectToImport.ObjName.EndsWith(".leaf", StringComparison.OrdinalIgnoreCase) || ObjectToImport.ObjName.EndsWith(".lvl", StringComparison.OrdinalIgnoreCase) ? "leafname" : ObjectToImport.ObjName)};{ObjectToImport.ParamPath.Replace(ObjectToImport.ParamPathLane, "ent")}";
                         if (TCLE.LeafObjects.TryGetValue(normalizeParam, out DefaultSequencerObject objmatch)) {
                             ObjectToImport.Default = objmatch;
                             ObjectToImport.FriendlyParam = objmatch.ParamDisplayName;

@@ -92,6 +92,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             FileLock?.Close();
             TCLE.Documents.Remove(WorkingFile?.Name + (RawText ? "-raw" : ""));
+            if (WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))
+                TCLE.Documents.Remove(WorkingFile?.Name + " [Sequencer]");
         }
 
         protected override void Dispose(bool disposing)

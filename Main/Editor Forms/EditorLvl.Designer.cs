@@ -127,7 +127,7 @@
             this.lvlLeafList.Dock = DockStyle.Fill;
             this.lvlLeafList.EnableHeadersVisualStyles = false;
             this.lvlLeafList.GridColor = Color.Black;
-            this.lvlLeafList.Location = new Point(24, 0);
+            this.lvlLeafList.Location = new Point(24, 28);
             this.lvlLeafList.Margin = new Padding(4, 3, 4, 3);
             this.lvlLeafList.Name = "lvlLeafList";
             this.lvlLeafList.ReadOnly = true;
@@ -206,14 +206,14 @@
             // 
             this.btnLvlSequencer.BackColor = Color.DarkGreen;
             this.btnLvlSequencer.CausesValidation = false;
-            this.btnLvlSequencer.Dock = DockStyle.Bottom;
+            this.btnLvlSequencer.Dock = DockStyle.Top;
             this.btnLvlSequencer.Enabled = false;
             this.btnLvlSequencer.FlatStyle = FlatStyle.Popup;
             this.btnLvlSequencer.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.btnLvlSequencer.ForeColor = Color.White;
             this.btnLvlSequencer.Image = Properties.Resources.icon_template;
             this.btnLvlSequencer.ImageAlign = ContentAlignment.MiddleLeft;
-            this.btnLvlSequencer.Location = new Point(24, 219);
+            this.btnLvlSequencer.Location = new Point(24, 0);
             this.btnLvlSequencer.Margin = new Padding(4, 3, 4, 3);
             this.btnLvlSequencer.MaximumSize = new Size(200, 28);
             this.btnLvlSequencer.MinimumSize = new Size(200, 28);

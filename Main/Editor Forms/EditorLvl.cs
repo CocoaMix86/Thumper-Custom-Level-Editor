@@ -972,7 +972,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlSequencer_Click(object sender, EventArgs e)
         {
             //if the Sequencer is open already, attempt to locate it and open it
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]"));
+            if (TCLE.Documents.TryGetValue($"{this.WorkingFile.Name} [Sequencer]", out EditorBase sequencer)) {
+                sequencer.DockHandler.Activate();
+                return;
+            }
+            /*IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]"));
             if (workspacehastab != null) {
                 workspacehastab.DockHandler.Activate();
                 (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == this.WorkingFile.Name + " [Sequencer]").DockHandler.Activate();
@@ -986,12 +990,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     activate.DockHandler.Activate();
                     return;
                 }
-            }
+            }*/
             //this finds a pane in the active workspace that has matching extensions already open on it
             DockPaneCollection Panes = TCLE.ActiveWorkspace.dockMain.Panes;
             DockPane OpenHere = Panes.FirstOrDefault(x => x.Contents.Where(x => x.DockHandler.TabText.Contains(".leaf")).Any());
 
             EditorLeaf leaf = new(LvlProperties, this.WorkingFile, false) { DockAreas = DockAreas.Document | DockAreas.Float };
+            TCLE.Documents.TryAdd($"{leaf.WorkingFile.Name} [Sequencer]", leaf);
             if (OpenHere != null)
                 leaf.Show(OpenHere, null);
             else
