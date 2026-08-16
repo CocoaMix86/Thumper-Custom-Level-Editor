@@ -892,7 +892,7 @@
             this.contextMenuProject.Name = "workingfolderRightClick";
             this.contextMenuProject.OwnerItem = this.toolstripProject;
             this.contextMenuProject.RenderMode = ToolStripRenderMode.System;
-            this.contextMenuProject.Size = new Size(267, 236);
+            this.contextMenuProject.Size = new Size(267, 214);
             // 
             // toolstripProjectLeaf
             // 
@@ -1145,7 +1145,7 @@
             this.contextmenuWindow.Name = "contextmenuEdit";
             this.contextmenuWindow.OwnerItem = this.toolstripWindow;
             this.contextmenuWindow.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuWindow.Size = new Size(294, 230);
+            this.contextmenuWindow.Size = new Size(294, 252);
             // 
             // toolStripWindowCloseTab
             // 

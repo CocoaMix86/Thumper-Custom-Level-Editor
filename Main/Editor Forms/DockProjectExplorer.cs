@@ -824,6 +824,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     
                 }
                 TCLE.OpenFile(new(UtilPaths.ProjectNotes));
+                TCLE.Documents["ProjectNotes.txt-raw"].DockHandler.DockState = DockState.Float;
             }
         }
     }
