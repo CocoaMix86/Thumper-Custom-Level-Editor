@@ -83,6 +83,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
+            if (dockMain.ActiveDocument is ProjectNotes)
+                return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
@@ -92,6 +94,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
             if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
+                return;
+            if (dockMain.ActiveDocument is ProjectNotes)
                 return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
@@ -103,6 +107,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
                 return;
+            if (dockMain.ActiveDocument is ProjectNotes)
+                return;
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
@@ -113,6 +119,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
         {
             if (/*TCLE.DontSwitchGAD || */this.Disposing || TCLE.IsLoadingProject)
+                return;
+            if (dockMain.ActiveContent is ProjectNotes)
                 return;
             //if (dockMain.ActivePane == null) {
             //if (dockMain.ActiveContent == null)

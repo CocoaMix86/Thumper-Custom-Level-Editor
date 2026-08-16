@@ -80,34 +80,38 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
-            //make the beeble emote
-            TCLE.MainBeeble.MakeFace();
-
             EditorIsSaved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = this.WorkingFile.Name + " [Raw]*";
+                return;
+            }
+            //make the beeble emote
+            TCLE.MainBeeble.MakeFace();
+
+            if (this.WorkingFile.Extension.Equals(".txt", StringComparison.OrdinalIgnoreCase)) {
+                UtilFile.WriteFileLock(this.WorkingFile.FullName, textEditor.Text);
             }
             else {
                 //build the JSON to write to file
                 JObject _saveJSON = new();
                 try {
                     _saveJSON = JObject.Parse(textEditor.Text);
-                }
-                catch (Exception ex) {
+                    //write JSON to file
+                    UtilFile.WriteFileLock(this.FileLock, _saveJSON);
+                } catch (Exception ex) {
                     MessageBox.Show($"JSON failed to parse in file. Changes not saved.\n\n{ex}", "Thumper Custom Level Editor");
                     return;
                 }
-                //denote editor tab is saved
-                this.Text = this.WorkingFile.Name + " [Raw]";
-                //write JSON to file
-                UtilFile.WriteFileLock(this.FileLock, _saveJSON);
+            }
+            //denote editor tab is saved
+            this.Text = this.WorkingFile.Name + " [Raw]";
+            if (playsound) UtilAudio.PlaySound("UIsave");
 
-                if (playsound) UtilAudio.PlaySound("UIsave");
-
-                foreach (EditorBase document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
-                    document.GetType().GetMethod("Reload").Invoke(document, null);
-                }
+            foreach (EditorBase document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
+                if (document == this)
+                    continue;
+                document.GetType().GetMethod("Reload").Invoke(document, null);
             }
         }
 

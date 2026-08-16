@@ -408,7 +408,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 string name = Path.GetFileNameWithoutExtension(fullname.Name);
                 int count = Directory.GetFiles($@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}", $"{name} - Copy*{fullname.Extension}").Length + 1;
                 dest = $@"{ProjectExplorer.AllFiles[targetnode].Folder.FullName}\{name}{(count > 0 ? $" - Copy ({count})" : "")}{fullname.Extension}";
-            }            
+            }
 
             if (File.Exists(source)) {
                 dynamic towrite = UtilFile.LoadFileLock(source);
@@ -811,8 +811,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
 
         }
-
-
+        ///
+        ///
+        ///
+        private void toolstripProjectNotes_Click(object sender, EventArgs e)
+        {
+            if (TCLE.Documents.TryGetValue("ProjectNotes.txt-raw", out EditorBase _notes)) {
+                _notes.DockHandler.Activate();
+            }
+            else {
+                using (FileStream fileStream = new(UtilPaths.ProjectNotes, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) {
+                    
+                }
+                TCLE.OpenFile(new(UtilPaths.ProjectNotes));
+            }
+        }
     }
 
     public static class SOExtension

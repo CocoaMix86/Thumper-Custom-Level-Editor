@@ -12,5 +12,6 @@
         public static string SettingsProjects => DirSettingsProjects.FullName;
         public static DirectoryInfo DirCurrentProjectSettings => new(Path.Combine(SettingsProjects, TCLE.WorkingFolder?.Name));
         public static string CurrentProjectSettings => DirCurrentProjectSettings.FullName;
+        public static string ProjectNotes => Path.Combine(TCLE.WorkingFolder.FullName, "ProjectNotes.txt");
     }
 }

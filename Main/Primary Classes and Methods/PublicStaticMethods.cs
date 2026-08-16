@@ -322,22 +322,27 @@ namespace Thumper_Custom_Level_Editor
             }
 
             DockContent OpenFile = new() { DockAreas = DockAreas.Document | DockAreas.Float };
-            switch (filepath.Extension) {
-                case ".master":
-                    OpenFile = new EditorMaster(_load, filepath);
-                    break;
-                case ".lvl":
-                    OpenFile = new EditorLvl(_load, filepath, Playback.Generating);
-                    break;
-                case ".gate":
-                    OpenFile = new EditorGate(_load, filepath, Playback.Generating);
-                    break;
-                case ".leaf":
-                    OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);
-                    break;
-                case ".samp":
-                    OpenFile = new EditorSample(_load, filepath);
-                    break;
+            if (openraw) {
+                OpenFile = new EditorRawText((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+            }
+            else {
+                switch (filepath.Extension) {
+                    case ".master":
+                        OpenFile = new EditorMaster(_load, filepath);
+                        break;
+                    case ".lvl":
+                        OpenFile = new EditorLvl(_load, filepath, Playback.Generating);
+                        break;
+                    case ".gate":
+                        OpenFile = new EditorGate(_load, filepath, Playback.Generating);
+                        break;
+                    case ".leaf":
+                        OpenFile = new EditorLeaf(_load, filepath, Playback.Generating);
+                        break;
+                    case ".samp":
+                        OpenFile = new EditorSample(_load, filepath);
+                        break;
+                }
             }
 
             TCLE.Instance.toolStripWindowCloseTab.Enabled = true;

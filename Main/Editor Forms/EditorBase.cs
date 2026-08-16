@@ -73,9 +73,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public virtual void PerformUndo(int undolistindex) { }
         public virtual void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false) { }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            base.OnFormClosing(e);
+            base.OnFormClosed(e);
             if (this.WorkingFile is null)
                 return;
 

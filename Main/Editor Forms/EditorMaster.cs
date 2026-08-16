@@ -757,6 +757,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sfd.FilterIndex = 1;
             sfd.InitialDirectory = startpath ?? TCLE.WorkingFolder.FullName ?? Application.StartupPath;
             if (sfd.ShowDialog() == DialogResult.OK) {
+                this.NoLock = true;
                 this.WorkingFile = new FileInfo(sfd.FileName);
 
                 MasterProperties ??= new(this) {

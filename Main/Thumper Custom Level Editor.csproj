@@ -278,6 +278,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Editor Forms\ProjectNotes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Editor Forms\EditorBaseSub.cs">
       <SubType>Form</SubType>
     </Compile>
