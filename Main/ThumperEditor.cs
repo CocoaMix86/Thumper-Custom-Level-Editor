@@ -193,6 +193,10 @@ namespace Thumper_Custom_Level_Editor
             //write quick values to file
             File.WriteAllText($@"{UtilPaths.Settings}\quickvalues.txt", string.Join('\n', TCLE.LeafQuickValues));
             Properties.Settings.Default.Save();
+            //save Workspace layouts
+            foreach (DockWorkspace _dw in TCLE.Workspaces) {
+                _dw.dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{_dw.Text}.config");
+            }
         }
 
         private void TCLE_FormClosed(object sender, FormClosedEventArgs e)

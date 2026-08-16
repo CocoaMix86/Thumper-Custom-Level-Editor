@@ -56,7 +56,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Content.DockHandler.TabPageContextMenuStrip = TCLE.TabRightClickMenu;
             if (TCLE.IsLoadingProject)
                 return;
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
 
             TCLE.Instance.toolStripWindowCloseTab.Enabled = true;
             TCLE.Instance.toolstripWindowCloseEditors.Enabled = true;
@@ -71,12 +70,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (TCLE.IsLoadingProject || TCLE.Instance.Disposing)
                 return;
-            //EditorBase DocClosing = (EditorBase)e.Content;
-            //FileInfo filetoclose = null;
-            //filetoclose = DocClosing.WorkingFile;
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
-            ///TCLE.ProjectExplorer.FindNode(filetoclose.Name, TCLE.ProjectExplorer.treeView1.Nodes[0].Nodes).ForeColor = Properties.Settings.Default.ColorProjExpText;
-
         }
 
         private void dockMain_Enter(object sender, EventArgs e)
@@ -88,8 +81,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
-            
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
@@ -100,8 +91,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
-
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
@@ -112,8 +101,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
                 TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
-            
-            dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
