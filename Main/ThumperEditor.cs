@@ -557,10 +557,10 @@ namespace Thumper_Custom_Level_Editor
                 documentsPane.Resize += DockPanelDocumentArea_Resize;
                 dockMain.DefaultFloatWindowSize = documentsPane.Size;
             }
-            if (!TCLE.Documents.TryGetValue("ProjectNotes.txt-raw", out _) && File.Exists(UtilPaths.ProjectNotes)) {
+            /*if (!TCLE.Documents.TryGetValue("ProjectNotes.txt-raw", out _) && File.Exists(UtilPaths.ProjectNotes)) {
                 TCLE.OpenFile(new(UtilPaths.ProjectNotes));
                 TCLE.Documents["ProjectNotes.txt-raw"].DockHandler.DockState = DockState.Float;
-            }
+            }*/
         }
 
         private IDockContent GetContentFromPersistString(string persistString)

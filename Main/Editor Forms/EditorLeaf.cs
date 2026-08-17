@@ -76,7 +76,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             splitContainerLeafSide.Panel2Collapsed = Properties.Settings.Default.LeafHideRaw;
             //
             dockPanel1.Theme = TCLE.DockTheme;
-            //m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
             contentMain.Controls.Add(splitContainerLeafSide);
             splitContainerLeafSide.Dock = DockStyle.Fill;
             contentObjects.Controls.Add(panelObjects);
@@ -85,11 +85,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             propertyGridLeaf.Dock = DockStyle.Fill;
             contentMasterView.Controls.Add(panelMasterView);
             panelMasterView.Dock = DockStyle.Fill;
-            //
-            contentMain.Show(dockPanel1, DockState.Document);
-            contentObjects.Show(contentMain.Pane, DockAlignment.Left, Properties.Settings.Default.ProportionLeafObjects);
-            contentPropertyGrid.Show(contentObjects.Pane, DockAlignment.Bottom, Properties.Settings.Default.ProportionLeafPropertyGrid);
-            contentMasterView.Show(contentMain.Pane, DockAlignment.Top, Properties.Settings.Default.ProportionLeafMasterView);
+            try {
+                dockPanel1.LoadFromXml($@"{TCLE.AppLocation}\settings\layout_leaf.config", m_deserializeDockContent);
+            } catch {
+                contentMain.Show(dockPanel1, DockState.Document);
+                contentObjects.Show(contentMain.Pane, DockAlignment.Left, Properties.Settings.Default.ProportionLeafObjects);
+                contentPropertyGrid.Show(contentObjects.Pane, DockAlignment.Bottom, Properties.Settings.Default.ProportionLeafPropertyGrid);
+                contentMasterView.Show(contentMain.Pane, DockAlignment.Top, Properties.Settings.Default.ProportionLeafMasterView);
+            }
             //
             leaftoolsToolStrip.Renderer = TCLE.LeafToolStripOverride;
             toolstripMasterView.Renderer = TCLE.LeafToolStripOverride;
@@ -159,11 +162,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (TCLE.IsLoadingProject || EditorIsLoading)
                 return;
-            
+
+            dockPanel1.SaveAsXml($@"{TCLE.AppLocation}\settings\layout_leaf.config");
             Properties.Settings.Default.ProportionLeafObjects = contentObjects.Pane.NestedDockingStatus.Proportion;
             Properties.Settings.Default.ProportionLeafPropertyGrid = contentPropertyGrid.Pane.NestedDockingStatus.Proportion;
             Properties.Settings.Default.ProportionLeafMasterView = contentMasterView.Pane.NestedDockingStatus.Proportion;
-
         }
         #endregion
 
@@ -254,7 +257,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private EditorBaseSub? GetContentFromPersistString(string persistString)
         {
-            persistString = persistString.Split(';')[1];
+            string[] elements = persistString.Split(';');
+            persistString = elements[1];
+            if (elements.Length > 2)
+                trackEditor.RowHeadersWidth = Convert.ToInt32(elements[2]);
             if (persistString is "Data Point Props.")
                 return contentPropertyGrid;
             if (persistString is "Objects")
@@ -2398,12 +2404,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LeafLanes = SequencerObjects.Where(x => x.ObjName.EndsWith(".leaf")).ToDictionary(x => x.FriendlyParam);
             trackZoom_Scroll(null, null);
             trackEditor.RowHeadersVisible = true;
-            TCLE.ResizeHeaders(trackEditor);
             foreach (Sequencer_Object seq in SequencerObjects) {
                 //update visual row properties
                 seq.ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 SetRowHeaderText(seq);
             }
+            TCLE.ResizeHeaders(trackEditor);
             TrackTimeSigHighlighting();
             //
             SuspendDataGrids(false);
