@@ -46,6 +46,7 @@ namespace Thumper_Custom_Level_Editor
             BuildObjectTree();
             //set mute
             checkMuteApp.Checked = Properties.Settings.Default.muteapplication;
+            checkAntiDuck.Checked = Properties.Settings.Default.muteduck;
             //read keybinds to a dictionary for easier lookup
             if (Properties.Settings.Default.UserKeybinds == "-") {
                 DictKeybind = Properties.Resources.DefaultKeybinds.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToDictionary(g => g.Split(';')[0], g => Enum.Parse<Keys>(g.Split(';')[1], true));
