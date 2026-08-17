@@ -150,14 +150,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///         ///
 
         ///DGV LVLLEAFLIST
+        int CurrentRow;
         private void lvlLeafList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+            if (!IsUndoing && Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
                 return;
+            CurrentRow = e.RowIndex;
             LvlProperties.SelectedLeaf = LvlLeafs[e.RowIndex];
             contentTunnel.TabText = $"Paths/Tunnels - {LvlProperties.SelectedLeaf.Leaf}";
+            lvlLeafPaths.DataSource = null;
             lvlLeafPaths.DataSource = new BindingSource(LvlProperties.SelectedLeaf.Paths, null);
             LvlPaths_ListChanged(null, null);
         }
@@ -1102,6 +1105,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafPaths.Columns[0].DataPropertyName = "Name";
             RecalculateRuntime();
             UpdateLoopHeaders();
+            lvlLeafList.ClearSelection();
+            lvlLeafList.Rows[CurrentRow].Selected = true;
+            lvlLeafList_CellClick(null, new(0, CurrentRow));
         }
 
         public void LoadLvlSimple(dynamic _load)
@@ -1202,10 +1208,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlUpdatePaths(LvlProperties.SelectedLeaf);
         }
         */
+        bool IsUndoing;
         public override void PerformUndo(int undolistindex)
         {
             if (undolistindex > UndoList.Count - 1)
                 return;
+            IsUndoing = true;
             bool _trackNotSaved = this.Saved;
             LoadLvl(UndoList[undolistindex].State);
             UndoList.RemoveRange(0, undolistindex);
@@ -1215,6 +1223,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (!this.Text.EndsWith('*'))
                     this.Text += '*';
             }
+            IsUndoing = false;
         }
 
         ///SAVE
