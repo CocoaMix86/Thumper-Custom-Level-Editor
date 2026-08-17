@@ -23,6 +23,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
         public static Pen PenRowBorder = new(new SolidBrush(Color.FromArgb(10, 10, 10)), 2);
         public static SolidBrush SelectionColor = new(Color.FromArgb(180, Color.LightSkyBlue));
         public static StringFormat CellFormat = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+        public static StringFormat CellFormatHeader = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Near };
         public static StringFormat CellFormatVert = new(StringFormatFlags.NoWrap) { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center, FormatFlags = (StringFormatFlags.DirectionVertical | StringFormatFlags.DirectionRightToLeft) };
 
         public static void SetCellBorders(DataGridViewCellPaintingEventArgs e, DataGridView trackEditor)
@@ -136,7 +137,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             if (e.Value is null or "")
                 return;
             //skips a bunch of objects since they display their values differently
-            if (e.RowIndex == -1)
+            if (e.RowIndex == -1 || seq is null)
                 goto skipchecks;
             if (seq.Default.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 return;
@@ -181,6 +182,24 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
         }
 
+        public static void DrawHeaderText(DataGridViewCellPaintingEventArgs e)
+        {
+            using var BrushTextColor = new SolidBrush(e.CellStyle.ForeColor);
+            string cellText = e.Value.ToString();
+            //
+            using Font font = new("Arial", 10, FontStyle.Bold);
+            SizeF RealSize = e.Graphics.MeasureString(cellText, font);
+            Rectangle bounds = e.CellBounds;
+            if (Properties.Settings.Default.LeafOptionCategoryIcon) {
+                bounds.X += 16;
+                bounds.Width -= 16;
+            }
+            float HeightScaleRatio = (bounds.Height + 4) / RealSize.Height;
+            float WidthScaleRatio = (bounds.Width + 4) / RealSize.Width;
+            float ScaleFontSize = font.Size * ((HeightScaleRatio < WidthScaleRatio) ? HeightScaleRatio : WidthScaleRatio);
+            e.Graphics.DrawString(cellText, new Font("Arial", ScaleFontSize, FontStyle.Bold,  GraphicsUnit.Pixel), BrushTextColor, bounds, CellFormatHeader);
+        }
+
         public static void CellPaintIcons(DataGridViewCellPaintingEventArgs e, EditorLeaf Leaf, Sequencer_Object seq = null)
         {
             if (e.RowIndex != -1 && seq.ObjName == "_TuningLayerX" && e.ColumnIndex is 1 or 2)
@@ -193,7 +212,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             switch (e.ColumnIndex) {
                 case -1:
                     if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.Default.CategoryIcon != null) {
-                        e.Graphics.DrawImage(seq.Default.CategoryIcon, e.CellBounds.Left + 10, y, 16, 16);
+                        e.Graphics.DrawImage(seq.Default.CategoryIcon, e.CellBounds.Left + 4, y, 16, 16);
                     }
                     break;
                 case 0:
@@ -258,7 +277,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                     CellPaintingColor.Color = UtilMath.Blend(seq.HighlightColor, Color.Black, 0.8);
                 }
                 e.Graphics.FillRoundedRectangle(CellPaintingColor, bounds, 5);
-                e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
+
+                if (Properties.Settings.Default.LeafOptionScaleHeader)
+                    DrawHeaderText(e);
+                else
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.ContentForeground);
             }
             //colums 0 and 1 are Enable and Mute
             else if (e.ColumnIndex is 0 or 1) {

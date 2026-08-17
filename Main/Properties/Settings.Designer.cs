@@ -1182,5 +1182,17 @@ namespace Thumper_Custom_Level_Editor.Properties {
                 this["ProportionLeafMasterView"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LeafOptionScaleHeader {
+            get {
+                return ((bool)(this["LeafOptionScaleHeader"]));
+            }
+            set {
+                this["LeafOptionScaleHeader"] = value;
+            }
+        }
     }
 }

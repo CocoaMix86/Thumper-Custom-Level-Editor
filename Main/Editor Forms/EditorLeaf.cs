@@ -2865,7 +2865,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public static void SetRowHeaderText(Sequencer_Object seq)
         {
             string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Default.Category}] " : "";
-            ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $" {ShowCategory}" : ShowCategory; 
+            //ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $" {ShowCategory}" : ShowCategory; 
             string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{seq.FriendlyParam}, {seq.FriendlyLane}" : seq.FriendlyParam;
             if (seq.Default.Category == "PLAY SAMPLE")
                 //show the sample name instead

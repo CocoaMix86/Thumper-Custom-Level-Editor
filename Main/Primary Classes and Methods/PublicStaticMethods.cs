@@ -121,6 +121,7 @@ namespace Thumper_Custom_Level_Editor
             leafoptionShowWave.Checked = Properties.Settings.Default.LeafOptionShowWave;
             leafoptionVerticalCells.Checked = Properties.Settings.Default.LeafOptionVerticalCells;
             leafoptionPlaybackScroll.Checked = Properties.Settings.Default.LeafOptionPlaybackScroll;
+            leafoptionScaleHeader.Checked = Properties.Settings.Default.LeafOptionScaleHeader;
         }
 
         public static void InitializeFolders()
