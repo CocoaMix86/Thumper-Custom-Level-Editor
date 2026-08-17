@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DockWorkspace));
-            this.dockMain = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.dockMain = new DockPanelEx();
             this.SuspendLayout();
             // 
             // dockMain
@@ -69,6 +69,6 @@
 
         #endregion
 
-        public WeifenLuo.WinFormsUI.Docking.DockPanel dockMain;
+        public DockPanelEx dockMain;
     }
 }

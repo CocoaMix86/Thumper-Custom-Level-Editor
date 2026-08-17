@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.DirectoryServices.ActiveDirectory;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
@@ -114,24 +115,30 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
     public class CustomFloatWindow : FloatWindow
     {
-        public CustomFloatWindow(DockPanel dockPanel, DockPane pane)
-            : base(dockPanel, pane)
+        public CustomFloatWindow(DockPanel dockPanel, DockPane pane) : base(dockPanel, pane)
         {
             FormBorderStyle = FormBorderStyle.Sizable;
-            this.Enter += Float_Enter;
-            this.GotFocus += Float_Enter;
+            //this.Enter += Float_Enter;
+            //this.GotFocus += Float_Enter;
         }
 
-        public CustomFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
-            : base(dockPanel, pane, bounds)
+        public CustomFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds) : base(dockPanel, pane, bounds)
         {
             FormBorderStyle = FormBorderStyle.Sizable;
-            this.Enter += Float_Enter;
-            this.GotFocus += Float_Enter;
+            //this.Enter += Float_Enter;
+            //this.GotFocus += Float_Enter;
         }
 
         public void Float_Enter(object sender, EventArgs e)
         {
+            IDockContent focus = this.NestedPanes.Select(x => x.ActiveContent).FirstOrDefault();
+            if (focus != null)
+                TCLE.GlobalActiveDocument = (EditorBase?)focus;
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
             IDockContent focus = this.NestedPanes.Select(x => x.ActiveContent).FirstOrDefault();
             if (focus != null)
                 TCLE.GlobalActiveDocument = (EditorBase?)focus;
@@ -148,6 +155,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
         {
             return new CustomFloatWindow(dockPanel, pane);
+        }
+    }
+
+    public class DockPanelEx : DockPanel
+    {
+        public DockPanelEx()
+        {
+
+        }
+
+        protected override void OnActiveDocumentChanged(EventArgs e)
+        {
+            base.OnActiveDocumentChanged(e);
+            if (this.ActiveDocument != null && TCLE.GlobalActiveDocument != this.ActiveDocument)
+                TCLE.GlobalActiveDocument = (EditorBase?)this.ActiveDocument;
         }
     }
 }

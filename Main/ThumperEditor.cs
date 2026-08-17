@@ -1086,11 +1086,8 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
-            foreach (DockWorkspace workspace in Workspaces) {
-                foreach (EditorBase document in workspace.dockMain.Documents) {
-                    document.Save(false);
-                    //FindEditorRunMethod(document.GetType(), "Save");
-                }
+            foreach (EditorBase tab in TCLE.Documents.Values) {
+                tab.Save(false);
             }
             TCLE.SaveTCL();
             UtilAudio.PlaySound("UIsave");

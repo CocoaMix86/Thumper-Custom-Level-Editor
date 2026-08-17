@@ -79,8 +79,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dockMain.ActiveDocument is ProjectNotes)
                 return;
 
-            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
+            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                //TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
         }
         private void dockMain_ActiveDocumentChanged(object sender, EventArgs e)
         {
@@ -89,8 +89,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dockMain.ActiveDocument is ProjectNotes)
                 return;
 
-            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
+            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                //TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
         }
         private void dockMain_ActiveContentChanged(object sender, EventArgs e)
         {
@@ -99,8 +99,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (dockMain.ActiveDocument is ProjectNotes)
                 return;
 
-            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
+            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                //TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveDocument;
         }
 
         private void dockMain_ActivePaneChanged(object sender, EventArgs e)
@@ -113,8 +113,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if (dockMain.ActiveContent == null)
             //if (dockMain.Panes.Count > 0)
             //    dockMain.Panes[0].Activate();
-            if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
-                TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveContent;
+            //if (dockMain.ActiveDocument != null && TCLE.GlobalActiveDocument != dockMain.ActiveDocument)
+                //TCLE.GlobalActiveDocument = (EditorBase?)dockMain.ActiveContent;
             //}
             //dockMain.SaveAsXml($@"{TCLE.AppLocation}\settings\projects\{TCLE.WorkingFolder.Name}\layout_{this.Text}.config");
         }
