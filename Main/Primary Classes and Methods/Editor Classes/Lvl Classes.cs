@@ -45,6 +45,7 @@ namespace Thumper_Custom_Level_Editor
         public List<string> ImportPaths { 
             set {
                 Paths = new BindingList<LvlPath>(value.Select(x => new LvlPath(x)).ToList());
+                Paths.ListChanged += ((EditorLvl)Parent.ParentEditor).LvlPaths_ListChanged;
             } 
         }
         public BindingList<LvlPath> Paths { get; set; } = new();

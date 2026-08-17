@@ -841,14 +841,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathDelete_Click(object sender, EventArgs e)
         {
+            int lastrow = lvlLeafPaths.SelectedRows[^1].Index;
             for (int x = lvlLeafPaths.RowCount - 1; x >= 0; x--) {
                 if (lvlLeafPaths.Rows[x].Selected)
                     LvlProperties.SelectedLeaf.Paths.RemoveAt(x);
             }
-            /*
-            foreach (DataGridViewRow dgvr in lvlLeafPaths.SelectedRows) {
-                LvlProperties.SelectedLeaf.Paths.Remove(dgvr.Cells[0].Value.ToString());
-            }*/
+            if (lvlLeafPaths.Rows.Count > 0) {
+                if (lastrow >= lvlLeafPaths.Rows.Count)
+                    lvlLeafPaths.Rows[^1].Selected = true;
+                else
+                    lvlLeafPaths.Rows[lastrow].Selected = true;
+            }
             UtilAudio.PlaySound("UItunnelremove");
             SaveCheckAndWrite(false, "Remove Tunnel");
         }
@@ -919,7 +922,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (LvlLeafs.Count == 0)
                 return;
             LvlProperties.SelectedLeaf.Paths.Add(new(TCLE.LvlPaths[TCLE.rng.Next(1, TCLE.LvlPaths.Count)]));
-            btnLvlPathDelete.Enabled = true;
+            LvlPaths_ListChanged(null, null);
             UtilAudio.PlaySound("UItunneladd");
             SaveCheckAndWrite(false, "Add Random Tunnel to Leaf");
         }
