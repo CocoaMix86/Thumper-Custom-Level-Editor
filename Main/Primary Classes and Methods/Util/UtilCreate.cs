@@ -9,7 +9,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         public static SimpleLeafProperties SimpleLeaf(dynamic LeafToLoad, FileInfo File)
         {
             SimpleLeafProperties LeafProps = new() {
-                LeafName = File.Name,
+                LeafName = File?.Name,
                 LeafLength = (int?)LeafToLoad["beat_cnt"] ?? 1
             };
             LoadSequencer(LeafToLoad["seq_objs"], LeafProps);

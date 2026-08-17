@@ -3319,7 +3319,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //timer1.Interval = (int)((60 / TCLE.BPM) * (1000 / Playback.BeatSubdivisions));
                 timer1.Interval = 30;
                 btnTrackPlayback.Image = Properties.Resources.icon_stop;
-                SimpleLeafProperties _leafload = UtilCreate.SimpleLeaf(UtilFile.LoadFileLock(ProjectExplorer.TryGetFile(WorkingFile.Name, out FileInfo _file) ? _file : null), _file);
+                //
+                JObject _saveJSON = LeafProperties.ConvertToJson();
+                SimpleLeafProperties _leafload = UtilCreate.SimpleLeaf(_saveJSON, null);
+                //
                 Playback.Initialize("leaf");
                 Playback.CreatePlaybackFromLeaf(_leafload, PlaybackEnd);
                 Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.LeafLength, PlaybackLoop);
