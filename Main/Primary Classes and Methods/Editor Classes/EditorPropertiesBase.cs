@@ -24,6 +24,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats this item spans.")]
+        public int _showbeats => _beats;
+        [Browsable(false)]
         public int Beats {
             get => _beats;
             set {
@@ -40,6 +42,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
         [CategoryAttribute("Runtime")]
         [DisplayName("Runtime")]
         [Description("Calculated based on Beats and the current BPM. (Beats/BPM)")]
+        public string _showruntime => Runtime;
+        [Browsable(false)]
         public string Runtime { get; set; } 
     }
 }
