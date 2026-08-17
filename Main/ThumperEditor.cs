@@ -244,6 +244,7 @@ namespace Thumper_Custom_Level_Editor
             toolstripWindowDock.ShortcutKeys = Keybinds["Dock Floating Tab"];
             toolstripWindowWorkspace.ShortcutKeys = Keybinds["Add New Worksapce"];
             toolStripWindowCloseTab.ShortcutKeys = Keybinds["Close Current Tab"];
+            toolstripTabClose.ShortcutKeys = Keybinds["Close Current Tab"];
             toolStripWindowCloseWorkspace.ShortcutKeys = Keybinds["Close Current Workspace"];
             ///
             toolstripTabSave.ShortcutKeys = Keybinds["Save File"];
@@ -1137,7 +1138,7 @@ namespace Thumper_Custom_Level_Editor
                     return;
                 }
             }
-            GlobalActiveDocument.DockHandler.Dispose();
+            GlobalActiveDocument.Close();
         }
 
         private void toolstripTabCloseOther_Click(object sender, EventArgs e)
@@ -1151,7 +1152,7 @@ namespace Thumper_Custom_Level_Editor
             }
             foreach (IDockContent document in ActiveWorkspace.dockMain.Documents.ToList()) {
                 if (document != GlobalActiveDocument)
-                    document.DockHandler.Dispose();
+                    ((EditorBase)document).Close();
             }
         }
 
