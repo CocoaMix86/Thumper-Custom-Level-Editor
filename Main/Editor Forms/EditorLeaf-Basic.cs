@@ -188,7 +188,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     _importseq.ObjName = this.WorkingFile.Name;
                 _importseq.ExpandLanesInEditor = _importseq.FriendlyLane == "none" || Properties.Settings.Default.LeafOptionShowLane;
                 if (_importseq.FriendlyLane == "lane center") {
-                    LoadMultiLanes(_importseq, SequencerObjects);
+                    var _lanes = LoadMultiLanes(_importseq, SequencerObjects);
+                    if (_lanes != null) {
+                        SequencerObjects.AddRange(_lanes);
+                        trackEditor.Rows.AddRange(_lanes.ToArray());
+                    }
                 }
                 else {
                     SequencerObjects.Add(_importseq);
