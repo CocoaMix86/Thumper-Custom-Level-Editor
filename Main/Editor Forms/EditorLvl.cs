@@ -1108,9 +1108,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlLeafPaths.Columns[0].DataPropertyName = "Name";
             RecalculateRuntime();
             UpdateLoopHeaders();
-            lvlLeafList.ClearSelection();
-            lvlLeafList.Rows[CurrentRow].Selected = true;
-            lvlLeafList_CellClick(null, new(0, CurrentRow));
+            if (lvlLeafList.RowCount > 0) {
+                lvlLeafList.ClearSelection();
+                lvlLeafList.Rows[CurrentRow].Selected = true;
+                lvlLeafList_CellClick(null, new(0, CurrentRow));
+            }
         }
 
         public void LoadLvlSimple(dynamic _load)
@@ -1407,7 +1409,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq_objs.Add(s);
             }
             //add all seq_objs to the overall leaf
-            _save.Add("seq_objs", seq_objs);
+            if (_properties.SequencerObjects.Count > 0)
+                _save.Add("seq_objs", seq_objs);
+            else
+                _save.Add("seq_objs", _properties.seqJSON);
             //this section adds all leafs
             JArray leaf_seq = new();
             foreach (LvlLeafData _leaf in _properties.Leafs) {
