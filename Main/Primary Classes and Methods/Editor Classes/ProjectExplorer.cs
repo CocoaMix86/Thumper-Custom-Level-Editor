@@ -75,6 +75,7 @@ namespace Thumper_Custom_Level_Editor
             expandednodes = GetExpandedNodes(ProjectTree);
             Point LastScrollPosition = GetTreeViewScrollPos(TCLE.Explorer.treeView1);
             //clear existing treeview
+            Dictionary<TreeNode, string> ReselectNodes = DockProjectExplorer.selectedNodes.Select(x => (x, x.FullPath)).ToDictionary();
             ProjectTree.Clear();
             AllFiles.Clear();
             Files.Clear();
@@ -107,6 +108,13 @@ namespace Thumper_Custom_Level_Editor
             }
             //repopulate dragdrop list
             TCLE.DragDropItems.Populate();
+            //
+            DockProjectExplorer.selectedNodes.Clear();
+            foreach (var node in ReselectNodes) {
+                if (AllFiles.Keys.FirstOrDefault(x => x.FullPath == node.Value) is TreeNode _found)
+                    DockProjectExplorer.selectedNodes.Add(_found);
+            }
+            DockProjectExplorer.ChangeSelection(DockProjectExplorer.selectedNodes, new(), TCLE.Explorer.treeView1.BackColor);
             SetTreeViewScrollPos(TCLE.Explorer.treeView1, LastScrollPosition);
         }
 
