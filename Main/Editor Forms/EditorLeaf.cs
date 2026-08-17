@@ -8,6 +8,7 @@ using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using System.ComponentModel;
 using System.Data.SqlTypes;
+using System.Windows.Media.Animation;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -1725,25 +1726,29 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnTrackPaste_Click(object sender, EventArgs e)
         {
+            bool resize = true;
             int _index = trackEditor.CurrentRow?.Index ?? 0;
-            //if pasting inside a multilane object, skip index down a few rows
-            switch (SequencerObjects[_index].FriendlyLane) {
-                case "lane left 2":
-                    _index += 5;
-                    break;
-                case "lane left 1":
-                    _index += 4;
-                    break;
-                case "lane center":
-                    _index += 3;
-                    break;
-                case "lane right 1":
-                    _index += 2;
-                    break;
-                case "lane right 2":
-                case "none":
-                    _index += 1;
-                    break;
+            if (SequencerObjects.Count > 0) {
+                resize = false;
+                //if pasting inside a multilane object, skip index down a few rows
+                switch (SequencerObjects[_index].FriendlyLane) {
+                    case "lane left 2":
+                        _index += 5;
+                        break;
+                    case "lane left 1":
+                        _index += 4;
+                        break;
+                    case "lane center":
+                        _index += 3;
+                        break;
+                    case "lane right 1":
+                        _index += 2;
+                        break;
+                    case "lane right 2":
+                    case "none":
+                        _index += 1;
+                        break;
+                }
             }
             EditorIsPasting = true;
             //add copied Sequencer_Object to main _tracks list
@@ -1751,10 +1756,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Sequencer_Object clone = _newtrack.Clone(_leafproperties.LeafLength);
                 clone.ParentLeaf = LeafProperties;
                 clone.ExpandLanesInEditor = GlobalExpand;
+                clone.Height = trackZoomVert.Value;
                 SequencerObjects.Insert(_index, clone);
                 trackEditor.Rows.Insert(_index, clone);
                 _index++;
             }
+            if (resize)
+                TCLE.ResizeHeaders(trackEditor);
 
             EditorIsPasting = false;
             UtilAudio.PlaySound("UIkpaste");
