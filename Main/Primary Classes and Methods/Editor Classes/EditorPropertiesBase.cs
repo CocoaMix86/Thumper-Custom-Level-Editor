@@ -31,7 +31,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
                     return;
                 _beats = value;
                 Runtime = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
-                if (ParentEditor != null)
+                if (ParentEditor != null && this.ParentEditor?.WorkingFile?.Name != null)
                     TCLE.CachedRuntimes[this.ParentEditor.WorkingFile.Name] = Beats;
             }
         }//> Leafs.Sum(x => x.Beats);
