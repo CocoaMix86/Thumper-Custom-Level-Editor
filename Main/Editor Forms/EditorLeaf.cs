@@ -324,6 +324,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             Properties.Settings.Default.ZoomHoriz = trackZoom.Value;
             ZoomHasChanged = true;
+            SuspendDataGrids(true);
             int display = trackEditor.FirstDisplayedScrollingColumnIndex;
             foreach (DataGridViewColumn dgvc in Columns) {
                 dgvc.Width = trackZoom.Value;
@@ -336,6 +337,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             LeafMasterView.Width = trackZoom.Value;
             LeafMasterView.InitializeAndResize(SequencerObjects.ToList(), _leafproperties);
+            SuspendDataGrids(false);
         }
 
         private void trackZoomVert_Scroll(object sender, EventArgs e)

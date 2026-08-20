@@ -78,7 +78,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     trackZoom.Value = Math.Max(1, horiz - scrollLines);
                 }
                 else if (ModifierKeys is Keys.Control && e.Delta > 0) {
-                    trackZoom.Value = Math.Min(100, horiz + scrollLines);
+                    trackZoom.Value = Math.Min(200, horiz + scrollLines);
                 }
             }
         }
