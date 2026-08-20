@@ -74,7 +74,7 @@ namespace Thumper_Custom_Level_Editor
         {
             SampleData clone = new() {
                 Editor = null,
-                File = new(File.FullName),
+                File = File == null ? null : new(File.FullName),
                 TempFile = TempFile,
                 ObjName = ObjName,
                 Path = Path,
@@ -83,7 +83,7 @@ namespace Thumper_Custom_Level_Editor
                 Pan = Pan,
                 Offset = Offset,
                 ChannelGroup = ChannelGroup,
-                Wave = Wave.Clone(false),
+                Wave = Wave == null ? null : Wave.Clone(false),
                 Runtime = Runtime,
             };
             clone.Editor = parent;
