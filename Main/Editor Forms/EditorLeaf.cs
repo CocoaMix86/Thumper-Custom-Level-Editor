@@ -370,14 +370,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void vscrollbarTrackEditor_Resize()
         {
-            vScrollBarTrackEditor.Visible = (trackEditor.DisplayedRowCount(false) < trackEditor.Rows.Cast<DataGridViewRow>().Where(x => x.Visible).Count());
-            vScrollBarTrackEditor.Maximum = trackEditor.RowCount - trackEditor.DisplayedRowCount(false) + 10;
+            vScrollBarTrackEditor.LargeChange = 1;
+            int visiblerows = SequencerObjects?.Count(x => x.Visible) ?? 0;
+            vScrollBarTrackEditor.Visible = (trackEditor.DisplayedRowCount(false) < visiblerows);
+            vScrollBarTrackEditor.Maximum = visiblerows - trackEditor.DisplayedRowCount(false);
         }
 
         private void trackEditor_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             trackEditor.Focus();
-            int scollrowindex = trackEditor.FirstDisplayedScrollingRowIndex;
+            int scrollrowindex = trackEditor.FirstDisplayedScrollingRowIndex;
             int horiz = trackZoom.Value;
             int vert = trackZoomVert.Value;
             int scrollLines = SystemInformation.MouseWheelScrollLines;
@@ -387,14 +389,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (trackEditor.FirstDisplayedScrollingRowIndex == -1 || trackEditor.FirstDisplayedScrollingColumnIndex == -1)
                     return;
                 //handle horizontal scroll
-                if (MouseCurrentColumn != -1) {
+                if (MouseCurrentColumn != -1 && ModifierKeys is not Keys.Alt) {
                     trackEditor.HorizontalScrollingOffset = trackEditor.HorizontalScrollingOffset + (e.Delta * -1) < 0 ? 0 : trackEditor.HorizontalScrollingOffset + (e.Delta * -1);
                     trackEditor.Invalidate();
                 }
                 //handle vertical scroll
                 else {
                     if (e.Delta > 0) {
-                        int ind = Math.Max(0, scollrowindex - scrollLines);
+                        int ind = Math.Max(0, scrollrowindex - scrollLines);
                         while (trackEditor.Rows[ind].Visible == false && ind > 1)
                             ind -= 1;
                         if (ind == 0) {
@@ -404,12 +406,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
                     else if (e.Delta < 0) {
-                        int ind = Math.Min(trackEditor.RowCount - 1, scollrowindex + scrollLines);
+                        int ind = Math.Min(trackEditor.RowCount - 1, scrollrowindex + scrollLines);
                         while (trackEditor.Rows[ind].Visible == false && ind < trackEditor.RowCount)
                             ind += 1;
                         trackEditor.FirstDisplayedScrollingRowIndex = ind;
                     }
-                    vScrollBarTrackEditor.Value = trackEditor.FirstDisplayedScrollingRowIndex;
+                    vScrollBarTrackEditor.Value = VisibleRows.IndexOf(SequencerObjects[trackEditor.FirstDisplayedScrollingRowIndex]);
                 }
             }
             //handle zoom scroll
@@ -430,8 +432,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         private void vScrollBarTrackEditor_Scroll(object sender, ScrollEventArgs e)
         {
-            if (trackEditor.FirstDisplayedScrollingRowIndex != -1 && trackEditor.Rows[e.NewValue].Visible == true)
-                trackEditor.FirstDisplayedScrollingRowIndex = e.NewValue;
+            List<Sequencer_Object> visibleobjs = SequencerObjects.Where(x => x.Visible).ToList();
+            int rowindex = visibleobjs[e.NewValue].Index;
+            if (trackEditor.FirstDisplayedScrollingRowIndex != -1)// && trackEditor.Rows[e.NewValue].Visible == true)
+                trackEditor.FirstDisplayedScrollingRowIndex = rowindex;// e.NewValue;
         }
         #endregion
         #region Trackeditor Painting
@@ -1369,6 +1373,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Rows.Add(seq);
             }
             SetRowHeaderText(seq);
+
+            UpdateUIThings();
             return seq;
         }
 
@@ -1515,6 +1521,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             trackEditor.Invalidate();
             SaveCheckAndWrite(false, "Delete Object");
             UtilAudio.PlaySound("UIobjectremove");
+
+            UpdateUIThings();
         }
 
         private void btnTrackUp_Click(object sender, EventArgs e)
@@ -1882,7 +1890,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             set {
                 Properties.Settings.Default.LeafOptionInterp = value;
                 Properties.Settings.Default.Save();
-                foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.WorkingFile.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase))) {
+                foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
                     leaf.UpdateInterpTooltip(InterpLastUsed);
                 }
             }
@@ -2413,6 +2421,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 seq.ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 SetRowHeaderText(seq);
             }
+            UpdateUIThings();
             TCLE.ResizeHeaders(trackEditor);
             TrackTimeSigHighlighting();
             //
@@ -2968,6 +2977,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnTrackClear.Enabled = SequencerObjects.Count > 0;
             btnTrackCopy.Enabled = SequencerObjects.Count > 0;
             btnTrackPaste.Enabled = TCLE.ClipboardSequencer.Count > 0;
+        }
+
+        List<Sequencer_Object> VisibleRows = new();
+        public void UpdateUIThings()
+        {
+            EnableLeafButtons();
+            VisibleRows = SequencerObjects.Where(x => x.Visible).ToList();
+            vscrollbarTrackEditor_Resize();
         }
 
         #region Cut Copy Paste
