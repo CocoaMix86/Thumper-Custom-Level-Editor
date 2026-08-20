@@ -111,11 +111,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public override void Copy()
         {
+            if (string.IsNullOrEmpty(textEditor.SelectedText))
+                return;
             Clipboard.SetText(textEditor.SelectedText);
         }
 
         public override void Cut()
         {
+            if (string.IsNullOrEmpty(textEditor.SelectedText))
+                return;
             Clipboard.SetText(textEditor.SelectedText);
             textEditor.SelectedText = "";
         }
