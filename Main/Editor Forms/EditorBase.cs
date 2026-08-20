@@ -66,9 +66,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         protected override string GetPersistString()
         {
             string _persist = base.GetPersistString() + ";" + (this.TabText ?? this.Text).Replace("*", "");
-            if (this is EditorLeaf _leaf) {
-                _persist += $";{_leaf.trackEditor.RowHeadersWidth}";
-            }
             return _persist;
         }
 

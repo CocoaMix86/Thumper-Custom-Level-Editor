@@ -173,7 +173,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region Variables
         //Static
         public static int FrozenColumnOffset = 3;
-        private static Pen PenVioletThin = new(new SolidBrush(Color.Violet), 2);
         private static Pen PenWhite = new(new SolidBrush(Color.White), 3);
         public static Font TuningFont = new("Consolas", 8);
         public static Dictionary<Color, SolidBrush> CellBackColorCache = new() {
@@ -259,8 +258,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             string[] elements = persistString.Split(';');
             persistString = elements[1];
-            if (elements.Length > 2)
-                trackEditor.RowHeadersWidth = Convert.ToInt32(elements[2]);
+            //if (elements.Length > 2)
+               // trackEditor.RowHeadersWidth = Convert.ToInt32(elements[2]);
             if (persistString is "Data Point Props.")
                 return contentPropertyGrid;
             if (persistString is "Objects")
@@ -271,8 +270,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return contentMasterView;
 
             return null;
-
-            throw new NotImplementedException();
         }
 
         #region EventHandlers
