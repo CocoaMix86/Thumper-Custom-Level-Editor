@@ -44,6 +44,8 @@
             this.btnSampleDelete = new ToolStripButton();
             this.FSBtoSamp = new ToolStripButton();
             this.btnSampleChunk = new ToolStripButton();
+            this.btnSampleCopy = new ToolStripButton();
+            this.btnSamplePaste = new ToolStripButton();
             this.propertyGridSample = new PropertyGrid();
             this.lblLoading = new Label();
             this.label1 = new Label();
@@ -166,7 +168,7 @@
             this.sampleToolStrip.GripMargin = new Padding(0);
             this.sampleToolStrip.GripStyle = ToolStripGripStyle.Hidden;
             this.sampleToolStrip.ImageScalingSize = new Size(20, 20);
-            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampleChunk });
+            this.sampleToolStrip.Items.AddRange(new ToolStripItem[] { this.btnSampleAdd, this.btnSampleDelete, this.FSBtoSamp, this.btnSampleChunk, this.btnSampleCopy, this.btnSamplePaste });
             this.sampleToolStrip.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.sampleToolStrip.Location = new Point(0, 0);
             this.sampleToolStrip.Name = "sampleToolStrip";
@@ -222,6 +224,29 @@
             this.btnSampleChunk.Size = new Size(23, 24);
             this.btnSampleChunk.ToolTipText = "Chunk/split the selected sample into\r\nspecific beat/time lengths.";
             this.btnSampleChunk.Click += this.btnSampleChunk_Click;
+            // 
+            // btnSampleCopy
+            // 
+            this.btnSampleCopy.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSampleCopy.Enabled = false;
+            this.btnSampleCopy.Image = Properties.Resources.icon_copy2;
+            this.btnSampleCopy.ImageTransparentColor = Color.Magenta;
+            this.btnSampleCopy.Margin = new Padding(0);
+            this.btnSampleCopy.Name = "btnSampleCopy";
+            this.btnSampleCopy.Size = new Size(23, 24);
+            this.btnSampleCopy.ToolTipText = "Copy selected sublevel";
+            this.btnSampleCopy.Click += this.btnSampleCopy_Click;
+            // 
+            // btnSamplePaste
+            // 
+            this.btnSamplePaste.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            this.btnSamplePaste.Enabled = false;
+            this.btnSamplePaste.Image = Properties.Resources.icon_paste2;
+            this.btnSamplePaste.ImageTransparentColor = Color.Magenta;
+            this.btnSamplePaste.Name = "btnSamplePaste";
+            this.btnSamplePaste.Size = new Size(23, 24);
+            this.btnSamplePaste.ToolTipText = "Paste the copied sublevel";
+            this.btnSamplePaste.Click += this.btnSamplePaste_Click;
             // 
             // propertyGridSample
             // 
@@ -329,7 +354,7 @@
             this.dockPanel1.TabIndex = 152;
             this.dockPanel1.ActiveContentChanged += this.dockPanel1_ActiveContentChanged;
             // 
-            // Form_SampleEditor
+            // EditorSample
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -346,7 +371,7 @@
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "Form_SampleEditor";
+            this.Name = "EditorSample";
             this.Text = "Sample Editor";
             this.Shown += this.Form_SampleEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.sampleList).EndInit();
@@ -377,5 +402,7 @@
         private Panel panelMain;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         public ToolStripButton btnSampleChunk;
+        private ToolStripButton btnSampleCopy;
+        private ToolStripButton btnSamplePaste;
     }
 }

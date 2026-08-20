@@ -551,24 +551,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //export pc file to playable file
-            if (samp.wave == null) {
+            if (samp.Wave == null) {
                 samp.CalculateRuntime();
             }
             //CalculateRuntime can fail. In that case, skip drawing the waveform
-            if (samp.wave != null) {
+            if (samp.Wave != null) {
                 int cellwidth = trackZoom.Value;
-                int wavewidth = (int)Math.Floor(cellwidth * samp.beats);
-                samp.wave.ColorBackground = seqref.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.HighlightColor;
+                int wavewidth = (int)Math.Floor(cellwidth * samp.Beats);
+                samp.Wave.ColorBackground = seqref.ReadOnly ? Color.FromArgb(45, 45, 45) : seqref.HighlightColor;
                 //if object has no drawn wave, create it. Wave is null whenever cell sizes change
                 if (seqref.WaveBitmap == null) {
-                    Bitmap WaveToDraw = samp.wave.CreateBitmap(wavewidth, e.RowBounds.Height - 4, -1, -1, true);
+                    Bitmap WaveToDraw = samp.Wave.CreateBitmap(wavewidth, e.RowBounds.Height - 4, -1, -1, true);
                     seqref.WaveBitmap = WaveToDraw;
                 }
                 if (seqref.WaveBitmap != null) {
                     //once the bitmap is created, now we can do some funky stuff
                     foreach (SeqDataPoint sdp in seqref.Cells.Cast<SeqDataPoint>().Where(x => x.Value != null)) {
                         //skip drawing the waveform if its offscreen to the right
-                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) || sdp.beat + samp.beats < columnindex)
+                        if (sdp.beat > columnindex + trackEditor.DisplayedColumnCount(true) || sdp.beat + samp.Beats < columnindex)
                             continue;
                         //math to offset drawing the wave horizontally based on where the active beats are
                         e.Graphics.DrawImage(seqref.WaveBitmap, ((sdp.beat - columnindex) * cellwidth) + offsetportion + 3, e.RowBounds.Top + 3, wavewidth - 6, e.RowBounds.Height - 6);
@@ -577,9 +577,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
             }
 
-            if (samp.message != null) {
-                RowPrePaintError = samp.message;
-                samp.message = null;
+            if (samp.ErrorMessage != null) {
+                RowPrePaintError = samp.ErrorMessage;
+                samp.ErrorMessage = null;
             }
         }
         private void PaintRowLongObject(DataGridViewRowPrePaintEventArgs e)
@@ -1404,9 +1404,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 sampchannel = Bass.BASS_StreamCreateFile($@"{SampToPlay.TempFile}", 0, 0, BASSFlag.BASS_SAMPLE_FLOAT);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)SampToPlay.pitch);
-                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)SampToPlay.pan);
-                Bass.BASS_ChannelSetPosition(sampchannel, (double)SampToPlay.offset / 1000d);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)SampToPlay.Pitch);
+                Bass.BASS_ChannelSetAttribute(sampchannel, BASSAttribute.BASS_ATTRIB_PAN, (float)SampToPlay.Pan);
+                Bass.BASS_ChannelSetPosition(sampchannel, (double)SampToPlay.Offset / 1000d);
                 //play the sample
                 if (sampchannel != 0 && Bass.BASS_ChannelPlay(sampchannel, false)) {
                     SamplePlaying = SampToPlay;
@@ -2206,7 +2206,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SequencerObjects.Any(x => x.Default.Category == category && x.ParamPath == BaseObj.ParamPath))
                 goto beginrando;
 
-            Sequencer_Object seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name);
+            Sequencer_Object seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.ObjName);
             /*Sequencer_Object seq = new(LeafProperties) {
                 ParentLeaf = LeafProperties,
                 ObjName = category == "PLAY SAMPLE" ? TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.obj_name : BaseObj.obj_name,

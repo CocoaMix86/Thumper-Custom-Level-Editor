@@ -189,7 +189,7 @@ namespace Thumper_Custom_Level_Editor
                 return;
             ProjectSamples.Clear();
             //add default empty sample
-            ProjectSamples.Add("", new SampleData { obj_name = "", path = "", volume = 0, pitch = 0, pan = 0, offset = 0, channel_group = "", File = null });
+            ProjectSamples.Add("", new SampleData { ObjName = "", Path = "", Volume = 0, Pitch = 0, Pan = 0, Offset = 0, ChannelGroup = "", File = null });
             string warning = "";
             //iterate over each file
             foreach (FileInfo sampfile in WorkingFolder.GetFiles("*.samp", SearchOption.AllDirectories).Where(x => x.Name != "?!?!default?!?!?!?.samp")) {
@@ -198,7 +198,7 @@ namespace Thumper_Custom_Level_Editor
             }
             if (warning.Length > 2)
                 MessageBox.Show($"Your sample files contain duplicate entries. These can break your level, and it is advised to rename 1 or both of them.\n\n{warning}", "Thumper Custom Level Editor");
-            ProjectSamples = ProjectSamples.OrderBy(w => w.Value.obj_name).ToDictionary();
+            ProjectSamples = ProjectSamples.OrderBy(w => w.Value.ObjName).ToDictionary();
             /*
             if (Properties.Settings.Default.RuntimeAsk) {
                 CheckboxDialog Ask = new();
@@ -242,15 +242,15 @@ namespace Thumper_Custom_Level_Editor
                         continue;
                 }
                 ProjectSamples.TryAdd((string)_samp["obj_name"], new SampleData {
-                    obj_name = ((string)_samp["obj_name"]),
-                    path = _samp["path"],
-                    volume = _samp["volume"],
-                    pitch = _samp["pitch"],
-                    pan = _samp["pan"],
-                    offset = _samp["offset"],
-                    channel_group = _samp["channel_group"],
+                    ObjName = ((string)_samp["obj_name"]),
+                    Path = _samp["path"],
+                    Volume = _samp["volume"],
+                    Pitch = _samp["pitch"],
+                    Pan = _samp["pan"],
+                    Offset = _samp["offset"],
+                    ChannelGroup = _samp["channel_group"],
                     File = SampFile,
-                    time = 0
+                    Runtime = 0
                 });
             }
 

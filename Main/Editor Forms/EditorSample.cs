@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using ICSharpCode.TextEditor.Actions;
+using Newtonsoft.Json.Linq;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 using Thumper_Custom_Level_Editor.Other_Forms;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using Un4seen.Bass;
 using Un4seen.Bass.Misc;
 using WeifenLuo.WinFormsUI.Docking;
-using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
-using System.ComponentModel;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -216,7 +217,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             sampleList.RowCount = 0;
             //repopulate dgv from list
             foreach (SampleData _samp in SampleList) {
-                sampleList.Rows.Add(new object[] { null, _samp.obj_name, (_samp.time != 0 ? $"{_samp.beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fff")}" : "play sample to get time") });
+                sampleList.Rows.Add(new object[] { null, _samp.ObjName, (_samp.Runtime != 0 ? $"{_samp.Beats.ToString("0.##")} beats -- {TimeSpan.FromSeconds(_samp.AlteredRuntime).ToString(@"hh\:mm\:ss\.fff")}" : "play sample to get time") });
             }
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
@@ -334,16 +335,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool customforcesave = false;
             ///outputDevice?.Stop();
 
-            if (todelete.Any(x => x.path.Contains("custom"))) {
+            if (todelete.Any(x => x.Path.Contains("custom"))) {
                 if (MessageBox.Show("At least 1 sample selected is a custom sample and it will be removed from the \"extras\" folder. This deletion cannot be undone.\nContinue?", "Confirm?", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
 
             foreach (SampleData sd in todelete) {
-                if (sd.path.Contains("custom")) {
+                if (sd.Path.Contains("custom")) {
                     customforcesave = true;
                     string _hashedname = null;
-                    byte[] hashbytes = BitConverter.GetBytes(UtilMath.Hash32($"A{sd.path}"));
+                    byte[] hashbytes = BitConverter.GetBytes(UtilMath.Hash32($"A{sd.Path}"));
                     Array.Reverse(hashbytes);
                     foreach (byte b in hashbytes)
                         _hashedname += b.ToString("X").PadLeft(2, '0').ToLower();
@@ -357,12 +358,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 //delete file from temp folder too. If it isn't removed and then a new sample is added with the same name, the old sample will play
                 try {
-                    if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.obj_name}.ogg"))
-                        File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.ogg");
-                    if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav"))
-                        File.Delete($@"{TCLE.AppLocation}\temp\{sd.obj_name}.wav");
+                    if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.ObjName}.ogg"))
+                        File.Delete($@"{TCLE.AppLocation}\temp\{sd.ObjName}.ogg");
+                    if (File.Exists($@"{TCLE.AppLocation}\temp\{sd.ObjName}.wav"))
+                        File.Delete($@"{TCLE.AppLocation}\temp\{sd.ObjName}.wav");
                 } catch (Exception ex) {
-                    MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{SampleList[_in].obj_name}\n\n{ex}");
+                    MessageBox.Show($"Unable to delete {TCLE.AppLocation}\\temp\\\\{SampleList[_in].ObjName}\n\n{ex}");
                 }
                 SampleList.Remove(sd);
             }
@@ -374,17 +375,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //force save as this cannot be undone
             UtilAudio.PlaySound("UIobjectremove");
         }
+
         private void btnSampleAdd_Click(object sender, EventArgs e)
         {
             SampleData newsample = new() {
-                obj_name = "new",
-                volume = 1,
-                pitch = 1,
-                pan = 0,
-                offset = 0,
-                path = "samples/levels/custom/new.wav",
-                channel_group = "sequin.ch",
-                time = 0,
+                ObjName = "new",
+                Volume = 1,
+                Pitch = 1,
+                Pan = 0,
+                Offset = 0,
+                Path = "samples/levels/custom/new.wav",
+                ChannelGroup = "sequin.ch",
+                Runtime = 0,
                 Editor = this
             };
             SampleList.Add(newsample);
@@ -420,6 +422,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (UtilAudio.PlaySampleOneOff(CellToPlay, SampleProperties.sample, out int SampChannel)) {
                 UtilAudio.LastChannel = SampChannel;
+                LastChannel = SampChannel;
                 _updateTimer.Start();
                 sampleList.InvalidateCell(CellToPlay);
             }
@@ -429,6 +432,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        int LastChannel;
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             if (!UtilAudio.PlayingChannels.Any(x => x.Item1 == this.sampleList)) {
@@ -436,13 +440,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             }
             //these 2 show different spectrums visually while the sample plays
-            pictureSpectrum.Image = _vis.CreateSpectrumWave(UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Properties.Settings.Default.ColorWaveformBG, 1, false, false, false);
-            pictureWave.Image = _vis.CreateWaveForm(UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Properties.Settings.Default.ColorWaveformBG, 1, false, true, false);
-        }
-
-        private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
-        {
-            //Bass.BASS_SetVolume(volumeSlider1.Volume);
+            pictureSpectrum.Image = _vis.CreateSpectrumWave(LastChannel/*UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3*/, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Properties.Settings.Default.ColorWaveformBG, 1, false, false, false);
+            pictureWave.Image = _vis.CreateWaveForm(LastChannel/*UtilAudio.PlayingChannels.Last(x => x.Item1 == this.sampleList).Item3*/, pictureSpectrum.Width, pictureSpectrum.Height, Color.Green, Color.Red, Color.Gray, Properties.Settings.Default.ColorWaveformBG, 1, false, true, false);
         }
         #endregion
 
@@ -504,15 +503,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
                 SampleList.Add(new SampleData() {
-                    obj_name = ((string)_samp["obj_name"]),
-                    path = _samp["path"],
-                    volume = _samp["volume"],
-                    pitch = _samp["pitch"],
-                    pan = _samp["pan"],
-                    offset = _samp["offset"],
-                    channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
+                    ObjName = ((string)_samp["obj_name"]),
+                    Path = _samp["path"],
+                    Volume = _samp["volume"],
+                    Pitch = _samp["pitch"],
+                    Pan = _samp["pan"],
+                    Offset = _samp["offset"],
+                    ChannelGroup = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
                     Editor = this,
-                    time = TCLE.ProjectSamples[(string)_samp["obj_name"]].time
+                    Runtime = TCLE.ProjectSamples[(string)_samp["obj_name"]].Runtime
                 });
             }
             SampleList.CollectionChanged += _samplelist_CollectionChanged;
@@ -539,13 +538,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ///load lvls associated with this master
             foreach (dynamic _samp in _load["items"]) {
                 SampleList.Add(new SampleData() {
-                    obj_name = ((string)_samp["obj_name"]),
-                    path = _samp["path"],
-                    volume = _samp["volume"],
-                    pitch = _samp["pitch"],
-                    pan = _samp["pan"],
-                    offset = _samp["offset"],
-                    channel_group = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
+                    ObjName = ((string)_samp["obj_name"]),
+                    Path = _samp["path"],
+                    Volume = _samp["volume"],
+                    Pitch = _samp["pitch"],
+                    Pan = _samp["pan"],
+                    Offset = _samp["offset"],
+                    ChannelGroup = _samp["channel_group"] == "" ? "sequin.ch" : _samp["channel_group"],
                     Editor = this,
                 });
             }
@@ -647,14 +646,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (SampleData _sample in _properties.samplelist) {
                 JObject _samp = new() {
                     { "obj_type", "Sample"},
-                    { "obj_name", _sample.obj_name },
+                    { "obj_name", _sample.ObjName },
                     { "mode", "kSampleOneOff" },
-                    { "path", _sample.path },
-                    { "volume", _sample.volume },
-                    { "pitch", _sample.pitch },
-                    { "pan", _sample.pan },
-                    { "offset", _sample.offset },
-                    { "channel_group", _sample.channel_group }
+                    { "path", _sample.Path },
+                    { "volume", _sample.Volume },
+                    { "pitch", _sample.Pitch },
+                    { "pan", _sample.Pan },
+                    { "offset", _sample.Offset },
+                    { "channel_group", _sample.ChannelGroup }
                 };
                 _items.Add(_samp);
             }
@@ -810,14 +809,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //Add new sample entry to the loaded samp_ file
             SampleData newsample = new() {
-                obj_name = $"{_filename.Replace(" ", "")}.samp",
-                volume = 1,
-                pitch = 1,
-                pan = 0,
-                offset = 0,
-                path = $"samples/levels/custom/{_filename}.wav",
-                channel_group = "sequin.ch",
-                time = -1,
+                ObjName = $"{_filename.Replace(" ", "")}.samp",
+                Volume = 1,
+                Pitch = 1,
+                Pan = 0,
+                Offset = 0,
+                Path = $"samples/levels/custom/{_filename}.wav",
+                ChannelGroup = "sequin.ch",
+                Runtime = -1,
                 Editor = SampleEditor
             };
             newsample.CalculateRuntime();
@@ -828,8 +827,31 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
 
         public override void Cut() { }
-        public override void Copy() { }
-        public override void Paste() { }
+        public override void Copy()
+        {
+            TCLE.ClipboardSamples.Clear();
+            foreach (DataGridViewRow dgvr in sampleList.SelectedRows) {
+                TCLE.ClipboardSamples.Add(SampleList[dgvr.Index].Clone());
+            }
+            foreach (EditorSample tab in TCLE.Documents.Values.OfType<EditorSample>())
+                tab.btnSamplePaste.Enabled = true;
+        }
+        public override void Paste()
+        {
+            foreach (SampleData samp in TCLE.ClipboardSamples) {
+                SampleList.Add(samp.Clone(this));
+            }
+        }
         #endregion
+
+        private void btnSampleCopy_Click(object sender, EventArgs e)
+        {
+            Copy();
+        }
+
+        private void btnSamplePaste_Click(object sender, EventArgs e)
+        {
+            Paste();
+        }
     }
 }

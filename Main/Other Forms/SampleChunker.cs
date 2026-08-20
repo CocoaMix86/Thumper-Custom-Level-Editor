@@ -42,13 +42,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
 
             SampleToChunk = _samp;
             SampleToChunk.CalculateRuntime();
-            SampleToChunk.wave.ColorBackground = Color.Black;
-            SampleToChunk.wave.MarkerLength = 1;
-            SampleToChunk.wave.ColorMarker = Color.LimeGreen;
-            SampleToChunk.wave.DrawMarker = Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Line | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Name | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NameBoxFilled | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NamePositionTop;
-            SampleToChunk.wave.BeatWidth = 2;
-            SampleToChunk.wave.DetectBeats = true;
-            SampleToChunk.wave.DrawBeat = Un4seen.Bass.Misc.WaveForm.BEATDRAWTYPE.Bottom;
+            SampleToChunk.Wave.ColorBackground = Color.Black;
+            SampleToChunk.Wave.MarkerLength = 1;
+            SampleToChunk.Wave.ColorMarker = Color.LimeGreen;
+            SampleToChunk.Wave.DrawMarker = Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Line | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.Name | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NameBoxFilled | Un4seen.Bass.Misc.WaveForm.MARKERDRAWTYPE.NamePositionTop;
+            SampleToChunk.Wave.BeatWidth = 2;
+            SampleToChunk.Wave.DetectBeats = true;
+            SampleToChunk.Wave.DrawBeat = Un4seen.Bass.Misc.WaveForm.BEATDRAWTYPE.Bottom;
 
             //initialize the sample
             SampleHandle = Bass.BASS_SampleLoad(SampleToChunk.TempFile, 0, 0, 1, BASSFlag.BASS_SAMPLE_8BITS);
@@ -57,24 +57,24 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
             SampleBuffer = new byte[SampleInfo.length];
             Bass.BASS_SampleGetData(SampleHandle, SampleBuffer);
             SampleChannel = Bass.BASS_SampleGetChannel(SampleHandle, BASSFlag.BASS_SAMPLE_8BITS);
-            SampleToChunk.wave.SyncPlayback(SampleChannel);
+            SampleToChunk.Wave.SyncPlayback(SampleChannel);
 
-            Endtime = SampleToChunk.alteredtime;
+            Endtime = SampleToChunk.AlteredRuntime;
             DrawWave();
 
-            this.Text = $"Sample Chunker - {SampleToChunk.obj_name}";
+            this.Text = $"Sample Chunker - {SampleToChunk.ObjName}";
             lblMousePos.Text = $"CURRENT BPM = {TCLE.ProjectProperties.BPM} = 1 min";
-            lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.alteredtime).ToString(@"hh\:mm\:ss\.fffff")}";
-            lblBeats.Text = $"Beats: {SampleToChunk.beats.ToString("0.#####")}";
+            lblRuntime.Text = $"Runtime: {TimeSpan.FromSeconds(_samp.AlteredRuntime).ToString(@"hh\:mm\:ss\.fffff")}";
+            lblBeats.Text = $"Beats: {SampleToChunk.Beats.ToString("0.#####")}";
             lblBpm.Text = $"Current BPM = {TCLE.ProjectProperties.BPM} = 1 min";
 
-            numSplitBeat.Maximum = (decimal)SampleToChunk.beats;
-            numSplitSec.Maximum = (decimal)_samp.alteredtime;
-            txtBeatStart.Maximum = (decimal)SampleToChunk.beats;
-            txtBeatEnd.Maximum = (decimal)SampleToChunk.beats;
-            txtBeatChunk.Maximum = (decimal)SampleToChunk.beats;
+            numSplitBeat.Maximum = (decimal)SampleToChunk.Beats;
+            numSplitSec.Maximum = (decimal)_samp.AlteredRuntime;
+            txtBeatStart.Maximum = (decimal)SampleToChunk.Beats;
+            txtBeatEnd.Maximum = (decimal)SampleToChunk.Beats;
+            txtBeatChunk.Maximum = (decimal)SampleToChunk.Beats;
 
-            txtChunkName.Text = SampleToChunk.obj_name.Replace(".samp", "") + "_chunk{X}";
+            txtChunkName.Text = SampleToChunk.ObjName.Replace(".samp", "") + "_chunk{X}";
         }
         private void SampleChunker_ResizeEnd(object sender, EventArgs e)
         {
@@ -120,7 +120,7 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 }
             }
             else {
-                Endtime = SampleToChunk.alteredtime;
+                Endtime = SampleToChunk.AlteredRuntime;
             }
             ParseInputs();
             DrawMarkers();
@@ -236,18 +236,18 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
         private void DrawMarkers()
         {
             //clear stuff to prep for drawing new markers
-            SampleToChunk.wave.ClearAllMarker();
+            SampleToChunk.Wave.ClearAllMarker();
             double markerpos = Starttime;
             int markernum = 0;
             //draw nothing if the chunk size is 0 (effectively making infinity)
             if (ChunkSize != 0) {
                 //there will always be at least 1 split. So "do" first before the while
                 do {
-                    SampleToChunk.wave.AddMarker($"{(btnChunkName.Checked ? $"chunk {markernum}\n" : " ")}{(btnChunkBeats.Checked ? $"{Math.Round(markerpos / BeatTime, 3)}\n" : " ")}{(btnChunkTime.Checked ? TimeSpan.FromSeconds(markerpos).ToString(@"mm\:ss\.fff") : " ")}".Replace("   ", $"{markernum}"), markerpos);
+                    SampleToChunk.Wave.AddMarker($"{(btnChunkName.Checked ? $"chunk {markernum}\n" : " ")}{(btnChunkBeats.Checked ? $"{Math.Round(markerpos / BeatTime, 3)}\n" : " ")}{(btnChunkTime.Checked ? TimeSpan.FromSeconds(markerpos).ToString(@"mm\:ss\.fff") : " ")}".Replace("   ", $"{markernum}"), markerpos);
                     markerpos += ChunkTime;
                     markernum++;
                     if (chkLimit.Checked && markernum > Chunklimit) {
-                        SampleToChunk.wave.AddMarker($"chunk end", markerpos);
+                        SampleToChunk.Wave.AddMarker($"chunk end", markerpos);
                         break;
                     }
                 }
@@ -257,7 +257,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             DrawManualSplits();
             //draw all the markers and the wave
             DrawWave();
-            lblChunkTotal.Text = $"Total Chunks: {SampleToChunk.wave.Wave.marker?.Count}";
+            lblChunkTotal.Text = $"Total Chunks: {SampleToChunk.Wave.Wave.marker?.Count}";
         }
 
         private void DrawManualSplits()
@@ -265,14 +265,14 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             //draw all the manually set splits
             int markernum = 1;
             foreach (DataGridViewRow dgvr in dgvSplits.Rows) {
-                SampleToChunk.wave.AddMarker($"m{markernum}", (double)dgvr.Cells[0].Value);
+                SampleToChunk.Wave.AddMarker($"m{markernum}", (double)dgvr.Cells[0].Value);
                 markernum++;
             }
         }
 
         private void DrawWave()
         {
-            Bitmap WaveToDraw = SampleToChunk.wave.CreateBitmap(pictureWave.Width, pictureWave.Height - 20, -1, -1, true);
+            Bitmap WaveToDraw = SampleToChunk.Wave.CreateBitmap(pictureWave.Width, pictureWave.Height - 20, -1, -1, true);
             pictureWave.Image = WaveToDraw;
         }
         #endregion
@@ -283,7 +283,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
         ///(of this file)
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SampleToChunk.wave.Wave.marker == null || SampleToChunk.wave.Wave.marker.Count == 0) {
+            if (SampleToChunk.Wave.Wave.marker == null || SampleToChunk.Wave.Wave.marker.Count == 0) {
                 MessageBox.Show("No splits have been set yet.", "Nwolc Custom Level Editor");
                 return;
             }
@@ -293,9 +293,9 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
             }
 
             //get markers
-            SampleToChunk.wave.SyncPlayback(SampleChannel);
-            string[] markers = SampleToChunk.wave.GetMarkers();
-            List<long> markerpos = markers.Select(x => SampleToChunk.wave.GetMarker(x)).Order().ToList();
+            SampleToChunk.Wave.SyncPlayback(SampleChannel);
+            string[] markers = SampleToChunk.Wave.GetMarkers();
+            List<long> markerpos = markers.Select(x => SampleToChunk.Wave.GetMarker(x)).Order().ToList();
             //add a 0 marker if it doesn't exist
             if (markerpos.Count == 0)
                 markerpos.Add(0);
@@ -370,14 +370,14 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
 
                 //add new entry to the sample file for the chunk
                 ReturnForm.SampleList.Add(new() {
-                    obj_name = $"{chunkname}.samp",
-                    volume = SampleToChunk.volume,
-                    pitch = SampleToChunk.pitch,
-                    pan = SampleToChunk.pan,
-                    offset = 0,
-                    path = $"samples/levels/custom/{chunkname}.wav",
-                    channel_group = "sequin.ch",
-                    time = -1,
+                    ObjName = $"{chunkname}.samp",
+                    Volume = SampleToChunk.Volume,
+                    Pitch = SampleToChunk.Pitch,
+                    Pan = SampleToChunk.Pan,
+                    Offset = 0,
+                    Path = $"samples/levels/custom/{chunkname}.wav",
+                    ChannelGroup = "sequin.ch",
+                    Runtime = -1,
                     Editor = ReturnForm
                 });
             }
@@ -398,7 +398,7 @@ If ""Start Position"" is checked, the first chunk will start at that position. O
 
         private void pictureWave_MouseMove(object sender, MouseEventArgs e)
         {
-            long bytepos = SampleToChunk.wave.GetBytePositionFromX(e.Location.X, pictureWave.Width, -1, -1);
+            long bytepos = SampleToChunk.Wave.GetBytePositionFromX(e.Location.X, pictureWave.Width, -1, -1);
             double time = Bass.BASS_ChannelBytes2Seconds(SampleHandle, bytepos);
             double beats = time / BeatTime;
             lblMousePos.Text = $"Mouse Pos: {TimeSpan.FromSeconds(time).ToString(@"mm\:ss\.fffff")} ;; Beat {Math.Round(beats, 5)}";

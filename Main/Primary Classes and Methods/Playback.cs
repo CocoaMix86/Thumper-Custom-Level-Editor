@@ -1063,7 +1063,7 @@ namespace Thumper_Custom_Level_Editor
             //get the sampledata to calculate the volume it should be played at
             SampleData SampToPlay = TCLE.ProjectSamples[Seq.ObjName];
             //default to 100 if volume is somehow not set
-            int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+            int velocity = (int?)(SampToPlay?.Volume * 100) ?? 100;
             //then further tune velocity using the master volume setting
             velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
             //clamp
@@ -1087,7 +1087,7 @@ namespace Thumper_Custom_Level_Editor
                 GlobalLoopEvents.Add(new());
                 //get sample data and its volume
                 SampleData SampToPlay = TCLE.ProjectSamples[loop.SampleName];
-                int velocity = (int?)(SampToPlay?.volume * 100) ?? 100;
+                int velocity = (int?)(SampToPlay?.Volume * 100) ?? 100;
                 velocity = (int)(velocity * (((float)(int)Properties.Settings.Default[$"VolKey99"]) / 100f));
                 //clamp
                 velocity = Math.Clamp(velocity, 0, 127);

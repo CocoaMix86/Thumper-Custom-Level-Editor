@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor
                 CategoryNodes["PLAY SAMPLE"].Nodes.Add(sampfile);
 
                 foreach (SampleData? samp in file) {
-                    TreeNode _param = BuildNode(samp.obj_name, "none", $"Pitch: {samp.pitch}\nPan: {samp.pan}\nOffset: {samp.offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
+                    TreeNode _param = BuildNode(samp.ObjName, "none", $"Pitch: {samp.Pitch}\nPan: {samp.Pan}\nOffset: {samp.Offset}\nSelect sample and then hold SPACE to play it", null, "sample.samp;play");
                     sampfile.Nodes.Add(_param);
                     //ObjectNodes.Add(samp.obj_name, _param);
                 }

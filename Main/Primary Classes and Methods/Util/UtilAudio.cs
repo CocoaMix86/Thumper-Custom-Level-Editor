@@ -68,14 +68,14 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static void CalculateSampleRuntimes()
         {
-            foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Value.time == 0).Select(x => x.Value)) {
+            foreach (SampleData samp in TCLE.ProjectSamples.Where(x => x.Value.Runtime == 0).Select(x => x.Value)) {
                 byte[] _bytes;
                 //get the hash of this filename. This will be used to locate the sample's .PC file
-                string _hashedname = UtilMath.HashPCName($"A{samp.path}");
+                string _hashedname = UtilMath.HashPCName($"A{samp.Path}");
                 //check if sample is custom or not. This changes where we load audio from
                 string filetoread;
                 try {
-                    if (samp.path.Contains("custom"))
+                    if (samp.Path.Contains("custom"))
                         filetoread = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc";
                     else
                         filetoread = $@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc";
@@ -99,10 +99,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                         UInt64 freqid = (metadata & 0b11110) >> 1;
                         UInt64 samples = metadata >> 34;
                         int freq = Frequencies[(int)freqid];
-                        samp.time = (double)(samples) / (double)freq;
+                        samp.Runtime = (double)(samples) / (double)freq;
                     }
                 } catch (Exception ex) {
-                    samp.time = -1;
+                    samp.Runtime = -1;
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static string PCtoAudioFile(SampleData _samp)
         {
-            if (_samp == null || _samp.obj_name == ".samp")
+            if (_samp == null || _samp.ObjName == ".samp")
                 return null;
             //check if the gamedir has been set so the method can find the .pc files
             if (Properties.Settings.Default.game_dir == "none") {
@@ -134,16 +134,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
             byte[] _bytes;
             //get the hash of this filename. This will be used to locate the sample's .PC file
-            string _hashedname = UtilMath.HashPCName($"A{_samp.path}");
+            string _hashedname = UtilMath.HashPCName($"A{_samp.Path}");
 
             //check if sample is custom or not. This changes where we load audio from
-            if (_samp.path.Contains("custom")) {
+            if (_samp.Path.Contains("custom")) {
                 //attempt to locate file. But error and return safely if nothing found
                 try {
                     _bytes = File.ReadAllBytes($@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc");
                     _bytes = _bytes.Skip(4).ToArray();
                 } catch {
-                    _samp.message = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.obj_name}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
+                    _samp.ErrorMessage = $@"Unable to locate file {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for sample {_samp.ObjName}. Is the file in the project's ""extras"" folder? You may need to re-import the file.";
                     return null;
                 }
             }
@@ -152,16 +152,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     _bytes = File.ReadAllBytes($@"{Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc");
                     _bytes = _bytes.Skip(4).ToArray();
                 } catch {
-                    _samp.message = $@"Unable to locate file {Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc for sample {_samp.obj_name}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
+                    _samp.ErrorMessage = $@"Unable to locate file {Properties.Settings.Default.game_dir}\cache\{_hashedname}.pc for sample {_samp.ObjName}. This is a non-custom sample supplied by the game. If you need to change your Game Directory, go to the the Help menu. Otherwise you may need to repair your Thumper installation.";
                     return null;
                 }
             }
             if (_bytes.Length == 0) {
-                _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample {_samp.obj_name}. You may need to re-import the file.";
+                _samp.ErrorMessage = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample {_samp.ObjName}. You may need to re-import the file.";
                 return null;
             }
             //check if file has been converted already. Ready the path if true
-            string existingFile = Directory.GetFiles($@"temp\", $"{_samp.obj_name}.*", SearchOption.AllDirectories).FirstOrDefault();
+            string existingFile = Directory.GetFiles($@"temp\", $"{_samp.ObjName}.*", SearchOption.AllDirectories).FirstOrDefault();
             if (existingFile != null) {
                 _samp.TempFile = existingFile;
                 return _samp.TempFile;
@@ -196,7 +196,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     dataBytes = RebuildWav(samples[0], bank.Header.AudioType);
                     fileExtension = "wav";
                 } catch (Exception) {
-                    _samp.message = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
+                    _samp.ErrorMessage = $@"Unable to properly parse {TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc to play sample. You may need to re-import the file.";
                     return null;
                 }
             }
@@ -205,11 +205,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 samples[0].RebuildAsStandardFileFormat(out dataBytes, out fileExtension);
             }
             else {
-                _samp.message = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for {_samp.obj_name} is an unsupported audio type. Not PCM or Vorbis.";
+                _samp.ErrorMessage = $@"{TCLE.WorkingFolder.FullName}\extras\{_hashedname}.pc for {_samp.ObjName} is an unsupported audio type. Not PCM or Vorbis.";
                 return null;
             }
 
-            string finalfilename = $@"temp\{_samp.obj_name}.{fileExtension}";
+            string finalfilename = $@"temp\{_samp.ObjName}.{fileExtension}";
             using (FileStream stream = File.Open(finalfilename, FileMode.Create)) {
                 using (BinaryWriter bw = new(stream)) {
                     bw.Write(dataBytes);
@@ -277,11 +277,11 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 _ = Bass.BASS_ChannelSetSync(SampChannel, BASSSync.BASS_SYNC_END, 0, EndingProc, 0);
                 //pitch shift and pan
                 Bass.BASS_ChannelGetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, ref initialfreq);
-                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.pitch);
-                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.pan);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_FREQ, initialfreq * (float)_samp.Pitch);
+                Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_PAN, (float)_samp.Pan);
                 Bass.BASS_ChannelSetAttribute(SampChannel, BASSAttribute.BASS_ATTRIB_VOL, (float)Properties.Settings.Default.VolKey99 / 100f);
-                Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.offset / 1000d);
-                if (_samp.wave == null) {
+                Bass.BASS_ChannelSetPosition(SampChannel, (double)_samp.Offset / 1000d);
+                if (_samp.Wave == null) {
                     _samp.CalculateRuntime(SampChannel, false);
                     _samp.UpdateRuntime();
                 }
@@ -339,10 +339,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             };
             //math to figure out how long the sample is, in seconds and dimensions
             long len = Bass.BASS_ChannelGetLength(channel, BASSMode.BASS_POS_BYTE);
-            samp.time = Bass.BASS_ChannelBytes2Seconds(channel, len);/* - ((double)samp.offset / 1000d)) / (double)samp.pitch;*/
+            samp.Runtime = Bass.BASS_ChannelBytes2Seconds(channel, len);/* - ((double)samp.offset / 1000d)) / (double)samp.pitch;*/
             //render wave
             wave.RenderStart(false, BASSFlag.BASS_SAMPLE_FLOAT);
-            samp.wave = wave;
+            samp.Wave = wave;
         }
     }
 }
