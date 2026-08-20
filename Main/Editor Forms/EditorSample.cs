@@ -222,6 +222,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //enable certain buttons if there are enough items for them
             btnSampleAdd.Enabled = true;
             btnSampleDelete.Enabled = SampleList.Count > 0;
+            btnSampleCopy.Enabled = SampleList.Count > 0;
         }
 
         private Rectangle dragBoxFromMouseDown;
