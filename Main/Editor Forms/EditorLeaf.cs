@@ -346,6 +346,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return;
             Properties.Settings.Default.ZoomVert = trackZoomVert.Value;
             ZoomHasChanged = true;
+            SuspendDataGrids(true);
             int display = trackEditor.FirstDisplayedScrollingRowIndex;
             foreach (DataGridViewRow dgvr in trackEditor.Rows) {
                 dgvr.Height = trackZoomVert.Value;
@@ -359,6 +360,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 trackEditor.Scroll += trackEditor_Scroll;
             }
+            SuspendDataGrids(false);
         }
 
         private void trackEditor_Resize(object sender, EventArgs e)
