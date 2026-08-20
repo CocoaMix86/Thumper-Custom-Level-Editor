@@ -585,6 +585,11 @@ namespace Thumper_Custom_Level_Editor
         {
             if (GlobalActiveDocument == null)
                 return;
+            //we check this because Ctrl+A should select all text
+            if (GlobalActiveDocument is EditorRawText raw) {
+                raw.SelectAll();
+                return;
+            }
             GlobalActiveDocument.SaveAs(false, null);
             TCLE.SaveTCL();
         }

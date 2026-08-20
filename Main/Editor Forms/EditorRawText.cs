@@ -13,7 +13,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             InitializeComponent();
             ColorFormElements();
-            textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             textEditor.Text = _load;
             textEditor.ClearUndo();
             textEditor.SetSelectedLine(-1);
@@ -31,6 +30,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public override void ColorFormElements()
         {
+            textEditor.Language = WorkingFile.Extension.Equals(".txt", StringComparison.OrdinalIgnoreCase) ? FastColoredTextBoxNS.Text.Language.XML : FastColoredTextBoxNS.Text.Language.JSON;
             this.BackColor = Properties.Settings.Default.ColorRawBG;
             textEditor.BackColor = Properties.Settings.Default.ColorRawBG;
             textEditor.ForeColor = Properties.Settings.Default.ColorRawText;
@@ -107,6 +107,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     continue;
                 document.GetType().GetMethod("Reload").Invoke(document, null);
             }
+        }
+
+        public void SelectAll()
+        {
+            textEditor.SelectAll();
         }
 
         public override void Copy()
