@@ -22,7 +22,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!IsSaved()) {
+            if (!Saved) {
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
@@ -37,7 +37,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Variables
-        public bool EditorIsSaved = true;
 
         #endregion
         #region Event Handlers
@@ -47,11 +46,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         #endregion
         #region Methods
-        public bool IsSaved()
-        {
-            return EditorIsSaved;
-        }
-
         public override object GetProperties()
         {
             return null;
@@ -73,14 +67,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             textEditor.SetSelectedLine(-1);
             textEditor.TextChanged += textEditor_TextChanged;
 
-            EditorIsSaved = true;
+            Saved = true;
             this.Text = this.WorkingFile.Name + " [Raw]";
             this.Invalidate();
         }
 
         public void SaveCheckAndWrite(bool IsSaved, bool playsound = false)
         {
-            EditorIsSaved = IsSaved;
+            Saved = IsSaved;
             if (!IsSaved) {
                 //denote editor tab is not saved
                 this.Text = this.WorkingFile.Name + " [Raw]*";
@@ -128,7 +122,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public override void Paste()
         {
-            throw new NotImplementedException();
+
         }
         #endregion
     }
