@@ -523,7 +523,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 MasterLvls.Remove(mld);
 
             if (MasterLvls.Count > 0) {
-                if (masterLvlList.SelectedRows.Count == 0)
+                if (masterLvlList.SelectedCells.Count == 0)
                     masterLvlList.Rows[^1].Selected = true;
             }
 
