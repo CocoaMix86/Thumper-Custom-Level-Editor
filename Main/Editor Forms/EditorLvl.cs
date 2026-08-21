@@ -768,6 +768,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (LvlLeafData lvd in todelete)
                 LvlLeafs.Remove(lvd);
 
+            if (LvlLeafs.Count > 0) {
+                if (lvlLeafList.SelectedRows.Count == 0)
+                    lvlLeafList.Rows[^1].Selected = true;
+            }
+
             LogUndo = true;
             UtilAudio.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Leaf");

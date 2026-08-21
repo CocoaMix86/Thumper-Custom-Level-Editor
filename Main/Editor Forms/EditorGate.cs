@@ -474,11 +474,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<GateLvlData> todelete = new();
             foreach (DataGridViewRow dgvr in gateLvlList.SelectedRows) {
-                todelete.Add(_gateproperties.GateLvls[dgvr.Index]);
+                todelete.Add(GateLvls[dgvr.Index]);
             }
             LogUndo = false;
             foreach (GateLvlData gld in todelete)
-                _gateproperties.GateLvls.Remove(gld);
+                GateLvls.Remove(gld);
+
+            if (GateLvls.Count > 0) {
+                if (gateLvlList.SelectedRows.Count == 0)
+                    gateLvlList.Rows[^1].Selected = true;
+            }
+
             LogUndo = true;
             SaveCheckAndWrite(false, "Remove Phase");
             UtilAudio.PlaySound("UIobjectremove");

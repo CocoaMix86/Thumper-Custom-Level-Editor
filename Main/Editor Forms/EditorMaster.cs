@@ -522,6 +522,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (MasterLvlData mld in todelete)
                 MasterLvls.Remove(mld);
 
+            if (MasterLvls.Count > 0) {
+                if (masterLvlList.SelectedRows.Count == 0)
+                    masterLvlList.Rows[^1].Selected = true;
+            }
+
             LogUndo = true;
             UtilAudio.PlaySound("UIobjectremove");
             SaveCheckAndWrite(false, "Remove Lvl");

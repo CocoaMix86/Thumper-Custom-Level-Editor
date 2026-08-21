@@ -335,7 +335,7 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += this.timer1_Tick;
             // 
-            // Form_GateEditor
+            // EditorGate
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -349,7 +349,7 @@
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "Form_GateEditor";
+            this.Name = "EditorGate";
             this.Text = "Gate Editor";
             this.Shown += this.Form_GateEditor_Shown;
             ((System.ComponentModel.ISupportInitialize)this.gateLvlList).EndInit();
