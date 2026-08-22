@@ -7,6 +7,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         #region VARIABLES
         private static string[] LaneParams = new[] { "a01", "a02", "ent", "z01", "z02" };
         private static string[] LaneNames = new[] { "visibla01", "visibla02", "visible", "visiblz01", "visiblz02" };
+        private Dictionary<string, ToolStripItem> BasicObjects = new();
         private string BasicEditorSelectedObject = "select";
         private decimal? BasicEditorClickValue = 1m;
         private ToolStripItem BasicEditorSelectedButton;
@@ -134,6 +135,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 dgvMasterView.SelectionChanged += dgvMasterView_SelectionChanged;
                 RegisteredSelectionChanged = true;
             }
+            //middle click to fast select objects
+            if (Control.MouseButtons == MouseButtons.Middle) {
+                //get any object that exists in the sequencer that the basic editor uses
+                List<Sequencer_Object> matches = SequencerObjects.Where(x => BasicObjects.ContainsKey(x.ParamPathBase)).ToList();
+                //then filter to the ones that have a value set at the clicked beat
+                if (matches.FirstOrDefault(x => ((e.RowIndex is 2 && x.ParamPathLane is "none") || (x.ParamPathLane == LaneParams[e.RowIndex])) && x.Cells[e.ColumnIndex + FrozenColumnOffset].Value != null) is Sequencer_Object found) {
+                    //if found, click the button to select it
+                    BasicObjects[found.ParamPathBase].PerformClick();
+                    //the the object is a dropdown item, then we also have the click the parent button to highlight it
+                    if (BasicObjects[found.ParamPathBase] is ToolStripMenuItem drop) {
+                        drop.OwnerItem.PerformClick();
+                        basicEditorDropDownItemClicked(null, new(drop));
+                    }
+                }
+                return;
+            }
             decimal? setvalue = e.Button == MouseButtons.Left ? BasicEditorClickValue : null;
             MasterViewSetValue(e.RowIndex, e.ColumnIndex, setvalue);
         }
@@ -193,7 +210,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     SequencerObjects.Add(_importseq);
                     trackEditor.Rows.Add(_importseq);
                 }
+                string _e = string.Join(',', trackEditor.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
                 SetRowHeaderText(_importseq);
+                vscrollbarTrackEditor_Resize();
                 goto search;
             }
 

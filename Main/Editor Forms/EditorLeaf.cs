@@ -117,6 +117,28 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UpdateInterpTooltip(InterpLastUsed);
             this.dockPanel1.ResumeLayout();
             this.ResumeLayout();
+
+            BasicObjects = new() {
+                { "visible", masterviewbtnLanes },
+                { "turn", masterviewbtnTurns },
+                { "thump_rails", masterviewbtnThump},
+                { "thump_rails_fast_activat", masterviewbtnThumpFast},
+                { "thump_checkpoint", masterviewbtnThumpBonus},
+                { "thump_boss_bonus", masterviewbtnThumpBoss},
+                { "grindable_with_thump", masterviewbtnThumpBar},
+                { "grindable_still", masterviewbtnBar },
+                { "center_multi",masterviewbtnBarCenter},
+                { "left_multi", masterviewbtnBarLeft},
+                { "right_multi", masterviewbtnBarRight},
+                { "grindable_double", masterviewbtnBarDouble },
+                { "grindable_thirds", masterviewbtnBarTriple },
+                { "grindable_quarters",masterviewbtnBarQuad},
+                { "ducker_crak", masterviewbtnRings },
+                { "jump_high_2", masterviewbtnSpike2 },
+                { "jump_high_4", masterviewbtnSpike4 },
+                { "jump_high_6",masterviewbtnSpike6 },
+                { "jump_high", masterviewbtnSpike8 }
+            };
         }
 
         private void Form_LeafEditor_Shown(object sender, EventArgs e)
@@ -278,7 +300,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (EditorIsTuning || EditorIsLoading)
                 return;
-            vscrollbarTrackEditor_Resize();
 
             LeafLanes = SequencerObjects.Where(x => x.ParamPathBase.StartsWith("visibl")).ToDictionary(x => x.FriendlyParam);
 
@@ -291,6 +312,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     seq[2].ToolTipText = "Show/Hide Lanes";
                 TimeSigHighlightSingleObject(seq, LeafProperties.TimeTopBeat);
             }
+
+            //vscrollbarTrackEditor_Resize();
         }
 
         private void trackEditor_Scroll(object sender, ScrollEventArgs e)
