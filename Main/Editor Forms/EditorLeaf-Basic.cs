@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
+﻿using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
