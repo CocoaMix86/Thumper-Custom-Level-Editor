@@ -1599,6 +1599,7 @@
             this.contextmenuView.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuView.Items.AddRange(new ToolStripItem[] { this.toolStripMenuItem11, this.toolStripSeparator19, this.toolstripViewExplorer, this.toolstripViewProperties, this.toolStripSeparator18, this.toolstripViewFullscreen });
             this.contextmenuView.Name = "contextmenuEdit";
+            this.contextmenuView.OwnerItem = this.toolStripMenuItem3;
             this.contextmenuView.RenderMode = ToolStripRenderMode.System;
             this.contextmenuView.Size = new Size(215, 104);
             // 

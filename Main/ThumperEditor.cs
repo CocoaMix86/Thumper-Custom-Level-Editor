@@ -1077,7 +1077,8 @@ namespace Thumper_Custom_Level_Editor
                     if (!ProjectExplorer.Files.ContainsKey($"{_packitem.Tag}.samp")) {
                         FileInfo SampFile = new FileInfo($@"{WorkingFolder}\{_packitem.Tag}.samp");
                         using (StreamWriter sw = SampFile.CreateText()) {
-                            sw.Write(Properties.Resources.ResourceManager.GetObject($"samp_{_packitem.Tag}"));
+                            byte[] bytes = (byte[])Properties.Resources.ResourceManager.GetObject($"samp_{_packitem.Tag}");
+                            sw.BaseStream.Write(bytes, 0, bytes.Length);
                         }
                         UpdateProjectSamplesFromFile(SampFile, true, false, out string _);
                         filesupdates = true;
