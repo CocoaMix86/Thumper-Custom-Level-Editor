@@ -1,0 +1,92 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "700   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "700   INTRO LOAD IN SFX.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "700  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "700 - intro_intro_rumble.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/intro/intro_rumble.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "701 - intro_intro_1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/intro/intro_1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "702 - intro_intro_2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/intro/intro_2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "703 - intro_intro_3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/intro/intro_3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "704 - intro_intro_4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/intro/intro_4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

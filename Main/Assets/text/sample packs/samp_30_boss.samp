@@ -1,0 +1,290 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "552   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "552   BOSS SFX.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "552  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "552 - boss_ending_sequence.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/ending_sequence.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "553 - boss_final_boss_sounds_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/final_boss_sounds_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "554 - boss_geom_boss_divide.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/geom_boss_divide.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "555 - boss_geom_bust.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/geom_bust.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "556 - boss_monster,roar,attack,echoing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/monster,roar,attack,echoing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "557 - boss_piano_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/piano_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "558 - boss_piano_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/piano_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "559 - boss_piano_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/piano_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "560 - boss_piano_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/piano_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "561 - boss_pyramid_boss_hit_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/pyramid_boss_hit_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "562 - boss_tuba_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/tuba_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "563 - boss_tuba_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/tuba_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "564 - boss_tuba_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/tuba_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "565 - boss_tuba_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/tuba_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "566 - boss_wail1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/wail1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "567 - boss_wail2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/wail2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "568 - boss_wail3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/wail3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "569 - boss_wail4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/wail4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "570 - boss_waterphone1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/waterphone1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "571 - boss_waterphone2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/waterphone2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "572 - boss_waterphone3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/waterphone3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "573 - boss_waterphone4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/waterphone4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "574 - boss_waterphone5.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/boss/waterphone5.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

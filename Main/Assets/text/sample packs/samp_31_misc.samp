@@ -1,0 +1,235 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "575   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "575   MISCELLANEOUS.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "575  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "575 - misc_beautiful_beautiful_sensuality.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/beautiful/beautiful_sensuality.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "576 - misc_crakhed_final_roar.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/crakhed_final_roar.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "577 - misc_crakhed_final_roarb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/crakhed_final_roarb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "578 - misc_logo_song_pyramid_horn_theme.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/logo_song/pyramid_horn_theme.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "579 - misc_logo_song_french_horn_opening_line.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/logo_song/french_horn_opening_line.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "580 - misc_logo_song_french_horn_opening_line2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/logo_song/french_horn_opening_line2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "581 - misc_ending_credits_song_9_ultimate_space_beetle_theme.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/ending_credits_song/9_ultimate_space_beetle_theme.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "582 - misc_high_score_song_8_children_of_the_head.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/high_score_song/8_children_of_the_head.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "583 - misc_logo_song_logo_song.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/logo_song/logo_song.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "584 - misc_songs_set1_flutter_drone.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/songs/songs_set1/flutter_drone.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "585 - misc_songs_set1_grind_drone.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/songs/songs_set1/grind_drone.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "586 - misc_songs_set1_scrape_drone.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/songs/songs_set1/scrape_drone.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "587 - misc_gold_accellerate.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/gold_accellerate.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "588 - misc_gold_decelerate.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/gold_decelerate.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "589 - misc_jump.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/jump.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "590 - misc_jump_high.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/jump_high.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "591 - misc_rail_drone_low.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/rail_drone_low.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "592 - misc_tutorial_countdown.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/tutorial_countdown.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

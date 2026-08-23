@@ -19,7 +19,7 @@ namespace Thumper_Custom_Level_Editor.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -1933,71 +1933,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;multitrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_da [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string leaf_multitrack {
-            get {
-                return ResourceManager.GetString("leaf_multitrack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
-        ///  &quot;obj_name&quot;: &quot;multitrack_new.leaf&quot;,
-        ///  &quot;seq_objs&quot;: [
-        ///    {
-        ///      &quot;obj_name&quot;: &quot;multitrack_new.leaf&quot;,
-        ///      &quot;param_path&quot;: &quot;pitch&quot;,
-        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
-        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
-        ///      &quot;data_points&quot;: {},
-        ///      &quot;step&quot;: &quot;True&quot;,
-        ///      &quot;default&quot;: 1.25,
-        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
-        ///      &quot;editor_data&quot;: [
-        ///        &quot;-1710619&quot;,
-        ///        1.0
-        ///      ]
-        ///    },
-        ///    {
-        ///      &quot;obj_name&quot;: &quot;m [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string leaf_multitrack_new {
-            get {
-                return ResourceManager.GetString("leaf_multitrack_new", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
-        ///  &quot;obj_name&quot;: &quot;multitrack_barring.leaf&quot;,
-        ///  &quot;seq_objs&quot;: [
-        ///    {
-        ///      &quot;obj_name&quot;: &quot;multitrack_barring.leaf&quot;,
-        ///      &quot;param_path&quot;: &quot;pitch&quot;,
-        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
-        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
-        ///      &quot;data_points&quot;: {},
-        ///      &quot;step&quot;: &quot;True&quot;,
-        ///      &quot;default&quot;: 1.25,
-        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
-        ///      &quot;editor_data&quot;: [
-        ///        &quot;-1710619&quot;,
-        ///        1.0
-        ///      ]
-        ///    },
-        ///    {
-        ///      &quot;obj_n [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string leaf_multitrack_ring_bar {
-            get {
-                return ResourceManager.GetString("leaf_multitrack_ring_bar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;obj_type&apos;: &apos;SequinLeaf&apos;,
         ///&apos;obj_name&apos;: &apos;pyramid_outro.leaf&apos;,
@@ -2008,43 +1943,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string leaf_pyramid_outro {
             get {
                 return ResourceManager.GetString("leaf_pyramid_outro", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {&quot;obj_type&quot;:&quot;SequinLeaf&quot;,&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;seq_objs&quot;:[{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;pitch&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:1.25,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor_data&quot;:[&quot;-8355585&quot;,1.0]},{&quot;obj_name&quot;:&quot;singletrack.leaf&quot;,&quot;param_path&quot;:&quot;roll&quot;,&quot;trait_type&quot;:&quot;kTraitFloat&quot;,&quot;data_points&quot;:{},&quot;step&quot;:&quot;True&quot;,&quot;default&quot;:0.0,&quot;footer&quot;:[4,1,2,1,2,&quot;kIntensityScale&quot;,&quot;kIntensityScale&quot;,1,0,1,1,1,1,1,1,0,0,0],&quot;editor [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string leaf_singletrack {
-            get {
-                return ResourceManager.GetString("leaf_singletrack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///  &quot;obj_type&quot;: &quot;SequinLeaf&quot;,
-        ///  &quot;obj_name&quot;: &quot;singletrack_new.leaf&quot;,
-        ///  &quot;seq_objs&quot;: [
-        ///    {
-        ///      &quot;obj_name&quot;: &quot;singletrack_new.leaf&quot;,
-        ///      &quot;param_path&quot;: &quot;pitch&quot;,
-        ///      &quot;trait_type&quot;: &quot;kTraitFloat&quot;,
-        ///      &quot;default_interp&quot;: &quot;kTraitInterpLinear&quot;,
-        ///      &quot;data_points&quot;: {},
-        ///      &quot;step&quot;: &quot;True&quot;,
-        ///      &quot;default&quot;: 1.25,
-        ///      &quot;footer&quot;: &quot;4,1,2,1,2,&apos;kIntensityScale&apos;,&apos;kIntensityScale&apos;,1,0,1,1,1,1,1,1,0,0,0&quot;,
-        ///      &quot;editor_data&quot;: [
-        ///        &quot;-1710619&quot;,
-        ///        1.0
-        ///      ]
-        ///    },
-        ///    {
-        ///      &quot;obj_name&quot;:  [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string leaf_singletrack_new {
-            get {
-                return ResourceManager.GetString("leaf_singletrack_new", resourceCulture);
             }
         }
         
@@ -3916,6 +3814,406 @@ namespace Thumper_Custom_Level_Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_01_level_1_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_01_level_1_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_02_level_1_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_02_level_1_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_03_level_2_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_03_level_2_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_04_level_2_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_04_level_2_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_05_level_3_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_05_level_3_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_06_level_3_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_06_level_3_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_07_level_4_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_07_level_4_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_08_level_4_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_08_level_4_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_09_level_5_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_09_level_5_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_10_level_5_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_10_level_5_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_11_level_6_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_11_level_6_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_12_level_6_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_12_level_6_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_13_level_7_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_13_level_7_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_14_level_7_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_14_level_7_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_15_level_8_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_15_level_8_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_16_level_8_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_16_level_8_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_17_level_9_drums {
+            get {
+                object obj = ResourceManager.GetObject("samp_17_level_9_drums", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_18_level_9_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_18_level_9_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_19_rests {
+            get {
+                object obj = ResourceManager.GetObject("samp_19_rests", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_20_global_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_20_global_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_21_dissonant {
+            get {
+                object obj = ResourceManager.GetObject("samp_21_dissonant", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_22_rises {
+            get {
+                object obj = ResourceManager.GetObject("samp_22_rises", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_23_dirty_cello_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_23_dirty_cello_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_24_orchestral {
+            get {
+                object obj = ResourceManager.GetObject("samp_24_orchestral", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_25_french_horn_chords {
+            get {
+                object obj = ResourceManager.GetObject("samp_25_french_horn_chords", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_26_french_horn_notes {
+            get {
+                object obj = ResourceManager.GetObject("samp_26_french_horn_notes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_27_french_horn_swell {
+            get {
+                object obj = ResourceManager.GetObject("samp_27_french_horn_swell", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_28_french_horn_swell_short {
+            get {
+                object obj = ResourceManager.GetObject("samp_28_french_horn_swell_short", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_29_horror_drones {
+            get {
+                object obj = ResourceManager.GetObject("samp_29_horror_drones", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_30_boss {
+            get {
+                object obj = ResourceManager.GetObject("samp_30_boss", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_31_misc {
+            get {
+                object obj = ResourceManager.GetObject("samp_31_misc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_32_dissonant_blast {
+            get {
+                object obj = ResourceManager.GetObject("samp_32_dissonant_blast", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_33_gongs {
+            get {
+                object obj = ResourceManager.GetObject("samp_33_gongs", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_34_hit {
+            get {
+                object obj = ResourceManager.GetObject("samp_34_hit", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_35_decorators {
+            get {
+                object obj = ResourceManager.GetObject("samp_35_decorators", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_36_intro {
+            get {
+                object obj = ResourceManager.GetObject("samp_36_intro", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_37_metallic {
+            get {
+                object obj = ResourceManager.GetObject("samp_37_metallic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_38_swish {
+            get {
+                object obj = ResourceManager.GetObject("samp_38_swish", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_39_swooshes {
+            get {
+                object obj = ResourceManager.GetObject("samp_39_swooshes", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] samp_40_interface {
+            get {
+                object obj = ResourceManager.GetObject("samp_40_interface", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///&apos;items&apos;: [
         ///{
@@ -3943,444 +4241,6 @@ namespace Thumper_Custom_Level_Editor.Properties {
         internal static string samp_default {
             get {
                 return ResourceManager.GetString("samp_default", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_additive_pad.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/dissonant/dissonant_additive_pad.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;dissonant-dissonant_affecting_preciousness.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/dissonant/dissonant_affecting_preciousness.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_dissonant {
-            get {
-                return ResourceManager.GetString("samp_dissonant", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;global_drones-beneath_ice_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/Levels/global_drones/beneath_ice_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos; [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_globaldrones {
-            get {
-                return ResourceManager.GetString("samp_globaldrones", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/drums/level1/basic1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic4.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/drums/level1/basic4.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;drums-level1-basic4_cymbal.samp&apos;,
-        ///&apos;mode&apos; [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level1_320bpm {
-            get {
-                return ResourceManager.GetString("samp_level1_320bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_2-drums-crakhed_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_2/drums/crakhed_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level2_340bpm {
-            get {
-                return ResourceManager.GetString("samp_level2_340bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_3-drones-boss_drone_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_3/drones/boss_drone_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level3_360bpm {
-            get {
-                return ResourceManager.GetString("samp_level3_360bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_4-drums-crakhed_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_4/drums/crakhed_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;S [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level4_380bpm {
-            get {
-                return ResourceManager.GetString("samp_level4_380bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_5-drones-boss_drone_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_5/drones/boss_drone_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level5_400bpm {
-            get {
-                return ResourceManager.GetString("samp_level5_400bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_6-drones-level_drone_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_6/drones/level_drone_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_6-drums-crakhed_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_6/drums/crakhed_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level6_420bpm {
-            get {
-                return ResourceManager.GetString("samp_level6_420bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_7-drones-turn_anticipation_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_7/drones/turn_anticipation_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0 [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level7_440bpm {
-            get {
-                return ResourceManager.GetString("samp_level7_440bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_8-drones-boss_drone_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_8/drones/boss_drone_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level8_460bpm {
-            get {
-                return ResourceManager.GetString("samp_level8_460bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern1.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern1.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;level_9-drones-boss_drone_pattern2.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/levels/level_9/drones/boss_drone_pattern2.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        /// [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_level9_480bpm {
-            get {
-                return ResourceManager.GetString("samp_level9_480bpm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;misc-beautiful-beautiful_sensuality.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/beautiful/beautiful_sensuality.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;misc-boss-ending_sequence.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/boss/ending_sequence.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;mis [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_misc {
-            get {
-                return ResourceManager.GetString("samp_misc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {
-        ///&apos;items&apos;: [
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level8a.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8a.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level8b.samp&apos;,
-        ///&apos;mode&apos;: &apos;kSampleOneOff&apos;,
-        ///&apos;path&apos;: &apos;samples/Levels/rests/rests_level8b.wav&apos;,
-        ///&apos;volume&apos;: 1.0,
-        ///&apos;pitch&apos;: 1.0,
-        ///&apos;pan&apos;: 0.0,
-        ///&apos;offset&apos;: 0.0,
-        ///&apos;channel_group&apos;: &apos;&apos;
-        ///},
-        ///{
-        ///&apos;obj_type&apos;: &apos;Sample&apos;,
-        ///&apos;obj_name&apos;: &apos;rests-rests_level9a.sam [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string samp_rests {
-            get {
-                return ResourceManager.GetString("samp_rests", resourceCulture);
             }
         }
         

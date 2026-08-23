@@ -1,0 +1,92 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "610   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "610   GONGS.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "610  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "610 - gongs_crash1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/gongs_gongs_crash1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "611 - gongs_crash2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/gongs_gongs_crash2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "612 - gongs_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/gongs_gongs_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "613 - gongs_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/gongs_gongs_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "614 - gongs_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/gongs_gongs_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "732   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "732   SWOOSHES SFX.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "732  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "732 - swooshes_anvil_and_formula.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/anvil_and_formula.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "733 - swooshes_buzz_tight_yeah.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/buzz_tight_yeah.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "734 - swooshes_d_wing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/d_wing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "735 - swooshes_death_arrow.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/death_arrow.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "736 - swooshes_final_brass.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/final_brass.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "737 - swooshes_formula_frenzy.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/formula_frenzy.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "738 - swooshes_hello_earth.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/hello_earth.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "739 - swooshes_ice_rocket.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/ice_rocket.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "740 - swooshes_messerschmitt.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/messerschmitt.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "741 - swooshes_mouth_shut.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/mouth_shut.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "742 - swooshes_piano.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/piano.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "743 - swooshes_racing_deep_backfire.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/racing_deep_backfire.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "744 - swooshes_solid_smack.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/solid_smack.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "745 - swooshes_sonic_wall.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/sonic_wall.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "746 - swooshes_tango_down.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/swooshes/tango_down.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

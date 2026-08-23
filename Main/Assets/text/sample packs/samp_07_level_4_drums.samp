@@ -1,0 +1,301 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "114   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "114   LEVEL 4 DRUMS   380 BPM.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "114  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "114 - [ 8 ]  lvl_4_drums_rhythm_short_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_short_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "115 - [ 8 ]  lvl_4_drums_rhythm_short_pattern1_short.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_short_pattern1_short.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "116 - [ 8 ]  lvl_4_drums_rhythm_short_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_short_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "117 - [ 8 ]  lvl_4_drums_rhythm_short_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_short_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "118 - [ 8 ]  lvl_4_drums_rhythm_short_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_short_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "119 - [16]  lvl_4_drums_rhythm_sparse_pattern5.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_sparse_pattern5.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "120 - [32]  lvl_4_drums_rhythm_long_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_long_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "121 - [ 8 ]  lvl_4_drums_rhythm_jagged_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_jagged_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "122 - [ 8 ]  lvl_4_drums_rhythm_jagged_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_jagged_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "123 - [ 8 ]  lvl_4_drums_rhythm_jagged_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_jagged_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "124 - [ 8 ]  lvl_4_drums_rhythm_jagged_trance.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_jagged_trance.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "125 - [ 8 ]  lvl_4_drums_seven_rock_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/drums_seven_rock_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "126 - [ 8 ]  lvl_4_drums_seven_rock_battery1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/level_4_drums_seven_rock_battery1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "127 - [16]  lvl_4_drums_timpani1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/timpani1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "128 - [16]  lvl_4_drums_timpani1_taico1_cropped.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/level_4_timpani1_taico1_cropped.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "129 - [32]  lvl_4_drums_special1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/special1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "130 - [ 8 ]  lvl_4_drums_rhythm_boss_pattern1_sparse.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_boss_pattern1_sparse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "131 - [ 8 ]  lvl_4_drums_rhythm_boss_pattern1_sparse2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_boss_pattern1_sparse2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "132 - [ 8 ]  lvl_4_drums_rhythm_boss_pattern1_sparse3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_boss_pattern1_sparse3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "133 - [ 8 ]  lvl_4_drums_rhythm_boss_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/rhythm_boss_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "134 - [ 8 ]  lvl_4_drums_crakhed_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/crakhed_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "135 - [ 8 ]  lvl_4_drums_crakhed_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/crakhed_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "136 - [ 8 ]  lvl_4_drums_crakhed_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/crakhed_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "137 - [ 8 ]  lvl_4_drums_crakhed_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_4/drums/crakhed_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

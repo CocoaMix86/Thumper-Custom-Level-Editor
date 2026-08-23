@@ -1,0 +1,169 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "408   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "408   DISSONANT.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "408  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "408 - dissonant_additive_pad.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_additive_pad.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "409 - dissonant_affecting_preciousness.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_affecting_preciousness.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "410 - dissonant_chainsaw_massacre.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_chainsaw_massacre.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "411 - dissonant_delerius_violin.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_delerius_violin.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "412 - dissonant_once_apon_a_time.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_once_apon_a_time.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "413 - dissonant_sensuality.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/dissonant_sensuality.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "414 - dissonant_violins_dissonant1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/violins/dissonant1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "415 - dissonant_violins_dissonant2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/violins/dissonant2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "416 - dissonant_violins_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/diss_violins_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "417 - dissonant_violins_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/diss_violins_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "418 - dissonant_violins_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/diss_violins_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "419 - dissonant_violins_pattern5.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/dissonant/diss_violins_pattern5.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

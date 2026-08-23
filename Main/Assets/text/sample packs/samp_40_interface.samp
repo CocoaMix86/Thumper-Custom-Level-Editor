@@ -1,0 +1,202 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "747   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "747   INTERFACE SFX.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "747  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "747 - interface_back_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/back_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "748 - interface_crak_collect4_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/crak_collect4_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "749 - interface_pause1_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pause1_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "750 - interface_pulse.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "751 - interface_pulse2_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse2_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "752 - interface_remap_confirmation.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/remap_confirmation.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "753 - interface_remap_removal.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/remap_removal.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "754 - interface_remap_restricted.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/remap_restricted.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "755 - interface_score_countup.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/score_countup.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "756 - interface_slide_vertical_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/slide_vertical_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "757 - interface_slide1_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/slide1_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "758 - interface_thump_miss_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/thump_miss_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "759 - interface_title_screen_reverb.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/title_screen_reverb.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "760 - interface_WHOOSH_Speeding.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/WHOOSH_Speeding.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "761 - interface_WHOOSH-SOFT_Chimera_Breeze.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/WHOOSH-SOFT_Chimera_Breeze.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

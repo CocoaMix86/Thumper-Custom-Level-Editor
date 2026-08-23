@@ -114,6 +114,7 @@ namespace Thumper_Custom_Level_Editor
             ColorFormElements(TCLE.Instance);
             JumpListUpdate();
             SetKeyBinds();
+            InitializeSamplePacks();
             SeqObjTreeBuilder.Initialize();
             //import last used custom colors
             colorDialog1.CustomColors = Properties.Settings.Default.colordialogcustomcolors?.ToArray() ?? new[] { 1 };
@@ -169,6 +170,68 @@ namespace Thumper_Custom_Level_Editor
             }
             jml.Apply();
             Properties.Settings.Default.Save();
+        }
+
+        public static Dictionary<string, string> SamplePacks = new() {
+            {"Level 1 drones","02_level_1_drones"},
+{"Level 1 drums","01_level_1_drums"},
+{"Level 2 drones","04_level_2_drones"},
+{"Level 2 drums","03_level_2_drums"},
+{"Level 3 drones","06_level_3_drones"},
+{"Level 3 drums","05_level_3_drums"},
+{"Level 4 drones","08_level_4_drones"},
+{"Level 4 drums","07_level_4_drums"},
+{"Level 5 drones","10_level_5_drones"},
+{"Level 5 drums","09_level_5_drums"},
+{"Level 6 drones","12_level_6_drones"},
+{"Level 6 drums","11_level_6_drums"},
+{"Level 7 drones","14_level_7_drones"},
+{"Level 7 drums","13_level_7_drums"},
+{"Level 8 drones","16_level_8_drones"},
+{"Level 8 drums","15_level_8_drums"},
+{"Level 9 drones","18_level_9_drones"},
+{"Level 9 drums","17_level_9_drums"},
+{"Boss","30_boss"},
+{"Decorators","35_decorators"},
+{"Dirty cello drones","23_dirty_cello_drones"},
+{"Dissonant","21_dissonant"},
+{"Dissonant blast","32_dissonant_blast"},
+{"French horn chords","25_french_horn_chords"},
+{"French horn notes","26_french_horn_notes"},
+{"French horn swell","27_french_horn_swell"},
+{"French horn swell short","28_french_horn_swell_short"},
+{"Global drones","20_global_drones"},
+{"Gongs","33_gongs"},
+{"Hit","34_hit"},
+{"Horror drones","29_horror_drones"},
+{"Interface","40_interface"},
+{"Intro","36_intro"},
+{"Metallic","37_metallic"},
+{"Misc","31_misc"},
+{"Orchestral","24_orchestral"},
+{"Rests","19_rests"},
+{"Rises","22_rises"},
+{"Swish","38_swish"},
+{"Swooshes","39_swooshes"}
+        };
+        private static Color MenuBackColor = Color.FromArgb(46, 46, 46);
+        private void InitializeSamplePacks()
+        {
+            contextmenuSampPacks.Items.Clear();
+
+            foreach (var samppack in SamplePacks) {
+                ToolStripMenuItem _packitem = new() {
+                    BackColor = MenuBackColor,
+                    ForeColor = Color.White,
+                    Image = Properties.Resources.editor_sample,
+                    Text = samppack.Key,
+                    Tag = samppack.Value,
+                    CheckOnClick = true,
+                    Checked = false
+                };
+
+                contextmenuSampPacks.Items.Add(_packitem);
+            }
         }
 
         private void TCLE_FormClosing(object sender, FormClosingEventArgs e)
@@ -1007,6 +1070,30 @@ namespace Thumper_Custom_Level_Editor
                 return;
             }
 
+            bool filesupdates = false;
+
+            foreach (ToolStripMenuItem _packitem in contextmenuSampPacks.Items) {
+                if (_packitem.Checked) {
+                    if (!ProjectExplorer.Files.ContainsKey($"{_packitem.Tag}.samp")) {
+                        FileInfo SampFile = new FileInfo($@"{WorkingFolder}\{_packitem.Tag}.samp");
+                        using (StreamWriter sw = SampFile.CreateText()) {
+                            sw.Write(Properties.Resources.ResourceManager.GetObject($"samp_{_packitem.Tag}"));
+                        }
+                        UpdateProjectSamplesFromFile(SampFile, true, false, out string _);
+                        filesupdates = true;
+                    }
+                }
+                else {
+                    if (ProjectExplorer.Files.TryGetValue($"{_packitem.Tag}.samp", out FileInfo _samp)) {
+                        TCLE.CloseFile(_samp);
+                        TCLE.RemoveProjectSamples(_samp);
+                        filesupdates = true;
+                        _samp.Delete();
+                    }
+                }
+            }
+
+            /*
             Tuple<FileInfo, bool, string>[] samplePacks = {
                 new(new FileInfo($@"{WorkingFolder}\level1_320bpm.samp"), toolstripSampLevel1.Checked, Properties.Resources.samp_level1_320bpm),
                 new(new FileInfo($@"{WorkingFolder}\level2_340bpm.samp"), toolstripSampLevel2.Checked, Properties.Resources.samp_level2_340bpm),
@@ -1023,7 +1110,6 @@ namespace Thumper_Custom_Level_Editor
                 new(new FileInfo($@"{WorkingFolder}\misc.samp"), toolstripSampLevelMisc.Checked, Properties.Resources.samp_misc)
             };
 
-            bool filesupdates = false;
             FileInfo[] files = WorkingFolder.GetFiles("*", SearchOption.AllDirectories);
             ///create samp_ files if any boxes are checked
             foreach (Tuple<FileInfo, bool, string> pack in samplePacks) {
@@ -1044,7 +1130,7 @@ namespace Thumper_Custom_Level_Editor
                         pack.Item1.Delete();
                     }
                 }
-            }
+            }*/
 
             if (filesupdates) {
                 UpdateEditorsWithSamples();
@@ -1054,7 +1140,7 @@ namespace Thumper_Custom_Level_Editor
 
         private void contextmenuSampPacks_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            string[] files = Directory.GetFiles(WorkingFolder.FullName, "*", SearchOption.AllDirectories).Select(x => Path.GetFileName(x)).ToArray();
+            /*string[] files = Directory.GetFiles(WorkingFolder.FullName, "*", SearchOption.AllDirectories).Select(x => Path.GetFileName(x)).ToArray();
             toolstripSampLevel1.Checked = files.Contains($"level1_320bpm.samp");
             toolstripSampLevel2.Checked = files.Contains($"level2_340bpm.samp");
             toolstripSampLevel3.Checked = files.Contains($"level3_360bpm.samp");
@@ -1068,6 +1154,14 @@ namespace Thumper_Custom_Level_Editor
             toolstripSampLevelDrones.Checked = files.Contains($"globaldrones.samp");
             toolstripSampLevelRests.Checked = files.Contains($"rests.samp");
             toolstripSampLevelMisc.Checked = files.Contains($"misc.samp");
+            */
+            foreach (ToolStripMenuItem _packitem in contextmenuSampPacks.Items) {
+                if (ProjectExplorer.Files.ContainsKey($"{_packitem.Tag}.samp")) {
+                    _packitem.Checked = true;
+                }
+                else
+                    _packitem.Checked = false;
+            }
         }
 
         private void toolstripProjectPreload_Click(object sender, EventArgs e)

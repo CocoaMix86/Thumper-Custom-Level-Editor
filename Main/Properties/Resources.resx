@@ -673,23 +673,8 @@
   <data name="JetBrainsMono_Medium" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\fonts\JetBrainsMono-Medium.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="leaf_multitrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\leaf_multitrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="leaf_multitrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\leaf_multitrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="leaf_multitrack_ring_bar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\leaf_multitrack_ring&amp;bar.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
   <data name="leaf_pyramid_outro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\text\leaf_pyramid_outro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="leaf_singletrack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\leaf_singletrack.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="leaf_singletrack_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\leaf_singletrack_new.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="mousebeeble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\images\misc\mousebeeble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1237,47 +1222,128 @@
   <data name="projectopen_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\images\main menu\projectopen-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="samp_01_level_1_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_01_level_1_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_02_level_1_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_02_level_1_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_03_level_2_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_03_level_2_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_04_level_2_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_04_level_2_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_05_level_3_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_05_level_3_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_06_level_3_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_06_level_3_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_07_level_4_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_07_level_4_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_08_level_4_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_08_level_4_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_09_level_5_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_09_level_5_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_10_level_5_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_10_level_5_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_11_level_6_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_11_level_6_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_12_level_6_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_12_level_6_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_13_level_7_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_13_level_7_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_14_level_7_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_14_level_7_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_15_level_8_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_15_level_8_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_16_level_8_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_16_level_8_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_17_level_9_drums" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_17_level_9_drums.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_18_level_9_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_18_level_9_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_19_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_19_rests.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_20_global_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_20_global_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_21_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_21_dissonant.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_22_rises" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_22_rises.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_23_dirty_cello_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_23_dirty_cello_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_24_orchestral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_24_orchestral.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_25_french_horn_chords" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_25_french_horn_chords.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_26_french_horn_notes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_26_french_horn_notes.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_27_french_horn_swell" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_27_french_horn_swell.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_28_french_horn_swell_short" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_28_french_horn_swell_short.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_29_horror_drones" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_29_horror_drones.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_30_boss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_30_boss.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_31_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_31_misc.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_32_dissonant_blast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_32_dissonant_blast.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_33_gongs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_33_gongs.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_34_hit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_34_hit.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_35_decorators" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_35_decorators.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_36_intro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_36_intro.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_37_metallic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_37_metallic.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_38_swish" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_38_swish.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_39_swooshes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_39_swooshes.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="samp_40_interface" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Assets\text\sample packs\samp_40_interface.samp;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="samp_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
-  </data>
-  <data name="samp_dissonant" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_dissonant.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_globaldrones" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_globaldrones.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level1_320bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level1_320bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level2_340bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level2_340bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level3_360bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level3_360bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level4_380bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level4_380bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level5_400bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level5_400bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level6_420bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level6_420bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level7_440bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level7_440bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level8_460bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level8_460bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_level9_480bpm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_level9_480bpm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_misc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_misc.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="samp_rests" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Assets\text\samp_rests.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+    <value>..\Assets\text\sample packs\samp_default.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="SPIKES" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Assets\images\icons_basiceditor\SPIKES.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

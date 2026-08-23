@@ -1,0 +1,202 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "717   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "717   SWISH SFX.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "717  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "717 - swish_reverse riser 03, nice.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/swish/reverse riser 03, nice.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "718 - swish_boss_tunnel_swoosh.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/boss_tunnel_swoosh.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "719 - swish_stutter woosh.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/swish/stutter woosh.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "720 - swish_tunnel1_black_dust.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel1_black_dust.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "721 - swish_tunnel2_whoosh_breeze.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel2_whoosh_breeze.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "722 - swish_tunnel3_Dwing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel3_Dwing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "723 - swish_tunnel4_formula_frenzy.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel4_formula_frenzy.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "724 - swish_tunnel5_lexicorn.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel5_lexicorn.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "725 - swish_tunnel6_messershmitt.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel6_messershmitt.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "726 - swish_tunnel7_pressure_on.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel7_pressure_on.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "727 - swish_tunnel8_spaceship_pass.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel8_spaceship_pass.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "728 - swish_tunnel9_speedwheel.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/tunnel9_speedwheel.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "729 - swish_WHOOSH_Breeze.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/WHOOSH_Breeze.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "730 - swish_WHOOSH_Dragons_Breath.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Swish/WHOOSH_Dragons_Breath.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "731 - swish_white_noise_straight1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/swish/white_noise_straight1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

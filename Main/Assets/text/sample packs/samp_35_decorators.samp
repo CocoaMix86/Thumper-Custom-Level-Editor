@@ -1,0 +1,202 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "685   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "685   DECORATORS.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "685  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "685 - decorators_ambient_chrome_debris.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators_ambient/chrome_debris.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "686 - decorators_ambient_boss_hit_smoke.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators_ambient/boss_hit_smoke.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "687 - decorators_ambient_smoke.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators_ambient/smoke.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "688 - decorators_boss_shield_block.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/boss_shield_block.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "689 - decorators_checkpoint_thrust.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/checkpoint_thrust.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "690 - decorators_ducker_ring_approach.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/ducker_ring_approach.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "691 - decorators_high_jump.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/high_jump.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "692 - decorators_jump_high_thump.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/jump_high_thump.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "693 - decorators_jumper_approach.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/jumper_approach.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "694 - decorators_jumper_approach_boss.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/jumper_approach_boss.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "695 - decorators_millipede_cry.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/millipede_cry.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "696 - decorators_millipede_half_landing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/millipede_half_landing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "697 - decorators_millipede_landing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/millipede_landing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "698 - decorators_millipede_quarter_landing.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/millipede_quarter_landing.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "699 - decorators_turn_auto_imact.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/decorators/turn_auto_imact.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

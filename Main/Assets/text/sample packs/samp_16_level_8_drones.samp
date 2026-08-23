@@ -1,0 +1,224 @@
+﻿{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "308   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "308   LEVEL 8 DRONES   460 BPM.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "308  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "308 - [100]  lvl_8_drones_orchestra_clusters_patt1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/orchestra_clusters_patt1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "309 - [100]  lvl_8_drones_orchestra_clusters_patt2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/orchestra_clusters_patt2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "310 - [100]  lvl_8_drones_orchestra_clusters_patt3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/orchestra_clusters_patt3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "311 - [ 4 ]  lvl_8_drones_pulse_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/pulse_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "312 - [ 4 ]  lvl_8_drones_pulse_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/pulse_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "313 - [ 4 ]  lvl_8_drones_turn_anticipation_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/turn_anticipation_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "314 - [ 4 ]  lvl_8_drones_turn_anticipation_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/turn_anticipation_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "315 - [ 4 ]  lvl_8_drones_turn_anticipation_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/turn_anticipation_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "316 - [ 4 ]  lvl_8_drones_turn_anticipation_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/turn_anticipation_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "317 - [16]  lvl_8_drones_scream1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/rises/scream1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "318 - [32]  lvl_8_drones_boss_drone_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/boss_drone_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "319 - [32]  lvl_8_drones_boss_drone_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/boss_drone_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "320 - [32]  lvl_8_drones_boss_drone_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/boss_drone_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "321 - [40]  lvl_8_drones_crakhed_drone_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/crakhed_drone_pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "322 - [40]  lvl_8_drones_crakhed_drone_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/crakhed_drone_pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "323 - [40]  lvl_8_drones_crakhed_drone_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/crakhed_drone_pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "324 - [40]  lvl_8_drones_crakhed_drone_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/level_8/drones/crakhed_drone_pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

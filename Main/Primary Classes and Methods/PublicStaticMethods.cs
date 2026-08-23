@@ -12,7 +12,7 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variable
         //Static
-        public static string VersionNumber = "3.0.0-a69";
+        public static string VersionNumber = "3.0.0-a70";
         public static decimal[] LeafQuickValues = new[] { 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m };
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
         public static Dictionary<string, DefaultSequencerObject> LeafObjects = new();
@@ -161,9 +161,9 @@ namespace Thumper_Custom_Level_Editor
             if (!UtilPaths.DirSettings.Exists)
                 UtilPaths.DirSettings.Create();
             //write out default templates and settings files
-            File.WriteAllText($@"{UtilPaths.Templates}\singletrack.leaf", Properties.Resources.leaf_singletrack);
-            File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
-            File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
+            //File.WriteAllText($@"{UtilPaths.Templates}\singletrack.leaf", Properties.Resources.leaf_singletrack);
+            //File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
+            //File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
             File.WriteAllText($@"{UtilPaths.Settings}\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
             File.WriteAllText($@"{UtilPaths.Settings}\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
         }

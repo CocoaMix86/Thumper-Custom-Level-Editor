@@ -1,0 +1,213 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "367   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "367   RESTS   320 - 480 BPM.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "367  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "367 - rests_rest_level2a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level2a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "368 - rests_rest_level2b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level2b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "369 - rests_rest_level3a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level3a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "370 - rests_rest_level3b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level3b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "371 - rests_rest_level4a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level4a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "372 - rests_rest_level4b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level4b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "373 - rests_rest_level5a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level5a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "374 - rests_rest_level5b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level5b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "375 - rests_rest_level6a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level6a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "376 - rests_rest_level6b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level6b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "377 - rests_rest_level7a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level7a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "378 - rests_rest_level7b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rest_level7b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "379 - rests_rests_level8a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rests_level8a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "380 - rests_rests_level8b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rests_level8b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "381 - rests_rests_level9a.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rests_level9a.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "382 - rests_rests_level9b.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/Levels/rests/rests_level9b.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

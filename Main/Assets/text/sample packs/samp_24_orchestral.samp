@@ -1,0 +1,169 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "467   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "467   ORCHESTRAL.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "467  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "467 - orchestral_igf_orchestral_drone1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/igf_orchestral/igf_orchestral_drone1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "468 - orchestral_tutorial_set_tutorial1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "469 - orchestral_tutorial_set_tutorial3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "470 - orchestral_tutorial_set_tutorial_gate2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial_gate2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "471 - orchestral_tutorial_set_tutorial_gate3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial_gate3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "472 - orchestral_tutorial_set_tutorial_gate4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial_gate4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "473 - orchestral_tutorial_set_tutorial_gate5.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/orchestral_tutorial_set/tutorial_gate5.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "474 - orchestral_tutorial_rhythm_set_tut_rhythm_bass_pulse.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/tutorial_rhythm_set/tut_rhythm_bass_pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "475 - orchestral_tutorial_rhythm_set_tut_rhythm_strings.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/tutorial_rhythm_set/tut_rhythm_strings.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "476 - orchestral_tutorial_rhythm_set_tut_rhythm_trumpet_pulse.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/tutorial_rhythm_set/tut_rhythm_trumpet_pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "477 - orchestral_thump_tutorials_preturn_strings.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/custom/orchestral_thump_tutorials_preturn_strings.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "478 - orchestral_thump_tutorials_preturn_strings_double.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/orchestral/thump_tutorials/preturn_strings_double.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}

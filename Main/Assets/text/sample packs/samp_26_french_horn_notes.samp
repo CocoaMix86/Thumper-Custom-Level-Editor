@@ -1,0 +1,224 @@
+{
+  "items": [
+    {
+      "obj_type": "Sample",
+      "obj_name": "496   .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "496   FRENCH HORN NOTES.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "496  .samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/interface/pulse.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "496 - french_horn_notes_pattern1.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern1.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "497 - french_horn_notes_pattern2.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern2.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "498 - french_horn_notes_pattern3.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern3.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "499 - french_horn_notes_pattern4.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern4.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "500 - french_horn_notes_pattern5.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern5.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "501 - french_horn_notes_pattern6.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern6.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "502 - french_horn_notes_pattern7.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern7.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "503 - french_horn_notes_pattern8.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern8.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "504 - french_horn_notes_pattern9.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern9.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "505 - french_horn_notes_pattern10.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern10.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "506 - french_horn_notes_pattern11.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern11.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "507 - french_horn_notes_pattern12.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern12.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "508 - french_horn_notes_pattern13.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern13.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "509 - french_horn_notes_pattern14.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern14.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "510 - french_horn_notes_pattern15.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern15.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "511 - french_horn_notes_pattern16.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern16.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    },
+    {
+      "obj_type": "Sample",
+      "obj_name": "512 - french_horn_notes_pattern17.samp",
+      "mode": "kSampleOneOff",
+      "path": "samples/levels/global_drones/french_horn_notes/pattern17.wav",
+      "volume": 1.0,
+      "pitch": 1.0,
+      "pan": 0.0,
+      "offset": 0,
+      "channel_group": "sequin.ch"
+    }
+  ]
+}
