@@ -129,10 +129,10 @@ namespace Thumper_Custom_Level_Editor
             try {
                 if (Properties.Settings.Default.version != TCLE.VersionNumber) {
                     Properties.Settings.Default.version = TCLE.VersionNumber;
-                    if (UtilPaths.DirTemp.Exists)
-                        UtilPaths.DirTemp.Delete(true);
-                    if (UtilPaths.DirSettings.Exists)
-                        UtilPaths.DirSettings.Delete(true);
+                    //if (UtilPaths.DirTemp.Exists)
+                    //    UtilPaths.DirTemp.Delete(true);
+                    //if (UtilPaths.DirSettings.Exists)
+                    //    UtilPaths.DirSettings.Delete(true);
                 }
                 //Create directory for leaf templates and other default files
                 if (!UtilPaths.DirTemplates.Exists) {
@@ -143,6 +143,8 @@ namespace Thumper_Custom_Level_Editor
                 }
                 if (!UtilPaths.DirSettings.Exists) {
                     UtilPaths.DirSettings.Create();
+                    File.WriteAllText($@"{UtilPaths.Settings}\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
+                    File.WriteAllText($@"{UtilPaths.Settings}\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
                 }
                 //load fonts
                 if (!File.Exists($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf"))
@@ -158,14 +160,10 @@ namespace Thumper_Custom_Level_Editor
         {
             if (!UtilPaths.DirTemplates.Exists)
                 UtilPaths.DirTemplates.Create();
-            if (!UtilPaths.DirSettings.Exists)
-                UtilPaths.DirSettings.Create();
             //write out default templates and settings files
             //File.WriteAllText($@"{UtilPaths.Templates}\singletrack.leaf", Properties.Resources.leaf_singletrack);
             //File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack.leaf", Properties.Resources.leaf_multitrack);
             //File.WriteAllText($@"{UtilPaths.Templates}\leaf_multitrack_ring&bar.leaf", Properties.Resources.leaf_multitrack_ring_bar);
-            File.WriteAllText($@"{UtilPaths.Settings}\track_objects_v4.txt", Properties.Resources.trackobjects_v4);
-            File.WriteAllText($@"{UtilPaths.Settings}\objects_defaultcolors_v3.txt", Properties.Resources.objects_defaultcolors);
         }
 
         public static void ResizeHeaders(DataGridView dgv)
