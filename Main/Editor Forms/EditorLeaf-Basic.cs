@@ -193,7 +193,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     DefaultValue = objmatch.DefaultValue,
                     Step = objmatch.Step,
                     HighlightColor = objmatch.DefaultColor,
-                    highlight_value = 0,
+                    highlight_value = 0m,
                     EnabledInEditor = true
                 };
                 if (_importseq.ObjName == "leafname")

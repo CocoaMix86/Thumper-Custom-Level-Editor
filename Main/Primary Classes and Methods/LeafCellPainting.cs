@@ -93,7 +93,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             }
             //paint the whole cell with the highlighting color
             else if (seq.ObjName != "_TuningLayerX" && seq.Default.Category != "PLAY SAMPLE") {
-                if (e.Value != null && Math.Abs((decimal)e.Value) >= (decimal)seq.highlight_value)
+                if (e.Value != null && Math.Abs((decimal)e.Value) >= seq.highlight_value)
                     e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
         }

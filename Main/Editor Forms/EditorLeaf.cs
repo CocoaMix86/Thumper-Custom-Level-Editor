@@ -1366,7 +1366,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 DefaultValue = ObjToAdd.DefaultValue,
                 Step = ObjToAdd.Step,
                 HighlightColor = ObjToAdd.DefaultColor,
-                highlight_value = 0,
+                highlight_value = 0m,
                 EnabledInEditor = true
             };
             if (seq.ObjName == "leafname")
@@ -2476,7 +2476,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     //Footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     ParamPath = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
-                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0,
+                    highlight_value = (int?)seq_obj["editor_data"]?[1] ?? 0m,
                     EnabledInEditor = ((string)seq_obj["enabled"] ?? "True").Equals("true", StringComparison.OrdinalIgnoreCase),
                     IsDefault = false
                 };
@@ -2615,7 +2615,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 DefaultValue = 0,
                 Step = false,
                 HighlightColor = Color.FromArgb(40, 40, 40),
-                highlight_value = 0,
+                highlight_value = 0m,
                 EnabledInEditor = true
             };
 
@@ -2642,7 +2642,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             seq.DefaultValue = 0;
             seq.Step = false;
             seq.HighlightColor = Color.FromArgb(40, 40, 40);
-            seq.highlight_value = 0;
+            seq.highlight_value = 0m;
             seq.EnabledInEditor = true;
 
             int tuninglayers = SequencerObjects.Count(x => x.ObjName == "_TuningLayerX");

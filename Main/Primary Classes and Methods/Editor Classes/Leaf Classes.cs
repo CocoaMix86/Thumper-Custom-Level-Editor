@@ -91,8 +91,8 @@ namespace Thumper_Custom_Level_Editor
                 return value;
             return trait switch
             {
-                DefaultSequencerObject.Trait.Bool => (decimal)value is 0 or 1 ? value : 1,
-                DefaultSequencerObject.Trait.Action => (decimal)value is 0 or 1 ? value : 1,
+                DefaultSequencerObject.Trait.Bool => (decimal)value is 0 or 1 ? value : 1m,
+                DefaultSequencerObject.Trait.Action => (decimal)value is 0 or 1 ? value : 1m,
                 DefaultSequencerObject.Trait.Int => Math.Truncate((decimal)value),
                 DefaultSequencerObject.Trait.Color => Math.Truncate((decimal)value),
                 _ => value
@@ -203,7 +203,7 @@ namespace Thumper_Custom_Level_Editor
             }
         }
         public SolidBrush HighlightBrush = new(Color.Purple);
-        public float highlight_value { get; set; }
+        public decimal highlight_value { get; set; }
 
         private bool _enabledineditor = true;
         public bool EnabledInEditor
@@ -595,7 +595,7 @@ namespace Thumper_Custom_Level_Editor
         [CategoryAttribute("Sequencer Object")]
         [DisplayName("Highlight Value")]
         [Description("When this value is met (+/-), color the cell the Highlight Color. Set to 0 to highlight all.")]
-        public float highlightvalue
+        public decimal highlightvalue
         {
             get => selectedobj.highlight_value;
             set {
