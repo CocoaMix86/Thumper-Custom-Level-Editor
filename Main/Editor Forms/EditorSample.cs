@@ -147,6 +147,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SampleProperties.sample = SampleList[e.RowIndex];
             propertyGridSample.ExpandAllGridItems();
             propertyGridSample.Refresh();
+            sampleList.Focus();
 
             if (e.ColumnIndex == 0) {
                 AudioPlayback(sampleList[e.ColumnIndex, e.RowIndex]);
@@ -853,6 +854,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnSamplePaste_Click(object sender, EventArgs e)
         {
             Paste();
+        }
+
+        private void sampleList_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ') {
+                sampleList_CellClick(null, new(0, sampleList.SelectedRows[^1].Index));
+            }
+        }
+
+        private void sampleList_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyCode == Keys.Space ) {
+            //    sampleList_CellClick(null, new(0, sampleList.SelectedRows[^1].Index));
+            //}
         }
     }
 }

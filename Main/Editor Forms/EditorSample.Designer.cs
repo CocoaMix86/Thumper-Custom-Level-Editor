@@ -52,6 +52,7 @@
             this.pictureSpectrum = new PictureBox();
             this.pictureWave = new PictureBox();
             this.panelMain = new Panel();
+            this.label2 = new Label();
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             ((System.ComponentModel.ISupportInitialize)this.sampleList).BeginInit();
             this.sampleToolStrip.SuspendLayout();
@@ -128,6 +129,8 @@
             this.sampleList.DragDrop += this.sampleList_DragDrop;
             this.sampleList.DragEnter += this.sampleList_DragEnter;
             this.sampleList.DragOver += this.sampleList_DragOver;
+            this.sampleList.KeyDown += this.sampleList_KeyDown;
+            this.sampleList.KeyPress += this.sampleList_KeyPress;
             this.sampleList.MouseDown += this.sampleList_MouseDown;
             this.sampleList.MouseMove += this.sampleList_MouseMove;
             // 
@@ -335,6 +338,7 @@
             // panelMain
             // 
             this.panelMain.BackColor = Color.Black;
+            this.panelMain.Controls.Add(this.label2);
             this.panelMain.Controls.Add(this.lblLoading);
             this.panelMain.Controls.Add(this.sampleList);
             this.panelMain.Controls.Add(this.label1);
@@ -343,6 +347,19 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new Size(324, 409);
             this.panelMain.TabIndex = 137;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = Color.FromArgb(10, 10, 10);
+            this.label2.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            this.label2.ForeColor = Color.Gray;
+            this.label2.Location = new Point(136, 0);
+            this.label2.Margin = new Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new Size(208, 13);
+            this.label2.TabIndex = 154;
+            this.label2.Text = "Press [SPACE] to play the selected sample";
             // 
             // dockPanel1
             // 
@@ -404,5 +421,6 @@
         public ToolStripButton btnSampleChunk;
         private ToolStripButton btnSampleCopy;
         private ToolStripButton btnSamplePaste;
+        private Label label2;
     }
 }
