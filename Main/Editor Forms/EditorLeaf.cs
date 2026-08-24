@@ -1604,6 +1604,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
+                if (dgvc.RowIndex == -1 || dgvc.ColumnIndex == -1)
+                    continue;
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
             SuspendDataGrids(false);
