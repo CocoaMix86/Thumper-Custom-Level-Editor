@@ -679,6 +679,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         }
         public void LvlLoop_CollectionChanged(object sender, ListChangedEventArgs e)
         {
+            if (SimpleLoad)
+                return;
             btnLvlLoopDelete.Enabled = LvlProperties.LvlLoops.Count > 0;
 
             if (EditorIsLoading)
