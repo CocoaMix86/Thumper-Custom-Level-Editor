@@ -353,7 +353,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private static SolidBrush ClearColor = new(Color.Black);
         private static SolidBrush BrushWhite = new(Color.White);
-        private static Pen PenBlack = new(Color.Black, 1);
+        private static Pen PenBlack = new(Color.Black, 2);
         private static Pen PenGreen = new(Color.Green, 4);
         private static Pen PenViolet = new(new SolidBrush(Color.Violet), 3);
         private void masterLvlList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -492,12 +492,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             UpdateSublevelNumbers();
         }
 
-        private void UpdateSublevelNumbers()
+        public void UpdateSublevelNumbers()
         {
             foreach (MasterLvlData lvl in MasterProperties.MasterLvls) {
                 lvl.SublevelNumber = "";
             }
 
+        }
+
+        private void UpdateUI()
+        {
+            if (SimpleLoad)
+                return;
+            btnMasterLvlDelete.Enabled = MasterLvls.Count > 0;
+            btnMasterLvlUp.Enabled = MasterLvls.Count > 1;
+            btnMasterLvlDown.Enabled = MasterLvls.Count > 1;
+            btnMasterLvlCopy.Enabled = MasterLvls.Count > 0;
         }
 
         private void propertyGridMaster_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -677,10 +687,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 checkpointlvl = string.IsNullOrEmpty((string)_load["checkpoint_lvl_name"]) ? "<none>" : (string)_load["checkpoint_lvl_name"]
             };
             this.Text = $"{this.WorkingFile.Name}";
-            //calc intro lvl
-            //MasterProperties.introlevelbeats += UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(MasterProperties.introlvl, out FileInfo intro) ? intro : null);
-            //calc checkpoint lvl
-            //MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo chk) ? chk : null);
 
             ///Clear form elements so new data can load
             MasterLvls.Clear();
@@ -698,8 +704,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next(0, 10000000)
                 });
             }
-            UpdateSublevelNumbers();
             RecalculateRuntime();
+            UpdateSublevelNumbers();
             MasterLvls.ListChanged += masterlvls_CollectionChanged;
 
             masterLvlList.AutoGenerateColumns = false;
@@ -710,6 +716,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterLvlList.Columns[5].DataPropertyName = "PlayPlus";
             masterLvlList.Columns[6].DataPropertyName = "Isolate";
             masterLvlList.DataSource = new BindingSource(MasterLvls, null);
+            UpdateUI();
         }
 
         public void LoadEnd(dynamic savestate)

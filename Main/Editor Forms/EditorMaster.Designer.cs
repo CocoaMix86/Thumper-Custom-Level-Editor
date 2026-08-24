@@ -29,10 +29,11 @@
         {
             this.components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorMaster));
             this.toolTip1 = new ToolTip(this.components);
             this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
@@ -126,15 +127,15 @@
             this.masterLvlList.ColumnHeadersHeight = 20;
             this.masterLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.masterLvlList.Columns.AddRange(new DataGridViewColumn[] { this.SublevelNum, this.masterfiletype, this.masterLvl, this.Runtime, this.masterCheckpoint, this.masterPlayPlus, this.masterIsolate });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = Color.Green;
-            dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(150, 150, 255);
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = Color.Green;
+            dataGridViewCellStyle4.Font = new Font("Arial", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(150, 150, 255);
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            this.masterLvlList.DefaultCellStyle = dataGridViewCellStyle4;
             this.masterLvlList.Dock = DockStyle.Fill;
             this.masterLvlList.EnableHeadersVisualStyles = false;
             this.masterLvlList.GridColor = Color.Black;
@@ -143,22 +144,22 @@
             this.masterLvlList.Name = "masterLvlList";
             this.masterLvlList.ReadOnly = true;
             this.masterLvlList.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(90, 90, 90);
-            dataGridViewCellStyle4.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(90, 90, 90);
+            dataGridViewCellStyle5.Font = new Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            this.masterLvlList.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.masterLvlList.RowHeadersVisible = false;
             this.masterLvlList.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle5.BackColor = Color.Green;
-            dataGridViewCellStyle5.Font = new Font("Relay-Medium", 8.249999F);
-            dataGridViewCellStyle5.ForeColor = Color.White;
-            this.masterLvlList.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.BackColor = Color.Green;
+            dataGridViewCellStyle6.Font = new Font("Relay-Medium", 8.249999F);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            this.masterLvlList.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.masterLvlList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
-            this.masterLvlList.RowTemplate.DefaultCellStyle.Font = new Font("Relay-Medium", 8.249999F);
+            this.masterLvlList.RowTemplate.DefaultCellStyle.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             this.masterLvlList.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             this.masterLvlList.RowTemplate.Height = 20;
             this.masterLvlList.RowTemplate.Resizable = DataGridViewTriState.False;
@@ -182,12 +183,14 @@
             // 
             // SublevelNum
             // 
-            this.SublevelNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.SublevelNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Font = new Font("Arial Narrow", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.SublevelNum.DefaultCellStyle = dataGridViewCellStyle2;
             this.SublevelNum.HeaderText = "";
             this.SublevelNum.Name = "SublevelNum";
             this.SublevelNum.ReadOnly = true;
             this.SublevelNum.Resizable = DataGridViewTriState.False;
-            this.SublevelNum.Width = 18;
+            this.SublevelNum.Width = 50;
             // 
             // masterfiletype
             // 
@@ -209,9 +212,9 @@
             // Runtime
             // 
             this.Runtime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.Runtime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.Runtime.DefaultCellStyle = dataGridViewCellStyle3;
             this.Runtime.FillWeight = 50F;
             this.Runtime.HeaderText = "Runtime";
             this.Runtime.Name = "Runtime";
@@ -360,7 +363,7 @@
             this.timer1.Interval = 2000;
             this.timer1.Tick += this.timer1_Tick;
             // 
-            // Form_MasterEditor
+            // EditorMaster
             // 
             this.AutoScaleDimensions = new SizeF(7F, 15F);
             this.AutoScaleMode = AutoScaleMode.Font;
@@ -375,7 +378,7 @@
             this.Icon = (Icon)resources.GetObject("$this.Icon");
             this.KeyPreview = true;
             this.Margin = new Padding(4, 3, 4, 3);
-            this.Name = "Form_MasterEditor";
+            this.Name = "EditorMaster";
             this.Text = "Master Editor";
             this.Shown += this.Form_MasterEditor_Shown;
             this.panelMain.ResumeLayout(false);
@@ -391,13 +394,6 @@
         public PropertyGrid propertyGridMaster;
         private Panel panelMain;
         private DataGridView masterLvlList;
-        private DataGridViewTextBoxColumn SublevelNum;
-        private DataGridViewImageColumn masterfiletype;
-        private DataGridViewTextBoxColumn masterLvl;
-        private DataGridViewTextBoxColumn Runtime;
-        private DataGridViewTextBoxColumn masterCheckpoint;
-        private DataGridViewTextBoxColumn masterPlayPlus;
-        private DataGridViewTextBoxColumn masterIsolate;
         private ToolStrip masterToolStrip;
         private ToolStripButton btnMasterLvlAdd;
         private ToolStripButton btnMasterLvlDelete;
@@ -407,5 +403,12 @@
         private ToolStripButton btnMasterLvlPaste;
         private System.Windows.Forms.Timer timer1;
         private ToolStripButton btnMasterPlayback;
+        private DataGridViewTextBoxColumn SublevelNum;
+        private DataGridViewImageColumn masterfiletype;
+        private DataGridViewTextBoxColumn masterLvl;
+        private DataGridViewTextBoxColumn Runtime;
+        private DataGridViewTextBoxColumn masterCheckpoint;
+        private DataGridViewTextBoxColumn masterPlayPlus;
+        private DataGridViewTextBoxColumn masterIsolate;
     }
 }

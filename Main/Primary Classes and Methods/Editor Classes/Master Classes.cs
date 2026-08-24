@@ -71,12 +71,17 @@ namespace Thumper_Custom_Level_Editor
             get => _sublevelnum;
             set {
                 string levelnum;
+                int index = Parent.MasterLvls.IndexOf(this);
+                int checkpoints = Parent.MasterLvls.Take(index).Count(x => x.Checkpoint);
                 if (this.gatesectiontype is "SECTION_BOSS_CRAKHED" or "SECTION_BOSS_CRAKHED_FINAL")
                     levelnum = "Ω";
                 else if (this.gatesectiontype is "SECTION_BOSS_PYRAMID")
                     levelnum = "∞";
+                //check if previous sublevel had a checkpoint. If not, these are merged.
+                else if (index != 0 && !Parent.MasterLvls[index - 1].Checkpoint)
+                    levelnum = Parent.MasterLvls[index - 1].SublevelNumber;
                 else
-                    levelnum = $"{Parent.MasterLvls.IndexOf(this) + 1}";
+                    levelnum = $"{checkpoints + 1}";// $"{Parent.MasterLvls.IndexOf(this) + 1}";
                 _sublevelnum = levelnum;
                 //SetField(ref _sublevelnum, levelnum);
             }

@@ -729,7 +729,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
-                TCLE.FindEditorRunMethod(typeof(EditorMaster), "RecalculateRuntime");
+                //update section type on loaded masters to then update the displayed sublevel numbers
+                foreach (EditorMaster tab in TCLE.Documents.Values.OfType<EditorMaster>()) {
+                    foreach (MasterLvlData mld in tab.MasterLvls.Where(x => x.name == this.WorkingFile.Name)) {
+                        mld.gatesectiontype = gatesectiontypes.First(x => x.Value == GateProperties.sectiontype).Key;
+                    }
+                    tab.RecalculateRuntime();
+                    tab.UpdateSublevelNumbers();
+                }
                 if (playsound) UtilAudio.PlaySound("UIsave");
 
                 if (!SimpleLoad) {

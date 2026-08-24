@@ -108,7 +108,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
             //this section handles gate
             else {
-                int gatebeats = CalculateGateRuntimeFromFile(_masterlvl.name);
+                int gatebeats = CalculateGateRuntimeFromFile(_masterlvl);
                 if (gatebeats == -1)
                     return -1;
                 else
@@ -120,22 +120,23 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             return _beatcount;
         }
 
-        public static int CalculateGateRuntimeFromFile(string gatename)
+        public static int CalculateGateRuntimeFromFile(MasterLvlData _masterlvl)
         {
             dynamic _load;
             int _beatcount = 0;
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            if (!ProjectExplorer.TryGetFile(gatename, out FileInfo gate))
+            if (!ProjectExplorer.TryGetFile(_masterlvl.name, out FileInfo gate))
                 return -1;
-            if (TCLE.CachedRuntimes.TryGetValue(gate.Name, out int runtime))
+            if (!string.IsNullOrEmpty(_masterlvl.gatesectiontype) && TCLE.CachedRuntimes.TryGetValue(gate.Name, out int runtime))
                 return runtime;
 
             _load = UtilFile.LoadFileLock(gate);
             //if gate not found, _load is null. Return -1 to denote this
             if (_load == null)
                 return -1;
+            _masterlvl.gatesectiontype = (string)_load["section_type"];
             //check if random is enabled on this gate
             israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
             //loop through each lvl in gate
