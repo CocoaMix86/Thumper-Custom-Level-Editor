@@ -1601,7 +1601,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     x += 4;
                 }
             }
-
+            string _e = string.Join(',', trackEditor.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
                 if (dgvc.RowIndex == -1 || dgvc.ColumnIndex == -1)
@@ -1716,7 +1716,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     x += 4;
                 }
             }
-
+            string _e = string.Join(',', trackEditor.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
                 if (dgvc.RowIndex == -1 || dgvc.ColumnIndex == -1)
