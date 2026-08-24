@@ -2684,7 +2684,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //restore selection
             foreach (Tuple<int, int> _cell in _selection) {
-                if (_cell.Item1 >= trackEditor.RowCount || _cell.Item2 >= trackEditor.ColumnCount)
+                if (_cell.Item1 >= trackEditor.ColumnCount || _cell.Item2 >= trackEditor.RowCount)
                     continue;
                 trackEditor[_cell.Item1, _cell.Item2].Selected = true;
             }
@@ -3048,7 +3048,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public override void Paste()
         {
-            if (textEditor.Focused)
+            if (textEditor.Focused || TCLE.ClipboardDataPoints == null || TCLE.ClipboardDataPoints.Count == 0)
                 return;
 
             EditorIsPasting = true;
