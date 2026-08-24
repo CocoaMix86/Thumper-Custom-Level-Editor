@@ -1717,6 +1717,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             trackEditor.ClearSelection();
             foreach (DataGridViewCell dgvc in selectedcells) {
+                if (dgvc.RowIndex == -1 || dgvc.ColumnIndex == -1)
+                    continue;
                 trackEditor[dgvc.ColumnIndex, dgvc.RowIndex].Selected = true;
             }
             SuspendDataGrids(false);
@@ -1800,6 +1802,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.Rows.Insert(_index, clone);
                 _index++;
             }
+            string _e = string.Join(',', trackEditor.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             if (resize)
                 TCLE.ResizeHeaders(trackEditor);
 
@@ -2681,6 +2684,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //restore selection
             foreach (Tuple<int, int> _cell in _selection) {
+                if (_cell.Item1 >= trackEditor.RowCount || _cell.Item2 >= trackEditor.ColumnCount)
+                    continue;
                 trackEditor[_cell.Item1, _cell.Item2].Selected = true;
             }
 
@@ -2982,9 +2987,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else {
                 seq.ReadOnly = false;
-                foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
-                    dgvc.Style = null;
-                }
+                TimeSigHighlightSingleObject(seq, seq.ParentLeaf.TimeTopBeat);
+                //foreach (DataGridViewCell dgvc in seq.Cells.Cast<DataGridViewCell>().Where(x => x.ColumnIndex >= FrozenColumnOffset)) {
+                //   dgvc.Style = null;
+                //}
             }
         }
 
