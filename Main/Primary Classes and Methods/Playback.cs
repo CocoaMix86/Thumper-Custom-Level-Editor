@@ -268,7 +268,7 @@ namespace Thumper_Custom_Level_Editor
 
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
-                    if (Seq.Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action && Seq.DefaultValue is 1) {
+                    if (Seq.Default?.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action && Seq.DefaultValue is 1) {
                         for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
                             if (Seq[beat]?.Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
@@ -440,7 +440,7 @@ namespace Thumper_Custom_Level_Editor
 
                     //If the default for bools and actions is 1, every beat will trigger, so don't check for null.
                     //instead, check for any beat set to 0.
-                    if (Seq.Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action && Seq.DefaultValue is 1) {
+                    if (Seq.Default?.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action && Seq.DefaultValue is 1) {
                         for (int beat = EditorLeaf.FrozenColumnOffset; beat <= LeafLastBeat + EditorLeaf.FrozenColumnOffset; beat++) {
                             if (Seq[beat]?.Value == null || (Seq[beat].Value != null && (decimal)Seq[beat].Value != 0)) {
                                 AddNoteToChannel(Seq[beat].beat, Key, Call, CallKey, Seq.MuteInEditor);
@@ -863,7 +863,7 @@ namespace Thumper_Custom_Level_Editor
             List<BASS_MIDI_EVENT> EventsToAdd16 = new();
             foreach (SimpleSequencerObject Seq in Leaf.SequencerObjects.Where(x => x.ObjName == "sentry.spn"))
             {
-                int length = Seq.Default.TrailLength;
+                int length = Seq.Default?.TrailLength ?? 1;
                 /*switch (Seq.FriendlyParam) {
                     case "single lane [55 beats]":
                         length = 55;

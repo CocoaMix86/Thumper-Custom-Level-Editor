@@ -528,9 +528,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             RowPrePaintError = null;
 
-            if (SequencerObjects[e.RowIndex].Default.Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+            if (SequencerObjects[e.RowIndex].Default?.Category == "PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 PaintRowWaveforms(e);
-            else if (SequencerObjects[e.RowIndex].Default.TrailLength > 1)
+            else if (SequencerObjects[e.RowIndex].Default?.TrailLength > 1)
                 PaintRowLongObject(e);
             else if (SequencerObjects[e.RowIndex].ObjName == "_TuningLayerX")
                 PaintRowTuningLayer(e);
@@ -613,7 +613,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             ///if (!SequencerObjects[e.RowIndex].data_points.Any(x => x.value != null))
             ///    goto paintheader;
-            int LengthOfObject = SequencerObjects[e.RowIndex].Default.TrailLength;
+            int LengthOfObject = SequencerObjects[e.RowIndex].Default?.TrailLength ?? 0;
             if (LengthOfObject == 0) {
                 return;
             }
@@ -1024,7 +1024,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 trackEditor.InvalidateCell(trackEditor[e.ColumnIndex, e.RowIndex]);
             }
             else if (e.Button == MouseButtons.Left && btnLeafAutoPlace.Checked) {
-                if (SequencerObjects[e.RowIndex].Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action)
+                if (SequencerObjects[e.RowIndex].Default?.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action)
                     if (dgv[e.ColumnIndex, e.RowIndex].Value == null) {
                         dgv[e.ColumnIndex, e.RowIndex].Value = 1m;
                     }
@@ -1321,7 +1321,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].Default.TraitType is DefaultSequencerObject.Trait.Float;
+            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].Default?.TraitType is DefaultSequencerObject.Trait.Float;
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1371,8 +1371,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             };
             if (seq.ObjName == "leafname")
                 seq.ObjName = this.WorkingFile.Name;
-            if (seq.Default.Category == "LOOP TRACK VOLUME") {
-                int audiochannels = SequencerObjects.Count(x => x.Default.Category == "LOOP TRACK VOLUME");
+            if (seq.Default?.Category == "LOOP TRACK VOLUME") {
+                int audiochannels = SequencerObjects.Count(x => x.Default?.Category == "LOOP TRACK VOLUME");
                 seq.ParamPath = seq.ParamPath.Replace("x", $"{audiochannels}");
                 seq.FriendlyParam = seq.FriendlyParam.Replace("x", $"{audiochannels}");
             }
@@ -1986,7 +1986,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             double max2 = 0, max3 = 0, min2 = 0, min3 = 0;
             Color startcolor = new();
             Color endcolor = new();
-            if (interpobject.Default.TraitType is DefaultSequencerObject.Trait.Color) {
+            if (interpobject.Default?.TraitType is DefaultSequencerObject.Trait.Color) {
                 startcolor = Color.FromArgb((int)_start);
                 endcolor = Color.FromArgb((int)_end);
                 max = Math.Max(startcolor.R, endcolor.R);
@@ -2086,7 +2086,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     break;
             }
 
-            if (interpobject.Default.TraitType is DefaultSequencerObject.Trait.Color) {
+            if (interpobject.Default?.TraitType is DefaultSequencerObject.Trait.Color) {
                 double valR, valG, valB = 0;
                 //convert interp[] range of 0 to 1 into range between selected beats
                 for (int x = 0; x < interp.Length; x++) {
@@ -2227,7 +2227,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             List<DefaultSequencerObject> objects = TCLE.LeafObjects.Where(x => x.Value.Category == category).Select(x => x.Value).ToList();
             DefaultSequencerObject BaseObj = objects[TCLE.rng.Next(0, objects.Count)];
             //check if the object exists in the leaf already. If so, pick a new one
-            if (SequencerObjects.Any(x => x.Default.Category == category && x.ParamPath == BaseObj.ParamPath))
+            if (SequencerObjects.Any(x => x.Default?.Category == category && x.ParamPath == BaseObj.ParamPath))
                 goto beginrando;
 
             Sequencer_Object seq = AddToSequencer(BaseObj, TCLE.ProjectSamples.ElementAt(TCLE.rng.Next(0, TCLE.ProjectSamples.Count)).Value.ObjName);
@@ -2509,7 +2509,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                             //ObjectToImport.HighlightColor = objmatch.defaultcolor;
                         }
                         //set audio channel numbers on load
-                        if (ObjectToImport.Default.Category == "LOOP TRACK VOLUME") {
+                        if (ObjectToImport.Default?.Category == "LOOP TRACK VOLUME") {
                             ObjectToImport.ParamPath = ObjectToImport.ParamPath.Replace("x", $"{audiochannels}");
                             ObjectToImport.FriendlyParam = ObjectToImport.FriendlyParam.Replace("x", $"{audiochannels}");
                             audiochannels++;
@@ -2904,10 +2904,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///Updates row headers to be the Object and Param_Path
         public static void SetRowHeaderText(Sequencer_Object seq)
         {
-            string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Default.Category}] " : "";
+            string ShowCategory = Properties.Settings.Default.LeafOptionShowCategory ? $"[{seq.Default?.Category ?? ""}] " : "";
             //ShowCategory = Properties.Settings.Default.LeafOptionCategoryIcon ? $" {ShowCategory}" : ShowCategory; 
-            string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{seq.FriendlyParam}, {seq.FriendlyLane}" : seq.FriendlyParam;
-            if (seq.Default.Category == "PLAY SAMPLE")
+            string ShowLane = (seq.ExpandLanesInEditor && seq.FriendlyLane != "none") ? $"{(string.IsNullOrEmpty(seq.FriendlyParam) ? seq.ObjName : seq.FriendlyParam)}, {seq.FriendlyLane}" : (string.IsNullOrEmpty(seq.FriendlyParam) ? seq.ObjName : seq.FriendlyParam);
+            if (seq.Default?.Category == "PLAY SAMPLE")
                 //show the sample name instead
                 seq.HeaderCell.Value = $"{ShowCategory}{seq.ObjName}";
             else if (seq.ObjName == "_TuningLayerX")
@@ -3089,7 +3089,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int randomtype = 0;
             decimal? valueiftrue = 0;
 
-            if ((seq.Default.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action) || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
+            if ((seq.Default?.TraitType is DefaultSequencerObject.Trait.Bool or DefaultSequencerObject.Trait.Action) || (seq.ParamPath is "visibla01" or "visibla02" or "visible" or "visiblz01" or "visiblz02")) {
                 valueiftrue = 1;
                 rngchance = 10;
                 rnglimit = 9;
@@ -3098,7 +3098,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     rnglimit = 54;
                 }
             }
-            else if (seq.Default.TraitType is DefaultSequencerObject.Trait.Color) {
+            else if (seq.Default?.TraitType is DefaultSequencerObject.Trait.Color) {
                 randomtype = 7;
                 rngchance = 10;
                 rnglimit = 8;
@@ -3110,9 +3110,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     randomtype = 2;
                 else if (seq.ObjName == "fade.pp")
                     randomtype = 3;
-                else if (seq.Default.Category == "CAMERA")
+                else if (seq.Default?.Category == "CAMERA")
                     randomtype = 4;
-                else if (seq.Default.Category == "GAMMA")
+                else if (seq.Default?.Category == "GAMMA")
                     randomtype = 5;
                 else
                     randomtype = 6;

@@ -1380,12 +1380,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     s.Add("param_path_hash", seq_obj.ParamPath.Replace("0x", ""));
                 else
                     s.Add("param_path", $"{seq_obj.ParamPath}");
-                s.Add("trait_type", seq_obj.Default.TraitTypeString);
+                s.Add("trait_type", seq_obj.Default?.TraitTypeString);
                 JArray datapoints = new();
                 foreach (SeqDataPoint datapoint in seq_obj.Cells.Cast<SeqDataPoint>()) {
                     if (datapoint is null || datapoint.Value is null)
                         continue;
-                    if (seq_obj.Default.TraitType is DefaultSequencerObject.Trait.Float) {
+                    if (seq_obj.Default?.TraitType is DefaultSequencerObject.Trait.Float) {
                         JObject d = new() {
                             { "beat", datapoint.beat },
                             { "value", (decimal)datapoint.Value },
@@ -1409,7 +1409,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //add the rest of the keys to this seq_obj
                 s.Add("step", seq_obj.Step);
                 s.Add("default", seq_obj.DefaultValue);
-                s.Add("footer", seq_obj.Default.Footer);
+                s.Add("footer", seq_obj.Default?.Footer);
                 s.Add("editor_data", new JArray() { new object[] { seq_obj.HighlightColor.ToArgb(), seq_obj.highlight_value } });
                 s.Add("enabled", seq_obj.EnabledInEditor);
 

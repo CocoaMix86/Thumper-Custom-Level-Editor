@@ -109,7 +109,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public static void GetThumperCacheFolder(bool init = false)
         {
-            if (init && Settings.Default.game_dir != "none")
+            if (init && Settings.Default?.game_dir != "none")
                 return;
 
             CommonOpenFileDialog cfd_lvl = new() {
@@ -118,16 +118,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 Title = "Select the folder where Thumper is installed (NOT the cache folder)"
             };
             //check if the game_dir has been set before. It'll be empty if starting for the first time
-            if (Settings.Default.game_dir == "none")
+            if (Settings.Default?.game_dir == "none")
                 cfd_lvl.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Thumper";
             else
                 //if it's not empty, initialize the FolderBrowser to be whatever was selected last
-                cfd_lvl.InitialDirectory = Settings.Default.game_dir;
+                cfd_lvl.InitialDirectory = Settings.Default?.game_dir;
             //show FolderBrowser, and then set "game_dir" to whatever is chosen
             if (cfd_lvl.ShowDialog() == CommonFileDialogResult.Ok)
-                Settings.Default.game_dir = cfd_lvl.FileName;
+                Settings.Default?.game_dir = cfd_lvl.FileName;
 
-            Settings.Default.Save();
+            Settings.Default?.Save();
         }
     }
 }

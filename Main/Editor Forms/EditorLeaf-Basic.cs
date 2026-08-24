@@ -216,10 +216,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 goto search;
             }
 
-            if (setvalue == null && _findseq.Default.Category != "TRACK EFFECTS") {
+            if (setvalue == null && _findseq.Default?.Category != "TRACK EFFECTS") {
                 //if trying to delete a data point, this loops through all objects of the same category and removes that value on each
                 //just so you don't have to switch your selection to a different object to delete it.
-                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Default.Category == _findseq.Default.Category && x.FriendlyLane == _findseq.FriendlyLane)) {
+                foreach (Sequencer_Object seq in SequencerObjects.Where(x => x.Default?.Category == _findseq.Default?.Category && x.FriendlyLane == _findseq.FriendlyLane)) {
                     if (seq.DefaultValue == 1 && setvalue == null) {
                         setvalue = 0;
                     }

@@ -87,12 +87,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
                 }
             }
             //if a color object, convert the cell value to ARGB and use that
-            else if (seq.Default.TraitType is DefaultSequencerObject.Trait.Color) {
+            else if (seq.Default?.TraitType is DefaultSequencerObject.Trait.Color) {
                 if (SequencerObjects[e.RowIndex][e.ColumnIndex].Value != null)
                     e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Convert.ToInt32(e.Value))), e.CellBounds);
             }
             //paint the whole cell with the highlighting color
-            else if (seq.ObjName != "_TuningLayerX" && seq.Default.Category != "PLAY SAMPLE") {
+            else if (seq.ObjName != "_TuningLayerX" && seq.Default?.Category != "PLAY SAMPLE") {
                 if (e.Value != null && Math.Abs((decimal)e.Value) >= seq.highlight_value)
                     e.Graphics.FillRectangle(seq.HighlightBrush, e.CellBounds.Left - 1, e.CellBounds.Top, e.CellBounds.Width + 2, e.CellBounds.Height);
             }
@@ -139,9 +139,9 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //skips a bunch of objects since they display their values differently
             if (e.RowIndex == -1 || seq is null)
                 goto skipchecks;
-            if (seq.Default.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
+            if (seq.Default?.Category == "!!PLAY SAMPLE" && Properties.Settings.Default.LeafOptionShowWave)
                 return;
-            else if (seq.Default.TraitType is DefaultSequencerObject.Trait.Color)
+            else if (seq.Default?.TraitType is DefaultSequencerObject.Trait.Color)
                 return;
             else if ((Properties.Settings.Default.LeafOptionThinBars && seq.FriendlyLane == "lane center" && seq.ExpandLanesInEditor == false))
                 return;
@@ -211,8 +211,8 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods
             //Object Toggle
             switch (e.ColumnIndex) {
                 case -1:
-                    if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.Default.CategoryIcon != null) {
-                        e.Graphics.DrawImage(seq.Default.CategoryIcon, e.CellBounds.Left + 4, y, 16, 16);
+                    if (seq != null && Properties.Settings.Default.LeafOptionCategoryIcon && seq.Default?.CategoryIcon != null) {
+                        e.Graphics.DrawImage(seq.Default?.CategoryIcon, e.CellBounds.Left + 4, y, 16, 16);
                     }
                     break;
                 case 0:

@@ -212,7 +212,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //sanitize inputs based on the trait type
             //skipping header row
             if (rowIndex is not -1 && this.OwningRow.Index is not -1) {
-                value = TraitValidator.Sanitize(ParentSeqObj.Default.TraitType, value);
+                value = TraitValidator.Sanitize(ParentSeqObj.Default?.TraitType, value);
             }
             bool _set = base.SetValue(rowIndex, value);
             return _set;

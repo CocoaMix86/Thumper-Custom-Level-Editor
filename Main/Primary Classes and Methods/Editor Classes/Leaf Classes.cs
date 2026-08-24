@@ -128,7 +128,7 @@ namespace Thumper_Custom_Level_Editor
                 { "trait_type", Default.TraitTypeString },
                 { "step", this.Step },
                 { "default", this.DefaultValue },
-                { "footer", this.Default.Footer },
+                { "footer", this.Default?.Footer },
                 { "editor_data", new JArray() { new object[] { this.HighlightColor.ToArgb(), this.highlight_value } } },
                 { "enabled", this.EnabledInEditor },
             };
@@ -339,7 +339,7 @@ namespace Thumper_Custom_Level_Editor
 
         public JObject ConvertToJson()
         {
-            if (this.ParentSeqObj.Default.TraitType == DefaultSequencerObject.Trait.Float) { 
+            if (this.ParentSeqObj.Default?.TraitType == DefaultSequencerObject.Trait.Float) { 
                 return new() { 
                     { "beat", this.beat }, 
                     { "value", (decimal)this.Value }, 
@@ -372,7 +372,7 @@ namespace Thumper_Custom_Level_Editor
 
             this.OwningRow.DataGridView.InvalidateRow(this.RowIndex);
 
-            if (((Sequencer_Object)this.OwningRow).Default.Category == "PLAY SAMPLE")
+            if (((Sequencer_Object)this.OwningRow).Default?.Category == "PLAY SAMPLE")
                 ParentSeqObj.DataGridView.InvalidateRow(ParentSeqObj.Index);
             //if value changing on a tuning layer, recalc the values
             if (((Sequencer_Object)this.OwningRow).ObjName == "_TuningLayerX") {
