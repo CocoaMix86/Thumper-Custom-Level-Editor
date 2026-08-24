@@ -1392,6 +1392,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 SequencerObjects.Add(seq);
                 trackEditor.Rows.Add(seq);
             }
+            string e = string.Join(',', trackEditor.Rows.Cast<DataGridViewRow>().Select(x => x.Index));
             SetRowHeaderText(seq);
 
             UpdateUIThings();
