@@ -848,6 +848,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlPathDelete_Click(object sender, EventArgs e)
         {
+            if (lvlLeafPaths.SelectedRows.Count == 0)
+                return;
             int lastrow = lvlLeafPaths.SelectedRows[^1].Index;
             for (int x = lvlLeafPaths.RowCount - 1; x >= 0; x--) {
                 if (lvlLeafPaths.Rows[x].Selected)
