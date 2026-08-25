@@ -2191,7 +2191,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //reduce split leafs beat count and save
                 LeafSplitAfter._leafproperties.LeafLength = _leafproperties.LeafLength - splitindex;
                 LeafSplitAfter.SaveCheckAndWrite(true, "");
-                LeafSplitAfter.Dispose();
+                LeafSplitAfter.Close();
 
                 //reduce beat count of the leaf that was just split and save it
                 LeafProperties.LeafLength = splitindex;
