@@ -829,7 +829,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             _leafproperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
             TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
             TCLE.dockProjectProperties.propertyGridProject.Refresh();
-            propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
+            propertyGridLeaf.SelectedObjects = SelectedDPs.Cast<object>().ToArray();
             propertyGridLeaf.Refresh();
         }
 
@@ -1095,7 +1095,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _leafproperties.selectedobj = SequencerObjects[trackEditor.SelectedCells[^1].RowIndex];
                 TCLE.dockProjectProperties.propertyGridProject.SelectedObject = GetProperties();
                 TCLE.dockProjectProperties.propertyGridProject.Refresh();
-                propertyGridLeaf.SelectedObjects = SelectedDPs.ToArray();
+                propertyGridLeaf.SelectedObjects = SelectedDPs.Cast<object>().ToArray();
                 propertyGridLeaf.Refresh();
             }
         }
