@@ -75,6 +75,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public virtual void Copy() { }
         public virtual void Cut() { }
         public virtual void Paste() { }
+        public virtual void Reload(string OldName, string NewName) { }
         public virtual object GetProperties() { return null; }
         public virtual void PerformUndo(int undolistindex) { }
         public virtual void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false) { }

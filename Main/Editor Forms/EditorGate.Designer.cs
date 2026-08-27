@@ -35,10 +35,11 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorGate));
             this.gateLvlList = new DataGridView();
-            this.gatePhaseNum = new DataGridViewTextBoxColumn();
-            this.dataGridViewImageColumn1 = new DataGridViewImageColumn();
-            this.dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            this.GateLvlRuntime = new DataGridViewTextBoxColumn();
+            this.gateColumnPhase = new DataGridViewTextBoxColumn();
+            this.gateColumnIcon = new DataGridViewImageColumn();
+            this.gateColumnLvl = new DataGridViewTextBoxColumn();
+            this.gateColumnSentry = new DataGridViewTextBoxColumn();
+            this.gateColumnRuntime = new DataGridViewTextBoxColumn();
             this.gateToolStrip = new ToolStrip();
             this.btnGateLvlAdd = new ToolStripButton();
             this.btnGateLvlDelete = new ToolStripButton();
@@ -78,7 +79,7 @@
             this.gateLvlList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gateLvlList.ColumnHeadersHeight = 20;
             this.gateLvlList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gateLvlList.Columns.AddRange(new DataGridViewColumn[] { this.gatePhaseNum, this.dataGridViewImageColumn1, this.dataGridViewTextBoxColumn1, this.GateLvlRuntime });
+            this.gateLvlList.Columns.AddRange(new DataGridViewColumn[] { this.gateColumnPhase, this.gateColumnIcon, this.gateColumnLvl, this.gateColumnSentry, this.gateColumnRuntime });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(40, 40, 40);
             dataGridViewCellStyle3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -131,44 +132,53 @@
             this.gateLvlList.MouseDown += this.gateLvlList_MouseDown;
             this.gateLvlList.MouseMove += this.gateLvlList_MouseMove;
             // 
-            // gatePhaseNum
+            // gateColumnPhase
             // 
-            this.gatePhaseNum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            this.gatePhaseNum.HeaderText = "";
-            this.gatePhaseNum.Name = "gatePhaseNum";
-            this.gatePhaseNum.ReadOnly = true;
-            this.gatePhaseNum.SortMode = DataGridViewColumnSortMode.NotSortable;
-            this.gatePhaseNum.Width = 5;
+            this.gateColumnPhase.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.gateColumnPhase.HeaderText = "";
+            this.gateColumnPhase.Name = "gateColumnPhase";
+            this.gateColumnPhase.ReadOnly = true;
+            this.gateColumnPhase.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gateColumnPhase.Width = 5;
             // 
-            // dataGridViewImageColumn1
+            // gateColumnIcon
             // 
-            this.dataGridViewImageColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.dataGridViewImageColumn1.FillWeight = 1F;
-            this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Width = 5;
+            this.gateColumnIcon.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.gateColumnIcon.FillWeight = 1F;
+            this.gateColumnIcon.HeaderText = "";
+            this.gateColumnIcon.Name = "gateColumnIcon";
+            this.gateColumnIcon.ReadOnly = true;
+            this.gateColumnIcon.Width = 5;
             // 
-            // dataGridViewTextBoxColumn1
+            // gateColumnLvl
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Lvl";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gateColumnLvl.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.gateColumnLvl.FillWeight = 50F;
+            this.gateColumnLvl.HeaderText = "Lvl";
+            this.gateColumnLvl.Name = "gateColumnLvl";
+            this.gateColumnLvl.ReadOnly = true;
+            this.gateColumnLvl.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
-            // GateLvlRuntime
+            // gateColumnSentry
             // 
-            this.GateLvlRuntime.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            this.gateColumnSentry.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.gateColumnSentry.HeaderText = "Sentry";
+            this.gateColumnSentry.Name = "gateColumnSentry";
+            this.gateColumnSentry.ReadOnly = true;
+            this.gateColumnSentry.Width = 67;
+            // 
+            // gateColumnRuntime
+            // 
+            this.gateColumnRuntime.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.GateLvlRuntime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.GateLvlRuntime.FillWeight = 50F;
-            this.GateLvlRuntime.HeaderText = "Runtime";
-            this.GateLvlRuntime.Name = "GateLvlRuntime";
-            this.GateLvlRuntime.ReadOnly = true;
-            this.GateLvlRuntime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gateColumnRuntime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gateColumnRuntime.FillWeight = 50F;
+            this.gateColumnRuntime.HeaderText = "Runtime";
+            this.gateColumnRuntime.Name = "gateColumnRuntime";
+            this.gateColumnRuntime.ReadOnly = true;
+            this.gateColumnRuntime.SortMode = DataGridViewColumnSortMode.NotSortable;
+            this.gateColumnRuntime.Width = 58;
             // 
             // gateToolStrip
             // 
@@ -369,10 +379,6 @@
         private ToolStripButton btnGateLvlDown;
         private Label label1;
         private ToolTip toolTip1;
-        private DataGridViewTextBoxColumn gatePhaseNum;
-        private DataGridViewImageColumn dataGridViewImageColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn GateLvlRuntime;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private Panel panelMain;
         private ToolStripButton btnGateCopy;
@@ -380,5 +386,10 @@
         public DataGridView gateLvlList;
         private ToolStripButton btnGatePlayback;
         private System.Windows.Forms.Timer timer1;
+        private DataGridViewTextBoxColumn gateColumnPhase;
+        private DataGridViewImageColumn gateColumnIcon;
+        private DataGridViewTextBoxColumn gateColumnLvl;
+        private DataGridViewTextBoxColumn gateColumnSentry;
+        private DataGridViewTextBoxColumn gateColumnRuntime;
     }
 }

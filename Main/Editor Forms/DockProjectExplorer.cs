@@ -138,7 +138,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void toolstripFileSearch_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(UtilFile.SearchReferences(selectedNodes[0].Name), "Thumper Custom Level Editor");
+            FileInfo filetosearch = ProjectExplorer.AllFiles[selectedNodes[0]].File;
+            List<FileInfo> References = UtilFile.SearchReferences(filetosearch);
+            if (References.Count == 0)
+                References.Add(new("No references found"));
+            MessageBox.Show(string.Join('\n', References.Select(x => x.Name)), "Thumper Custom Level Editor");
         }
         private void toolstripFileExternal_Click(object sender, EventArgs e)
         {
@@ -243,44 +247,59 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
             }
-            //move the folder or file
+            //move the folder
             if (node.ImageKey == "folder") {
                 Directory.Move(source, dest);
                 ProjectExplorer.CreateTreeView();
             }
+            //move file
             else {
+                FileInfo filesource = new(source);
+                FileInfo filedest = new(dest);
                 //check if file is open. Prevent renaming if it is
-                if (TCLE.Documents.Any(x => x.Value.WorkingFile.FullName == source))
+                if (TCLE.Documents.ContainsKey(filesource.Name)) {
                     MessageBox.Show($"{source} is currently open and cannot be renamed.", "Thumper Custom Level Editor");
-                else {
-                    File.Move(source, dest);
-                    dynamic towrite = UtilFile.LoadFileLock(dest);
-                    File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(Path.GetFileName(source), Path.GetFileName(dest)));
-                    //Set scroll position and rebuild the tree
-                    ProjectExplorer.CreateTreeView();
-                    //
-                    //need to update the name in every other file that references it too
-                    foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
-                        dynamic _loadfile = UtilFile.LoadFileLock(file);
-                        //if load fails, skip
-                        if (_loadfile == null)
-                            continue;
-                        string _output = JsonConvert.SerializeObject(_loadfile, Formatting.Indented);
-                        //if files doesn't contain reference, skip
-                        if (!_output.Contains(Path.GetFileName(source)))
-                            continue;
-                        //some files may be lock loaded, so we use different writing methods for those
-                        //also force editor to reload the document
-                        if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, EditorBase> stream && stream.Value != null) {
-                            UtilFile.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
-                            //a document might be open multiple times (normal and raw), so need to locate both of them
-                            foreach (IDockContent doc in TCLE.Documents.Values.Where(x => x.DockHandler.TabText.StartsWith(stream.Key)))
-                                doc.GetType().GetMethod("Reload").Invoke(doc, null);
-                        }
-                        else
-                            File.WriteAllText(file.FullName, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                    return;
+                }
+
+                File.Move(source, dest);
+                dynamic towrite = UtilFile.LoadFileLock(dest);
+                File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(filesource.Name, filedest.Name));
+                //Set scroll position and rebuild the tree
+                ProjectExplorer.CreateTreeView();
+                //
+                //need to update the name in every other file that references it too
+
+                List<FileInfo> References = UtilFile.SearchReferences(filesource, true, filedest);
+                foreach (FileInfo file in References) {
+                    if (TCLE.Documents.TryGetValue(file.Name, out EditorBase tab)) {
+                        tab.Reload(filesource.Name, filedest.Name);
+                        tab.Save(false);
                     }
                 }
+                /*
+                foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
+                    UtilFile.SearchReferences();
+                    dynamic _loadfile = UtilFile.LoadFileLock(file);
+                    //if load fails, skip
+                    if (_loadfile == null)
+                        continue;
+                    string _output = JsonConvert.SerializeObject(_loadfile, Formatting.Indented);
+                    //if files doesn't contain reference, skip
+                    if (!_output.Contains(Path.GetFileName(source)))
+                        continue;
+                    //some files may be lock loaded, so we use different writing methods for those
+                    //also force editor to reload the document
+                    if (TCLE.Documents.FirstOrDefault(x => x.Value.WorkingFile.FullName == file.FullName) is KeyValuePair<string, EditorBase> stream && stream.Value != null) {
+                        UtilFile.WriteFileLock(stream.Value.FileLock, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                        //a document might be open multiple times (normal and raw), so need to locate both of them
+                        foreach (IDockContent doc in TCLE.Documents.Values.Where(x => x.DockHandler.TabText.StartsWith(stream.Key)))
+                            doc.GetType().GetMethod("Reload").Invoke(doc, null);
+                    }
+                    else
+                        File.WriteAllText(file.FullName, _output.Replace($"_name\": \"{Path.GetFileName(source)}\"", $"_name\": \"{Path.GetFileName(dest)}\""));
+                }
+                */
             }
         }
         #endregion

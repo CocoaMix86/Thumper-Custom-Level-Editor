@@ -2394,6 +2394,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TimeSignature = (string)_load["time_sig"] ?? "4/4",
                     LeafLength = (int?)_load["beat_cnt"] ?? 1,
                 };
+                TCLE.CachedRuntimes[this.WorkingFile.Name] = LeafProperties.LeafLength;
             }
             else if (this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
                 LeafProperties = new(this) {
@@ -2423,6 +2424,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TimeSignature = (string)_load["time_sig"] ?? "4/4",
                     LeafLength = (int?)_load["beat_cnt"] ?? 1
                 };
+                TCLE.CachedRuntimes[this.WorkingFile.Name] = LeafProperties.LeafLength;
             }
             else if (this.WorkingFile?.Extension is ".lvl" or null) {
                 LeafProperties = new(this) {
@@ -2698,6 +2700,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             LeafMasterView.InitializeAndResize(SequencerObjects, LeafProperties);
+        }
+
+        public override void Reload(string OldName, string NewName)
+        {
+            foreach (Sequencer_Object seq in SequencerObjects) {
+                if (seq.ObjName == OldName)
+                    seq.ObjName = NewName;
+            }
         }
 
         ///SAVE

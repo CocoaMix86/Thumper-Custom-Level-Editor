@@ -121,8 +121,35 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
         }
 
-        public static string SearchReferences(string searchreference)
+        public static List<FileInfo> SearchReferences(FileInfo searchreference, bool Rename = false, FileInfo NewName = null)
         {
+            List<FileInfo> Search = new();
+            List<FileInfo> References = new();
+            string[] extensions = ["none"];
+            string _ext = searchreference.Extension.ToLower();
+            if (_ext == ".leaf")
+                extensions = [".lvl"];
+            else if (_ext == ".lvl")
+                extensions = [".gate", ".master"];
+            else if (_ext == ".gate")
+                extensions = [".master"];
+
+            Search = TCLE.WorkingFolder.EnumerateFiles("*.*", SearchOption.AllDirectories).Where(x => extensions.Contains(x.Extension.ToLower())).ToList();
+            foreach (FileInfo _file in Search) {
+                string text = ((JObject)UtilFile.LoadFileLock(_file)).ToString(Formatting.Indented);
+                //check if the file we're searching contains the obj_name
+                if (text.Contains(searchreference.Name)) {
+                    References.Add(_file);
+                }
+                if (Rename) {
+                    //this replace ensures that the replacement doesn't accidentally change a substring that might also match
+                    //by starting with the end of the name field name and the ':'
+                    text = text.Replace($"_name\": \"{searchreference.Name}\"", $"_name\": \"{NewName.Name}\"");
+                    UtilFile.WriteFileLock(_file.FullName, text);
+                }
+            }
+            return References;
+            /*
             string referencefiles = "";
             //search all files in the project folder
             //looking only in approved extensions as to not search massive audio files
@@ -138,6 +165,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
 
             return referencefiles.Length > 1 ? referencefiles : "<none>";
+            */
         }
 
         public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)

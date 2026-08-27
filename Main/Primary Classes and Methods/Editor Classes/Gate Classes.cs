@@ -2,36 +2,118 @@
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
-using Un4seen.Bass;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
-    public class GateLvlData
+    public class GatePropertyGrid
     {
-        [CategoryAttribute("Sublevel Options")]
-        [DisplayName("Sublevel Name")]
-        public string Lvlname { get => _lvlname; }
-        [Browsable(false)]
-        public string _lvlname;
+        public GateLvlData Parent;
+
+        [CategoryAttribute("General")]
+        [DisplayName("Phase Lvl Name")]
+        public string LvlName => Parent.LvlName;
+
+        [CategoryAttribute("General")]
+        [DisplayName("Phase Number")]
+        public int Phase => Parent.Phase;
+
+        [CategoryAttribute("General")]
+        [DisplayName("Beats")]
+        public int Beats => Parent.Beats;
+        [CategoryAttribute("General")]
+        [DisplayName("Runtime")]
+        public string Runtime => Parent.Runtime;
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sentry")]
         [Description("Does this sublevel use a sentry. The multilane option is wider than the single lane")]
         [TypeConverter(typeof(GateSentryList))]
-        public string SentryType { get; set; }
+        public string SentryType
+        {
+            get => Parent.SentryType;
+            set => Parent.SentryType = value;
+        }
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Bucket #")]
         [Description("Which phase's bucket should this go in. If random FALSE, always use 1.")]
         [TypeConverter(typeof(GateBucket))]
-        public int Bucket { get; set; }
+        public int Bucket
+        {
+            get => Parent.Bucket;
+            set => Parent.Bucket = value;
+        }
+    }
 
-        [Browsable(false)]
-        public int Beats { get; set; } = 0;
-        [Browsable(false)]
+    public class GateLvlData : NotifyBase
+    {
+        public GateProperties Parent;
+        public GatePropertyGrid PropertyGrid;
+        public Image Icon = Properties.Resources.editor_gate;
+        public GateLvlData(GateProperties parent)
+        {
+            Parent = parent;
+            PropertyGrid = new() { Parent = this };
+        }
+
+        private string _lvlname;
+        public string LvlName
+        {
+            get => _lvlname;
+            set => SetField(ref _lvlname, value);
+        }
+
+        private string _sentrytype;
+        public string SentryType { 
+            get => _sentrytype; 
+            set => SetField(ref _sentrytype, value); 
+        }
+
+        private int _bucket;
+        public int Bucket { 
+            get => _bucket; 
+            set => SetField(ref _bucket, value); 
+        }
+        public int Phase => Parent.Random ? Bucket : Parent.GateLvls.IndexOf(this);
+
+        public int Beats
+        {
+            get {
+                if (!TCLE.CachedRuntimes.TryGetValue(LvlName, out int _run)) {
+                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files[LvlName]);
+                }
+                if (_beats != _run) {
+                    _beats = _run;
+                    if (_beats == -1) {
+                        Runtime = "file not found";
+                        RowColor = Color.Maroon;
+                    }
+                    else
+                        Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
+                    RowColor = Color.Green;
+                }
+                return _run;
+            }
+        }
+        private int _beats;
+        
+        private string _runtime;
+        public string Runtime
+        {
+            get => _runtime;
+            set => SetField(ref _runtime, value);
+        }
+
+        public Color RowColor = Color.Green;
         public int BeatStart { get; set; } = 0;
-        [Browsable(false)]
-        public string Runtime => TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+
+        private string _runtimemessage;
+        public string RuntimeMessage
+        {
+            get => _runtimemessage;
+            set => SetField(ref _runtimemessage, value);
+        }
 
         public GateLvlData Clone()
         {
@@ -49,13 +131,13 @@ namespace Thumper_Custom_Level_Editor
     public class GateProperties : EditorPropertiesBase
     {
         [Browsable(false)]
-        public ObservableCollection<GateLvlData> GateLvls;
+        public BindingList<GateLvlData> GateLvls;
 
         public GateProperties(EditorGate Parent)
         {
             ParentEditor = Parent;
             GateLvls = new();
-            GateLvls.CollectionChanged += ((EditorGate)ParentEditor).gatelvls_CollectionChanged;
+            GateLvls.ListChanged += ((EditorGate)ParentEditor).GateLvls_ListChanges;
         }
 
         [CategoryAttribute("Options")]
@@ -86,7 +168,17 @@ namespace Thumper_Custom_Level_Editor
         [TypeConverter(typeof(LvlList))]
         public string prelvl { get; set; }
         [Browsable(false)]
-        public int prebeats = 0;
+        public int prebeats
+        {
+            get {
+                if (prelvl is null or "<none>")
+                    return 0;
+                if (!TCLE.CachedRuntimes.TryGetValue(prelvl, out int _run)) {
+                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(prelvl));
+                }
+                return _run;
+            }
+        }
 
         [CategoryAttribute("Options")]
         [DisplayName("Post Lvl")]
@@ -94,7 +186,17 @@ namespace Thumper_Custom_Level_Editor
         [TypeConverter(typeof(LvlList))]
         public string postlvl { get; set; }
         [Browsable(false)]
-        public int postbeats = 0;
+        public int postbeats
+        {
+            get {
+                if (postlvl is null or "<none>")
+                    return 0;
+                if (!TCLE.CachedRuntimes.TryGetValue(postlvl, out int _run)) {
+                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(postlvl));
+                }
+                return _run;
+            }
+        }
 
         [CategoryAttribute("Options")]
         [DisplayName("Restart Lvl")]

@@ -169,6 +169,7 @@
             this.masterLvlList.Tag = "editorpaneldgv";
             this.masterLvlList.CellClick += this.masterLvlList_CellClick;
             this.masterLvlList.CellDoubleClick += this.masterLvlList_CellDoubleClick;
+            this.masterLvlList.CellMouseClick += this.masterLvlList_CellMouseClick;
             this.masterLvlList.CellMouseDown += this.masterLvlList_CellMouseDown;
             this.masterLvlList.CellMouseUp += this.masterLvlList_CellMouseUp;
             this.masterLvlList.CellPainting += this.masterLvlList_CellPainting;

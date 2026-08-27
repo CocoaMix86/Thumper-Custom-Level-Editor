@@ -1240,6 +1240,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             IsUndoing = false;
         }
 
+        public override void Reload(string OldName, string NewName)
+        {
+            foreach (LvlLeafData leaf in LvlLeafs) {
+                if (leaf.Leaf == OldName)
+                    leaf.Leaf = NewName;
+            }
+        }
+
         ///SAVE
         public override void Save(bool playsound = true)
         {

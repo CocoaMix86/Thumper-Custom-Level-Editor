@@ -105,53 +105,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         /// DGV MASTERLVLLIS
         private void masterLvlList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if not selecting the file column, return and do nothing
-            if (e.ColumnIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
-                return;
-            if (e.RowIndex == -1) {
-                if (e.ColumnIndex == 4) {
-                    GlobalCheckpoint = !GlobalCheckpoint;
-                    foreach (MasterLvlData lvl in MasterLvls) {
-                        lvl.Checkpoint = GlobalCheckpoint;
-                    }
-                }
-                else if (e.ColumnIndex == 5) {
-                    GlobalPlayPlus = !GlobalPlayPlus;
-                    foreach (MasterLvlData lvl in MasterLvls) {
-                        lvl.Playplus = GlobalPlayPlus;
-                    }
-                }
-                else if (e.ColumnIndex == 6) {
-                    GlobalIsolate = !GlobalIsolate;
-                    foreach (MasterLvlData lvl in MasterLvls) {
-                        lvl.Isolate = GlobalIsolate;
-                    }
-                }
-                masterLvlList.Invalidate();
-                return;
-            }
-            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
-                return;
+        }
 
-            if (e.ColumnIndex is 4) {
-                MasterLvls[e.RowIndex].Checkpoint = !MasterLvls[e.RowIndex].Checkpoint;
-                foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
-                    lvl.Checkpoint = MasterLvls[e.RowIndex].Checkpoint;
-                }
-            }
-            else if (e.ColumnIndex is 5) {
-                MasterLvls[e.RowIndex].Playplus = !MasterLvls[e.RowIndex].Playplus;
-                foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
-                    lvl.Playplus = MasterLvls[e.RowIndex].Playplus;
-                }
-            }
-            else if (e.ColumnIndex is 6) {
-                MasterLvls[e.RowIndex].Isolate = !MasterLvls[e.RowIndex].Isolate;
-                foreach (MasterLvlData lvl in propertyGridMaster.SelectedObjects) {
-                    lvl.Isolate = MasterLvls[e.RowIndex].Isolate;
-                }
-            }
-            masterLvlList.Invalidate();
+        private void masterLvlList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
         }
 
         bool MouseDown;
@@ -168,12 +125,57 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 masterLvlList.SelectionChanged += masterLvlList_SelectionChanged;
             }
 
-            propertyGridMaster.SelectedObjects = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index]).ToArray();
+            propertyGridMaster.SelectedObjects = masterLvlList.SelectedRows.Cast<DataGridViewRow>().Select(x => MasterLvls[x.Index].PropertyGrid).Cast<object>().ToArray();
             propertyGridMaster.Refresh();
         }
 
         private void masterLvlList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            //if not selecting the file column, return and do nothing
+            if (e.ColumnIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
+                return;
+
+            if (e.RowIndex == -1) {
+                if (e.ColumnIndex == 4) {
+                    GlobalCheckpoint = !GlobalCheckpoint;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.Checkpoint = GlobalCheckpoint;
+                    }
+                    SaveCheckAndWrite(false, "Checkpoint updated");
+                }
+                else if (e.ColumnIndex == 5) {
+                    GlobalPlayPlus = !GlobalPlayPlus;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.Playplus = GlobalPlayPlus;
+                    }
+                    SaveCheckAndWrite(false, "Playplus updated");
+                }
+                else if (e.ColumnIndex == 6) {
+                    GlobalIsolate = !GlobalIsolate;
+                    foreach (MasterLvlData lvl in MasterLvls) {
+                        lvl.Isolate = GlobalIsolate;
+                    }
+                    SaveCheckAndWrite(false, "Isolate updated");
+                }
+                masterLvlList.Invalidate();
+                return;
+            }
+            if (Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control)
+                return;
+
+            if (e.ColumnIndex is 4) {
+                MasterLvls[e.RowIndex].Checkpoint = !MasterLvls[e.RowIndex].Checkpoint;
+                SaveCheckAndWrite(false, "Checkpoint updated");
+            }
+            else if (e.ColumnIndex is 5) {
+                MasterLvls[e.RowIndex].Playplus = !MasterLvls[e.RowIndex].Playplus;
+                SaveCheckAndWrite(false, "Playplus updated");
+            }
+            else if (e.ColumnIndex is 6) {
+                MasterLvls[e.RowIndex].Isolate = !MasterLvls[e.RowIndex].Isolate;
+                SaveCheckAndWrite(false, "Isolate updated");
+            }
+            masterLvlList.Invalidate();
             if (ModifierKeys.HasFlag(Keys.Control) || e.RowIndex == LastRow)
                 return;
             if (masterLvlList.Rows[e.RowIndex].Selected) {
@@ -204,7 +206,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(MasterLvls[e.RowIndex].name));
+            TCLE.OpenFile(ProjectExplorer.GetFile(MasterLvls[e.RowIndex].NameSplitter));
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -215,6 +217,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private int TargetRowToPaint = -3;
         private void masterLvlList_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            //if selection is in the checkbox columns, do not dragdrop
+            if (masterLvlList.HitTest(e.X, e.Y).ColumnIndex > 3)
+                return;
             if (TCLE.DragSource is "none" && (e.Button & MouseButtons.Left) == MouseButtons.Left) {
                 // If the mouse moves outside the rectangle, start the drag.
                 if (LvlsToMove == null && dragBoxFromMouseDown != Rectangle.Empty && !dragBoxFromMouseDown.Contains(e.X, e.Y)) {
@@ -242,7 +247,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void masterLvlList_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //if selection is in the checkbox columns, do not dragdrop
-            if (masterLvlList.HitTest(e.X, e.Y).ColumnIndex >= 4)
+            if (masterLvlList.HitTest(e.X, e.Y).ColumnIndex > 3)
                 return;
             rowIndexFromMouseDown = masterLvlList.HitTest(e.X, e.Y).RowIndex;
             if (rowIndexFromMouseDown is -1) {
@@ -435,12 +440,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             if (Playback.IsPlaying && row.BeatStart < Playback.PlaybackBeat && row.BeatStart + row.Beats > Playback.PlaybackBeat) {
-                if (row.name == Playback.GlobalCurrentGate) {
+                if (row.NameSplitter == Playback.GlobalCurrentGate) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)row.Beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetGate + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
                 }
-                else if (row.name == Playback.GlobalCurrentLvl) {
+                else if (row.NameSplitter == Playback.GlobalCurrentLvl) {
                     double pixelsperbeat = (double)e.RowBounds.Width / (double)row.Beats;
                     double offset = Playback.PlaybackBeat - Playback.GlobalCurrentOffsetLvl + Playback.PlaybackSubBeat;
                     e.Graphics.DrawLine(PenViolet, (int)(pixelsperbeat * offset), e.RowBounds.Top, (int)(pixelsperbeat * offset), e.RowBounds.Bottom);
@@ -569,19 +574,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add lvl/gate data to the list
             MasterLvlData _import = new(MasterProperties) {
                 Type = (_load["obj_type"] == "SequinLevel") ? "lvl" : "gate",
-                name = (string)_load["obj_name"],
+                NameSplitter = (string)_load["obj_name"],
                 Playplus = true,
                 Checkpoint = true,
                 checkpoint_leader = "<none>",
-                rest = "<none>",
-                gatesectiontype = "",
-                id = TCLE.rng.Next(0, 1000000)
+                RestLvl = "<none>",
+                gatesectiontype = ""
             };
-            if (index is -1) 
-                MasterLvls.Add(_import);            
-            else 
+            if (index is -1)
+                MasterLvls.Add(_import);
+            else
                 MasterLvls.Insert(index, _import);
-            
+
             if (!IsAddingItems)
                 propertyGridMaster.Refresh();
 
@@ -695,13 +699,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (dynamic _lvl in _load["groupings"]) {
                 MasterLvls.Add(new MasterLvlData(MasterProperties) {
                     Type = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? "lvl" : "gate",
-                    name = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
+                    NameSplitter = !string.IsNullOrEmpty(((string)_lvl["lvl_name"])) ? _lvl["lvl_name"] : _lvl["gate_name"],
                     Checkpoint = _lvl["checkpoint"],
                     Playplus = _lvl["play_plus"],
                     Isolate = _lvl["isolate"] ?? false,
                     checkpoint_leader = _lvl["checkpoint_leader_lvl_name"],
-                    rest = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"],
-                    id = TCLE.rng.Next(0, 10000000)
+                    RestLvl = _lvl["rest_lvl_name"] == "" ? "<none>" : _lvl["rest_lvl_name"]
                 });
             }
             RecalculateRuntime();
@@ -710,7 +713,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             masterLvlList.AutoGenerateColumns = false;
             masterLvlList.Columns[0].DataPropertyName = "SublevelNumber";
-            masterLvlList.Columns[2].DataPropertyName = "name2";
+            masterLvlList.Columns[2].DataPropertyName = "WholeName";
             masterLvlList.Columns[3].DataPropertyName = "Runtime";
             masterLvlList.Columns[4].DataPropertyName = "Checkpoint";
             masterLvlList.Columns[5].DataPropertyName = "PlayPlus";
@@ -827,23 +830,27 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (SimpleLoad)
                 return 0;
-            int beattotal = 0;
+            //int beattotal = 0;
             //calc intro lvl
+            /*
             if (!ProjectExplorer.TryGetFile(MasterProperties.introlvl, out FileInfo _introlvl))
                 MasterProperties.introlevelbeats = 0;
-            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl, true);            
+            MasterProperties.introlevelbeats = UtilMath.CalculateLvlRuntime(_introlvl, true);
             //calc checkpoint lvl
             if (!ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo _checkpointlvl))
                 MasterProperties.checkpointbeats = 0;
             MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(_checkpointlvl);
+            */
             //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
-                beattotal += RecalculateRuntimeSublevel(_lvl, false);
+                /*beattotal += */RecalculateRuntimeSublevel(_lvl, false);
             }
             UpdateBeatPosition();
-            MasterProperties.Beats = beattotal;
+            //MasterProperties.Beats = beattotal;
+            MasterProperties.Beats = MasterLvls.Sum(x => x.Beats) + MasterProperties.introlevelbeats;
             masterLvlList.Invalidate();
-            return beattotal + MasterProperties.introlevelbeats;
+            //return beattotal + MasterProperties.introlevelbeats;
+            return MasterProperties.Beats;
         }
 
         public int RecalculateRuntimeSublevel(MasterLvlData _lvl, bool updatebeats = true)
@@ -851,10 +858,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (SimpleLoad)
                 return 0;
 
-            _lvl.Beats = UtilMath.CalculateSublevelRuntime(_lvl);
+            /*_lvl.Beats = */
+            UtilMath.CalculateSublevelRuntime(_lvl);
             //include rest in lvl's runtime
-            if (_lvl.rest is not "<none>" and not null)
-                _lvl.restlevelbeats = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.rest));
+            if (_lvl.RestLvl is not "<none>" and not null)
+                /*_lvl.restlevelbeats = */
+                UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.RestLvl));
             //uptime visuals to show if lvl found or 
             int index = MasterLvls.IndexOf(_lvl);
             if (updatebeats)
@@ -895,11 +904,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             JArray groupings = new();
             foreach (MasterLvlData _sublevel in _properties.MasterLvls) {
                 JObject _buildlvlJSON = new() {
-                    { "lvl_name", (_sublevel.Type == "lvl" ? _sublevel.name : "") },
-                    { "gate_name", (_sublevel.Type == "gate" ? _sublevel.name : "") },
+                    { "lvl_name", (_sublevel.Type == "lvl" ? _sublevel.NameSplitter : "") },
+                    { "gate_name", (_sublevel.Type == "gate" ? _sublevel.NameSplitter : "") },
                     { "checkpoint", _sublevel.Checkpoint },
                     { "checkpoint_leader_lvl_name", _sublevel.checkpoint_leader.Replace("<none>", "") ?? "" },
-                    { "rest_lvl_name", _sublevel.rest.Replace("<none>", "") ?? "" },
+                    { "rest_lvl_name", _sublevel.RestLvl.Replace("<none>", "") ?? "" },
                     { "play_plus", _sublevel.Playplus },
                     { "isolate", _sublevel.Isolate }
                 };

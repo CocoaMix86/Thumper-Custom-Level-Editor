@@ -102,7 +102,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             int _beatcount = 0;
             if (_masterlvl.Type == "lvl") {
-                if (!ProjectExplorer.TryGetFile(_masterlvl.name, out FileInfo lvl))
+                if (!ProjectExplorer.TryGetFile(_masterlvl.NameSplitter, out FileInfo lvl))
                     return -1;
                 _beatcount += CalculateLvlRuntime(lvl);
             }
@@ -114,7 +114,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 else
                     _beatcount += gatebeats;
             }
-            if (ProjectExplorer.TryGetFile(_masterlvl.rest, out FileInfo lvlrest))
+            if (ProjectExplorer.TryGetFile(_masterlvl.RestLvl, out FileInfo lvlrest))
                 _beatcount += CalculateLvlRuntime(lvlrest);
 
             return _beatcount;
@@ -127,10 +127,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             List<int> bucketscounted = new();
             bool israndom;
             //load the gate to then loop through all lvls in it
-            if (!ProjectExplorer.TryGetFile(_masterlvl.name, out FileInfo gate))
+            if (!ProjectExplorer.TryGetFile(_masterlvl.NameSplitter, out FileInfo gate))
                 return -1;
-            if (!string.IsNullOrEmpty(_masterlvl.gatesectiontype) && TCLE.CachedRuntimes.TryGetValue(gate.Name, out int runtime))
-                return runtime;
+            if (!string.IsNullOrEmpty(_masterlvl.gatesectiontype) && TCLE.CachedRuntimes.TryGetValue(gate.Name, out int runtime)) {
+                if (runtime != 0)
+                    return runtime;
+            }
 
             _load = UtilFile.LoadFileLock(gate);
             //if gate not found, _load is null. Return -1 to denote this
@@ -169,8 +171,10 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         {
             if (lvl is null)
                 return 0;
-            if (!GetApproach && TCLE.CachedRuntimes.TryGetValue(lvl.Name, out int runtime))
-                return runtime;
+            if (!GetApproach && TCLE.CachedRuntimes.TryGetValue(lvl.Name, out int runtime)) {
+                if (runtime != 0)
+                    return runtime;
+            }
 
             int _beatcount = 0;
             //load the lvl and then loop through its leafs to get beat counts
