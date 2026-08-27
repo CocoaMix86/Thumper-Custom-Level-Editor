@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -26,6 +27,12 @@ namespace Thumper_Custom_Level_Editor
             set {
                 if (value == _beats)
                     return;
+                if (TCLE.CachedRuntimes.TryGetValue(Leaf, out int _run)) {
+                    if (_run != value) {
+                        UtilMath.CalculateLeafRuntime(ProjectExplorer.Files.TryGetValue(Leaf, out FileInfo leaf) ? leaf : null);
+                        value = TCLE.CachedRuntimes[Leaf];
+                    }
+                }
                 SetField(ref _beats, value);
                 Parent.Beats = Parent.Leafs.Sum(x => x.Beats);
                 if (_beats == -1) {

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 {
@@ -192,6 +193,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             //_beatcount += (int)_load["approach_beats"];
             TCLE.CachedRuntimes[lvl.Name] = _beatcount;
             return _beatcount + (GetApproach ? (int)_load["approach_beats"] : 0);
+        }
+
+        public static int CalculateLeafRuntime(FileInfo leaf)
+        {
+            if (leaf is null)
+                return 0;
+            JObject _loadleaf = UtilFile.LoadFileLock(leaf);
+            int runtime = (int)_loadleaf["leaf_length"];
+            TCLE.CachedRuntimes[leaf.Name] = runtime;
+            return runtime;
         }
 
         public static int GetTrackOffset(DataGridView trackEditor)
