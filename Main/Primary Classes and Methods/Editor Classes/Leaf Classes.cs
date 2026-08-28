@@ -493,7 +493,7 @@ namespace Thumper_Custom_Level_Editor
         [Editor(typeof(LeafBeatLength), typeof(UITypeEditor))]
         public int LeafLength
         {
-            get => Beats;
+            get => _leaflength;
             set {
                 if (SequencerType == ".leaf") {
                     if (value > 255)
@@ -502,18 +502,19 @@ namespace Thumper_Custom_Level_Editor
                         value = 1;
                 }
                 //cannot change beats if editing a non-leaf sequencer
-                else if (Beats == value)
+                else if (_leaflength == value)
                     return;
 
-                Beats = (int)value;
+                _leaflength = (int)value;
                 if (SequencerType == ".leaf")
-                    TCLE.CachedRuntimes[ParentEditor.WorkingFile.Name] = Beats;
+                    ProjectExplorer.Files[ParentEditor.WorkingFile.Name].Runtime = _leaflength;
                 if (!ParentEditor.EditorIsLoading) {
                     BeatsChangedSinceSave = true;
                     ((EditorLeaf)ParentEditor).LeafLengthChanged();
                 }
             }
         }
+        private int _leaflength;
         [Browsable(false)]
         public int BeatsAndFrozen => Beats + EditorLeaf.FrozenColumnOffset;
         [Browsable(false)]

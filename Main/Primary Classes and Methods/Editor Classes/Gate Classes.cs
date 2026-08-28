@@ -80,11 +80,12 @@ namespace Thumper_Custom_Level_Editor
         public int Beats
         {
             get {
-                if (!TCLE.CachedRuntimes.TryGetValue(LvlName, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.Files[LvlName]);
+                int _b = -1;
+                if (ProjectExplorer.TryGetFile(LvlName, out ProjectItem _run)) {
+                    _b = _run.Runtime;
                 }
-                if (_beats != _run) {
-                    _beats = _run;
+                if (_beats != _b) {
+                    _beats = _b;
                     if (_beats == -1) {
                         Runtime = "file not found";
                         RowColor = Color.Maroon;
@@ -93,7 +94,7 @@ namespace Thumper_Custom_Level_Editor
                         Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
                     RowColor = Color.Green;
                 }
-                return _run;
+                return _beats;
             }
         }
         private int _beats;

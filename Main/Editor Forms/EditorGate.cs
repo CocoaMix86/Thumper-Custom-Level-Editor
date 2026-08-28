@@ -767,17 +767,17 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Add New Phase");
         }
 
-        public int RecalculateRuntime()
+        public void RecalculateRuntime()
         {
             if (EditorIsLoading || _gateproperties == null)
-                return 0;
+                return;
             //depending on the gate configuration, it can have a different amount of lvls in it
             _gateproperties.MaximumLvls = 4;
             if (_gateproperties.Boss == "Level 9 - pyramid")
                 _gateproperties.MaximumLvls = 5;
             else if (_gateproperties.Random)
                 _gateproperties.MaximumLvls = 16;
-
+            /*
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
@@ -797,20 +797,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     beattotal += _lvl.Beats;
             }
-
+            */
             UpdateBeatPosition();
             //GateProperties.Beats = GateLvls.Sum(x => x.Beats) + GateProperties.prebeats + GateProperties.postbeats;//beattotal + GateProperties.prebeats + GateProperties.postbeats;
             if (!Playback.Generating)
                 gateLvlList.Invalidate();
-            return beattotal;
+            return;
         }
 
-        public int RecalculateRuntimeSublevel(GateLvlData _lvl, int index)
+        public void RecalculateRuntimeSublevel(GateLvlData _lvl, int index)
         {
             if (EditorIsLoading)
-                return 0;
+                return;
 
-            if (!ProjectExplorer.TryGetFile(_lvl.LvlName, out FileInfo lvlfile) || !lvlfile.Exists) {
+            /*if (!ProjectExplorer.TryGetFile(_lvl.LvlName, out FileInfo lvlfile) || !lvlfile.Exists) {
                 TCLE.CachedRuntimes[_lvl.LvlName] = 0;
             }
             else
@@ -818,10 +818,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             lvlfile?.Refresh();
             //if playback generating, this was reached during generation, and the form won't exist
             //ColorRow calls form objects which won't be initialized yet.
+            */
             if (!Playback.Generating)
                 ColorRow(_lvl, index);
 
-            return _lvl.Beats;
+            return;
         }
 
         public void UpdateBeatPosition()
