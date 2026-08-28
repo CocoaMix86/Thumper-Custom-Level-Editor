@@ -108,10 +108,10 @@ namespace Thumper_Custom_Level_Editor
             get {
                 if (RestLvl is null or "<none>")
                     return 0;
-                if (!TCLE.CachedRuntimes.TryGetValue(RestLvl, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(RestLvl));
+                if (ProjectExplorer.TryGetFile(RestLvl, out ProjectItem _run)) {
+                    return _run.Runtime;
                 }
-                return _run;
+                return 0;
             }
         }
         public int restlevelbeatstart;
@@ -145,11 +145,12 @@ namespace Thumper_Custom_Level_Editor
         public int Beats
         {
             get {
-                if (!TCLE.CachedRuntimes.TryGetValue(WholeName, out int _run)) {
-                    _run = UtilMath.CalculateSublevelRuntime(this);
+                int _b = -1;
+                if (ProjectExplorer.TryGetFile(WholeName, out ProjectItem _run)) {
+                    _b = _run.Runtime;
                 }
-                if (_beats != _run) {
-                    _beats = _run;
+                if (_beats != _b) {
+                    _beats = _b;
                     if (_beats == -1) {
                         Runtime = "file not found";
                         RowColor = Color.Maroon;
@@ -158,7 +159,7 @@ namespace Thumper_Custom_Level_Editor
                         Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
                     RowColor = Color.Green;
                 }
-                return _run + restlevelbeats;
+                return _b + restlevelbeats;
             }
         }
         private int _beats;
@@ -203,10 +204,10 @@ namespace Thumper_Custom_Level_Editor
             get {
                 if (introlvl is null or "<none>")
                     return 0;
-                if (!TCLE.CachedRuntimes.TryGetValue(introlvl, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(introlvl));
+                if (ProjectExplorer.TryGetFile(introlvl, out ProjectItem _run)) {
+                    return _run.Runtime;
                 }
-                return _run;
+                return 0;
             }
         }
 
@@ -221,10 +222,10 @@ namespace Thumper_Custom_Level_Editor
             get {
                 if (checkpointlvl is null or "<none>")
                     return 0;
-                if (!TCLE.CachedRuntimes.TryGetValue(checkpointlvl, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(checkpointlvl));
+                if (ProjectExplorer.TryGetFile(checkpointlvl, out ProjectItem _run)) {
+                    return _run.Runtime;
                 }
-                return _run;
+                return 0;
             }
         }
     }
