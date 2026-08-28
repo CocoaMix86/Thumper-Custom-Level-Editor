@@ -211,7 +211,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(LvlLeafs[e.RowIndex].Leaf));
+            TCLE.OpenFile(ProjectExplorer.TryGetFile(LvlLeafs[e.RowIndex].Leaf, out ProjectItem leaf) ? leaf.File : null);
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -400,7 +400,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
                 foreach (string leaf in leafs2)
-                    AddFiletoLvl(ProjectExplorer.GetFile(leaf), TargetRowToPaint);
+                    AddFiletoLvl((ProjectExplorer.TryGetFile(leaf, out ProjectItem _leaf) ? _leaf.File : null), TargetRowToPaint);
             }
             TargetRowToPaint = -3;
             previousDragOver = -2;
@@ -841,8 +841,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
-            List<FileInfo> leafs = ProjectExplorer.GetFilesByExtension(".leaf");
-            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)]);
+            List<ProjectItem> leafs = ProjectExplorer.GetFilesByExtension(".leaf");
+            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].File);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
 
@@ -1154,7 +1154,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     id = TCLE.rng.Next()
                 });
             }
-            LvlProperties.Beats = LvlProperties.Leafs.Sum(x => x.Beats);
+            //LvlProperties.Beats = LvlProperties.Leafs.Sum(x => x.Beats);
 
             //mark that lvl is saved (just freshly loaded)
             EditorIsLoading = false;
@@ -1323,24 +1323,24 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public int RecalculateRuntime()
+        public void RecalculateRuntime()
         {
             if (EditorIsLoading || SimpleLoad)
-                return 0;
-            int beattotal = 0;
+                return;
+            /*int beattotal = 0;
             foreach (LvlLeafData _leaf in LvlLeafs) {
                 beattotal += RecalculateRuntimeLeaf(_leaf);
             }
             if (!Playback.Generating)
-                lvlLeafList.Refresh();
+                lvlLeafList.Refresh();*/
             UpdateBeatPosition();
-            LvlProperties.Beats = beattotal;
-            return beattotal;
+            //LvlProperties.Beats = beattotal;
+            //return beattotal;
         }
 
         public int RecalculateRuntimeLeaf(LvlLeafData _leaf)
         {
-            if (EditorIsLoading || SimpleLoad)
+            /*if (EditorIsLoading || SimpleLoad)
                 return 0;
 
             if (!ProjectExplorer.TryGetFile(_leaf.Leaf, out FileInfo leaffile) || !leaffile.Exists)
@@ -1353,7 +1353,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 else
                     _leaf.Beats = runtime;
             }
-
+            */
             return _leaf.Beats;
         }
 

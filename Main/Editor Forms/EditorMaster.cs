@@ -206,7 +206,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > MasterLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(MasterLvls[e.RowIndex].NameSplitter));
+            TCLE.OpenFile(ProjectExplorer.TryGetFile(MasterLvls[e.RowIndex].WholeName, out ProjectItem lvl) ? lvl.File : null);
         }
 
         private Rectangle dragBoxFromMouseDown;
@@ -346,7 +346,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string lvl in sublevels2)
-                    AddFiletoMaster(ProjectExplorer.GetFile(lvl), TargetRowToPaint);
+                    AddFiletoMaster((ProjectExplorer.TryGetFile(lvl, out ProjectItem _item) ? _item.File : null), TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Lvls");
             }

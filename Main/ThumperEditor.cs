@@ -244,8 +244,8 @@ namespace Thumper_Custom_Level_Editor
                 }
             }
             //save runtimes
-            if (ProjectProperties != null && ProjectProperties.WorkingFile != null)
-                File.WriteAllLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt"), TCLE.CachedRuntimes.Select(x => $"{x.Key};;{x.Value}"));
+            ///if (ProjectProperties != null && ProjectProperties.WorkingFile != null)
+            ///    File.WriteAllLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt"), TCLE.CachedRuntimes.Select(x => $"{x.Key};;{x.Value}"));
             //save sequencer favs
             Properties.Settings.Default.SequencerFavorites = TCLE.LeafObjects.Values.Where(x => x.Favorite).Select(x => $"{x.Name};{x.ParamPath}").ToList();
             //save panel sizes and locations
@@ -606,7 +606,7 @@ namespace Thumper_Custom_Level_Editor
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
-                OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
+                OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.File.Name.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).File);
             }
             TCLE.Instance.panelLoadingMessage.Visible = false;
             //
@@ -1088,11 +1088,11 @@ namespace Thumper_Custom_Level_Editor
                     }
                 }
                 else {
-                    if (ProjectExplorer.Files.TryGetValue($"{_packitem.Tag}.samp", out FileInfo _samp)) {
-                        TCLE.CloseFile(_samp);
-                        TCLE.RemoveProjectSamples(_samp);
+                    if (ProjectExplorer.TryGetFile($"{_packitem.Tag}.samp", out ProjectItem _samp)) {
+                        TCLE.CloseFile(_samp.File);
+                        TCLE.RemoveProjectSamples(_samp.File);
                         filesupdates = true;
-                        _samp.Delete();
+                        _samp.File.Delete();
                     }
                 }
             }

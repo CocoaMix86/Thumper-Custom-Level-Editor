@@ -75,13 +75,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 }
             }
             else if (Items == "leaf") {
-                TCLE.GlobalLastLvl?.AddFiletoLvl(ProjectExplorer.GetFile(cellval));
+                TCLE.GlobalLastLvl?.AddFiletoLvl(ProjectExplorer.GetFile(cellval).File);
             }
             else if (Items == "lvl") {
-                TCLE.GlobalLastGate?.AddFileToGate(ProjectExplorer.GetFile(cellval));
+                TCLE.GlobalLastGate?.AddFileToGate(ProjectExplorer.GetFile(cellval).File);
             }
             else if (Items == "lvlgate") {
-                TCLE.GlobalLastMaster?.AddFiletoMaster(ProjectExplorer.GetFile(cellval));
+                TCLE.GlobalLastMaster?.AddFiletoMaster(ProjectExplorer.GetFile(cellval).File);
             }
         }
 
@@ -159,9 +159,9 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Values) {
-                    if (lvl.Extension is ".lvl")
-                        dgvPathsList.Rows.Add(lvl.Name);
+                foreach (ProjectItem lvl in ProjectExplorer.Files.Values) {
+                    if (lvl.File.Extension is ".lvl")
+                        dgvPathsList.Rows.Add(lvl.File.Name);
                 }
             }
             else if (Items == "lvlgate") {
@@ -169,13 +169,13 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LvlGateList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Lvl/Gate";
-                foreach (FileInfo lvl in ProjectExplorer.Files.Values) {
-                    if (lvl.Extension is ".lvl") {
-                        dgvPathsList.Rows.Add(lvl.Name);
+                foreach (ProjectItem lvl in ProjectExplorer.Files.Values) {
+                    if (lvl.File.Extension is ".lvl") {
+                        dgvPathsList.Rows.Add(lvl.File.Name);
                         dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Green;
                     }
-                    else if (lvl.Extension is ".gate") {
-                        dgvPathsList.Rows.Add(lvl.Name);
+                    else if (lvl.File.Extension is ".gate") {
+                        dgvPathsList.Rows.Add(lvl.File.Name);
                         dgvPathsList.Rows[^1].DefaultCellStyle.BackColor = Color.Orange;
                     }
                 }
@@ -185,9 +185,9 @@ namespace Thumper_Custom_Level_Editor.Other_Forms
                 DragSource = "LeafList";
                 dgvPathsList.RowTemplate.DefaultCellStyle.BackColor = Color.Green;
                 this.Text = "Add Leaf";
-                foreach (FileInfo leaf in ProjectExplorer.Files.Values) {
-                    if (leaf.Extension is ".leaf")
-                        dgvPathsList.Rows.Add(leaf.Name);
+                foreach (ProjectItem leaf in ProjectExplorer.Files.Values) {
+                    if (leaf.File.Extension is ".leaf")
+                        dgvPathsList.Rows.Add(leaf.File.Name);
                 }
             }
         }
