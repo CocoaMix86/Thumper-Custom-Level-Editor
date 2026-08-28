@@ -34,23 +34,46 @@ namespace Thumper_Custom_Level_Editor
         {
             File = _file;
         }
-        public FileInfo File { get; set; }
-        public int Runtime { get; set; } = -1;
-        public JObject Data { private get; set; }
+        public FileInfo File { 
+            get => _file; 
+            set {
+                _file = value;
+                LastAccessTime = _file.LastWriteTime;
+            } 
+        }
+        private FileInfo _file;
+        public DateTime LastAccessTime { get; set; }
+        public int Runtime { 
+            get => _runtime;
+            set {
+                _runtime = value;
+                PropagateRuntime();
+            } 
+        }
+        private int _runtime = -1;
+        public JObject Data { 
+            private get => _data;
+            set {
+                _data = value;
+                File.Refresh();
+                LastAccessTime = File.LastWriteTime;
+            } 
+        }
+        private JObject _data;
         public Dictionary<string, ProjectItem> Children = new();
         public Dictionary<string, ProjectItem> Parents = new();
 
         public void AddParent(string Parent)
         {
             if (ProjectExplorer.Files.TryGetValue(Parent, out ProjectItem _parent)) {
-                Parents[Parent] = _parent;
+                Parents.TryAdd(Parent, _parent);
             }
         }
 
         public void AddChild(string Child)
         {
             if (ProjectExplorer.Files.TryGetValue(Child, out ProjectItem _child)) {
-                Children[Child] = _child;
+                Children.TryAdd(Child, _child);
                 _child.AddParent(Child);
             }
         }
@@ -58,18 +81,22 @@ namespace Thumper_Custom_Level_Editor
         public JObject Load()
         {
             if (Data == null) {
-                File.Refresh();
                 Data = UtilFile.LoadFileLock(File);
                 return Data;
             }
             //check write time of file and refresh Data if it's changed since last load
-            DateTime _1 = File.LastWriteTime;
-            File.Refresh();
-            DateTime _2 = File.LastWriteTime;
-            if (_2 > _1) {
+            if (!IsUpToDate()) {
                 Data = UtilFile.LoadFileLock(File);
             }
             return Data;
+        }
+
+        public bool IsUpToDate()
+        {
+            File.Refresh();
+            if (LastAccessTime < File.LastWriteTime)
+                return false;
+            return true;
         }
 
         public void UpdateRuntime()
@@ -79,6 +106,16 @@ namespace Thumper_Custom_Level_Editor
                     item.UpdateRuntime();
 
                 Runtime = Children.Values.Sum(x => x.Runtime);
+            }
+        }
+
+        public void PropagateRuntime()
+        {
+            if (Children.Count > 0) {
+                Runtime = Children.Values.Sum(x => x.Runtime);
+            }
+            foreach (ProjectItem item in Parents.Values) {
+                item.PropagateRuntime();
             }
         }
     }

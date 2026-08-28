@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Thumper_Custom_Level_Editor.Editor_Panels;
-using Windows.ApplicationModel.Activation;
 
 namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
 {
@@ -24,10 +18,16 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
         [CategoryAttribute("Runtime")]
         [DisplayName("Beats")]
         [Description("Total number of beats this item spans.")]
-        public int _showbeats => _beats;
-        [Browsable(false)]
-        public int Beats {
-            get => _beats;
+        public int Beats { 
+            get {
+                if (ProjectExplorer.Files.TryGetValue(ParentEditor.WorkingFile.Name, out ProjectItem _item)) {
+                    if (_beats != _item.Runtime) {
+                        _beats = _item.Runtime;
+                        Runtime = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    }
+                }
+                return _beats;
+            }/*
             set {
                 if (_beats == value)
                     return;
@@ -35,7 +35,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
                 Runtime = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
                 if (ParentEditor != null && this.ParentEditor?.WorkingFile?.Name != null)
                     TCLE.CachedRuntimes[this.ParentEditor.WorkingFile.Name] = Beats;
-            }
+            }*/
         }//> Leafs.Sum(x => x.Beats);
         private int _beats;
 

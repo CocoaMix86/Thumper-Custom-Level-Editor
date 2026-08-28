@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor
                     value = _run.Runtime;
                 }
                 SetField(ref _beats, value);
-                Parent.Beats = Parent.Leafs.Sum(x => x.Beats);
+                //Parent.Beats = Parent.Leafs.Sum(x => x.Beats);
                 if (_beats == -1) {
                     Runtime = "file not found";
                     BackColor = Color.Maroon;
