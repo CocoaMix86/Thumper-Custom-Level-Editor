@@ -236,7 +236,7 @@ namespace Thumper_Custom_Level_Editor
         public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext? context)
         {
             TCLE.ReloadLvlsInProject();
-            return new StandardValuesCollection(TCLE.lvlsinworkfolder);
+            return new StandardValuesCollection(TCLE.LvlsInProject);
         }
     }
 

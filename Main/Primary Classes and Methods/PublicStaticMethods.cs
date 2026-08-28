@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Other_Forms;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -12,9 +13,10 @@ namespace Thumper_Custom_Level_Editor
     {
         #region Variable
         //Static
-        public static string VersionNumber = "3.0.0-a70";
+        public static string VersionNumber = "3.0.0-a71";
         public static decimal[] LeafQuickValues = new[] { 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m, 1.000m };
         public static List<string> LvlPaths = Properties.Resources.paths.Replace("\r\n", "\n").Split('\n').ToList();
+        public static List<string> LvlsInProject = new();
         public static Dictionary<string, DefaultSequencerObject> LeafObjects = new();
         public static Dictionary<string, Bitmap> ColorIcons = new();
         //public static List<SampleData> ProjectSamples = new();
@@ -28,7 +30,6 @@ namespace Thumper_Custom_Level_Editor
         public static readonly Dictionary<string, string> Easings = new() { { "kEaseInOut", "Ease In Out" }, { "kEaseIn", "Ease In" }, { "kEaseOut", "Ease Out" } };
         public static readonly string[] ImageExtensions = new string[] { ".png", ".jpeg", ".jpg", ".gif", ".webp", ".bmp" };
         public static readonly string[] ProjectExtensions = new string[] { ".leaf", ".lvl", ".gate", ".master", ".samp" };
-        public static Dictionary<string, int> CachedRuntimes = new();
         //
         #endregion
 
@@ -284,7 +285,7 @@ namespace Thumper_Custom_Level_Editor
         //check if at least 1 master file exists
         public static bool CheckForMaster()
         {
-            return ProjectExplorer.Files.Values.Any(x => string.Equals(x.Extension, ".master", StringComparison.OrdinalIgnoreCase));
+            return ProjectExplorer.Files.Keys.Any(x => string.Equals(x, ".master", StringComparison.OrdinalIgnoreCase));
         }
 
         public static EditorBase OpenFile(FileInfo filepath, bool openraw = false, bool ReturnContent = false)
@@ -434,9 +435,9 @@ namespace Thumper_Custom_Level_Editor
         {
             if (WorkingFolder == null)
                 return;
-            lvlsinworkfolder = ProjectExplorer.GetFilesByExtension(".lvl").Select(x => x.Name).ToList();
-            lvlsinworkfolder.Add("<none>");
-            lvlsinworkfolder.Sort();
+            LvlsInProject = ProjectExplorer.GetFilesByExtension(".lvl").Select(x => x.File.Name).ToList();
+            LvlsInProject.Add("<none>");
+            LvlsInProject.Sort();
         }
 
         public static void FindReloadRaw(string documentname)

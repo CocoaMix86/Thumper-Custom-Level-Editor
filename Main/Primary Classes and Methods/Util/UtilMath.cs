@@ -98,7 +98,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
             return -1;
         }
-
+        /*
         public static int CalculateSublevelRuntime(MasterLvlData _masterlvl)
         {
             int _beatcount = 0;
@@ -179,14 +179,14 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
             int _beatcount = 0;
             //load the lvl and then loop through its leafs to get beat counts
-            dynamic _load = UtilFile.LoadFileLock(lvl);
+            JObject _load = UtilFile.LoadFileLock(lvl);
             if (_load == null)
                 return 0;
-            foreach (dynamic leaf in _load["leaf_seq"]) {
+            foreach (JObject leaf in _load["leaf_seq"]) {
                 if (ProjectExplorer.TryGetFile((string)leaf["leaf_name"], out FileInfo _leaf) && _leaf.Exists) {
-                    dynamic _loeadleaf = UtilFile.LoadFileLock(_leaf);
-                    if (_loeadleaf != null)
-                        _beatcount += (int)_loeadleaf["beat_cnt"];
+                    JObject _loadleaf = UtilFile.LoadFileLock(_leaf);
+                    if (_loadleaf != null)
+                        _beatcount += (int)_loadleaf["beat_cnt"];
                 }
             }
             //every lvl has an approach beats to consider too
@@ -200,9 +200,123 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             if (leaf is null)
                 return 0;
             JObject _loadleaf = UtilFile.LoadFileLock(leaf);
-            int runtime = (int)_loadleaf["leaf_length"];
-            TCLE.CachedRuntimes[leaf.Name] = runtime;
+            int runtime = 0;
+            if (_loadleaf is null) {
+                TCLE.CachedRuntimes[leaf.Name] = -1;
+                runtime = -1;
+            }
+            else {
+                runtime = (int)_loadleaf["beat_cnt"];
+                TCLE.CachedRuntimes[leaf.Name] = runtime;
+            }
             return runtime;
+        }
+        */
+        public static void RecalculateAllRuntimes()
+        {
+            foreach (FileInfo leaf in TCLE.WorkingFolder.EnumerateFiles("*.leaf", SearchOption.AllDirectories)) {
+                UtilMath.CalculateLeafRuntimeStartup(leaf);
+            }
+            foreach (FileInfo lvl in TCLE.WorkingFolder.EnumerateFiles("*.lvl", SearchOption.AllDirectories)) {
+                UtilMath.CalculateLvlRuntimeStartup(lvl);
+            }
+            foreach (FileInfo gate in TCLE.WorkingFolder.EnumerateFiles("*.gate", SearchOption.AllDirectories)) {
+                UtilMath.CalculateGateRuntimeStartup(gate);
+            }
+            foreach (FileInfo gate in TCLE.WorkingFolder.EnumerateFiles("*.master", SearchOption.AllDirectories)) {
+                UtilMath.CalculateMasterRuntimeStartup(gate);
+            }
+        }
+
+        public static void CalculateLeafRuntimeStartup(FileInfo leaf)
+        {
+            JObject _load = UtilFile.LoadFileLock(leaf);
+            if (_load is null) {
+                ProjectExplorer.Files[leaf.Name].Runtime = -1;
+                return;
+            }
+            ProjectExplorer.Files[leaf.Name].Data = _load;
+            ProjectExplorer.Files[leaf.Name].Runtime = (int)_load["beat_cnt"];
+        }
+        public static void CalculateLvlRuntimeStartup(FileInfo lvl)
+        {
+            //load the lvl and then loop through its leafs to get beat counts
+            JObject _load = UtilFile.LoadFileLock(lvl);
+            if (_load == null) {
+                ProjectExplorer.Files[lvl.Name].Runtime = -1;
+                return;
+            }
+            int _beatcount = 0;
+            foreach (JObject leaf in _load["leaf_seq"]) {
+                ProjectExplorer.Files[lvl.Name].AddChild((string)leaf["leaf_name"]);
+                if (ProjectExplorer.Files.TryGetValue((string)leaf["leaf_name"], out ProjectItem _run)) {
+                    _beatcount += _run.Runtime;
+                    if (_run.Runtime != (int)leaf["beat_cnt"])
+                        leaf["beat_cnt"] = _run.Runtime;
+                }
+            }
+            ProjectExplorer.Files[lvl.Name].Data = _load;
+            ProjectExplorer.Files[lvl.Name].Runtime = _beatcount;
+        }
+        public static void CalculateGateRuntimeStartup(FileInfo gate)
+        {
+            JObject _load = UtilFile.LoadFileLock(gate);
+            int _beatcount = 0;
+            List<int> bucketscounted = new();
+            bool israndom;
+            //if gate not found, _load is null. Return -1 to denote this
+            if (_load == null) {
+                ProjectExplorer.Files[gate.Name].Runtime = -1;
+                return;
+            }
+            //check if random is enabled on this gate
+            israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
+            //loop through each lvl in gate
+            foreach (JObject _lvl in _load["boss_patterns"]) {
+                //attempt to load lvl
+                if (ProjectExplorer.Files.TryGetValue((string)_lvl["lvl_name"], out ProjectItem _run)) {
+                    //if random is enabled, count only the first entry in each bucket
+                    if (israndom) {
+                        if (!bucketscounted.Contains((int)_lvl["bucket_num"])) {
+                            bucketscounted.Add((int)_lvl["bucket_num"]);
+                            _beatcount += _run.Runtime;
+                        }
+                    }
+                    //otherwise count each lvl
+                    else
+                        _beatcount += _run.Runtime;
+                }
+            }
+            //need to also count pre and post lvl
+            if (ProjectExplorer.Files.TryGetValue((string)_load["pre_lvl_name"], out ProjectItem _pre))
+                _beatcount += _pre.Runtime;
+            if (ProjectExplorer.Files.TryGetValue((string)_load["post_lvl_name"], out ProjectItem _post))
+                _beatcount += _post.Runtime;
+
+            ProjectExplorer.Files[gate.Name].Data = _load;
+            ProjectExplorer.Files[gate.Name].Runtime = _beatcount;
+        }
+        public static void CalculateMasterRuntimeStartup(FileInfo master)
+        {
+            JObject _load = UtilFile.LoadFileLock(master);
+            if (_load == null) {
+                ProjectExplorer.Files[master.Name].Runtime = -1;
+                return;
+            }
+            int _beatcount = 0;
+            foreach (JObject _sublevel in _load["groupings"]) {
+                if (ProjectExplorer.Files.TryGetValue((string)_sublevel["lvl_name"], out ProjectItem _run))
+                    _beatcount += _run.Runtime;
+                if (ProjectExplorer.Files.TryGetValue((string)_sublevel["gate_name"], out _run))
+                    _beatcount += _run.Runtime;
+                if (ProjectExplorer.Files.TryGetValue((string)_sublevel["rest_lvl_name"], out _run))
+                    _beatcount += _run.Runtime;
+            }
+            if (ProjectExplorer.Files.TryGetValue((string)_load["intro_lvl_name"], out ProjectItem _run2))
+                _beatcount += _run2.Runtime;
+
+            ProjectExplorer.Files[master.Name].Data = _load;
+            ProjectExplorer.Files[master.Name].Runtime = _beatcount;
         }
 
         public static int GetTrackOffset(DataGridView trackEditor)

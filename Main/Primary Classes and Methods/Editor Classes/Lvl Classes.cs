@@ -32,6 +32,8 @@ namespace Thumper_Custom_Level_Editor
                         UtilMath.CalculateLeafRuntime(ProjectExplorer.Files.TryGetValue(Leaf, out FileInfo leaf) ? leaf : null);
                         value = TCLE.CachedRuntimes[Leaf];
                     }
+                    else
+                        value = _run;
                 }
                 SetField(ref _beats, value);
                 Parent.Beats = Parent.Leafs.Sum(x => x.Beats);

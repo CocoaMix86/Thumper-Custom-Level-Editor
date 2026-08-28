@@ -30,7 +30,6 @@ namespace Thumper_Custom_Level_Editor
         public static ContextMenuStrip TabRightClickMenu;
         public static DirectoryInfo WorkingFolder => ProjectProperties.WorkingFolder;
         public static decimal BPM => ProjectProperties.BPM;
-        public static List<string> lvlsinworkfolder = new();
         public static Random rng = new();
         public static string AppLocation => Path.GetDirectoryName(Application.ExecutablePath);
         public static Dictionary<string, Keys> Keybinds = new();
@@ -585,11 +584,14 @@ namespace Thumper_Custom_Level_Editor
             //create Project Explorer and Project Property panels
             Explorer = new() { TabText = "Project Explorer", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             dockProjectProperties = new() { TabText = "Project Properties", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
+            /*if (File.Exists(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")))
+                TCLE.CachedRuntimes = File.ReadLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")).Select(line => line.Split(";;")).ToDictionary(line => line[0], line => int.Parse(line[1]));*/
             //Load the project''s files into Explorer
-            if (File.Exists(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")))
-                TCLE.CachedRuntimes = File.ReadLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")).Select(line => line.Split(";;")).ToDictionary(line => line[0], line => int.Parse(line[1]));
             Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
+            //calculate all file runtimes
+            TCLE.Instance.lblLoadingPlayback.Text = "Loading Runtimes";
+            UtilMath.RecalculateAllRuntimes();
             //create a workspace
             IsLoadingProject = true;
             TCLE.Instance.lblLoadingPlayback.Text = "Loading Project";
@@ -607,6 +609,7 @@ namespace Thumper_Custom_Level_Editor
                 OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.FullName.EndsWith(".master", StringComparison.OrdinalIgnoreCase)));
             }
             TCLE.Instance.panelLoadingMessage.Visible = false;
+            //
             /*
             foreach (DockWorkspace _ws in TCLE.Workspaces) {
                 if (File.Exists($@"{UtilPaths.CurrentProjectSettings}\layout_{_ws.Text}.config"))

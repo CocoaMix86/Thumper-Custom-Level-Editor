@@ -1,5 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using Newtonsoft.Json.Linq;
+using System.Runtime.InteropServices;
 using Thumper_Custom_Level_Editor.Editor_Panels;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
+using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 
 namespace Thumper_Custom_Level_Editor
 {
@@ -22,6 +25,61 @@ namespace Thumper_Custom_Level_Editor
         {
             File = _file;
             Folder = null;
+        }
+    }
+
+    public class ProjectItem
+    {
+        public ProjectItem(FileInfo _file)
+        {
+            File = _file;
+        }
+        public FileInfo File { get; set; }
+        public int Runtime { get; set; } = -1;
+        public JObject Data { private get; set; }
+        public Dictionary<string, ProjectItem> Children = new();
+        public Dictionary<string, ProjectItem> Parents = new();
+
+        public void AddParent(string Parent)
+        {
+            if (ProjectExplorer.Files.TryGetValue(Parent, out ProjectItem _parent)) {
+                Parents[Parent] = _parent;
+            }
+        }
+
+        public void AddChild(string Child)
+        {
+            if (ProjectExplorer.Files.TryGetValue(Child, out ProjectItem _child)) {
+                Children[Child] = _child;
+                _child.AddParent(Child);
+            }
+        }
+
+        public JObject Load()
+        {
+            if (Data == null) {
+                File.Refresh();
+                Data = UtilFile.LoadFileLock(File);
+                return Data;
+            }
+            //check write time of file and refresh Data if it's changed since last load
+            DateTime _1 = File.LastWriteTime;
+            File.Refresh();
+            DateTime _2 = File.LastWriteTime;
+            if (_2 > _1) {
+                Data = UtilFile.LoadFileLock(File);
+            }
+            return Data;
+        }
+
+        public void UpdateRuntime()
+        {
+            if (Children.Count > 0) {
+                foreach (ProjectItem item in Children.Values)
+                    item.UpdateRuntime();
+
+                Runtime = Children.Values.Sum(x => x.Runtime);
+            }
         }
     }
 
@@ -49,12 +107,13 @@ namespace Thumper_Custom_Level_Editor
         public static TreeNode ProjectRoot => ProjectTree[0];
         //
         public static Dictionary<TreeNode, FileOrFolder> AllFiles = new();
-        public static Dictionary<string, FileInfo> Files = new(StringComparer.OrdinalIgnoreCase);
+        public static Dictionary<string, ProjectItem> MasterFiles = new(StringComparer.OrdinalIgnoreCase);
+        public static Dictionary<string, ProjectItem> Files = new(StringComparer.OrdinalIgnoreCase);
         public static Dictionary<string, DirectoryInfo> Folders = new(StringComparer.OrdinalIgnoreCase);
-        public static bool TryGetFile(string name, out FileInfo file) => Files.TryGetValue(name, out file);
-        public static FileInfo? GetFile(string name) => Files.GetValueOrDefault(name);
+        public static bool TryGetFile(string name, out ProjectItem file) => Files.TryGetValue(name, out file);
+        public static ProjectItem? GetFile(string name) => Files.GetValueOrDefault(name);
         public static bool TryGetFolder(string name, out DirectoryInfo folder) => Folders.TryGetValue(name, out folder);
-        public static List<FileInfo> GetFilesByExtension(string extension) => Files.Values.Where(x => x.Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)).ToList();
+        public static List<ProjectItem> GetFilesByExtension(string extension) => Files.Values.Where(x => x.File.Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)).ToList();
         //public static IEnumerable<FileInfo> Files => AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
         //public static IEnumerable<DirectoryInfo> Folders => AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
         //
@@ -156,7 +215,13 @@ namespace Thumper_Custom_Level_Editor
                     ForeColor = Properties.Settings.Default.ColorProjExpText
                 };
                 AllFiles.Add(_tn, new(file));
-                Files[file.Name] = file;
+                if (MasterFiles.TryGetValue(file.Name, out ProjectItem _item)) {
+                    Files[file.Name] = _item;
+                }
+                else {
+                    MasterFiles[file.Name] = new(file);
+                    Files[file.Name] = MasterFiles[file.Name];
+                }
                 ///projectfiles.Add(_tn.FullPath, file);
                 //check for various filters being used
                 if (filtersearch && !file.Name.Contains(SearchString)) { }

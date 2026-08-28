@@ -506,6 +506,8 @@ namespace Thumper_Custom_Level_Editor
                     return;
 
                 Beats = (int)value;
+                if (SequencerType == ".leaf")
+                    TCLE.CachedRuntimes[ParentEditor.WorkingFile.Name] = Beats;
                 if (!ParentEditor.EditorIsLoading) {
                     BeatsChangedSinceSave = true;
                     ((EditorLeaf)ParentEditor).LeafLengthChanged();
