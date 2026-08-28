@@ -173,10 +173,10 @@ namespace Thumper_Custom_Level_Editor
             get {
                 if (prelvl is null or "<none>")
                     return 0;
-                if (!TCLE.CachedRuntimes.TryGetValue(prelvl, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(prelvl));
+                if (ProjectExplorer.TryGetFile(prelvl, out ProjectItem _prelvl)) {
+                    return _prelvl.Runtime;
                 }
-                return _run;
+                return 0;
             }
         }
 
@@ -191,10 +191,10 @@ namespace Thumper_Custom_Level_Editor
             get {
                 if (postlvl is null or "<none>")
                     return 0;
-                if (!TCLE.CachedRuntimes.TryGetValue(postlvl, out int _run)) {
-                    _run = UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(postlvl));
+                if (ProjectExplorer.TryGetFile(postlvl, out ProjectItem _postlvl)) {
+                    return _postlvl.Runtime;
                 }
-                return _run;
+                return 0;
             }
         }
 

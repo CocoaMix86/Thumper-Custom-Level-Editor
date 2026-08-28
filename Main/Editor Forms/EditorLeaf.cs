@@ -2786,24 +2786,36 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                     //need to update leaf beat count in every lvl that references this file
                     if (_leafproperties.BeatsChangedSinceSave) {
-                        foreach (FileInfo lvl in ProjectExplorer.GetFilesByExtension(".lvl")) {
-                            dynamic _loadfile = UtilFile.LoadFileLock(lvl);
-                            //if load fails, skip
-                            if (_loadfile == null)
-                                continue;
+                        foreach (ProjectItem lvl in ProjectExplorer.GetFilesByExtension(".lvl")) {
                             bool changes = false;
-                            //some files may be lock loaded, so we use different writing methods for those
-                            //also force editor to reload the document
-                            foreach (dynamic leafseq in _loadfile["leaf_seq"]) {
-                                if (leafseq["leaf_name"] == this.WorkingFile.Name) {
+                            foreach (JObject leafseq in lvl.Load()["leaf_seq"]) {
+                                if ((string)leafseq["leaf_name"] == this.WorkingFile.Name) {
                                     leafseq["beat_cnt"] = _leafproperties.LeafLength;
                                     changes = true;
                                 }
                             }
                             if (changes)
-                                UtilFile.WriteFileLock(new FileStream(lvl.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
+                                lvl.Save();
+                            /*
+                            JObject _loadfile = UtilFile.LoadFileLock(lvl.File);
+                            //if load fails, skip
+                            if (_loadfile == null)
+                                continue;
+                            //some files may be lock loaded, so we use different writing methods for those
+                            //also force editor to reload the document
+                            foreach (JObject leafseq in _loadfile["leaf_seq"]) {
+                                if ((string)leafseq["leaf_name"] == this.WorkingFile.Name) {
+                                    leafseq["beat_cnt"] = _leafproperties.LeafLength;
+                                    changes = true;
+                                }
+                            }
+                            if (changes)
+                                UtilFile.WriteFileLock(new FileStream(lvl.File.FullName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite), _loadfile);
+                            */
                         }
-                        TCLE.FindEditorRunMethod(typeof(EditorLvl), "RecalculateRuntime");
+                        foreach (EditorLvl tab in TCLE.Documents.Values.OfType<EditorLvl>())
+                            tab.RecalculateRuntime();
+                        //TCLE.FindEditorRunMethod(typeof(EditorLvl), "RecalculateRuntime");
                     }
                     if (playsound) UtilAudio.PlaySound("UIsave");
                 }

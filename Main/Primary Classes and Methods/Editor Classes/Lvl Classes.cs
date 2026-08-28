@@ -29,7 +29,7 @@ namespace Thumper_Custom_Level_Editor
                 if (value == _beats)
                     return;
                 value = -1;
-                if (ProjectExplorer.Files.TryGetValue(Leaf, out ProjectItem _run)) {
+                if (ProjectExplorer.TryGetFile(Leaf, out ProjectItem _run)) {
                     value = _run.Runtime;
                 }
                 SetField(ref _beats, value);

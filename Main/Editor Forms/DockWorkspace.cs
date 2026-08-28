@@ -37,14 +37,14 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             bool raw = persistString.Contains(" [Raw]");
             persistString = persistString.Replace(" [Raw]", "");
 
-            if (ProjectExplorer.TryGetFile(persistString, out FileInfo _toopen)) {//show the loading message
+            if (ProjectExplorer.TryGetFile(persistString, out ProjectItem _toopen)) {//show the loading message
                 TCLE.Instance.lblLoadingLvl.Text = $"Loading: {persistString}";
                 TCLE.Instance.lblLoadingLvl.Invalidate();
                 TCLE.Instance.lblLoadingLvl.Update();
                 TCLE.Instance.lblLoadingLvl.Refresh();
                 Application.DoEvents();
                 //
-                EditorBase _e = TCLE.OpenFile(_toopen, raw, true);
+                EditorBase _e = TCLE.OpenFile(_toopen.File, raw, true);
                 return _e;
             }
             return null;

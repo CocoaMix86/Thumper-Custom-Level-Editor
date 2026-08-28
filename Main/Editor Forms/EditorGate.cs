@@ -169,7 +169,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.GetFile(GateLvls[e.RowIndex].LvlName));
+            TCLE.OpenFile(ProjectExplorer.TryGetFile(GateLvls[e.RowIndex].LvlName, out ProjectItem lvl) ? lvl.File : null);
         }
 
         bool MouseDown;
@@ -348,7 +348,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string lvl in sublevels2)
-                    AddFileToGate(ProjectExplorer.GetFile(lvl), TargetRowToPaint);
+                    AddFileToGate((ProjectExplorer.TryGetFile(lvl, out ProjectItem _itemlvl) ? _itemlvl.File : null), TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Phases");
             }
@@ -781,9 +781,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int beattotal = 0;
             List<int> bucketscounted = new();
             //calc pre lvl beats
-            UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.prelvl, out FileInfo pre) ? pre : null);
+            //UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.prelvl, out FileInfo pre) ? pre : null);
             //calc post lvl beats
-            UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.postlvl, out FileInfo post) ? post : null);
+            //UtilMath.CalculateLvlRuntime(ProjectExplorer.TryGetFile(_gateproperties.postlvl, out FileInfo post) ? post : null);
             //loop over each lvl and update the grid with runtime or a warning
             for (int i = 0; i < GateLvls.Count; i++) {
                 GateLvlData _lvl = GateLvls[i];
@@ -799,7 +799,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
 
             UpdateBeatPosition();
-            GateProperties.Beats = GateLvls.Sum(x => x.Beats) + GateProperties.prebeats + GateProperties.postbeats;//beattotal + GateProperties.prebeats + GateProperties.postbeats;
+            //GateProperties.Beats = GateLvls.Sum(x => x.Beats) + GateProperties.prebeats + GateProperties.postbeats;//beattotal + GateProperties.prebeats + GateProperties.postbeats;
             if (!Playback.Generating)
                 gateLvlList.Invalidate();
             return beattotal;

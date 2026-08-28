@@ -91,6 +91,13 @@ namespace Thumper_Custom_Level_Editor
             return Data;
         }
 
+        public void Save()
+        {
+            UtilFile.WriteFileLock(File.FullName, Data);
+            File.Refresh();
+            LastAccessTime = File.LastWriteTime;
+        }
+
         public bool IsUpToDate()
         {
             File.Refresh();
@@ -99,11 +106,13 @@ namespace Thumper_Custom_Level_Editor
             return true;
         }
 
-        public void UpdateRuntime()
+        public void UpdateRuntime(bool Startup = false)
         {
             if (Children.Count > 0) {
-                foreach (ProjectItem item in Children.Values)
-                    item.UpdateRuntime();
+                if (!Startup) {
+                    foreach (ProjectItem item in Children.Values)
+                        item.UpdateRuntime();
+                }
 
                 Runtime = Children.Values.Sum(x => x.Runtime);
             }
