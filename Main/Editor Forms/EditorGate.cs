@@ -728,15 +728,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void AddFileToGate(FileInfo FileToAdd, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = UtilFile.LoadFileLock(FileToAdd);
+            JObject _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] is not "SequinLevel") {
                 MessageBox.Show("That does not appear to be a lvl.\nItem not added to gate.", "Bumper Custom Level Editor");
                 return;
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
+            UtilFile.CopyToWorkingFolderCheck(FileToAdd.FullName);
+            //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             //this is why I utilize workingfolder
             //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
+            /*
             if (FileToAdd.FullName.Contains(TCLE.WorkingFolder.FullName)) {
                 if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{FileToAdd.Name}")) {
@@ -745,7 +748,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     }
                     else
                         return;
-            }
+            }*/
             UtilAudio.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             if (index == -1) {

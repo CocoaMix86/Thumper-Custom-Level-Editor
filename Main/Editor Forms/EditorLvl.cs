@@ -1165,7 +1165,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public void AddFiletoLvl(FileInfo FileToAdd, int index = -1)
         {
             //parse leaf to JSON
-            dynamic _load = UtilFile.LoadFileLock(FileToAdd);
+            JObject _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
             if ((string)_load["obj_type"] != "SequinLeaf") {
                 MessageBox.Show("This does not appear to be a leaf file!", "Leaf load error");
