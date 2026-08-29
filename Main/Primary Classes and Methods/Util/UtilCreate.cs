@@ -33,7 +33,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     ParamPath = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
                     EnabledInEditor = ((string)seq_obj["enabled"] ?? "True").Equals("true", StringComparison.OrdinalIgnoreCase),
                 };
-                for (int x = 0; x < LeafProps.Beats + EditorLeaf.FrozenColumnOffset; x++)
+                for (int x = 0; x < LeafProps.LeafLength + EditorLeaf.FrozenColumnOffset; x++)
                     ObjectToImport.Cells.Add(new SimpleSeqDataPoint());
 
                 //if object is a layer volume, we "reset" its index to x so it can be renumbered in case its out of order.
@@ -114,7 +114,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
             }
         }
         private int _leaflength;
-        public int BeatsAndFrozen => Beats + EditorLeaf.FrozenColumnOffset;
+        public int BeatsAndFrozen => LeafLength + EditorLeaf.FrozenColumnOffset;
     }
 
     public class SimpleSequencerObject : DataGridViewRow

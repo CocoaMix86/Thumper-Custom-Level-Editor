@@ -516,7 +516,7 @@ namespace Thumper_Custom_Level_Editor
         }
         private int _leaflength;
         [Browsable(false)]
-        public int BeatsAndFrozen => Beats + EditorLeaf.FrozenColumnOffset;
+        public int BeatsAndFrozen => LeafLength + EditorLeaf.FrozenColumnOffset;
         [Browsable(false)]
         public bool BeatsChangedSinceSave = false;
 

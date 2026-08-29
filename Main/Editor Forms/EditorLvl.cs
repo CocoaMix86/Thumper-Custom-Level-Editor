@@ -655,7 +655,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         ///_LVLLEAF - Triggers when the collection changes
         public void LvlLeaf_CollectionChanged(object sender, ListChangedEventArgs e)
         {
-            if (EditorIsLoading)
+            if (EditorIsLoading || SimpleLoad)
                 return;
             //enable certain buttons if there are enough items for them
             btnLvlLeafDelete.Enabled = LvlLeafs.Count > 0;

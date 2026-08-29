@@ -20,7 +20,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Editor_Classes
         [Description("Total number of beats this item spans.")]
         public int Beats { 
             get {
-                if (ProjectExplorer.Files.TryGetValue(ParentEditor.WorkingFile.Name, out ProjectItem _item)) {
+                if (ProjectExplorer.Files.TryGetValue(ParentEditor?.WorkingFile?.Name, out ProjectItem _item)) {
                     if (_beats != _item.Runtime) {
                         _beats = _item.Runtime;
                         Runtime = TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
