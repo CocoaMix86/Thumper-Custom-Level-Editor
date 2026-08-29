@@ -43,11 +43,17 @@ namespace Thumper_Custom_Level_Editor
         }
         private FileInfo _file;
         public DateTime LastAccessTime { get; set; }
+        private bool _ispropagating;
         public int Runtime { 
             get => _runtime;
             set {
+                if (_runtime == value)
+                    return;
                 _runtime = value;
-                PropagateRuntime();
+                if (TCLE.Documents.TryGetValue(File.Name, out EditorBase tab))
+                    tab.RecalculateRuntime();
+                if (!_ispropagating)
+                    PropagateRuntime();
             } 
         }
         private int _runtime = -1;
@@ -63,18 +69,16 @@ namespace Thumper_Custom_Level_Editor
         public Dictionary<string, ProjectItem> Children = new();
         public Dictionary<string, ProjectItem> Parents = new();
 
-        public void AddParent(string Parent)
+        public void AddParent(ProjectItem Parent)
         {
-            if (ProjectExplorer.Files.TryGetValue(Parent, out ProjectItem _parent)) {
-                Parents.TryAdd(Parent, _parent);
-            }
+            Parents.TryAdd(Parent.File.Name, Parent);
         }
 
         public void AddChild(string Child)
         {
             if (ProjectExplorer.Files.TryGetValue(Child, out ProjectItem _child)) {
                 Children.TryAdd(Child, _child);
-                _child.AddParent(Child);
+                _child.AddParent(this);
             }
         }
 
@@ -120,12 +124,14 @@ namespace Thumper_Custom_Level_Editor
 
         public void PropagateRuntime()
         {
+            _ispropagating = true;
             if (Children.Count > 0) {
                 Runtime = Children.Values.Sum(x => x.Runtime);
             }
             foreach (ProjectItem item in Parents.Values) {
                 item.PropagateRuntime();
             }
+            _ispropagating = false;
         }
     }
 

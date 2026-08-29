@@ -41,6 +41,14 @@ namespace Thumper_Custom_Level_Editor
             DoubleBufferedProperty?.SetValue(grid, true);
         }
 
+        public static void UpdateLoadingMessage()
+        {
+            TCLE.Instance.lblLoadingLeaf.Invalidate();
+            TCLE.Instance.lblLoadingLeaf.Update();
+            TCLE.Instance.lblLoadingLeaf.Refresh();
+            Application.DoEvents();
+        }
+
         ///Color elements based on set properties
         public static void ColorFormElements(TCLE MainForm)
         {

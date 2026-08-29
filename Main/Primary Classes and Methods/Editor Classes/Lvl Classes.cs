@@ -24,28 +24,34 @@ namespace Thumper_Custom_Level_Editor
         //
         private int _beats;
         public int Beats { 
-            get => _beats;
-            set {
-                if (value == _beats)
-                    return;
-                value = -1;
+            get {
+                int _b = -1;
                 if (ProjectExplorer.TryGetFile(Leaf, out ProjectItem _run)) {
-                    value = _run.Runtime;
+                    _b = _run.Runtime;
                 }
-                SetField(ref _beats, value);
-                //Parent.Beats = Parent.Leafs.Sum(x => x.Beats);
+                if (_b == _beats)
+                    return _beats;
+                SetField(ref _beats, _b);
                 if (_beats == -1) {
-                    Runtime = "file not found";
+                    UpdateRuntime("file not found");
                     BackColor = Color.Maroon;
                 }
                 else {
-                    Runtime = $"{Beats} beats -- " + TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff");
+                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
                     BackColor = Color.Green;
                 }
+                return _beats;
             } 
         }
         //
-        public string Runtime { get; set; } = "file not found";
+        private string _runtime = "file not found";
+        public string Runtime { 
+            get => $"{Beats} beats -- {_runtime}"; } 
+        public void UpdateRuntime(string value)
+        {
+            _runtime = value;
+            OnPropertyChanged(nameof(Runtime));
+        }
         public Color BackColor { get; set; } = Color.Green;
         //
         public List<string> ImportPaths { 

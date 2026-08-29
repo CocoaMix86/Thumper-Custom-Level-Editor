@@ -767,7 +767,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             SaveCheckAndWrite(false, "Add New Phase");
         }
 
-        public void RecalculateRuntime()
+        public override void RecalculateRuntime()
         {
             if (EditorIsLoading || _gateproperties == null)
                 return;
@@ -800,8 +800,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             */
             UpdateBeatPosition();
             //GateProperties.Beats = GateLvls.Sum(x => x.Beats) + GateProperties.prebeats + GateProperties.postbeats;//beattotal + GateProperties.prebeats + GateProperties.postbeats;
-            if (!Playback.Generating)
+            if (!Playback.Generating) {
+                gateLvlList.Refresh();
                 gateLvlList.Invalidate();
+            }
             return;
         }
 
@@ -855,7 +857,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     row.DefaultCellStyle = null;
-                    _lvl.RuntimeMessage = _lvl.Runtime;
+                    _lvl.RuntimeMessage = null;
                 }
             }
         }

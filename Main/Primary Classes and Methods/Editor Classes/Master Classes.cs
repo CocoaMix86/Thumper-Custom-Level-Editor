@@ -152,19 +152,29 @@ namespace Thumper_Custom_Level_Editor
                 if (_beats != _b) {
                     _beats = _b;
                     if (_beats == -1) {
-                        Runtime = "file not found";
+                        UpdateRuntime("file not found");
                         RowColor = Color.Maroon;
                     }
-                    else
-                        Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
-                    RowColor = Color.Green;
+                    else {
+                        UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
+                        RowColor = Color.Green;
+                    }
                 }
                 return _b + restlevelbeats;
             }
         }
         private int _beats;
-        public string Runtime { get => _runtime; set => SetField(ref _runtime, value); }
-        private string _runtime;
+        //
+        private string _runtime = "file not found";
+        public string Runtime
+        {
+            get => $"{Beats} beats -- {_runtime}";
+        }
+        public void UpdateRuntime(string value)
+        {
+            _runtime = value;
+            OnPropertyChanged(nameof(Runtime));
+        }
 
         public Color RowColor = Color.Green;
         public int BeatStart;

@@ -826,10 +826,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public int RecalculateRuntime()
+        public override void RecalculateRuntime()
         {
             if (SimpleLoad)
-                return 0;
+                return;
+            UpdateBeatPosition();
+            masterLvlList.Refresh();
             //int beattotal = 0;
             //calc intro lvl
             /*
@@ -840,10 +842,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!ProjectExplorer.TryGetFile(MasterProperties.checkpointlvl, out FileInfo _checkpointlvl))
                 MasterProperties.checkpointbeats = 0;
             MasterProperties.checkpointbeats = UtilMath.CalculateLvlRuntime(_checkpointlvl);
-            */
+            
             //calc each lvl/gate
             foreach (MasterLvlData _lvl in MasterLvls) {
-                /*beattotal += */RecalculateRuntimeSublevel(_lvl, false);
+                //beattotal += RecalculateRuntimeSublevel(_lvl, false);
             }
             UpdateBeatPosition();
             //MasterProperties.Beats = beattotal;
@@ -851,18 +853,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             masterLvlList.Invalidate();
             //return beattotal + MasterProperties.introlevelbeats;
             return MasterProperties.Beats;
+            */
         }
-
+        /*
         public int RecalculateRuntimeSublevel(MasterLvlData _lvl, bool updatebeats = true)
         {
             if (SimpleLoad)
                 return 0;
 
-            /*_lvl.Beats = */
+            /*_lvl.Beats = 
             UtilMath.CalculateSublevelRuntime(_lvl);
             //include rest in lvl's runtime
             if (_lvl.RestLvl is not "<none>" and not null)
-                /*_lvl.restlevelbeats = */
+                /*_lvl.restlevelbeats = 
                 UtilMath.CalculateLvlRuntime(ProjectExplorer.GetFile(_lvl.RestLvl));
             //uptime visuals to show if lvl found or 
             int index = MasterLvls.IndexOf(_lvl);
@@ -871,7 +874,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //index for previous lvl checkpoint status
             return _lvl.Beats + _lvl.restlevelbeats + (index > 0 && MasterLvls[index - 1].Checkpoint ? MasterProperties.checkpointbeats : 0);
         }
-
+        */
         public void UpdateBeatPosition()
         {
             int beatpos = MasterProperties.introlevelbeats;

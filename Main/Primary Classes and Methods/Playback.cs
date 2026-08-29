@@ -157,10 +157,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //show the loading message
             TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.ParentEditor.WorkingFile?.Name ?? "Lvl Sequencer"}";
-            TCLE.Instance.lblLoadingLeaf.Invalidate();
-            TCLE.Instance.lblLoadingLeaf.Update();
-            TCLE.Instance.lblLoadingLeaf.Refresh();
-            Application.DoEvents();
+            TCLE.UpdateLoadingMessage();
             //
             Generating = true;
             BeatOffset = _BeatOffset;
@@ -331,10 +328,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //show the loading message
             TCLE.Instance.lblLoadingLeaf.Text = $"Leaf: {Leaf.LeafName}";
-            TCLE.Instance.lblLoadingLeaf.Invalidate();
-            TCLE.Instance.lblLoadingLeaf.Update();
-            TCLE.Instance.lblLoadingLeaf.Refresh();
-            Application.DoEvents();
+            TCLE.UpdateLoadingMessage();
             //
             Generating = true;
             BeatOffset = _BeatOffset;
@@ -504,10 +498,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //show the loading message
             TCLE.Instance.lblLoadingLvl.Text = $"Lvl: {Lvl.ParentEditor.WorkingFile.Name}";
-            TCLE.Instance.lblLoadingLvl.Invalidate();
-            TCLE.Instance.lblLoadingLvl.Update();
-            TCLE.Instance.lblLoadingLvl.Refresh();
-            Application.DoEvents();
+            TCLE.UpdateLoadingMessage();
             //
             Generating = true;
             GlobalLvlQueue.Add(new Tuple<string, int>(Lvl.ParentEditor.WorkingFile.Name, (_BeatOffset) * 100));
@@ -542,10 +533,7 @@ namespace Thumper_Custom_Level_Editor
         {
             //show the loading message
             TCLE.Instance.lblLoadingGate.Text = $"Gate: {Gate.ParentEditor.WorkingFile.Name}";
-            TCLE.Instance.lblLoadingGate.Invalidate();
-            TCLE.Instance.lblLoadingGate.Update();
-            TCLE.Instance.lblLoadingGate.Refresh();
-            Application.DoEvents();
+            TCLE.UpdateLoadingMessage();
             //
             Generating = true;
             GlobalGateQueue.Add(new Tuple<string, int>(Gate.ParentEditor.WorkingFile.Name, (_BeatOffset) * 100));
@@ -574,10 +562,7 @@ namespace Thumper_Custom_Level_Editor
             }
             //clear the gate name after loading it
             TCLE.Instance.lblLoadingGate.Text = $"Gate:";
-            TCLE.Instance.lblLoadingGate.Invalidate();
-            TCLE.Instance.lblLoadingGate.Update();
-            TCLE.Instance.lblLoadingGate.Refresh();
-            Application.DoEvents();
+            TCLE.UpdateLoadingMessage();
             //
         }
 

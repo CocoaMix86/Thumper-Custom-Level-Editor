@@ -79,6 +79,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public virtual object GetProperties() { return null; }
         public virtual void PerformUndo(int undolistindex) { }
         public virtual void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false) { }
+        public virtual void RecalculateRuntime() { }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {

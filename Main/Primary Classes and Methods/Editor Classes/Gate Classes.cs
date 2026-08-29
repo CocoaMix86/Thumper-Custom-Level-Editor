@@ -77,33 +77,36 @@ namespace Thumper_Custom_Level_Editor
         }
         public int Phase => Parent.Random ? Bucket : Parent.GateLvls.IndexOf(this);
 
-        public int Beats
-        {
+        private int _beats;
+        public int Beats {
             get {
                 int _b = -1;
                 if (ProjectExplorer.TryGetFile(LvlName, out ProjectItem _run)) {
                     _b = _run.Runtime;
                 }
-                if (_beats != _b) {
-                    _beats = _b;
-                    if (_beats == -1) {
-                        Runtime = "file not found";
-                        RowColor = Color.Maroon;
-                    }
-                    else
-                        Runtime = $"{this.Beats} beats -- {TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff")}";
+                if (_beats == _b)
+                    return _beats;
+                SetField(ref _beats, _b);
+                if (_beats == -1) {
+                    UpdateRuntime("file not found");
+                    RowColor = Color.Maroon;
+                }
+                else {
+                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
                     RowColor = Color.Green;
                 }
                 return _beats;
             }
         }
-        private int _beats;
-        
-        private string _runtime;
-        public string Runtime
+        //
+        private string _runtime = "file not found";
+        public string Runtime {
+            get => $"{Beats} beats -- {_runtime}";
+        }
+        public void UpdateRuntime(string value)
         {
-            get => _runtime;
-            set => SetField(ref _runtime, value);
+            _runtime = value;
+            OnPropertyChanged(nameof(Runtime));
         }
 
         public Color RowColor = Color.Green;
@@ -112,7 +115,7 @@ namespace Thumper_Custom_Level_Editor
         private string _runtimemessage;
         public string RuntimeMessage
         {
-            get => _runtimemessage;
+            get => string.IsNullOrEmpty(_runtimemessage) ? Runtime : _runtimemessage;
             set => SetField(ref _runtimemessage, value);
         }
 

@@ -99,7 +99,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
 
         public int LeafLength
         {
-            get => Beats;
+            get => _leaflength;
             set {
                 if (SequencerType == ".leaf") {
                     if (value > 255)
@@ -108,13 +108,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                         value = 1;
                 }
                 //cannot change beats if editing a non-leaf sequencer
-                else if (Beats == value)
+                else if (_leaflength == value)
                     return;
-                else
-                    return;
-                Beats = (int)value;
+                _leaflength = (int)value;
             }
         }
+        private int _leaflength;
         public int BeatsAndFrozen => Beats + EditorLeaf.FrozenColumnOffset;
     }
 

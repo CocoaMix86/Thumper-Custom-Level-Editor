@@ -1093,7 +1093,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData(LvlProperties) {
                     Leaf = (string)leaf["leaf_name"],
-                    Beats = (int)leaf["beat_cnt"],
+                    //Beats = (int)leaf["beat_cnt"],
                     ImportPaths = leaf["sub_paths"].ToObject<List<string>>(),
                     id = TCLE.rng.Next()
                 });
@@ -1149,7 +1149,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (dynamic leaf in _load["leaf_seq"]) {
                 LvlLeafs.Add(new LvlLeafData(LvlProperties) {
                     Leaf = (string)leaf["leaf_name"],
-                    Beats = (int)leaf["beat_cnt"],
+                    //Beats = (int)leaf["beat_cnt"],
                     ImportPaths = leaf["sub_paths"].ToObject<List<string>>(),
                     id = TCLE.rng.Next()
                 });
@@ -1180,7 +1180,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //add leaf data to the list
             LvlLeafData _toadd = new(LvlProperties) {
                 Leaf = (string)_load["obj_name"],
-                Beats = (int)_load["beat_cnt"],
+                //Beats = (int)_load["beat_cnt"],
                 Paths = new BindingList<LvlPath>(copytunnels),
                 id = TCLE.rng.Next()
             };
@@ -1323,7 +1323,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
-        public void RecalculateRuntime()
+        public override void RecalculateRuntime()
         {
             if (EditorIsLoading || SimpleLoad)
                 return;
@@ -1334,6 +1334,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (!Playback.Generating)
                 lvlLeafList.Refresh();*/
             UpdateBeatPosition();
+            if (!Playback.Generating) {
+                lvlLeafList.Refresh();
+                lvlLeafList.Invalidate();
+            }
             //LvlProperties.Beats = beattotal;
             //return beattotal;
         }

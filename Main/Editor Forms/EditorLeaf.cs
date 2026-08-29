@@ -2878,6 +2878,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else {
                 trackEditor.ColumnCount = _leafproperties.LeafLength + FrozenColumnOffset;
             }
+            //force open lvls to update leaf beats
+            foreach (EditorLvl tab in TCLE.Documents.Values.OfType<EditorLvl>())
+                tab.RecalculateRuntime();
 
             dgvMasterView.ColumnCount = trackEditor.ColumnCount - FrozenColumnOffset;
             LeafMasterView.InitializeAndResize(SequencerObjects, _leafproperties);

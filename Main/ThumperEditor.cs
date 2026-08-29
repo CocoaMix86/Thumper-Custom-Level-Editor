@@ -586,16 +586,20 @@ namespace Thumper_Custom_Level_Editor
             dockProjectProperties = new() { TabText = "Project Properties", DockAreas = DockAreas.DockRight | DockAreas.DockLeft };
             /*if (File.Exists(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")))
                 TCLE.CachedRuntimes = File.ReadLines(Path.Combine(UtilPaths.CurrentProjectSettings, "RuntimeCache.txt")).Select(line => line.Split(";;")).ToDictionary(line => line[0], line => int.Parse(line[1]));*/
+            TCLE.Instance.panelLoadingMessage.Visible = true;
+            TCLE.Instance.lblLoadingPlayback.Text = "Loading Explorer";
+            TCLE.UpdateLoadingMessage();
             //Load the project''s files into Explorer
             Explorer.LoadProject();
             dockProjectProperties.LoadProjectProperties();
             //calculate all file runtimes
             TCLE.Instance.lblLoadingPlayback.Text = "Loading Runtimes";
+            TCLE.UpdateLoadingMessage();
             UtilMath.RecalculateAllRuntimes();
             //create a workspace
             IsLoadingProject = true;
-            TCLE.Instance.lblLoadingPlayback.Text = "Loading Project";
-            TCLE.Instance.panelLoadingMessage.Visible = true;
+            TCLE.Instance.lblLoadingPlayback.Text = "Loading Layout";
+            TCLE.UpdateLoadingMessage();
             if (!UtilPaths.DirCurrentProjectSettings.Exists)
                 UtilPaths.DirCurrentProjectSettings.Create();
             DeserializeDockContent m_deserializeDockContent = new(GetContentFromPersistString);
