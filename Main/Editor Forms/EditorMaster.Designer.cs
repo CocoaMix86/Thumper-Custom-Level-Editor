@@ -173,6 +173,7 @@
             this.masterLvlList.CellMouseDown += this.masterLvlList_CellMouseDown;
             this.masterLvlList.CellMouseUp += this.masterLvlList_CellMouseUp;
             this.masterLvlList.CellPainting += this.masterLvlList_CellPainting;
+            this.masterLvlList.DataError += this.masterLvlList_DataError;
             this.masterLvlList.RowPrePaint += this.masterLvlList_RowPrePaint;
             this.masterLvlList.SelectionChanged += this.masterLvlList_SelectionChanged;
             this.masterLvlList.DragDrop += this.masterLvlList_DragDrop;

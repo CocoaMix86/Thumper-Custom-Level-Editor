@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Swift;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
@@ -44,16 +45,19 @@ namespace Thumper_Custom_Level_Editor
         private FileInfo _file;
         public DateTime LastAccessTime { get; set; }
         private bool _ispropagating;
+        private bool _selftriggered;
         public int Runtime { 
             get => _runtime;
             set {
                 if (_runtime == value)
                     return;
                 _runtime = value;
-                if (TCLE.Documents.TryGetValue(File.Name, out EditorBase tab))
-                    tab.RecalculateRuntime();
                 if (!_ispropagating)
                     PropagateRuntime();
+                if (TCLE.Documents.TryGetValue(File.Name, out EditorBase tab)) {
+                    if (!_selftriggered)
+                        tab.RecalculateRuntime();
+                }
             } 
         }
         private int _runtime = -1;
@@ -82,6 +86,27 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public void UpdateChildren(List<string> CurrentChildren)
+        {
+            bool changes = false;
+            _selftriggered = true;
+            foreach (var _c1 in Children.ToList()) {
+                if (!CurrentChildren.Contains(_c1.Key)) {
+                    Children.Remove(_c1.Key);
+                    changes = true;
+                }
+            }
+            foreach (string _c2 in CurrentChildren) {
+                if (!Children.ContainsKey(_c2)) {
+                    AddChild(_c2);
+                    changes = true;
+                }
+            }
+            if (changes)
+                GetRuntime();
+            _selftriggered = false;
+        }
+
         public JObject Load()
         {
             if (Data == null) {
@@ -102,6 +127,23 @@ namespace Thumper_Custom_Level_Editor
             LastAccessTime = File.LastWriteTime;
         }
 
+        public void Reset()
+        {
+            Children.Clear();
+            if (File.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateLeafRuntimeStartup(File);
+            }
+            else if (File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateLvlRuntimeStartup(File);
+            }
+            else if (File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateGateRuntimeStartup(File);
+            }
+            else if (File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateMasterRuntimeStartup(File);
+            }
+        }
+
         public bool IsUpToDate()
         {
             File.Refresh();
@@ -110,12 +152,17 @@ namespace Thumper_Custom_Level_Editor
             return true;
         }
 
-        public void UpdateRuntime(bool Startup = false)
+        public void GetRuntime()
+        {
+            Runtime = Children.Values.Sum(x => x.Runtime);
+        }
+
+        public void ForceAllChildrenUpdate(bool Startup = false)
         {
             if (Children.Count > 0) {
                 if (!Startup) {
                     foreach (ProjectItem item in Children.Values)
-                        item.UpdateRuntime();
+                        item.ForceAllChildrenUpdate();
                 }
 
                 Runtime = Children.Values.Sum(x => x.Runtime);

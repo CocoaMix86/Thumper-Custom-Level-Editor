@@ -60,6 +60,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
+                //reset the ProjectItem to last saved state
+                ProjectExplorer.Files[WorkingFile.Name].Reset();
             }
         }
 
@@ -495,6 +497,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnMasterLvlDown.Enabled = MasterLvls.Count > 1;
             btnMasterLvlCopy.Enabled = MasterLvls.Count > 0;
             UpdateSublevelNumbers();
+            //monke
+            if (e is null)
+                return;
+            if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted) {
+                ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(MasterLvls.Select(x => x.WholeName).ToList());
+            }
         }
 
         public void UpdateSublevelNumbers()
@@ -710,6 +718,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
             UpdateSublevelNumbers();
             MasterLvls.ListChanged += masterlvls_CollectionChanged;
+            ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(MasterLvls.Select(x => x.WholeName).ToList());
 
             masterLvlList.AutoGenerateColumns = false;
             masterLvlList.Columns[0].DataPropertyName = "SublevelNumber";
@@ -1057,6 +1066,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _playinglvlform?.lvlLeafList.Invalidate();
                 _playinggateform?.gateLvlList.Invalidate();
             }
+        }
+
+        private void masterLvlList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
         }
     }
 }

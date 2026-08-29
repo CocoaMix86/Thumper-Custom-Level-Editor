@@ -5,6 +5,7 @@ using Un4seen.Bass;
 using WeifenLuo.WinFormsUI.Docking;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util;
 using System.ComponentModel;
+using ABI.Windows.ApplicationModel.Activation;
 
 namespace Thumper_Custom_Level_Editor.Editor_Panels
 {
@@ -64,6 +65,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
+                //reset the ProjectItem to last saved state
+                ProjectExplorer.Files[WorkingFile.Name].Reset();
             }
         }
 
@@ -409,6 +412,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void GateLvls_ListChanges(object sender, ListChangedEventArgs e)
         {
+            if (EditorIsLoading || SimpleLoad)
+                return;
             //set selected index. Mainly used when moving items
             //enable certain buttons if there are enough items for them
             btnGateLvlDelete.Enabled = _gateproperties.GateLvls.Count > 0;
@@ -417,6 +422,15 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             //limit how many phases can be added
             btnGateLvlAdd.Enabled = IsAllowedToAddLvl;
+            //monke
+            if (e is null)
+                return;
+            if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted) {
+                List<string> childs = GateLvls.Select(x => x.LvlName).ToList();
+                childs.Add(GateProperties.prelvl);
+                childs.Add(GateProperties.postlvl);
+                ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(childs);
+            }
         }
 
         private void propertyGridGate_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -579,6 +593,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             EditorIsLoading = false;
             this.Saved = true;
+            //
+            List<string> childs = GateLvls.Select(x => x.LvlName).ToList();
+            childs.Add(GateProperties.prelvl);
+            childs.Add(GateProperties.postlvl);
+            ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(childs);
 
             gateLvlList.AutoGenerateColumns = false;
             gateLvlList.Columns[0].DataPropertyName = "Phase";
@@ -714,7 +733,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     foreach (MasterLvlData mld in tab.MasterLvls.Where(x => x.NameSplitter == this.WorkingFile.Name)) {
                         mld.gatesectiontype = gatesectiontypes.First(x => x.Value == GateProperties.sectiontype).Key;
                     }
-                    tab.RecalculateRuntime();
+                    //tab.RecalculateRuntime();
                     tab.UpdateSublevelNumbers();
                 }
                 if (playsound) UtilAudio.PlaySound("UIsave");
@@ -1050,6 +1069,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 _playingleafform?.trackEditor.Invalidate();
                 _playinglvlform?.lvlLeafList.Invalidate();
             }
+        }
+
+        private void gateLvlList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
         }
     }
 }

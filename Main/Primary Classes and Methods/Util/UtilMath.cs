@@ -247,15 +247,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 ProjectExplorer.Files[lvl.Name].Runtime = -1;
                 return;
             }
+            ProjectItem Item = ProjectExplorer.Files[lvl.Name];
+
             foreach (JObject leaf in _load["leaf_seq"]) {
-                ProjectExplorer.Files[lvl.Name].AddChild((string)leaf["leaf_name"]);
+                Item.AddChild((string)leaf["leaf_name"]);
                 if (ProjectExplorer.TryGetFile((string)leaf["leaf_name"], out ProjectItem _run)) {
                     if (_run.Runtime != (int)leaf["beat_cnt"])
                         leaf["beat_cnt"] = _run.Runtime;
                 }
             }
-            ProjectExplorer.Files[lvl.Name].Data = _load;
-            ProjectExplorer.Files[lvl.Name].UpdateRuntime(true);
+            Item.Data = _load;
+            Item.GetRuntime();
         }
         public static void CalculateGateRuntimeStartup(FileInfo gate)
         {
@@ -267,11 +269,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 ProjectExplorer.Files[gate.Name].Runtime = -1;
                 return;
             }
+            ProjectItem Item = ProjectExplorer.Files[gate.Name];
             //check if random is enabled on this gate
             israndom = (string)_load["random_type"] == "LEVEL_RANDOM_BUCKET";
             //loop through each lvl in gate
             foreach (JObject _lvl in _load["boss_patterns"]) {
-                ProjectExplorer.Files[gate.Name].AddChild((string)_lvl["lvl_name"]);
+                Item.AddChild((string)_lvl["lvl_name"]);
                 //attempt to load lvl
                 if (ProjectExplorer.TryGetFile((string)_lvl["lvl_name"], out ProjectItem _run)) {
                     //if random is enabled, count only the first entry in each bucket
@@ -287,17 +290,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 }
             }
             //need to also count pre and post lvl
-            ProjectExplorer.Files[gate.Name].AddChild((string)_load["pre_lvl_name"]);
+            Item.AddChild((string)_load["pre_lvl_name"]);
             if (ProjectExplorer.TryGetFile((string)_load["pre_lvl_name"], out ProjectItem _pre)) {
                 //_beatcount += _pre.Runtime;
             }
-            ProjectExplorer.Files[gate.Name].AddChild((string)_load["post_lvl_name"]);
+            Item.AddChild((string)_load["post_lvl_name"]);
             if (ProjectExplorer.TryGetFile((string)_load["post_lvl_name"], out ProjectItem _post)) {
                 //_beatcount += _post.Runtime;
             }
 
-            ProjectExplorer.Files[gate.Name].Data = _load;
-            ProjectExplorer.Files[gate.Name].UpdateRuntime(true);
+            Item.Data = _load;
+            Item.GetRuntime();
         }
         public static void CalculateMasterRuntimeStartup(FileInfo master)
         {
@@ -306,28 +309,29 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 ProjectExplorer.Files[master.Name].Runtime = -1;
                 return;
             }
+            ProjectItem Item = ProjectExplorer.Files[master.Name];
             //int _beatcount = 0;
             foreach (JObject _sublevel in _load["groupings"]) {
-                ProjectExplorer.Files[master.Name].AddChild((string)_sublevel["lvl_name"]);
+                Item.AddChild((string)_sublevel["lvl_name"]);
                 if (ProjectExplorer.TryGetFile((string)_sublevel["lvl_name"], out ProjectItem _run)) {
                     //_beatcount += _run.Runtime;
                 }
-                ProjectExplorer.Files[master.Name].AddChild((string)_sublevel["gate_name"]);
+                Item.AddChild((string)_sublevel["gate_name"]);
                 if (ProjectExplorer.TryGetFile((string)_sublevel["gate_name"], out _run)) {
                     //_beatcount += _run.Runtime;
                 }
-                ProjectExplorer.Files[master.Name].AddChild((string)_sublevel["rest_lvl_name"]);
+                Item.AddChild((string)_sublevel["rest_lvl_name"]);
                 if (ProjectExplorer.TryGetFile((string)_sublevel["rest_lvl_name"], out _run)) {
                     //_beatcount += _run.Runtime;
                 }
             }
-            ProjectExplorer.Files[master.Name].AddChild((string)_load["intro_lvl_name"]);
+            Item.AddChild((string)_load["intro_lvl_name"]);
             if (ProjectExplorer.TryGetFile((string)_load["intro_lvl_name"], out ProjectItem _run2)) {
                 //_beatcount += _run2.Runtime;
             }
-            
-            ProjectExplorer.Files[master.Name].Data = _load;
-            ProjectExplorer.Files[master.Name].UpdateRuntime(true);
+
+            Item.Data = _load;
+            Item.GetRuntime();
         }
 
         public static int GetTrackOffset(DataGridView trackEditor)

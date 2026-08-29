@@ -98,6 +98,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
+                //reset the ProjectItem to last saved state
+                ProjectExplorer.Files[WorkingFile.Name].Reset();
             }
         }
         #endregion
@@ -675,7 +677,12 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathClear.Enabled = lvlLeafPaths.Rows.Count > 0;
             btnLvlLoopAdd.Enabled = LvlLeafs.Count > 0;
             if (btnLvlLoopAdd.Enabled == false) btnLvlLoopDelete.Enabled = false;
-            //
+            //monke
+            if (e is null)
+                return;
+            if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted) {
+                ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(LvlLeafs.Select(x => x.Leaf).ToList());
+            }
         }
         public void LvlLoop_CollectionChanged(object sender, ListChangedEventArgs e)
         {
@@ -690,7 +697,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void LvlPaths_ListChanged(object sender, ListChangedEventArgs e)
         {
-            if (EditorIsLoading)
+            if (EditorIsLoading || SimpleLoad)
                 return;
             int _paths = LvlProperties.SelectedLeaf.Paths.Count;
             //enable a bunch of buttons based on if paths exist or not
@@ -701,7 +708,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             btnLvlPathUp.Enabled = _paths > 1;
             btnLvlPathDown.Enabled = _paths > 1;
             btnLvlPathClear.Enabled = _paths > 0;
-            //monke
         }
 
         public void UpdateLoopHeaders()
@@ -1104,6 +1110,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             LvlLeaf_CollectionChanged(null, null);
             this.Saved = true;
             btnLvlSequencer.Enabled = true;
+            ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(LvlLeafs.Select(x => x.Leaf).ToList());
 
             lvlLeafList.AutoGenerateColumns = false;
             lvlLeafList.Columns[1].DataPropertyName = "Leaf";
@@ -1310,10 +1317,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 UtilFile.WriteFileLock(this.FileLock, _saveJSON);
                 //find if any raw text docs are open of this gate and update them
                 TCLE.FindReloadRaw(this.WorkingFile.Name);
-                foreach (EditorBase doc in TCLE.Documents.Values) {
+                /*foreach (EditorBase doc in TCLE.Documents.Values) {
                     if (doc is EditorGate gate) gate.RecalculateRuntime();
                     if (doc is EditorMaster master) master.RecalculateRuntime();
-                }
+                }*/
 
                 if (playsound) UtilAudio.PlaySound("UIsave");
 
@@ -1602,6 +1609,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 lvlLeafList.Invalidate();
                 _playingleafform?.trackEditor.Invalidate();
             }
+        }
+
+        private void lvlLeafList_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.ThrowException = false;
         }
     }
 }

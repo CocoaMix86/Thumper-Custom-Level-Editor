@@ -153,6 +153,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("File not saved. Are you sure you want to close it and discard changes?", "Thumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.No) {
                     e.Cancel = true;
                 }
+                //reset the ProjectItem to last saved state
+                ProjectExplorer.Files[WorkingFile.Name].Reset();
             }
         }
 

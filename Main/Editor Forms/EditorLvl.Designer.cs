@@ -159,6 +159,7 @@
             this.lvlLeafList.CellMouseDown += this.lvlLeafList_CellMouseDown;
             this.lvlLeafList.CellMouseUp += this.lvlLeafList_CellMouseUp;
             this.lvlLeafList.CellPainting += this.lvlLeafList_CellPainting;
+            this.lvlLeafList.DataError += this.lvlLeafList_DataError;
             this.lvlLeafList.RowPrePaint += this.lvlLeafList_RowPrePaint;
             this.lvlLeafList.SelectionChanged += this.lvlLeafList_SelectionChanged;
             this.lvlLeafList.DragDrop += this.lvlLeafList_DragDrop;
