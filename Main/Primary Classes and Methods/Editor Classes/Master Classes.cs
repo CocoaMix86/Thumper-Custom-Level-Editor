@@ -142,33 +142,43 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        private int _beats = -1;
         public int Beats
         {
             get {
                 int _b = -1;
+                bool exists = false;
                 if (ProjectExplorer.TryGetFile(WholeName, out ProjectItem _run)) {
                     _b = _run.Runtime;
+                    exists = true;
                 }
                 if (_beats != _b) {
                     _beats = _b;
-                    if (_beats == -1) {
-                        UpdateRuntime("file not found");
+                    if (!exists) {
+                        UpdateRuntime("File not found");
                         RowColor = Color.Maroon;
                     }
+                    else if (exists && _beats <= 0) {
+                        UpdateRuntime($"Item exists, but nothing in it");
+                        RowColor = Color.Orange;
+                    }
                     else {
-                        UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
+                        UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(_beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
                         RowColor = Color.Green;
                     }
                 }
                 return _b + restlevelbeats;
             }
         }
-        private int _beats;
         //
-        private string _runtime = "file not found";
+        private string _runtime = "File not found";
         public string Runtime
         {
-            get => $"{Beats} beats -- {_runtime}";
+            get {
+                if (_beats <= 0)
+                    return _runtime;
+                return $"{Beats} beats -- {_runtime}";
+            }
         }
         public void UpdateRuntime(string value)
         {
@@ -176,7 +186,7 @@ namespace Thumper_Custom_Level_Editor
             OnPropertyChanged(nameof(Runtime));
         }
 
-        public Color RowColor = Color.Green;
+        public Color RowColor = Color.Red;
         public int BeatStart;
 
         public MasterLvlData Clone()

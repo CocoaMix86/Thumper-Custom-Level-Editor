@@ -589,6 +589,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 RestLvl = "<none>",
                 gatesectiontype = ""
             };
+            _ = _import.Beats;
             if (index is -1)
                 MasterLvls.Add(_import);
             else

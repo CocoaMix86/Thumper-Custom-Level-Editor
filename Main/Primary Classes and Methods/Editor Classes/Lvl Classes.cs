@@ -22,37 +22,49 @@ namespace Thumper_Custom_Level_Editor
             set => SetField(ref _leafname, value);
         }
         //
-        private int _beats;
+        private int _beats = -1;
         public int Beats { 
             get {
                 int _b = -1;
+                bool exists = false;
                 if (ProjectExplorer.TryGetFile(Leaf, out ProjectItem _run)) {
                     _b = _run.Runtime;
+                    exists = true;
                 }
                 if (_b == _beats)
                     return _beats;
                 SetField(ref _beats, _b);
-                if (_beats == -1) {
-                    UpdateRuntime("file not found");
-                    BackColor = Color.Maroon;
+                if (!exists) {
+                    UpdateRuntime("File not found");
+                    RowColor = Color.Maroon;
+                }
+                else if (exists && _beats <= 0) {
+                    UpdateRuntime("Leaf has no beats");
+                    RowColor = Color.Orange;
                 }
                 else {
-                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
-                    BackColor = Color.Green;
+                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(_beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
+                    RowColor = Color.Green;
                 }
                 return _beats;
             } 
         }
         //
-        private string _runtime = "file not found";
-        public string Runtime { 
-            get => $"{Beats} beats -- {_runtime}"; } 
+        private string _runtime = "File not found";
+        public string Runtime
+        {
+            get {
+                if (_beats <= 0)
+                    return _runtime;
+                return $"{Beats} beats -- {_runtime}"; 
+            }
+        }
         public void UpdateRuntime(string value)
         {
             _runtime = value;
             OnPropertyChanged(nameof(Runtime));
         }
-        public Color BackColor { get; set; } = Color.Green;
+        public Color RowColor = Color.Red;
         //
         public List<string> ImportPaths { 
             set {

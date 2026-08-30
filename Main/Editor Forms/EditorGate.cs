@@ -391,7 +391,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(BrushWhite, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(GateLvls[e.RowIndex].RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
             e.PaintCells(e.RowBounds, DataGridViewPaintParts.ContentForeground);
 
             if (sender == gateLvlList && TCLE.DragSource is "LvlList" or "FileExplorer") {
@@ -770,20 +770,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }*/
             UtilAudio.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
-            if (index == -1) {
-                GateLvls.Add(new GateLvlData(GateProperties) {
-                    LvlName = (string)_load["obj_name"],
-                    SentryType = "None",
-                    Bucket = 0
-                });
-            }
-            else {
-                GateLvls.Insert(index, new GateLvlData(GateProperties) {
-                    LvlName = (string)_load["obj_name"],
-                    SentryType = "None",
-                    Bucket = 0
-                });
-            }
+            GateLvlData _gate = new GateLvlData(GateProperties) {
+                LvlName = (string)_load["obj_name"],
+                SentryType = "None",
+                Bucket = 0
+            };
+            if (index == -1) 
+                GateLvls.Add(_gate);            
+            else 
+                GateLvls.Insert(index, _gate);            
+            _ = _gate.Beats;
             if (!IsAddingItems)
                 propertyGridGate.Refresh();
             SaveCheckAndWrite(false, "Add New Phase");
@@ -864,21 +860,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if random, the phase counter will instead show bucket numbers
             row.Cells[0].Value = _gateproperties.Random ? _lvl.Bucket + 1 : index + 1;
             if (index >= _gateproperties.MaximumLvls) {
-                row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                _lvl.RowColor = Color.DarkOrange;
                 _lvl.RuntimeMessage = $"too many lvls in list (max. {_gateproperties.MaximumLvls})";
             }
             //each bucket can have 4 lvls only. Show warning if more than 4.
             else if (_gateproperties.Random && GateLvls.Where(x => x.Bucket == _lvl.Bucket).Count() > 4) {
-                row.DefaultCellStyle.BackColor = Color.DarkOrange;
+                _lvl.RowColor = Color.DarkOrange;
                 _lvl.RuntimeMessage = $"too many lvls in bucket {_lvl.Bucket + 1} (max. 4)";
             }
             else {
                 if (_lvl.Beats == -1) {
-                    row.DefaultCellStyle.BackColor = Color.Maroon;
+                    _lvl.RowColor = Color.Red;
                     _lvl.RuntimeMessage = $"file not found";
                 }
                 else {
-                    row.DefaultCellStyle = null;
                     _lvl.RuntimeMessage = null;
                 }
             }

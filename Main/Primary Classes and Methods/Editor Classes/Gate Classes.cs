@@ -19,11 +19,11 @@ namespace Thumper_Custom_Level_Editor
         public int Phase => Parent.Phase;
 
         [CategoryAttribute("General")]
-        [DisplayName("Beats")]
-        public int Beats => Parent.Beats;
-        [CategoryAttribute("General")]
         [DisplayName("Runtime")]
         public string Runtime => Parent.Runtime;
+        [CategoryAttribute("General")]
+        [DisplayName("Beats")]
+        public int Beats => Parent._beats;
 
         [CategoryAttribute("Sublevel Options")]
         [DisplayName("Sentry")]
@@ -75,33 +75,43 @@ namespace Thumper_Custom_Level_Editor
             get => _bucket; 
             set => SetField(ref _bucket, value); 
         }
-        public int Phase => Parent.Random ? Bucket : Parent.GateLvls.IndexOf(this);
+        public int Phase => Parent.Random ? Bucket : Parent.GateLvls.IndexOf(this) + 1;
 
-        private int _beats;
+        public int _beats = -1;
         public int Beats {
             get {
                 int _b = -1;
+                bool exists = false;
                 if (ProjectExplorer.TryGetFile(LvlName, out ProjectItem _run)) {
                     _b = _run.Runtime;
+                    exists = true;
                 }
                 if (_beats == _b)
                     return _beats;
                 SetField(ref _beats, _b);
-                if (_beats == -1) {
-                    UpdateRuntime("file not found");
+                if (!exists) {
+                    UpdateRuntime("File not found");
                     RowColor = Color.Maroon;
                 }
+                else if (exists && _beats <= 0) {
+                    UpdateRuntime("No leafs in lvl");
+                    RowColor = Color.Orange;
+                }            
                 else {
-                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(Beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
+                    UpdateRuntime(TimeSpan.FromMilliseconds((int)TimeSpan.FromMinutes(_beats / (double)TCLE.BPM).TotalMilliseconds).ToString(@"hh\:mm\:ss\.fff"));
                     RowColor = Color.Green;
                 }
                 return _beats;
             }
         }
         //
-        private string _runtime = "file not found";
+        private string _runtime = "File not found";
         public string Runtime {
-            get => $"{Beats} beats -- {_runtime}";
+            get {
+                if (_beats <= 0)
+                    return _runtime;
+                return $"{Beats} beats -- {_runtime}"; 
+            }
         }
         public void UpdateRuntime(string value)
         {
@@ -109,7 +119,7 @@ namespace Thumper_Custom_Level_Editor
             OnPropertyChanged(nameof(Runtime));
         }
 
-        public Color RowColor = Color.Green;
+        public Color RowColor = Color.Red;
         public int BeatStart { get; set; } = 0;
 
         private string _runtimemessage;

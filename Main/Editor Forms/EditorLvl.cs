@@ -552,7 +552,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             if (dgv.Rows[e.RowIndex].Selected)
                 e.Graphics.FillRoundedRectangle(Brushes.White, new Rectangle(bounds.X - 1, bounds.Y - 1, bounds.Width + 2, bounds.Height + 2), 8);
-            e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            if (sender == lvlLeafList)
+                e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(LvlLeafs[e.RowIndex].RowColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
+            else
+                e.Graphics.FillRoundedRectangle(new SolidBrush(UtilMath.Blend(e.InheritedRowStyle.BackColor, Color.Black, (dgv.Rows[e.RowIndex].Selected ? 1 : 0.6))), bounds, 8);
 
             if (sender == lvlLeafPaths)
                 e.PaintCells(e.RowBounds, DataGridViewPaintParts.All);
@@ -1191,6 +1194,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Paths = new BindingList<LvlPath>(copytunnels),
                 id = TCLE.rng.Next()
             };
+            _ = _toadd.Beats;
             if (index is -1)
                 LvlLeafs.Add(_toadd);
             else
