@@ -457,7 +457,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (gateLvlList.SelectedRows.Count == 0)
                     gateLvlList.Rows[^1].Selected = true;
             }
-
+            RecalculateRuntime();
             LogUndo = true;
             SaveCheckAndWrite(false, "Remove Phase");
             UtilAudio.PlaySound("UIobjectremove");
@@ -746,6 +746,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         public void AddFileToGate(FileInfo FileToAdd, int index = -1)
         {
+            if (GateLvls.Count >= GateProperties.MaximumLvls) {
+                MessageBox.Show("Maximum phases reached already.\nItem not added to gate.", "Shoutouts to SimpleFlips");
+                return;
+            }
             //parse leaf to JSON
             JObject _load = UtilFile.LoadFileLock(FileToAdd);
             //check if file being loaded is actually a leaf. Can do so by checking the JSON key
@@ -780,6 +784,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else 
                 GateLvls.Insert(index, _gate);            
             _ = _gate.Beats;
+            RecalculateRuntime();
             if (!IsAddingItems)
                 propertyGridGate.Refresh();
             SaveCheckAndWrite(false, "Add New Phase");
@@ -825,41 +830,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             return;
         }
 
-        public void RecalculateRuntimeSublevel(GateLvlData _lvl, int index)
-        {
-            if (EditorIsLoading)
-                return;
-
-            /*if (!ProjectExplorer.TryGetFile(_lvl.LvlName, out FileInfo lvlfile) || !lvlfile.Exists) {
-                TCLE.CachedRuntimes[_lvl.LvlName] = 0;
-            }
-            else
-                UtilMath.CalculateLvlRuntime(lvlfile);
-            lvlfile?.Refresh();
-            //if playback generating, this was reached during generation, and the form won't exist
-            //ColorRow calls form objects which won't be initialized yet.
-            */
-            if (!Playback.Generating)
-                ColorRow(_lvl, index);
-
-            return;
-        }
-
         public void UpdateBeatPosition()
         {
             int beatpos = _gateproperties.prebeats + _gateproperties.postbeats;
             foreach (GateLvlData _lvl in GateLvls) {
                 _lvl.BeatStart = beatpos;
                 beatpos += _lvl.Beats;
+                ColorRow(_lvl);
             }
         }
 
-        public void ColorRow(GateLvlData _lvl, int index)
+        public void ColorRow(GateLvlData _lvl)
         {
-            DataGridViewRow row = gateLvlList.Rows[index];
             //if random, the phase counter will instead show bucket numbers
-            row.Cells[0].Value = _gateproperties.Random ? _lvl.Bucket + 1 : index + 1;
-            if (index >= _gateproperties.MaximumLvls) {
+            //row.Cells[0].Value = _gateproperties.Random ? _lvl.Bucket + 1 : index + 1;
+            if (_lvl.Phase > _gateproperties.MaximumLvls) {
                 _lvl.RowColor = Color.DarkOrange;
                 _lvl.RuntimeMessage = $"too many lvls in list (max. {_gateproperties.MaximumLvls})";
             }

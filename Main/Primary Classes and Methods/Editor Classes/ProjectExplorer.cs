@@ -70,40 +70,31 @@ namespace Thumper_Custom_Level_Editor
             } 
         }
         private JObject _data;
-        public Dictionary<string, ProjectItem> Children = new();
-        public Dictionary<string, ProjectItem> Parents = new();
+        public List<ProjectItem> Children = new();
+        public List<ProjectItem> Parents = new();
 
         public void AddParent(ProjectItem Parent)
         {
-            Parents.TryAdd(Parent.File.Name, Parent);
+            if (!Parents.Contains(Parent))
+                Parents.Add(Parent);
         }
 
         public void AddChild(string Child)
         {
             if (ProjectExplorer.Files.TryGetValue(Child, out ProjectItem _child)) {
-                Children.TryAdd(Child, _child);
+                Children.Add(_child);
                 _child.AddParent(this);
             }
         }
 
         public void UpdateChildren(List<string> CurrentChildren)
         {
-            bool changes = false;
             _selftriggered = true;
-            foreach (var _c1 in Children.ToList()) {
-                if (!CurrentChildren.Contains(_c1.Key)) {
-                    Children.Remove(_c1.Key);
-                    changes = true;
-                }
+            Children.Clear();
+            foreach (string Child in CurrentChildren) {
+                AddChild(Child);
             }
-            foreach (string _c2 in CurrentChildren) {
-                if (!Children.ContainsKey(_c2)) {
-                    AddChild(_c2);
-                    changes = true;
-                }
-            }
-            if (changes)
-                GetRuntime();
+            GetRuntime();
             _selftriggered = false;
         }
 
@@ -154,18 +145,18 @@ namespace Thumper_Custom_Level_Editor
 
         public void GetRuntime()
         {
-            Runtime = Children.Values.Sum(x => x.Runtime);
+            Runtime = Children.Sum(x => x.Runtime);
         }
 
         public void ForceAllChildrenUpdate(bool Startup = false)
         {
             if (Children.Count > 0) {
                 if (!Startup) {
-                    foreach (ProjectItem item in Children.Values)
+                    foreach (ProjectItem item in Children)
                         item.ForceAllChildrenUpdate();
                 }
 
-                Runtime = Children.Values.Sum(x => x.Runtime);
+                Runtime = Children.Sum(x => x.Runtime);
             }
         }
 
@@ -173,9 +164,9 @@ namespace Thumper_Custom_Level_Editor
         {
             _ispropagating = true;
             if (Children.Count > 0) {
-                Runtime = Children.Values.Sum(x => x.Runtime);
+                Runtime = Children.Sum(x => x.Runtime);
             }
-            foreach (ProjectItem item in Parents.Values) {
+            foreach (ProjectItem item in Parents) {
                 item.PropagateRuntime();
             }
             _ispropagating = false;
