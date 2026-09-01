@@ -759,19 +759,6 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             //check if lvl exists in the same folder as the master. If not, allow user to copy file.
             UtilFile.CopyToWorkingFolderCheck(FileToAdd.FullName);
-            //check if lvl exists in the same folder as the master. If not, allow user to copy file.
-            //this is why I utilize workingfolder
-            //if (Path.GetDirectoryName(path) != TCLE.WorkingFolder) {
-            /*
-            if (FileToAdd.FullName.Contains(TCLE.WorkingFolder.FullName)) {
-                if (MessageBox.Show("The item you chose does not exist in the project. Do you want to copy it to the project folder?", "Yhumper Custom Level Editor", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    if (!File.Exists($@"{TCLE.WorkingFolder}\{FileToAdd.Name}")) {
-                        FileToAdd.CopyTo($@"{TCLE.WorkingFolder}\{FileToAdd.Name}");
-                        ProjectExplorer.CreateTreeView();
-                    }
-                    else
-                        return;
-            }*/
             UtilAudio.PlaySound("UIobjectadd");
             //add lvl/gate data to the list
             GateLvlData _gate = new GateLvlData(GateProperties) {

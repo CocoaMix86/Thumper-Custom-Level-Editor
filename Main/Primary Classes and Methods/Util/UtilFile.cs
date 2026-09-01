@@ -70,6 +70,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 return filepath;
 
             FileInfo _input = new(filepath);
+            string NameNoExt = Path.GetFileNameWithoutExtension(filepath);
             if (!_input.DirectoryName.Contains(TCLE.WorkingFolder.FullName, StringComparison.OrdinalIgnoreCase)) {
                 DialogResult result = MessageBox.Show("That file does not exist in the current Project. Do you want to copy it here?", "Bumper Custom Level Editor", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
@@ -77,7 +78,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                     if (!File.Exists($@"{TCLE.WorkingFolder}\{_input.Name}"))
                         dest = $@"{TCLE.WorkingFolder}\{_input.Name}";
                     else
-                        dest = $@"{TCLE.WorkingFolder}\{_input.Name} ({TCLE.WorkingFolder.GetFiles($"{Path.GetFileNameWithoutExtension(filepath)}*").Length + 1})";
+                        dest = $@"{TCLE.WorkingFolder}\{NameNoExt} ({TCLE.WorkingFolder.GetFiles($"{NameNoExt}*{_input.Extension}").Length + 1}){_input.Extension}";
                     File.Copy(filepath, dest);
                     filepath = dest;
                     ProjectExplorer.CreateTreeView();
