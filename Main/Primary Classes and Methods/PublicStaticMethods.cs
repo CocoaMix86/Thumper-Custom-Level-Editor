@@ -693,4 +693,17 @@ namespace Thumper_Custom_Level_Editor
             lastsave = DateTime.Now;
         }
     }
+
+    public static class DictExtensions
+    {
+        public static bool ChangeKey<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey oldKey, TKey newKey)
+        {
+            if (!dict.Remove(oldKey, out TValue value))
+                return false;
+
+            dict[newKey] = value;  // or dict.Add(newKey, value) depending on ur comfort
+            return true;
+        }
+
+    }
 }

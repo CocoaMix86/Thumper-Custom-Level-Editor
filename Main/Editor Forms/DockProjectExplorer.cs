@@ -263,6 +263,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
 
                 File.Move(source, dest);
+                ProjectExplorer.Files.ChangeKey(filesource.Name, filedest.Name);
                 dynamic towrite = UtilFile.LoadFileLock(dest);
                 File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(filesource.Name, filedest.Name));
                 //Set scroll position and rebuild the tree

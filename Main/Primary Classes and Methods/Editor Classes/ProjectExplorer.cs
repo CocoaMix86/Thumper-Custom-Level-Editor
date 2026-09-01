@@ -135,6 +135,15 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public void Rename(FileInfo newname)
+        {
+            ProjectExplorer.Files.ChangeKey(File.Name, newname.Name);
+            File = newname;
+            foreach (ProjectItem Parent in Parents) {
+                Parent.Reset();
+            }
+        }
+
         public bool IsUpToDate()
         {
             File.Refresh();
