@@ -308,7 +308,10 @@ namespace Thumper_Custom_Level_Editor
                 openraw = true;
             }
 
-            object _load = openraw ? UtilFile.LoadFileLockRaw(filepath) : UtilFile.LoadFileLock(filepath);
+            //object _load = openraw ? UtilFile.LoadFileLockRaw(filepath) : UtilFile.LoadFileLock(filepath);
+            if (ProjectExplorer.TryGetFile(filepath.Name, out ProjectItem Item))
+                return null;
+            JObject _load = Item.Load();
             if (_load == null)
                 return null;
             //enter this block if we're not returning the form
@@ -323,7 +326,7 @@ namespace Thumper_Custom_Level_Editor
 
                 //open document in raw viewer if that option was selected
                 if (openraw || !ProjectExtensions.Contains(filepath.Extension, StringComparer.OrdinalIgnoreCase)) {
-                    EditorRawText rawtext = new((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                    EditorRawText rawtext = new(_load.ToString(), filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
                     rawtext.Show(ActiveWorkspace.dockMain, DockState.Document);
                     return null;
                 }
@@ -331,7 +334,7 @@ namespace Thumper_Custom_Level_Editor
 
             DockContent OpenFile = new() { DockAreas = DockAreas.Document | DockAreas.Float };
             if (openraw) {
-                OpenFile = new EditorRawText((string)_load, filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
+                OpenFile = new EditorRawText(_load.ToString(), filepath) { Text = filepath.Name + " [Raw]", DockAreas = DockAreas.Document | DockAreas.Float };
             }
             else {
                 switch (filepath.Extension) {
@@ -392,25 +395,6 @@ namespace Thumper_Custom_Level_Editor
                 tab.DockHandler.Activate();
                 return true;
             }
-            /*
-            //find if the document is loaded already in a tab
-            //if so, make it activate
-            IDockContent workspacehastab = TCLE.Workspaces.FirstOrDefault(x => (x as DockWorkspace).dockMain.Documents.Any(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))));
-            if (workspacehastab != null) {
-                workspacehastab.DockHandler.Activate();
-                (workspacehastab as DockWorkspace).dockMain.Documents.First(y => y.DockHandler.TabText.Replace("*", "") == (filepath.Name + (openraw ? " [Raw]" : ""))).DockHandler.Activate();
-                return true;
-            }
-
-            IEnumerable<DockWorkspace> workspacewithfloats = TCLE.Workspaces.Cast<DockWorkspace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-            foreach (DockWorkspace ws in workspacewithfloats) {
-                IDockContent activate = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).Where(z => z.DockHandler.TabText == filepath.Name + (openraw ? " [Raw]" : "")).FirstOrDefault();
-                if (activate != null) {
-                    activate.DockHandler.Activate();
-                    return true;
-                }
-            }
-            */
             return false;
         }
 
@@ -422,21 +406,6 @@ namespace Thumper_Custom_Level_Editor
             TCLE.Documents.TryGetValue(filepath.Name + "-raw", out _close);
             _close?.Close();
             _close?.Dispose();
-            /*
-            //check tabs in non float
-            IDockContent workspacehastab = TCLE.Workspaces.SelectMany(x => (x as Form_WorkSpace).dockMain.Documents).FirstOrDefault(y => y.DockHandler.TabText.StartsWith(filepath.Name));
-            if (workspacehastab != null) {
-                (workspacehastab as DockContent).DockHandler.Dispose();
-            }
-            //check tabs in floats
-            IEnumerable<Form_WorkSpace> workspacewithfloats = TCLE.Workspaces.Cast<Form_WorkSpace>().Where(w => w.dockMain.FloatWindows.Count > 0);
-            foreach (Form_WorkSpace ws in workspacewithfloats) {
-                IDockContent toclose = ws.dockMain.FloatWindows.SelectMany(x => x.NestedPanes).SelectMany(y => y.Contents).FirstOrDefault(z => z.DockHandler.TabText.StartsWith(filepath.Name));
-                if (toclose != null) {
-                    (toclose as DockContent).DockHandler.Dispose();
-                }
-            }
-            */
         }
 
         public static void ReloadLvlsInProject()
@@ -453,11 +422,6 @@ namespace Thumper_Custom_Level_Editor
             //find if any raw text docs matching documentname are open and update them
             TCLE.Documents.TryGetValue(documentname + "-raw", out EditorBase _found);
             (_found as EditorRawText)?.Reload();
-            /*
-            foreach (IDockContent document in TCLE.Documents.Where(x => x.DockHandler.TabText.StartsWith(documentname) && x.GetType() == typeof(Form_RawText))) {
-                (document as Form_RawText).Reload();
-            }
-            */
         }
 
         private static void SwitchTab(int direction)
@@ -492,7 +456,7 @@ namespace Thumper_Custom_Level_Editor
 
         public static void RefreshLeafEditors(bool ExpandLanes = false)
         {
-            foreach (EditorLeaf leaf in TCLE.Documents.Values.Where(x => x.GetType() == typeof(EditorLeaf))) {
+            foreach (EditorLeaf leaf in TCLE.Documents.Values.OfType<EditorLeaf>()) {
                 if (ExpandLanes && Properties.Settings.Default.LeafOptionShowLane) {
                     foreach (Sequencer_Object seq in leaf.LeafProperties.SequencerObjects) {
                         seq.ExpandLanesInEditor = true;
@@ -500,17 +464,6 @@ namespace Thumper_Custom_Level_Editor
                 }
                 leaf.trackEditor.Invalidate();
                 leaf.dgvMasterView.Invalidate();
-            }
-        }
-
-        public static void FindEditorRunMethod(Type editorType, string methodName)
-        {
-            MethodInfo? method = editorType.GetMethod(methodName);
-            if (method == null)
-                return;
-
-            foreach (EditorBase? document in TCLE.Documents.Values.Where(x => editorType.IsInstanceOfType(x))) {
-                method.Invoke(document, null);
             }
         }
 
