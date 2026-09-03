@@ -2,10 +2,10 @@ bar;-7981771
 bar [center];-7981771
 bar [left];-7981771
 bar [right];-7981771
-bars [double];-9106934
-bars [quad];-9106934
-bars [triple];-9106934
-thump and bar;-5363807
+bar[double];-9106934
+bar[quad];-10942713
+bar[triple];-12778492
+thump and bar;-13172481
 fractal jump;-5319980
 fractal pulse;-5319980
 fractal pulse 2;-5319980
@@ -23,8 +23,8 @@ FOV;-11050692
 camera forward and backward;-11050692
 camera height;-11050692
 camera zoom out;-11050692
-camera pitch2 (limited: "1" = ~90°);-11050692
-camera yaw (limited: "1" = ~90°);-11050692
+camera pitch2 [limited: "1" = ~90°];-11050692
+camera yaw [limited: "1" = ~90°];-11050692
 manual camera shake;-11050692
 crakhed screen shake;-9228537
 rumble;-9131869
@@ -47,23 +47,23 @@ lane end right turn;-1293570
 ForcePlayerDamage;-1293570
 boss gate pellet;-1293570
 transparent path;-16777216
-turn left end (long turn end);-1293774
+turn left end [long turn end];-1293774
 turn left isolated;-1293774
-turn left middle (long turn mid);-1293774
-turn left start (long turn start);-1293774
-turn right end (long turn end);-1293774
+turn left middle [long turn mid];-1293774
+turn left start [long turn start];-1293774
+turn right end [long turn end];-1293774
 turn right isolated;-1293774
-turn right middle (long turn mid);-1293774
-turn right start (long turn start);-1293774
+turn right middle [long turn mid];-1293774
+turn right start [long turn start];-1293774
 turn base;-1293774
 lane end left;-1293774
 lane end right;-1293774
 lane end base;-1293774
-ending sequence;-1293570
-spiral tunnel [16 beats];-1293570
-spiral tunnel unison [16 beats];-1293570
-spiral tunnel slow wave [16 beats];-1293570
-spiral tunnel wave out [16 beats];-1293570
+ending sequence [crash];-1293570
+spiral tunnel [16 beats] [debug];-1293570
+spiral tunnel unison [16 beats] [debug];-1293570
+spiral tunnel slow wave [16 beats] [debug];-1293570
+spiral tunnel wave out [16 beats] [debug];-1293570
 final twirlies small;-1293570
 final twirlies pound1;-1293570
 final twirlies pound2;-1293570
@@ -115,41 +115,41 @@ props checkpoint [14 beats];-6525469
 gamma red;-1763047
 gamma green;-15146984
 gamma blue;-15375373
-gamma red add;-1763047
+gamma red add [broken];-16777216
 gamma green add;-15146984
 gamma blue add;-15375373
-blue dark;-16758847
+blue dark [broken];-16777216
 blue gamma;-15375373
 blue output dark;-16758847
-blue output light;-14782209
-blue light;-14782209
-green dark;-15487469
+blue output light [persistent];-12746508
+blue light [broken];-16777216
+green dark [broken];-16777216
 green gamma;-15146984
 green output dark;-15487469
-green output light;-11080874
-green light;-11080874
-red dark;-5041389
+green output light [persistent];-12391870
+green light [broken];-16777216
+red dark [broken];-16777216
 red gamma;-1763047
 red output dark;-5041389
-red output light;-1355696
-red light;-1355696
-radialBlur?;-3401504
-rgb dark;-6417490
-rgb output dark;-6417490
-rgb output light;-2003730
-rgb light;-2003730
+red output light [broken];-16777216
+red light [broken];-16777216
+radialBlur [unknown];-8388480
+rgb dark [persistent];-16744605
+rgb output dark [persistent];-16744605
+rgb output light [persistent];-16718417
+rgb light [persistent];-16718417
 mushroom [1 beat];-31227
 mushroom [6 beats];-31227
 tall spike [2 beats];-42752
 tall spike [4 beats];-42752
 tall spike [6 beats];-42752
 tall spike [8 beats];-42752
-wide spike(?) [2 beats];-42752
-random spike [NO DAMAGE];-42752
-spike left [NO DAMAGE];-42752
-spike right [DAMAGE];-42752
-spike right base [NO DAMAGE];-42752
-spike right ground collide [DAMAGE];-42752
+wide spike [2 beats];-42752
+random spike [no damage];-42752
+spike left [no damage];-42752
+spike right [damage];-42752
+spike right base [no damage];-42752
+spike right ground collide [damage];-42752
 millipede [4 beats];-10263709
 millipede half [4 beats];-10263709
 millipede half phrase [4 beats];-10263709
@@ -172,13 +172,13 @@ cubic distortion;-10136100
 spheric distortion;-10136100
 invert;-983098
 contrast/brightness1;-2325331
-contrast/brightness2 (USE >=0);-2325331
+contrast/brightness2 [use >=0];-2325331
 contrast noise;-3750202
 red noise;-49859
 vignette1;-2795175
 glow color;-13886732
 path color;-16054654
-rail color;-11075898
+rail color;-11289347
 ring;-16711937
 multi lane [126 beats];-10595408
 multi lane [150 beats];-10595408
@@ -251,32 +251,32 @@ scale y;-8143485
 scale z;-8289861
 turn;-65536
 turn auto;-6396571
-path redglow;-65536
+path redglow;-5439488
 rail glow;-65536
-headlight glow;-65536
+headlight glow;-114110
 speed;-943
 win checkpoint;-1188450
 win;-3762423
 fake checkpoint;-12844939
 fade;-15790321
 Loop Track x Volume;-14131170
-diss1;-3046073
-diss2;-3046073
-diss3;-3046073
-diss4;-3046073
-diss5;-3046073
-diss6;-3046073
-diss7;-3046073
-diss8;-3046073
-diss9;-3046073
-diss10;-3046073
-diss11;-3046073
-diss12;-3046073
-diss13;-3046073
-diss14;-3046073
-diss15;-3046073
-diss16;-3046073
-diss17;-3046073
+dissonant burst 1;-3046073
+dissonant burst 2;-3046073
+dissonant burst 3;-3046073
+dissonant burst 4;-3046073
+dissonant burst 5;-3046073
+dissonant burst 6;-3046073
+dissonant burst 7;-3046073
+dissonant burst 8;-3046073
+dissonant burst 9;-3046073
+dissonant burst 10;-3046073
+dissonant burst 11;-3046073
+dissonant burst 12;-3046073
+dissonant burst 13;-3046073
+dissonant burst 14;-3046073
+dissonant burst 15;-3046073
+dissonant burst 16;-3046073
+dissonant burst 17;-3046073
 french horn chord 1;-10918241
 french horn chord 2;-10918241
 french horn chord 3;-10918241
@@ -349,9 +349,9 @@ rise violins;-231443
 rise low blasts;-15677845
 chimes;-397056
 piano blasts;-10336074
-tuba blasts [TOGGLE];-6786023
+tuba blasts [toggle];-8388480
 beneath ice lows;-6562067
-boss wails [TOGGLE];-13476941
+boss wails [toggle];-8388480
 crakhed waterphones;-6094745
 turn anticipations;-6423407
 gongs 1;-14339735
@@ -359,22 +359,22 @@ gongs 2;-14339735
 gongs 3;-14339735
 intro flow 1;-9685345
 intro flow 2;-9685345
-rises once 1 [TOGGLE];-1310885
-rises once 2 [TOGGLE];-1310885
-rises once 3 [TOGGLE];-1310885
-rises once 4 [TOGGLE];-1310885
-rises once 5 [TOGGLE];-1310885
-rises once 6 [TOGGLE];-1310885
-rises once 7 [TOGGLE];-1310885
-rises once 8 [TOGGLE];-1310885
-rises once 9 [TOGGLE];-1310885
-rises once 10 [TOGGLE];-1310885
-rises once 11 [TOGGLE];-1310885
-rises once 12 [TOGGLE];-1310885
-rises once 13 [TOGGLE];-1310885
-rises once 14 [TOGGLE];-1310885
-rises once 15 [TOGGLE];-1310885
-rises once 16 [TOGGLE];-1310885
+rises once 1 [toggle];-8388480
+rises once 2 [toggle];-8388480
+rises once 3 [toggle];-8388480
+rises once 4 [toggle];-8388480
+rises once 5 [toggle];-8388480
+rises once 6 [toggle];-8388480
+rises once 7 [toggle];-8388480
+rises once 8 [toggle];-8388480
+rises once 9 [toggle];-8388480
+rises once 10 [toggle];-8388480
+rises once 11 [toggle];-8388480
+rises once 12 [toggle];-8388480
+rises once 13 [toggle];-8388480
+rises once 14 [toggle];-8388480
+rises once 15 [toggle];-8388480
+rises once 16 [toggle];-8388480
 level 1 fingers decorative [1 beat];-9014144
 level 1 fingers [16 beats];-9014144
 level 1 fingers gate [16 beats];-9014144
@@ -524,10 +524,10 @@ level 6c fingers gate [12 beats];-13163475
 level 6c fingers unison [12 beats];-13163475
 level 6c fingers wave in [12 beats];-13163475
 level 6 spirograph fingers decorative [1 beat];-9327424
-level 6 spirograph fingers [12 beats];-9327424
-level 6 spirograph fingers unison [12 beats];-9327424
-level 6 spirograph fingers slow wave [12 beats];-9327424
-level 6 spirograph fingers wave out [12 beats];-9327424
+level 6 spirograph fingers [24 beats];-8388480
+level 6 spirograph fingers unison [24 beats];-8388480
+level 6 spirograph fingers slow wave [24 beats];-8388480
+level 6 spirograph fingers wave out [24 beats];-8388480
 level 6 boss fingers decorative [1 beat];-9014144
 level 6 boss fingers [12 beats];-9014144
 level 6 boss fingers gate [12 beats];-9014144
