@@ -24,11 +24,17 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
         public static void WriteFileLock(string fs, JObject _save)
         {
             WriteFileLock(fs, JsonConvert.SerializeObject(_save, Formatting.Indented));
+            if (ProjectExplorer.TryGetFile(Path.GetFileName(fs), out ProjectItem item)) {
+                item.Data = _save;
+            }
         }
 
         public static void WriteFileLock(FileStream fs, JObject _save)
         {
             WriteFileLock(fs, JsonConvert.SerializeObject(_save, Formatting.Indented));
+            if (ProjectExplorer.TryGetFile(Path.GetFileName(fs.Name), out ProjectItem item)) {
+                item.Data = _save;
+            }
         }
 
         public static dynamic LoadFileLock(string _selectedfilename)
