@@ -142,6 +142,20 @@ namespace Thumper_Custom_Level_Editor
             foreach (ProjectItem Parent in Parents) {
                 Parent.Reset();
             }
+            //need to check other items to see if they have references to the new name, but without children attached
+            foreach (ProjectItem item in ProjectExplorer.Files.Values) {
+                //skip files that don't matter for the file type
+                if (this.File.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                else if (this.File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                else if (this.File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                //add this item as a child to the found item
+                if (item.Data.ToString().Contains(newname.Name) && !item.Children.Contains(this)) {
+                    item.AddChild(newname.Name);
+                }
+            }
         }
 
         public bool IsUpToDate()
