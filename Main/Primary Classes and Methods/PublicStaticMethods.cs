@@ -309,9 +309,13 @@ namespace Thumper_Custom_Level_Editor
             }
 
             //object _load = openraw ? UtilFile.LoadFileLockRaw(filepath) : UtilFile.LoadFileLock(filepath);
+            JObject _load = null;
             if (ProjectExplorer.TryGetFile(filepath.Name, out ProjectItem Item))
-                return null;
-            JObject _load = Item.Load();
+                _load = Item.Load();
+            else {
+                _load = (JObject?)UtilFile.LoadFileLockRaw(filepath);
+            }
+
             if (_load == null)
                 return null;
             //enter this block if we're not returning the form
