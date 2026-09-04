@@ -105,7 +105,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             foreach (EditorBase document in TCLE.Documents.Values.Where(x => x.WorkingFile.Name == this.WorkingFile.Name)) {
                 if (document == this)
                     continue;
-                document.GetType().GetMethod("Reload").Invoke(document, null);
+                document.Reload(null, null);
             }
         }
 

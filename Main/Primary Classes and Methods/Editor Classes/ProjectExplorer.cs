@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Runtime.InteropServices;
+using System.IO;
 using System.Runtime.InteropServices.Swift;
 using Thumper_Custom_Level_Editor.Editor_Panels;
 using Thumper_Custom_Level_Editor.Primary_Classes_and_Methods;
@@ -33,16 +34,16 @@ namespace Thumper_Custom_Level_Editor
     {
         public ProjectItem(FileInfo _file)
         {
-            File = _file;
+            FilePath = _file;
         }
-        public FileInfo File { 
-            get => _file; 
+        public FileInfo FilePath { 
+            get => _filepath; 
             set {
-                _file = value;
-                LastAccessTime = _file.LastWriteTime;
+                _filepath = value;
+                LastAccessTime = _filepath.LastWriteTime;
             } 
         }
-        private FileInfo _file;
+        private FileInfo _filepath;
         public DateTime LastAccessTime { get; set; }
         private bool _ispropagating;
         private bool _selftriggered;
@@ -54,7 +55,7 @@ namespace Thumper_Custom_Level_Editor
                 _runtime = value;
                 if (!_ispropagating)
                     PropagateRuntime();
-                if (TCLE.Documents.TryGetValue(File.Name, out EditorBase tab)) {
+                if (TCLE.Documents.TryGetValue(FilePath.Name, out EditorBase tab)) {
                     if (!_selftriggered)
                         tab.RecalculateRuntime();
                 }
@@ -65,8 +66,8 @@ namespace Thumper_Custom_Level_Editor
             private get => _data;
             set {
                 _data = value;
-                File.Refresh();
-                LastAccessTime = File.LastWriteTime;
+                FilePath.Refresh();
+                LastAccessTime = FilePath.LastWriteTime;
             } 
         }
         private JObject _data;
@@ -87,6 +88,20 @@ namespace Thumper_Custom_Level_Editor
             }
         }
 
+        public void RemoveParents()
+        {
+            foreach (ProjectItem parent in Parents) {
+                parent.RemoveChild(FilePath.Name);
+            }
+            Parents.Clear();
+        }
+
+        public void RemoveChild(string Child)
+        {
+            Children.RemoveAll(x => x.FilePath.Name == Child);
+            GetRuntime();
+        }
+
         public void UpdateChildren(List<string> CurrentChildren)
         {
             _selftriggered = true;
@@ -101,67 +116,81 @@ namespace Thumper_Custom_Level_Editor
         public JObject Load()
         {
             if (Data == null) {
-                Data = UtilFile.LoadFileLock(File);
+                Data = UtilFile.LoadFileLock(FilePath);
                 return Data;
             }
             //check write time of file and refresh Data if it's changed since last load
             if (!IsUpToDate()) {
-                Data = UtilFile.LoadFileLock(File);
+                Data = UtilFile.LoadFileLock(FilePath);
             }
             return Data;
         }
 
         public void Save()
         {
-            UtilFile.WriteFileLock(File.FullName, Data);
-            File.Refresh();
-            LastAccessTime = File.LastWriteTime;
+            UtilFile.WriteFileLock(FilePath.FullName, Data);
+            FilePath.Refresh();
+            LastAccessTime = FilePath.LastWriteTime;
         }
 
         public void Reset()
         {
             Children.Clear();
-            if (File.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
-                UtilMath.CalculateLeafRuntimeStartup(File);
+            if (FilePath.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateLeafRuntimeStartup(FilePath);
             }
-            else if (File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
-                UtilMath.CalculateLvlRuntimeStartup(File);
+            else if (FilePath.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateLvlRuntimeStartup(FilePath);
             }
-            else if (File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase)) {
-                UtilMath.CalculateGateRuntimeStartup(File);
+            else if (FilePath.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateGateRuntimeStartup(FilePath);
             }
-            else if (File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)) {
-                UtilMath.CalculateMasterRuntimeStartup(File);
+            else if (FilePath.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase)) {
+                UtilMath.CalculateMasterRuntimeStartup(FilePath);
             }
         }
 
         public void Rename(FileInfo newname)
         {
-            ProjectExplorer.Files.ChangeKey(File.Name, newname.Name);
-            File = newname;
+            string oldname = FilePath.Name;
+            ProjectExplorer.Files.ChangeKey(oldname, newname.Name);
+            ProjectExplorer.MasterFiles.ChangeKey(oldname, newname.Name);
+            //need to update the name in every other file that references it too
+            List<FileInfo> References = UtilFile.SearchReferences(FilePath, true, newname);
+
+            File.Move(FilePath.FullName, newname.FullName);
+            FilePath = newname;
             foreach (ProjectItem Parent in Parents) {
                 Parent.Reset();
             }
+
             //need to check other items to see if they have references to the new name, but without children attached
             foreach (ProjectItem item in ProjectExplorer.Files.Values) {
                 //skip files that don't matter for the file type
-                if (this.File.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))
+                if (this.FilePath.Extension.Equals(".leaf", StringComparison.OrdinalIgnoreCase) && !item.FilePath.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase))
                     continue;
-                else if (this.File.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
+                else if (this.FilePath.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) && !item.FilePath.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.FilePath.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
                     continue;
-                else if (this.File.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.File.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
+                else if (this.FilePath.Extension.Equals(".gate", StringComparison.OrdinalIgnoreCase) && !item.FilePath.Extension.Equals(".master", StringComparison.OrdinalIgnoreCase))
                     continue;
                 //add this item as a child to the found item
-                if (item.Data.ToString().Contains(newname.Name) && !item.Children.Contains(this)) {
-                    item.AddChild(newname.Name);
+                if (item.Data.ToString().Contains(newname.Name)) {
+                    item.Reset();
+                }
+            }
+
+            foreach (FileInfo file in References) {
+                if (TCLE.Documents.TryGetValue(file.Name, out EditorBase tab)) {
+                    tab.Reload(oldname, newname.Name);
+                    tab.Save(false);
                 }
             }
         }
 
         public bool IsUpToDate()
         {
-            File.Refresh();
-            if (LastAccessTime < File.LastWriteTime)
+            FilePath.Refresh();
+            if (LastAccessTime < FilePath.LastWriteTime)
                 return false;
             return true;
         }
@@ -226,7 +255,7 @@ namespace Thumper_Custom_Level_Editor
         public static bool TryGetFile(string name, out ProjectItem file) => Files.TryGetValue(name, out file);
         public static ProjectItem? GetFile(string name) => Files.GetValueOrDefault(name);
         public static bool TryGetFolder(string name, out DirectoryInfo folder) => Folders.TryGetValue(name, out folder);
-        public static List<ProjectItem> GetFilesByExtension(string extension) => Files.Values.Where(x => x.File.Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)).ToList();
+        public static List<ProjectItem> GetFilesByExtension(string extension) => Files.Values.Where(x => x.FilePath.Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)).ToList();
         //public static IEnumerable<FileInfo> Files => AllFiles.Where(x => x.Value.IsFile).Select(x => x.Value.File);
         //public static IEnumerable<DirectoryInfo> Folders => AllFiles.Where(x => x.Value.IsFolder).Select(x => x.Value.Folder);
         //
@@ -273,11 +302,11 @@ namespace Thumper_Custom_Level_Editor
                 RecurseNodesFindExpanded(ProjectTree);
             }
             //force each master to recalc runtime in case tree has new files
-            foreach (EditorBase dock in TCLE.Documents.Values) {
+            /*foreach (EditorBase dock in TCLE.Documents.Values) {
                 if (dock is EditorLvl lvl) lvl.RecalculateRuntime();
                 else if (dock is EditorGate gate) gate.RecalculateRuntime();
                 else if (dock is EditorMaster master) master.RecalculateRuntime();
-            }
+            }*/
             //repopulate dragdrop list
             TCLE.DragDropItems.Populate();
             //

@@ -44,7 +44,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 TCLE.Instance.lblLoadingLvl.Refresh();
                 Application.DoEvents();
                 //
-                EditorBase _e = TCLE.OpenFile(_toopen.File, raw, true);
+                EditorBase _e = TCLE.OpenFile(_toopen.FilePath, raw, true);
                 return _e;
             }
             return null;

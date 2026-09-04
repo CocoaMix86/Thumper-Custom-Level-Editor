@@ -19,7 +19,10 @@ namespace Thumper_Custom_Level_Editor
         private string _leafname;
         public string Leaf { 
             get => _leafname;
-            set => SetField(ref _leafname, value);
+            set { 
+                SetField(ref _leafname, value);
+                _ = Beats;
+            }
         }
         //
         private int _beats = -1;

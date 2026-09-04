@@ -213,7 +213,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             if (e.RowIndex == -1 || LvlLeafs.Count == 0 || e.RowIndex > LvlLeafs.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.TryGetFile(LvlLeafs[e.RowIndex].Leaf, out ProjectItem leaf) ? leaf.File : null);
+            TCLE.OpenFile(ProjectExplorer.TryGetFile(LvlLeafs[e.RowIndex].Leaf, out ProjectItem leaf) ? leaf.FilePath : null);
         }
 
         private void lvlLeafList_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -402,7 +402,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
             else if (e.Data.GetData(typeof(List<string>)) is List<string> leafs2) {
                 foreach (string leaf in leafs2)
-                    AddFiletoLvl((ProjectExplorer.TryGetFile(leaf, out ProjectItem _leaf) ? _leaf.File : null), TargetRowToPaint);
+                    AddFiletoLvl((ProjectExplorer.TryGetFile(leaf, out ProjectItem _leaf) ? _leaf.FilePath : null), TargetRowToPaint);
             }
             TargetRowToPaint = -3;
             previousDragOver = -2;
@@ -851,7 +851,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         private void btnLvlLeafRandom_Click(object sender, EventArgs e)
         {
             List<ProjectItem> leafs = ProjectExplorer.GetFilesByExtension(".leaf");
-            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].File);
+            AddFiletoLvl(leafs[TCLE.rng.Next(0, leafs.Count)].FilePath);
             SaveCheckAndWrite(false, "Add Random Leaf");
         }
 

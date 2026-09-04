@@ -172,7 +172,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             //if not selecting the file column, return and do nothing
             if (e.ColumnIndex == -1 || e.RowIndex == -1 || e.RowIndex > GateLvls.Count - 1)
                 return;
-            TCLE.OpenFile(ProjectExplorer.TryGetFile(GateLvls[e.RowIndex].LvlName, out ProjectItem lvl) ? lvl.File : null);
+            TCLE.OpenFile(ProjectExplorer.TryGetFile(GateLvls[e.RowIndex].LvlName, out ProjectItem lvl) ? lvl.FilePath : null);
         }
 
         bool MouseDown;
@@ -351,7 +351,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             else if (e.Data.GetData(typeof(List<string>)) is List<string> sublevels2) {
                 LogUndo = false;
                 foreach (string lvl in sublevels2)
-                    AddFileToGate((ProjectExplorer.TryGetFile(lvl, out ProjectItem _itemlvl) ? _itemlvl.File : null), TargetRowToPaint);
+                    AddFileToGate((ProjectExplorer.TryGetFile(lvl, out ProjectItem _itemlvl) ? _itemlvl.FilePath : null), TargetRowToPaint);
                 LogUndo = true;
                 SaveCheckAndWrite(false, "Add Phases");
             }

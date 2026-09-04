@@ -610,7 +610,7 @@ namespace Thumper_Custom_Level_Editor
                 workspace1.Show(dockMain, DockState.Document);
                 Explorer.Show(dockMain, DockState.DockRight);
                 dockProjectProperties.Show(Explorer.Pane, DockAlignment.Bottom, 0.35);
-                OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.File.Name.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).File);
+                OpenFile(ProjectExplorer.Files.Values.FirstOrDefault(x => x.FilePath.Name.EndsWith(".master", StringComparison.OrdinalIgnoreCase)).FilePath);
             }
             TCLE.Instance.panelLoadingMessage.Visible = false;
             //
@@ -1093,10 +1093,10 @@ namespace Thumper_Custom_Level_Editor
                 }
                 else {
                     if (ProjectExplorer.TryGetFile($"{_packitem.Tag}.samp", out ProjectItem _samp)) {
-                        TCLE.CloseFile(_samp.File);
-                        TCLE.RemoveProjectSamples(_samp.File);
+                        TCLE.CloseFile(_samp.FilePath);
+                        TCLE.RemoveProjectSamples(_samp.FilePath);
                         filesupdates = true;
-                        _samp.File.Delete();
+                        _samp.FilePath.Delete();
                     }
                 }
             }

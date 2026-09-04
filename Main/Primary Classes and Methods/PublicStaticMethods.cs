@@ -416,7 +416,7 @@ namespace Thumper_Custom_Level_Editor
         {
             if (WorkingFolder == null)
                 return;
-            LvlsInProject = ProjectExplorer.GetFilesByExtension(".lvl").Select(x => x.File.Name).ToList();
+            LvlsInProject = ProjectExplorer.GetFilesByExtension(".lvl").Select(x => x.FilePath.Name).ToList();
             LvlsInProject.Add("<none>");
             LvlsInProject.Sort();
         }

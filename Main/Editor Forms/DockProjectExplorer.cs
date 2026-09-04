@@ -174,12 +174,16 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 }
                 else {
                     FileInfo source = ProjectExplorer.AllFiles[tn].File;
+                    if (ProjectExplorer.TryGetFile(source.Name, out ProjectItem item)) {
+                        item.RemoveParents();
+                        ProjectExplorer.MasterFiles.Remove(source.Name);
+                    }
                     TCLE.CloseFile(source);
                     source.Delete();
                     ///FindDuplicateFile(tn, Color.White);
                 }
-                tn.Remove();
             }
+            ProjectExplorer.CreateTreeView();
         }
         private void toolstripFileCopy_Click(object sender, EventArgs e)
         {
@@ -262,22 +266,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     return;
                 }
 
-                File.Move(source, dest);
-                ProjectExplorer.Files.ChangeKey(filesource.Name, filedest.Name);
+                ProjectExplorer.Files[filesource.Name].Rename(filedest);
                 dynamic towrite = UtilFile.LoadFileLock(dest);
                 File.WriteAllText(dest, ((string)JsonConvert.SerializeObject(towrite, Formatting.Indented)).Replace(filesource.Name, filedest.Name));
                 //Set scroll position and rebuild the tree
                 ProjectExplorer.CreateTreeView();
-                //
-                //need to update the name in every other file that references it too
-
-                List<FileInfo> References = UtilFile.SearchReferences(filesource, true, filedest);
-                foreach (FileInfo file in References) {
-                    if (TCLE.Documents.TryGetValue(file.Name, out EditorBase tab)) {
-                        tab.Reload(filesource.Name, filedest.Name);
-                        tab.Save(false);
-                    }
-                }
                 /*
                 foreach (FileInfo file in TCLE.WorkingFolder.GetFilesByExtensions(".leaf", ".lvl", ".gate", ".master", ".samp")) {
                     UtilFile.SearchReferences();
