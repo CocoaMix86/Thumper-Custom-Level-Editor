@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Documents;
 using Thumper_Custom_Level_Editor.Editor_Panels;
@@ -140,7 +141,7 @@ namespace Thumper_Custom_Level_Editor
         [Browsable(false)]
         public BindingList<LvlLeafData> Leafs;
         [Browsable(false)]
-        public dynamic seqJSON;
+        public dynamic seqJSON = new JArray();
         [Browsable(false)]
         public List<Sequencer_Object> SequencerObjects {
             get => _seqobjs;

@@ -2476,13 +2476,13 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             int audiochannels = 0;
 
             //each object in the seq_objs[] list
-            foreach (dynamic seq_obj in seqJSON) {
+            foreach (JObject seq_obj in seqJSON) {
                 Sequencer_Object ObjectToImport = new(ParentLeaf, null) {
                     ParentLeaf = ParentLeaf,
                     ObjName = ((string)seq_obj["obj_name"]),
                     //TraitType = Sequencer_Object.TraitLookup[(string)seq_obj["trait_type"]],
                     Step = (string)seq_obj["step"] == "True",
-                    DefaultValue = seq_obj["default"],
+                    DefaultValue = (decimal)seq_obj["default"],
                     //Footer = seq_obj["footer"].GetType() == typeof(JArray) ? String.Join(",", ((JArray)seq_obj["footer"]).ToList()) : ((string)seq_obj["footer"]).Replace("[", "").Replace("]", ""),
                     //if the leaf has definitions for these, add them. If not, set to defaults
                     ParamPath = seq_obj.ContainsKey("param_path_hash") ? $"0x{(string)seq_obj["param_path_hash"]}" : ((string)seq_obj["param_path"]),
@@ -2514,7 +2514,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         if (TCLE.LeafObjects.TryGetValue(normalizeParam, out DefaultSequencerObject objmatch)) {
                             ObjectToImport.Default = objmatch;
                             ObjectToImport.FriendlyParam = objmatch.ParamDisplayName;
-                            ObjectToImport.HighlightColor = seq_obj["editor_data"]?[0] is int _color ? Color.FromArgb(_color) : objmatch.DefaultColor;
+                            ObjectToImport.HighlightColor = (int)seq_obj["editor_data"]?[0] is int _color ? Color.FromArgb(_color) : objmatch.DefaultColor;
                             //ObjectToImport.HighlightColor = objmatch.defaultcolor;
                         }
                         //set audio channel numbers on load
