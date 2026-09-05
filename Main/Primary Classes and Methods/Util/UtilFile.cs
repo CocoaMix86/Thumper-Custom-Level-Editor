@@ -147,12 +147,12 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 //check if the file we're searching contains the obj_name
                 if (text.Contains(searchreference.Name)) {
                     References.Add(_file);
-                }
-                if (Rename) {
-                    //this replace ensures that the replacement doesn't accidentally change a substring that might also match
-                    //by starting with the end of the name field name and the ':'
-                    text = text.Replace($"_name\": \"{searchreference.Name}\"", $"_name\": \"{NewName.Name}\"");
-                    UtilFile.WriteFileLock(_file.FullName, text);
+                    if (Rename) {
+                        //this replace ensures that the replacement doesn't accidentally change a substring that might also match
+                        //by starting with the end of the name field name and the ':'
+                        text = text.Replace($"_name\": \"{searchreference.Name}\"", $"_name\": \"{NewName.Name}\"");
+                        UtilFile.WriteFileLock(_file.FullName, text);
+                    }
                 }
             }
             return References;

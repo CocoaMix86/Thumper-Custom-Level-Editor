@@ -664,6 +664,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 GateProperties.postlvl = NewName;
             if (GateProperties.restartlvl == OldName)
                 GateProperties.restartlvl = NewName;
+
+            gateLvlList.Refresh();
         }
 
         ///SAVE

@@ -117,9 +117,9 @@
             this.toolstripSampLevelDrones = new ToolStripMenuItem();
             this.toolstripSampLevelRests = new ToolStripMenuItem();
             this.toolstripSampLevelMisc = new ToolStripMenuItem();
+            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.toolstripProjectPreload = new ToolStripMenuItem();
             this.toolstripProject = new ToolStripMenuItem();
-            this.addSamplePackToolStripMenuItem = new ToolStripMenuItem();
             this.contextmenuWindow = new ContextMenuStrip(this.components);
             this.toolStripWindowCloseTab = new ToolStripMenuItem();
             this.toolstripWindowCloseEditors = new ToolStripMenuItem();
@@ -986,8 +986,9 @@
             this.contextmenuSampPacks.BackColor = Color.FromArgb(46, 46, 46);
             this.contextmenuSampPacks.Items.AddRange(new ToolStripItem[] { this.toolstripSampLevel1, this.toolstripSampLevel2, this.toolstripSampLevel3, this.toolstripSampLevel4, this.toolstripSampLevel5, this.toolstripSampLevel6, this.toolstripSampLevel7, this.toolstripSampLevel8, this.toolstripSampLevel9, this.toolstripSampLevelDiss, this.toolstripSampLevelDrones, this.toolstripSampLevelRests, this.toolstripSampLevelMisc });
             this.contextmenuSampPacks.Name = "contextmenuHelp";
+            this.contextmenuSampPacks.OwnerItem = this.addSamplePackToolStripMenuItem1;
             this.contextmenuSampPacks.RenderMode = ToolStripRenderMode.System;
-            this.contextmenuSampPacks.Size = new Size(181, 312);
+            this.contextmenuSampPacks.Size = new Size(165, 290);
             this.contextmenuSampPacks.Closing += this.contextmenuSampPacks_Closing;
             this.contextmenuSampPacks.Opening += this.contextmenuSampPacks_Opening;
             // 
@@ -997,7 +998,7 @@
             this.toolstripSampLevel1.ForeColor = Color.White;
             this.toolstripSampLevel1.Image = (Image)resources.GetObject("toolstripSampLevel1.Image");
             this.toolstripSampLevel1.Name = "toolstripSampLevel1";
-            this.toolstripSampLevel1.Size = new Size(180, 22);
+            this.toolstripSampLevel1.Size = new Size(164, 22);
             this.toolstripSampLevel1.Text = "Level 1 (320bpm)";
             // 
             // toolstripSampLevel2
@@ -1006,7 +1007,7 @@
             this.toolstripSampLevel2.ForeColor = Color.White;
             this.toolstripSampLevel2.Image = (Image)resources.GetObject("toolstripSampLevel2.Image");
             this.toolstripSampLevel2.Name = "toolstripSampLevel2";
-            this.toolstripSampLevel2.Size = new Size(180, 22);
+            this.toolstripSampLevel2.Size = new Size(164, 22);
             this.toolstripSampLevel2.Text = "Level 2 (340bpm)";
             // 
             // toolstripSampLevel3
@@ -1015,7 +1016,7 @@
             this.toolstripSampLevel3.ForeColor = Color.White;
             this.toolstripSampLevel3.Image = (Image)resources.GetObject("toolstripSampLevel3.Image");
             this.toolstripSampLevel3.Name = "toolstripSampLevel3";
-            this.toolstripSampLevel3.Size = new Size(180, 22);
+            this.toolstripSampLevel3.Size = new Size(164, 22);
             this.toolstripSampLevel3.Text = "Level 3 (360bpm)";
             // 
             // toolstripSampLevel4
@@ -1024,7 +1025,7 @@
             this.toolstripSampLevel4.ForeColor = Color.White;
             this.toolstripSampLevel4.Image = (Image)resources.GetObject("toolstripSampLevel4.Image");
             this.toolstripSampLevel4.Name = "toolstripSampLevel4";
-            this.toolstripSampLevel4.Size = new Size(180, 22);
+            this.toolstripSampLevel4.Size = new Size(164, 22);
             this.toolstripSampLevel4.Text = "Level 4 (380bpm)";
             // 
             // toolstripSampLevel5
@@ -1033,7 +1034,7 @@
             this.toolstripSampLevel5.ForeColor = Color.White;
             this.toolstripSampLevel5.Image = (Image)resources.GetObject("toolstripSampLevel5.Image");
             this.toolstripSampLevel5.Name = "toolstripSampLevel5";
-            this.toolstripSampLevel5.Size = new Size(180, 22);
+            this.toolstripSampLevel5.Size = new Size(164, 22);
             this.toolstripSampLevel5.Text = "Level 5 (400bpm)";
             // 
             // toolstripSampLevel6
@@ -1042,7 +1043,7 @@
             this.toolstripSampLevel6.ForeColor = Color.White;
             this.toolstripSampLevel6.Image = (Image)resources.GetObject("toolstripSampLevel6.Image");
             this.toolstripSampLevel6.Name = "toolstripSampLevel6";
-            this.toolstripSampLevel6.Size = new Size(180, 22);
+            this.toolstripSampLevel6.Size = new Size(164, 22);
             this.toolstripSampLevel6.Text = "Level 6 (420bpm)";
             // 
             // toolstripSampLevel7
@@ -1051,7 +1052,7 @@
             this.toolstripSampLevel7.ForeColor = Color.White;
             this.toolstripSampLevel7.Image = (Image)resources.GetObject("toolstripSampLevel7.Image");
             this.toolstripSampLevel7.Name = "toolstripSampLevel7";
-            this.toolstripSampLevel7.Size = new Size(180, 22);
+            this.toolstripSampLevel7.Size = new Size(164, 22);
             this.toolstripSampLevel7.Text = "Level 7 (440bpm)";
             // 
             // toolstripSampLevel8
@@ -1060,7 +1061,7 @@
             this.toolstripSampLevel8.ForeColor = Color.White;
             this.toolstripSampLevel8.Image = (Image)resources.GetObject("toolstripSampLevel8.Image");
             this.toolstripSampLevel8.Name = "toolstripSampLevel8";
-            this.toolstripSampLevel8.Size = new Size(180, 22);
+            this.toolstripSampLevel8.Size = new Size(164, 22);
             this.toolstripSampLevel8.Text = "Level 8 (460bpm)";
             // 
             // toolstripSampLevel9
@@ -1069,7 +1070,7 @@
             this.toolstripSampLevel9.ForeColor = Color.White;
             this.toolstripSampLevel9.Image = (Image)resources.GetObject("toolstripSampLevel9.Image");
             this.toolstripSampLevel9.Name = "toolstripSampLevel9";
-            this.toolstripSampLevel9.Size = new Size(180, 22);
+            this.toolstripSampLevel9.Size = new Size(164, 22);
             this.toolstripSampLevel9.Text = "Level 9 (480bpm)";
             // 
             // toolstripSampLevelDiss
@@ -1078,7 +1079,7 @@
             this.toolstripSampLevelDiss.ForeColor = Color.White;
             this.toolstripSampLevelDiss.Image = (Image)resources.GetObject("toolstripSampLevelDiss.Image");
             this.toolstripSampLevelDiss.Name = "toolstripSampLevelDiss";
-            this.toolstripSampLevelDiss.Size = new Size(180, 22);
+            this.toolstripSampLevelDiss.Size = new Size(164, 22);
             this.toolstripSampLevelDiss.Text = "Dissonance";
             // 
             // toolstripSampLevelDrones
@@ -1087,7 +1088,7 @@
             this.toolstripSampLevelDrones.ForeColor = Color.White;
             this.toolstripSampLevelDrones.Image = (Image)resources.GetObject("toolstripSampLevelDrones.Image");
             this.toolstripSampLevelDrones.Name = "toolstripSampLevelDrones";
-            this.toolstripSampLevelDrones.Size = new Size(180, 22);
+            this.toolstripSampLevelDrones.Size = new Size(164, 22);
             this.toolstripSampLevelDrones.Text = "Drones";
             // 
             // toolstripSampLevelRests
@@ -1096,7 +1097,7 @@
             this.toolstripSampLevelRests.ForeColor = Color.White;
             this.toolstripSampLevelRests.Image = (Image)resources.GetObject("toolstripSampLevelRests.Image");
             this.toolstripSampLevelRests.Name = "toolstripSampLevelRests";
-            this.toolstripSampLevelRests.Size = new Size(180, 22);
+            this.toolstripSampLevelRests.Size = new Size(164, 22);
             this.toolstripSampLevelRests.Text = "Rests";
             // 
             // toolstripSampLevelMisc
@@ -1105,8 +1106,16 @@
             this.toolstripSampLevelMisc.ForeColor = Color.White;
             this.toolstripSampLevelMisc.Image = (Image)resources.GetObject("toolstripSampLevelMisc.Image");
             this.toolstripSampLevelMisc.Name = "toolstripSampLevelMisc";
-            this.toolstripSampLevelMisc.Size = new Size(180, 22);
+            this.toolstripSampLevelMisc.Size = new Size(164, 22);
             this.toolstripSampLevelMisc.Text = "Misc.";
+            // 
+            // addSamplePackToolStripMenuItem
+            // 
+            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
+            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
+            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
+            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
+            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // toolstripProjectPreload
             // 
@@ -1128,14 +1137,6 @@
             this.toolstripProject.Padding = new Padding(3, 0, 3, 0);
             this.toolstripProject.Size = new Size(58, 21);
             this.toolstripProject.Text = "&Project";
-            // 
-            // addSamplePackToolStripMenuItem
-            // 
-            this.addSamplePackToolStripMenuItem.DropDown = this.contextmenuSampPacks;
-            this.addSamplePackToolStripMenuItem.ForeColor = Color.White;
-            this.addSamplePackToolStripMenuItem.Name = "addSamplePackToolStripMenuItem";
-            this.addSamplePackToolStripMenuItem.Size = new Size(202, 22);
-            this.addSamplePackToolStripMenuItem.Text = "Add Sample Pack";
             // 
             // contextmenuWindow
             // 
@@ -2186,13 +2187,28 @@
             this.imageListCategoryIcons.Images.SetKeyName(22, "RAIL COLORS.png");
             this.imageListCategoryIcons.Images.SetKeyName(23, "RINGS.png");
             this.imageListCategoryIcons.Images.SetKeyName(24, "SENTRY.png");
-            this.imageListCategoryIcons.Images.SetKeyName(25, "SKYBOX_COLORS.png");
-            this.imageListCategoryIcons.Images.SetKeyName(26, "SMOKE FX.png");
-            this.imageListCategoryIcons.Images.SetKeyName(27, "TENTACLES.png");
-            this.imageListCategoryIcons.Images.SetKeyName(28, "THUMPS.png");
-            this.imageListCategoryIcons.Images.SetKeyName(29, "TRACK EFFECTS.png");
-            this.imageListCategoryIcons.Images.SetKeyName(30, "TRACK FX.png");
-            this.imageListCategoryIcons.Images.SetKeyName(31, "WIN & MISC.png");
+            this.imageListCategoryIcons.Images.SetKeyName(25, "SMOKE FX.png");
+            this.imageListCategoryIcons.Images.SetKeyName(26, "TENTACLES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(27, "THUMPS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(28, "TRACK EFFECTS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(29, "TRACK FX.png");
+            this.imageListCategoryIcons.Images.SetKeyName(30, "WIN & MISC.png");
+            this.imageListCategoryIcons.Images.SetKeyName(31, "FLOW FRENCH HORNS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(32, "FLOW GONGS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(33, "FLOW RANDOMIZED.png");
+            this.imageListCategoryIcons.Images.SetKeyName(34, "FLOW RISES.png");
+            this.imageListCategoryIcons.Images.SetKeyName(35, "TENTACLES LEVEL 1.png");
+            this.imageListCategoryIcons.Images.SetKeyName(36, "TENTACLES LEVEL 2.png");
+            this.imageListCategoryIcons.Images.SetKeyName(37, "TENTACLES LEVEL 3.png");
+            this.imageListCategoryIcons.Images.SetKeyName(38, "TENTACLES LEVEL 4.png");
+            this.imageListCategoryIcons.Images.SetKeyName(39, "TENTACLES LEVEL 5.png");
+            this.imageListCategoryIcons.Images.SetKeyName(40, "TENTACLES LEVEL 6.png");
+            this.imageListCategoryIcons.Images.SetKeyName(41, "TENTACLES LEVEL 7.png");
+            this.imageListCategoryIcons.Images.SetKeyName(42, "TENTACLES LEVEL 8.png");
+            this.imageListCategoryIcons.Images.SetKeyName(43, "TENTACLES LEVEL 9.png");
+            this.imageListCategoryIcons.Images.SetKeyName(44, "MILLIPEDES DECORATIVE.png");
+            this.imageListCategoryIcons.Images.SetKeyName(45, "SKYBOX COLORS.png");
+            this.imageListCategoryIcons.Images.SetKeyName(46, "TENTACLES OTHER.png");
             // 
             // TCLE
             // 

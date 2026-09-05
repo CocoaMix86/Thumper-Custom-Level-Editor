@@ -910,6 +910,19 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             }
         }
 
+        public override void Reload(string OldName, string NewName)
+        {
+            foreach (MasterLvlData mld in MasterLvls) {
+                if (mld.NameSplitter == OldName)
+                    mld.NameSplitter = NewName;
+                if (mld.RestLvl == OldName)
+                    mld.RestLvl = NewName;
+            }
+            if (MasterProperties.introlvl == OldName)
+                MasterProperties.introlvl = NewName;
+            masterLvlList.Refresh();
+        }
+
         public static JObject BuildSave(MasterProperties _properties)
         {
             int checkpoints = 0;
