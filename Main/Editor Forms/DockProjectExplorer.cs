@@ -753,21 +753,21 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void toolstripProjectAddLeaf_Click(object sender, EventArgs e)
         {
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             TCLE.OpenFile(new EditorLeaf().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddLvl_Click(object sender, EventArgs e)
         {
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             TCLE.OpenFile(new EditorLvl().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddGate_Click(object sender, EventArgs e)
         {
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             TCLE.OpenFile(new EditorGate().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
@@ -778,20 +778,22 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 if (MessageBox.Show("This project already has a master file. It is not recommended to have more than 1 as it can mess up the mod loader.\nDo you still wish to continue?", "Bad Idea", MessageBoxButtons.YesNo) == DialogResult.No)
                     return;
             }
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             TCLE.OpenFile(new EditorMaster().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private void toolstripProjectAddSample_Click(object sender, EventArgs e)
         {
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             TCLE.OpenFile(new EditorSample().SaveAs(true, path));
             ProjectExplorer.CreateTreeView();
         }
 
         private static string PathCheck(TreeNode selectednode)
         {
+            if (selectednode == null)
+                return TCLE.WorkingFolder.FullName;
             if (ProjectExplorer.AllFiles[selectednode].Folder?.Exists ?? false)
                 return ProjectExplorer.AllFiles[selectednode].Folder.FullName;
             return null;
@@ -799,7 +801,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void folderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = PathCheck(selectedNodes[^1]);
+            string path = PathCheck(selectedNodes.Count > 0 ? selectedNodes[^1] : null);
             if (path == null) {
                 int newfolders = ProjectExplorer.AllFiles.Where(x => x.Key.Text.StartsWith("New Folder")).Count();
                 TCLE.WorkingFolder.CreateSubdirectory($"New Folder{(newfolders > 0 ? $" {newfolders}" : "")}");

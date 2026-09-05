@@ -1183,11 +1183,13 @@ namespace Thumper_Custom_Level_Editor
                 .ToList();
         }
 
-        public static void SetupPlaybackStream(List<BASS_MIDI_EVENT> AllEvents, double StartTime, bool Loop)
+        public static void SetupPlaybackStream(List<BASS_MIDI_EVENT> AllEvents, double StartTime, bool Loop, int EndBeat)
         {
             //create the stream
             MidiStream = BassMidi.BASS_MIDI_StreamCreateEvents(AllEvents.ToArray(), 100, BASSFlag.BASS_SAMPLE_FLOAT, 0);
-            ///List<BASS_MIDI_EVENT> BadTick = AllEvents.Where(x => x.tick > (EndBeat + 1)*100).ToList();
+            Error = Bass.BASS_ErrorGetCode();
+            List<BASS_MIDI_EVENT> BadTick = AllEvents.Where(x => x.tick > (EndBeat + 1)*100).ToList();
+            BadTick.Reverse();
             //set ending sync
             channelsync = Bass.BASS_ChannelSetSync(MidiStream, BASSSync.BASS_SYNC_END, 0, EndingProc, IntPtr.Zero);
             //setup channel for looping
@@ -1232,7 +1234,7 @@ namespace Thumper_Custom_Level_Editor
             //the very last midi event needs to be EVENT_END
             AllEvents.Add(new(BASSMIDIEvent.MIDI_EVENT_END, 0, 0, (EndBeat * 100) + 1, 0));
 
-            SetupPlaybackStream(AllEvents, StartTime, Loop);
+            SetupPlaybackStream(AllEvents, StartTime, Loop, EndBeat);
             //at this point we can clear the generating flag and hide the loading screen
             Generating = false;
             TCLE.Instance.panelLoadingMessage.Visible = false;            
@@ -1251,7 +1253,7 @@ namespace Thumper_Custom_Level_Editor
                 IsPlaying = true;
             }
             else {
-                ///Error = Bass.BASS_ErrorGetCode();
+                Error = Bass.BASS_ErrorGetCode();
             }
         }
 

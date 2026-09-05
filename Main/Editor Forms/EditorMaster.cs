@@ -501,7 +501,10 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             if (e is null)
                 return;
             if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted) {
-                ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(MasterLvls.Select(x => x.WholeName).ToList());
+                List<string> AllChildren = MasterLvls.Select(x => x.WholeName).ToList();
+                AllChildren.AddRange(MasterLvls.Select(x => x.RestLvl));
+                AllChildren.Add(MasterProperties.introlvl);
+                ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(AllChildren);
             }
         }
 
@@ -719,7 +722,11 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             RecalculateRuntime();
             UpdateSublevelNumbers();
             MasterLvls.ListChanged += masterlvls_CollectionChanged;
-            ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(MasterLvls.Select(x => x.WholeName).ToList());
+            //
+            List<string> AllChildren = MasterLvls.Select(x => x.WholeName).ToList();
+            AllChildren.AddRange(MasterLvls.Select(x => x.RestLvl));
+            AllChildren.Add(MasterProperties.introlvl);
+            ProjectExplorer.Files[WorkingFile.Name].UpdateChildren(AllChildren);
 
             masterLvlList.AutoGenerateColumns = false;
             masterLvlList.Columns[0].DataPropertyName = "SublevelNumber";

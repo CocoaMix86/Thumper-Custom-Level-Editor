@@ -322,7 +322,7 @@ namespace Thumper_Custom_Level_Editor.Primary_Classes_and_Methods.Util
                 }
                 Item.AddChild((string)_sublevel["rest_lvl_name"]);
                 if (ProjectExplorer.TryGetFile((string)_sublevel["rest_lvl_name"], out _run)) {
-                    //_beatcount += _run.Runtime;
+                    ;
                 }
             }
             Item.AddChild((string)_load["intro_lvl_name"]);
