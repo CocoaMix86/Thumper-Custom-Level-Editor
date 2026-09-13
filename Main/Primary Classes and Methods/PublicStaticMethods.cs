@@ -160,6 +160,7 @@ namespace Thumper_Custom_Level_Editor
                     File.WriteAllBytes($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf", Properties.Resources.JetBrainsMono_Medium);
                 ImportedFonts.AddFontFile($@"{UtilPaths.Temp}\JetBrainsMono_Medium.ttf");
                 RuntimeLabelFont = new(TCLE.ImportedFonts.Families[0], 12);
+                FontJetBrainsMono10 = new(TCLE.ImportedFonts.Families[0], 9);
             } catch (Exception ex) {
                 MessageBox.Show($"An error occurred during app load section 1. Please show this to CocoaMix\n\n{ex}", "Thumper Custom Level Editor");
             }

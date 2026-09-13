@@ -13,6 +13,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public DockProjectExplorer()
         {
             InitializeComponent();
+            txtSearch.Font = TCLE.FontJetBrainsMono10;
+            treeView1.Font = TCLE.FontJetBrainsMono10;
             //set custom renderer for some controls
             toolstripExplorer.Renderer = tsover;
             contextMenuAddFile.Renderer = contextmenucol;

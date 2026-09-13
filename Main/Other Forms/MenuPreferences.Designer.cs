@@ -41,6 +41,7 @@ namespace Thumper_Custom_Level_Editor
             this.imageList1 = new ImageList(this.components);
             this.txtSearch = new TextBox();
             this.tabAudio = new TabPage();
+            this.checkAntiDuck = new CheckBox();
             this.checkMuteApp = new CheckBox();
             this.tabPage1 = new TabPage();
             this.propertyGridKeyBinds = new PropertyGrid();
@@ -48,7 +49,6 @@ namespace Thumper_Custom_Level_Editor
             this.toolStripTitle = new ToolStripEx();
             this.toolStripLabel1 = new ToolStripLabel();
             this.toolstripFormClose = new ToolStripButton();
-            this.checkAntiDuck = new CheckBox();
             this.toolstripCustomize.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabUIColors.SuspendLayout();
@@ -208,7 +208,7 @@ namespace Thumper_Custom_Level_Editor
             this.imageList1.Images.SetKeyName(14, "FX");
             this.imageList1.Images.SetKeyName(15, "GAMMA");
             this.imageList1.Images.SetKeyName(16, "INTROFLOW");
-            this.imageList1.Images.SetKeyName(17, "JUMPSSPIKES");
+            this.imageList1.Images.SetKeyName(17, "JUMPS/SPIKES");
             this.imageList1.Images.SetKeyName(18, "LOOP TRACK VOLUME");
             this.imageList1.Images.SetKeyName(19, "MILLIPEDES");
             this.imageList1.Images.SetKeyName(20, "PLAY SAMPLE");
@@ -216,13 +216,28 @@ namespace Thumper_Custom_Level_Editor
             this.imageList1.Images.SetKeyName(22, "RAIL COLORS");
             this.imageList1.Images.SetKeyName(23, "RINGS");
             this.imageList1.Images.SetKeyName(24, "SENTRY");
-            this.imageList1.Images.SetKeyName(25, "SKYBOX_COLORS");
-            this.imageList1.Images.SetKeyName(26, "SMOKE FX");
-            this.imageList1.Images.SetKeyName(27, "TENTACLES");
-            this.imageList1.Images.SetKeyName(28, "THUMPS");
-            this.imageList1.Images.SetKeyName(29, "TRACK EFFECTS");
-            this.imageList1.Images.SetKeyName(30, "TRACK FX");
-            this.imageList1.Images.SetKeyName(31, "WIN & MISC");
+            this.imageList1.Images.SetKeyName(25, "SMOKE FX");
+            this.imageList1.Images.SetKeyName(26, "TENTACLES");
+            this.imageList1.Images.SetKeyName(27, "THUMPS");
+            this.imageList1.Images.SetKeyName(28, "TRACK EFFECTS");
+            this.imageList1.Images.SetKeyName(29, "TRACK FX");
+            this.imageList1.Images.SetKeyName(30, "WIN & MISC");
+            this.imageList1.Images.SetKeyName(31, "FLOW FRENCH HORNS");
+            this.imageList1.Images.SetKeyName(32, "FLOW GONGS");
+            this.imageList1.Images.SetKeyName(33, "FLOW RANDOMIZED");
+            this.imageList1.Images.SetKeyName(34, "FLOW RISES");
+            this.imageList1.Images.SetKeyName(35, "MILLIPEDES DECORATIVE");
+            this.imageList1.Images.SetKeyName(36, "SKYBOX COLORS");
+            this.imageList1.Images.SetKeyName(37, "TENTACLES LEVEL 1");
+            this.imageList1.Images.SetKeyName(38, "TENTACLES LEVEL 2");
+            this.imageList1.Images.SetKeyName(39, "TENTACLES LEVEL 3");
+            this.imageList1.Images.SetKeyName(40, "TENTACLES LEVEL 4");
+            this.imageList1.Images.SetKeyName(41, "TENTACLES LEVEL 5");
+            this.imageList1.Images.SetKeyName(42, "TENTACLES LEVEL 6");
+            this.imageList1.Images.SetKeyName(43, "TENTACLES LEVEL 7");
+            this.imageList1.Images.SetKeyName(44, "TENTACLES LEVEL 8");
+            this.imageList1.Images.SetKeyName(45, "TENTACLES LEVEL 9");
+            this.imageList1.Images.SetKeyName(46, "TENTACLES OTHER");
             // 
             // txtSearch
             // 
@@ -250,6 +265,19 @@ namespace Thumper_Custom_Level_Editor
             this.tabAudio.Size = new Size(368, 493);
             this.tabAudio.TabIndex = 1;
             this.tabAudio.Text = "Audio";
+            // 
+            // checkAntiDuck
+            // 
+            this.checkAntiDuck.AutoSize = true;
+            this.checkAntiDuck.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.checkAntiDuck.ForeColor = Color.White;
+            this.checkAntiDuck.Location = new Point(40, 73);
+            this.checkAntiDuck.Name = "checkAntiDuck";
+            this.checkAntiDuck.Size = new Size(97, 19);
+            this.checkAntiDuck.TabIndex = 1;
+            this.checkAntiDuck.Text = "Disable duck";
+            this.checkAntiDuck.UseVisualStyleBackColor = true;
+            this.checkAntiDuck.CheckedChanged += this.checkAntiDuck_CheckedChanged;
             // 
             // checkMuteApp
             // 
@@ -340,19 +368,6 @@ namespace Thumper_Custom_Level_Editor
             this.toolstripFormClose.Size = new Size(38, 25);
             this.toolstripFormClose.ToolTipText = "Close";
             this.toolstripFormClose.Click += this.toolstripFormClose_Click;
-            // 
-            // checkAntiDuck
-            // 
-            this.checkAntiDuck.AutoSize = true;
-            this.checkAntiDuck.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            this.checkAntiDuck.ForeColor = Color.White;
-            this.checkAntiDuck.Location = new Point(40, 73);
-            this.checkAntiDuck.Name = "checkAntiDuck";
-            this.checkAntiDuck.Size = new Size(97, 19);
-            this.checkAntiDuck.TabIndex = 1;
-            this.checkAntiDuck.Text = "Disable duck";
-            this.checkAntiDuck.UseVisualStyleBackColor = true;
-            this.checkAntiDuck.CheckedChanged += this.checkAntiDuck_CheckedChanged;
             // 
             // MenuPreferences
             // 

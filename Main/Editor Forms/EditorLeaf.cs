@@ -104,6 +104,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             TCLE.DoubleBufferDGV(dgvMasterView);
             textEditor.Language = FastColoredTextBoxNS.Text.Language.JSON;
             //
+            txtSearch.Font = TCLE.FontJetBrainsMono10;
+            treeObjects.Font = TCLE.FontJetBrainsMono10;
             treeObjects.Tag = txtSearch.Text;
             SeqObjTreeBuilder.FilterTree(treeObjects, "");
             //
@@ -283,7 +285,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             string[] elements = persistString.Split(';');
             persistString = elements[1];
             //if (elements.Length > 2)
-               // trackEditor.RowHeadersWidth = Convert.ToInt32(elements[2]);
+            // trackEditor.RowHeadersWidth = Convert.ToInt32(elements[2]);
             if (persistString is "Data Point Props.")
                 return contentPropertyGrid;
             if (persistString is "Objects")
@@ -518,7 +520,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 //
                 LeafCellPainting.DrawSelection(e, trackEditor);
                 //if (trackEditor[e.ColumnIndex, e.RowIndex] == trackEditor.CurrentCell && (seqref.Category == "PLAY SAMPLE" || seqref.ObjName == "_TuningLayerX"))
-                    //e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
+                //e.Graphics.DrawLine(PenVioletThin, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Top, e.CellBounds.Left + (e.CellBounds.Width / 2), e.CellBounds.Bottom);
             }
         }
 
@@ -541,7 +543,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
             PaintForeground(e);
             //if (Playback.IsPlaying && e.RowIndex == SequencerObjects.Last(x => x.Visible).Index) 
-                //PaintRowPlayback(e);
+            //PaintRowPlayback(e);
 
             RowCellPaintForeground = true;
             e.PaintHeader(true);
@@ -753,7 +755,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                         midpoint = new PointF(_drawingpoints[x].X, _drawingpoints[x].Y);
                         midpoint2 = new PointF(_drawingpoints[x + 1].X, _drawingpoints[x + 1].Y);
                         break;
-                        //if not step or linear, use the bezier lookup to get the curves
+                    //if not step or linear, use the bezier lookup to get the curves
                     default:
                         if (!BezierLookup.TryGetValue((_datapoints[x].Interpolation, _datapoints[x].Ease), out BezierPreset BezierPreset))
                             continue;
@@ -906,7 +908,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
             ResetCell(SequencerObjects[_cell.RowIndex][_cell.ColumnIndex]);
 
             if (SequencerObjects[_cell.RowIndex].ExpandLanesInEditor == false && SequencerObjects[_cell.RowIndex].FriendlyLane == "lane center") {
-                foreach (int laneoffset in new[] { -2, -1, 0, 1, 2}) {
+                foreach (int laneoffset in new[] { -2, -1, 0, 1, 2 }) {
                     ResetCell(SequencerObjects[_cell.RowIndex + laneoffset][_cell.ColumnIndex]);
                 }
             }
@@ -1323,7 +1325,18 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
 
         private void contextMenuObj_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            toolstripObjTune.Enabled = SequencerObjects[trackEditor.CurrentRow.Index].Default?.TraitType is DefaultSequencerObject.Trait.Float;
+            Sequencer_Object seq = SequencerObjects[trackEditor.CurrentRow.Index];
+            toolstripObjTune.Enabled = seq.Default?.TraitType is DefaultSequencerObject.Trait.Float;
+
+            toolstripObjFav.Text = seq.Default.Favorite ? "Remove From Favorites" : "Add To Favorites";
+            toolstripObjFav.Image = seq.Default.Favorite ? Properties.Resources.icon_remove2 : Properties.Resources.icon_fav;
+        }
+
+        private void toolstripObjFav_Click(object sender, EventArgs e)
+        {
+            Sequencer_Object seq = SequencerObjects[trackEditor.CurrentRow.Index];
+            seq.Default.Favorite = !seq.Default.Favorite;
+            SeqObjTreeBuilder.UpdateTrees(false);
         }
 
         private void trackEditor_RowHeadersWidthChanged(object sender, EventArgs e)
@@ -1893,9 +1906,9 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 return false;
             //locate the default object
             if (TCLE.LeafObjects.TryGetValue($"{seq.ObjName};{seq.ParamPath.Replace(seq.ParamPathLane, "ent")}", out DefaultSequencerObject? BaseObj))
-            //once found, compare its default value to the leaf object's. If different, data has changed, so don't delete it.
-            if (BaseObj != null && BaseObj.DefaultValue != seq.DefaultValue)
-                return false;
+                //once found, compare its default value to the leaf object's. If different, data has changed, so don't delete it.
+                if (BaseObj != null && BaseObj.DefaultValue != seq.DefaultValue)
+                    return false;
 
             return true;
         }
@@ -2593,19 +2606,20 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         {
             List<Sequencer_Object> Lanes = new(); Sequencer_Object lookup = LoadedObjects.FirstOrDefault(x => x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
             //if null, no object exists in SequencerObjects yet for this object or its lanes. We'll have to make it.
-            if (lookup == null) { 
+            if (lookup == null) {
                 Lanes.Add(ObjectToImport.CloneAsLane(".a01", Properties.Settings.Default.LeafOptionShowLane));
                 //dgv.Rows.Add(LoadedObjects[^1]); if (!ObjectToImport.ParentLeaf.ParentEditor.SimpleLoad) LoadedObjects[^1].ExpandLanesInEditor = Properties.Settings.Default.LeafOptionShowLane;
                 Lanes.Add(ObjectToImport.CloneAsLane(".a02", Properties.Settings.Default.LeafOptionShowLane));
                 Lanes.Add(ObjectToImport.CloneAsLane(".ent", Properties.Settings.Default.LeafOptionShowLane));
                 Lanes.Add(ObjectToImport.CloneAsLane(".z01", Properties.Settings.Default.LeafOptionShowLane));
                 Lanes.Add(ObjectToImport.CloneAsLane(".z02", Properties.Settings.Default.LeafOptionShowLane));
-                
+
                 Lanes[(ObjectToImport.LaneOffsetFromTop * -1)] = ObjectToImport;
                 //lookup = Lanes[(ObjectToImport.LaneOffsetFromTop * -1)];// .FirstOrDefault(x => x.ObjName == ObjectToImport.ObjName && x.ParamPath == ObjectToImport.ParamPath && x.ParamPathLane == ObjectToImport.ParamPathLane && x.IsDefault == true);
                 //Lanes[Lanes.IndexOf(lookup)] = ObjectToImport;
                 return Lanes;
-            } else { 
+            }
+            else {
                 LoadedObjects[LoadedObjects.IndexOf(lookup)] = ObjectToImport;
                 return null;
             }
@@ -2752,7 +2766,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
         public string GetEditorTitle() => $"{this.WorkingFile.Name}{(this.WorkingFile.Extension.Equals(".lvl", StringComparison.OrdinalIgnoreCase) ? " [Sequencer]" : "")}";
         public override void SaveCheckAndWrite(bool IsSaved, string Reason, bool playsound = false)
         {
-            if (EditorIsLoading || Playback.Generating || TCLE.IsLoadingProject )
+            if (EditorIsLoading || Playback.Generating || TCLE.IsLoadingProject)
                 return;
             //make the beeble emote
             TCLE.MainBeeble.MakeFace();
@@ -3263,8 +3277,7 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                     TargetTuningLayer[m].Value = (decimal)(SumOfLayers[m].Value ?? 0m);
                 }
                 ((EditorLeaf)_properties.ParentEditor).trackEditor.Rows.Remove(SumOfLayers);
-            }
-            finally {
+            } finally {
                 _properties.ParentEditor.LogUndo = true;
                 _properties.ParentEditor.EditorIsTuning = false;
             }
@@ -3418,8 +3431,8 @@ namespace Thumper_Custom_Level_Editor.Editor_Panels
                 Playback.CreatePlaybackFromLeaf(_leafload, PlaybackEnd);
                 Playback.Play(PlaybackStart, PlaybackEnd > -1 ? PlaybackEnd : _leafproperties.LeafLength, PlaybackLoop);
                 if (Playback.IsPlaying) {
-                    if (Properties.Settings.Default.LeafOptionPlaybackScroll) 
-                        trackEditor.HorizontalScrollingOffset = (int)Math.Round((Math.Max(0, Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat)) * trackZoom.Value);                    
+                    if (Properties.Settings.Default.LeafOptionPlaybackScroll)
+                        trackEditor.HorizontalScrollingOffset = (int)Math.Round((Math.Max(0, Playback.PlaybackBeat - Playback.GlobalCurrentOffset + Playback.PlaybackSubBeat)) * trackZoom.Value);
                     timer1.Enabled = true;
                 }
                 else {

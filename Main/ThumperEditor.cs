@@ -39,6 +39,7 @@ namespace Thumper_Custom_Level_Editor
         public static string DragSource = "none";
         public static PrivateFontCollection ImportedFonts = new();
         public static Font RuntimeLabelFont;
+        public static Font FontJetBrainsMono10;
         //Active File Tracking
         public static EditorBase? GlobalActiveDocument
         {
